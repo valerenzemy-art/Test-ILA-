@@ -3,134 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TestDaF — Modelltests Leseverstehen</title>
+<title>TestDaF — Modelltests Lesen (7 Aufgabentypen)</title>
 <style>
   :root{
-    --teal-dark:#0f3d47;
-    --teal:#155a68;
-    --teal-light:#1d7285;
-    --bg-page:#f4f8f9;
-    --bg-instructions:#e7f1f3;
-    --card-bg:#ffffff;
-    --border:#cfe0e4;
-    --text:#1e2d31;
-    --text-soft:#516268;
-    --correct:#1c7a4a;
-    --wrong:#b3262c;
+    --teal-dark:#0f3d47; --teal:#155a68; --teal-light:#1d7285;
+    --bg-page:#f4f8f9; --bg-instructions:#e7f1f3; --card-bg:#ffffff;
+    --border:#cfe0e4; --text:#1e2d31; --text-soft:#516268;
+    --correct:#1c7a4a; --wrong:#b3262c;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
   }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
       --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
       --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
     }
   }
-
   :root[data-theme="dark"]{
     --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
     --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
   }
-
   html{scroll-padding-top:env(safe-area-inset-top,0px);}
   *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--bg-page); color:var(--text);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    line-height:1.55;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
-  }
+  body{margin:0;background:var(--bg-page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55;}
   .app{max-width:900px;margin:0 auto;min-height:100vh;background:var(--card-bg);box-shadow:0 0 24px rgba(0,0,0,.06);}
-  header.topbar{
-    background:linear-gradient(135deg,var(--teal-dark),var(--teal));
-    color:#fff; padding:18px 20px 14px;
-    padding-top:calc(18px + env(safe-area-inset-top,0px));
-    display:flex; justify-content:space-between; align-items:flex-start;
-  }
+  header.topbar{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;padding:18px 20px 14px;padding-top:calc(18px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;align-items:flex-start;}
   header.topbar .brand{font-size:1.5rem;font-weight:700;letter-spacing:.5px;}
   header.topbar .subbrand{font-size:.72rem;opacity:.8;margin-top:2px;}
   header.topbar .tag{font-size:.8rem;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:20px;white-space:nowrap;}
-
   .select-screen{padding:36px 20px 60px;text-align:center;}
   .select-screen h2{color:var(--teal-dark);margin-bottom:6px;}
-  .select-screen p{color:var(--text-soft);font-size:.92rem;max-width:540px;margin:0 auto 26px;}
+  .select-screen p{color:var(--text-soft);font-size:.92rem;max-width:560px;margin:0 auto 26px;}
   .cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-  .sel-card{
-    width:230px; border:1px solid var(--border); border-radius:14px; padding:20px 16px;
-    background:var(--bg-instructions); cursor:pointer; text-align:left;
-  }
+  .sel-card{width:230px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
   .sel-card:hover{border-color:var(--teal);}
   .sel-card .sc-title{font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
-  .sel-card .sc-desc{font-size:.83rem;color:var(--text-soft);}
-  .select-note{font-size:.78rem;color:var(--text-soft);max-width:540px;margin:22px auto 0;}
-
-  .taskbar{
-    background:var(--bg-instructions); border-bottom:1px solid var(--border);
-    padding:16px 20px 18px; display:flex; gap:18px; flex-wrap:wrap; align-items:center;
-  }
+  .sel-card .sc-desc{font-size:.8rem;color:var(--text-soft);}
+  .select-note{font-size:.78rem;color:var(--text-soft);max-width:560px;margin:22px auto 0;}
+  .taskbar{background:var(--bg-instructions);border-bottom:1px solid var(--border);padding:16px 20px 18px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
   .task-count{display:flex;align-items:baseline;gap:6px;min-width:70px;}
   .task-count .n{font-size:2.1rem;font-weight:800;color:var(--teal-dark);line-height:1;}
   .task-count .of{font-size:1rem;color:var(--text-soft);}
   .task-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin-bottom:2px;}
-
   .timer-wrap{display:flex;flex-direction:column;align-items:center;}
-  .timer-circle{
-    width:74px;height:74px;border-radius:50%; border:3px solid var(--teal);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:1.05rem;color:var(--teal-dark);
-    background:var(--card-bg); flex-shrink:0;
-  }
+  .timer-circle{width:74px;height:74px;border-radius:50%;border:3px solid var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;color:var(--teal-dark);background:var(--card-bg);flex-shrink:0;}
   .timer-circle.warn{border-color:var(--wrong);color:var(--wrong);}
   .timer-caption{font-size:.65rem;color:var(--text-soft);margin-top:4px;}
-
   .instructions{flex:1;min-width:220px;}
   .instructions .title{font-weight:700;margin-bottom:4px;font-size:1rem;}
-  .instructions p{margin:2px 0;font-size:.92rem;color:var(--text-soft);}
+  .instructions p{margin:2px 0;font-size:.9rem;color:var(--text-soft);}
   .instructions .time-hint{font-weight:600;color:var(--teal-dark);}
-
   main{padding:22px 20px 100px;}
   h2.task-title{margin-top:0;font-size:1.2rem;color:var(--teal-dark);}
   .passage{font-size:.98rem;}
   .passage p{margin:0 0 14px;}
-
+  select.gapselect{border:none;border-bottom:2px solid var(--teal);background:var(--bg-instructions);font:inherit;font-weight:600;color:var(--teal-dark);padding:3px 6px;border-radius:4px 4px 0 0;min-width:130px;}
+  select.gapselect.answered{background:#dff0e4;border-color:var(--correct);}
+  .order-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .order-item{border:1px solid var(--border);border-radius:8px;padding:12px 14px;background:var(--bg-instructions);display:flex;gap:10px;align-items:flex-start;}
+  .order-item .pos{font-weight:800;color:#fff;background:var(--teal);border-radius:50%;width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .order-item .txt{flex:1;font-size:.92rem;}
+  .order-controls{display:flex;flex-direction:column;gap:4px;}
+  .order-controls button{border:1px solid var(--border);background:var(--card-bg);color:var(--teal-dark);border-radius:5px;width:30px;height:26px;font-size:.85rem;cursor:pointer;}
+  .order-controls button:disabled{opacity:.3;cursor:default;}
   .qblock{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border);}
   .qblock:last-child{border-bottom:none;}
   .qtext{font-weight:600;margin-bottom:8px;}
   .opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:.92rem;}
   .opt:hover{background:var(--bg-instructions);}
   .opt input{margin-top:3px;}
-
+  .matchrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;padding:10px;background:var(--bg-instructions);border-radius:8px;}
+  .matchrow .ptxt{flex:1;min-width:200px;font-size:.9rem;}
+  .matchrow select{font:inherit;padding:6px 8px;border-radius:6px;border:1px solid var(--border);min-width:220px;}
   table.tzt{width:100%;border-collapse:collapse;margin-top:8px;font-size:.83rem;}
   table.tzt th, table.tzt td{border:1px solid var(--border);padding:8px 6px;text-align:center;}
   table.tzt th{background:var(--teal);color:#fff;font-weight:600;font-size:.76rem;}
   table.tzt td.label{text-align:left;font-weight:500;}
   table.tzt input[type=radio]{width:16px;height:16px;}
-
-  footer.navbar{
-    position:sticky;bottom:0; background:var(--card-bg); border-top:1px solid var(--border);
-    padding:12px 20px; padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));
-    display:flex;justify-content:space-between;align-items:center;gap:10px;
-  }
+  .graphic-box{background:var(--bg-instructions);border:1px solid var(--border);border-radius:10px;padding:14px;margin:16px 0;}
+  .graphic-box .cap{font-size:.76rem;color:var(--text-soft);margin-top:6px;text-align:center;}
+  .summary-item{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:6px;font-size:.9rem;}
+  .summary-item:hover{background:var(--bg-instructions);}
+  .summary-item input{margin-top:4px;}
+  .count-hint{font-size:.82rem;color:var(--text-soft);margin:10px 0;}
+  footer.navbar{position:sticky;bottom:0;background:var(--card-bg);border-top:1px solid var(--border);padding:12px 20px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:10px;}
   footer .foot-note{font-size:.68rem;color:var(--text-soft);}
-  .btn{
-    border:none;border-radius:6px;padding:11px 18px;font-size:.88rem;font-weight:700;cursor:pointer;
-    color:#fff;background:var(--teal-dark);
-  }
+  .btn{border:none;border-radius:6px;padding:11px 18px;font-size:.88rem;font-weight:700;cursor:pointer;color:#fff;background:var(--teal-dark);}
   .btn.next{background:var(--teal);}
   .btn:hover{filter:brightness(1.08);}
   .btn.ghost{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);}
-
   .results h2{color:var(--teal-dark);}
-  .score-hero{
-    background:linear-gradient(135deg,var(--teal-dark),var(--teal));
-    color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:22px;
-  }
+  .score-hero{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:22px;}
   .score-hero .pct{font-size:2.6rem;font-weight:800;}
   .score-hero .tdn{font-size:1rem;opacity:.9;margin-top:4px;}
-  .result-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.92rem;}
+  .result-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.9rem;}
   .result-row .ok{color:var(--correct);font-weight:700;}
   .result-row .no{color:var(--wrong);font-weight:700;}
   .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
+
+  /* Custom styling for Aufgabe 6 Vorteils/Nachteils Table */
+  .a6-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+  .a6-statements { background: var(--bg-instructions); padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
+  .a6-statements-title { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
+  .a6-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  table.a6-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  table.a6-table th, table.a6-table td { border: 1px solid var(--border); padding: 10px; text-align: left; }
+  table.a6-table th { background: var(--teal); color: #fff; width: 50%; }
+  table.a6-table select { width: 100%; padding: 6px; border-radius: 4px; border: 1px solid var(--border); font: inherit; }
 
   @media (max-width:480px){
     header.topbar{padding:14px 14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px));}
@@ -139,7 +119,8 @@
     footer.navbar{padding:10px 14px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));}
     .timer-circle{width:62px;height:62px;font-size:.92rem;}
     .cards{flex-direction:column;align-items:center;}
-    table.tzt{font-size:.72rem;}
+    table.tzt{font-size:.7rem;}
+    .a6-list { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -148,7 +129,7 @@
   <header class="topbar">
     <div>
       <div class="brand">LESEN</div>
-      <div class="subbrand">TestDaF · Modelltests · 3 Prüfungsteile, 30 Items</div>
+      <div class="subbrand">TestDaF · Digitaler TestDaF Formate</div>
     </div>
     <div class="tag">Übungsversion</div>
   </header>
@@ -159,150 +140,173 @@
 
 <script>
 /* ===========================================================
-   DATEN — TESTDAF LESEVERSTEHEN MODELLTESTS
+   AUFGABENTYPEN-VORLAGE (Digitaler TestDaF)
+   1 Lückentext ergänzen            4 Min · 5 Items
+   2 Textabschnitte ordnen          5 Min · 5 Items
+   3 Multiple Choice (4 Optionen)  15 Min · 7 Items
+   4 Textstellen zuordnen           6 Min · 4 Items
+   5 Aussagen Kategorien zuordnen   9 Min · 7 Items
+   6 Vorteile / Nachteile Tabelle   7 Min · 4 Items
+   7 Fehler in Zusammenfassung      7 Min · 3 Items
 =========================================================== */
+const TEMPLATE = [
+  {teil:1, type:'gap',     time:240,  label:'Lückentext ergänzen'},
+  {teil:2, type:'order',   time:300,  label:'Textabschnitte ordnen'},
+  {teil:3, type:'mc',      time:900,  label:'Multiple Choice'},
+  {teil:4, type:'match',   time:360,  label:'Textstellen zuordnen'},
+  {teil:5, type:'table',   time:540,  label:'Aussagen Kategorien zuordnen'},
+  {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung'},
+  {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
+];
+
+/* ===========================================================
+   MODELLTEST 1
+=========================================================== */
+const MT1 = [
+  /* Aufgabe 1 */
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Schlafmangel und kognitive Leistungsfähigkeit',
+    segments:[
+      'Zahlreiche Studien belegen, dass chronischer Schlafmangel die kognitive Leistungsfähigkeit erheblich ',
+      ' kann, selbst wenn Betroffene subjektiv das Gefühl haben, sich an den reduzierten Schlaf gewöhnt zu haben. Besonders betroffen ist dabei das Arbeitsgedächtnis, das für die kurzfristige Speicherung und Verarbeitung von Informationen ',
+      ' ist. Bereits eine einzige durchwachte Nacht kann die Reaktionsgeschwindigkeit messbar ',
+      ', vergleichbar mit den Effekten eines erhöhten Alkoholspiegels. Langfristig wird chronischer Schlafmangel zudem mit einem erhöhten Risiko für verschiedene Herz-Kreislauf-Erkrankungen in ',
+      ' gebracht. Schlafforscherinnen und Schlafforscher empfehlen daher, feste Schlafenszeiten ',
+      ', um dem Körper einen stabilen Rhythmus zu ermöglichen.'
+    ],
+    gaps:[
+      {options:['beeinträchtigen','fördern','stabilisieren','ignorieren'], correct:0},
+      {options:['zuständig','begeistert','abhängig','überzeugt'], correct:0},
+      {options:['verringern','erhöhen','stabilisieren','ausgleichen'], correct:0},
+      {options:['Verbindung','Kontakt','Rücksicht','Hinsicht'], correct:0},
+      {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
+    ]
+  },
+
+  /* Aufgabe 2 */
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Die Entdeckung des Penicillins',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Der schottische Bakteriologe Alexander Fleming bemerkte 1928 in seinem Labor eher zufällig, dass sich auf einer vergessenen Bakterienkultur ein Schimmelpilz gebildet hatte.',
+      'Er stellte fest, dass rund um den Schimmelpilz keine Bakterien mehr wuchsen, und vermutete, dass der Pilz eine bakterienabtötende Substanz absondern müsse.',
+      'Fleming veröffentlichte seine Beobachtungen, doch zunächst zeigte die wissenschaftliche Gemeinschaft nur wenig Interesse an einer praktischen Anwendung der Entdeckung.',
+      'Erst rund ein Jahrzehnt später gelang es einem Forschungsteam um Howard Florey und Ernst Chain, den Wirkstoff Penicillin in ausreichender Reinheit und Menge für klinische Tests herzustellen.',
+      'Während des Zweiten Weltkriegs wurde Penicillin schließlich in großem Maßstab produziert und rettete Schätzungen zufolge Hunderttausenden verwundeter Soldaten das Leben.'
+    ],
+    shuffledStart:[2,4,0,3,1]
+  },
+
+  /* Aufgabe 3 (Ajustée : 4 propositions a, b, c, d) */
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Luzides Träumen',
+    passage:[
+      '(1) Viele Menschen haben schon einmal erlebt, dass sie während eines Traums erkannten, dass sie träumten. Eine kleine Gruppe von Klarträumern kann im Traum sogar selbstbestimmt handeln.',
+      '(2) Klarträumer zeichnen sich laut Forschung vor allem durch eine kritische Selbstreflexion beim Träumen aus, die es ihnen ermöglicht, den Traumzustand bewusst wahrzunehmen.',
+      '(3) Das Phänomen des luziden Träumens ist nicht neu. In zahlreichen Kulturen und Epochen findet sich seit jeher ein kulturübergreifendes Interesse an luziden Träumen.',
+      '(4) Psychologinnen und Psychologen untersuchen, inwiefern man mithilfe von Klarträumen Menschen psychologische Erleichterung verschaffen kann, etwa bei wiederkehrenden Alpträumen.',
+      '(5) Zudem zeigt sich, dass Erfahrungen aus der Traumwelt durchaus in die Realität übertragbar sind und bestimmte Bewegungsabläufe gedanklich eingeübt werden können.',
+      '(6) Was das absichtliche Hervorrufen luzider Träume angeht, mahnt der Autor zur Vorsicht, da gezielte Eingriffe in den Schlaf-Wach-Rhythmus Risiken bergen.',
+      '(7) Zusammenfassend lässt sich sagen, dass das Hauptanliegen des Textes darin besteht, sachlich über das Phänomen der Klarträume zu informieren.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:['die Hälfte der Bevölkerung regelmäßige Klarträumer sind.','die Mehrheit der Menschen unfähig zum Klarträumen ist.','eine Gruppe von Klarträumern im Traum selbstbestimmt handeln kann.','luzide Träumer normalerweise ihre Träume steuern können.'], correct:2 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:['kritische Selbstreflexion beim Träumen.','logisches Denken im Traum.','schnellere Augenbewegungen im Schlaf.','stärkere Aktivität in einer Gehirnregion.'], correct:0 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:['Der Stellenwert luzider Träume in unterschiedlichen Religionen','Die kulturell unterschiedlich geprägte Sicht auf Klarträume','Die lange Geschichte der Klartraumforschung','Kulturübergreifendes Interesse an luziden Träumen'], correct:3 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:['Aufzeichnungen von Trauminhalten machen.','den Bewusstseinszustand beeinflussen.','Menschen aus schlechten Träumen wecken.','Menschen psychologische Erleichterung verschaffen.'], correct:3 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:['Erfahrungen aus der Traumwelt sind in die Realität übertragbar.','Klarträume sind eine Methode, um Aufgaben besser zu lösen.','Luzide Träume helfen dabei, die Schöpferkraft zu stärken.','Snowboarder und Skateboardfahrer trainieren im Schlaf.'], correct:0 },
+      { q:'Welche Meinung hat der Autor in Absatz 6 über das absichtliche Hervorrufen luzider Träume?', options:['Er begrüßt es.','Er kritisiert es.','Er lehnt es ab.','Er mahnt zur Vorsicht.'], correct:3 },
+      { q:'Hauptanliegen des Textes ist es, ...', options:['die Fortschritte in der Klartraumforschung darzulegen.','die Vorteile und Nachteile von Klarträumen aufzuzeigen.','falsche Vorstellungen über Klarträume zu korrigieren.','über das Phänomen der Klarträume zu informieren.'], correct:3 }
+    ]
+  },
+
+  /* Aufgabe 4 (Ajustée : Zuordnung Textstellen 1-4 zu Aussagen a-h) */
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
+    passageText:`Die Vorstellung, dass wir mehr Ressourcen verbrauchen, als dieser Planet hat und deshalb konsequent reduzieren und verzichten müssen, ist eine Behauptung, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch technologische Verfahren synthetische Rohstoffe herzustellen. <strong>[2] Diese Verfahren sind zugegebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt schnell voran. Vielleicht werden wir in Zukunft mit einem 3-D-Drucker unsere wichtigsten Rohstoffe kostengünstig herstellen. Die Idee der Grenzen des Wachstums könnte also ein Irrglaube sein. <strong>[3] Dass sie dennoch so populär ist, hängt damit zusammen, dass unsere Vorstellung von unseren Ressourcen immer noch die eines steinzeitlichen Jägers und Sammlers ist.</strong> In Wahrheit sind unsere Ressourcen nahezu unerschöpflich. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Fantasie werden wir immer besser in der Lage sein, sie zu nutzen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt etwas.',
+      'Der Experte hofft auf etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte räumt etwas ein.',
+      'Der Experte stellt etwas in Frage.',
+      'Der Experte vermutet etwas.',
+      'Der Experte verteidigt etwas.',
+      'Der Experte widerspricht etwas.'
+    ],
+    correct:[4, 3, 5, 2] // [1]->e (index 4), [2]->d (index 3), [3]->f (index 5), [4]->c (index 2)
+  },
+
+  /* Aufgabe 5 */
+  { ...TEMPLATE[4],
+    instructions:'Ordnen Sie den Aussagen 1–7 das passende Modell (A, B oder C) zu.',
+    title:'Drei Modelle der Energiewende',
+    passage:'Beim Übergang zu erneuerbaren Energien werden im Wesentlichen drei Modelle diskutiert. Modell A setzt auf den Ausbau weniger, aber sehr großer Wind- und Solarparks, die zentral geplant und von großen Energiekonzernen betrieben werden; Befürworter verweisen auf Skaleneffekte und geringere Kosten pro Kilowattstunde. Modell B setzt auf eine dezentrale Struktur mit vielen kleinen, oft genossenschaftlich organisierten Anlagen in Bürgerhand, wodurch die Wertschöpfung stärker vor Ort verbleibe und die lokale Akzeptanz steige. Modell C kombiniert beide Ansätze: Große Anlagen decken die Grundlast, während dezentrale Bürgerenergieprojekte Spitzenlasten abfedern.',
+    columns:['Modell A','Modell B','Modell C'],
+    items:[
+      {text:'Setzt auf wenige, sehr große Anlagen.', correct:0},
+      {text:'Beruht auf genossenschaftlich organisierten Projekten in Bürgerhand.', correct:1},
+      {text:'Kombiniert zentrale und dezentrale Ansätze.', correct:2},
+      {text:'Wird mit Skaleneffekten und geringeren Kosten pro Kilowattstunde begründet.', correct:0},
+      {text:'Große Anlagen decken hier die Grundlast.', correct:2},
+      {text:'Erhöht laut Befürwortern die lokale Akzeptanz der Energiewende.', correct:1},
+      {text:'Wird von großen Energiekonzernen zentral geplant.', correct:0}
+    ]
+  },
+
+  /* Aufgabe 6 (Ajustée : Heilpflanzen Vorteile/Nachteile Tabelle) */
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen. Schreiben Sie die richtigen Aussagen an die passende Stelle in der Tabelle. Es müssen vier Aussagen zugeordnet werden.',
+    title:'Aufgabe 6: Heilpflanzen',
+    passage:'Heilpflanzen sind schon seit Tausenden Jahren bekannt. Sie gelten als natürlich und ursprünglich, da sie allgemein verträglicher als herkömmliche Präparate sind. Zwar können auch hier mitunter Neben- und Wechselwirkungen auftreten, allerdings ist die Konzentration in verkäuflichen Naturheilmitteln oft gering. Heilpflanzen werden aufgrund ihrer vielseitigen Anwendungsmöglichkeiten geschätzt. Denn häufig kann man sie sowohl innerlich als auch äußerlich verwenden. Einiges kann man überdies leicht selbst machen... Beachten sollte man außerdem, dass sich die Wirkung von pflanzlichen Arzneimitteln oft erheblich von herkömmlichen Medikamenten unterscheidet. Während diese bereits nach wenigen Minuten wirken, können bei pflanzlichen Mitteln mitunter Wochen vergehen, bis sich ein Effekt zeigt. Zudem sollte man auf mögliche Allergien achten.',
+    aussagen:[
+      { key:'a', text:'[a] Eigenständige Verarbeitung zu Präparaten' },
+      { key:'b', text:'[b] Giftstoffe in Heilpflanzen nicht auszuschließen' },
+      { key:'c', text:'[c] Kaum Nebenwirkungen trotz hohem Wirkstoffgehalt' },
+      { key:'d', text:'[d] Keine eindeutige Zuordnung von Pflanzen' },
+      { key:'e', text:'[e] Längere Dauer bis zum Wirkungseintritt' },
+      { key:'f', text:'[f] Möglicherweise Entstehung von Allergien' },
+      { key:'g', text:'[g] Vollständiger Ersatz herkömmlicher Arzneimittel' },
+      { key:'h', text:'[h] Zahlreiche Einsatzformen bestehen' }
+    ],
+    // Correct choices: Vorteile (1, 2) -> 'a', 'h' | Nachteile (3, 4) -> 'e', 'f'
+    correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
+  },
+
+  /* Aufgabe 7 */
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Wachstum des E-Commerce',
+    passage:'Der Anteil des Online-Handels am gesamten Einzelhandelsumsatz in Deutschland ist in den vergangenen Jahren kontinuierlich gestiegen. Lag der Anteil im Jahr 2015 noch bei rund 9 Prozent, so erreichte er im Jahr 2023 bereits über 19 Prozent. Besonders stark war der Zuwachs zwischen 2020 und 2021, was Fachleute vor allem auf veränderte Einkaufsgewohnheiten während der Pandemie zurückführen. Am stärksten wächst der Online-Handel im Bereich Mode und Elektronik, während Lebensmittel bislang einen vergleichsweise kleinen Anteil ausmachen. Kleinere, inhabergeführte Geschäfte berichten dabei überproportional häufig von Umsatzeinbußen, während große Online-Plattformen ihre Marktanteile weiter ausbauen konnten.',
+    graphicData:[{year:'2015',val:9},{year:'2018',val:12},{year:'2020',val:14},{year:'2021',val:17},{year:'2023',val:19}],
+    graphicCaption:'Grafik: Anteil des Online-Handels am Einzelhandelsumsatz in Deutschland (in Prozent)',
+    sentences:[
+      {text:'Der Online-Handel-Anteil ist von rund 9 Prozent 2015 auf über 19 Prozent 2023 gestiegen.', wrong:false},
+      {text:'Der stärkste Zuwachs war zwischen 2020 und 2021 zu beobachten.', wrong:false},
+      {text:'Lebensmittel machen bislang den größten Anteil am Online-Handel aus.', wrong:true},
+      {text:'Kleinere, inhabergeführte Geschäfte berichten überproportional häufig von Umsatzeinbußen.', wrong:false},
+      {text:'Große Online-Plattformen haben laut Text Marktanteile verloren.', wrong:true},
+      {text:'Der Zuwachs wird unter anderem mit veränderten Einkaufsgewohnheiten während der Pandemie erklärt.', wrong:false},
+      {text:'Mode und Elektronik zählen zu den am stärksten wachsenden Online-Handel-Bereichen.', wrong:false},
+      {text:'Der Anteil des Online-Handels ist seit 2015 nahezu unverändert geblieben.', wrong:true}
+    ]
+  }
+];
+
 const TESTS = [
-{
-  id:1, title:'Modelltest 1',
-  teile:[
-    {
-      teil:1, type:'table', time:600, label:'Globalverstehen',
-      instructions:'Lesen Sie die fünf kurzen Texte A–E aus dem Hochschulalltag. Ordnen Sie den Aussagen 1–10 den passenden Text zu.',
-      title:'Veranstaltungen und Angebote der Universität',
-      passage:'A: Ringvorlesung „Klimawandel und Gesellschaft" — Reihe von Gastvorträgen jeden Mittwoch 18 Uhr im Hörsaal 3, offen für alle Fakultäten, keine Anmeldung nötig. — B: Schreibwerkstatt für internationale Studierende — wöchentlicher Kurs zur akademischen Schreibkompetenz, Anmeldung über das Studierendensekretariat bis 10. Oktober, maximal 15 Teilnehmende. — C: Career Day Ingenieurwissenschaften — Messeveranstaltung mit Unternehmen aus der Region am 14. November, Anmeldung über das Career Center empfohlen, Eintritt frei. — D: Bibliotheksführung für Erstsemester — findet in der ersten Semesterwoche täglich zu verschiedenen Uhrzeiten statt, Dauer ca. 45 Minuten, Treffpunkt Haupteingang Bibliothek. — E: Stipendienberatung des Akademischen Auslandsamts — offene Sprechstunde jeden Donnerstag 14–16 Uhr, keine Voranmeldung erforderlich, auch online per Videocall möglich.',
-      columns:['Text A','Text B','Text C','Text D','Text E'],
-      items:[
-        {text:'Diese Veranstaltungsreihe lädt wöchentlich externe Gastrednerinnen und Gastredner ein.', correct:0},
-        {text:'Für diese Veranstaltung ist die Teilnehmerzahl begrenzt.', correct:1},
-        {text:'Diese Veranstaltung bringt Studierende direkt mit Unternehmen in Kontakt.', correct:2},
-        {text:'Diese Veranstaltung richtet sich speziell an Studienanfängerinnen und -anfänger.', correct:3},
-        {text:'Bei dieser Beratung ist auch eine Teilnahme per Video möglich.', correct:4},
-        {text:'Für diese Veranstaltung muss man sich bis zu einem bestimmten Datum anmelden.', correct:1},
-        {text:'Diese Veranstaltung dauert etwa dreiviertel Stunden.', correct:3},
-        {text:'Diese Veranstaltung findet regelmäßig mittwochabends statt.', correct:0},
-        {text:'Der Eintritt zu dieser Veranstaltung ist kostenlos.', correct:2},
-        {text:'Diese Sprechstunde findet wöchentlich am selben Wochentag statt.', correct:4}
-      ]
-    },
-    {
-      teil:2, type:'table', time:600, label:'Detailverstehen',
-      instructions:'Lesen Sie den Text. Entscheiden Sie bei den Aussagen 1–10, ob sie richtig, falsch sind oder ob der Text dazu keine Angabe macht.',
-      title:'Warum manche Menschen Frühaufsteher sind',
-      passage:'Ob jemand morgens leicht aus dem Bett kommt oder erst am späten Abend richtig wach wird, hängt maßgeblich vom individuellen Chronotyp ab, also der genetisch mitbestimmten inneren Uhr eines Menschen. Schlafforscherinnen und Schlafforscher unterscheiden grob zwischen sogenannten Lerchen, die früh aufstehen und früh müde werden, und Eulen, deren Leistungsfähigkeit erst am späten Vormittag oder Nachmittag ihren Höhepunkt erreicht. Zwillingsstudien deuten darauf hin, dass der Chronotyp zu einem erheblichen Teil genetisch bedingt ist, auch wenn Umweltfaktoren wie Lichtexposition und Tagesroutinen ihn zusätzlich beeinflussen können. Besonders bei Jugendlichen verschiebt sich der Chronotyp im Rahmen der Pubertät häufig deutlich nach hinten, sodass viele Teenager biologisch bedingt erst spät abends müde werden. Genau hier setzt eine seit Jahren geführte Debatte über spätere Schulbeginnzeiten an: Mehrere Studien legen nahe, dass ein späterer Unterrichtsbeginn bei Jugendlichen mit einer verbesserten Konzentrationsfähigkeit und selteneren Fehlzeiten einhergeht. Kritiker wenden jedoch ein, dass eine Verschiebung des Schulbeginns organisatorische Folgeprobleme mit sich bringt, etwa bei der Koordination von Bustransporten oder der Betreuung jüngerer Geschwister. Manche Schulen in Skandinavien haben den Unterrichtsbeginn bereits testweise um eine Stunde nach hinten verschoben und berichten von positiven ersten Ergebnissen, auch wenn Langzeitstudien zu den tatsächlichen Effekten auf die schulischen Leistungen noch ausstehen. Arbeitgeberverbände diskutieren zudem, inwiefern auch im Berufsleben flexiblere Arbeitszeiten dem individuellen Chronotyp stärker Rechnung tragen könnten. Einig sind sich Forschende zumindest darin, dass ein dauerhafter Konflikt zwischen dem biologischen Rhythmus und gesellschaftlichen Zeitvorgaben langfristig mit gesundheitlichen Risiken verbunden sein kann.',
-      columns:['richtig','falsch','Text sagt dazu nichts'],
-      items:[
-        {text:'Der Chronotyp eines Menschen ist ausschließlich genetisch bedingt.', correct:1},
-        {text:'Bei Jugendlichen verschiebt sich der Chronotyp während der Pubertät häufig nach hinten.', correct:0},
-        {text:'Ein späterer Schulbeginn wird mit weniger Fehlzeiten in Verbindung gebracht.', correct:0},
-        {text:'Alle Bundesländer in Deutschland haben den Schulbeginn bereits verschoben.', correct:2},
-        {text:'Kritiker eines späteren Schulbeginns verweisen auf organisatorische Probleme.', correct:0},
-        {text:'Skandinavische Schulen berichten von ausschließlich negativen Erfahrungen mit späterem Unterrichtsbeginn.', correct:1},
-        {text:'Langzeitstudien zu den schulischen Effekten liegen bereits abschließend vor.', correct:1},
-        {text:'Arbeitgeberverbände diskutieren flexiblere Arbeitszeiten im Zusammenhang mit dem Chronotyp.', correct:0},
-        {text:'Zwillingsstudien wurden ausschließlich mit erwachsenen Teilnehmenden durchgeführt.', correct:2},
-        {text:'Ein dauerhafter Konflikt zwischen biologischem Rhythmus und gesellschaftlichen Zeitvorgaben gilt als gesundheitlich unbedenklich.', correct:1}
-      ]
-    },
-    {
-      teil:3, type:'mc', time:1200, label:'Selektives / detailliertes Verstehen',
-      instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–10. Für jede Frage gibt es genau eine richtige Lösung. Frage 10 bezieht sich auf den gesamten Text.',
-      title:'Gemeinschaftsgärten in deutschen Großstädten',
-      passage:[
-        'In zahlreichen deutschen Großstädten sind in den vergangenen anderthalb Jahrzehnten Hunderte Gemeinschaftsgärten entstanden, in denen Anwohnerinnen und Anwohner gemeinsam Gemüse, Kräuter und Blumen anbauen. Anders als klassische Schrebergärten, die meist einzelnen Familien vorbehalten sind, werden Gemeinschaftsgärten kollektiv bewirtschaftet: Beete, Werkzeug und oft auch die Ernte werden gemeinschaftlich genutzt und verteilt. Die Bewegung, ursprünglich aus nordamerikanischen Städten wie New York und Detroit nach Europa überschwappt, versteht sich dabei explizit als politisches Statement für eine andere, partizipative Nutzung städtischen Raums.',
-        'Städteplanerinnen und Städteplaner beobachten die Entwicklung mit wachsendem Interesse, da Gemeinschaftsgärten häufig auf brachliegenden oder wenig genutzten Flächen entstehen, etwa auf ehemaligen Bahngeländen, Parkplätzen oder Baulücken. Für Kommunen stellt sich dabei regelmäßig die Frage, wie langfristig solche informellen Nutzungen mit anderen städtebaulichen Zielen, etwa dem dringend benötigten Wohnungsbau, in Einklang gebracht werden können. Einige Städte haben inzwischen befristete Nutzungsverträge entwickelt, die Gemeinschaftsgärten für einige Jahre rechtlich absichern.',
-        'Aus sozialwissenschaftlicher Perspektive wird den Projekten ein erhebliches Potenzial zur Förderung des nachbarschaftlichen Zusammenhalts zugeschrieben. Studien zu einzelnen Projekten zeigen, dass die gemeinsame gärtnerische Arbeit Kontakte zwischen Menschen unterschiedlicher Herkunft, Generationen und sozialer Schichten ermöglicht. Gerade für neu zugezogene Menschen böten Gemeinschaftsgärten dadurch einen niedrigschwelligen Zugang zu sozialem Austausch.',
-        'Kritisch angemerkt wird, dass die Erträge der Gemeinschaftsgärten den städtischen Lebensmittelbedarf nur in verschwindend geringem Maße decken können und ihr Beitrag zur urbanen Ernährungssicherheit eher symbolischer Natur sei. Auch die ökologische Wirkung wird kontrovers diskutiert: Während Befürworter auf einen positiven Effekt für die städtische Biodiversität verweisen, geben Skeptiker zu bedenken, dass viele Gärten aufgrund fehlender fachlicher Anleitung wenig ertragreich und teils mit hohem Ressourcenverbrauch verbunden seien.',
-        'Diskutiert wird zudem, inwieweit Gemeinschaftsgärten tatsächlich alle Bevölkerungsgruppen gleichermaßen erreichen. Untersuchungen deuten darauf hin, dass die aktive Beteiligung überproportional häufig von gut ausgebildeten, eher wohlhabenden Bewohnerinnen und Bewohnern getragen wird, während Menschen mit geringerem Einkommen seltener teilnehmen. Fachleute empfehlen daher, gezielt niedrigschwellige Zugangsmöglichkeiten zu schaffen, etwa durch flexible Mitarbeit ohne feste Verpflichtungen oder mehrsprachige Ansprache.'
-      ],
-      questions:[
-        {q:'Was unterscheidet Gemeinschaftsgärten laut Text von klassischen Schrebergärten?', options:['Sie werden gemeinschaftlich statt individuell bewirtschaftet.','Sie sind ausschließlich für Familien mit Kindern gedacht.','Sie befinden sich immer außerhalb der Stadt.'], correct:0},
-        {q:'Woher stammt die Gemeinschaftsgarten-Bewegung ursprünglich?', options:['Aus Deutschland selbst.','Aus nordamerikanischen Städten.','Aus Skandinavien.'], correct:1},
-        {q:'Auf welchen Flächen entstehen Gemeinschaftsgärten laut Text häufig?', options:['Auf brachliegenden oder wenig genutzten Flächen.','Ausschließlich in privaten Vorgärten.','Nur auf öffentlichen Sportplätzen.'], correct:0},
-        {q:'Wie reagieren manche Städte auf die Nutzungsfrage von Gemeinschaftsgärten?', options:['Sie verbieten Gemeinschaftsgärten grundsätzlich.','Sie entwickeln befristete Nutzungsverträge.','Sie verkaufen die Flächen sofort an Investoren.'], correct:1},
-        {q:'Welches soziale Potenzial wird Gemeinschaftsgärten laut Text zugeschrieben?', options:['Sie fördern Kontakte zwischen unterschiedlichen Bevölkerungsgruppen.','Sie ersetzen soziale Einrichtungen vollständig.','Sie reduzieren die Mieten in der gesamten Nachbarschaft.'], correct:0},
-        {q:'Was wird bezüglich der Ernährungssicherheit kritisch angemerkt?', options:['Der Beitrag zum städtischen Lebensmittelbedarf sei eher symbolisch.','Gemeinschaftsgärten würden den Lebensmittelbedarf vollständig decken.','Gemeinschaftsgärten würden zu Lebensmittelknappheit führen.'], correct:0},
-        {q:'Was bemängeln Skeptiker an der ökologischen Wirkung mancher Gärten?', options:['Einen zu hohen Ressourcenverbrauch bei geringem Ertrag.','Eine zu geringe Anzahl an Pflanzenarten in der gesamten Stadt.','Eine zu starke Versiegelung der genutzten Flächen.'], correct:0},
-        {q:'Wer beteiligt sich laut Untersuchungen überproportional häufig an Gemeinschaftsgärten?', options:['Menschen mit geringem Einkommen.','Gut ausgebildete, eher wohlhabende Bewohnerinnen und Bewohner.','Ausschließlich Rentnerinnen und Rentner.'], correct:1},
-        {q:'Was empfehlen Fachleute laut Text für neue Projekte?', options:['Gezielt niedrigschwellige Zugangsmöglichkeiten zu schaffen.','Die Teilnahme auf Fachleute zu beschränken.','Feste, verpflichtende Mitgliedschaften einzuführen.'], correct:0},
-        {q:'(Globalfrage) Worum geht es in dem Text insgesamt?', options:['Um Chancen und Kontroversen rund um Gemeinschaftsgärten in Städten.','Um die Geschichte klassischer Schrebergärten in Deutschland.','Um staatliche Förderprogramme für die Landwirtschaft.'], correct:0}
-      ]
-    }
-  ]
-},
-{
-  id:2, title:'Modelltest 2',
-  teile:[
-    {
-      teil:1, type:'table', time:600, label:'Globalverstehen',
-      instructions:'Lesen Sie die fünf kurzen Texte A–E aus dem Hochschulalltag. Ordnen Sie den Aussagen 1–10 den passenden Text zu.',
-      title:'Angebote für Studierende',
-      passage:'A: Sprachtandem-Programm — Studierende werden mit Muttersprachlerinnen und Muttersprachlern anderer Sprachen gepaart, Anmeldung über Online-Formular, das Programm läuft das ganze Semester. — B: Fahrradwerkstatt des Studierendenwerks — kostenlose Reparaturhilfe jeden zweiten Freitag im Monat, Werkzeug wird gestellt, Ersatzteile müssen selbst mitgebracht werden. — C: Prüfungsangst-Workshop der psychologischen Beratungsstelle — zweiteiliger Workshop vor der Prüfungsphase, Anmeldung begrenzt auf 12 Plätze, kostenlos für Studierende. — D: Internationale Wohnheim-Kennenlernabende — monatliche Abende im Wohnheim, offen für alle, auch für Studierende, die nicht im Wohnheim wohnen. — E: Career Coaching Einzelgespräche — individuelle 30-minütige Beratungstermine zur Berufsorientierung, Terminvereinbarung per E-Mail, Wartezeit derzeit ca. drei Wochen.',
-      columns:['Text A','Text B','Text C','Text D','Text E'],
-      items:[
-        {text:'Bei diesem Angebot werden Teilnehmende mit Muttersprachlerinnen und Muttersprachlern zusammengebracht.', correct:0},
-        {text:'Für die Teilnahme an diesem Workshop steht nur eine begrenzte Platzzahl zur Verfügung.', correct:2},
-        {text:'Bei diesem Angebot müssen bestimmte Materialien selbst mitgebracht werden.', correct:1},
-        {text:'Dieses Angebot richtet sich ausdrücklich auch an Personen, die nicht im Wohnheim leben.', correct:3},
-        {text:'Für dieses Beratungsangebot muss derzeit mit einer Wartezeit von mehreren Wochen gerechnet werden.', correct:4},
-        {text:'Dieses Angebot findet einmal im Monat statt.', correct:1},
-        {text:'Dieser Workshop bereitet gezielt auf die Prüfungsphase vor.', correct:2},
-        {text:'Für dieses Angebot ist eine Anmeldung über ein Online-Formular vorgesehen.', correct:0},
-        {text:'Diese Veranstaltung ist eine regelmäßige Kennenlernveranstaltung im Wohnheim.', correct:3},
-        {text:'Für dieses Beratungsgespräch sollte man per E-Mail einen Termin vereinbaren.', correct:4}
-      ]
-    },
-    {
-      teil:2, type:'table', time:600, label:'Detailverstehen',
-      instructions:'Lesen Sie den Text. Entscheiden Sie bei den Aussagen 1–10, ob sie richtig, falsch sind oder ob der Text dazu keine Angabe macht.',
-      title:'Multitasking und kognitive Leistungsfähigkeit',
-      passage:'Der Begriff Multitasking, ursprünglich aus der Informatik entlehnt, hat sich längst auch im Alltagssprachgebrauch etabliert und beschreibt dort die vermeintliche Fähigkeit, mehrere Aufgaben gleichzeitig zu erledigen. Kognitionswissenschaftlerinnen und Kognitionswissenschaftler weisen jedoch seit Langem darauf hin, dass das menschliche Gehirn in Wirklichkeit kaum zu echtem Multitasking fähig ist: Was subjektiv als gleichzeitiges Bearbeiten mehrerer Aufgaben empfunden wird, ist meist ein sehr schneller Wechsel der Aufmerksamkeit zwischen einzelnen Tätigkeiten, ein Vorgang, der in der Forschung als Task-Switching bezeichnet wird. Jeder dieser Wechsel ist mit einem kurzen kognitiven Umschaltaufwand verbunden, der sich bei häufiger Wiederholung messbar zu einem erheblichen Effizienzverlust summieren kann. Studien zeigen, dass Personen, die während einer komplexen Aufgabe wiederholt unterbrochen werden, für die Fertigstellung insgesamt deutlich länger benötigen als bei ungestörter, sequenzieller Bearbeitung. Besonders ausgeprägt ist dieser Effekt bei kognitiv anspruchsvollen Tätigkeiten, während einfache, automatisierte Routinehandlungen deutlich weniger stark beeinträchtigt werden. Umstritten ist in der Forschung nach wie vor, ob sich die Fähigkeit zum Task-Switching durch gezieltes Training verbessern lässt. Einige Studien berichten von messbaren Trainingseffekten, andere Untersuchungen kommen zu deutlich ernüchternderen Ergebnissen. Einigkeit besteht hingegen weitgehend darin, dass ständige digitale Unterbrechungen durch Benachrichtigungen die Konzentrationsfähigkeit im Arbeitsalltag spürbar beeinträchtigen können. Arbeitspsychologinnen und Arbeitspsychologen empfehlen daher zunehmend feste, unterbrechungsfreie Zeitblöcke für anspruchsvolle Aufgaben.',
-      columns:['richtig','falsch','Text sagt dazu nichts'],
-      items:[
-        {text:'Das menschliche Gehirn kann laut Text mehrere Aufgaben tatsächlich gleichzeitig verarbeiten.', correct:1},
-        {text:'Der schnelle Wechsel zwischen Aufgaben wird in der Forschung als Task-Switching bezeichnet.', correct:0},
-        {text:'Jeder Aufgabenwechsel ist mit einem kognitiven Umschaltaufwand verbunden.', correct:0},
-        {text:'Einfache, automatisierte Tätigkeiten werden durch Task-Switching stärker beeinträchtigt als komplexe Aufgaben.', correct:1},
-        {text:'Die im Text erwähnten Studien wurden ausschließlich mit Studierenden durchgeführt.', correct:2},
-        {text:'Ob sich Task-Switching gezielt trainieren lässt, ist in der Forschung umstritten.', correct:0},
-        {text:'Alle Studien zum Training von Task-Switching kommen zum selben Ergebnis.', correct:1},
-        {text:'Digitale Unterbrechungen durch Benachrichtigungen gelten laut Text als unproblematisch für die Konzentration.', correct:1},
-        {text:'Arbeitspsychologinnen und Arbeitspsychologen empfehlen unterbrechungsfreie Zeitblöcke für anspruchsvolle Aufgaben.', correct:0},
-        {text:'Der Begriff Multitasking stammt ursprünglich aus der Psychologie.', correct:1}
-      ]
-    },
-    {
-      teil:3, type:'mc', time:1200, label:'Selektives / detailliertes Verstehen',
-      instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–10. Für jede Frage gibt es genau eine richtige Lösung. Frage 10 bezieht sich auf den gesamten Text.',
-      title:'Reparatur-Cafés: Wider die Wegwerfgesellschaft',
-      passage:[
-        'In immer mehr deutschen Städten öffnen ehrenamtlich organisierte Reparatur-Cafés ihre Türen, in denen defekte Alltagsgegenstände gemeinsam mit erfahrenen Hobby-Reparateurinnen und -Reparateuren wieder instand gesetzt werden können. Anders als in kommerziellen Reparaturwerkstätten steht dabei nicht die schnelle Erledigung im Vordergrund, sondern der Lernprozess: Besucherinnen und Besucher reparieren ihre Geräte in der Regel selbst, unterstützt von freiwilligen Expertinnen und Experten, die ihr technisches Wissen kostenlos zur Verfügung stellen.',
-        'Die Bewegung, deren erstes Café 2009 in Amsterdam gegründet wurde, versteht sich als Reaktion auf eine Konsum- und Wegwerfkultur, in der viele Produkte aus wirtschaftlichen Gründen so constructed sind, dass eine Reparatur unrentabel oder technisch kaum möglich ist, ein Phänomen, das häufig als geplante Obsoleszenz bezeichnet wird, auch wenn dessen genaue Häufigkeit wissenschaftlich umstritten bleibt. In deutschen Reparatur-Cafés werden nach Angaben eines bundesweiten Dachverbands jährlich mehrere Hunderttausend Gegenstände behandelt; die Erfolgsquote liegt Schätzungen zufolge bei etwa 60 bis 70 Prozent.',
-        'Für die Kommunen sind Reparatur-Cafés inzwischen auch aus abfallwirtschaftlicher Sicht interessant geworden: Mehrere Städte fördern entsprechende Initiativen finanziell, etwa durch die kostenlose Bereitstellung von Räumlichkeiten, da jeder erfolgreich reparierte Gegenstand potenziell den städtischen Sperrmüll reduziert. Umweltverbände verweisen zudem auf die im Vergleich zur Neuproduktion deutlich geringere Umweltbelastung einer Reparatur.',
-        'Kritisch diskutiert wird allerdings, inwieweit Reparatur-Cafés tatsächlich zu einer strukturellen Veränderung des Konsumverhaltens beitragen können oder ob sie vor allem ein bereits reparaturaffines, häufig gut gebildetes Milieu ansprechen, ohne die grundlegenden ökonomischen Anreize für eine Wegwerfproduktion zu verändern.',
-        'Aus juristischer Perspektive wird diskutiert, inwiefern eine europaweite gesetzliche Verpflichtung der Hersteller zu länger verfügbaren Ersatzteilen und leichter reparierbaren Produktdesigns die Arbeit der ehrenamtlichen Initiativen sinnvoll ergänzen könnte. Erste entsprechende EU-Regelungen, die unter dem Stichwort „Recht auf Reparatur" diskutiert werden, sehen für bestimmte Produktkategorien bereits verbindliche Mindestfristen für die Ersatzteilverfügbarkeit vor, auch wenn Verbraucherschützer weiterreichende Verpflichtungen fordern.'
-      ],
-      questions:[
-        {q:'Was steht in Reparatur-Cafés laut Text im Vordergrund?', options:['Der Lernprozess beim gemeinsamen Reparieren.','Die möglichst schnelle professionelle Reparatur.','Der kostenpflichtige Verkauf reparierter Geräte.'], correct:0},
-        {q:'Wo wurde das erste Reparatur-Café gegründet?', options:['In Berlin.','In Amsterdam.','In Paris.'], correct:1},
-        {q:'Was wird im Text als geplante Obsoleszenz bezeichnet?', options:['Eine bewusst verkürzte Produktlebensdauer aus wirtschaftlichen Gründen.','Ein staatliches Förderprogramm für Reparaturen.','Eine neue Reparaturtechnik für Elektrogeräte.'], correct:0},
-        {q:'Wie hoch liegt laut Text die Erfolgsquote der Reparaturen ungefähr?', options:['Bei etwa 60 bis 70 Prozent.','Bei nahezu 100 Prozent.','Bei unter 10 Prozent.'], correct:0},
-        {q:'Warum unterstützen manche Kommunen Reparatur-Cafés finanziell?', options:['Weil reparierte Gegenstände potenziell Entsorgungskosten reduzieren.','Weil Reparatur-Cafés hohe Steuereinnahmen generieren.','Weil sie gesetzlich dazu verpflichtet sind.'], correct:0},
-        {q:'Was wird hinsichtlich der Zielgruppe von Reparatur-Cafés kritisch diskutiert?', options:['Ob sie vor allem ein bereits reparaturaffines, gebildetes Milieu ansprechen.','Ob sie ausschließlich von älteren Menschen besucht werden.','Ob sie zu teuer für einkommensschwache Haushalte sind.'], correct:0},
-        {q:'Worauf zielt das diskutierte „Recht auf Reparatur" ab?', options:['Auf verbindliche Mindestfristen für die Ersatzteilverfügbarkeit.','Auf ein generelles Verbot der Neuproduktion von Elektrogeräten.','Auf kostenlose Reparaturen durch die Hersteller.'], correct:0},
-        {q:'Was fordern Verbraucherschützer laut Text zusätzlich?', options:['Weiterreichende gesetzliche Verpflichtungen der Hersteller.','Eine Abschaffung der Reparatur-Cafés.','Höhere Preise für Neugeräte.'], correct:0},
-        {q:'Worauf verweisen Umweltverbände laut Text?', options:['Auf eine geringere Umweltbelastung durch Reparatur im Vergleich zur Neuproduktion.','Auf eine höhere Umweltbelastung durch Reparatur-Cafés.','Auf einen Anstieg des Elektroschrotts durch Reparatur-Cafés.'], correct:0},
-        {q:'(Globalfrage) Worum geht es in dem Text insgesamt?', options:['Um Reparatur-Cafés als Reaktion auf die Wegwerfkultur und damit verbundene Debatten.','Um die Geschichte der Elektrogeräteindustrie in Europa.','Um staatliche Subventionen für Neuproduktion.'], correct:0}
-      ]
-    }
-  ]
-}
+  {id:1, title:'Modelltest 1', teile: MT1}
 ];
 
 /* ===========================================================
    STATE
 =========================================================== */
 let currentTestIdx = 0;
-let currentTeilIdx = 0;
+let current = 0;
 let timerInterval = null;
 let remaining = 0;
 const answers = {};
@@ -334,10 +338,10 @@ function updateTimerDisplay(){
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-function getAnswerBucket(test, teil){
+function getBucket(test, task){
   if(!answers[test.id]) answers[test.id] = {};
-  if(!answers[test.id][teil.teil]) answers[test.id][teil.teil] = {};
-  return answers[test.id][teil.teil];
+  if(!answers[test.id][task.teil]) answers[test.id][task.teil] = {};
+  return answers[test.id][task.teil];
 }
 
 /* ===========================================================
@@ -347,44 +351,36 @@ function showTestSelect(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   document.getElementById('navbar').innerHTML = '';
-
   let cards = '';
   TESTS.forEach((test, idx)=>{
     cards += `<div class="sel-card" data-idx="${idx}">
       <div class="sc-title">${test.title}</div>
-      <div class="sc-desc">Teil 1 Globalverstehen · Teil 2 Detailverstehen · Teil 3 Selektives Verstehen (30 Items gesamt)</div>
+      <div class="sc-desc">7 Aufgaben · 53 Minuten · 34 Items</div>
     </div>`;
   });
-
   document.getElementById('main').innerHTML = `
     <div class="select-screen">
       <h2>Leseverstehen — Modelltest wählen</h2>
-      <p>Struktur wie in der echten TestDaF-Prüfung: 3 Lesetexte mit insgesamt 30 Items. Wählen Sie einen Modelltest und bearbeiten Sie die drei Teile nacheinander.</p>
+      <p>Jeder Modelltest umfasst die 7 offiziellen Aufgabentypen mit den jeweils vorgesehenen Zeiten und Itemzahlen.</p>
       <div class="cards">${cards}</div>
-      <p class="select-note">Eigens erstelltes Übungsmaterial im TestDaF-Format, kein Original-TestDaF-Material. Alle Texte und Aufgaben wurden neu verfasst.</p>
+      <p class="select-note">Eigens erstelltes Übungsmaterial im TestDaF-Format, kein Original-TestDaF-Material.</p>
     </div>
   `;
   document.querySelectorAll('.sel-card[data-idx]').forEach(card=>{
-    card.onclick = ()=> startTest(parseInt(card.dataset.idx));
+    card.onclick = ()=>{ currentTestIdx = parseInt(card.dataset.idx); current = 0; renderTask(); };
   });
-}
-
-function startTest(idx){
-  currentTestIdx = idx;
-  currentTeilIdx = 0;
-  renderTeil();
 }
 
 /* ===========================================================
    TASKBAR / NAVBAR
 =========================================================== */
-function renderTaskbar(teil, test){
+function renderTaskbar(task, test){
   const tb = document.getElementById('taskbar');
   tb.innerHTML = `
     <div class="task-count">
       <div>
-        <div class="task-label">${test.title} · Teil</div>
-        <span class="n">${teil.teil}</span><span class="of">/3</span>
+        <div class="task-label">${test.title} · Aufgabe</div>
+        <span class="n">${task.teil}</span><span class="of">/${test.teile.length}</span>
       </div>
     </div>
     <div class="timer-wrap">
@@ -392,78 +388,109 @@ function renderTaskbar(teil, test){
       <div class="timer-caption">verbleibend</div>
     </div>
     <div class="instructions">
-      <div class="title">${teil.label}</div>
-      <p>${teil.instructions}</p>
-      <p class="time-hint">Sie haben ${fmt(teil.time)} Minuten Zeit.</p>
+      <div class="title">${task.label}</div>
+      <p>${task.instructions}</p>
+      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
     </div>
   `;
 }
-
-function renderNavbar(isLast){
+function renderNavbar(isLast, test){
   const nb = document.getElementById('navbar');
   nb.innerHTML = `
     <button class="btn ghost" id="btnMenu">Modelltests</button>
     <span class="foot-note">Eigenes Übungsmaterial · kein Original-TestDaF-Test</span>
-    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Teil '+(currentTeilIdx+2)+' →'}</button>
+    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
   `;
   document.getElementById('btnMenu').onclick = ()=>{
-    if(confirm('Zurück zur Modelltest-Auswahl? Ihre Antworten in diesem Test bleiben erhalten.')) showTestSelect();
+    if(confirm('Zurück zur Modelltest-Auswahl? Ihre Antworten bleiben erhalten.')) showTestSelect();
   };
   document.getElementById('btnNext').onclick = ()=>{
-    if(isLast){ showResults(); } else { currentTeilIdx++; renderTeil(); }
+    if(isLast){ showResults(); } else { current++; renderTask(); }
   };
 }
 
 /* ===========================================================
-   RENDER: TEIL DISPATCH
+   DISPATCH
 =========================================================== */
-function renderTeil(){
+function renderTask(){
   const test = TESTS[currentTestIdx];
-  const teil = test.teile[currentTeilIdx];
-  renderTaskbar(teil, test);
-  startTimer(teil.time);
+  const task = test.teile[current];
+  renderTaskbar(task, test);
+  startTimer(task.time);
   const main = document.getElementById('main');
-  main.innerHTML = `<h2 class="task-title">${teil.title}</h2><div id="taskBody"></div>`;
+  main.innerHTML = `<h2 class="task-title">${task.title}</h2><div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
-
-  switch(teil.type){
-    case 'table': renderTable(teil, test, body); break;
-    case 'mc': renderMC(teil, test, body); break;
+  switch(task.type){
+    case 'gap': renderGap(task, test, body); break;
+    case 'order': renderOrder(task, test, body); break;
+    case 'mc': renderMC(task, test, body); break;
+    case 'match': renderMatch(task, test, body); break;
+    case 'table': renderTable(task, test, body); break;
+    case 'twocat': renderTwoCat(task, test, body); break;
+    case 'summary': renderSummary(task, test, body); break;
   }
-  renderNavbar(currentTeilIdx === test.teile.length-1);
-  window.scrollTo(0, 0);
+  renderNavbar(current === test.teile.length-1, test);
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
-/* ---- Teil: Tabelle ---- */
-function renderTable(teil, test, body){
-  let html = `<div class="passage"><p>${escapeHtml(teil.passage)}</p></div>`;
-  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussage</th>${teil.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
-  const a = getAnswerBucket(test, teil);
-  teil.items.forEach((item, ii)=>{
-    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
-    teil.columns.forEach((c, ci)=>{
-      const checked = a[ii] == ci ? 'checked' : '';
-      html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
-    });
-    html += `</tr>`;
+/* ---- Aufgabe 1: Lückentext ---- */
+function renderGap(task, test, body){
+  let html = '<div class="passage"><p>';
+  task.segments.forEach((seg, i)=>{
+    html += escapeHtml(seg);
+    if(i < task.gaps.length){
+      const gap = task.gaps[i];
+      html += `<select class="gapselect" data-idx="${i}"><option value="">(${i+1}) wählen …</option>`;
+      gap.options.forEach((opt, oi)=>{ html += `<option value="${oi}">${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</option>`; });
+      html += `</select>`;
+    }
   });
-  html += '</tbody></table>';
+  html += '</p></div>';
   body.innerHTML = html;
-  teil.items.forEach((item, ii)=>{
-    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=>{
-      inp.addEventListener('change', ()=> a[ii] = inp.value);
-    });
+  const a = getBucket(test, task);
+  body.querySelectorAll('.gapselect').forEach(sel=>{
+    const idx = sel.dataset.idx;
+    if(a[idx] !== undefined){ sel.value = a[idx]; sel.classList.add('answered'); }
+    sel.addEventListener('change', ()=>{ a[idx] = sel.value; sel.classList.toggle('answered', sel.value !== ''); });
   });
 }
 
-/* ---- Teil: Multiple Choice ---- */
-function renderMC(teil, test, body){
+/* ---- Aufgabe 2: Reihenfolge ---- */
+function renderOrder(task, test, body){
+  const a = getBucket(test, task);
+  if(!a.order) a.order = [...task.shuffledStart];
+  const order = a.order;
+  function draw(){
+    let html = '<ul class="order-list">';
+    order.forEach((origIdx, pos)=>{
+      html += `<li class="order-item"><div class="pos">${pos+1}</div><div class="txt">${escapeHtml(task.items[origIdx])}</div>
+        <div class="order-controls">
+          <button data-dir="up" data-pos="${pos}" ${pos===0?'disabled':''}>▲</button>
+          <button data-dir="down" data-pos="${pos}" ${pos===order.length-1?'disabled':''}>▼</button>
+        </div></li>`;
+    });
+    html += '</ul>';
+    body.innerHTML = html;
+    body.querySelectorAll('button[data-dir]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const pos = parseInt(btn.dataset.pos);
+        const swapWith = btn.dataset.dir === 'up' ? pos-1 : pos+1;
+        [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
+        draw();
+      };
+    });
+  }
+  draw();
+}
+
+/* ---- Aufgabe 3: Multiple Choice (4 propositions a,b,c,d) ---- */
+function renderMC(task, test, body){
   let html = '<div class="passage">';
-  teil.passage.forEach(p=> html += `<p>${escapeHtml(p)}</p>`);
+  task.passage.forEach(p=> html += `<p>${escapeHtml(p)}</p>`);
   html += '</div><div style="margin-top:20px;">';
-  const a = getAnswerBucket(test, teil);
-  teil.questions.forEach((q, qi)=>{
-    html += `<div class="qblock"><div class="qtext">${qi+1}. ${escapeHtml(q.q)}</div>`;
+  const a = getBucket(test, task);
+  task.questions.forEach((q, qi)=>{
+    html += `<div class="qblock"><div class="qtext">Frage ${qi+1}: ${escapeHtml(q.q)}</div>`;
     q.options.forEach((opt, oi)=>{
       const checked = a[qi] == oi ? 'checked' : '';
       html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
@@ -472,27 +499,168 @@ function renderMC(teil, test, body){
   });
   html += '</div>';
   body.innerHTML = html;
-  teil.questions.forEach((q, qi)=>{
-    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=>{
-      inp.addEventListener('change', ()=> a[qi] = inp.value);
+  task.questions.forEach((q, qi)=>{
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[qi] = inp.value));
+  });
+}
+
+/* ---- Aufgabe 4: Textstellen 1-4 zu Aussagen a-h ---- */
+function renderMatch(task, test, body){
+  let html = `<div class="passage"><p>${task.passageText}</p></div>`;
+  html += `<h3 style="margin-top:20px;">Aussagen</h3><ul style="list-style:none;padding:0;">`;
+  task.options.forEach((opt, oi)=>{
+    html += `<li style="margin-bottom:4px;font-size:0.9rem;"><strong>${String.fromCharCode(97+oi)}</strong> ${escapeHtml(opt)}</li>`;
+  });
+  html += `</ul><div style="margin-top:20px;">`;
+  
+  const a = getBucket(test, task);
+  task.textStellen.forEach((ts, ti)=>{
+    html += `<div class="matchrow"><div class="ptxt"><strong>Textstelle [${ts}]:</strong></div>
+      <select data-ti="${ti}"><option value="">Aussage wählen …</option>
+      ${task.options.map((o,oi)=>`<option value="${oi}">aussage ${String.fromCharCode(97+oi)}</option>`).join('')}
+      </select></div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  
+  body.querySelectorAll('select[data-ti]').forEach(sel=>{
+    const ti = sel.dataset.ti;
+    if(a[ti] !== undefined) sel.value = a[ti];
+    sel.addEventListener('change', ()=> a[ti] = sel.value);
+  });
+}
+
+/* ---- Aufgabe 5: Kategorien-Tabelle ---- */
+function renderTable(task, test, body){
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussage</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  const a = getBucket(test, task);
+  task.items.forEach((item, ii)=>{
+    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
+    task.columns.forEach((c, ci)=>{
+      const checked = a[ii] == ci ? 'checked' : '';
+      html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
+    });
+    html += `</tr>`;
+  });
+  html += '</tbody></table>';
+  body.innerHTML = html;
+  task.items.forEach((item, ii)=>{
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[ii] = inp.value));
+  });
+}
+
+/* ---- Aufgabe 6: Vorteile / Nachteile Tabelle ---- */
+function renderTwoCat(task, test, body){
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<div class="a6-container"><div class="a6-statements"><div class="a6-statements-title">Aussagen</div><div class="a6-list">`;
+  task.aussagen.forEach(item => {
+    html += `<div>${escapeHtml(item.text)}</div>`;
+  });
+  html += `</div></div>`;
+  
+  const a = getBucket(test, task);
+  
+  const makeSelect = (id) => {
+    let s = `<select data-key="${id}"><option value="">-- Wählen --</option>`;
+    task.aussagen.forEach(item => {
+      const selected = a[id] === item.key ? 'selected' : '';
+      s += `<option value="${item.key}" ${selected}>${item.text}</option>`;
+    });
+    s += `</select>`;
+    return s;
+  };
+
+  html += `<table class="a6-table">
+    <thead>
+      <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
+      <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
+    </tbody>
+  </table></div>`;
+
+  body.innerHTML = html;
+  body.querySelectorAll('select[data-key]').forEach(sel=>{
+    sel.addEventListener('change', ()=>{
+      a[sel.dataset.key] = sel.value;
     });
   });
+}
+
+/* ---- Aufgabe 7: Fehler in Zusammenfassung ---- */
+function renderSummary(task, test, body){
+  const maxVal = Math.max(...task.graphicData.map(d=>d.val));
+  let bars = '';
+  task.graphicData.forEach(d=>{
+    const h = Math.round((d.val/maxVal)*90)+10;
+    bars += `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+      <div style="font-size:.68rem;color:var(--text-soft);">${d.val}</div>
+      <div style="width:70%;height:${h}px;background:var(--teal);border-radius:4px 4px 0 0;"></div>
+      <div style="font-size:.7rem;color:var(--text-soft);">${d.year}</div></div>`;
+  });
+  const wrongCount = task.sentences.filter(s=>s.wrong).length;
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>
+  <div class="graphic-box"><div style="display:flex;align-items:flex-end;gap:6px;height:120px;">${bars}</div>
+  <div class="cap">${escapeHtml(task.graphicCaption)}</div></div>
+  <h3 style="color:var(--teal-dark);font-size:1rem;">Zusammenfassung</h3>
+  <div class="count-hint">Kreuzen Sie genau <strong>${wrongCount}</strong> Sätze an, die inhaltlich falsche Informationen enthalten. Ausgewählt: <span id="cnt">0</span>/${wrongCount}</div>
+  <div id="sentList">`;
+  const a = getBucket(test, task);
+  task.sentences.forEach((s, si)=>{
+    const checked = a[si] ? 'checked' : '';
+    html += `<label class="summary-item"><input type="checkbox" data-si="${si}" ${checked}><span>${escapeHtml(s.text)}</span></label>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  function updateCount(){
+    const n = task.sentences.filter((s,si)=>a[si]).length;
+    document.getElementById('cnt').textContent = n;
+  }
+  body.querySelectorAll('input[data-si]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
+  });
+  updateCount();
 }
 
 /* ===========================================================
    AUSWERTUNG
 =========================================================== */
-function scoreTeil(teil, test){
-  const a = getAnswerBucket(test, teil);
+function scoreTask(task, test){
+  const a = getBucket(test, task);
   let correct = 0, total = 0;
-  switch(teil.type){
-    case 'table':
-      total = teil.items.length;
-      teil.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+  switch(task.type){
+    case 'gap':
+      total = task.gaps.length;
+      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
+      break;
+    case 'order':
+      total = task.correctOrder.length;
+      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
       break;
     case 'mc':
-      total = teil.questions.length;
-      teil.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      total = task.questions.length;
+      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      break;
+    case 'match':
+      total = task.correct.length;
+      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
+      break;
+    case 'table':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'twocat':
+      total = 4;
+      if(a.v1 === task.correctMap.v1) correct++;
+      if(a.v2 === task.correctMap.v2) correct++;
+      if(a.n3 === task.correctMap.n3) correct++;
+      if(a.n4 === task.correctMap.n4) correct++;
+      break;
+    case 'summary':
+      total = task.sentences.filter(s=>s.wrong).length;
+      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
       break;
   }
   return {correct, total};
@@ -504,33 +672,26 @@ function showResults(){
   const test = TESTS[currentTestIdx];
   const nb = document.getElementById('navbar');
   nb.innerHTML = `<button class="btn ghost" id="btnMenu2">Modelltests</button><span class="foot-note">Eigenes Übungsmaterial · kein Original-TestDaF-Test</span><button class="btn" id="btnRestart">Test neu starten</button>`;
-  document.getElementById('btnRestart').onclick = ()=>{ answers[test.id] = {}; currentTeilIdx = 0; renderTeil(); };
+  document.getElementById('btnRestart').onclick = ()=>{ answers[test.id] = {}; current = 0; renderTask(); };
   document.getElementById('btnMenu2').onclick = ()=> showTestSelect();
 
   let sumCorrect = 0, sumTotal = 0;
   let rows = '';
-  test.teile.forEach(teil=>{
-    const {correct, total} = scoreTeil(teil, test);
+  test.teile.forEach(task=>{
+    const {correct, total} = scoreTask(task, test);
     sumCorrect += correct; sumTotal += total;
-    rows += `<div class="result-row"><span>Teil ${teil.teil} — ${teil.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
+    rows += `<div class="result-row"><span>Aufgabe ${task.teil} — ${task.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
   });
   const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
   let tdn = 'unterhalb TDN 3';
-  if(pct >= 88) tdn = 'TDN 5';
-  else if(pct >= 67) tdn = 'TDN 4';
-  else if(pct >= 44) tdn = 'TDN 3';
+  if(pct >= 88) tdn = 'TDN 5'; else if(pct >= 67) tdn = 'TDN 4'; else if(pct >= 44) tdn = 'TDN 3';
 
-  const main = document.getElementById('main');
-  main.innerHTML = `
+  document.getElementById('main').innerHTML = `
     <div class="results">
-      <div class="score-hero">
-        <div class="pct">${pct}%</div>
-        <div>${sumCorrect} von ${sumTotal} Punkten</div>
-        <div class="tdn">Näherungswert: ${tdn}</div>
-      </div>
+      <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Näherungswert: ${tdn}</div></div>
       <h2>Ergebnisse — ${test.title}</h2>
       ${rows}
-      <p class="keylist" style="margin-top:16px;">Näherung, ersetzt keine offizielle TestDaF-Bewertung: ≥ 88 % ≈ TDN 5 · ≥ 67 % ≈ TDN 4 · ≥ 44 % ≈ TDN 3 · darunter = unterhalb TDN 3.</p>
+      <p class="keylist" style="margin-top:16px;">Näherung, ersetzt keine offizielle TestDaF-Bewertung.</p>
     </div>
   `;
 }
