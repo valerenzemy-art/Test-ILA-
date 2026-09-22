@@ -186,7 +186,7 @@ const MT1 = [
     shuffledStart:[2,4,0,3,1]
   },
 
-  /* AUFGABE 3 (Niveau C1 : Texte dense sur la neurobiologie du rêve lucide) */
+  /* AUFGABE 3 (Niveau C1) */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
     title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
@@ -273,7 +273,7 @@ const MT1 = [
     ]
   },
 
-  /* AUFGABE 4 (Niveau C1 : Textstelle 1-4 zu Aussagen a-h / Rohstoffdebatte) */
+  /* AUFGABE 4 (Niveau C1) */
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
     title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
@@ -289,27 +289,27 @@ const MT1 = [
       'Der Experte verteidigt die Position der Verzichtsökonomie.',
       'Der Experte widerspricht den Grundlagen der Biologie.'
     ],
-    correct:[4, 3, 5, 2] // [1]->e (index 4), [2]->d (index 3), [3]->f (index 5), [4]->c (index 2)
+    correct:[4, 3, 5, 2]
   },
 
-  /* Aufgabe 5 */
+  /* AUFGABE 5 (Mise à jour d'après la capture d'écran Klett - 4 Colonnes C1) */
   { ...TEMPLATE[4],
-    instructions:'Ordnen Sie den Aussagen 1–7 das passende Modell (A, B oder C) zu.',
-    title:'Drei Modelle der Energiewende',
-    passage:'Beim Übergang zu erneuerbaren Energien werden im Wesentlichen drei Modelle diskutiert. Modell A setzt auf den Ausbau weniger, aber sehr großer Wind- und Solarparks, die zentral geplant und von großen Energiekonzernen betrieben werden; Befürworter verweisen auf Skaleneffekte und geringere Kosten pro Kilowattstunde. Modell B setzt auf eine dezentrale Struktur mit vielen kleinen, oft genossenschaftlich organisierten Anlagen in Bürgerhand, wodurch die Wertschöpfung stärker vor Ort verbleibe und die lokale Akzeptanz steige. Modell C kombiniert beide Ansätze: Große Anlagen decken die Grundlast, während dezentrale Bürgerenergieprojekte Spitzenlasten abfedern.',
-    columns:['Modell A','Modell B','Modell C'],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
+    title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen[span_0](start_span)[span_0](end_span). Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit[span_1](start_span)[span_1](end_span). Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen[span_2](start_span)[span_2](end_span). Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus[span_3](start_span)[span_3](end_span). Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt[span_4](start_span)[span_4](end_span). Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren[span_5](start_span)[span_5](end_span). Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet[span_6](start_span)[span_6](end_span). Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen[span_7](start_span)[span_7](end_span).',
+    columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
     items:[
-      {text:'Setzt auf wenige, sehr große Anlagen.', correct:0},
-      {text:'Beruht auf genossenschaftlich organisierten Projekten in Bürgerhand.', correct:1},
-      {text:'Kombiniert zentrale und dezentrale Ansätze.', correct:2},
-      {text:'Wird mit Skaleneffekten und geringeren Kosten pro Kilowattstunde begründet.', correct:0},
-      {text:'Große Anlagen decken hier die Grundlast.', correct:2},
-      {text:'Erhöht laut Befürwortern die lokale Akzeptanz der Energiewende.', correct:1},
-      {text:'Wird von großen Energiekonzernen zentral geplant.', correct:0}
+      {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
+      {text:'Diese Gruppe hinterfragt bestehende Normen und Werte eher kritisch.', correct:1},
+      {text:'Diese Gruppe zeigt eine positive Einstellung gegenüber hierarchischen Rangordnungen.', correct:0},
+      {text:'Diese Menschen zeigen sich im sozialen Umgang zugänglicher und verträglicher.', correct:0},
+      {text:'Diese Menschen wählen Haustiere gezielt nach der Übereinstimmung mit dem eigenen Charakter aus.', correct:3},
+      {text:'Diese Gruppe weist eine geringere emotionale Stabilität auf.', correct:1},
+      {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
     ]
   },
 
-  /* AUFGABE 6 (Niveau C1 : Phytotherapie / Vorteile vs. Nachteile) */
+  /* AUFGABE 6 (Niveau C1) */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
@@ -562,7 +562,7 @@ function renderMatch(task, test, body){
 
 function renderTable(task, test, body){
   let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
-  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussage</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   const a = getBucket(test, task);
   task.items.forEach((item, ii)=>{
     html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
