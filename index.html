@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesen — Akademischer Modelltest</title>
+<style>
+  :root{
+    --teal-dark:#0f3d47;
+    --teal:#155a68;
+    --teal-light:#1d7285;
+    --bg-page:#f4f8f9;
+    --bg-instructions:#e7f1f3;
+    --card-bg:#ffffff;
+    --border:#cfe0e4;
+    --text:#1e2d31;
+    --text-soft:#516268;
+    --red:#b3262c;
+    --red-dark:#8c1e23;
+    --red-text:#ffffff;
+    --correct:#1c7a4a;
+    --wrong:#b3262c;
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg-page:#0e1416;
+      --card-bg:#151d20;
+      --border:#2b3a3f;
+      --text:#eaf1f2;
+      --text-soft:#9fb2b7;
+      --bg-instructions:#132a2f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg-page:#0e1416;
+    --card-bg:#151d20;
+    --border:#2b3a3f;
+    --text:#eaf1f2;
+    --text-soft:#9fb2b7;
+    --bg-instructions:#132a2f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg-page);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;
+  }
+  .app{max-width:900px;margin:0 auto;min-height:100vh;background:var(--card-bg);box-shadow:0 0 24px rgba(0,0,0,.06);}
+  header.topbar{
+    background:linear-gradient(135deg,var(--teal-dark),var(--teal));
+    color:#fff;
+    padding:18px 20px 14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+  }
+  header.topbar .brand{font-size:1.5rem;font-weight:700;letter-spacing:.5px;}
+  header.topbar .subbrand{font-size:.72rem;opacity:.75;margin-top:2px;}
+  header.topbar .tag{font-size:.8rem;background:rgba(255,255,255,.12);padding:4px 10px;border-radius:20px;white-space:nowrap;}
+
+  .taskbar{
+    background:var(--bg-instructions);
+    border-bottom:1px solid var(--border);
+    padding:16px 20px 18px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .task-count{display:flex;align-items:baseline;gap:6px;min-width:70px;}
+  .task-count .n{font-size:2.1rem;font-weight:800;color:var(--teal-dark);line-height:1;}
+  .task-count .of{font-size:1rem;color:var(--text-soft);}
+  .task-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin-bottom:2px;}
+
+  .timer-wrap{display:flex;flex-direction:column;align-items:center;}
+  .timer-circle{
+    width:74px;height:74px;border-radius:50%;
+    border:3px solid var(--teal);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:1.05rem;color:var(--teal-dark);
+    background:var(--card-bg);
+    flex-shrink:0;
+  }
+  .timer-circle.warn{border-color:var(--red);color:var(--red);}
+  .timer-caption{font-size:.65rem;color:var(--text-soft);margin-top:4px;}
+
+  .instructions{flex:1;min-width:220px;}
+  .instructions .title{font-weight:700;margin-bottom:4px;font-size:1rem;}
+  .instructions p{margin:2px 0;font-size:.92rem;color:var(--text-soft);}
+  .instructions .time-hint{font-weight:600;color:var(--teal-dark);}
+
+  main{padding:22px 20px 100px;}
+  h2.task-title{margin-top:0;font-size:1.2rem;color:var(--teal-dark);}
+  .passage{font-size:.98rem;}
+  .passage p{margin:0 0 14px;}
+
+  select.gapselect{
+    border:none;border-bottom:2px solid var(--teal);
+    background:var(--bg-instructions);
+    font:inherit;font-weight:600;color:var(--teal-dark);
+    padding:3px 6px;border-radius:4px 4px 0 0;
+    min-width:130px;
+  }
+  select.gapselect.answered{background:#dff0e4;border-color:var(--correct);}
+
+  .order-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .order-item{
+    border:1px solid var(--border);border-radius:8px;padding:12px 14px;
+    background:var(--bg-instructions);
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .order-item .pos{
+    font-weight:800;color:#fff;background:var(--teal);
+    border-radius:50%;width:26px;height:26px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:.85rem;
+  }
+  .order-item .txt{flex:1;font-size:.92rem;}
+  .order-controls{display:flex;flex-direction:column;gap:4px;}
+  .order-controls button{
+    border:1px solid var(--border);background:var(--card-bg);color:var(--teal-dark);
+    border-radius:5px;width:30px;height:26px;font-size:.85rem;cursor:pointer;
+  }
+  .order-controls button:disabled{opacity:.3;cursor:default;}
+
+  .qblock{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+  .qblock:last-child{border-bottom:none;}
+  .qtext{font-weight:600;margin-bottom:8px;}
+  .opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:.92rem;}
+  .opt:hover{background:var(--bg-instructions);}
+  .opt input{margin-top:3px;}
+
+  .matchrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;padding:10px;background:var(--bg-instructions);border-radius:8px;}
+  .matchrow .ptxt{flex:1;min-width:200px;font-size:.9rem;}
+  .matchrow select{font:inherit;padding:6px 8px;border-radius:6px;border:1px solid var(--border);min-width:220px;}
+
+  table.tzt{width:100%;border-collapse:collapse;margin-top:8px;font-size:.85rem;}
+  table.tzt th, table.tzt td{border:1px solid var(--border);padding:8px 6px;text-align:center;}
+  table.tzt th{background:var(--teal);color:#fff;font-weight:600;font-size:.8rem;}
+  table.tzt td.label{text-align:left;font-weight:500;}
+  table.tzt input[type=radio]{width:16px;height:16px;}
+
+  .twocat-item{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;background:var(--bg-instructions);}
+  .twocat-item .lbl{flex:1;min-width:200px;font-size:.9rem;}
+  .toggle-btns{display:flex;gap:6px;}
+  .toggle-btns button{border:1px solid var(--teal);background:var(--card-bg);color:var(--teal-dark);padding:6px 12px;border-radius:20px;font-size:.82rem;cursor:pointer;}
+  .toggle-btns button.active{background:var(--teal);color:#fff;}
+
+  .graphic-box{background:var(--bg-instructions);border:1px solid var(--border);border-radius:10px;padding:14px;margin:16px 0;}
+  .graphic-box .cap{font-size:.78rem;color:var(--text-soft);margin-top:6px;text-align:center;}
+
+  .summary-item{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:6px;font-size:.9rem;}
+  .summary-item:hover{background:var(--bg-instructions);}
+  .summary-item input{margin-top:4px;}
+  .count-hint{font-size:.82rem;color:var(--text-soft);margin:10px 0;}
+
+  footer.navbar{
+    position:sticky;bottom:0;
+    background:var(--card-bg);
+    border-top:1px solid var(--border);
+    padding:12px 20px;
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+  }
+  footer .foot-note{font-size:.7rem;color:var(--text-soft);}
+  .btn{
+    border:none;border-radius:6px;padding:11px 18px;font-size:.88rem;font-weight:700;cursor:pointer;
+    color:var(--red-text);background:var(--red-dark);
+  }
+  .btn.next{background:var(--red);}
+  .btn:hover{filter:brightness(1.08);}
+  .btn.ghost{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);}
+
+  .results h2{color:var(--teal-dark);}
+  .score-hero{
+    background:linear-gradient(135deg,var(--teal-dark),var(--teal));
+    color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:22px;
+  }
+  .score-hero .pct{font-size:2.6rem;font-weight:800;}
+  .score-hero .tdn{font-size:1rem;opacity:.9;margin-top:4px;}
+  .result-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.92rem;}
+  .result-row .ok{color:var(--correct);font-weight:700;}
+  .result-row .no{color:var(--wrong);font-weight:700;}
+  .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
+
+  @media (max-width:480px){
+    header.topbar{padding:14px 14px 12px;}
+    .taskbar{padding:14px 14px;gap:12px;}
+    main{padding:18px 14px 90px;}
+    footer.navbar{padding:10px 14px;}
+    .timer-circle{width:62px;height:62px;font-size:.92rem;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div>
+      <div class="brand">LESEN</div>
+      <div class="subbrand">Akademischer Modelltest · Niveau C1/C2</div>
+    </div>
+    <div class="tag" id="modeTag">Übungsversion</div>
+  </header>
+
+  <div class="taskbar" id="taskbar"></div>
+
+  <main id="main"></main>
+
+  <footer class="navbar" id="navbar"></footer>
+
+</div>
+
+<script>
+/* ---------------------------------------------------------
+   DATEN
+--------------------------------------------------------- */
+const TASKS = [
+{
+  id:1, type:'gap', time:240, label:'Lückentext',
+  instructions:'Lesen Sie den Text. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
+  title:'Nudging als Instrument der Verhaltenssteuerung',
+  segments:[
+    "Die Erkenntnis, dass menschliches Entscheidungsverhalten selten den Prinzipien reiner Rationalität ",
+    ", hat in den vergangenen Jahren zunehmend Eingang in die Politikgestaltung gefunden. Verhaltensökonomen wie Richard Thaler haben gezeigt, dass Menschen sich bei komplexen Entscheidungen häufig von Heuristiken und Gewohnheiten leiten lassen, anstatt sämtliche verfügbaren Informationen sorgfältig ",
+    ". Aus dieser Beobachtung entstand das Konzept des Nudging: Durch eine geschickte Gestaltung der Entscheidungsumgebung, etwa durch veränderte Standardoptionen, lässt sich Verhalten in eine gewünschte Richtung ",
+    ", ohne dabei Verbote auszusprechen oder finanzielle Anreize einzusetzen. Ein vielzitiertes Beispiel ist die automatische Aufnahme von Angestellten in eine betriebliche Altersvorsorge, aus der sie aktiv austreten müssen, falls sie nicht teilnehmen möchten. Die Teilnahmequoten steigen dadurch nachweislich, da die Trägheit vieler Menschen dazu führt, dass sie bei der voreingestellten Option ",
+    ". Kritiker wenden allerdings ein, dass Nudging die Autonomie der Bürger untergrabe, da Entscheidungen unbemerkt beeinflusst werden, ohne dass die Betroffenen dies unmittelbar ",
+    " können. Befürworter halten dem entgegen, dass ohnehin jede Gestaltung einer Wahlsituation Einfluss nimmt und Nudging diesen Umstand lediglich transparent und zum Wohle der Menschen nutze."
+  ],
+  gaps:[
+    {options:["folgt","vertraut","dient","gleicht"], correct:0},
+    {options:["aufzuzählen","abzuwägen","abzulehnen","zu wiederholen"], correct:1},
+    {options:["verhindern","verbieten","lenken","ignorieren"], correct:2},
+    {options:["widersprechen","austreten","verzichten","verbleiben"], correct:3},
+    {options:["nachvollziehen","bezahlen","fordern","verhindern"], correct:0}
+  ]
+},
+{
+  id:2, type:'order', time:300, label:'Reihenfolge',
+  instructions:'Lesen Sie die fünf Textabschnitte. Bringen Sie sie mit den Pfeiltasten in die richtige Reihenfolge. Es gibt genau eine richtige Reihenfolge.',
+  title:'Der Schwänzeltanz der Honigbienen',
+  correctOrder:[0,1,2,3,4],
+  items:[
+    "Honigbienen gelten als eines der bekanntesten Beispiele für komplexe soziale Kommunikation im Tierreich, da sie Artgenossen über Entfernung und Richtung von Futterquellen informieren können.",
+    "Lange war unklar, wie genau die Bienen diese räumlichen Informationen im Dunkeln des Bienenstocks vermitteln, ohne auf visuelle Signale zurückgreifen zu können.",
+    "Karl von Frisch entschlüsselte in den 1940er-Jahren den sogenannten Schwänzeltanz, bei dem die Winkelabweichung zur Sonne die Richtung und die Tanzdauer die Entfernung kodiert.",
+    "Erstaunlicherweise passen die Bienen ihre Tanzsignale sogar an, wenn Hindernisse wie Berge den direkten Flugweg versperren, und berücksichtigen so die tatsächliche Flugstrecke.",
+    "Die Forscher schließen daraus, dass der Tanz kein starres Muster ist, sondern eine flexible Form räumlicher Kommunikation, die sich an die jeweilige Umgebung anpasst."
+  ],
+  shuffledStart:[2,0,4,1,3]
+},
+{
+  id:3, type:'mc', time:900, label:'Fragen zum Text',
+  instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Für jede Frage gibt es genau eine richtige Lösung. Frage 7 bezieht sich auf den gesamten Text.',
+  title:'Grüne Infrastruktur gegen urbane Hitzeinseln',
+  passage:[
+    "(1) In vielen Großstädten liegen die Temperaturen an heißen Sommertagen mehrere Grad über denen des Umlands – ein Phänomen, das als urbane Hitzeinsel bezeichnet wird. Besonders in den Abend- und Nachtstunden kühlen dicht bebaute Innenstädte kaum ab, da gespeicherte Wärme aus Asphalt, Beton und Fassaden nur langsam wieder abgegeben wird. Für die Bewohnerinnen und Bewohner bedeutet dies nicht nur eine Beeinträchtigung der Lebensqualität, sondern auch ein gesundheitliches Risiko, da anhaltende nächtliche Hitze die Erholung des Körpers erschwert und insbesondere für ältere Menschen und Personen mit Vorerkrankungen gefährlich werden kann. Angesichts des fortschreitenden Klimawandels gewinnt die Frage, wie sich Städte kühler gestalten lassen, zunehmend an Bedeutung für die Stadtplanung.",
+    "(2) Ursächlich für die Erwärmung sind vor allem die hohe Dichte versiegelter Oberflächen und der geringe Anteil an Vegetation. Asphalt und dunkle Dachflächen absorbieren einen Großteil der einfallenden Sonnenstrahlung und geben sie als Wärme wieder ab, während unversiegelte, bewachsene Böden einen erheblichen Teil der Energie für die Verdunstung von Wasser aufwenden, wodurch die Umgebungstemperatur sinkt. Hinzu kommt, dass die enge Bebauung den nächtlichen Luftaustausch behindert, sodass aufgeheizte Luft in den Straßenschluchten verbleibt, anstatt durch kühlere Luftströme aus dem Umland ersetzt zu werden. Auch die Abwärme von Klimaanlagen, Verkehr und Industrie trägt zusätzlich zur Aufheizung urbaner Räume bei, sodass sich mehrere Wärmequellen überlagern und Innenstädte auch bei sinkenden Außentemperaturen oft deutlich wärmer bleiben als ländliche Gegenden.",
+    "(3) Stadtbäume gelten als eine der wirksamsten Maßnahmen gegen urbane Überhitzung, da sie gleich auf mehreren Wegen kühlend wirken. Zum einen spenden ihre Kronen Schatten und verhindern, dass sich Fassaden und Bodenbeläge übermäßig aufheizen. Zum anderen verdunsten Bäume über ihre Blätter große Mengen Wasser, ein Prozess, der der Umgebungsluft Energie entzieht und so messbar zur Abkühlung beiträgt. Untersuchungen zeigen, dass gut begrünte Straßenzüge im Sommer mehrere Grad kühler sein können als vergleichbare, unbegrünte Abschnitte. Allerdings benötigen Bäume in dicht bebauten Innenstädten ausreichend Wurzelraum und Wasser, was ihre Pflanzung in stark versiegelten Bereichen technisch anspruchsvoll macht.",
+    "(4) Neben klassischen Straßenbäumen rücken zunehmend Dach- und Fassadenbegrünungen in den Fokus der Stadtplanung, insbesondere dort, wo ebenerdiger Platz fehlt. Begrünte Dächer verbessern nicht nur die Wärmedämmung der darunterliegenden Gebäude, sondern binden auch Regenwasser, das andernfalls die Kanalisation belasten würde, und geben es verzögert durch Verdunstung wieder ab. Fassadenbegrünungen mit rankenden Pflanzen können zusätzlich die Außentemperatur von Gebäudewänden spürbar senken und wirken sich auch positiv auf das Innenraumklima aus. Da sich solche Maßnahmen ohne zusätzlichen Flächenverbrauch realisieren lassen, gelten sie vielen Fachleuten als besonders geeignet für die Nachrüstung bestehender, dicht bebauter Quartiere.",
+    "(5) Der Umsetzung stehen jedoch praktische Hürden entgegen. Die Anlage und Pflege von Grünflächen verursacht Kosten, die in kommunalen Haushalten oft mit anderen Investitionen konkurrieren, und die Bewässerung neu gepflanzter Bäume wird gerade in trockenen Sommern zu einer zusätzlichen Belastung. Zudem konkurriert Begrünung in wachsenden Städten häufig mit anderen Nutzungsansprüchen an knappen Flächen, etwa für Wohnraum, Verkehrswege oder Leitungstrassen. Auch technische Fragen, etwa die statische Tragfähigkeit älterer Gebäude für Dachbegrünungen, müssen im Einzelfall gelöst werden. Fachleute betonen daher, dass Begrünungsmaßnahmen von Beginn an in die Stadtplanung integriert werden sollten, anstatt sie nachträglich und isoliert umzusetzen.",
+    "(6) Vor diesem Hintergrund setzen immer mehr Kommunen auf verbindliche Begrünungsvorgaben in Bebauungsplänen sowie auf finanzielle Förderprogramme für private Dach- und Fassadenbegrünung. Einige Städte verpflichten Bauherren mittlerweile dazu, einen bestimmten Anteil der Grundstücksfläche zu entsiegeln oder zu bepflanzen, um langfristig ein widerstandsfähigeres Stadtklima zu schaffen. Langfristig könnten solche Vorgaben auch dazu beitragen, die Artenvielfalt in urbanen Räumen zu fördern, was den Nutzen der Begrünung über die reine Temperaturregulierung hinaus erweitert. Ob solche Maßnahmen ausreichen, um die Folgen des Klimawandels in den Städten spürbar abzumildern, hängt letztlich davon ab, wie konsequent sie in der Fläche umgesetzt und mit anderen Anpassungsstrategien wie einer klimaangepassten Verkehrsplanung kombiniert werden."
+  ],
+  questions:[
+    {q:"Was beschreibt Absatz 1 als Folge urbaner Hitzeinseln?", options:["Geringere Kosten für Stadtverwaltungen.","Gesundheitliche Risiken durch fehlende nächtliche Abkühlung.","Einen Rückgang der Stadtbevölkerung.","Verbesserte Luftqualität in Innenstädten."], correct:1},
+    {q:"Laut Absatz 2 tragen versiegelte Flächen zur Erwärmung bei, weil …", options:["sie kaum Wasser verdunsten und Wärme speichern.","sie den Luftaustausch verbessern.","sie mehr Schatten spenden als Bäume.","sie die Abwärme von Klimaanlagen reduzieren."], correct:0},
+    {q:"Welchen Doppeleffekt haben Bäume laut Absatz 3?", options:["Sie spenden Schatten und kühlen durch Verdunstung.","Sie speichern Regenwasser und filtern Feinstaub.","Sie senken Baukosten und verbessern die Statik.","Sie reduzieren Lärm und binden CO2."], correct:0},
+    {q:"Was ist laut Absatz 4 ein Vorteil von Dach- und Fassadenbegrünung?", options:["Sie benötigt keinerlei Pflege.","Sie lässt sich ohne zusätzlichen Flächenverbrauch realisieren.","Sie ersetzt vollständig die Notwendigkeit von Straßenbäumen.","Sie senkt ausschließlich die Heizkosten im Winter."], correct:1},
+    {q:"Welches Hindernis nennt Absatz 5 für die Umsetzung von Begrünungsmaßnahmen?", options:["Fehlendes wissenschaftliches Interesse.","Konkurrenz um Flächen und begrenzte finanzielle Mittel.","Mangelnde Zustimmung der Bevölkerung.","Zu geringe Nachfrage nach Wohnraum."], correct:1},
+    {q:"Was tun laut Absatz 6 einige Städte bereits?", options:["Sie verbieten jegliche Neubebauung.","Sie verpflichten Bauherren zu Entsiegelung oder Bepflanzung.","Sie fördern ausschließlich den Straßenbahnausbau.","Sie schaffen Anreize für den Autoverkehr."], correct:1},
+    {q:"(Globalfrage) Worum geht es in dem Text insgesamt?", options:["Um die Kosten kommunaler Bauprojekte.","Um Strategien und Herausforderungen der Stadtbegrünung gegen urbane Überhitzung.","Um die Geschichte der Stadtplanung in Europa.","Um den Vergleich verschiedener Baumarten."], correct:1}
+  ]
+},
+{
+  id:4, type:'match', time:360, label:'Sprachhandlungen zuordnen',
+  instructions:'Lesen Sie die vier Textabschnitte. Ordnen Sie jedem Abschnitt die passende Sprachhandlung (A–H) zu. Es gibt acht Sprachhandlungen, von denen nur vier zu den Abschnitten passen.',
+  title:'Diskussion: Die Vier-Tage-Woche',
+  paragraphs:[
+    "Viele Unternehmen, die im Rahmen von Pilotprojekten testweise eine Vier-Tage-Woche eingeführt haben, berichten von überraschend positiven Effekten auf die Produktivität ihrer Belegschaft. Die Erklärung liegt für viele Personalverantwortliche auf der Hand: Wenn Beschäftigten insgesamt weniger Arbeitszeit zur Verfügung steht, konzentrieren sie sich stärker auf ihre Kernaufgaben und vermeiden ineffiziente Leerlaufzeiten, die in einer klassischen Fünf-Tage-Woche häufiger auftreten.",
+    "Allerdings lässt sich dieses Modell nach Einschätzung vieler Arbeitsmarktforscher nicht ohne Weiteres auf sämtliche Branchen übertragen. Insbesondere in personalintensiven Bereichen wie der Pflege, dem Einzelhandel oder dem öffentlichen Nahverkehr stößt eine pauschale Verkürzung der Arbeitszeit rasch an praktische Grenzen, da die zu erledigenden Aufgaben nicht beliebig verdichtet werden können und zusätzliches Personal oft nur schwer zu finden ist.",
+    "Gewerkschaftsvertreter fordern vor diesem Hintergrund, dass die Einführung der Vier-Tage-Woche nicht per Gesetz von oben verordnet, sondern branchenspezifisch zwischen Arbeitgebern und Beschäftigten ausgehandelt wird. Nur durch schrittweise erprobte Modelle, die die jeweiligen betrieblichen Gegebenheiten berücksichtigen, lasse sich verhindern, dass die Reform in bestimmten Wirtschaftszweigen zu Lasten der Beschäftigten oder der Versorgungssicherheit gehe.",
+    "Kritiker, die grundsätzlich vor Produktivitätseinbußen durch eine verkürzte Arbeitswoche warnen, übersehen aus Sicht der Befürworter jedoch häufig, dass die bislang vorliegenden Studien mehrheitlich positive oder zumindest neutrale Effekte auf die wirtschaftliche Leistungsfähigkeit der beteiligten Unternehmen dokumentieren. Die vermeintliche Gefahr sinkender Produktivität lasse sich empirisch bislang kaum belegen."
+  ],
+  options:[
+    "Ein positives Ergebnis wird genannt und durch eine Erklärung gestützt.",
+    "Die Anwendbarkeit eines Konzepts wird eingeschränkt.",
+    "Es wird eine konkrete Forderung formuliert.",
+    "Ein kritischer Einwand wird zurückgewiesen.",
+    "Es wird ein Kompromissvorschlag unterbreitet.",
+    "Eine historische Entwicklung wird nachgezeichnet.",
+    "Es wird ein eigener Fehler eingeräumt.",
+    "Eine Datengrundlage wird grundsätzlich in Frage gestellt."
+  ],
+  correct:[0,1,2,3]
+},
+{
+  id:5, type:'table', time:540, label:'Tabelle',
+  instructions:'Lesen Sie den Text. Kreuzen Sie an: Trifft die Aussage auf das gedruckte Buch, das E-Book, beide oder keins von beiden zu? Die Aussagen folgen nicht der Reihenfolge des Textes.',
+  title:'Gedrucktes Buch und E-Book im Vergleich',
+  passage:"Gedruckte Bücher und E-Books unterscheiden sich in zahlreichen Aspekten, die für unterschiedliche Lesegewohnheiten relevant sind. E-Book-Reader ermöglichen es, ganze Bibliotheken auf einem einzigen, leichten Gerät mitzuführen, was besonders auf Reisen oder im Pendelverkehr geschätzt wird. Gedruckte Bücher hingegen bieten ein haptisches Leseerlebnis, das viele Leserinnen und Leser als angenehmer empfinden, und lassen sich problemlos verleihen oder verschenken, ohne dass technische Einschränkungen wie Kopierschutzsysteme dem entgegenstehen. Beide Formate erfordern von Verlagen eine sorgfältige redaktionelle Bearbeitung der Texte, unabhängig davon, ob das fertige Werk gedruckt oder digital vertrieben wird. In Bezug auf die Lesbarkeit bei Tageslicht zeigen Studien, dass Reflexionen auf glänzenden Bildschirmoberflächen die Lesbarkeit von E-Books im Freien beeinträchtigen können, während Papier hier keine vergleichbaren Probleme aufweist. Umgekehrt profitieren Menschen mit Sehbeeinträchtigungen häufig von E-Books, da sich Schriftgröße und Kontrast individuell anpassen lassen, was bei gedruckten Texten nicht möglich ist. Preislich zeigt sich kein einheitliches Bild: Während Neuerscheinungen als E-Book teils günstiger angeboten werden, sind ältere, gebrauchte gedruckte Bücher auf dem Second-Hand-Markt oft die kostengünstigere Option. Hinsichtlich der Umweltbilanz wird häufig angenommen, E-Books seien grundsätzlich ökologischer, doch Studien kommen zu keinem eindeutigen Ergebnis, da Herstellung, Energieverbrauch und Nutzungsdauer der Lesegeräte erheblich ins Gewicht fallen. Bibliotheken müssen bei beiden Formaten Fragen der Langzeitarchivierung berücksichtigen, wobei sich digitale Formate durch technologischen Wandel als überraschend anfällig für Kompatibilitätsprobleme erwiesen haben, während gut gelagerte gedruckte Bücher über Jahrhunderte hinweg lesbar bleiben können. Für das wissenschaftliche Arbeiten schätzen viele Nutzerinnen und Nutzer bei gedruckten Büchern die Möglichkeit, handschriftliche Notizen direkt am Rand anzubringen, auch wenn moderne E-Book-Anwendungen mittlerweile digitale Annotationsfunktionen anbieten, die sich durchsuchen lassen. In sozialen Kontexten, etwa in Lesekreisen, wird das gemeinsame Durchblättern eines physischen Exemplars von vielen Teilnehmenden nach wie vor als verbindender empfunden als der Austausch über digitale Geräte.",
+  columns:["Buch","E-Book","beide","keins"],
+  items:[
+    {text:"Ermöglicht individuelle Anpassung von Schriftgröße und Kontrast.", correct:1},
+    {text:"Erfordert bei Verlagen eine sorgfältige redaktionelle Bearbeitung.", correct:2},
+    {text:"Lässt sich ohne technische Einschränkungen verleihen oder verschenken.", correct:0},
+    {text:"Ist grundsätzlich umweltfreundlicher als das jeweils andere Format.", correct:3},
+    {text:"Bietet Vorteile für die Langzeitarchivierung über Jahrhunderte.", correct:0},
+    {text:"Erlaubt automatisches Zusammenfassen markierter Textstellen.", correct:1},
+    {text:"Wird in Lesekreisen als verbindender empfunden.", correct:0}
+  ]
+},
+{
+  id:6, type:'twocat', time:420, label:'Problem / Lösung',
+  instructions:'Lesen Sie den Text. Im sechsten Aufgabentyp sollen Sie kausale Zusammenhänge erkennen. Ordnen Sie die vier Aussagen den beiden Kategorien Problem und Lösung zu. Die Items folgen nicht dem Textverlauf.',
+  title:'Lichtverschmutzung in Städten',
+  passage:"Künstliche Beleuchtung prägt heute nahezu jede Nacht in urbanen Räumen und hat sich zu einem ernstzunehmenden ökologischen Problem entwickelt. Straßenlaternen, beleuchtete Werbetafeln und Gebäudefassaden sorgen dafür, dass der Nachthimmel über Großstädten kaum noch natürliche Dunkelheit erreicht, ein Phänomen, das als Lichtverschmutzung bezeichnet wird. Besonders betroffen sind nachtaktive Insekten, die von künstlichen Lichtquellen angezogen werden und dort bis zur Erschöpfung umherfliegen, anstatt ihren eigentlichen Aufgaben wie der Nahrungssuche oder der Fortpflanzung nachzugehen. Da Insekten eine zentrale Rolle in vielen Nahrungsketten spielen, wirkt sich ihr Rückgang auch auf insektenfressende Vogelarten und Fledermäuse aus, deren Bestände in stark beleuchteten Regionen spürbar zurückgehen. Zugvögel wiederum können durch helle Lichtquellen bei ihrer nächtlichen Orientierung an den Sternen gestört werden, was zu gefährlichen Umwegen oder Kollisionen mit beleuchteten Hochhäusern führt. Als eine der wirksamsten Gegenmaßnahmen gilt die Umrüstung öffentlicher Beleuchtung auf warmweißes, nach unten gerichtetes Licht, das den Lichtkegel gezielt auf die zu beleuchtende Fläche begrenzt und ein Abstrahlen in den Himmel oder in angrenzende Grünflächen vermeidet. Zusätzlich setzen immer mehr Kommunen auf Bewegungsmelder, die Straßenlampen erst dann auf volle Helligkeit schalten, wenn tatsächlich Fußgänger oder Fahrzeuge unterwegs sind, wodurch die durchschnittliche nächtliche Lichtmenge insgesamt deutlich reduziert wird. Umweltverbände fordern zudem verbindliche Dunkelzeiten für die Beleuchtung von Gebäudefassaden und Werbeflächen, um insbesondere während der Zugvogelsaison die Belastung für wandernde Arten zu verringern. Erste Modellprojekte in einzelnen Regionen zeigen, dass sich durch eine Kombination dieser Maßnahmen der nächtliche Lichtpegel spürbar senken lässt, ohne die Sicherheit im Straßenverkehr zu beeinträchtigen.",
+  categories:["Problem","Lösung"],
+  items:[
+    {text:"Bewegungsmelder, die Straßenlampen bedarfsgerecht steuern.", correct:1},
+    {text:"Störung der nächtlichen Orientierung ziehender Vogelarten.", correct:0},
+    {text:"Warmweißes, nach unten gerichtetes Licht bei der Straßenbeleuchtung.", correct:1},
+    {text:"Rückgang nachtaktiver Insekten durch Anziehung durch Kunstlicht.", correct:0}
+  ]
+},
+{
+  id:7, type:'summary', time:420, label:'Zusammenfassung mit Fehlern',
+  instructions:'Lesen Sie den Text und die Grafik. Kreuzen Sie in der Zusammenfassung genau drei Sätze an, die inhaltlich falsche Informationen enthalten. Die Zusammenfassung folgt nicht dem Textverlauf.',
+  title:'Fernstudium in Deutschland',
+  passage:"Die Zahl der Fernstudierenden an deutschen Hochschulen ist in den vergangenen zehn Jahren deutlich gestiegen. Lag die Zahl der Einschreibungen im Jahr 2015 noch bei rund 150.000, so wuchs sie bis zum Jahr 2023 auf über 250.000 Studierende an. Besonders stark war der Anstieg zwischen 2020 und 2022, was Fachleute unter anderem auf veränderte Lerngewohnheiten während der Pandemie zurückführen, als viele Menschen erstmals Erfahrungen mit digitalen Lernformaten sammelten. Der überwiegende Teil der Fernstudierenden ist berufsbegleitend eingeschrieben und älter als der Durchschnitt der Studierenden in klassischen Präsenzstudiengängen. Besonders gefragt sind Fernstudiengänge in den Bereichen Betriebswirtschaft, Sozialwissenschaften und Informatik, während naturwissenschaftliche Fächer mit hohem Praxis- und Laboranteil im Fernstudium bislang eine untergeordnete Rolle spielen. Hochschulen reagieren auf die steigende Nachfrage mit einem wachsenden Angebot an digitalen Studiengängen, wobei private Anbieter den staatlichen Hochschulen in diesem Segment bislang zahlenmäßig deutlich voraus sind. Trotz des Wachstums bleibt die Abbrecherquote im Fernstudium im Vergleich zum Präsenzstudium überdurchschnittlich hoch, was Expertinnen und Experten vor allem auf die hohen Anforderungen an Selbstorganisation und die zeitliche Doppelbelastung durch Beruf und Studium zurückführen.",
+  graphicData:[
+    {year:"2015", val:150},
+    {year:"2018", val:180},
+    {year:"2020", val:210},
+    {year:"2022", val:240},
+    {year:"2023", val:255}
+  ],
+  graphicCaption:"Grafik: Anzahl der Fernstudierenden in Deutschland (in Tausend)",
+  sentences:[
+    {text:"Private Anbieter liegen im Fernstudienbereich zahlenmäßig noch hinter den staatlichen Hochschulen.", wrong:true},
+    {text:"Naturwissenschaftliche Fächer mit hohem Praxisanteil spielen im Fernstudium bislang eine untergeordnete Rolle.", wrong:false},
+    {text:"Der stärkste Zuwachs an Fernstudierenden war zwischen 2020 und 2022 zu beobachten.", wrong:false},
+    {text:"Die Abbrecherquote im Fernstudium liegt unter der des Präsenzstudiums.", wrong:true},
+    {text:"Am stärksten nachgefragt werden Fernstudiengänge in Betriebswirtschaft, Sozialwissenschaften und Informatik.", wrong:false},
+    {text:"Die meisten Fernstudierenden sind jünger als der Durchschnitt der Studierenden im Präsenzstudium.", wrong:true},
+    {text:"Der Anstieg der Fernstudierendenzahlen wird unter anderem mit veränderten Lerngewohnheiten während der Pandemie erklärt.", wrong:false},
+    {text:"Die Zahl der Fernstudierenden ist von rund 150.000 im Jahr 2015 auf über 250.000 im Jahr 2023 gestiegen.", wrong:false}
+  ]
+}
+];
+
+/* ---------------------------------------------------------
+   STATE
+--------------------------------------------------------- */
+let current = 0;
+let timerInterval = null;
+let remaining = 0;
+const answers = {}; // per task id
+
+/* ---------------------------------------------------------
+   HELPERS
+--------------------------------------------------------- */
+function fmt(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return m+":"+s;
+}
+
+function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
+
+function startTimer(seconds){
+  clearTimer();
+  remaining = seconds;
+  updateTimerDisplay();
+  timerInterval = setInterval(()=>{
+    remaining--;
+    if(remaining <= 0){
+      remaining = 0;
+      updateTimerDisplay();
+      clearTimer();
+    } else {
+      updateTimerDisplay();
+    }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const el = document.getElementById('timerText');
+  const circle = document.getElementById('timerCircle');
+  if(!el) return;
+  el.textContent = fmt(remaining);
+  if(remaining <= 30){ circle.classList.add('warn'); } else { circle.classList.remove('warn'); }
+}
+
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+/* ---------------------------------------------------------
+   RENDER: TASKBAR
+--------------------------------------------------------- */
+function renderTaskbar(task){
+  const tb = document.getElementById('taskbar');
+  tb.innerHTML = `
+    <div class="task-count">
+      <div>
+        <div class="task-label">Aufgabe</div>
+        <span class="n">${task.id}</span><span class="of">/7</span>
+      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
+      <div class="timer-caption">verbleibend</div>
+    </div>
+    <div class="instructions">
+      <div class="title">${task.label}</div>
+      <p>${task.instructions}</p>
+      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
+    </div>
+  `;
+}
+
+/* ---------------------------------------------------------
+   RENDER: NAVBAR
+--------------------------------------------------------- */
+function renderNavbar(isLast){
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `
+    <button class="btn" id="btnEnd">Beenden</button>
+    <span class="foot-note">Eigener Übungstest · nicht die offizielle TestDaF-Prüfung</span>
+    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
+  `;
+  document.getElementById('btnEnd').onclick = ()=>{
+    if(confirm('Test wirklich beenden und Ergebnisse anzeigen?')) showResults();
+  };
+  document.getElementById('btnNext').onclick = ()=>{
+    if(isLast){ showResults(); } else { current++; renderTask(); }
+  };
+}
+
+/* ---------------------------------------------------------
+   RENDER: TASK DISPATCH
+--------------------------------------------------------- */
+function renderTask(){
+  const task = TASKS[current];
+  renderTaskbar(task);
+  startTimer(task.time);
+  const main = document.getElementById('main');
+  main.innerHTML = `<h2 class="task-title">${task.title}</h2><div id="taskBody"></div>`;
+  const body = document.getElementById('taskBody');
+
+  if(!answers[task.id]) answers[task.id] = {};
+
+  switch(task.type){
+    case 'gap': renderGap(task, body); break;
+    case 'order': renderOrder(task, body); break;
+    case 'mc': renderMC(task, body); break;
+    case 'match': renderMatch(task, body); break;
+    case 'table': renderTable(task, body); break;
+    case 'twocat': renderTwoCat(task, body); break;
+    case 'summary': renderSummary(task, body); break;
+  }
+  renderNavbar(current === TASKS.length-1);
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+/* ---- Aufgabe 1: Lückentext ---- */
+function renderGap(task, body){
+  let html = '<div class="passage"><p>';
+  task.segments.forEach((seg, i)=>{
+    html += escapeHtml(seg);
+    if(i < task.gaps.length){
+      const gap = task.gaps[i];
+      html += `<select class="gapselect" data-idx="${i}"><option value="">(${i+1}) wählen …</option>`;
+      gap.options.forEach((opt, oi)=>{
+        html += `<option value="${oi}">${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</option>`;
+      });
+      html += `</select>`;
+    }
+  });
+  html += '</p></div>';
+  body.innerHTML = html;
+  body.querySelectorAll('.gapselect').forEach(sel=>{
+    const idx = sel.dataset.idx;
+    if(answers[task.id][idx] !== undefined){ sel.value = answers[task.id][idx]; sel.classList.add('answered'); }
+    sel.addEventListener('change', ()=>{
+      answers[task.id][idx] = sel.value;
+      sel.classList.toggle('answered', sel.value !== '');
+    });
+  });
+}
+
+/* ---- Aufgabe 2: Reihenfolge ---- */
+function renderOrder(task, body){
+  if(!answers[task.id].order) answers[task.id].order = [...task.shuffledStart];
+  const order = answers[task.id].order;
+  function draw(){
+    let html = '<ul class="order-list">';
+    order.forEach((origIdx, pos)=>{
+      html += `<li class="order-item">
+        <div class="pos">${pos+1}</div>
+        <div class="txt">${escapeHtml(task.items[origIdx])}</div>
+        <div class="order-controls">
+          <button data-dir="up" data-pos="${pos}" ${pos===0?'disabled':''}>▲</button>
+          <button data-dir="down" data-pos="${pos}" ${pos===order.length-1?'disabled':''}>▼</button>
+        </div>
+      </li>`;
+    });
+    html += '</ul>';
+    body.innerHTML = html;
+    body.querySelectorAll('button[data-dir]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const pos = parseInt(btn.dataset.pos);
+        const dir = btn.dataset.dir;
+        const swapWith = dir === 'up' ? pos-1 : pos+1;
+        [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
+        draw();
+      };
+    });
+  }
+  draw();
+}
+
+/* ---- Aufgabe 3: Fragen zum Text (MC) ---- */
+function renderMC(task, body){
+  let html = '<div class="passage">';
+  task.passage.forEach(p=> html += `<p>${escapeHtml(p)}</p>`);
+  html += '</div><div style="margin-top:20px;">';
+  task.questions.forEach((q, qi)=>{
+    html += `<div class="qblock"><div class="qtext">${qi+1}. ${escapeHtml(q.q)}</div>`;
+    q.options.forEach((opt, oi)=>{
+      const checked = answers[task.id][qi] == oi ? 'checked' : '';
+      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
+    });
+    html += `</div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  task.questions.forEach((q, qi)=>{
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=>{
+      inp.addEventListener('change', ()=> answers[task.id][qi] = inp.value);
+    });
+  });
+}
+
+/* ---- Aufgabe 4: Sprachhandlungen zuordnen ---- */
+function renderMatch(task, body){
+  let html = '<div class="passage">';
+  task.paragraphs.forEach((p, pi)=>{
+    html += `<div class="matchrow">
+      <div class="ptxt"><strong>Absatz ${pi+1}:</strong> ${escapeHtml(p)}</div>
+      <select data-pi="${pi}">
+        <option value="">Sprachhandlung wählen …</option>
+        ${task.options.map((o,oi)=>`<option value="${oi}">${String.fromCharCode(65+oi)})${escapeHtml(o)}</option>`).join('')}
+      </select>
+    </div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  body.querySelectorAll('select[data-pi]').forEach(sel=>{
+    const pi = sel.dataset.pi;
+    if(answers[task.id][pi] !== undefined) sel.value = answers[task.id][pi];
+    sel.addEventListener('change', ()=> answers[task.id][pi] = sel.value);
+  });
+}
+
+/* ---- Aufgabe 5: Tabelle ---- */
+function renderTable(task, body){
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussage</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  task.items.forEach((item, ii)=>{
+    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
+    task.columns.forEach((c, ci)=>{
+      const checked = answers[task.id][ii] == ci ? 'checked' : '';
+      html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
+    });
+    html += `</tr>`;
+  });
+  html += '</tbody></table>';
+  body.innerHTML = html;
+  task.items.forEach((item, ii)=>{
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=>{
+      inp.addEventListener('change', ()=> answers[task.id][ii] = inp.value);
+    });
+  });
+}
+
+/* ---- Aufgabe 6: Problem/Lösung (zwei Kategorien) ---- */
+function renderTwoCat(task, body){
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div><div style="margin-top:16px;">`;
+  task.items.forEach((item, ii)=>{
+    html += `<div class="twocat-item" data-ii="${ii}">
+      <div class="lbl">${ii+1}. ${escapeHtml(item.text)}</div>
+      <div class="toggle-btns">
+        ${task.categories.map((c,ci)=>`<button data-ci="${ci}" class="${answers[task.id][ii]==ci?'active':''}">${c}</button>`).join('')}
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  body.querySelectorAll('.twocat-item').forEach(row=>{
+    const ii = row.dataset.ii;
+    row.querySelectorAll('button[data-ci]').forEach(btn=>{
+      btn.onclick = ()=>{
+        answers[task.id][ii] = btn.dataset.ci;
+        row.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+    });
+  });
+}
+
+/* ---- Aufgabe 7: Zusammenfassung mit Fehlern (+ Grafik) ---- */
+function renderSummary(task, body){
+  const maxVal = Math.max(...task.graphicData.map(d=>d.val));
+  let bars = '';
+  task.graphicData.forEach(d=>{
+    const h = Math.round((d.val/maxVal)*90)+10;
+    bars += `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+      <div style="font-size:.68rem;color:var(--text-soft);">${d.val}k</div>
+      <div style="width:70%;height:${h}px;background:var(--teal);border-radius:4px 4px 0 0;"></div>
+      <div style="font-size:.7rem;color:var(--text-soft);">${d.year}</div>
+    </div>`;
+  });
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>
+  <div class="graphic-box">
+    <div style="display:flex;align-items:flex-end;gap:6px;height:120px;">${bars}</div>
+    <div class="cap">${escapeHtml(task.graphicCaption)}</div>
+  </div>
+  <h3 style="color:var(--teal-dark);font-size:1rem;">Zusammenfassung</h3>
+  <div class="count-hint">Kreuzen Sie genau <strong>drei</strong> Sätze an, die inhaltlich falsche Informationen enthalten. Ausgewählt: <span id="cnt">0</span>/3</div>
+  <div id="sentList">`;
+  task.sentences.forEach((s, si)=>{
+    const checked = answers[task.id][si] ? 'checked' : '';
+    html += `<label class="summary-item"><input type="checkbox" data-si="${si}" ${checked}><span>${escapeHtml(s.text)}</span></label>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+
+  function updateCount(){
+    const n = task.sentences.filter((s,si)=>answers[task.id][si]).length;
+    document.getElementById('cnt').textContent = n;
+  }
+  body.querySelectorAll('input[data-si]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      const si = cb.dataset.si;
+      answers[task.id][si] = cb.checked;
+      updateCount();
+    });
+  });
+  updateCount();
+}
+
+/* ---------------------------------------------------------
+   AUSWERTUNG
+--------------------------------------------------------- */
+function scoreTask(task){
+  const a = answers[task.id] || {};
+  let correct = 0, total = 0;
+  switch(task.type){
+    case 'gap':
+      total = task.gaps.length;
+      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
+      break;
+    case 'order':
+      total = task.correctOrder.length;
+      const order = a.order || [];
+      order.forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
+      break;
+    case 'mc':
+      total = task.questions.length;
+      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      break;
+    case 'match':
+      total = task.correct.length;
+      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
+      break;
+    case 'table':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'twocat':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'summary':
+      total = task.sentences.length;
+      task.sentences.forEach((s,i)=>{ const marked = !!a[i]; if(marked === s.wrong) correct++; });
+      break;
+  }
+  return {correct, total};
+}
+
+function showResults(){
+  clearTimer();
+  document.getElementById('taskbar').innerHTML = '';
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `<span></span><span class="foot-note">Eigener Übungstest · nicht die offizielle TestDaF-Prüfung</span><button class="btn ghost" id="btnRestart">Neu starten</button>`;
+  document.getElementById('btnRestart').onclick = ()=>{ location.reload(); };
+
+  let sumCorrect = 0, sumTotal = 0;
+  let rows = '';
+  TASKS.forEach(task=>{
+    const {correct, total} = scoreTask(task);
+    sumCorrect += correct; sumTotal += total;
+    rows += `<div class="result-row"><span>Aufgabe ${task.id} — ${task.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
+  });
+  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+  let tdn = 'unterhalb TDN 3';
+  if(pct >= 88) tdn = 'TDN 5';
+  else if(pct >= 67) tdn = 'TDN 4';
+  else if(pct >= 44) tdn = 'TDN 3';
+
+  const main = document.getElementById('main');
+  main.innerHTML = `
+    <div class="results">
+      <div class="score-hero">
+        <div class="pct">${pct}%</div>
+        <div>${sumCorrect} von ${sumTotal} Punkten</div>
+        <div class="tdn">Näherungswert: ${tdn}</div>
+      </div>
+      <h2>Ergebnisse nach Aufgabe</h2>
+      ${rows}
+      <p class="keylist" style="margin-top:16px;">Bewertung (Näherung, ersetzt keine offizielle TestDaF-Bewertung): ≥ 88 % = TDN 5 · ≥ 67 % = TDN 4 · ≥ 44 % = TDN 3 · darunter = unterhalb TDN 3</p>
+    </div>
+  `;
+}
+
+/* ---------------------------------------------------------
+   INIT
+--------------------------------------------------------- */
+renderTask();
+</script>
+</body>
+</html>
