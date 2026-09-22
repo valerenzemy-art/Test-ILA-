@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -17,26 +17,28 @@
     --text-soft:#516268;
     --correct:#1c7a4a;
     --wrong:#b3262c;
-    box-sizing:border-box;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
   }
-  :root:not([data-theme="light"]) {
-    @media (prefers-color-scheme: dark) {
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
       --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
       --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
     }
   }
+
   :root[data-theme="dark"]{
     --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
     --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
   }
+
   html{scroll-padding-top:env(safe-area-inset-top,0px);}
   *{box-sizing:border-box;}
   body{
     margin:0; background:var(--bg-page); color:var(--text);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.55;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
   }
   .app{max-width:900px;margin:0 auto;min-height:100vh;background:var(--card-bg);box-shadow:0 0 24px rgba(0,0,0,.06);}
   header.topbar{
@@ -60,11 +62,6 @@
   .sel-card:hover{border-color:var(--teal);}
   .sel-card .sc-title{font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
   .sel-card .sc-desc{font-size:.83rem;color:var(--text-soft);}
-  .back-link{
-    display:inline-block; margin-bottom:18px; font-size:.85rem; color:var(--teal-dark);
-    text-decoration:none; border:1px solid var(--border); padding:6px 12px; border-radius:20px; cursor:pointer;
-  }
-  .back-link:hover{border-color:var(--teal);}
   .select-note{font-size:.78rem;color:var(--text-soft);max-width:540px;margin:22px auto 0;}
 
   .taskbar{
@@ -163,9 +160,6 @@
 <script>
 /* ===========================================================
    DATEN — TESTDAF LESEVERSTEHEN MODELLTESTS
-   Teil 1: Globalverstehen (kurze Texte aus dem Hochschulalltag)
-   Teil 2: Richtig / Falsch / Text sagt dazu nichts
-   Teil 3: Multiple Choice (journalistischer Text)
 =========================================================== */
 const TESTS = [
 {
@@ -282,7 +276,7 @@ const TESTS = [
       title:'Reparatur-Cafés: Wider die Wegwerfgesellschaft',
       passage:[
         'In immer mehr deutschen Städten öffnen ehrenamtlich organisierte Reparatur-Cafés ihre Türen, in denen defekte Alltagsgegenstände gemeinsam mit erfahrenen Hobby-Reparateurinnen und -Reparateuren wieder instand gesetzt werden können. Anders als in kommerziellen Reparaturwerkstätten steht dabei nicht die schnelle Erledigung im Vordergrund, sondern der Lernprozess: Besucherinnen und Besucher reparieren ihre Geräte in der Regel selbst, unterstützt von freiwilligen Expertinnen und Experten, die ihr technisches Wissen kostenlos zur Verfügung stellen.',
-        'Die Bewegung, deren erstes Café 2009 in Amsterdam gegründet wurde, versteht sich als Reaktion auf eine Konsum- und Wegwerfkultur, in der viele Produkte aus wirtschaftlichen Gründen so konstruiert sind, dass eine Reparatur unrentabel oder technisch kaum möglich ist, ein Phänomen, das häufig als geplante Obsoleszenz bezeichnet wird, auch wenn dessen genaue Häufigkeit wissenschaftlich umstritten bleibt. In deutschen Reparatur-Cafés werden nach Angaben eines bundesweiten Dachverbands jährlich mehrere Hunderttausend Gegenstände behandelt; die Erfolgsquote liegt Schätzungen zufolge bei etwa 60 bis 70 Prozent.',
+        'Die Bewegung, deren erstes Café 2009 in Amsterdam gegründet wurde, versteht sich als Reaktion auf eine Konsum- und Wegwerfkultur, in der viele Produkte aus wirtschaftlichen Gründen so constructed sind, dass eine Reparatur unrentabel oder technisch kaum möglich ist, ein Phänomen, das häufig als geplante Obsoleszenz bezeichnet wird, auch wenn dessen genaue Häufigkeit wissenschaftlich umstritten bleibt. In deutschen Reparatur-Cafés werden nach Angaben eines bundesweiten Dachverbands jährlich mehrere Hunderttausend Gegenstände behandelt; die Erfolgsquote liegt Schätzungen zufolge bei etwa 60 bis 70 Prozent.',
         'Für die Kommunen sind Reparatur-Cafés inzwischen auch aus abfallwirtschaftlicher Sicht interessant geworden: Mehrere Städte fördern entsprechende Initiativen finanziell, etwa durch die kostenlose Bereitstellung von Räumlichkeiten, da jeder erfolgreich reparierte Gegenstand potenziell den städtischen Sperrmüll reduziert. Umweltverbände verweisen zudem auf die im Vergleich zur Neuproduktion deutlich geringere Umweltbelastung einer Reparatur.',
         'Kritisch diskutiert wird allerdings, inwieweit Reparatur-Cafés tatsächlich zu einer strukturellen Veränderung des Konsumverhaltens beitragen können oder ob sie vor allem ein bereits reparaturaffines, häufig gut gebildetes Milieu ansprechen, ohne die grundlegenden ökonomischen Anreize für eine Wegwerfproduktion zu verändern.',
         'Aus juristischer Perspektive wird diskutiert, inwiefern eine europaweite gesetzliche Verpflichtung der Hersteller zu länger verfügbaren Ersatzteilen und leichter reparierbaren Produktdesigns die Arbeit der ehrenamtlichen Initiativen sinnvoll ergänzen könnte. Erste entsprechende EU-Regelungen, die unter dem Stichwort „Recht auf Reparatur" diskutiert werden, sehen für bestimmte Produktkategorien bereits verbindliche Mindestfristen für die Ersatzteilverfügbarkeit vor, auch wenn Verbraucherschützer weiterreichende Verpflichtungen fordern.'
@@ -311,7 +305,7 @@ let currentTestIdx = 0;
 let currentTeilIdx = 0;
 let timerInterval = null;
 let remaining = 0;
-const answers = {}; // answers[testId][teilNr] = {}
+const answers = {};
 
 /* ===========================================================
    HELPERS
@@ -437,10 +431,10 @@ function renderTeil(){
     case 'mc': renderMC(teil, test, body); break;
   }
   renderNavbar(currentTeilIdx === test.teile.length-1);
-  window.scrollTo({top:0, behavior:'instant'});
+  window.scrollTo(0, 0);
 }
 
-/* ---- Teil: Tabelle (Globalverstehen / Detailverstehen) ---- */
+/* ---- Teil: Tabelle ---- */
 function renderTable(teil, test, body){
   let html = `<div class="passage"><p>${escapeHtml(teil.passage)}</p></div>`;
   html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussage</th>${teil.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
