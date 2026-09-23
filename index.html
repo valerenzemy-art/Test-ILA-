@@ -1142,15 +1142,21 @@ function showResults(){
 
   document.getElementById('main').innerHTML = `
     <div class="results">
-      <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
-      <h2>Ergebnisse — ${test.title}</h2>
+      <div class="score-hero">
+        <div class="pct">${pct}%</div>
+        <div class="tdn">${sumCorrect} von ${sumTotal} Punkten</div>
+        <div class="tdn" style="margin-top:6px;font-weight:600;">Einschätzung: ${tdn}</div>
+      </div>
+      <h3 style="color:var(--teal-dark);margin-top:20px;">Detaillierte Übersicht</h3>
       ${rows}
-      <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
+      <div class="keylist" style="margin-top:20px;">Tipp: Für ein sicheres Bestehen des Digitalen TestDaF (Niveau C1) wird ein Ergebnis ab 67% (TDN 4) empfohlen.</div>
     </div>
   `;
 }
 
-showTestSelect();
+document.addEventListener('DOMContentLoaded', () => {
+  showTestSelect();
+});
 </script>
 </body>
 </html>
