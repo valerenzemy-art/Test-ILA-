@@ -345,7 +345,7 @@ const MT1 = [
   }
 ];
 
-/* NEU: Modelltest 2 (MT2) basierend exakt auf den von Ihnen hochgeladenen Aufgaben */
+/* Modelltest 2 (MT2) */
 const MT2 = [
   /* Aufgabe 1: Mikrobiologie & Hitzetoleranz */
   { ...TEMPLATE[0],
@@ -372,7 +372,7 @@ const MT2 = [
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Aufgabe 2: Quantenphysik & Schrödingers Katze',
-    correctOrder:[2,1,0,4,3], // Entspricht der korrekten Reihenfolge: C -> B -> A -> E -> D
+    correctOrder:[2,1,0,4,3],
     items:[
       'Dass dieses Gedankenexperiment im makroskopischen Alltag jedoch völlig absurd erscheint, liegt an einem physikalischen Phänomen namens Dekohärenz: Sobald ein Quantensystem mit seiner Umwelt – sei es auch nur mit einem einzigen Luftmolekül – in Wechselwirkung tritt, kollabiert der Überlagerungszustand augenblicklich in eine klassische Realität.',
       'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, die theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
@@ -457,7 +457,7 @@ const MT2 = [
       'Der Experte verteidigt etwas.',
       'Der Experte widerspricht etwas.'
     ],
-    correct:[4, 3, 5, 2] // [1] -> e (4), [2] -> d (3), [3] -> f (5), [4] -> c (2)
+    correct:[4, 3, 5, 2]
   },
 
   /* Aufgabe 5: Zusatzleistungen & Kindergesundheit */
@@ -467,13 +467,13 @@ const MT2 = [
     passage:'Ob sich die gesundheitliche Entwicklung von Kindern durch direkte finanzielle Hilfen für Mütter signifikant verbessern lässt – und wie die Effekte im Vergleich zu klassischen Sachleistungen ausgeprägt sind –, untersuchen Gesundheitsökonomen und Soziologen bereits seit Jahren. Eine aktuelle europaweite Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden zwei Gruppen von Müttern im Hinblick auf fünf gesundheits- und entwicklungsspezifische Indikatoren untersucht: Mütter, die einen monatlichen, bedingungslosen Finanzbonus (Zusatzgeld) erhalten, und Mütter, die im traditionellen, an strenge Auflagen geknüpften Regelsystem der staatlichen Sozialhilfe verblieben sind. Personen der ersten Gruppe, die sich selbst als Empfängerinnen des Zusatzgeldes bezeichneten, erwiesen sich in den Kennzahlen zu Ernährungssicherheit, Vorsorgeuntersuchungen und psychischem Wohlbefinden ihrer Kinder als deutlich proaktiver - sie gaben beispielsweise an, flexibler auf kindliche Bedürfnisse reagieren zu können, ausgewogenere Nahrungsmittel zu kaufen und präventive Arztbesuche termingerecht wahrzunehmen. Mütter im herkömmlichen Regelsystem erzielten dagegen niedrigere Werte in puncto Ernährungsqualität und wiesen häufiger stressbedingte Erschöpfungssymptome auf. Sie sind damit im Mittel stärker von akuten finanziellen Sorgen geplagt, wodurch auch die mentale Gesundheit der Kinder indirekt beeinträchtigt wird.',
     columns:['Mutter mit Zusatzgeld','Mutter im Regelsystem','beide','passt nicht'],
     items:[
-      {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3}, // passt nicht
-      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0}, // Mutter mit Zusatzgeld
-      {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0}, // Mutter mit Zusatzgeld
-      {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1}, // Mutter im Regelsystem
-      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0}, // Mutter mit Zusatzgeld
-      {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3}, // passt nicht
-      {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1} // Mutter im Regelsystem
+      {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3},
+      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0},
+      {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0},
+      {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1},
+      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0},
+      {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3},
+      {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1}
     ]
   },
 
@@ -515,10 +515,182 @@ const MT2 = [
   }
 ];
 
-/* MISE À JOUR DU TABLEAU DES TESTS (MT1 et MT2 inclus) */
+/* NEU: Modelltest 3 (MT3) exakt strukturiert wie MT1 mit Ihren 7 neuen C1-Übungen */
+const MT3 = [
+  /* Aufgabe 1 */
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1–5, welches Wort passt.',
+    title:'Warum werden Städte nachts immer wärmer?',
+    segments:[
+      'Dass sich Städte während des Tages stärker erwärmen als ihr Umland, ist seit Langem bekannt. Weniger offensichtlich ist jedoch, warum dieser Temperaturunterschied auch nach Sonnenuntergang bestehen bleibt. Einen wesentlichen Grund sehen Forschende in den Materialien, aus denen Straßen und Gebäude bestehen. Beton und Asphalt nehmen tagsüber große Mengen an Wärme auf und geben diese während der Nacht nur langsam wieder ab. Dadurch entsteht ein Effekt, der als städtische Wärmeinsel ',
+      ' wird. Allerdings lässt sich das Phänomen nicht allein durch die verwendeten Baustoffe erklären. Untersuchungen haben gezeigt, dass auch die geringe Luftzirkulation zwischen dicht stehenden Gebäuden dazu ',
+      ', dass die gespeicherte Wärme langsamer entweichen kann. Hinzu kommt die Abwärme, die von Fahrzeugen, Klimaanlagen und industriellen Anlagen ',
+      ' wird. Interessanterweise können selbst kleine Veränderungen der Stadtplanung messbare Auswirkungen haben. Begrünte Dächer und Bäume beispielsweise ',
+      ' nicht nur Schatten, sondern tragen durch die Verdunstung von Wasser auch zur Abkühlung der Umgebung bei. Einige Städte versuchen deshalb inzwischen, gezielt Flächen zu schaffen, auf denen sich die nächtliche Wärme ',
+      ' stark ansammelt.'
+    ],
+    gaps:[
+      {options:['bezeichnet','bezeichnet sich','benennt','n nennt sich'], correct:0},
+      {options:['beiträgt','führt','verursacht','bewirkt'], correct:0},
+      {options:['abgegeben','ausgestoßen','entlassen','ausgesetzt'], correct:0},
+      {options:['spenden','gewähren','leisten','bieten'], correct:0},
+      {options:['nicht','weniger','kaum','selten'], correct:0}
+    ]
+  },
+
+  /* Aufgabe 2 */
+  { ...TEMPLATE[1],
+    instructions:'Lesen Sie die Textabschnitte rechts. Bringen Sie die 5 Textabschnitte in die richtige Reihenfolge.',
+    title:'Forscher erzeugen neuartiges „Super-Eis“',
+    correctOrder:[0,1,3,2,4], // Entspricht: [1] -> [2] -> [4] -> [3] -> [5]
+    items:[
+      'Obwohl erste theoretische Modelle zu dieser extremen Phase bereits in den späten 1990er Jahren formuliert wurden, scheiterte die experimentelle Verifikation jahrzehntelang an den astronomischen Druckverhältnissen, die für eine Stabilisierung im Labor notwendig schienen.',
+      'Erst als ein interdisziplinäres Team im September 2026 mithilfe von neuartigen Diamantstempelzellen und präzisen Laserschock-Techniken einen Quantensprung erzielte, wandelte sich die hypothetische Materie in eine greifbare Realität.',
+      'Dieses radikal modifizierte Gittergefüge verleiht dem Material physikalische Anomalien, darunter eine thermische Leitfähigkeit, die konventionelles Wassereis um ein Vielfaches übertrifft, und eine bemerkenswerte Resistenz gegenüber extremen Temperaturen.',
+      'Das so geschaffene, als „Super-Eis“ bezeichnete Konglomerat unterscheidet sich fundamental von irdischem Eis, da seine Moleküle unter immensem physikalischem Zwang in eine dichte, hochsymmetrische Kristallstruktur gepresst werden, die selbst bei Raumtemperatur stabil bleibt.',
+      'Sollten sich die aktuellen Skalierungstests in der Raumfahrt- und Energieindustrie als erfolgreich erweisen, könnte dieser Stoff in naher Zukunft als revolutionäres Kühlmedium in thermischen Isolationssystemen dienen.'
+    ],
+    shuffledStart:[4,2,0,1,3]
+  },
+
+  /* Aufgabe 3 */
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1-7. Entscheiden Sie, welche Lösung passt.',
+    title:'Adaptive KI-Robotik und menschliche Motorik',
+    passage:[
+      '(1) Die Schnittstelle zwischen künstlicher Intelligenz und hochkomplexer Robotik hat in den letzten Jahren jene technologischen Grenzen verschoben, die lange Zeit als unüberwindbar galten. Während traditionelle Industrieroboter vor allem starr programmierte, repetitive Aufgaben in isolierten Fabrikzellen ausführen, verlangen moderne physische Assistenzsysteme nach einer gänzlich neuen Dimension der sensorischen Adaption. Ein herausragendes Beispiel hierfür sind Kl-gesteuerte humanoide Robotersysteme, die in Echtzeit physikalische Parameter wie Flugbahnen, Reibung und kinetische Energie berechnen können, um beispielsweise hochentwickelte sportliche Interaktionen wie das Fangen und Schlagen von Baseball-Bällen zu meistern eine Aufgabe, die selbst für geschulte menschliche Athleten ein Höchstmaß an visuell-motorischer Koordination erfordert.',
+      '(2) Warum diese Integration von maschinellem Lernen und mechanischer Ausführung so komplex ist, liegt vor allem an der unvorhersehbaren Dynamik realer Umgebungen. Nachgewiesen ist, dass Algorithmen zwar immense Datenmengen in Millisekunden verarbeiten können, die physikalische Umsetzung durch Aktoren jedoch oft träge reagiert. Bei menschlichen Bewegungen steuert das Kleinhirn unbewusst die Feinabstimmung, während Kortex-Areale strategische Entscheidungen treffen. Moderne Roboterarchitekturen versuchen diesen biologischen Dualismus durch neuronale Netze nachzuahmen. Dennoch unterscheiden sich autonome Systeme von biologischen Organismen grundlegend dadurch, dass ihnen das intuitive, erfahrungsbasierte "Gefühl" für physakalisches Material fehlt, weshalb jede Abweichung von der Norm zu Fehlkalkulationen führt.',
+      '(3) Während in Europa die Entwicklung solcher dynamischen Roboterarme stark sicherheitsgetrieben und regulativ gebremst wird, setzt man in anderen Innovationszentren auf kompromisslose Praxistests unter Extrembedingungen. Ingenieure nutzen dort fortschrittliche Simulationen, um Tausende von Wurfszenarien zu generieren, bevor die Hardware überhaupt physisch beansprucht wird. In der westlichen Welt galt lange Zeit eine skeptische Haltung gegenüber autonomen Maschinen, die in direkter physischer Nähe zum Menschen agieren. Erst nachdem internationale Forschungsteams in kontrollierten Testlaboren nachweisen konnten, dass moderne Kollisionserkennungssysteme absolut verlässlich arbeiten, erhielten solche Roboter eine breitere gesellschaftliche und industrielle Akzeptanz.',
+      '(4) Heutzutage stehen autonome KI-Systeme vor allem im Fokus der Materialwissenschaft und der Logistikoptimierung. Denn über physikalische Interaktionskräfte wissen wir oft weniger, als intuitiv angenommen wird, da sich mechanische Belastungen in dreidimensionalen Räumen unvorhersehbar überlagern. Roboter sind für Forscher besonders wertvoll, da sie als messbare Versuchsträger dienen: Das System registriert und quantifiziert jeden Millimeterbruchteil einer Bewegung. Dieser empirische Datensatz kann auch in der Rehabilitation genutzt werden: Ein gewisser Prozentsatz von Patienten leidet unter neurologisch bedingten Bewegungsstörungen nach Schlaganfällen. Es ist bereits wissenschaftlich belegt, dass präzise haptische Feedback-Roboter helfen können, neuronale Bahnen im Gehirn zu reaktivieren und motorische Fähigkeiten gezielt wiederherzustellen.',
+      '(5) Anders als die Ingenieure beschäftigen sich Kognitionswissenschaftler mit der Frage, inwiefern die algorithmische Entscheidungsfindung Aufschluss über menschliche Denkprozesse geben kann. Einer der Forscher analysierte, ob neuronale KI-Modelle das menschliche Antizipationsvermögen bei High-Speed-Reaktionen simulieren können. Nach eigenen Angaben konnte er dadurch neue Muster im menschlichen Lernverhalten entschlüsseln. Mittlerweile ist auch anderweitig belegt, dass derartige Simulationen für das Verstehen einfacher Bewegungsabläufe hervorragend funktionieren. Bei hochkomplexen, intuitiven Handlungen geraten die Algorithmen jedoch an ihre Grenzen, da menschliche Kreativität und Spontaneität mathematisch kaum fassbar sind.',
+      '(6) Die Beherrschung solcher Systeme lässt sich indes steuern und optimieren. Es gibt verschiedene Methoden, die zum technologischen Durchbruch führen können. Bekannt ist vor allem das Reinforcement-Learning-Modell: Dabei optimiert sich die KI durch Millionen von Simulationen selbst, indem sie Bestrafungen für Fehler und Belohnungen für erfolgreiche Treffer registriert. Eine andere Möglichkeit besteht darin, Roboter direkt durch menschliche Vormacher (Teleoperation) zu trainieren. Im Idealfall nähert sich die Maschine so der menschlichen Flexibilität an. Mittlerweile ist es auch möglich, Roboter durch KI-gesteuerte Sensorik in Echtzeit anzupassen. Diese Technologie ist jedoch extrem teuer und rechenintensiv, weshalb ein flächendeckender Einsatz in der Industrie noch auf sich warten lässt.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'traditionelle Roboter flexibler als moderne Systeme sind.',
+        'moderne KI-Roboter komplexe physikalische Abläufe in Echtzeit berechnen.',
+        'das Fangen von Baseball-Bällen für Menschen unmöglich ist.',
+        'Fabrikzellen ausschließlich durch autonome Roboter gesteuert werden.'
+      ], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 autonome KI-Systeme aus? Durch ...', options:[
+        'ein intuitives, erfahrungsbasiertes Materialgefühl.',
+        'eine absolut fehlerfreie mechanische Umsetzung.',
+        'eine rein biologische Nachahmung des Kleinhims.',
+        'Schwierigkeiten bei normAbweichungen aufgrund fehlender Intuition.'
+      ], correct:3 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
+        'Unterschiedliche globale Herangehensweisen und Akzeptanz',
+        'Die technologische Vorreiterrolle Europas in der Sicherheit',
+        'Internationale Vorschriften für Roboterarme im Labor',
+        'Die strikte Ablehnung von Simulationen in der westlichen Welt'
+      ], correct:0 },
+      { q:'Laut Absatz 4 kann man mithilfe von KI-Robotern in der Medizin ...', options:[
+        'neurologische Störungen endgültig heilen.',
+        'mechanische Belastungen im Raum komplett eliminieren.',
+        'neuronale Bahnen durch haptisches Feedback reaktivieren.',
+        'das menschliche Gehim vollständig digitalisieren.'
+      ], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
+        'KI-Simulationen erfassen menschliche Spontaneität vollständig.',
+        'Kognitionswissenschaftler nutzen KI zur Analyse menschlicher Lernmuster.',
+        'Menschliches Antizipationsvermögen lässt sich mathematisch exakt berechnen.',
+        'Komplexe Bewegungen werden von KI besser ausgeführt als von Menschen.'
+      ], correct:1 },
+      { q:'Welche Meinung hat der Autor in Absatz 6 über den Einsatz von KI-Sensorik?', options:[
+        'Er hält ihn für unmittelbar flächendeckend realisierbar.',
+        'Er kritisiert die mangelnde Leistungsfähigkeit der Algorithmen.',
+        'Er lehnt den Einsatz von Reinforcement Learning ab.',
+        'Er dämpft die Erwartungen wegen hoher Kosten und Rechenintensität.'
+      ], correct:3 },
+      { q:'Hauptanliegen des Textes ist es,...', options:[
+        'die Fortschritte und Grenzen adaptiver KI-Robotik darzulegen.',
+        'ausschliesslich die sportlichen Anwendungen von Robotern zu vergleichen.',
+        'vor den Gefahren autonomer Maschinen im Alltag zu warmen.',
+        'die Überlegenheit von Robotern gegenüber Menschen zu beweisen.'
+      ], correct:0 }
+    ]
+  },
+
+  /* Aufgabe 4 */
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
+    title:'Kommentar eines Experten zu Künstlicher Intelligenz und Arbeitsmarkt',
+    passageText:`Die Annahme, dass generative Künstliche Intelligenz in naher Zukunft weite Teile der intellektuellen Arbeitswelt revolutionieren und zu einer massiven Entwertung akademischer Berufe führen wird, wird in Fachkreisen kaum noch ernsthaft bestritten. <strong>[1] Ob diese technologische Disruption jedoch linear verläuft oder durch unvorhersehbare regulatorische und gesellschaftliche Hürden abgebremst wird, entzieht sich aktuell jeder verlässlichen Prognose.</strong> Bereits heute existieren Algorithmen, die komplexe juristische Schriftsätze verfassen und medizinische Diagnosen mit einer Präzision stellen können, die das menschliche Fehlerrisiko in bestimmten Teilbereichen signifikant unterscheidet. <strong>[2] Diese Applikationen basieren auf gigantischen Rechenkapazitäten und probabilistischen Modellen, deren interne Entscheidungsprozesse für den Anwender eine absolute Blackbox darstellen.</strong> Doch während Kritiker vor einem irreversiblen Vertrauensverlust in automatisierte Systeme warnen, schreitet die Implementierung in sicherheitskritischen Infrastrukturen rasant voran. Vielleicht erleben wir schon bald den Punkt, an dem autonome Agenten eigenständig ökonomische Strategien für globale Konzerne entwickeln. Wenn Sie vor zwanzig Jahren einem Pionier der Informatik gesagt hätten, dass Computer semantische Nuancen menschlicher Sprache fehlerfrei erfassen und imitieren können, hätte er Sie vermutlich ungläubig angeschaut. Und wenn Sie ihm gesagt hätten, dass diese Systeme kreative Prozesse wie das Komponieren von Symphonien in Sekundenschnelle und mit bruchteilhaften Energiekosten im Vergleich zu menschlichen Künstlern bewältigen, hätte er das für völlig absurd erklärt. Doch durch algorithmische Optimierung und massive Skalierung ist uns genau das gelungen.<br><br>Die Idee des unaufhaltsamen technologischen Fortschritts könnte also ein Trugschluss sein. <strong>[3] Dass sie dennoch so populär ist, hängt damit zusammen, dass unser kollektives Narrativ von Innovation immer noch tief im linearen Denken der industriellen Revolution verwurzelt ist.</strong> Damals hieß es: Wer effizienter maschinell produziert, gewinnt den Markt. Wenn heute alle alten Paradigmen obsolet werden, müssen wir unsere ökonomischen Grundregeln völlig neu definieren. In Wahrheit sind unsere Grenzen unserer technologischen Leistungsfähigkeit keineswegs erreicht. <strong>[4] Und mit unserem rasant wachsenden Verständnis neuronaler Netze und synthetischer Daten werden wir immer besser in der Lage sein, kognitive Engpässe zu überwinden.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt etwas.',
+      'Der Experte hofft auf etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte räumt etwas ein.',
+      'Der Experte stellt etwas in Frage.',
+      'Der Experte vermutet etwas.',
+      'Der Experte verteidigt etwas.',
+      'Der Experte widerspricht etwas.'
+    ],
+    correct:[5, 3, 7, 2] // [1]->f(5), [2]->d(3), [3]->h(7), [4]->c(2)
+  },
+
+  /* Aufgabe 5 */
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Analytikern, zu Intuitionistikern oder zu beiden passt.',
+    title:'Wie analytische und intuitive Köpfe ticken',
+    passage:'Ob sich menschliche Denkstrukturen in kognitive Extreme wie strikte Analytik und fluid-intuitive Verarbeitung aufteilen lassen – und wie stark diese Unterschiede im Einzelfall ausgeprägt sind –, diskutieren Neurowissenschaftler seit Jahrzehnten kontrovers. Eine aktuelle multidisziplinäre Studie liefert nun tiefere Einblicke in diese kognitive Dichotomie. Dabei wurden Probanden hinsichtlich fünf fundamentaler neurokognitiver Merkmale untersucht: algorithmische Stringenz, Offenheit für sensorische Ambiguität, Gewissenhaftigkeit, kognitive Flexibilität d.h. die Fähigkeit zur schnellen Reorientierung, sowie neuronale Erregbarkeit bzw. emotionale Stabilität unter Entscheidungsdruck. Personen, die sich selbst als primär analytisch veranlagt einstuften, erzielen im Schnitt höhere Werte in puncto systematischer Planung, formaler Logik und methodischer Vorhersehbarkeit – sie neigen also dazu, Probleme strikt strukturiert und Schritt für Schritt anzugehen. Intuitionistischer veranlagte Probanden verzeichnen dagegen höhere Werte bei holistischer Mustererkennung und divergentem Denken. Sie sind damit im Mittel etwas risikofreudiger und fehlerintoleranter gegenüber starren Hierarchien; gleichzeitig werden sie jedoch auch häufiger von unbewussten kognitiven Verzerrungen und spontanen Fehleinschätzungen geplagt. Ein relativ ähnliches Bild liefert auch eine andere Untersuchung: Insgesamt deuten die neueren Studien auf einen engen Zusammenhang zwischen unserer neuronalen Verschaltung und der Präferenz für einen ganz bestimmten Problemlösungsstil hin. Wie dieser Zusammenhang genau aussehen könnte, ist jedoch nicht abschließend geklärt. Australische Forscher vertreten die These, dass wir kognitive Strategien präferieren, die unsere angeborene mentale Architektur optimal ergänzen. Um ihre Vermutung zu überprüfen, untersuchten sie in zwei unterschiedlichen Studien mit jeweils rund 500 Teilnehmern, ob dominante Analytiker im Schnitt eine ausgeprägtere Dominanzorientierung besaßen als intuitive Köpfe – sie präferierten also eine feste gedankliche Hierarchie und glaubten, dass übergeordnete Systeme stets mit einem niedrigen Rang dominieren sollten. Paaroffene Fragen hinterlässt die Untersuchung allerdings: Die Wissenschaftler sehen das als Hinweis darauf, dass analytischere Personen Führungspositionen anstreben, die nicht primär auf emotionalem Konsens beruhen, sondern bereit sind, harte rationale Kriterien anzulegen – was auf mathematische Disziplinen eher zutrifft als auf rein künstlerisch-intuitive Domänen. So konnten die Wissenschaftler hinsichtlich Durchsetzungsvermögen und Narzissmus – zwei Eigenschaften, die ebenfalls mit kognitiver Dominanz zusammenhängen – keine signifikanten Unterschiede zwischen ihren Versuchspersonen finden: Analytiker waren weder durchsetzungsstärker noch selbstbezogener als Intuitionistiker. Wie das genau zu ihrer Hypothese passt, konnten die Wissenschaftler allerdings nicht abschließend erklären.',
+    columns:['Analytiker','Intuitionistiker','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen neigen zu einem starken Narzissmus.', correct:3},
+      {text:'Diese Gruppe hinterfragt ständige gedankliche Hierarchien.', correct:1},
+      {text:'Diese Personen schätzen eine systematische und methodische Vorhersehbarkeit.', correct:0},
+      {text:'Diese Gruppe profitiert von einer flexiblen holistischen Mustererkennung.', correct:1},
+      {text:'Diese Personen lassen sich stark durch unbewusste kognitive Verzerrungen leiten.', correct:1},
+      {text:'Diese Gruppe weist ein nachweislich höheres Durchsetzungsvermögen auf.', correct:3},
+      {text:'Diese Personen meiden Führungspositionen in harten rationalen Disziplinen.', correct:3}
+    ]
+  },
+
+  /* Aufgabe 6 */
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Flechten: Das komplexe Zusammenspiel der Symbiose',
+    passage:'Flechten gehören zu den faszinierendsten und zugleich widerstandsfähigsten Organismen der Erde, obwohl sie streng biologisch gesehen keine eigenständigen Lebewesen im klassischen Sinne darstellen. Vielmehr handelt es sich bei ihnen um eine Lebensgemeinschaft, die klassischerweise aus einem Pilz und mindestens einem phototrophen Partner, meist einer Grünalge oder einem Cyanobakterium, besteht. Diese Symbiose wird von der Mykologie traditionell als ein austariertes System gegenseitiger Abhängigkeit verstanden, bei dem der Pilz dem phototrophen Partner ein schützendes Gehäuse sowie Wasser und Mineralsalze bietet, während die Alge im Gegenzug durch Photosynthese gewonnene Kohlenhydrate beisteuert. Jüngste wissenschaftliche Untersuchungen enthüllen jedoch eine weitaus komplexere Realität: Oftmals sind an diesem vermeintlich dualen System heimlich noch weitere Pilzarten oder spezialisierte Hefen beteiligt, die maßgeblich zur Stabilität der Flechtenrinde beitragen. Trotz dieser evolutionären Raffinesse erweist sich die Kultivierung von Flechten unter Laborbedingungen als außerordentlich schwierig. Da die symbiotischen Partner in der Natur extrem langsam wachsen und in ein feines, chemisch hochkomplexes Wechselspiel eingebunden sind, schlagen künstliche Zuchtversuche im kontrollierten Umfeld meist fehl. Zudem reagieren Flechten extrem empfindlich auf anthropogene Schadstoffe. Da sie keine echten Wurzeln besitzen, nehmen sie sämtliche Nährstoffe und Flüssigkeiten direkt über die gesamte Oberfläche aus der Atmosphäre auf. Das macht sie zu hervorragenden Bioindikatoren für die Luftgüte, setzt sie aber gleichzeitig der unkontrollierten Anreicherung von Schwermetallen und Schwefeldioxid aus, was mancherorts zu massiven Bestandsrückgängen führt. Andererseits besitzen sie die erstaunliche Fähigkeit, extreme Austrocknungsphasen schadlos zu überstehen, indem sie ihren Stoffwechsel nahezu komplett herunterfahren und in eine Art metabolische Starre verfallen, aus der sie beim ersten Kontakt mit Feuchtigkeit sofort wieder erwachen.',
+    aussagen:[
+      { key:'a', text:'[a] Unkontrollierte Aufnahme von Schadstoffen aus der Luft' },
+      { key:'b', text:'[b] Vollständiger Verzicht auf externe Nährstoffzufuhr' },
+      { key:'c', text:'[c] Beteiligung von mehr als nur zwei Organismenarten' },
+      { key:'d', text:'[d] Problematische künstliche Kultivierung im Labor' },
+      { key:'e', text:'[e] Schneller und unkontrollierter Wuchs in feuchten Regionen' },
+      { key:'f', text:'[f] Ausschließlich ausschließliche Abhängigkeit von Grünalgen' },
+      { key:'g', text:'[g] Hohe Widerstandsfähigkeit gegen langanhaltende Dürreperioden' },
+      { key:'h', text:'[h] Unmittelbare Gefahr für das Menschen beim Berühren der Thalli' }
+    ],
+    correctMap: { v1: 'c', v2: 'g', n3: 'a', n4: 'd' }
+  },
+
+  /* Aufgabe 7 */
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten. Es gibt genau drei inhaltlich falsche Sätze.',
+    title:'Das Erdsystem an den Belastungsgrenzen',
+    passage:'Das Konzept der planetaren Grenzen, das erstmals im Jahr 2009 von einem internationalen Forscherteam um Johan Rockström und Will Steffen vorgestellt wurde, definiert den sicheren Handlungsraum für die Menschheit. Jüngste wissenschaftliche Aktualisierungen zeichnen jedoch ein alarmierendes Bild: Mittlerweile sind sieben von neun definierten Grenzen überschritten worden. Zu den kritisch fortgeschrittenen Bereichen gehören neben dem Klimawandel vor allem die Intégrität der Biosphäre, der Verlust von Ökosystemfunktionen sowie massive Störungen der biogeochemischen Kreisläufe von Stickstoff und Phosphor. Besonders besorgniserregend ist die Tatsache, dass diese Subsysteme des Erdsystems nicht isoliert voneinander betrachtet werden dürfen. Sie stehen in einem hochkomplexen, nicht-linearen Wechselverhältnis. So schwächt die anhaltende Entwaldung tropischer Regenwälder nicht nur die globale Kohlenstoffsenke, sondern beschleunigt gleichzeitig das Artensterben dramatisch. Wissenschaftler betonen, dass das Überschreiten dieser Schwellenwerte das Risiko unumkehrbarer Kippelemente signifikant erhöht, was kaskadenartige Kollapse ganzer Naturräume zur Folge haben kann. Zwar existieren auf internationaler Ebene zahlreiche Abkommen wie das Pariser Klimaschutzabkommen, doch kritisieren Experten immer wieder die mangelnde politische Entschlossenheit bei der Umsetzung konsequenter Gegenmaßnahmen. Ohne eine grundlegende sozial-ökologische Transformation droht die Stabilität des gesamten Erdsystems irreversibel zu kippen, wodurch die Lebensgrundlagen künftiger Generationen akut gefährdet werden.',
+    graphicData:[{year:'Klima',val:4},{year:'Biosphäre',val:5},{year:'Stickstoff',val:3},{year:'Landnutzung',val:4}],
+    graphicCaption:'Grafik: Zustand der planetaren Grenzen im Erdsystem',
+    sentences:[
+      {text:'(1) Das wissenschaftliche Konzept der planetaren Grenzen wurde zu Beginn des 21. Jahrhunderts eingeführt, um den sicheren Handlungsraum der Menschheit zu definieren.', wrong:false},
+      {text:'(2) Aktuellen Erhebungen zufolge gilt inzwischen die Mehrheit der neun untersuchten ökologischen Hauptgrenzen als überschritten.', wrong:false},
+      {text:'(3) Zu den stabilsten und unbedenklichsten Bereichen zählen derzeit die globalen Stickstoff- und Phosphorkreisläufe.', wrong:true},
+      {text:'(4) Die einzelnen Subsysteme des Erdsystems agieren voneinander völlig unabhängig und beeinflussen sich gegenseitig kaum.', wrong:true},
+      {text:'(5) Die Zerstörung tropischer Regenwälder reduziert parallel die globale Kohlenstoffsenke und verstärkt den Biodiversitätsverlust.', wrong:false},
+      {text:'(6) Das Überschreiten kritischer Schwellenwerte erhöht drastisch die Gefahr abrupter und unumkehrbarer Kippeffekte.', wrong:false},
+      {text:'(7) Internationale Vereinbarungen wie das Pariser Abkommen werden von Fachleuten wegen konsequenter politischer Umsetzung einhellig gelobt.', wrong:true},
+      {text:'(8) Komplexe ökologische Veränderungen können potenziell kaskadenartige und weitreichende Systemkollapse auslösen.', wrong:false},
+      {text:'(9) Ohne einen tiefgreifenden systemischen Wandel steht die langfristige Stabilität des gesamten Erdsystems auf dem Spiel.', wrong:false}
+    ]
+  }
+];
+
+/* MISE À JOUR DU TABLEAU DES TESTS (MT1, MT2 et MT3 inclus) */
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
-  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2}
+  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
+  {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3}
 ];
 
 let currentTestIdx = 0;
