@@ -1,11 +1,11 @@
 const TEMPLATE = [
-  {teil:1, type:'gap',     time:240,  label:'Lückentext ergänzen'},
-  {teil:2, type:'order',   time:300,  label:'Textabschnitte ordnen'},
-  {teil:3, type:'mc',      time:900,  label:'Multiple Choice (C1 Level)'},
-  {teil:4, type:'match',   time:360,  label:'Textstellen zuordnen (C1 Level)'},
-  {teil:5, type:'table',   time:540,  label:'Aussagen Kategorien zuordnen'},
-  {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
-  {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
+  {teil:1, type:'gap',     time:300,  label:'Lückentext ergänzen'},
+  {teil:2, type:'order',   time:360,  label:'Textabschnitte ordnen'},
+  {teil:3, type:'mc',      time:1080, label:'Multiple Choice (C1 Level)'},
+  {teil:4, type:'match',   time:420,  label:'Textstellen zuordnen (C1 Level)'},
+  {teil:5, type:'table',   time:600,  label:'Aussagen Kategorien zuordnen'},
+  {teil:6, type:'twocat',  time:480,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
+  {teil:7, type:'summary', time:480,  label:'Fehler in Zusammenfassung erkennen'}
 ];
 
 const MT1 = [
@@ -962,7 +962,6 @@ function renderSummary(task, test, body){
   updateCount();
 }
 
-// Fonction de calcul et d'affichage des résultats et corrections détaillées
 function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
@@ -1106,7 +1105,7 @@ function showResults(){
       <h2 style="text-align:center;">Ergebnisse & Detaillierte Korrektur</h2>
       <div style="background:var(--teal); color:white; padding:20px; border-radius:10px; text-align:center; margin:20px 0;">
         <div style="font-size:2rem; font-weight:bold;">${totalScore} / ${maxScore} Punkte (${percentage}%)</div>
-        <div style="font-size:1rem; margin-top:5px;">${test.title}</div>
+        <div style="font-size:1.0rem; margin-top:5px;">${test.title}</div>
       </div>
       <h3 style="margin:20px 0 10px 0;">Auswertung nach Aufgaben:</h3>
       ${correctionHtml}
@@ -1117,5 +1116,4 @@ function showResults(){
   `;
 }
 
-// Lancement initial de l'application
 showTestSelect();
