@@ -1,11 +1,11 @@
 const TEMPLATE = [
-  {teil:1, type:'gap',     time:300,  label:'Lückentext ergänzen'},
-  {teil:2, type:'order',   time:360,  label:'Textabschnitte ordnen'},
-  {teil:3, type:'mc',      time:1080, label:'Multiple Choice (C1 Level)'},
-  {teil:4, type:'match',   time:420,  label:'Textstellen zuordnen (C1 Level)'},
-  {teil:5, type:'table',   time:600,  label:'Aussagen Kategorien zuordnen'},
-  {teil:6, type:'twocat',  time:480,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
-  {teil:7, type:'summary', time:480,  label:'Fehler in Zusammenfassung erkennen'}
+  {teil:1, type:'gap',     time:240,  label:'Lückentext ergänzen'},
+  {teil:2, type:'order',   time:300,  label:'Textabschnitte ordnen'},
+  {teil:3, type:'mc',      time:900,  label:'Multiple Choice (C1 Level)'},
+  {teil:4, type:'match',   time:360,  label:'Textstellen zuordnen (C1 Level)'},
+  {teil:5, type:'table',   time:540,  label:'Aussagen Kategorien zuordnen'},
+  {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
+  {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
 ];
 
 const MT1 = [
@@ -170,7 +170,7 @@ const MT2 = [
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
     segments:[
-      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzielle Schlüsselpunkt ist: Demnach ',
+      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzieller Schlüsselpunkt ist: Demnach ',
       ' diese Organismen in thermisch belasteten Gewässern dank spezialisierter Lipidzusammensetzungen, die ein Aufschmelzen der zellulären Barrieren verhindern. Doch die molekularen Feinheiten dieses Schutzmechanismus blieben lange Zeit im Verborgenen. Zudem schien die ',
       ' von Wissenschaftlern, es handele sich hierbei um eine rein passive Schutzreaktion, zunehmend fragwürdig. In einer neuen molekularbiologischen Untersuchung konnten Forscher nun eindeutig ',
       ', dass sich die fluiden Eigenschaften der Membranen aktiv und dynamisch an die Umgebungstemperatur anpassen. Mit einer Dicke, die dem Bruchteil einer Mikrometerschicht entspricht, reagiert die Zelle wesentlich schneller auf thermischen Stress als bisher angenommen. Der interessanteste Aspekt allerdings: Es handelt sich keineswegs um einen starren Panzer. Wie aus den proteomischen Analysen hervorgeht, verhält sich die Zytoplasmastruktur stattdessen hochelastisch und besitzt komplexe Regulationsmechanismen. Dieses ',
@@ -655,29 +655,26 @@ function fmt(sec){
 }
 function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
 
-function handleTimerExpired(){
-  clearTimer();
-  const test = TESTS[currentTestIdx];
-  const isLast = (current === test.teile.length - 1);
-  if(isLast){
-    showResults();
-  } else {
-    current++;
-    renderTask();
-  }
-}
-
+// Fonction modifiée pour passer automatiquement à l'Aufgabe suivant lorsque le minuteur atteint 0
 function startTimer(seconds){
   clearTimer(); remaining = seconds; updateTimerDisplay();
   timerInterval = setInterval(()=>{
     remaining--;
     if(remaining <= 0){
-      remaining = 0; 
-      updateTimerDisplay(); 
+      remaining = 0;
+      updateTimerDisplay();
       clearTimer();
-      handleTimerExpired();
-    } else { 
-      updateTimerDisplay(); 
+      
+      // Passage automatique à l'exercice suivant ou affichage des résultats
+      const test = TESTS[currentTestIdx];
+      if(current < test.teile.length - 1){
+        current++;
+        renderTask();
+      } else {
+        showResults();
+      }
+    } else {
+      updateTimerDisplay();
     }
   },1000);
 }
@@ -747,7 +744,7 @@ function renderNavbar(isLast, test){
   nb.innerHTML = `
     <button class="btn ghost" id="btnMenu">Modelltests</button>
     <span class="foot-note">Niveau C1 · TestDaF Format</span>
-    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse & Korrektur' : 'Aufgabe '+(current+2)+' →'}</button>
+    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
   `;
   document.getElementById('btnMenu').onclick = ()=>{
     if(confirm('Zurück zur Auswahlliste? Ihre Antworten bleiben gespeichert.')) showTestSelect();
@@ -966,152 +963,11 @@ function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   document.getElementById('navbar').innerHTML = '';
-  
-  const test = TESTS[currentTestIdx];
-  const testAnswers = answers[test.id] || {};
-  
-  let totalScore = 0;
-  let maxScore = 0;
-  let correctionHtml = '';
-
-  test.teile.forEach((task, tIdx) => {
-    const userAns = testAnswers[task.teil] || {};
-    let taskScore = 0;
-    let taskMax = 0;
-    let detailsHtml = '';
-
-    switch(task.type){
-      case 'gap':
-        taskMax = task.gaps.length;
-        task.gaps.forEach((g, gIdx)=>{
-          const userVal = parseInt(userAns[gIdx]);
-          const isCorrect = (userVal === g.correct);
-          if(isCorrect) taskScore++;
-          detailsHtml += `<div style="margin:4px 0; font-size:0.9rem;">
-            Lücke ${gIdx+1}: Ihre Wahl: <b>${userVal >= 0 ? String.fromCharCode(97+userVal) + ') ' + g.options[userVal] : 'Keine'}</b> — 
-            Richtige Antwort: <span style="color:var(--teal-dark); font-weight:bold;">${String.fromCharCode(97+g.correct)}) ${g.options[g.correct]}</span>
-            ${isCorrect ? ' ✅' : ' ❌'}
-          </div>`;
-        });
-        break;
-
-      case 'order':
-        taskMax = 1;
-        const userOrder = userAns.order || task.shuffledStart;
-        const isOrderCorrect = userOrder.every((val, idx) => val === task.correctOrder[idx]);
-        if(isOrderCorrect) taskScore = 1;
-        detailsHtml += `<div style="margin:4px 0; font-size:0.9rem;">
-          ${isOrderCorrect ? '✅ Reihenfolge korrekt!' : '❌ Reihenfolge ist nicht ganz richtig.'}
-          <div style="font-size:0.8rem; color:var(--text-soft); margin-top:4px;">Richtige Reihenfolge der Sätze (von 1 bis 5):<br>
-          ${task.correctOrder.map(origIdx => '• ' + escapeHtml(task.items[origIdx])).join('<br>')}
-          </div>
-        </div>`;
-        break;
-
-      case 'mc':
-        taskMax = task.questions.length;
-        task.questions.forEach((q, qIdx)=>{
-          const userVal = parseInt(userAns[qIdx]);
-          const isCorrect = (userVal === q.correct);
-          if(isCorrect) taskScore++;
-          detailsHtml += `<div style="margin:4px 0; font-size:0.9rem;">
-            Frage ${qIdx+1}: Ihre Wahl: <b>${userVal >= 0 ? String.fromCharCode(97+userVal) + ') ' + q.options[userVal] : 'Keine'}</b> — 
-            Richtige Antwort: <span style="color:var(--teal-dark); font-weight:bold;">${String.fromCharCode(97+q.correct)}) ${q.options[q.correct]}</span>
-            ${isCorrect ? ' ✅' : ' ❌'}
-          </div>`;
-        });
-        break;
-
-      case 'match':
-        taskMax = task.textStellen.length;
-        task.textStellen.forEach((ts, tsIdx)=>{
-          const userVal = parseInt(userAns[tsIdx]);
-          const correctVal = task.correct[tsIdx];
-          const isCorrect = (userVal === correctVal);
-          if(isCorrect) taskScore++;
-          detailsHtml += `<div style="margin:4px 0; font-size:0.9rem;">
-            Textstelle [${ts}]: Ihre Wahl: <b>${userVal >= 0 ? String.fromCharCode(97+userVal) : 'Keine'}</b> — 
-            Richtige Antwort: <span style="color:var(--teal-dark); font-weight:bold;">${String.fromCharCode(97+correctVal)}</span>
-            ${isCorrect ? ' ✅' : ' ❌'}
-          </div>`;
-        });
-        break;
-
-      case 'table':
-        taskMax = task.items.length;
-        task.items.forEach((item, iIdx)=>{
-          const userVal = parseInt(userAns[iIdx]);
-          const correctVal = item.correct;
-          const isCorrect = (userVal === correctVal);
-          if(isCorrect) taskScore++;
-          detailsHtml += `<div style="margin:4px 0; font-size:0.9rem;">
-            Aussage ${iIdx+1}: Ihre Wahl: <b>${userVal >= 0 ? task.columns[userVal] : 'Keine'}</b> — 
-            Richtige Antwort: <span style="color:var(--teal-dark); font-weight:bold;">${task.columns[correctVal]}</span>
-            ${isCorrect ? ' ✅' : ' ❌'}
-          </div>`;
-        });
-        break;
-
-      case 'twocat':
-        taskMax = 4;
-        const keys = ['v1', 'v2', 'n3', 'n4'];
-        keys.forEach(k=>{
-          const userKey = userAns[k];
-          const correctKey = task.correctMap[k];
-          const isCorrect = (userKey === correctKey);
-          if(isCorrect) taskScore++;
-          const corrObj = task.aussagen.find(x => x.key === correctKey);
-          const userObj = task.aussagen.find(x => x.key === userKey);
-          detailsHtml += `<div style="margin:4px 0; font-size:0.9rem;">
-            Feld [${k.toUpperCase()}]: Ihre Wahl: <b>${userObj ? userObj.text : 'Keine'}</b> — 
-            Richtig: <span style="color:var(--teal-dark); font-weight:bold;">${corrObj ? corrObj.text : ''}</span>
-            ${isCorrect ? ' ✅' : ' ❌'}
-          </div>`;
-        });
-        break;
-
-      case 'summary':
-        taskMax = task.sentences.filter(s=>s.wrong).length;
-        let subScore = 0;
-        task.sentences.forEach((s, sIdx)=>{
-          const userChecked = !!userAns[sIdx];
-          const isActuallyWrong = s.wrong;
-          if(userChecked === isActuallyWrong) subScore++;
-          detailsHtml += `<div style="margin:4px 0; font-size:0.85rem; color:${isActuallyWrong ? '#d9534f' : '#5cb85c'}">
-            [${isActuallyWrong ? 'Falsche Aussage' : 'Richtige Aussage'}] ${escapeHtml(s.text)}<br>
-            <i>Ihre Markierung: ${userChecked ? 'Angekreuzt (Falsch)' : 'Nicht angekreuzt (Richtig)'} ${userChecked === isActuallyWrong ? '✅' : '❌'}</i>
-          </div>`;
-        });
-        taskScore = subScore;
-        taskMax = task.sentences.length;
-        break;
-    }
-
-    totalScore += taskScore;
-    maxScore += taskMax;
-
-    correctionHtml += `
-      <div style="background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:16px; margin-bottom:16px;">
-        <h4 style="color:var(--teal-dark); margin-bottom:8px;">Aufgabe ${task.teil}: ${task.title} (Ergebnis: ${taskScore}/${taskMax})</h4>
-        ${detailsHtml}
-      </div>
-    `;
-  });
-
-  const percentage = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
-
   document.getElementById('main').innerHTML = `
-    <div class="select-screen" style="max-width:800px; margin:0 auto; text-align:left;">
-      <h2 style="text-align:center;">Ergebnisse & Detaillierte Korrektur</h2>
-      <div style="background:var(--teal); color:white; padding:20px; border-radius:10px; text-align:center; margin:20px 0;">
-        <div style="font-size:2rem; font-weight:bold;">${totalScore} / ${maxScore} Punkte (${percentage}%)</div>
-        <div style="font-size:1.0rem; margin-top:5px;">${test.title}</div>
-      </div>
-      <h3 style="margin:20px 0 10px 0;">Auswertung nach Aufgaben:</h3>
-      ${correctionHtml}
-      <div style="text-align:center; margin-top:30px;">
-        <button class="btn next" onclick="showTestSelect()">Zurück zur Übersicht</button>
-      </div>
+    <div class="select-screen">
+      <h2>Test beendet</h2>
+      <p>Die Zeit ist abgelaufen oder Sie haben alle Aufgaben durchlaufen.</p>
+      <button class="btn next" onclick="showTestSelect()" style="margin-top:20px;">Zurück zur Übersicht</button>
     </div>
   `;
 }
