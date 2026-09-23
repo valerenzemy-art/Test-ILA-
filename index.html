@@ -345,7 +345,6 @@ const MT1 = [
   }
 ];
 
-/* NEU: Modelltest 2 (MT2) basierend exakt auf den von Ihnen hochgeladenen Aufgaben */
 const MT2 = [
   /* Aufgabe 1: Mikrobiologie & Hitzetoleranz */
   { ...TEMPLATE[0],
@@ -372,10 +371,10 @@ const MT2 = [
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Aufgabe 2: Quantenphysik & Schrödingers Katze',
-    correctOrder:[2,1,0,4,3], // Entspricht der korrekten Reihenfolge: C -> B -> A -> E -> D
+    correctOrder:[2,1,0,4,3],
     items:[
       'Dass dieses Gedankenexperiment im makroskopischen Alltag jedoch völlig absurd erscheint, liegt an einem physikalischen Phänomen namens Dekohärenz: Sobald ein Quantensystem mit seiner Umwelt – sei es auch nur mit einem einzigen Luftmolekül – in Wechselwirkung tritt, kollabiert der Überlagerungszustand augenblicklich in eine klassische Realität.',
-      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, die theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
+      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, der theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
       'In der mikroskopischen Welt der Quantenmechanik gilt ein physikalisches System, solange es nicht gemessen oder beobachtet wird, in einer sogenannten Superposition – es befindet sich also gleichzeitig in mehreren unterschiedlichen Zuständen.',
       'Dennoch versuchen moderne Quantenphysiker weltweit immer wieder, diese unsichtbare Grenze zwischen Quanten- und Makrowelt zu verschieben, um extrem empfindliche Quantencomputer zu konstruieren, die weit über die Leistung klassischer Rechenmaschinen hinausgehen.',
       'Genau aus diesem Grund gelingt es Wissenschaftlern bis heute nicht, makroskopische Objekte wie Katzen oder alltägliche Gegenstände in einen dauerhaften Quantenzustand zu versetzen, da die unkontrollierbare thermische Umgebung jede quantenmechanische Kohärenz innerhalb von Bruchteilen einer Mikrosekunde zerstört.'
@@ -457,7 +456,7 @@ const MT2 = [
       'Der Experte verteidigt etwas.',
       'Der Experte widerspricht etwas.'
     ],
-    correct:[4, 3, 5, 2] // [1] -> e (4), [2] -> d (3), [3] -> f (5), [4] -> c (2)
+    correct:[4, 3, 5, 2]
   },
 
   /* Aufgabe 5: Zusatzleistungen & Kindergesundheit */
@@ -467,13 +466,13 @@ const MT2 = [
     passage:'Ob sich die gesundheitliche Entwicklung von Kindern durch direkte finanzielle Hilfen für Mütter signifikant verbessern lässt – und wie die Effekte im Vergleich zu klassischen Sachleistungen ausgeprägt sind –, untersuchen Gesundheitsökonomen und Soziologen bereits seit Jahren. Eine aktuelle europaweite Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden zwei Gruppen von Müttern im Hinblick auf fünf gesundheits- und entwicklungsspezifische Indikatoren untersucht: Mütter, die einen monatlichen, bedingungslosen Finanzbonus (Zusatzgeld) erhalten, und Mütter, die im traditionellen, an strenge Auflagen geknüpften Regelsystem der staatlichen Sozialhilfe verblieben sind. Personen der ersten Gruppe, die sich selbst als Empfängerinnen des Zusatzgeldes bezeichneten, erwiesen sich in den Kennzahlen zu Ernährungssicherheit, Vorsorgeuntersuchungen und psychischem Wohlbefinden ihrer Kinder als deutlich proaktiver - sie gaben beispielsweise an, flexibler auf kindliche Bedürfnisse reagieren zu können, ausgewogenere Nahrungsmittel zu kaufen und präventive Arztbesuche termingerecht wahrzunehmen. Mütter im herkömmlichen Regelsystem erzielten dagegen niedrigere Werte in puncto Ernährungsqualität und wiesen häufiger stressbedingte Erschöpfungssymptome auf. Sie sind damit im Mittel stärker von akuten finanziellen Sorgen geplagt, wodurch auch die mentale Gesundheit der Kinder indirekt beeinträchtigt wird.',
     columns:['Mutter mit Zusatzgeld','Mutter im Regelsystem','beide','passt nicht'],
     items:[
-      {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3}, // passt nicht
-      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0}, // Mutter mit Zusatzgeld
-      {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0}, // Mutter mit Zusatzgeld
-      {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1}, // Mutter im Regelsystem
-      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0}, // Mutter mit Zusatzgeld
-      {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3}, // passt nicht
-      {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1} // Mutter im Regelsystem
+      {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3},
+      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0},
+      {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0},
+      {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1},
+      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0},
+      {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3},
+      {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1}
     ]
   },
 
@@ -515,10 +514,121 @@ const MT2 = [
   }
 ];
 
-/* MISE À JOUR DU TABLEAU DES TESTS (MT1 et MT2 inclus) */
+/* NEU: Modelltest 3 (MT3) basierend auf den von Ihnen angegebenen 7 Aufgaben */
+const MT3 = [
+  /* Aufgabe 1: Warum werden Städte nachts immer wärmer? */
+  { ...TEMPLATE[0],
+    instructions:'Fügen Sie die passenden Wörter in den Lückentext ein.',
+    title:'Aufgabe 1: Warum werden Städte nachts immer wärmer?',
+    segments:[
+      'Die Verstädterung führt weltweit zu dem Phänomen der städtischen Wärmeinsel. Dabei kühlen urbanisierte Areale nach Sonnenuntergang deutlich ',
+      ' ab als das Umland. Ursachen hierfür sind unter anderem die stark versiegelten Oberflächen, die tagsüber Wärme speichern, sowie der Mangel an ',
+      ' und Verdunstungsflächen. Zudem tragen anthropogene Abwärmequellen wie Verkehr und Klimaanlagen massiv dazu bei, dass nächtliche Tiefsttemperaturen in Zentren steigen.'
+    ],
+    gaps:[
+      {options:['langsamer','schneller','gleichmäßig','kaum'], correct:0},
+      {options:['Grünflächen','Industrieanlagen','Hochhäusern','Verkehrswegen'], correct:0}
+    ]
+  },
+
+  /* Aufgabe 2: Forscher erzeugen neuartiges „Super-Eis“ */
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die folgenden Textabschnitte in die logische Reihenfolge.',
+    title:'Aufgabe 2: Forscher erzeugen neuartiges „Super-Eis“',
+    correctOrder:[1,0,2],
+    items:[
+      'Zellulose-Nanopartikel und spezielle Proteine bilden ein stabiles Netzwerk im Wassereis.',
+      'Wassereis ist prinzipiell ein tragfähiges Material, neigt jedoch unter Belastung schnell zur Rissbildung.',
+      'Das so erzeugte Biopykret ist extrem robust, weniger spröde als normales Eis und verformt sich bei Überlastung kontrolliert.'
+    ],
+    shuffledStart:[2,1,0]
+  },
+
+  /* Aufgabe 3: Adaptive KI-Robotik und menschliche Motorik */
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text und wählen Sie die richtige Option aus.',
+    title:'Aufgabe 3: Adaptive KI-Robotik und menschliche Motorik',
+    passage:[
+      'Moderne Roboterarme lernen zunehmend durch adaptive Algorithmen, komplexe Bewegungsabläufe nach dem Vorbild biologischer Motorik auszuführen. Im Gegensatz zu starren Industrierobotern reagieren diese Systeme flexibel auf unvorhergesehene physikalische Störungen in ihrer Umgebung.'
+    ],
+    questions:[
+      {
+        q:'Was unterscheidet adaptive Roboter von klassischen Industrierobotern?',
+        options:[
+          'Sie arbeiten ausschließlich in geschlossenen Laborumgebungen.',
+          'Sie können flexibel auf unerwartete Umweltveränderungen reagieren.',
+          'Sie benötigen keinerlei Algorithmen zur Steuerung.',
+          'Sie sind starr und unbeweglich konstruiert.'
+        ],
+        correct:1
+      }
+    ]
+  },
+
+  /* Aufgabe 4: Kommentar zur Künstlichen Intelligenz und Arbeitsmarkt */
+  { ...TEMPLATE[3],
+    instructions:'Ordnen Sie die Argumente den passenden Abschnitten zu.',
+    title:'Aufgabe 4: Kommentar eines Experten zu Künstlicher Intelligenz und Arbeitsmarkt',
+    passageText:`Die Automatisierung schreitet in rasantem Tempo voran. <strong>[1] Dabei zeigt sich, dass vor allem repetitive Tätigkeiten vollständig von Algorithmen übernommen werden.</strong> Dies entlastet die Beschäftigten von monotonen Aufgaben. <strong>[2] Neue Berufsfelder entstehen vor allem im Bereich der Systemüberwachung und der technologischen Wartung.</strong>`,
+    textStellen:[1, 2],
+    options:[
+      'Automatisierung ersetzt repetitive Tätigkeiten vollständig.',
+      'Neue Berufsfelder entstehen vor allem im Bereich der Systemüberwachung.',
+      'Die Industrie lehnt jegliche Form von Künstlicher Intelligenz ab.',
+      'Menschliche Arbeitskraft wird komplett überflüssig werden.'
+    ],
+    correct:[0, 1]
+  },
+
+  /* Aufgabe 5: Wie analytische und intuitive Köpfe ticken */
+  { ...TEMPLATE[4],
+    instructions:'Ordnen Sie die Merkmale den jeweiligen kognitiven Typen zu.',
+    title:'Aufgabe 5: Wie analytische und intuitive Köpfe ticken',
+    passage:'Die kognitive Psychologie unterscheidet zwischen verschiedenen Problemlösungsansätzen. Analytische Typen bevorzugen strukturierte und schrittweise Vorgehensweisen, während intuitive Typen Entscheidungen oft rasch basierend auf Gesamteindrücken treffen.',
+    columns:['Analytischer Typ','Intuitiver Typ'],
+    items:[
+      {text:'Bevorzugt strukturierte, schrittweise Problemlösungen.', correct:0},
+      {text:'Trifft Entscheidungen oft rasch basierend auf Gesamteindrücken.', correct:1}
+    ]
+  },
+
+  /* Aufgabe 6: Flechten – Das komplexe Zusammenspiel der Symbiose */
+  { ...TEMPLATE[5],
+    instructions:'Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Flechten – Das komplexe Zusammenspiel der Symbiose',
+    passage:'Flechten sind faszinierende Organismen, die aus einer Lebensgemeinschaft von Pilzen und Algen bzw. Cyanobakterien bestehen. Als Vorteil gilt ihre enorme Widerstandskraft gegenüber extremen Klimabedingungen. Ein Nachteil ist jedoch ihr extrem langsames Wachstum.',
+    aussagen:[
+      { key:'a', text:'[a] Enorme Widerstandskraft gegenüber extremen Klimabedingungen' },
+      { key:'b', text:'[b] Extrem schnelles und unkontrolliertes Wachstum' },
+      { key:'c', text:'[c] Fähigkeit zur Symbiose zwischen Pilzen und Algen' },
+      { key:'d', text:'[d] Sofortiges Absterben bei minimalem Frost' },
+      { key:'e', text:'[e] Extrem langsames Wachstum im Freiland' },
+      { key:'f', text:'[f] Vollständige Unabhängigkeit von jeglichen Nährstoffen' }
+    ],
+    correctMap: { v1: 'a', v2: 'c', n3: 'e', n4: 'd' }
+  },
+
+  /* Aufgabe 7: Das Erdsystem an den Belastungsgrenzen */
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau zwei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Das Erdsystem an den Belastungsgrenzen',
+    passage:'Das Konzept der planetaren Grenzen definiert sichere Handlungsräume für die Menschheit. Eine Überschreitung dieser Grenzen führt unweigerlich zu abrupten und irreversiblen Umweltveränderungen auf globaler Ebene.',
+    graphicData:[{year:'Grenze 1',val:10},{year:'Grenze 2',val:20},{year:'Grenze 3',val:30}],
+    graphicCaption:'Grafik: Planetare Belastungsgrenzen',
+    sentences:[
+      {text:'Das Konzept beschreibt stabile ökologische Belastungsgrenzen der Erde.', wrong:false},
+      {text:'Die Grenzen können beliebig oft überschritten werden, ohne negative Folgen.', wrong:true},
+      {text:'Eine Überschreitung kann irreversible Umweltveränderungen auslösen.', wrong:false},
+      {text:'Das Ökosystem der Erde reagiert völlig unempfindlich auf menschliche Einflüsse.', wrong:true}
+    ]
+  }
+];
+
+/* MISE À JOUR DU TABLEAU GLOBAL DES TESTS (MT1, MT2 et MT3 intégrés) */
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
-  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2}
+  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
+  {id:3, title:'Modelltest 3 (C1-TestDaF)', teile: MT3}
 ];
 
 let currentTestIdx = 0;
