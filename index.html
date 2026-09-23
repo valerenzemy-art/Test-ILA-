@@ -387,9 +387,227 @@ const MT2 = [
   }
 ];
 
+/* MODELLTEST 3 */
+const MT3 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Die Verkehrswende in Ballungsräumen',
+    segments:[
+      'Die Transformation der urbanen Mobilität gilt als zentraler Baustein zur Erreichung der gesetzlich verankerten Klimaziele. Um den CO2-Ausstoß im Transportsektor drastisch zu ',
+      ', setzen viele Metropolen auf den gezielten Ausbau des öffentlichen Personennahverkehrs sowie geschützter Radverkehrsnetze. Experten betonen jedoch, dass reine Anreizsysteme oft nicht ',
+      ', um Autofahrer zum Umstieg zu bewegen. Ergänzend bedürfe es verkehrslenkender Maßnahmen wie einer Parkraumbewirtschaftung oder City-Maut. Die erfolgreiche Umsetzung dieser Strategien erfordert allerdings eine verlässliche ',
+      ' öffentlicher Fördermittel sowie eine hohe Akzeptanz innerhalb der Bevölkerung. Fehlt diese gesellschaftliche Unterstützung, drohen langwierige politische ',
+      ' und erhebliche Verzögerungen beim Infrastrukturausbau.'
+    ],
+    gaps:[
+      {options:['senken','steigerungsfähig','steigern','blockieren'], correct:0},
+      {options:['ausreichen','scheitern','versagen','enttäuschen'], correct:0},
+      {options:['Bereitstellung','Verweigerung','Kürzung','Stornierung'], correct:0},
+      {options:['Auseinandersetzungen','Harmonien','Einigungen','Zustimmungen'], correct:0},
+      {options:['Verzögerungen','Beschleunigungen','Fortschritte','Erfolge'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Evolution des Wasserstoffs als Energieträger',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Bereits im 19. Jahrhundert wurde Wasserstoff von Wissenschaftlern als potenzieller Energieträger der Zukunft diskutiert.',
+      'Aufgrund der billigen Verfügbarkeit fossiler Brennstoffe geriet die Technologie jedoch für viele Jahrzehnte wieder in den Hintergrund.',
+      'Mit dem Beginn der globalen Dekarbonisierungsbemühungen erlebte das Element schließlich eine Renaissance in der Energiewirtschaft.',
+      'Moderne Elektrolyseverfahren ermöglichen es heute, grünen Wasserstoff mithilfe erneuerbarer Energien klimaneutral herzustellen.',
+      'Insbesondere in schwer elektrifizierbaren Industriezweigen wie der Stahlproduktion gilt Wasserstoff nun als unverzichtbarer Schlüsselbaustein.'
+    ],
+    shuffledStart:[1,3,0,4,2]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Mikroplastik in marinen Ökosystemen',
+    passage:[
+      '(1) Die Akkumulation von Kunststoffen in Weltmeeren stellt eine der gravierendsten ökologischen Herausforderungen des 21. Jahrhunderts dar. Besonders gefährlich sind Partikel mit einem Durchmesser von weniger als fünf Millimetern, bekannt als Mikroplastik. Diese entstehen entweder durch den witterungsbedingten Zerfall größerer Plastikabfälle oder werden Produkten direkt industriell zugesetzt.',
+      '(2) Die biologischen Auswirkungen auf marine Organismen sind vielfältig und komplex. Fische und Filterfehrer verwechseln die Partikel häufig mit natürlicher Nahrung. Dies führt nicht nur zu physikalischen Blockaden im Verdauungstrakt, sondern auch zur Aufnahme von Anlagerungen toxischer Umweltgifte, die sich im Gewebe anreichern.',
+      '(3) Trotz zunehmender Forschung bleiben die langfristigen Konsequenzen für die menschliche Gesundheit über den Konsum von Meeresfrüchten noch nicht vollständig geklärt. Wissenschaftler fordern daher strengere internationale Abkommen zur Vermeidung von Plastikmüll an der Quelle.'
+    ],
+    questions:[
+      { q:'Wie entsteht Mikroplastik laut Absatz 1?', options:['Ausschließlich durch die Zersetzung von Industriemüll im Meer.','Durch Zerfall von Plastik oder durch direkte industrielle Beimischung.','Durch die chemische Reaktion von Plastik mit Salzwasser.','Durch die Verbrennung von Müll an Küstenregionen.'], correct:1 },
+      { q:'Welche Gefahr wird in Absatz 2 für Meerestiere beschrieben?', options:['Verlust des Orientierungssinns beim Schwimmen.','Aufnahme von Toxinen und Verstopfung des Verdauungssystems.','Schnelleres Wachstum durch synthetische Nährstoffe.','Unfruchtbarkeit durch veränderte Wassertemperaturen.'], correct:1 },
+      { q:'Was fordern Wissenschaftler in Absatz 3?', options:['Ein vollständiges Verbot des Verzehrs von Meeresfrüchten.','Internationale Abkommen zur Vermeidung von Plastikmüll.','Die Einstellung der Forschung an Mikroplastik.','Den Bau von Plastikfiltern an allen Flussmündungen.'], correct:1 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Die Transformation der Arbeitswelt durch Homeoffice',
+    passageText:`Die schlagartige Zunahme von Telearbeit hat die Unternehmenskultur nachhaltig verändert. <strong>[1] Der flächendeckende Übergang zu hybriden Arbeitsmodellen hat bewiesen, dass Produktivität nicht an ständige Präsenz im Büro gebunden ist.</strong> Dennoch birgt die Entgrenzung von Arbeit und Privatleben erhebliche Risiken. <strong>[2] Beschäftigte berichten signifikant häufiger über Schwierigkeiten, nach Feierabend gedanklich von beruflichen Aufgaben abzuschalten.</strong> Führungskräfte stehen vor der Herausforderung, den Zusammenhalt in virtuellen Teams aufrechtzuerhalten. <strong>[3] Das Fehlen informeller Flurgespräche schwächt auf Dauer das Zugehörigkeitsgefühl und die Innovationskraft.</strong> Es braucht daher klare betriebliche Vereinbarungen zur Erreichbarkeit. <strong>[4] Nur durch verbindliche Regeln lässt sich verhindern, dass der digitale Fortschritt zu einer psychischen Überlastung führt.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte fordert regulierende Schutzmaßnahmen.',
+      'Der Experte hebt eine Wiederlegung traditioneller Annahmen hervor.',
+      'Der Experte beschreibt ein psychologisches Entgrenzungsproblem.',
+      'Der Experte verweist auf den Verlust sozialer Dynamiken.',
+      'Der Experte empfiehlt die komplette Abschaffung von Büros.'
+    ],
+    correct:[1, 2, 3, 0]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Konzept A (Homeoffice), Konzept B (Präsenzarbeit), zu beiden oder zu keinem passt.',
+    title:'Aufgabe 5: Vergleich von Arbeitsplatzkonzepten',
+    passage:'In der Debatte um die Ausgestaltung moderner Arbeitswelten stehen sich zwei Arbeitsplatzmodelle gegenüber. Modell A (Remote/Homeoffice) setzt auf maximale zeitliche und ortsbezogene Flexibilität. Mitarbeiter sparen Pendelzeiten und können ihre Arbeit autonom organisieren. Kritiker betonen jedoch das Risiko sozialer Isolation und die Erschwerung von Einarbeitungsprozessen. Modell B (Klassische Präsenzarbeit) fördert den direkten, spontanen Austausch im Kollegium und erleichtert die Abgrenzung von Arbeit und Freizeit durch eine physische Trennung. Dafür nehmen Beschäftigte tägliche Anfahrtswege und weniger flexible Tagesabläufe in Kauf. Beide Modelle streben eine hohe Arbeitsqualität an.',
+    columns:['Modell A (Remote)','Modell B (Präsenz)','beide','passt nicht'],
+    items:[
+      {text:'Ermöglicht eine klare räumliche Trennung zwischen Berufs- und Privatleben.', correct:1},
+      {text:'Fördert den spontanen, ungeplanten Wissensaustausch im Team.', correct:1},
+      {text:'Spart den täglichen Zeitaufwand für den Arbeitsweg ein.', correct:0},
+      {text:'Erhöht das Risiko von Isolation und erschwert die Einarbeitung neuer Mitarbeiter.', correct:0},
+      {text:'Verlangt die ständige Überwachung der Mitarbeiter per Video.', correct:3},
+      {text:'Strebt die Sicherung einer hohen Arbeitsqualität an.', correct:2},
+      {text:'Garantiert ein höheres Gehalt für alle Angestellten.', correct:3}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vor- und Nachteile von Smart-Grid-Technologien',
+    passage:'Intelligente Stromnetze (Smart Grids) gelten als Schlüssel zur Bewältigung der Energiewende. Ein wesentlicher Vorteil liegt in der Echtzeit-Überwachung des Netzzustands, die eine schnelle Reaktion auf Lastspitzen und eine optimale Einbindung dezentraler erneuerbarer Energien ermöglicht. Zudem erlauben sie es Verbrauchern, ihren Energieverbrauch durch dynamische Tarife kostenoptimiert zu steuern. Demgegenüber stehen jedoch signifikante Nachteile: Die Umstellung erfordert immense Anfangsinvestitionen in digitale Zähler und Steuerungsgeräte. Zudem erhöht die vernetzte Infrastruktur die Verwundbarkeit gegenüber Cyberangriffen und wirft komplexe Datenschutzfragen bezüglich der Nutzerdaten auf.',
+    aussagen:[
+      { key:'a', text:'[a] Erhöhte Anfälligkeit für Cyberangriffe und Datenmissbrauch' },
+      { key:'b', text:'[b] Optimale Integration dezentraler erneuerbarer Energiequellen' },
+      { key:'c', text:'[c] Hohe initiale Investitionskosten für die digitale Infrastruktur' },
+      { key:'d', text:'[d] Völlige Befreiung der Verbraucher von jeglichen Stromkosten' },
+      { key:'e', text:'[e] Möglichkeiten zur verbrauchsabhängigen Kostensteuerung' },
+      { key:'f', text:'[f] Garantiert störungsfreier Betrieb ohne jeglichen Wartungsaufwand' }
+    ],
+    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Entwicklung der Treibhausgasemissionen',
+    passage:'Die Gesamtemissionen von Treibhausgasen in Deutschland sind von 1990 bis 2022 um etwa 40 Prozent gesunken. Während der Energiesektor durch den Ausbau erneuerbarer Energien erhebliche Einsparungen erzielte, verfehlte der Verkehrssektor seine Sektorziele wiederholt. Der Einsatz fossiler Brennstoffe im Transportbereich bleibt weiterhin auf hohem Niveau.',
+    graphicData:[{year:'1990',val:100},{year:'2000',val:82},{year:'2010',val:74},{year:'2022',val:60}],
+    graphicCaption:'Grafik: Relative Entwicklung der Treibhausgasemissionen in Deutschland (1990 = 100%)',
+    sentences:[
+      {text:'Die Emissionen sind im Vergleich zu 1990 um rund 40 Prozent gesunken.', wrong:false},
+      {text:'Der Verkehrssektor hat seine Reduktionsziele stets problemlos erreicht.', wrong:true},
+      {text:'Der Energiesektor konnte erhebliche Einsparungen verzeichnen.', wrong:false},
+      {text:'Laut Grafik lagen die Emissionen im Jahr 2000 höher als 1990.', wrong:true},
+      {text:'Der Einsatz fossiler Brennstoffe im Transportbereich ist weiterhin hoch.', wrong:false},
+      {text:'Im Jahr 2022 lagen die Emissionen bei 60 Prozent des Werts von 1990.', wrong:false},
+      {text:'Der Verkehrssektor ist der einzige Bereich mit ständigen Nullemissionen.', wrong:true}
+    ]
+  }
+];
+
+/* MODELLTEST 4 */
+const MT4 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Spracherwerb und neuronale Plastizität',
+    segments:[
+      'Die Fähigkeit des menschlichen Gehirns, in den ersten Lebensjahren mühelos eine oder mehrere Sprachen zu erwerben, fasziniert die Sprachwissenschaft seit Jahrzehnten. Diese frühe Lernphase zeichnet sich durch eine besonders hohe neuronale ',
+      ' aus, die es Kleinkindern ermöglicht, lautliche Nuancen präzise zu verarbeiten. Im Laufe der Pubertät nimmt diese Fähigkeit jedoch ab, da sich spezialisierte Hirnstrukturen ',
+      '. Zwar können auch Erwachsene eine Zweitsprache bis zu einem hohen Niveau erlernen, doch erfordert dies meist mehr kognitive ',
+      ' und führt selten zu einer völlig akzentfreien Aussprache. Neurowissenschaftler betonen daher die Bedeutung einer frühkindlichen ',
+      ', um das volle sprachliche Potenzial auszuschöpfen.'
+    ],
+    gaps:[
+      {options:['Plastizität','Trägheit','Rigidität','Blockade'], correct:0},
+      {options:['verfestigen','auflösen','zurückbilden','Verschlechtern'], correct:0},
+      {options:['Anstrengung','Passivität','Gleichgültigkeit','Ruhe'], correct:0},
+      {options:['Förderung','Vernachlässigung','Isolierung','Hemmung'], correct:0},
+      {options:['auszuschöpfen','zu unterdrücken','zu begrenzen','zu ignorieren'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Der Wandel des wissenschaftlichen Publizierens',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Über Jahrhunderte hinweg wurden wissenschaftliche Erkenntnisse fast ausschließlich in gedruckten Fachzeitschriften veröffentlicht.',
+      'Zugang zu diesen Aufsätzen hatten meist nur Universitäten, die teure Abonnement-Gebühren an Großverlage zahlten.',
+      'Mit dem Siegeszug des Internets entstand Ende des 20. Jahrhunderts die Open-Access-Bewegung als Gegenentwurf.',
+      'Ziel dieser Initiative ist es, wissenschaftliche Publikationen für jedermann kostenfrei und digital zugänglich zu machen.',
+      'Heute verlangen viele öffentliche Forschungsförderer explizit die Veröffentlichung in Open-Access-Organen.'
+    ],
+    shuffledStart:[2,0,4,1,3]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Epigenetik – Die Brücke zwischen Umwelt und Genen',
+    passage:[
+      '(1) Die klassische Genetik ging lange Zeit davon aus, dass der DNA-Code das unveränderliche Bauprogramm eines Organismus darstellt. Die Disziplin der Epigenetik zeigt jedoch, dass Umweltfaktoren wie Ernährung, Stress oder Schadstoffe chemische Markierungen an den Genen anbringen können, ohne deren Grundsequenz zu verändern.',
+      '(2) Diese epigenetischen Modifikationen fungieren als Molekularschalter, die Genaktivitäten an- oder ausschalten. Besonders bemerkenswert ist, dass manche dieser Anpassungen über Generationen hinweg vererbt werden können, was das traditionelle Verständnis der Vererbungslehre grundlegend erweitert.',
+      '(3) In der Medizin eröffnet die Epigenetik neue Wege zur Früherkennung und Behandlung schwerer Krankheiten wie Krebs, da epigenetische Veränderungen im Gegensatz zu Gendefekten potenziell reversibel sind.'
+    ],
+    questions:[
+      { q:'Was zeigt die Epigenetik laut Absatz 1?', options:['Dass der DNA-Code durch Ernährung komplett gelöscht wird.','Dass Umweltfaktoren Genaktivitäten ohne Sequenzänderung beeinflussen.','Dass Gene keinen Einfluss auf die Entwicklung des Körpers haben.','Dass Schadstoffe die biologische Rasse verändern.'], correct:1 },
+      { q:'Was ist das Besondere an epigenetischen Modifikationen laut Absatz 2?', options:['Sie verschwinden nach wenigen Sekunden wieder.','Sie können unter Umständen an nachfolgende Generationen weitergegeben werden.','Sie verhindern jegliche Vererbung von Eigenschaften.','Sie zerstören die molekulare Struktur der DNA.'], correct:1 },
+      { q:'Warum ist die Epigenetik für die Medizin so attraktiv (Absatz 3)?', options:['Weil epigenetische Modifikationen wieder rückgängig gemacht werden können.','Weil sie chirurgische Eingriffe völlig überflüssig macht.','Weil sie Gendefekte innerhalb von Minuten heilt.','Weil sie keine wissenschaftliche Forschung erfordert.'], correct:0 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Die Zukunft des universitären Studium',
+    passageText:`Die Digitalisierung der Hochschullehre hat durch den Schub der letzten Jahre eine neue Stufe erreicht. <strong>[1] Digitale Lehrformate bieten den Studierenden eine noch nie dagewesene zeitliche und räumliche Flexibilität beim Wissenserwerb.</strong> Doch reine Online-Lehre stößt schnell an Grenzen. <strong>[2] Das akademische Studium lebt vom unmittelbaren Diskurs, dem gemeinsamen Experimentieren und dem persönlichen Austausch auf dem Campus.</strong> Eine reine Virtualisierung würde den Kern der akademischen Bildung entkerten. <strong>[3] Es besteht die Gefahr, dass soziale Ungleichheiten durch rein digitale Lernumgebungen eher verstärkt als abgebaut werden.</strong> Hochschulen müssen daher zukunftsfähige Hybridmodelle entwickeln. <strong>[4] Nur eine durchdachte Kombination aus digitalen Werkzeugen und Präsenzlehre sichert eine hohe Qualität der Ausbildung.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte empfiehlt eine ausgewogene Synthese verschiedener Lernwelten.',
+      'Der Experte hebt Vorteile ortsunabhängigen Lernens hervor.',
+      'Der Experte unterstreicht die unersetzbare Bedeutung des Campuslebens.',
+      'Der Experte äußert Bedenken bezüglich der Chancengerechtigkeit.',
+      'Der Experte fordert die sofortige Schließung aller Universitätsgebäude.'
+    ],
+    correct:[1, 2, 3, 0]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Methode A (Klassische KI), Methode B (Deep Learning), zu beiden oder zu keiner passt.',
+    title:'Aufgabe 5: Vergleich von Ansätzen der Künstlichen Intelligenz',
+    passage:'In der Informatik unterscheidet man zwei grundlegende Ansätze zur Entwicklung intelligenter Systeme. Methode A (Symbolische KI) basiert auf explizit einprogrammierten Regeln und logischen Verknüpfungen. Sie ist hochgradig transparent und nachvollziehbar, stößt jedoch bei unstrukturierten Daten wie Bildern oder Sprache schnell an Grenzen. Methode B (Deep Learning) nutzt künstliche neuronale Netze, die selbstständig aus riesigen Datenmengen lernen. Sie erzielt herausragende Ergebnisse bei der Mustererkennung, leidet jedoch unter dem Problem der fehlenden Erklärbarkeit ("Black-Box-Problem"). Beide Methoden zielen darauf ab, kognitive Aufgaben automatisiert zu lösen.',
+    columns:['Methode A (Symbolisch)','Methode B (Deep Learning)','beide','passt nicht'],
+    items:[
+      {text:'Basiert auf manuell programmierten logischen Regelwerken.', correct:0},
+      {text:'Lent Muster eigenständig aus großen Datenmengen ohne feste Regeln.', correct:1},
+      {text:'Zeigt herausragende Leistung bei der automatischen Bild- und Spracherkennung.', correct:1},
+      {text:'Ist im Entscheidungsprozess transparent und Schritt für Schritt nachvollziehbar.', correct:0},
+      {text:'Leidet unter dem sogenannten Black-Box-Problem der fehlenden Transparenz.', correct:1},
+      {text:'Zielt auf die automatisierte Bewältigung kognitiver Aufgaben ab.', correct:2},
+      {text:'Wird ausschließlich in biologischen Gehirnen angewendet.', correct:3}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vor- und Nachteile von KI in der medizinischen Diagnostik',
+    passage:'Der Einsatz künstlicher Intelligenz (KI) in der medizinischen Bildgebung verspricht eine Revolution bei der Früherkennung von Erkrankungen. Ein Hauptvorteil besteht in der extrem hohen Geschwindigkeit und Präzision, mit der Algorithmen Aufnahmen wie MRTs oder Röntgenbilder analysieren und selbst kleinste Gewebeveränderungen erkennen können. Zudem entlastet dies Ärzte von Routineaufgaben. Demgegenüber stehen gravierende Nachteile: Bei fehlerhaften Trainingsdaten drohen systematische Fehlentscheidungen der Systeme. Darüber hinaus sind haftungsrechtliche Fragen bei medizinischen Fehldiagnosen durch autonome Software bis heute rechtlich unzureichend geklärt.',
+    aussagen:[
+      { key:'a', text:'[a] Ungeklärte juristische Haftung bei fälschlicherweise gestellten Diagnosen' },
+      { key:'b', text:'[b] Extrem schnelle und präzise Auswertung medizinischer Bilddaten' },
+      { key:'c', text:'[c] Risiko von Fehldiagnosen durch fehlerhafte oder verzerrte Trainingsdaten' },
+      { key:'d', text:'[d] Vollständige Abschaffung aller menschlichen Ärztinnen und Ärzte' },
+      { key:'e', text:'[e] Entlastung des Fachpersonals bei zeitaufwendigen Routineanalysen' },
+      { key:'f', text:'[f] Garantiert 100-prozentige Heilung aller Krebserkrankungen' }
+    ],
+    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Entwicklung der Studierendenzahlen in Deutschland',
+    passage:'Die Zahl der Studierenden an deutschen Hochschulen ist von 2005 bis 2020 kontinuierlich angestiegen und erreichte einen Höchststand von knapp 3 Millionen. Seit 2021 ist jedoch erstmals wieder ein leichtes Abschmelzen der Erstsemesterzahlen zu beobachten, was Experten primär auf demografische Faktoren zurückführen.',
+    graphicData:[{year:'2005',val:2.0},{year:'2010',val:2.2},{year:'2015',val:2.7},{year:'2020',val:2.9},{year:'2022',val:2.8}],
+    graphicCaption:'Grafik: Anzahl der Studierenden in Deutschland (in Millionen)',
+    sentences:[
+      {text:'Die Studierendenzahl stieg zwischen 2005 und 2020 stetig an.', wrong:false},
+      {text:'Seit 2021 geht die Zahl der Erstsemester leicht zurück.', wrong:false},
+      {text:'Im Jahr 2005 gab es laut Grafik bereits 3,5 Millionen Studierende.', wrong:true},
+      {text:'Demografische Faktoren gelten als Hauptgrund für den aktuellen Rückgang.', wrong:false},
+      {text:'Die Studierendenzahl hat sich von 2005 bis 2020 mehr als verdreifacht.', wrong:true},
+      {text:'Im Jahr 2020 wurde ein Spitzenwert von knapp 3 Millionen erreicht.', wrong:false},
+      {text:'An deutschen Hochschulen studieren heute überhaupt keine Menschen mehr.', wrong:true}
+    ]
+  }
+];
+
 const TESTS = [
   {id: 1, title: 'Modelltest 1 (Klett / Humanmedizin)', teile: MT1},
-  {id: 2, title: 'Modelltest 2 (Technik & Psychologie)', teile: MT2}
+  {id: 2, title: 'Modelltest 2 (Technik & Psychologie)', teile: MT2},
+  {id: 3, title: 'Modelltest 3 (Klimawandel & Mobilität)', teile: MT3},
+  {id: 4, title: 'Modelltest 4 (Neurowissenschaften & KI)', teile: MT4}
 ];
 
 let currentTestIdx = 0;
