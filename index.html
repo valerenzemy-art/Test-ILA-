@@ -148,7 +148,6 @@ const TEMPLATE = [
 ];
 
 const MT1 = [
-  /* Aufgabe 1 */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Schlafmangel und kognitive Leistungsfähigkeit',
@@ -168,8 +167,6 @@ const MT1 = [
       {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
     ]
   },
-
-  /* Aufgabe 2 */
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Die Entdeckung des Penicillins',
@@ -183,8 +180,6 @@ const MT1 = [
     ],
     shuffledStart:[2,4,0,3,1]
   },
-
-  /* AUFGABE 3 (Niveau C1) */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
     title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
@@ -194,84 +189,54 @@ const MT1 = [
       '(3) Historisch gesehen ist die Faszination für das Phänomen keineswegs ein modernes Nebenprodukt der modernen Psychologie. Bereits in antiken philosophischen Abhandlungen sowie in indigenen und östlichen Traditionen spielte die Schulung des Traum-Bewusstseins eine zentrale Rolle. Diese kulturübergreifende Kontinuität verdeutlicht, dass das Streben nach Kontrolle über den eigenen Geist im Schlaf ein tief verankertes menschliches Anliegen darstellt.',
       '(4) In der therapeutischen Praxis eröffnet die Klartraumforschung vielversprechende Ansätze zur Linderung schwerer psychischer Leiden. Insbesondere Patienten mit posttraumatischen Belastungsstörungen (PTBS), die unter chronischen Alpträumen leiden, profitieren von verhaltenstherapeutischen Techniken des luziden Träumens. Durch das gezielte Einüben von Re-Skripting-Strategien lernen Betroffene, bedrohliche Traumszenarien umzugestalten und so emotionale Erleichterung zu erfahren.',
       '(5) Ein weiterer Aspekt betrifft die plastischen Veränderungen im Gehirn durch sensomotorisches Training im Schlaflabor. Studien zeigen, dass das gedankliche Durchspielen komplexer Sportarten oder Bewegungsabläufe im Klartraum dieselben motorischen Areale im Gehirn stimuliert wie die reale Ausführung. Folglich lassen sich solche Traumerfahrungen messbar auf die motorische Leistungsfähigkeit in der Wachrealität übertragen.',
-      '(6) Trotz dieser Potenziale mahnt die akademische Forschung hinsichtlich der unkritischen Verbreitung von Techniken zur künstlichen Trauminduktion zur Vorsicht. Die unkontrollierte Anwendung von elektrischer Hirnstimulation oder pharmakologischen Präparaten zur Herbeiführung von Klarträumen kann die Schlafarchitektur nachhaltig stören, psychische Dissoziationen begünstigen und schwere Schlafstörungen nach sich ziehen.',
+      '(6) Trotz dieser Potenziale mahnt die akademische Forschung hinsichtlich der unkritischen Verbreitung von Techniken zur künstlichen Trauminduktion zur Vorsicht. Die unkontrollierte Anwendung von elektrischer Hirnstimulation oder pharmakologischen Präparaten zur Herbeiführung von Klarträumern kann die Schlafarchitektur nachhaltig stören, psychische Dissoziationen begünstigen und schwere Schlafstörungen nach sich ziehen.',
       '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
     ],
     questions:[
-      { 
-        q:'In Absatz 1 wird gesagt, dass ...', 
-        options:[
-          'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
-          'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
-          'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
-          'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', 
-        options:[
-          'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
-          'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
-          'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
-          'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', 
-        options:[
-          'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
-          'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
-          'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
-          'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
-        ], 
-        correct:2 
-      },
-      { 
-        q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', 
-        options:[
-          'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
-          'Patienten mit chronischen Schlafstörungen vollständig heilen.',
-          'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
-          'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
-        ], 
-        correct:2 
-      },
-      { 
-        q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', 
-        options:[
-          'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
-          'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
-          'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
-          'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', 
-        options:[
-          'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
-          'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
-          'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
-          'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
-        ], 
-        correct:3 
-      },
-      { 
-        q:'Hauptanliegen des gesamten Textes ist es, ...', 
-        options:[
-          'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
-          'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
-          'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
-          'vor den Gefahren des normalen REM-Schlafs zu warnen.'
-        ], 
-        correct:1 
-      }
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
+        'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
+        'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
+        'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
+      ], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:[
+        'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
+        'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
+        'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
+        'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
+        'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
+        'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
+        'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
+        'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
+      ], correct:2 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:[
+        'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
+        'Patienten mit chronischen Schlafstörungen vollständig heilen.',
+        'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
+        'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
+      ], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
+        'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
+        'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
+        'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
+        'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
+      ], correct:1 },
+      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:[
+        'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
+        'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
+        'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
+        'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
+      ], correct:3 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
+        'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
+        'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
+        'vor den Gefahren des normalen REM-Schlafs zu warnen.'
+      ], correct:1 }
     ]
   },
-
-  /* AUFGABE 4 (Niveau C1) */
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
     title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
@@ -289,8 +254,6 @@ const MT1 = [
     ],
     correct:[4, 3, 5, 2]
   },
-
-  /* AUFGABE 5 */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
     title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
@@ -306,8 +269,6 @@ const MT1 = [
       {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
     ]
   },
-
-  /* AUFGABE 6 */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
@@ -324,8 +285,6 @@ const MT1 = [
     ],
     correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
   },
-
-  /* Aufgabe 7 */
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Wachstum des E-Commerce',
@@ -345,9 +304,7 @@ const MT1 = [
   }
 ];
 
-/* Modelltest 2 (MT2) */
 const MT2 = [
-  /* Aufgabe 1: Mikrobiologie & Hitzetoleranz */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
@@ -367,8 +324,6 @@ const MT2 = [
       {options:['bildet','entlädt','formt','trennt'], correct:0}
     ]
   },
-
-  /* Aufgabe 2: Quantenphysik & Schrödingers Katze */
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Aufgabe 2: Quantenphysik & Schrödingers Katze',
@@ -382,8 +337,6 @@ const MT2 = [
     ],
     shuffledStart:[0,1,2,3,4]
   },
-
-  /* Aufgabe 3: Paläontologie & Evolutionsbiologie */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7.',
     title:'Aufgabe 3: Neue Unterart von Eiszeit-Leoparden in Thüringen entdeckt',
@@ -440,8 +393,6 @@ const MT2 = [
       ], correct:1 }
     ]
   },
-
-  /* Aufgabe 4: Kommentar eines Experten zu Rohstoffen (Lithium) */
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
@@ -459,8 +410,6 @@ const MT2 = [
     ],
     correct:[4, 3, 5, 2]
   },
-
-  /* Aufgabe 5: Zusatzleistungen & Kindergesundheit */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
     title:'Aufgabe 5: Wie finanzielle Zusatzleistungen die Kindergesundheit beeinflussen',
@@ -476,8 +425,6 @@ const MT2 = [
       {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1}
     ]
   },
-
-  /* Aufgabe 6: KI und Sprache */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Wie künstliche Intelligenz unsere Sprache verarmt',
@@ -494,8 +441,6 @@ const MT2 = [
     ],
     correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'h' }
   },
-
-  /* Aufgabe 7: Musik und das Gehirn */
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Aufgabe 7: Der Rhythmus des Lernens: Wie Musik das Gehirn beeinflusst',
@@ -515,9 +460,7 @@ const MT2 = [
   }
 ];
 
-/* NEU: Modelltest 3 (MT3) exakt strukturiert wie MT1 mit Ihren 7 neuen C1-Übungen */
 const MT3 = [
-  /* Aufgabe 1 */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1–5, welches Wort passt.',
     title:'Warum werden Städte nachts immer wärmer?',
@@ -537,12 +480,10 @@ const MT3 = [
       {options:['nicht','weniger','kaum','selten'], correct:0}
     ]
   },
-
-  /* Aufgabe 2 */
   { ...TEMPLATE[1],
     instructions:'Lesen Sie die Textabschnitte rechts. Bringen Sie die 5 Textabschnitte in die richtige Reihenfolge.',
     title:'Forscher erzeugen neuartiges „Super-Eis“',
-    correctOrder:[0,1,3,2,4], // Entspricht: [1] -> [2] -> [4] -> [3] -> [5]
+    correctOrder:[0,1,3,2,4],
     items:[
       'Obwohl erste theoretische Modelle zu dieser extremen Phase bereits in den späten 1990er Jahren formuliert wurden, scheiterte die experimentelle Verifikation jahrzehntelang an den astronomischen Druckverhältnissen, die für eine Stabilisierung im Labor notwendig schienen.',
       'Erst als ein interdisziplinäres Team im September 2026 mithilfe von neuartigen Diamantstempelzellen und präzisen Laserschock-Techniken einen Quantensprung erzielte, wandelte sich die hypothetische Materie in eine greifbare Realität.',
@@ -552,8 +493,6 @@ const MT3 = [
     ],
     shuffledStart:[4,2,0,1,3]
   },
-
-  /* Aufgabe 3 */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1-7. Entscheiden Sie, welche Lösung passt.',
     title:'Adaptive KI-Robotik und menschliche Motorik',
@@ -610,8 +549,6 @@ const MT3 = [
       ], correct:0 }
     ]
   },
-
-  /* Aufgabe 4 */
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Kommentar eines Experten zu Künstlicher Intelligenz und Arbeitsmarkt',
@@ -627,10 +564,8 @@ const MT3 = [
       'Der Experte verteidigt etwas.',
       'Der Experte widerspricht etwas.'
     ],
-    correct:[5, 3, 7, 2] // [1]->f(5), [2]->d(3), [3]->h(7), [4]->c(2)
+    correct:[5, 3, 7, 2]
   },
-
-  /* Aufgabe 5 */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Analytikern, zu Intuitionistikern oder zu beiden passt.',
     title:'Wie analytische und intuitive Köpfe ticken',
@@ -646,8 +581,6 @@ const MT3 = [
       {text:'Diese Personen meiden Führungspositionen in harten rationalen Disziplinen.', correct:3}
     ]
   },
-
-  /* Aufgabe 6 */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Flechten: Das komplexe Zusammenspiel der Symbiose',
@@ -664,8 +597,6 @@ const MT3 = [
     ],
     correctMap: { v1: 'c', v2: 'g', n3: 'a', n4: 'd' }
   },
-
-  /* Aufgabe 7 */
   { ...TEMPLATE[6],
     instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten. Es gibt genau drei inhaltlich falsche Sätze.',
     title:'Das Erdsystem an den Belastungsgrenzen',
@@ -686,11 +617,170 @@ const MT3 = [
   }
 ];
 
-/* MISE À JOUR DU TABLEAU DES TESTS (MT1, MT2 et MT3 inclus) */
+/* NEU: Modelltest 4 (MT4) vollständig hinzugefügt */
+const MT4 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Die Evolution der Biolumineszenz in den Tiefen der Ozeane',
+    segments:[
+      'Die Fähigkeit zahlreicher mariner Organismen, eigenes Licht zu erzeugen – die sogenannte Biolumineszenz –, stellt einen der faszinierendsten Anpassungsmechanismen an die extremen Bedingungen der Tiefsee dar. In absoluter Dunkelheit dient dieses biologische Leuchten vor allem der Kommunikation, der Abwehr von Fressfeinden oder dem Anlocken von Beute. Biochemisch basiert dieser Prozess auf einer enzymatisch katalysierten Oxidation, bei der das Substrat Luciferin durch das Enzym Luciferase umgewandelt wird. Forschern zufolge ',
+      ' sich dieser komplexe Mechanismus im Laufe der Erdgeschichte unabhängig voneinander in Dutzenden verschiedenen Tierstämmen entwickelt. Lange Zeit gab es unter Meeresbiologen eine intensive ',
+      ' darüber, ob diese evolutionäre Vielfalt eher auf einen urspünglichen, gemeinsamen Vorfahren oder auf konvergente Evolution zurückzuführen ist. Neuere phylogenetische Analysen konnten jedoch überzeugend ',
+      ', dass die konvergente Entstehung bei den meisten Taxa das wahrscheinlichere Szenario darstellt. Dies verdeutlicht, wie stark der Selektionsdruck in lichtlosen Meereszonen auf innovative Überlebensstrategien ',
+      '. Zukünftige Expeditionen mit autonom gesteuerten Unterwasserfahrzeugen sollen nun weitere unbekannte Spezies dokumentieren und helfen, die ökologischen Dynamiken dieser sensiblen Ökosysteme besser zu ',
+      '.'
+    ],
+    gaps:[
+      {options:['hat','scheint','vermutet','lässt'], correct:0},
+      {options:['Diskussion','Meldung','Mitteilung','Rede'], correct:0},
+      {options:['zeigen','verweisen','zurückweisen','hinweisen'], correct:0},
+      {options:['einwirkt','auswirkt','nachwirkt','vorwirkt'], correct:0},
+      {options:['begreifen','erfassen','verstehen','erkennen'], correct:2}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Die Entstehung von Mikroplastik in terrestrischen Böden',
+    correctOrder:[1,0,3,2,4],
+    items:[
+      'Durch mechanische Belastung, UV-Strahlung und mikrobiellen Abbau zerfallen diese Makroplastikreste im Laufe der Zeit in immer kleinere Fragmente, bis sie die definierte Mikroplastik-Grenze unterschreiten.',
+      'Lange Zeit konzentrierte sich die ökologische Forschung im Zusammenhang mit Plastikmüll fast ausschließlich auf die Weltmeere, während terrestrische Böden als vergleichsweise unbedeutend galten.',
+      'Diese winzigen Partikel reichern sich im Humus an, verändern dort physikalische Bodeneigenschaften wie das Wasserspeichervermögen und können von Regenwürmern oder Mikroorganismen aufgenommen werden.',
+      'Aktuelle bodenkundliche Studien zeigen jedoch, dass landwirtschaftlich genutzte Flächen – unter anderem durch Klärschlammdüngung und Mulchfolien – massiv mit makroskopischen Kunststoffabfällen belastet sind.',
+      'Ob diese synthetischen Fremdkörper langfristig über die Nahrungskette auch die Gesundheit von Pflanzen und Tieren nachhaltig schädigen, wird derzeit von toxikologischen Instituten weltweit intensiv untersucht.'
+    ],
+    shuffledStart:[4,2,0,3,1]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Die Psychologie des kollektiven Vergessens',
+    passage:[
+      '(1) Das Phänomen des kollektiven Gedächtnisses und dessen Gegenstück, das kollektive Vergessen, prägen die kulturelle Identität von Gesellschaften nachhaltig. Während historische Forschung meist darauf ausgerichtet ist, Ereignisse durch Dokumente und Artefakte im Bewusstsein zu halten, zeigt die Soziologie, dass Gesellschaften selektiv vorgehen. Nicht alles, was erinnert werden könnte, wird auch über Generationen hinweg tradiert. Vielmehr unterliegt das gesellschaftliche Erinnern einer ständigen Reinterpretation, die stark von gegenwärtigen Interessen, politischen Machtstrukturen und sozialen Bedürfnissen beeinflusst wird.',
+      '(2) Ein zentraler Mechanismus des Vergessens ist die institutionelle Verdrängung. Wenn schmerzhafte oder beschämende Kapitel der nationalen Geschichte im Widerspruch zum aktuellen Selbstbild einer Nation stehen, neigen kollektive Akteure dazu, diese Erzählungen schrittweise aus Lehrplänen, Denkmälern und Gedenkveranstaltungen zu entfernen. Dieser Prozess verläuft oft unbemerkt, führt jedoch langfristig zu einer tiefgreifenden Verzerrung des historischen Bewusstseins, was den kritischen Diskurs über historische Verantwortung erheblich erschwert.',
+      '(3) Historisch gesehen war der Umgang mit kollektivem Gedächtnis stark durch staatliche Lenkung und nationale Meistererzählungen geprägt. Im 19. und frühen 20. Jahrhundert diente die Geschichtsschreibung vor allem der Nationsbildung und der Erzeugung eines homogenen Wir-Gefühls, weshalb abweichende oder widersprüchliche Stimmen systematisch marginalisiert wurden. Erst mit dem Aufkommen postmoderner geschichtswissenschaftlicher Ansätze und der Etablierung einer pluralistischen Erinnerungskultur im späten 20. Jahrhundert wurde dieses starre Dogma grundlegend aufgebrochen.',
+      '(4) In der modernen Medienlandschaft vollzieht sich dieser Prozess unter völlig neuen Vorzeichen. Durch die Beschleunigung der Informationsströme und die digitale Flut an tagesaktuellen Nachrichten droht ein beschleunigtes Vergessen von Großereignissen, die noch vor wenigen Jahren als epochal galten. Soziologen sprechen in diesem Zusammenhang von einer Verkürzung der historischen Halbwertszeit: Ereignisse schrumpfen im digitalen Speicher zu ephemeren Datenpunkten, die kaum noch tiefere Spuren im kollektiven Bewusstsein hinterlassen.',
+      '(5) Dennoch gibt es gegenläufige Tendenzen, die durch digitale Graswurzelbewegungen und zivilgesellschaftliche Initiativen getragen werden. Mithilfe von Online-Archiven, Crowdsourcing-Projekten und virtuellen Gedenkorten versuchen Aktivisten, marginalisierte Geschichten und vergessene historische Opfer dem Vergessen zu entreißen. Diese dezentralen Initiativen demokratisieren den Zugang zur Vergangenheit, stehen jedoch gleichzeitig vor dem Problem der Verifizierung und der schieren Unüberschneidbarkeit der verfügbaren Datenmengen.',
+      '(6) Kritische Stimmen aus den Kulturwissenschaften warnen vor einer Inflation des Gedenkens. Wenn nahezu jedes historische Detail mit Gedenktagen, digitalen Hashtags oder symbolischen Akten bedacht wird, droht eine Übersättigung, die das eigentliche Erinnern trivialisiert und in eine oberflächliche Eventkultur mündet. Echtes historisches Verstehen erfordert jedoch Kontinuität, kritische Analyse und die Bereitschaft, sich mit unbequemen Wahrheiten auseinanderzusetzen, statt sich in einer ritualisierten Erinnerungsrhetorik zu erschöpfen.',
+      '(7) Zusammenfassend lässt sich festhalten, dass das kollektive Gedächtnis ein dynamisches, umkämpftes Terrain darstellt. Die Untersuchung seiner Mechanismen liefert wichtige Einblicke in die seelische Verfassung moderner Gesellschaften und zeigt auf, wie fragile die Balance zwischen Erinnern und Vergessen in einer sich rasant verändernden Welt ist.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird dargelegt, dass das kollektive Gedächtnis ...', options:[
+        'stets alle historischen Ereignisse unbestechlich und lückenlos bewahrt.',
+        'starken Einflüssen der jeweiligen Gegenwart und aktuellen Machtstrukturen unterliegt.',
+        'ausschließlich durch schriftliche Dokumente und Denkmäler definiert wird.',
+        'von den Mitgliedern einer Gesellschaft völlig unabhängig vom Zeitgeist gesteuert wird.'
+      ], correct:1 },
+      { q:'Was bewirkt laut Absatz 2 die institutionelle Verdrängung?', options:[
+        'Eine objektive und fehlerfreie Aufarbeitung aller historischen Krisen.',
+        'Die dauerhafte Stärkung des kritischen gesellschaftlichen Diskurses.',
+        'Eine schrittweise Verzerrung des historischen Bewusstseins durch das Entfernen unpassender Kapitel.',
+        'Die unmittelbare Errichtung neuer Denkmäler für vergessene Opfer.'
+      ], correct:2 },
+      { q:'Welche Überschrift passt am besten zu Absatz 3?', options:[
+        'Die staatliche Lenkung der Geschichtsschreibung im Wandel der Epochen',
+        'Warum das 19. Jahrhundert völlig frei von nationalen Mythen war',
+        'Die Entstehung der modernen digitalen Medien im späten 20. Jahrhundert',
+        'Der dauerhafte Erfolg starrer nationaler Meistererzählungen bis in die Gegenwart'
+      ], correct:0 },
+      { q:'In Absatz 4 wird über die digitale Medienlandschaft ausgesagt, dass ...', options:[
+        'sie die historische Halbwertszeit von Ereignissen durch digitale Speicherung massiv verlängert.',
+        'sie dafür sorgt, dass epochale Ereignisse niemals in Vergessenheit geraten.',
+        'sie durch die Informationsflut zu einer Verkürzung der historischen Halbwertszeit führt.',
+        'sie den Menschen hilft, historische Zusammenhänge tiefgreifender zu analysieren.'
+      ], correct:2 },
+      { q:'Welche Rolle spielen laut Absatz 5 zivilgesellschaftliche Initiativen?', options:[
+        'Sie verschärfen die staatliche Zensur historischer Archive.',
+        'Sie demokratisieren den Zugang zur Vergangenheit durch Online-Projekte und Archive.',
+        'Sie sorgen für eine perfekte Verifizierung und Vereinheitlichung aller historischen Daten.',
+        'Sie verhindern vollständig, dass digitale Daten unüberschaubar werden.'
+      ], correct:1 },
+      { q:'Welche Sorge äußern Kulturwissenschaftler laut Absatz 6?', options:[
+        'Dass zu wenig an historische Ereignisse erinnert wird.',
+        'Dass eine Inflation des Gedenkens zu einer oberflächlichen Eventkultur führt.',
+        'Dass digitale Hashtags die wissenschaftliche Geschichtsschreibung komplett ersetzen.',
+        'Dass historische Wahrheiten für immer im Verborgenen bleiben.'
+      ], correct:1 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'eine Anleitung zur perfekten Gestaltung von Gedenkstätten zu geben.',
+        'die Mechanismen, Dynamiken und Konflikte des kollektiven Erinnerns und Vergessens zu beleuchten.',
+        'zu beweisen, dass Vergessen für eine moderne Gesellschaft stets schädlich ist.',
+        'die digitale Medienlandschaft als einzige Ursache für Geschichtsverlust darzustellen.'
+      ], correct:1 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar zur Zukunft der urbanen Mobilität',
+    passageText:`Die feste Überzeugung, dass das private Auto in unseren Städten langfristig völlig obsolet wird und durch vollautomatisierte Schwarmtaxis komplett ersetzt werden kann, gilt in verkehrspolitischen Debatten mancherorts als unumstößliches Dogma. <strong>[1] Ob diese optimistische Verkehrswende-Hypothese jedoch realitätsnah ist, muss stark bezweifelt werden.</strong> Zwar schreitet die Entwicklung autonomer Fahrzeugflotten rasch voran. <strong>[2] Man muss allerdings anerkennen, dass die rechtlichen und infrastrukturellen Hürden für den Mischverkehr in historischen Altstädten gigantisch sind.</strong> Der urbane Raum ist begrenzt. Womöglich werden individuelle Mobilitätsbedürfnisse auch in Zukunft hybride Lösungen erfordern, bei denen der öffentliche Nahverkehr mit flexiblen Individualangeboten verschmilzt. Die Vision der autolosen Smart City könnte sich somit als voreiliger Schnellschuss erweisen. <strong>[3] Dass sich dieser radikale Ansatz dennoch so großer Beliebtheit erfreut, liegt vor allem daran, dass er perfekt in das moderne Sehnsuchtsbild einer emissionsfreien, lärmfreien Retortenstadt passt.</strong> In einer von Digitalisierung geprägten Euphorie werden physikalische Kapazitätsgrenzen des Straßenraums oft ausgeblendet. <strong>[4] Dank moderner Verkehrssteuerung und intelligentem Flächenmanagement werden wir jedoch hoffentlich in der Lage sein, den städtischen Raum gerechter und effizienter aufzuteilen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt ein soziologisches Wunschdenken.',
+      'Der Experte hofft auf eine gerechtere Flächenverteilung.',
+      'Der Experte prognostiziert eine technische Revolution.',
+      'Der Experte räumt eine aktuelle Hürde ein.',
+      'Der Experte stellt eine populäre Annahme in Frage.',
+      'Der Experte beschreibt die historischen Ursprünge der Autostadt.',
+      'Der Experte verteidigt die uneingeschränkte Autonutzung.',
+      'Der Experte widerspricht den Gesetzen der Physik.'
+    ],
+    correct:[4, 3, 0, 1]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
+    title:'Aufgabe 5: Das Konsumverhalten von Millennials und Generation Z',
+    passage:'Untersuchungen zum Kaufverhalten jüngerer Generationen – insbesondere der Millennials und der Generation Z – stehen im Fokus moderner marktwirtschaftlicher Analysen. Eine aktuelle europaweite Studie verglich das Konsumverhalten dieser Gruppen anhand von fünf Kernindikatoren mit dem traditioneller Käuferschichten: Markenloyalität, Nachhaltigkeitsbewusstsein, Relevanz von Online-Bewertungen, Preis-Leistungs-Verhältnis sowie Impulskaufneigung. Probanden der jüngeren Kohorten erwiesen sich in den Punkten ökologische Transparenz und digitale Recherche als wesentlich anspruchsvoller – sie gaben an, vor jedem Kauf gezielt nach Zertifikaten zu suchen, Rezensionen zu prüfen und Marken bei ethischen Verfehlungen sofort zu boykottieren. Ältere Verbrauchergruppen erzielten dagegen höhere Werte bei klassischer Markenloyalität und zeigten sich weniger geneigt, etablierte Anbieter zugunsten unbekannter Start-ups zu verlassen. Sie vertrauen eher auf langjährige Gewohnheiten und persönliche Empfehlungen aus ihrem unmittelbaren sozialen Umfeld. Hinsichtlich der generellen Zahlungsbereitschaft für umweltfreundliche Produkte zeigten sich jedoch kaum statistisch signifikante Unterschiede zwischen den Altersgruppen, sofern die finanzielle Belastung einen bestimmten Rahmen nicht überschritt.',
+    columns:['Jüngere Generationen (Millennials/Gen Z)','Ältere Verbrauchergruppen','beide','passt nicht'],
+    items:[
+      {text:'Diese Gruppe wechselt Marken bei ethischen Verfehlungen sofort.', correct:0},
+      {text:'Diese Personen zeigen eine ausgeprägte Treue gegenüber etablierten Anbietern.', correct:1},
+      {text:'Diese Verbraucher sind bereit, für zertifizierte Bio-Produkte mehr zu bezahlen.', correct:2},
+      {text:'Diese Käuferschicht verlässt sich primär auf persönliche Empfehlungen aus dem Bekanntenkreis.', correct:1},
+      {text:'Diese Personen boykottieren Unternehmen aktiv wegen mangelnder Transparenz.', correct:0},
+      {text:'Diese Gruppe kauft ausschließlich im stationären Handel vor Ort ein.', correct:3},
+      {text:'Diese Verbraucher prüfen vor dem Erwerb intensiv Online-Bewertungen.', correct:0}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vertikaler Landbau (Vertical Farming)',
+    passage:'Der urbane oder vertikale Landbau gilt als zukunftsweisender Ansatz, um die Nahrungsmittelversorgung in stark verdichteten Ballungsräumen sicherzustellen. Durch den anbaumäßig gestapelten Anbau in geschlossenen Gebäuden unter kontrollierten Licht- und Klimabedingungen lassen sich Erträge pro Quadratmeter massiv steigern. Ein weiterer großer Vorzug ist der extrem sparsame Umgang mit Wasser, da moderne Hydrokultursysteme den Großteil der Flüssigkeit im geschlossenen Kreislauf recyceln, wodurch der Wasserverbrauch im Vergleich zur Freilandwirtschaft um bis zu 95 Prozent sinkt. Zudem entfallen lange Transportwege, da die Produktion direkt in den Konsumzentren stattfindet. Dennoch ist das Konzept mit gravierenden Nachteilen verbunden: Der energetische Aufwand für künstliche LED-Beleuchtung und hochkomplexe Klimatisierung ist enorm und treibt die Betriebskosten in die Höhe. Darüber hinaus ist das Spektrum der sinnvoll anbaubaren Kulturpflanzen derzeit noch stark auf schnell wachsende Blattgemüse- und Kräuterarten beschränkt, während der großflächige Anbau von Grundnahrungsmitteln wie Getreide oder Kartoffeln wirtschaftlich völlig unrentabel bleibt.',
+    aussagen:[
+      { key:'a', text:'[a] Drastische Einsparung von wertvollem Wasser' },
+      { key:'b', text:'[b] Geringer Energiebedarf dank natürlicher Sonneneinstrahlung' },
+      { key:'c', text:'[c] Lokale Produktion und dadurch entfallende Transportwege' },
+      { key:'d', text:'[d] Wirtschaftlich rentabler Anbau von Getreide und Kartoffeln' },
+      { key:'e', text:'[e] Enorme Stromkosten durch künstliche Beleuchtung' },
+      { key:'f', text:'[f] Vollständiger Verzicht auf jegliche Pflanzennährstoffe' },
+      { key:'g', text:'[g] Stark eingeschränkte Pflanzenauswahl im Vergleich zum Freiland' },
+      { key:'h', text:'[h] Garantierte Senkung der Lebensmittelpreise für Endverbraucher' }
+    ],
+    correctMap: { v1: 'a', v2: 'c', n3: 'e', n4: 'g' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Die Renaissance der Kernfusion',
+    passage:'Die Kernfusion, bei der atomare Leichtkerne unter extremen Temperaturen verschmolzen werden, gilt seit Jahrzehnten als der heilige Gral der Energietechnik. Im Gegensatz zur Kernspaltung entsteht bei diesem Prozess kein langlebiger radioaktiver Abfall, und es besteht keine Gefahr einer unkontrollierten Kettenreaktion. Jüngste experimentelle Durchbrüche an internationalen Forschungseinrichtungen haben gezeigt, dass es erstmals gelungen ist, in einem kontrollierten Plasmareaktor kurzzeitig mehr Fusionsenergie freizusetzen, als für die Aufheizung des Plasmas aufgewendet werden musste – ein historischer Meilenstein auf dem Weg zur Netto-Energiegewinnung. Dennoch warnen Physiker vor übertriebenem Optimismus: Bis kommerzielle Fusionskraftwerke stablien Strom ins Netz einspeisen, werden voraussichtlich noch mehrere Jahrzehnte vergehen, da gigantische materialwissenschaftliche und thermische Herausforderungen ungelöst sind.',
+    graphicData:[{year:'2010',val:10},{year:'2015',val:25},{year:'2020',val:50},{year:'2023',val:100}],
+    graphicCaption:'Grafik: Entwicklung der Netto-Energiegewinnung bei Fusionsexperimenten (symbolisch)',
+    sentences:[
+      {text:'Bei der Kernfusion werden Atomkerne verschmolzen.', wrong:false},
+      {text:'Im Vergleich zur Kernspaltung entsteht hierbei langlebiger radioaktiver Atommüll in großen Mengen.', wrong:true},
+      {text:'Kürzlich gelang es Forschern erstmals, mehr Fusionsenergie zu erzeugen, als für das Aufheizen investiert wurde.', wrong:false},
+      {text:'Kommerzielle Fusionskraftwerke stehen nach übereinstimmender Expertenmeinung bereits im nächsten Jahr flächendeckend zur Verfügung.', wrong:true},
+      {text:'Es gibt weiterhin erhebliche materialwissenschaftliche und thermische Hürden zu bewältigen.', wrong:false},
+      {text:'Der Fusionsprozess birgt kein Risiko einer unkontrollierten nuklearen Kettenreaktion.', wrong:false},
+      {text:'Die physikalischen Prinzipien der Kernfusion sind wissenschaftlich noch völlig unerforscht.', wrong:true},
+      {text:'Die Technologie gilt in Fachkreisen als potenzieller Meilenstein für eine saubere Energieversorgung der Zukunft.', wrong:false}
+    ]
+  }
+];
+
+/* AKTUALISIERTES GLOBALES TESTS-ARRAY (MT1, MT2, MT3 und MT4) */
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
-  {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3}
+  {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
+  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4}
 ];
 
 let currentTestIdx = 0;
