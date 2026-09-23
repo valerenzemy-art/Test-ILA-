@@ -148,7 +148,6 @@ const TEMPLATE = [
 ];
 
 const MT1 = [
-  /* Aufgabe 1 */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Schlafmangel und kognitive Leistungsfähigkeit',
@@ -168,8 +167,6 @@ const MT1 = [
       {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
     ]
   },
-
-  /* Aufgabe 2 */
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Die Entdeckung des Penicillins',
@@ -183,8 +180,6 @@ const MT1 = [
     ],
     shuffledStart:[2,4,0,3,1]
   },
-
-  /* AUFGABE 3 (Niveau C1) */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
     title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
@@ -198,80 +193,50 @@ const MT1 = [
       '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
     ],
     questions:[
-      { 
-        q:'In Absatz 1 wird gesagt, dass ...', 
-        options:[
-          'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
-          'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
-          'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
-          'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', 
-        options:[
-          'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
-          'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
-          'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
-          'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', 
-        options:[
-          'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
-          'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
-          'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
-          'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
-        ], 
-        correct:2 
-      },
-      { 
-        q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', 
-        options:[
-          'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
-          'Patienten mit chronischen Schlafstörungen vollständig heilen.',
-          'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
-          'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
-        ], 
-        correct:2 
-      },
-      { 
-        q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', 
-        options:[
-          'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
-          'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
-          'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
-          'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', 
-        options:[
-          'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
-          'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
-          'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
-          'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
-        ], 
-        correct:3 
-      },
-      { 
-        q:'Hauptanliegen des gesamten Textes ist es, ...', 
-        options:[
-          'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
-          'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
-          'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
-          'vor den Gefahren des normalen REM-Schlafs zu warnen.'
-        ], 
-        correct:1 
-      }
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
+        'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
+        'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
+        'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
+      ], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:[
+        'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
+        'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
+        'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
+        'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
+        'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
+        'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
+        'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
+        'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
+      ], correct:2 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:[
+        'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
+        'Patienten mit chronischen Schlafstörungen vollständig heilen.',
+        'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
+        'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
+      ], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
+        'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
+        'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
+        'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
+        'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
+      ], correct:1 },
+      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:[
+        'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
+        'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
+        'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
+        'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
+      ], correct:3 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
+        'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
+        'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
+        'vor den Gefahren des normalen REM-Schlafs zu warnen.'
+      ], correct:1 }
     ]
   },
-
-  /* AUFGABE 4 (Niveau C1) */
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
     title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
@@ -289,8 +254,6 @@ const MT1 = [
     ],
     correct:[4, 3, 5, 2]
   },
-
-  /* AUFGABE 5 */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
     title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
@@ -306,8 +269,6 @@ const MT1 = [
       {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
     ]
   },
-
-  /* AUFGABE 6 */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
@@ -324,8 +285,6 @@ const MT1 = [
     ],
     correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
   },
-
-  /* Aufgabe 7 */
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Wachstum des E-Commerce',
@@ -346,7 +305,6 @@ const MT1 = [
 ];
 
 const MT2 = [
-  /* Aufgabe 1: Mikrobiologie & Hitzetoleranz */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
@@ -366,23 +324,19 @@ const MT2 = [
       {options:['bildet','entlädt','formt','trennt'], correct:0}
     ]
   },
-
-  /* Aufgabe 2: Quantenphysik & Schrödingers Katze */
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Aufgabe 2: Quantenphysik & Schrödingers Katze',
     correctOrder:[2,1,0,4,3],
     items:[
       'Dass dieses Gedankenexperiment im makroskopischen Alltag jedoch völlig absurd erscheint, liegt an einem physikalischen Phänomen namens Dekohärenz: Sobald ein Quantensystem mit seiner Umwelt – sei es auch nur mit einem einzigen Luftmolekül – in Wechselwirkung tritt, kollabiert der Überlagerungszustand augenblicklich in eine klassische Realität.',
-      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, der theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
+      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, die theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
       'In der mikroskopischen Welt der Quantenmechanik gilt ein physikalisches System, solange es nicht gemessen oder beobachtet wird, in einer sogenannten Superposition – es befindet sich also gleichzeitig in mehreren unterschiedlichen Zuständen.',
       'Dennoch versuchen moderne Quantenphysiker weltweit immer wieder, diese unsichtbare Grenze zwischen Quanten- und Makrowelt zu verschieben, um extrem empfindliche Quantencomputer zu konstruieren, die weit über die Leistung klassischer Rechenmaschinen hinausgehen.',
       'Genau aus diesem Grund gelingt es Wissenschaftlern bis heute nicht, makroskopische Objekte wie Katzen oder alltägliche Gegenstände in einen dauerhaften Quantenzustand zu versetzen, da die unkontrollierbare thermische Umgebung jede quantenmechanische Kohärenz innerhalb von Bruchteilen einer Mikrosekunde zerstört.'
     ],
     shuffledStart:[0,1,2,3,4]
   },
-
-  /* Aufgabe 3: Paläontologie & Evolutionsbiologie */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7.',
     title:'Aufgabe 3: Neue Unterart von Eiszeit-Leoparden in Thüringen entdeckt',
@@ -439,8 +393,6 @@ const MT2 = [
       ], correct:1 }
     ]
   },
-
-  /* Aufgabe 4: Kommentar eines Experten zu Rohstoffen (Lithium) */
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
@@ -458,8 +410,6 @@ const MT2 = [
     ],
     correct:[4, 3, 5, 2]
   },
-
-  /* Aufgabe 5: Zusatzleistungen & Kindergesundheit */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
     title:'Aufgabe 5: Wie finanzielle Zusatzleistungen die Kindergesundheit beeinflussen',
@@ -475,8 +425,6 @@ const MT2 = [
       {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1}
     ]
   },
-
-  /* Aufgabe 6: KI und Sprache */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Wie künstliche Intelligenz unsere Sprache verarmt',
@@ -493,8 +441,6 @@ const MT2 = [
     ],
     correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'h' }
   },
-
-  /* Aufgabe 7: Musik und das Gehirn */
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Aufgabe 7: Der Rhythmus des Lernens: Wie Musik das Gehirn beeinflusst',
@@ -514,121 +460,9 @@ const MT2 = [
   }
 ];
 
-/* NEU: Modelltest 3 (MT3) basierend auf den von Ihnen angegebenen 7 Aufgaben */
-const MT3 = [
-  /* Aufgabe 1: Warum werden Städte nachts immer wärmer? */
-  { ...TEMPLATE[0],
-    instructions:'Fügen Sie die passenden Wörter in den Lückentext ein.',
-    title:'Aufgabe 1: Warum werden Städte nachts immer wärmer?',
-    segments:[
-      'Die Verstädterung führt weltweit zu dem Phänomen der städtischen Wärmeinsel. Dabei kühlen urbanisierte Areale nach Sonnenuntergang deutlich ',
-      ' ab als das Umland. Ursachen hierfür sind unter anderem die stark versiegelten Oberflächen, die tagsüber Wärme speichern, sowie der Mangel an ',
-      ' und Verdunstungsflächen. Zudem tragen anthropogene Abwärmequellen wie Verkehr und Klimaanlagen massiv dazu bei, dass nächtliche Tiefsttemperaturen in Zentren steigen.'
-    ],
-    gaps:[
-      {options:['langsamer','schneller','gleichmäßig','kaum'], correct:0},
-      {options:['Grünflächen','Industrieanlagen','Hochhäusern','Verkehrswegen'], correct:0}
-    ]
-  },
-
-  /* Aufgabe 2: Forscher erzeugen neuartiges „Super-Eis“ */
-  { ...TEMPLATE[1],
-    instructions:'Bringen Sie die folgenden Textabschnitte in die logische Reihenfolge.',
-    title:'Aufgabe 2: Forscher erzeugen neuartiges „Super-Eis“',
-    correctOrder:[1,0,2],
-    items:[
-      'Zellulose-Nanopartikel und spezielle Proteine bilden ein stabiles Netzwerk im Wassereis.',
-      'Wassereis ist prinzipiell ein tragfähiges Material, neigt jedoch unter Belastung schnell zur Rissbildung.',
-      'Das so erzeugte Biopykret ist extrem robust, weniger spröde als normales Eis und verformt sich bei Überlastung kontrolliert.'
-    ],
-    shuffledStart:[2,1,0]
-  },
-
-  /* Aufgabe 3: Adaptive KI-Robotik und menschliche Motorik */
-  { ...TEMPLATE[2],
-    instructions:'Lesen Sie den Text und wählen Sie die richtige Option aus.',
-    title:'Aufgabe 3: Adaptive KI-Robotik und menschliche Motorik',
-    passage:[
-      'Moderne Roboterarme lernen zunehmend durch adaptive Algorithmen, komplexe Bewegungsabläufe nach dem Vorbild biologischer Motorik auszuführen. Im Gegensatz zu starren Industrierobotern reagieren diese Systeme flexibel auf unvorhergesehene physikalische Störungen in ihrer Umgebung.'
-    ],
-    questions:[
-      {
-        q:'Was unterscheidet adaptive Roboter von klassischen Industrierobotern?',
-        options:[
-          'Sie arbeiten ausschließlich in geschlossenen Laborumgebungen.',
-          'Sie können flexibel auf unerwartete Umweltveränderungen reagieren.',
-          'Sie benötigen keinerlei Algorithmen zur Steuerung.',
-          'Sie sind starr und unbeweglich konstruiert.'
-        ],
-        correct:1
-      }
-    ]
-  },
-
-  /* Aufgabe 4: Kommentar zur Künstlichen Intelligenz und Arbeitsmarkt */
-  { ...TEMPLATE[3],
-    instructions:'Ordnen Sie die Argumente den passenden Abschnitten zu.',
-    title:'Aufgabe 4: Kommentar eines Experten zu Künstlicher Intelligenz und Arbeitsmarkt',
-    passageText:`Die Automatisierung schreitet in rasantem Tempo voran. <strong>[1] Dabei zeigt sich, dass vor allem repetitive Tätigkeiten vollständig von Algorithmen übernommen werden.</strong> Dies entlastet die Beschäftigten von monotonen Aufgaben. <strong>[2] Neue Berufsfelder entstehen vor allem im Bereich der Systemüberwachung und der technologischen Wartung.</strong>`,
-    textStellen:[1, 2],
-    options:[
-      'Automatisierung ersetzt repetitive Tätigkeiten vollständig.',
-      'Neue Berufsfelder entstehen vor allem im Bereich der Systemüberwachung.',
-      'Die Industrie lehnt jegliche Form von Künstlicher Intelligenz ab.',
-      'Menschliche Arbeitskraft wird komplett überflüssig werden.'
-    ],
-    correct:[0, 1]
-  },
-
-  /* Aufgabe 5: Wie analytische und intuitive Köpfe ticken */
-  { ...TEMPLATE[4],
-    instructions:'Ordnen Sie die Merkmale den jeweiligen kognitiven Typen zu.',
-    title:'Aufgabe 5: Wie analytische und intuitive Köpfe ticken',
-    passage:'Die kognitive Psychologie unterscheidet zwischen verschiedenen Problemlösungsansätzen. Analytische Typen bevorzugen strukturierte und schrittweise Vorgehensweisen, während intuitive Typen Entscheidungen oft rasch basierend auf Gesamteindrücken treffen.',
-    columns:['Analytischer Typ','Intuitiver Typ'],
-    items:[
-      {text:'Bevorzugt strukturierte, schrittweise Problemlösungen.', correct:0},
-      {text:'Trifft Entscheidungen oft rasch basierend auf Gesamteindrücken.', correct:1}
-    ]
-  },
-
-  /* Aufgabe 6: Flechten – Das komplexe Zusammenspiel der Symbiose */
-  { ...TEMPLATE[5],
-    instructions:'Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
-    title:'Aufgabe 6: Flechten – Das komplexe Zusammenspiel der Symbiose',
-    passage:'Flechten sind faszinierende Organismen, die aus einer Lebensgemeinschaft von Pilzen und Algen bzw. Cyanobakterien bestehen. Als Vorteil gilt ihre enorme Widerstandskraft gegenüber extremen Klimabedingungen. Ein Nachteil ist jedoch ihr extrem langsames Wachstum.',
-    aussagen:[
-      { key:'a', text:'[a] Enorme Widerstandskraft gegenüber extremen Klimabedingungen' },
-      { key:'b', text:'[b] Extrem schnelles und unkontrolliertes Wachstum' },
-      { key:'c', text:'[c] Fähigkeit zur Symbiose zwischen Pilzen und Algen' },
-      { key:'d', text:'[d] Sofortiges Absterben bei minimalem Frost' },
-      { key:'e', text:'[e] Extrem langsames Wachstum im Freiland' },
-      { key:'f', text:'[f] Vollständige Unabhängigkeit von jeglichen Nährstoffen' }
-    ],
-    correctMap: { v1: 'a', v2: 'c', n3: 'e', n4: 'd' }
-  },
-
-  /* Aufgabe 7: Das Erdsystem an den Belastungsgrenzen */
-  { ...TEMPLATE[6],
-    instructions:'Kreuzen Sie genau zwei Sätze an, die inhaltlich falsche Informationen enthalten.',
-    title:'Aufgabe 7: Das Erdsystem an den Belastungsgrenzen',
-    passage:'Das Konzept der planetaren Grenzen definiert sichere Handlungsräume für die Menschheit. Eine Überschreitung dieser Grenzen führt unweigerlich zu abrupten und irreversiblen Umweltveränderungen auf globaler Ebene.',
-    graphicData:[{year:'Grenze 1',val:10},{year:'Grenze 2',val:20},{year:'Grenze 3',val:30}],
-    graphicCaption:'Grafik: Planetare Belastungsgrenzen',
-    sentences:[
-      {text:'Das Konzept beschreibt stabile ökologische Belastungsgrenzen der Erde.', wrong:false},
-      {text:'Die Grenzen können beliebig oft überschritten werden, ohne negative Folgen.', wrong:true},
-      {text:'Eine Überschreitung kann irreversible Umweltveränderungen auslösen.', wrong:false},
-      {text:'Das Ökosystem der Erde reagiert völlig unempfindlich auf menschliche Einflüsse.', wrong:true}
-    ]
-  }
-];
-
-/* MISE À JOUR DU TABLEAU GLOBAL DES TESTS (MT1, MT2 et MT3 intégrés) */
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
-  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
-  {id:3, title:'Modelltest 3 (C1-TestDaF)', teile: MT3}
+  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2}
 ];
 
 let currentTestIdx = 0;
@@ -931,6 +765,79 @@ function renderSummary(task, test, body){
   updateCount();
 }
 
+function scoreTask(task, test){
+  const a = getBucket(test, task);
+  let correct = 0, total = 0;
+  switch(task.type){
+    case 'gap':
+      total = task.gaps.length;
+      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
+      break;
+    case 'order':
+      total = task.correctOrder.length;
+      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
+      break;
+    case 'mc':
+      total = task.questions.length;
+      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      break;
+    case 'match':
+      total = task.correct.length;
+      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
+      break;
+    case 'table':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'twocat':
+      total = 4;
+      if(a.v1 === task.correctMap.v1) correct++;
+      if(a.v2 === task.correctMap.v2) correct++;
+      if(a.n3 === task.correctMap.n3) correct++;
+      if(a.n4 === task.correctMap.n4) correct++;
+      break;
+    case 'summary':
+      total = task.sentences.filter(s=>s.wrong).length;
+      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
+      break;
+  }
+  return {correct, total};
+}
+
+function showResults(){
+  clearTimer();
+  document.getElementById('taskbar').innerHTML = '';
+  const test = TESTS[currentTestIdx];
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `<button class="btn ghost" id="btnMenu2">Modelltests</button><span class="foot-note">Niveau C1 Auswertung</span><button class="btn" id="btnRestart">Neu starten</button>`;
+  document.getElementById('btnRestart').onclick = ()=>{ answers[test.id] = {}; current = 0; renderTask(); };
+  document.getElementById('btnMenu2').onclick = ()=> showTestSelect();
+
+  let sumCorrect = 0, sumTotal = 0;
+  let rows = '';
+  test.teile.forEach(task=>{
+    const {correct, total} = scoreTask(task, test);
+    sumCorrect += correct; sumTotal += total;
+    rows += `<div class="result-row"><span>Aufgabe ${task.teil} — ${task.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
+  });
+  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+  let tdn = 'unterhalb TDN 3';
+  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)'; else if(pct >= 44) tdn = 'TDN 3 (B2)';
+
+  document.getElementById('main').innerHTML = `
+    <div class="results">
+      <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
+      <h2>Ergebnisse — ${test.title}</h2>
+      ${rows}
+      <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
+    </div>
+  `;
+}
+
+showTestSelect();
+</script>
+</body>
+</html>
 function scoreTask(task, test){
   const a = getBucket(test, task);
   let correct = 0, total = 0;
