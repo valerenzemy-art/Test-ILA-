@@ -36,7 +36,7 @@
   .select-screen h2{color:var(--teal-dark);margin-bottom:6px;}
   .select-screen p{color:var(--text-soft);font-size:.92rem;max-width:560px;margin:0 auto 26px;}
   .cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-  .sel-card{width:260px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
+  .sel-card{width:240px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
   .sel-card:hover{border-color:var(--teal);}
   .sel-card .sc-title{font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
   .sel-card .sc-desc{font-size:.8rem;color:var(--text-soft);}
@@ -102,6 +102,7 @@
   .result-row .no{color:var(--wrong);font-weight:700;}
   .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
 
+  /* Custom styling for Aufgabe 6 Vorteils/Nachteils Table */
   .a6-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
   .a6-statements { background: var(--bg-instructions); padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
   .a6-statements-title { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
@@ -110,13 +111,6 @@
   table.a6-table th, table.a6-table td { border: 1px solid var(--border); padding: 10px; text-align: left; }
   table.a6-table th { background: var(--teal); color: #fff; width: 50%; }
   table.a6-table select { width: 100%; padding: 6px; border-radius: 4px; border: 1px solid var(--border); font: inherit; }
-
-  .corr-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
-  .corr-title { font-weight: 700; color: var(--teal-dark); margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
-  .corr-item { font-size: 0.88rem; padding: 6px 0; border-bottom: 1px dashed var(--border); }
-  .corr-item:last-child { border-bottom: none; }
-  .corr-tag-ok { color: var(--correct); font-weight: 700; }
-  .corr-tag-no { color: var(--wrong); font-weight: 700; }
 
   @media (max-width:480px){
     header.topbar{padding:14px 14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px));}
@@ -155,8 +149,8 @@ const TEMPLATE = [
   {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
 ];
 
-/* MODELLTEST 1 */
 const MT1 = [
+  /* Aufgabe 1 */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Schlafmangel und kognitive Leistungsfähigkeit',
@@ -176,6 +170,8 @@ const MT1 = [
       {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
     ]
   },
+
+  /* Aufgabe 2 */
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Die Entdeckung des Penicillins',
@@ -189,6 +185,8 @@ const MT1 = [
     ],
     shuffledStart:[2,4,0,3,1]
   },
+
+  /* AUFGABE 3 (Niveau C1) */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
     title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
@@ -202,17 +200,82 @@ const MT1 = [
       '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
     ],
     questions:[
-      { q:'In Absatz 1 wird gesagt, dass ...', options:['die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.','die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.','eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.','luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'], correct:1 },
-      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:['eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.','eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.','schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.','eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'], correct:1 },
-      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:['Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften','Die Ablehnung von Klarträumen in östlichen Kulturkreisen','Kulturübergreifendes und historisches Interesse an der Traumbewusstheit','Die Erfindung des Klartraums durch die moderne Psychoanalyse'], correct:2 },
-      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:['Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.','Patienten mit chronischen Schlafstörungen vollständig heilen.','Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.','den REM-Schlaf künstlich um mehrere Stunden verlängern.'], correct:2 },
-      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:['Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.','Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.','Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.','Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'], correct:1 },
-      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:['Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.','Er fordert das Verbot jeglicher Schlafforschung am Menschen.','Er steht der Trauminduktion völlig gleichgültig gegenüber.','Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'], correct:3 },
-      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:['Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.','über den Forschungsstand und die Komplexität des Klarträumens zu informieren.','die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.','vor den Gefahren des normalen REM-Schlafs zu warnen.'], correct:1 }
+      { 
+        q:'In Absatz 1 wird gesagt, dass ...', 
+        options:[
+          'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
+          'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
+          'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
+          'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
+        ], 
+        correct:1 
+      },
+      { 
+        q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', 
+        options:[
+          'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
+          'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
+          'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
+          'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
+        ], 
+        correct:1 
+      },
+      { 
+        q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', 
+        options:[
+          'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
+          'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
+          'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
+          'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
+        ], 
+        correct:2 
+      },
+      { 
+        q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', 
+        options:[
+          'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
+          'Patienten mit chronischen Schlafstörungen vollständig heilen.',
+          'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
+          'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
+        ], 
+        correct:2 
+      },
+      { 
+        q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', 
+        options:[
+          'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
+          'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
+          'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
+          'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
+        ], 
+        correct:1 
+      },
+      { 
+        q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', 
+        options:[
+          'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
+          'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
+          'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
+          'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
+        ], 
+        correct:3 
+      },
+      { 
+        q:'Hauptanliegen des gesamten Textes ist es, ...', 
+        options:[
+          'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
+          'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
+          'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
+          'vor den Gefahren des normalen REM-Schlafs zu warnen.'
+        ], 
+        correct:1 
+      }
     ]
   },
+
+  /* AUFGABE 4 (Niveau C1) */
   { ...TEMPLATE[3],
-    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
     title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
     passageText:`Die verhängnisvolle Annahme, dass der Menschheit durch unkontrollierten Konsum zwangsläufig der Kollaps droht und wir daher eine drastische Wachstumsrücknahme erzwingen müssen, gehört zum festen Dogma moderner Umweltdebatten. <strong>[1] Ob diese radikale Verzichtshypothese in wissenschaftlicher Hinsicht jedoch tatsächlich belastbar ist, darf ernsthaft in Zweifel gezogen werden.</strong> Durch fortschrittliche biochemische Verfahren ist die Synthetisierung von Rohstoffen bereits heute Realität. <strong>[2] Man muss allerdings unumwunden einräumen, dass derartige Syntheseverfahren derzeit noch außerordentlich energieintensiv und kostspielig sind.</strong> Der technologische Wandel vollzieht sich jedoch exponentiell. Womöglich werden molekulare Fertigungsverfahren in wenigen Jahrzehnten Rohstoffknappheiten komplett überflüssig machen. Die Theorie der Grenzen des Wachstums entpuppt sich somit womöglich als gedanklicher Rückschritt. <strong>[3] Dass sich dieses Bedrohungsszenario dennoch so hartnäckig in den Köpfen hält, dürfte vor allem darin begründet liegen, dass unser Denken in steinzeitlichen Kategorien begrenzter Vorräte verhaftet bleibt.</strong> In einer von Innovation geprägten Welt sind Ressourcen im Wesentlichen unbegrenzt. <strong>[4] Dank menschlicher Erfindungskraft und technologischem Pioniergeist werden wir künftig in der Lage sein, völlig neue Energie- und Materialquellen zu erschließen.</strong>`,
     textStellen:[1, 2, 3, 4],
@@ -228,10 +291,12 @@ const MT1 = [
     ],
     correct:[4, 3, 5, 2]
   },
+
+  /* AUFGABE 5 (Mise à jour d'après la capture d'écran Klett - 4 Colonnes C1) */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
     title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
-    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen[span_0](start_span)[span_0](end_span). Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit[span_1](start_span)[span_1](end_span). Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen[span_2](start_span)[span_2](end_span). Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus[span_3](start_span)[span_3](end_span). Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt[span_4](start_span)[span_4](end_span). Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren[span_5](start_span)[span_5](end_span). Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet[span_6](start_span)[span_6](end_span). Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen[span_7](start_span)[span_7](end_span).',
     columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
     items:[
       {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
@@ -243,6 +308,8 @@ const MT1 = [
       {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
     ]
   },
+
+  /* AUFGABE 6 (Niveau C1) */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
@@ -259,6 +326,8 @@ const MT1 = [
     ],
     correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
   },
+
+  /* Aufgabe 7 */
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Wachstum des E-Commerce',
@@ -278,336 +347,8 @@ const MT1 = [
   }
 ];
 
-/* MODELLTEST 2 */
-const MT2 = [
-  { ...TEMPLATE[0],
-    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
-    title:'Aufgabe 1: Netzstabilität im Zeitalter erneuerbarer Energien',
-    segments:[
-      'Die Umstellung der Energieversorgung auf erneuerbare Quellen stellt die Betreiber von Stromnetzen vor erhebliche ',
-      ' Herausforderungen. Da die Einspeisung von Wind- und Sonnenenergie stark von Witterungsbedingungen ',
-      ', kommt es im Netzverband häufiger zu Schwankungen. Um eine flächendeckende Stromversorgung weiterhin zu ',
-      ', müssen neuartige Speichermedien und intelligente Steuerungssysteme implementiert werden. Wissenschaftler betonen, dass ohne einen konsequenten Ausbau der Infrastruktur das Ausfallrisiko messbar ',
-      ' könnte. Aus diesem Grund werden derzeit umfassende Investitionen in sogenannte Smart Grids '
-    ],
-    gaps:[
-      {options:['technische','überflüssige','unbedeutende','historische'], correct:0},
-      {options:['abhängt','profitiert','resultiert','verzichtet'], correct:0},
-      {options:['gewährleisten','unterbrechen','verhindern','verzögern'], correct:0},
-      {options:['steigen','sinken','stagnieren','verschwinden'], correct:0},
-      {options:['getätigt','verhindert','abgebrochen','kritisiert'], correct:0}
-    ]
-  },
-  { ...TEMPLATE[1],
-    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
-    title:'Aufgabe 2: Meilensteine der Künstlichen Intelligenz',
-    correctOrder:[0,1,2,3,4],
-    items:[
-      'Die Geburtsstunde der Erforschung künstlicher Intelligenz schlug im Jahr 1956 auf einer historischen Konferenz am Dartmouth College.',
-      'In den darauf folgenden Jahrzehnten wechselten sich Phasen großer Euphorie mit Zeiten ernüchternder Rückschläge und gekürzter Forschungsgelder ab.',
-      'Erst der rasante Anstieg von Rechenkapazitäten und die Verfügbarkeit gewaltiger Datenmengen leiteten ab den 2010er Jahren eine Wende ein.',
-      'Durch den Einsatz tiefgestaffelter neuronaler Netze erzielten Systeme plötzlich verblüffende Erfolge bei der Bild- und Spracherkennung.',
-      'Heute ist die Technologie aus Schlüsselbereichen wie der medizinischen Diagnostik oder der Logistik nicht mehr wegzudenken.'
-    ],
-    shuffledStart:[3,0,4,1,2]
-  },
-  { ...TEMPLATE[2],
-    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
-    title:'Aufgabe 3: Nudging und die Architektur menschlicher Entscheidungen',
-    passage:[
-      '(1) Das Konzept des sogenannten "Nudging" (Anstupsen) beruht auf verhaltensökonomischen Erkenntnissen über menschliche Entscheidungsmuster. Anstatt Verhalten durch Verbote oder finanzielle Anreize zu erzwingen, werden Wahlarchitekturen so gestaltet, dass Menschen ganz subtil zu vorteilhaften Entscheidungen bewegt werden.',
-      '(2) Kritiker dieser Methode bemängeln oft eine versteckte Manipulation, da den Betroffenen die Beeinflussung selten bewusst ist. Befürworter entgegnen jedoch, dass Entscheidungssituationen niemals neutral gestaltet sein können und staatliches Handeln hier im Sinne des Gemeinwohls eingesetzt werden sollte.',
-      '(3) In zahlreichen Feldstudien konnte gezeigt werden, dass bereits geringfügige Umgestaltungen in Kantinen – etwa das Platzieren von Obst auf Augenhöhe – den Konsum gesünderer Lebensmittel signifikant steigern können, ohne die Wahlfreiheit einzuschränken.'
-    ],
-    questions:[
-      { q:'Was ist das Grundprinzip von "Nudging" laut Absatz 1?', options:['Der Einsatz strenger gesetzlicher Verbote zur Verhaltensänderung.','Die gezielte Beeinflussung von Entscheidungen durch Gestaltung des Umfelds.','Die finanzielle Belohnung von Bürgern bei umweltfreundlichem Verhalten.','Die vollständige Abschaffung jeglicher Entscheidungsoptionen.'], correct:1 },
-      { q:'Welcher Kritikpunkt wird in Absatz 2 gegenüber Nudging geäußert?', options:['Es verursache zu hohe Kosten für staatliche Institutionen.','Es beruhe auf veralteten psychologischen Theorien.','Es könne als unbewusste Manipulation der Bürger wahrgenommen werden.','Es führe zu einer drastischen Erhöhung von Bußgeldern.'], correct:2 },
-      { q:'Was belegen die Studien zur Kantinengestaltung in Absatz 3?', options:['Dass Wahlfreiheit durch Nudging komplett aufgehoben wird.','Dass Kunden ausschließlich ungesunde Nahrungsmittel bevorzugen.','Dass unauffällige Änderungen im Raumangebot das Essverhalten positiv steuern.','Dass Preise von Lebensmitteln wöchentlich angepasst werden müssen.'], correct:2 }
-    ]
-  },
-  { ...TEMPLATE[3],
-    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
-    title:'Aufgabe 4: Kommentar zur Finanzierung von Grundlagenforschung',
-    passageText:`Die Forderung, dass wissenschaftliche Forschung stets einen unmittelbaren wirtschaftlichen Nutzen erbringen muss, greift zu kurz. <strong>[1] Wer Wissenschaft rein nach ihrer kurzfristigen Rendite beurteilt, verkennt das Wesen echter Innovationen.</strong> Wegweisende Entdeckungen entstehen selten nach Fahrplan. <strong>[2] Ein beträchtlicher Teil unseres heutigen Wohlstands basiert auf Erkenntnissen, deren praktische Relevanz bei ihrer Entdeckung völlig ungewiss war.</strong> Natürlich stehen Forschungsförderer unter dem Druck, öffentliche Gelder zu rechtfertigen. <strong>[3] Dennoch birgt eine Verengung der Geldvergabe auf reine Zweckforschung das Risiko, den Nährboden für radikal neue Denkansätze auszutrocknen.</strong> Wenn nur noch risikofreie Projekte finanziert werden, stagniert der Fortschritt. <strong>[4] Wir benötigen daher dringend wieder mehr Mut zur ergebnisoffenen Grundlagenforschung ohne Verwertungsdruck.</strong>`,
-    textStellen:[1, 2, 3, 4],
-    options:[
-      'Der Experte fordert ein Umdenken bei Entscheidungsträgern.',
-      'Der Experte kritisiert eine einseitige ökonomische Sichtweise.',
-      'Der Experte nennt ein historisches Beispiel für Erfolg.',
-      'Der Experte verweist auf den Wert unerwarteter Ergebnisse.',
-      'Der Experte warnt vor den negativen Folgen einer verfehlten Strategie.',
-      'Der Experte schlägt die Abschaffung öffentlicher Gelder vor.'
-    ],
-    correct:[1, 3, 4, 0]
-  },
-  { ...TEMPLATE[4],
-    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Stadtmodell A, Stadtmodell B, zu beiden oder zu keinem Modell passt.',
-    title:'Aufgabe 5: Konzepte für die nachhaltige Stadtentwicklung',
-    passage:'Im Diskurs um die Zukunftsfähigkeit urbaner Zentren stehen sich zwei dominante Konzepte gegenüber. Stadtmodell A setzt auf die "Kompakte Stadt der kurzen Wege": Durch extreme bauliche Nachverdichtung, Mischung von Wohn- und Gewerbeflächen sowie den Rückbau der automobilen Infrastruktur soll der Energiebedarf minimiert werden. Kritiker verweisen hierbei auf die erhöhte Hitzebelastung in dicht bebauten Innenstädten. Stadtmodell B hingegen vertritt die "Schwammstadt": Hier stehen dezentrale Grünflächen, unversiegelte Böden und unterirdische Rückhaltebecken im Fokus, um Starkregenereignisse abzufangen und das Mikroklima zu kühlen. Beide Modelle streben eine Reduktion der CO2-Emissionen an, jedoch mit konträren baulichen Prioritäten.',
-    columns:['Stadtmodell A','Stadtmodell B','beide','passt nicht'],
-    items:[
-      {text:'Sucht nach Lösungen zur Vermeidung von Hitzestau durch großflächige Bepflanzung.', correct:1},
-      {text:'Fokussiert sich auf die funktionale Mischung von Arbeiten und Wohnen auf engem Raum.', correct:0},
-      {text:'Verfolgt das Ziel, den städtischen CO2-Ausstoß nachhaltig zu senken.', correct:2},
-      {text:'Sieht den vollständigen Abriss aller historischen Altbauten zwingend vor.', correct:3},
-      {text:'Plädiert für den gezielten Rückbau von Autostraßen zugunsten dichter Bebauung.', correct:0},
-      {text:'Setzt auf die Zwischenspeicherung von Niederschlagswasser zur Vermeidung von Überflutungen.', correct:1},
-      {text:'Empfiehlt die Verlegung von Wohngebieten in weit entfernte Vororte.', correct:3}
-    ]
-  },
-  { ...TEMPLATE[5],
-    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
-    title:'Aufgabe 6: Vor- und Nachteile der ökologischen Landwirtschaft',
-    passage:'Die ökologische Landwirtschaft gilt als Schlüssel zur Erhaltung der Biodiversität und zum Schutz der Grundwasservorkommen, da weitgehend auf synthetische Pflanzenschutzmittel verzichtet wird. Ein weiterer zentraler Vorteil ist der langfristige Erhalt der Bodenfruchtbarkeit durch organische Düngung und vielfältige Fruchtfolgen. Allerdings bringt diese Anbauform auch deutliche Nachteile mit sich: Die Erträge pro Hektar liegen spürbar unter denen der konventionellen Landwirtschaft, was für die gleiche Nahrungsmenge einen höheren Flächenbedarf erforderlich macht. Zudem führt der erhöhte Arbeitsaufwand bei der Unkrautbekämpfung zu deutlich höheren Endverbraucherpreisen.',
-    aussagen:[
-      { key:'a', text:'[a] Erhöhter Flächenbedarf aufgrund geringerer Hektarerträge' },
-      { key:'b', text:'[b] Schonung der Grundwasservorkommen durch Verzicht auf Chemie' },
-      { key:'c', text:'[c] Erforderlichkeit höherer Verkaufspreise wegen Mehraufwands' },
-      { key:'d', text:'[d] Völlige Immunität der Pflanzen gegen Schädlinge' },
-      { key:'e', text:'[e] Langfristige Förderung der natürlichen Bodenfruchtbarkeit' },
-      { key:'f', text:'[f] Garantie für weltweite Nahrungssicherheit ohne Ausnahmen' }
-    ],
-    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
-  },
-  { ...TEMPLATE[6],
-    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
-    title:'Aufgabe 7: Elektromobilität im Schienenverkehr',
-    passage:'Der Elektrifizierungsgrad des deutschen Schienennetzes lag im Jahr 2023 bei rund 62 Prozent. Während der Fernverkehr bereits zu über 90 Prozent elektrisch betrieben wird, fahren im regionalen Güterverkehr noch immer zahlreiche Dieselfahrzeuge. Die Bundesregierung strebt an, bis 2030 einen Elektrifizierungsgrad von 75 Prozent zu erreichen. Als Übergangslösung für nicht-elektrifizierte Strecken werden zunehmend Akku- und Wasserstoffzüge getestet.',
-    graphicData:[{year:'2015',val:58},{year:'2018',val:60},{year:'2020',val:61},{year:'2023',val:62}],
-    graphicCaption:'Grafik: Anteil des elektrifizierten Schienennetzes in Deutschland (%)',
-    sentences:[
-      {text:'Der Elektrifizierungsgrad des Schienennetzes lag 2023 bei etwa 62 Prozent.', wrong:false},
-      {text:'Der Fernverkehr wird heute noch mehrheitlich mit Diesel betrieben.', wrong:true},
-      {text:'Das Ziel für 2030 liegt bei einem Elektrifizierungsgrad von 75 Prozent.', wrong:false},
-      {text:'Auf nicht-elektrifizierten Strecken kommen Testzüge mit Akku- oder Wasserstoffantrieb zum Einsatz.', wrong:false},
-      {text:'Im Jahr 2015 lag der Elektrifizierungsgrad laut Grafik bereits bei über 70 Prozent.', wrong:true},
-      {text:'Der regionale Güterverkehr nutzt noch teilweise Diesel-Fahrzeuge.', wrong:false},
-      {text:'Die Bundesregierung plant den Rückbau elektrischer Oberleitungen.', wrong:true}
-    ]
-  }
-];
-
-/* MODELLTEST 3 (Aktualisiert & Vollständig) */
-const MT3 = [
-  { ...TEMPLATE[0],
-    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
-    title:'Aufgabe 1: Die Verkehrswende in Ballungsräumen',
-    segments:[
-      'Die Transformation der urbanen Mobilität gilt als zentraler Baustein zur Erreichung der gesetzlich verankerten Klimaziele. Um den CO2-Ausstoß im Transportsektor drastisch zu ',
-      ', setzen viele Metropolen auf den gezielten Ausbau des öffentlichen Personennahverkehrs sowie geschützter Radverkehrsnetze. Experten betonen jedoch, dass reine Anreizsysteme oft nicht ',
-      ', um Autofahrer zum Umstieg zu bewegen. Ergänzend bedürfe es verkehrslenkender Maßnahmen wie einer Parkraumbewirtschaftung oder City-Maut. Die erfolgreiche Umsetzung dieser Strategien erfordert allerdings eine verlässliche ',
-      ' öffentlicher Fördermittel sowie eine hohe Akzeptanz innerhalb der Bevölkerung. Fehlt diese gesellschaftliche Unterstützung, drohen langwierige politische ',
-      ' und erhebliche Verzögerungen beim Infrastrukturausbau.'
-    ],
-    gaps:[
-      {options:['senken','steigerungsfähig','steigern','blockieren'], correct:0},
-      {options:['ausreichen','scheitern','versagen','enttäuschen'], correct:0},
-      {options:['Bereitstellung','Verweigerung','Kürzung','Stornierung'], correct:0},
-      {options:['Auseinandersetzungen','Harmonien','Einigungen','Zustimmungen'], correct:0},
-      {options:['Verzögerungen','Beschleunigungen','Fortschritte','Erfolge'], correct:0}
-    ]
-  },
-  { ...TEMPLATE[1],
-    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
-    title:'Aufgabe 2: Evolution des Wasserstoffs als Energieträger',
-    correctOrder:[0,1,2,3,4],
-    items:[
-      'Bereits im 19. Jahrhundert wurde Wasserstoff von Wissenschaftlern als potenzieller Energieträger der Zukunft diskutiert.',
-      'Aufgrund der billigen Verfügbarkeit fossiler Brennstoffe geriet die Technologie jedoch für viele Jahrzehnte wieder in den Hintergrund.',
-      'Mit dem Beginn der globalen Dekarbonisierungsbemühungen erlebte das Element schließlich eine Renaissance in der Energiewirtschaft.',
-      'Moderne Elektrolyseverfahren ermöglichen es heute, grünen Wasserstoff mithilfe erneuerbarer Energien klimaneutral herzustellen.',
-      'Insbesondere in schwer elektrifizierbaren Industriezweigen wie der Stahlproduktion gilt Wasserstoff nun als unverzichtbarer Schlüsselbaustein.'
-    ],
-    shuffledStart:[1,3,0,4,2]
-  },
-  { ...TEMPLATE[2],
-    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
-    title:'Aufgabe 3: Mikroplastik in marinen Ökosystemen',
-    passage:[
-      '(1) Die Akkumulation von Kunststoffen in Weltmeeren stellt eine der gravierendsten ökologischen Herausforderungen des 21. Jahrhunderts dar. Besonders gefährlich sind Partikel mit einem Durchmesser von weniger als fünf Millimetern, bekannt als Mikroplastik. Diese entstehen entweder durch den witterungsbedingten Zerfall größerer Plastikabfälle oder werden Produkten direkt industriell zugesetzt.',
-      '(2) Die biologischen Auswirkungen auf marine Organismen sind vielfältig und komplex. Fische und Filterfehrer verwechseln die Partikel häufig mit natürlicher Nahrung. Dies führt nicht nur zu physikalischen Blockaden im Verdauungstrakt, sondern auch zur Aufnahme von Anlagerungen toxischer Umweltgifte, die sich im Gewebe anreichern.',
-      '(3) Trotz zunehmender Forschung bleiben die langfristigen Konsequenzen für die menschliche Gesundheit über den Konsum von Meeresfrüchten noch nicht vollständig geklärt. Wissenschaftler fordern daher strengere internationale Abkommen zur Vermeidung von Plastikmüll an der Quelle.'
-    ],
-    questions:[
-      { q:'Wie entsteht Mikroplastik laut Absatz 1?', options:['Ausschließlich durch die Zersetzung von Industriemüll im Meer.','Durch Zerfall von Plastik oder durch direkte industrielle Beimischung.','Durch die chemische Reaktion von Plastik mit Salzwasser.','Durch die Verbrennung von Müll an Küstenregionen.'], correct:1 },
-      { q:'Welche Gefahr wird in Absatz 2 für Meerestiere beschrieben?', options:['Verlust des Orientierungssinns beim Schwimmen.','Aufnahme von Toxinen und Verstopfung des Verdauungssystems.','Schnelleres Wachstum durch synthetische Nährstoffe.','Unfruchtbarkeit durch veränderte Wassertemperaturen.'], correct:1 },
-      { q:'Was fordern Wissenschaftler in Absatz 3?', options:['Ein vollständiges Verbot des Verzehrs von Meeresfrüchten.','Internationale Abkommen zur Vermeidung von Plastikmüll.','Die Einstellung der Forschung an Mikroplastik.','Den Bau von Plastikfiltern an allen Flussmündungen.'], correct:1 }
-    ]
-  },
-  { ...TEMPLATE[3],
-    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
-    title:'Aufgabe 4: Die Transformation der Arbeitswelt durch Homeoffice',
-    passageText:`Die schlagartige Zunahme von Telearbeit hat die Unternehmenskultur nachhaltig verändert. <strong>[1] Der flächendeckende Übergang zu hybriden Arbeitsmodellen hat bewiesen, dass Produktivität nicht an ständige Präsenz im Büro gebunden ist.</strong> Dennoch birgt die Entgrenzung von Arbeit und Privatleben erhebliche Risiken. <strong>[2] Beschäftigte berichten signifikant häufiger über Schwierigkeiten, nach Feierabend gedanklich von beruflichen Aufgaben abzuschalten.</strong> Führungskräfte stehen vor der Herausforderung, den Zusammenhalt in virtuellen Teams aufrechtzuerhalten. <strong>[3] Das Fehlen informeller Flurgespräche schwächt auf Dauer das Zugehörigkeitsgefühl und die Innovationskraft.</strong> Es braucht daher klare betriebliche Vereinbarungen zur Erreichbarkeit. <strong>[4] Nur durch verbindliche Regeln lässt sich verhindern, dass der digitale Fortschritt zu einer psychischen Überlastung führt.</strong>`,
-    textStellen:[1, 2, 3, 4],
-    options:[
-      'Der Experte fordert regulierende Schutzmaßnahmen.',
-      'Der Experte hebt eine Wiederlegung traditioneller Annahmen hervor.',
-      'Der Experte beschreibt ein psychologisches Entgrenzungsproblem.',
-      'Der Experte verweist auf den Verlust sozialer Dynamiken.',
-      'Der Experte empfiehlt die komplette Abschaffung von Büros.'
-    ],
-    correct:[1, 2, 3, 0]
-  },
-  { ...TEMPLATE[4],
-    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Konzept A (Homeoffice), Konzept B (Präsenzarbeit), zu beiden oder zu keinem passt.',
-    title:'Aufgabe 5: Vergleich von Arbeitsplatzkonzepten',
-    passage:'In der Debatte um die Ausgestaltung moderner Arbeitswelten stehen sich zwei Arbeitsplatzmodelle gegenüber. Modell A (Remote/Homeoffice) setzt auf maximale zeitliche und ortsbezogene Flexibilität. Mitarbeiter sparen Pendelzeiten und können ihre Arbeit autonom organisieren. Kritiker betonen jedoch das Risiko sozialer Isolation und die Erschwerung von Einarbeitungsprozessen. Modell B (Klassische Präsenzarbeit) fördert den direkten, spontanen Austausch im Kollegium und erleichtert die Abgrenzung von Arbeit und Freizeit durch eine physische Trennung. Dafür nehmen Beschäftigte tägliche Anfahrtswege und weniger flexible Tagesabläufe in Kauf. Beide Modelle streben eine hohe Arbeitsqualität an.',
-    columns:['Modell A (Remote)','Modell B (Präsenz)','beide','passt nicht'],
-    items:[
-      {text:'Ermöglicht eine klare räumliche Trennung zwischen Berufs- und Privatleben.', correct:1},
-      {text:'Fördert den spontanen, ungeplanten Wissensaustausch im Team.', correct:1},
-      {text:'Spart den täglichen Zeitaufwand für den Arbeitsweg ein.', correct:0},
-      {text:'Erhöht das Risiko von Isolation und erschwert die Einarbeitung neuer Mitarbeiter.', correct:0},
-      {text:'Verlangt die ständige Überwachung der Mitarbeiter per Video.', correct:3},
-      {text:'Strebt die Sicherung einer hohen Arbeitsqualität an.', correct:2},
-      {text:'Garantiert ein höheres Gehalt für alle Angestellten.', correct:3}
-    ]
-  },
-  { ...TEMPLATE[5],
-    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
-    title:'Aufgabe 6: Vor- und Nachteile von Smart-Grid-Technologien',
-    passage:'Intelligente Stromnetze (Smart Grids) gelten als Schlüssel zur Bewältigung der Energiewende. Ein wesentlicher Vorteil liegt in der Echtzeit-Überwachung des Netzzustands, die eine schnelle Reaktion auf Lastspitzen und eine optimale Einbindung dezentraler erneuerbarer Energien ermöglicht. Zudem erlauben sie es Verbrauchern, ihren Energieverbrauch durch dynamische Tarife kostenoptimiert zu steuern. Demgegenüber stehen jedoch signifikante Nachteile: Die Umstellung erfordert immense Anfangsinvestitionen in digitale Zähler und Steuerungsgeräte. Zudem erhöht die vernetzte Infrastruktur die Verwundbarkeit gegenüber Cyberangriffen und wirft komplexe Datenschutzfragen bezüglich der Nutzerdaten auf.',
-    aussagen:[
-      { key:'a', text:'[a] Erhöhte Anfälligkeit für Cyberangriffe und Datenmissbrauch' },
-      { key:'b', text:'[b] Optimale Integration dezentraler erneuerbarer Energiequellen' },
-      { key:'c', text:'[c] Hohe initiale Investitionskosten für die digitale Infrastruktur' },
-      { key:'d', text:'[d] Völlige Befreiung der Verbraucher von jeglichen Stromkosten' },
-      { key:'e', text:'[e] Möglichkeiten zur verbrauchsabhängigen Kostensteuerung' },
-      { key:'f', text:'[f] Garantiert störungsfreier Betrieb ohne jeglichen Wartungsaufwand' }
-    ],
-    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
-  },
-  { ...TEMPLATE[6],
-    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
-    title:'Aufgabe 7: Entwicklung der Treibhausgasemissionen',
-    passage:'Die Gesamtemissionen von Treibhausgasen in Deutschland sind von 1990 bis 2022 um etwa 40 Prozent gesunken. Während der Energiesektor durch den Ausbau erneuerbarer Energien erhebliche Einsparungen erzielte, verfehlte der Verkehrssektor seine Sektorziele wiederholt. Der Einsatz fossiler Brennstoffe im Transportbereich bleibt weiterhin auf hohem Niveau.',
-    graphicData:[{year:'1990',val:100},{year:'2000',val:82},{year:'2010',val:74},{year:'2022',val:60}],
-    graphicCaption:'Grafik: Relative Entwicklung der Treibhausgasemissionen in Deutschland (1990 = 100%)',
-    sentences:[
-      {text:'Die Emissionen sind im Vergleich zu 1990 um rund 40 Prozent gesunken.', wrong:false},
-      {text:'Der Verkehrssektor hat seine Reduktionsziele stets problemlos erreicht.', wrong:true},
-      {text:'Der Energiesektor konnte erhebliche Einsparungen verzeichnen.', wrong:false},
-      {text:'Laut Grafik lagen die Emissionen im Jahr 2000 höher als 1990.', wrong:true},
-      {text:'Der Einsatz fossiler Brennstoffe im Transportbereich ist weiterhin hoch.', wrong:false},
-      {text:'Im Jahr 2022 lagen die Emissionen bei 60 Prozent des Werts von 1990.', wrong:false},
-      {text:'Der Verkehrssektor ist der einzige Bereich mit ständigen Nullemissionen.', wrong:true}
-    ]
-  }
-];
-
-/* MODELLTEST 4 */
-const MT4 = [
-  { ...TEMPLATE[0],
-    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
-    title:'Aufgabe 1: Spracherwerb und neuronale Plastizität',
-    segments:[
-      'Die Fähigkeit des menschlichen Gehirns, in den ersten Lebensjahren mühelos eine oder mehrere Sprachen zu erwerben, fasziniert die Sprachwissenschaft seit Jahrzehnten. Diese frühe Lernphase zeichnet sich durch eine besonders hohe neuronale ',
-      ' aus, die es Kleinkindern ermöglicht, lautliche Nuancen präzise zu verarbeiten. Im Laufe der Pubertät nimmt diese Fähigkeit jedoch ab, da sich spezialisierte Hirnstrukturen ',
-      '. Zwar können auch Erwachsene eine Zweitsprache bis zu einem hohen Niveau erlernen, doch erfordert dies meist mehr kognitive ',
-      ' und führt selten zu einer völlig akzentfreien Aussprache. Neurowissenschaftler betonen daher die Bedeutung einer frühkindlichen ',
-      ', um das volle sprachliche Potenzial auszuschöpfen.'
-    ],
-    gaps:[
-      {options:['Plastizität','Trägheit','Rigidität','Blockade'], correct:0},
-      {options:['verfestigen','auflösen','zurückbilden','Verschlechtern'], correct:0},
-      {options:['Anstrengung','Passivität','Gleichgültigkeit','Ruhe'], correct:0},
-      {options:['Förderung','Vernachlässigung','Isolierung','Hemmung'], correct:0},
-      {options:['auszuschöpfen','zu unterdrücken','zu begrenzen','zu ignorieren'], correct:0}
-    ]
-  },
-  { ...TEMPLATE[1],
-    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
-    title:'Aufgabe 2: Der Wandel des wissenschaftlichen Publizierens',
-    correctOrder:[0,1,2,3,4],
-    items:[
-      'Über Jahrhunderte hinweg wurden wissenschaftliche Erkenntnisse fast ausschließlich in gedruckten Fachzeitschriften veröffentlicht.',
-      'Zugang zu diesen Aufsätzen hatten meist nur Universitäten, die teure Abonnement-Gebühren an Großverlage zahlten.',
-      'Mit dem Siegeszug des Internets entstand Ende des 20. Jahrhunderts die Open-Access-Bewegung als Gegenentwurf.',
-      'Ziel dieser Initiative ist es, wissenschaftliche Publikationen für jedermann kostenfrei und digital zugänglich zu machen.',
-      'Heute verlangen viele öffentliche Forschungsförderer explizit die Veröffentlichung in Open-Access-Organen.'
-    ],
-    shuffledStart:[2,0,4,1,3]
-  },
-  { ...TEMPLATE[2],
-    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
-    title:'Aufgabe 3: Epigenetik – Die Brücke zwischen Umwelt und Genen',
-    passage:[
-      '(1) Die klassische Genetik ging lange Zeit davon aus, dass der DNA-Code das unveränderliche Bauprogramm eines Organismus darstellt. Die Disziplin der Epigenetik zeigt jedoch, dass Umweltfaktoren wie Ernährung, Stress oder Schadstoffe chemische Markierungen an den Genen anbringen können, ohne deren Grundsequenz zu verändern.',
-      '(2) Diese epigenetischen Modifikationen fungieren als Molekularschalter, die Genaktivitäten an- oder ausschalten. Besonders bemerkenswert ist, dass manche dieser Anpassungen über Generationen hinweg vererbt werden können, was das traditionelle Verständnis der Vererbungslehre grundlegend erweitert.',
-      '(3) In der Medizin eröffnet die Epigenetik neue Wege zur Früherkennung und Behandlung schwerer Krankheiten wie Krebs, da epigenetische Veränderungen im Gegensatz zu Gendefekten potenziell reversibel sind.'
-    ],
-    questions:[
-      { q:'Was zeigt die Epigenetik laut Absatz 1?', options:['Dass der DNA-Code durch Ernährung komplett gelöscht wird.','Dass Umweltfaktoren Genaktivitäten ohne Sequenzänderung beeinflussen.','Dass Gene keinen Einfluss auf die Entwicklung des Körpers haben.','Dass Schadstoffe die biologische Rasse verändern.'], correct:1 },
-      { q:'Was ist das Besondere an epigenetischen Modifikationen laut Absatz 2?', options:['Sie verschwinden nach wenigen Sekunden wieder.','Sie können unter Umständen an nachfolgende Generationen weitergegeben werden.','Sie verhindern jegliche Vererbung von Eigenschaften.','Sie zerstören die molekulare Struktur der DNA.'], correct:1 },
-      { q:'Warum ist die Epigenetik für die Medizin so attraktiv (Absatz 3)?', options:['Weil epigenetische Modifikationen wieder rückgängig gemacht werden können.','Weil sie chirurgische Eingriffe völlig überflüssig macht.','Weil sie Gendefekte innerhalb von Minuten heilt.','Weil sie keine wissenschaftliche Forschung erfordert.'], correct:0 }
-    ]
-  },
-  { ...TEMPLATE[3],
-    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
-    title:'Aufgabe 4: Die Zukunft des universitären Studium',
-    passageText:`Die Digitalisierung der Hochschullehre hat durch den Schub der letzten Jahre eine neue Stufe erreicht. <strong>[1] Digitale Lehrformate bieten den Studierenden eine noch nie dagewesene zeitliche und räumliche Flexibilität beim Wissenserwerb.</strong> Doch reine Online-Lehre stößt schnell an Grenzen. <strong>[2] Das akademische Studium lebt vom unmittelbaren Diskurs, dem gemeinsamen Experimentieren und dem persönlichen Austausch auf dem Campus.</strong> Eine reine Virtualisierung würde den Kern der akademischen Bildung entkerten. <strong>[3] Es besteht die Gefahr, dass soziale Ungleichheiten durch rein digitale Lernumgebungen eher verstärkt als abgebaut werden.</strong> Hochschulen müssen daher zukunftsfähige Hybridmodelle entwickeln. <strong>[4] Nur eine durchdachte Kombination aus digitalen Werkzeugen und Präsenzlehre sichert eine hohe Qualität der Ausbildung.</strong>`,
-    textStellen:[1, 2, 3, 4],
-    options:[
-      'Der Experte empfiehlt eine ausgewogene Synthese verschiedener Lernwelten.',
-      'Der Experte hebt Vorteile ortsunabhängigen Lernens hervor.',
-      'Der Experte unterstreicht die unersetzbare Bedeutung des Campuslebens.',
-      'Der Experte äußert Bedenken bezüglich der Chancengerechtigkeit.',
-      'Der Experte fordert die sofortige Schließung aller Universitätsgebäude.'
-    ],
-    correct:[1, 2, 3, 0]
-  },
-  { ...TEMPLATE[4],
-    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Methode A (Klassische KI), Methode B (Deep Learning), zu beiden oder zu keiner passt.',
-    title:'Aufgabe 5: Vergleich von Ansätzen der Künstlichen Intelligenz',
-    passage:'In der Informatik unterscheidet man zwei grundlegende Ansätze zur Entwicklung intelligenter Systeme. Methode A (Symbolische KI) basiert auf explizit einprogrammierten Regeln und logischen Verknüpfungen. Sie ist hochgradig transparent und nachvollziehbar, stößt jedoch bei unstrukturierten Daten wie Bildern oder Sprache schnell an Grenzen. Methode B (Deep Learning) nutzt künstliche neuronale Netze, die selbstständig aus riesigen Datenmengen lernen. Sie erzielt herausragende Ergebnisse bei der Mustererkennung, leidet jedoch unter dem Problem der fehlenden Erklärbarkeit ("Black-Box-Problem"). Beide Methoden zielen darauf ab, kognitive Aufgaben automatisiert zu lösen.',
-    columns:['Methode A (Symbolisch)','Methode B (Deep Learning)','beide','passt nicht'],
-    items:[
-      {text:'Basiert auf manuell programmierten logischen Regelwerken.', correct:0},
-      {text:'Lent Muster eigenständig aus großen Datenmengen ohne feste Regeln.', correct:1},
-      {text:'Zeigt herausragende Leistung bei der automatischen Bild- und Spracherkennung.', correct:1},
-      {text:'Ist im Entscheidungsprozess transparent und Schritt für Schritt nachvollziehbar.', correct:0},
-      {text:'Leidet unter dem sogenannten Black-Box-Problem der fehlenden Transparenz.', correct:1},
-      {text:'Zielt auf die automatisierte Bewältigung kognitiver Aufgaben ab.', correct:2},
-      {text:'Wird ausschließlich in biologischen Gehirnen angewendet.', correct:3}
-    ]
-  },
-  { ...TEMPLATE[5],
-    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
-    title:'Aufgabe 6: Vor- und Nachteile von KI in der medizinischen Diagnostik',
-    passage:'Der Einsatz künstlicher Intelligenz (KI) in der medizinischen Bildgebung verspricht eine Revolution bei der Früherkennung von Erkrankungen. Ein Hauptvorteil besteht in der extrem hohen Geschwindigkeit und Präzision, mit der Algorithmen Aufnahmen wie MRTs oder Röntgenbilder analysieren und selbst kleinste Gewebeveränderungen erkennen können. Zudem entlastet dies Ärzte von Routineaufgaben. Demgegenüber stehen gravierende Nachteile: Bei fehlerhaften Trainingsdaten drohen systematische Fehlentscheidungen der Systeme. Darüber hinaus sind haftungsrechtliche Fragen bei medizinischen Fehldiagnosen durch autonome Software bis heute rechtlich unzureichend geklärt.',
-    aussagen:[
-      { key:'a', text:'[a] Ungeklärte juristische Haftung bei fälschlicherweise gestellten Diagnosen' },
-      { key:'b', text:'[b] Extrem schnelle und präzise Auswertung medizinischer Bilddaten' },
-      { key:'c', text:'[c] Risiko von Fehldiagnosen durch fehlerhafte oder verzerrte Trainingsdaten' },
-      { key:'d', text:'[d] Vollständige Abschaffung aller menschlichen Ärztinnen und Ärzte' },
-      { key:'e', text:'[e] Entlastung des Fachpersonals bei zeitaufwendigen Routineanalysen' },
-      { key:'f', text:'[f] Garantiert 100-prozentige Heilung aller Krebserkrankungen' }
-    ],
-    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
-  },
-  { ...TEMPLATE[6],
-    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
-    title:'Aufgabe 7: Entwicklung der Studierendenzahlen in Deutschland',
-    passage:'Die Zahl der Studierenden an deutschen Hochschulen ist von 2005 bis 2020 kontinuierlich angestiegen und erreichte einen Höchststand von knapp 3 Millionen. Seit 2021 ist jedoch erstmals wieder ein leichtes Abschmelzen der Erstsemesterzahlen zu beobachten, was Experten primär auf demografische Faktoren zurückführen.',
-    graphicData:[{year:'2005',val:2.0},{year:'2010',val:2.2},{year:'2015',val:2.7},{year:'2020',val:2.9},{year:'2022',val:2.8}],
-    graphicCaption:'Grafik: Anzahl der Studierenden in Deutschland (in Millionen)',
-    sentences:[
-      {text:'Die Studierendenzahl stieg zwischen 2005 und 2020 stetig an.', wrong:false},
-      {text:'Seit 2021 geht die Zahl der Erstsemester leicht zurück.', wrong:false},
-      {text:'Im Jahr 2005 gab es laut Grafik bereits 3,5 Millionen Studierende.', wrong:true},
-      {text:'Demografische Faktoren gelten als Hauptgrund für den aktuellen Rückgang.', wrong:false},
-      {text:'Die Studierendenzahl hat sich von 2005 bis 2020 mehr als verdreifacht.', wrong:true},
-      {text:'Im Jahr 2020 wurde ein Spitzenwert von knapp 3 Millionen erreicht.', wrong:false},
-      {text:'An deutschen Hochschulen studieren heute überhaupt keine Menschen mehr.', wrong:true}
-    ]
-  }
-];
-
 const TESTS = [
-  {id: 1, title: 'Modelltest 1 (Klett / Humanmedizin)', teile: MT1},
-  {id: 2, title: 'Modelltest 2 (Technik & Psychologie)', teile: MT2},
-  {id: 3, title: 'Modelltest 3 (Klimawandel & Mobilität)', teile: MT3},
-  {id: 4, title: 'Modelltest 4 (Neurowissenschaften & KI)', teile: MT4}
+  {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1}
 ];
 
 let currentTestIdx = 0;
@@ -949,118 +690,6 @@ function scoreTask(task, test){
   return {correct, total};
 }
 
-function renderCorrections(test) {
-  let html = `<h2 style="margin-top:32px;color:var(--teal-dark);">Detaillierte Korrektur</h2>`;
-
-  test.teile.forEach(task => {
-    const a = getBucket(test, task);
-    html += `<div class="corr-card">
-      <div class="corr-title">Aufgabe ${task.teil}: ${escapeHtml(task.title)}</div>`;
-
-    if (task.type === 'gap') {
-      task.gaps.forEach((g, i) => {
-        const uVal = parseInt(a[i]);
-        const isOk = uVal === g.correct;
-        const uText = uVal >= 0 ? g.options[uVal] : 'Keine Antwort';
-        const cText = g.options[g.correct];
-        html += `<div class="corr-item">
-          <strong>Lücke ${i+1}:</strong> 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span> 
-          ${!isOk ? `(Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>)` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'order') {
-      const userOrder = a.order || task.shuffledStart;
-      userOrder.forEach((origIdx, pos) => {
-        const isOk = task.correctOrder[pos] === origIdx;
-        const correctOrigIdx = task.correctOrder[pos];
-        html += `<div class="corr-item">
-          <strong>Position ${pos+1}:</strong> 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(task.items[origIdx])}</span>
-          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(task.items[correctOrigIdx])}</strong>` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'mc') {
-      task.questions.forEach((q, i) => {
-        const uVal = parseInt(a[i]);
-        const isOk = uVal === q.correct;
-        const uText = uVal >= 0 ? String.fromCharCode(97+uVal) + ') ' + q.options[uVal] : 'Keine Antwort';
-        const cText = String.fromCharCode(97+q.correct) + ') ' + q.options[q.correct];
-        html += `<div class="corr-item">
-          <strong>Frage ${i+1}:</strong> 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
-          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'match') {
-      task.textStellen.forEach((ts, i) => {
-        const uVal = parseInt(a[i]);
-        const cVal = task.correct[i];
-        const isOk = uVal === cVal;
-        const uText = uVal >= 0 ? 'Aussage ' + String.fromCharCode(97+uVal) : 'Keine Auswahl';
-        const cText = 'Aussage ' + String.fromCharCode(97+cVal);
-        html += `<div class="corr-item">
-          <strong>Textstelle [${ts}]:</strong> 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
-          ${!isOk ? ` (Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>)` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'table') {
-      task.items.forEach((item, i) => {
-        const uVal = parseInt(a[i]);
-        const isOk = uVal === item.correct;
-        const uText = uVal >= 0 ? task.columns[uVal] : 'Keine Auswahl';
-        const cText = task.columns[item.correct];
-        html += `<div class="corr-item">
-          <strong>${i+1}. ${escapeHtml(item.text)}</strong><br>
-          Ihre Wahl: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
-          ${!isOk ? ` | Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'twocat') {
-      const keys = [
-        {k:'v1', label:'Vorteil 1'}, {k:'v2', label:'Vorteil 2'},
-        {k:'n3', label:'Nachteil 1'}, {k:'n4', label:'Nachteil 2'}
-      ];
-      keys.forEach(item => {
-        const uKey = a[item.k];
-        const cKey = task.correctMap[item.k];
-        const isOk = uKey === cKey;
-        const uObj = task.aussagen.find(x => x.key === uKey);
-        const cObj = task.aussagen.find(x => x.key === cKey);
-        const uText = uObj ? uObj.text : 'Keine Auswahl';
-        const cText = cObj ? cObj.text : '';
-        html += `<div class="corr-item">
-          <strong>${item.label}:</strong> 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
-          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'summary') {
-      task.sentences.forEach((s, i) => {
-        const userChecked = !!a[i];
-        const isWrongSentence = s.wrong;
-        const isOk = userChecked === isWrongSentence;
-        html += `<div class="corr-item">
-          <span>"${escapeHtml(s.text)}"</span><br>
-          Sollte angekreuzt werden: <strong>${isWrongSentence ? 'JA (Falsch)' : 'NEIN (Richtig)'}</strong> | 
-          Ihre Auswahl: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${userChecked ? 'Angekreuzt' : 'Nicht angekreuzt'}</span>
-        </div>`;
-      });
-    }
-
-    html += `</div>`;
-  });
-
-  return html;
-}
-
 function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
@@ -1081,14 +710,11 @@ function showResults(){
   let tdn = 'unterhalb TDN 3';
   if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)'; else if(pct >= 44) tdn = 'TDN 3 (B2)';
 
-  const corrHtml = renderCorrections(test);
-
   document.getElementById('main').innerHTML = `
     <div class="results">
       <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
       <h2>Ergebnisse — ${test.title}</h2>
       ${rows}
-      ${corrHtml}
       <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
     </div>
   `;
