@@ -549,7 +549,6 @@ const MT2 = [
 
 /* ==========================================================================
    MODELLTEST 3 (COMPLEXIFIÉ - TDN 5 / C1+)
-   Thema: Dekarbonisierung, Systemtransformation & Rohstoffökonomie
    ========================================================================== */
 const MT3 = [
   {
@@ -668,7 +667,6 @@ const MT3 = [
 
 /* ==========================================================================
    MODELLTEST 4 (COMPLEXIFIÉ - TDN 5 / C1+)
-   Thema: Neurowissenschaften, Epigenetik & KI-Gouvernance
    ========================================================================== */
 const MT4 = [
   {
@@ -795,11 +793,21 @@ const TESTS = [
   { id: 4, title: 'Modelltest 4 (Neurowissenschaften & Gouvernance - C1+)', teile: MT4 }
 ];
 
+// Configuration des temps spécifiques par Aufgabe (en secondes)
+// Aufgabe 1: 4 min (240s)
+// Aufgabe 2: 5 min (300s)
+// Aufgabe 3: 15 min (900s)
+// Aufgabe 4: 6 min (360s)
+// Aufgabe 5: 9 min (540s)
+// Aufgabe 6: 7 min (420s)
+// Aufgabe 7: 7 min (420s)
+const TASK_TIMES_SECONDS = [240, 300, 900, 360, 540, 420, 420];
+
 let currentTestIdx = 0;
 let current = 0;
 let userAnswers = {};
 let timerInterval = null;
-let timeLeft = 600; // 10 Minuten Standardzeit pro Aufgabe
+let timeLeft = 0;
 
 function escapeHtml(text) {
   if (!text) return '';
@@ -820,7 +828,7 @@ function showTestSelect() {
       <div class="card-select" onclick="selectTest(${i})">
         <div>
           <h3>${escapeHtml(t.title)}</h3>
-          <p>7 wissenschaftssprachliche Aufgaben (B2 bis C1+ / TDN 5 Niveau)</p>
+          <p>7 wissenschaftssprachliche Aufgaben mit individuellen Zeitlimits (B2 bis C1+ / TDN 5 Niveau)</p>
         </div>
         <button class="btn-start">Test starten</button>
       </div>
@@ -841,14 +849,15 @@ function selectTest(idx) {
 
 function startTimer() {
   clearTimer();
-  timeLeft = 600;
+  // Attribution du temps spécifique selon l'Aufgabe active
+  timeLeft = TASK_TIMES_SECONDS[current] || 300;
   updateTimerDisplay();
   timerInterval = setInterval(() => {
     timeLeft--;
     updateTimerDisplay();
     if (timeLeft <= 0) {
       clearTimer();
-      alert("Die Zeit für diese Aufgabe ist abgelaufen!");
+      alert(`Die Zeit für Aufgabe ${current + 1} ist abgelaufen!`);
       if (current < TESTS[currentTestIdx].teile.length - 1) {
         current++;
         renderTask();
@@ -1002,7 +1011,7 @@ function renderTask() {
     <div class="task-card">
       <div class="task-header">
         <span class="task-title">Teil ${task.teil}: ${escapeHtml(task.title)}</span>
-        <span class="timer-box" id="timer">10:00</span>
+        <span class="timer-box" id="timer">--:--</span>
       </div>
       ${bodyHtml}
     </div>
