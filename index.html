@@ -101,8 +101,6 @@
   .result-row .ok{color:var(--correct);font-weight:700;}
   .result-row .no{color:var(--wrong);font-weight:700;}
   .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
-
-  /* Custom styling for Aufgabe 6 Vorteils/Nachteils Table */
   .a6-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
   .a6-statements { background: var(--bg-instructions); padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
   .a6-statements-title { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
@@ -292,11 +290,11 @@ const MT1 = [
     correct:[4, 3, 5, 2]
   },
 
-  /* AUFGABE 5 (Mise à jour d'après la capture d'écran Klett - 4 Colonnes C1) */
+  /* AUFGABE 5 */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
     title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
-    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen[span_0](start_span)[span_0](end_span). Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit[span_1](start_span)[span_1](end_span). Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen[span_2](start_span)[span_2](end_span). Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus[span_3](start_span)[span_3](end_span). Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt[span_4](start_span)[span_4](end_span). Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren[span_5](start_span)[span_5](end_span). Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet[span_6](start_span)[span_6](end_span). Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen[span_7](start_span)[span_7](end_span).',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
     columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
     items:[
       {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
@@ -309,7 +307,7 @@ const MT1 = [
     ]
   },
 
-  /* AUFGABE 6 (Niveau C1) */
+  /* AUFGABE 6 */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
@@ -347,8 +345,180 @@ const MT1 = [
   }
 ];
 
+/* NEU: Modelltest 2 (MT2) basierend exakt auf den von Ihnen hochgeladenen Aufgaben */
+const MT2 = [
+  /* Aufgabe 1: Mikrobiologie & Hitzetoleranz */
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
+    segments:[
+      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzieller Schlüsselpunkt ist: Demnach ',
+      ' diese Organismen in thermisch belasteten Gewässern dank spezialisierter Lipidzusammensetzungen, die ein Aufschmelzen der zellulären Barrieren verhindern. Doch die molekularen Feinheiten dieses Schutzmechanismus blieben lange Zeit im Verborgenen. Zudem schien die ',
+      ' von Wissenschaftlern, es handele sich hierbei um eine rein passive Schutzreaktion, zunehmend fragwürdig. In einer neuen molekularbiologischen Untersuchung konnten Forscher nun eindeutig ',
+      ', dass sich die fluiden Eigenschaften der Membranen aktiv und dynamisch an die Umgebungstemperatur anpassen. Mit einer Dicke, die dem Bruchteil einer Mikrometerschicht entspricht, reagiert die Zelle wesentlich schneller auf thermischen Stress als bisher angenommen. Der interessanteste Aspekt allerdings: Es handelt sich keineswegs um einen starren Panzer. Wie aus den proteomischen Analysen hervorgeht, verhält sich die Zytoplasmastruktur stattdessen hochelastisch und besitzt komplexe Regulationsmechanismen. Dieses ',
+      ' Verhalten lässt darauf schließen, dass sich die Organismen bei plötzlicher Erhitzung nicht irreversibel denaturieren. Stattdessen ',
+      ' sich rasch schützende Hitzeschockproteine, die den intrazellulären Zusammenbruch verhindern. Das Geheimnis der enormen Überlebensfähigkeit liegt demnach in den raffinierten biochemischen Schutzreaktionen dieser Spezies.'
+    ],
+    gaps:[
+      {options:['geht','überlebt','gleitet','agiert'], correct:1},
+      {options:['Annahme','Erklärung','Mitteilung','Meldung'], correct:0},
+      {options:['erweisen','nachweisen','verweisen','zurückweisen'], correct:1},
+      {options:['unangekündigte','unerwartete','unvergleichbare','unvorhergesehene'], correct:1},
+      {options:['bildet','entlädt','formt','trennt'], correct:0}
+    ]
+  },
+
+  /* Aufgabe 2: Quantenphysik & Schrödingers Katze */
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Quantenphysik & Schrödingers Katze',
+    correctOrder:[2,1,0,4,3], // Entspricht der korrekten Reihenfolge: C -> B -> A -> E -> D
+    items:[
+      'Dass dieses Gedankenexperiment im makroskopischen Alltag jedoch völlig absurd erscheint, liegt an einem physikalischen Phänomen namens Dekohärenz: Sobald ein Quantensystem mit seiner Umwelt – sei es auch nur mit einem einzigen Luftmolekül – in Wechselwirkung tritt, kollabiert der Überlagerungszustand augenblicklich in eine klassische Realität.',
+      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, die theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
+      'In der mikroskopischen Welt der Quantenmechanik gilt ein physikalisches System, solange es nicht gemessen oder beobachtet wird, in einer sogenannten Superposition – es befindet sich also gleichzeitig in mehreren unterschiedlichen Zuständen.',
+      'Dennoch versuchen moderne Quantenphysiker weltweit immer wieder, diese unsichtbare Grenze zwischen Quanten- und Makrowelt zu verschieben, um extrem empfindliche Quantencomputer zu konstruieren, die weit über die Leistung klassischer Rechenmaschinen hinausgehen.',
+      'Genau aus diesem Grund gelingt es Wissenschaftlern bis heute nicht, makroskopische Objekte wie Katzen oder alltägliche Gegenstände in einen dauerhaften Quantenzustand zu versetzen, da die unkontrollierbare thermische Umgebung jede quantenmechanische Kohärenz innerhalb von Bruchteilen einer Mikrosekunde zerstört.'
+    ],
+    shuffledStart:[0,1,2,3,4]
+  },
+
+  /* Aufgabe 3: Paläontologie & Evolutionsbiologie */
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7.',
+    title:'Aufgabe 3: Neue Unterart von Eiszeit-Leoparden in Thüringen entdeckt',
+    passage:[
+      '(1) Lange Zeit galt die europäische Quartärfauna als gut erforscht, insbesondere was die großen Beutegreifer des Pleistozäns betrifft. Doch eine unscheinbare fossile Unterkieferfragment-Entdeckung in Thüringen hat das herkömmliche Bild der eiszeitlichen Raubkatzenpopulationen ins Wanken gebracht. Paläontologen konnten nachweisen, dass es sich bei den Überresten nicht etwa um eine bereits bekannte Population von Höhlenlöwen oder eurasischen Leoparden handelt, sondern um eine bislang unbeschriebene, eigenständige Unterart des Eiszeit-Leoparden. Dieser Fund wirft ein neues Licht auf die Anpassungsfähigkeit großräumiger Raubtiere an die extremen Klimaschwankungen des eiszeitlichen Europas.',
+      '(2) Die morphologische Analyse der Zähne und des Knochenmaterials offenbarte anatomische Besonderheiten, die eine präzise evolutionäre Einordnung erlaubten. Während moderne Leoparden vor allem in tropischen und subtropischen Wald- oder Savannengebieten heimisch sind, zeigte diese thüringische Form robuste Kiefernstrukturen und markante Zahnabnutzungen, die auf eine spezialisierte Beutejagd in kaltzeitlichen Offenlandschaften hindeuteten. Das Tier war anatomisch exakt auf das Erlegen von mittelgroßen Huftieren wie Renten oder Wildpferden ausgerichtet. Die Forscher sprechen von einer evolutionären Nischenbesetzung, die es der Raubkatze ermöglichte, in direkter Konkurrenz zu etablierten Großräubern wie dem Höhlenbären oder dem Wolf zu überleben.',
+      '(3) Historisch betrachtet stieß die Suche nach eiszeitlichen Raubkatzenresten in Mitteleuropa im 19. Jahrhundert oft auf Skepsis und wissenschaftlichen Streit. Damals neigten Naturforscher dazu, fossile Knochenfragmente vorschnell bestehenden Arten zuzuordnen, um das klassische, hierarchische System der Tierwelt nicht zu gefährden. Kleinere Abweichungen wurden meist als individuelle Anomalien oder geografische Varianten abgetan. Erst mit der Etablierung moderner biometrischer Untersuchungsmethoden und der Paläogenetik im späten 20. Jahrhundert änderte sich dieses Dogma fundamental. Dennoch blieben Funde von echten Leoparden in Mitteleuropa extrem rar, was Skeptiker lange Zeit zu der Annahme verleitete, es habe sich lediglich um saisonale Wanderungsbewegungen einzelner Individuen statt um eine dauerhafte Population gehandelt.',
+      '(4) Heutzutage rücken derartige paläontologische Entdeckungen vor allem deshalb in den Fokus der Biodiversitätsforschung, weil sie präzise Rückschlüsse auf die Robustheit von Ökosystemen bei rasantem Klimawandel zulassen. Für Wissenschaftler ist besonders faszinierend, dass genetische Spuren aus Knochenkollagen belegen, wie stark sich die Populationen während der Kältehöhepunkte isolierten. Dies führte zu genetischen Engpässen, aber auch zu evolutionären Innovationsschüben. Aus naturschutzfachlicher Sicht liefert die Erforschung solcher pleistozäner Relikte wertvolle Analogien dazu, wie moderne Wildtiere auf Habitatfragmentierung und globale Erwärmung reagieren könnten.',
+      '(5) Abseits der rein theoretischen Evolutionsbiologie nutzen Paläontologen hochentwickelte bildgebende Verfahren, um innere Knochenstrukturen zu analysieren, ohne das wertvolle Originalmaterial zu zerstören. Ein kürzlich angewandtes mikro-CT-Verfahren machte es möglich, die Mikrostruktur des Dentins dreidimensional abzubilden, wodurch das Alter und der Ernährungszustand des Tieres exakt rekonstruiert werden konnten. Kritische Stimmen aus dem Fachbereich warnen davor, aus einzelnen Fossilien zu weit reichende Schlüsse über das gesamte regionale Ökosystem zu ziehen, da lokale Mikroklimata die Überlieferung verzerren können.',
+      '(6) Der Umgang mit fossilen Funden und deren wissenschaftliche Interpretation erfordert folglich äußerste methodische Akribie. Dennoch existieren standardisierte Protokolle zur Dokumentation, die weltweit von Museen und Grabungsteams angewendet werden. Dazu gehört die lückenlose Registrierung jedes Fundstücks in zentralen Datenbanken sowie der Verzicht auf invasive Präparationstechniken, sofern diese nicht absolut zwingend sind. Obgleich diese Richtlinien etabliert sind, mahnen Experten zur Wachsamkeit: Der illegale Handel mit Fossilien und die Zerstörung paläontologischer Fundstätten durch unkoordinierte Grabungen gefährden unwiederbringliche Archive unserer Erdgeschichte, weshalb der behördliche Schutz massiv verstärkt werden muss.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'die europäische Quartärfauna bereits vollständig erforscht ist.',
+        'es sich bei dem Fund in Thüringen um eine völlig neue Unterart handelt.',
+        'Höhlenlöwen und Leoparden in Thüringen denselben Lebensraum teilten.',
+        'Klimaschwankungen keine Auswirkungen auf Raubtiere hatten.'
+      ], correct:1 },
+      { q:'Wodurch zeichnet sich laut Absatz 2 die thüringische Form des Eiszeit-Leoparden aus? Durch ...', options:[
+        'Anpassung an tropische Waldgebiete.',
+        'spezialisierte Jagd auf große Beutetiere in Offenlandschaften.',
+        'eine Koexistenz mit modernen Leoparden.',
+        'physische Merkmale, die denen von Höhlenbären ähneln.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich am besten zu Absatz 3?', options:[
+        'Der wissenschaftliche Streit um fossile Klassifikationen im Wandel',
+        'Die Entstehung der modernen Paläogenetik im 19. Jahrhundert',
+        'Warum Leoparden dauerhaft nach Mitteleuropa einwanderten',
+        'Die Überwindung von Migrationsmythen durch Geologen'
+      ], correct:0 },
+      { q:'Laut Absatz 4 rücken paläontologische Entdeckungen heute in den Fokus, weil sie ...', options:[
+        'die Ausbreitung moderner Wildtiere verhindern helfen.',
+        'Einblicke in die Widerstandskraft von Ökosystemen bei Klimawandel geben.',
+        'genetische Engpässe bei heutigen Raubtieren künstlich ausgleichen.',
+        'den Nachweis erbringen, dass Eiszeit-Tiere nicht isoliert lebten.'
+      ], correct:1 },
+      { q:'Was fasst den Inhalt von Absatz 5 korrekt zusammen?', options:[
+        'Mikro-CT-Verfahren zerstören stets das empfindliche Knochenmaterial.',
+        'Kritiker lehnen den Einsatz moderner Technologie in der Paläontologie ab.',
+        'Moderne Bildgebung ermöglicht präzise Analysen, doch Vorsicht bei Generalisierungen ist geboten.',
+        'Lokale Mikroklimat machen die Untersuchung von Fossilien unmöglich.'
+      ], correct:2 },
+      { q:'Welche Meinung vertritt der Autor in Absatz 6?', options:[
+        'Er fordert einen verstärkten behördlichen Schutz gegen illegale Grabungen.',
+        'Er hält internationale Standardprotokolle für überflüssig.',
+        'Er empfiehlt den uneingeschränkten Einsatz invasiver Präparationen.',
+        'Er glaubt, dass Museen keine Kontrolle über Funde haben.'
+      ], correct:0 },
+      { q:'Hauptanliegen des Textes ist es, ...', options:[
+        'die Ausgrabungsmethoden in Thüringen lückenlos zu dokumentieren.',
+        'eine neu entdeckte Eiszeit-Leopardenart und deren wissenschaftliche Bedeutung vorzustellen.',
+        'vor dem Aussterben moderner Raubkatzen durch den Klimawandel zu warnen.',
+        'die Fehler früherer Naturforscher im 19. Jahrhundert zu kritisieren.'
+      ], correct:1 }
+    ]
+  },
+
+  /* Aufgabe 4: Kommentar eines Experten zu Rohstoffen (Lithium) */
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
+    passageText:`Die Vorstellung, dass wir bei der Energiewende vollständig von globalen Lieferketten abhängig bleiben und kritische Rohstoffe nur unter ökologisch fragwürdigen Bedingungen aus Übersee importieren können, ist eine These, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch innovative geothermische Verfahren Lithium direkt aus hiesigem Thermalwasser zu gewinnen. Dabei wird das Leichtmetall in einem komplexen technischen Kreislauf herausgefiltert, während das abgekühlte Wasser CO2-neutral in die Tiefe zurückgeleitet wird. <strong>[2] Diese Verfahren sind zugebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt extrem schnell voran. Vielleicht werden wir in Zukunft in der Lage sein, den gesamten hiesigen Bedarf an Batteriematerialien lokal und umweltschonend zu decken. Oder wir werden in den Genuss kommen, dass modernste Bergbautechnologien die Umweltauswirkungen auf ein absolutes Minimum reduzieren. Wenn Sie vor 100 Jahren einem Gelehrten gesagt hatten, dass wir schon bald durch automatisierte Fördertechniken und chemische Direktextraktion gigantische Industrimengen an Rohstoffen gewinnen können, hätte er Sie nur mitleidig angesehen. Und wenn Sie ihm gesagt hatten, dass diese Verfahren mit einem Bruchteil der ökologischen Belastung herkömmlicher Minen arbeiten wurden, hätte er Sie für komplett verrückt erklärt. Doch durch wissenschaftliche und ingenieurtechnische Meisterleistungen ist uns genau das gelungen.<br><br>Die Idee, dass heimische Rohstoffprojekte grundsätzlich zum Scheitern verurteilt sind, könnte auch ein Irrglaube sein. <strong>[3] Dass sie dennoch so unpopulär sind, hängt damit zusammen, dass unsere Vorstellung von der heimischen Natur immer noch von einer unberührten Idylle geprägt ist.</strong> Damals hiess es: Jede technische Eingriff in den Untergrund zerstört unweigerlich die Landschaft. Wenn alle Vorkommen erschlossen sind, wird die Region dauerhaft geschädigt. In Wahrheit sind unsere geologischen Potenziale jedoch enorm und die modernen Sicherheitsstandards extrem hoch. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Ingenieurskunst werden wir immer besser in der Lage sein, die Rohstoffe im Einklang mit der Umwelt zu fördern.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt etwas.',
+      'Der Experte hofft auf etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte räumt etwas ein.',
+      'Der Experte stellt etwas in Frage.',
+      'Der Experte vermutet etwas.',
+      'Der Experte verteidigt etwas.',
+      'Der Experte widerspricht etwas.'
+    ],
+    correct:[4, 3, 5, 2] // [1] -> e (4), [2] -> d (3), [3] -> f (5), [4] -> c (2)
+  },
+
+  /* Aufgabe 5: Zusatzleistungen & Kindergesundheit */
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
+    title:'Aufgabe 5: Wie finanzielle Zusatzleistungen die Kindergesundheit beeinflussen',
+    passage:'Ob sich die gesundheitliche Entwicklung von Kindern durch direkte finanzielle Hilfen für Mütter signifikant verbessern lässt – und wie die Effekte im Vergleich zu klassischen Sachleistungen ausgeprägt sind –, untersuchen Gesundheitsökonomen und Soziologen bereits seit Jahren. Eine aktuelle europaweite Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden zwei Gruppen von Müttern im Hinblick auf fünf gesundheits- und entwicklungsspezifische Indikatoren untersucht: Mütter, die einen monatlichen, bedingungslosen Finanzbonus (Zusatzgeld) erhalten, und Mütter, die im traditionellen, an strenge Auflagen geknüpften Regelsystem der staatlichen Sozialhilfe verblieben sind. Personen der ersten Gruppe, die sich selbst als Empfängerinnen des Zusatzgeldes bezeichneten, erwiesen sich in den Kennzahlen zu Ernährungssicherheit, Vorsorgeuntersuchungen und psychischem Wohlbefinden ihrer Kinder als deutlich proaktiver - sie gaben beispielsweise an, flexibler auf kindliche Bedürfnisse reagieren zu können, ausgewogenere Nahrungsmittel zu kaufen und präventive Arztbesuche termingerecht wahrzunehmen. Mütter im herkömmlichen Regelsystem erzielten dagegen niedrigere Werte in puncto Ernährungsqualität und wiesen häufiger stressbedingte Erschöpfungssymptome auf. Sie sind damit im Mittel stärker von akuten finanziellen Sorgen geplagt, wodurch auch die mentale Gesundheit der Kinder indirekt beeinträchtigt wird.',
+    columns:['Mutter mit Zusatzgeld','Mutter im Regelsystem','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3}, // passt nicht
+      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0}, // Mutter mit Zusatzgeld
+      {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0}, // Mutter mit Zusatzgeld
+      {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1}, // Mutter im Regelsystem
+      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0}, // Mutter mit Zusatzgeld
+      {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3}, // passt nicht
+      {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1} // Mutter im Regelsystem
+    ]
+  },
+
+  /* Aufgabe 6: KI und Sprache */
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Wie künstliche Intelligenz unsere Sprache verarmt',
+    passage:'Der Einfluss künstlicher Intelligenz auf unsere alltägliche Kommunikation und Sprachkultur ist in den letzten Jahren rasant gewachsen. Einerseits bieten generative KI-Systeme enorme Potenziale: Sie können Texte in Sekundenschnelle zusammenfassen, fehlerfrei übersetzen und stilistisch anpassen. Die Effizienzsteigerung im akademischen und beruflichen Bereich ist unbestritten, da wiederkehrende Schreibarbeiten automatisiert erledigt werden. Doch diese Bequemlichkeit hat ihren Preis. Linguisten warnen vor einer schleichenden Verarmung unseres Wortschatzes und dem Verlust individueller Ausdrucksformen. Wenn wir uns zunehmend auf standardisierte Textvorschläge verlassen, schrumpft die sprachliche Vielfalt, und komplexe Nuancen gehen verloren.<br><br>Besonders kritisch sehen Sprachforscher die Tatsache, dass generative Modelle oft zu sprachlichen Klischees und vorhersehbaren Formulierungen neigen. Dies führt zu einer Homogenisierung des schriftlichen Ausdrucks, bei der persönliche Stimmen und kreative Stilmittel zugunsten einer glatten, aber sterilen Durchschnittssprache verblassen. Zwar lässt sich durch den gezielten Einsatz von KI die Produktivität massiv steigern, doch wer verlernt, komplexe Gedanken selbst in Worte zu fassen, gefährdet langfristig seine kognitive und rhetorische Flexibilität. Dennoch wäre es verfehlt, KI-Technologien pauschal zu verteufeln. Sie können wertvolle Werkzeuge sein, sofern sie kritisch und ergänzend genutzt werden, anstatt das eigene Nachdenken und Formulieren komplett zu ersetzen. Der bewusste Umgang mit diesen neuen Werkzeugen ist daher entscheidend, um die sprachliche Kreativität und den Facettenreichtum unseres Wortschatzes zu bewahren.',
+    aussagen:[
+      { key:'a', text:'[a] Deutliche Effizienzsteigerung bei standardisierten Schreibarbeiten' },
+      { key:'b', text:'[b] Vollständiger Ersatz des eigenen kreativen Denkens' },
+      { key:'c', text:'[c] Schleichende Verarmung des individuellen Wortschatzes' },
+      { key:'d', text:'[d] Erhaltung sämtlicher rhetorischer Nuancen' },
+      { key:'e', text:'[e] Homogenisierung und Sterilität des schriftlichen Ausdrucks' },
+      { key:'f', text:'[f] Unproblematische uneingeschränkte Nutzung ohne jegliche Kritik' },
+      { key:'g', text:'[g] Förderung einer enormen sprachlichen Vielfalt' },
+      { key:'h', text:'[h] Verlust der kognitiven Flexibilität bei vollständiger Abhängigkeit' }
+    ],
+    correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'h' }
+  },
+
+  /* Aufgabe 7: Musik und das Gehirn */
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Der Rhythmus des Lernens: Wie Musik das Gehirn beeinflusst',
+    passage:'Ein regelmäßiger Musikkonsum beim Lernen kostet zwar Zeit und Aufmerksamkeit, doch er entlastet nachweislich das Gehirn, senkt den Cortisolspiegel und fördert die Konzentrationsfähigkeit im Vergleich zum Arbeiten in völliger Stille. Sogar die Schüler, die beim Lernen intensiv über laute Kopfhörer beschallt werden, leiden häufiger unter akustischer Reizüberflutung und Konzentrationsproblemen. Doch nicht nur die Oberstufenschüler, sondern auch die Jüngsten zeigen oft ein verändertes Hör- und Lernverhalten. Wie in einer aktuellen Studie in Deutschland festgestellt wurde, benötigen Schüler im Schnitt 32 Minuten, um sich morgens durch gezieltes Musikhören in eine optimale Lernstimmung zu versetzen. Während bei immerhin 22 Prozent der Schüler der Weg zur Schule kürzer als zehn Minuten ist, brauchen 12 Prozent dafür 45 Minuten und länger. Wären sie musikalisch aktiv, würde man sie als klassische Melomanen bezeichnen.<br><br>Wie die Forscher herausfanden, geht das ständige Musikhören im Alltag an den Jugendlichen nicht spurlos vorüber. Ähnlich wie Erwachsene leiden besonders Jugendliche mit langen Lernphasen unter mentaler Erschöpfung. Sie sind zudem unkonzentriert und fühlen sich weniger leistungsfähig. Doch auch Schüler, die gar keine Musik hören, leiden unter derartigen Folgen. Auf Reaktionen aus der Politik wartet man bislang vergeblich und eine Abhilfe scheint nicht in Sicht. In den letzten zehn Jahren mussten immer mehr Musikschulen schließen, weil beispielsweise qualifizierte Musiklehrer fehlten. Für die Schüler ist dies fatal: Sie müssen immer monotonere Lehrmethoden in Kauf nehmen – und damit auch die mangelnde Kreativität, die damit verbunden ist. Zum Bildungserfolg der Jugendlichen trägt das sicherlich nicht bei.',
+    graphicData:[{year:'1. Satz',val:1},{year:'2. Satz',val:1},{year:'3. Satz',val:1},{year:'4. Satz',val:1},{year:'5. Satz',val:1},{year:'6. Satz',val:1}],
+    graphicCaption:'Grafik zur Zusammenfassung der Sätze (Modelltest 2)',
+    sentences:[
+      {text:'Musik hebt unsere Stimmung und hilft dabei, Anspannung abzubauen.', wrong:false},
+      {text:'Sie wirkt sich auf Schüler ebenso positiv aus wie auf Erwachsene.', wrong:false},
+      {text:'Häufige Folgen des Musikhörens bei zu hoher Lautstärke sind Gehörschäden und Konzentrationsstörungen.', wrong:true},
+      {text:'Diese Auswirkungen zeigen sich bei Jugendlichen ab einer Beschallungsdauer von einer knappen halben Stunde.', wrong:false},
+      {text:'Das ist die Dauer eines durchschnittlichen Schulwegs in Deutschland.', wrong:false},
+      {text:'Erst- und Zweitklässler hören noch häufiger Musik beim Lernen als ältere Schüler.', wrong:true},
+      {text:'Ältere Schüler sind stärker von der positiven Gehirnstimulation überzeugt.', wrong:false},
+      {text:'Eine Verbesserung der Situation wurde nun politisch angekündigt.', wrong:true}
+    ]
+  }
+];
+
+/* MISE À JOUR DU TABLEAU DES TESTS (MT1 et MT2 inclus) */
 const TESTS = [
-  {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1}
+  {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
+  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2}
 ];
 
 let currentTestIdx = 0;
