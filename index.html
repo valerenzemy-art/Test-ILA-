@@ -36,7 +36,7 @@
   .select-screen h2{color:var(--teal-dark);margin-bottom:6px;}
   .select-screen p{color:var(--text-soft);font-size:.92rem;max-width:560px;margin:0 auto 26px;}
   .cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
-  .sel-card{width:240px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
+  .sel-card{width:260px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
   .sel-card:hover{border-color:var(--teal);}
   .sel-card .sc-title{font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
   .sel-card .sc-desc{font-size:.8rem;color:var(--text-soft);}
@@ -102,7 +102,6 @@
   .result-row .no{color:var(--wrong);font-weight:700;}
   .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
 
-  /* Custom styling for Aufgabe 6 Vorteils/Nachteils Table */
   .a6-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
   .a6-statements { background: var(--bg-instructions); padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
   .a6-statements-title { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
@@ -149,8 +148,8 @@ const TEMPLATE = [
   {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
 ];
 
+/* MODELLTEST 1 */
 const MT1 = [
-  /* Aufgabe 1 */
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Schlafmangel und kognitive Leistungsfähigkeit',
@@ -170,8 +169,6 @@ const MT1 = [
       {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
     ]
   },
-
-  /* Aufgabe 2 */
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Die Entdeckung des Penicillins',
@@ -185,8 +182,6 @@ const MT1 = [
     ],
     shuffledStart:[2,4,0,3,1]
   },
-
-  /* AUFGABE 3 (Niveau C1) */
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
     title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
@@ -200,82 +195,17 @@ const MT1 = [
       '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
     ],
     questions:[
-      { 
-        q:'In Absatz 1 wird gesagt, dass ...', 
-        options:[
-          'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
-          'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
-          'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
-          'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', 
-        options:[
-          'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
-          'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
-          'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
-          'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', 
-        options:[
-          'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
-          'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
-          'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
-          'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
-        ], 
-        correct:2 
-      },
-      { 
-        q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', 
-        options:[
-          'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
-          'Patienten mit chronischen Schlafstörungen vollständig heilen.',
-          'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
-          'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
-        ], 
-        correct:2 
-      },
-      { 
-        q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', 
-        options:[
-          'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
-          'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
-          'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
-          'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
-        ], 
-        correct:1 
-      },
-      { 
-        q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', 
-        options:[
-          'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
-          'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
-          'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
-          'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
-        ], 
-        correct:3 
-      },
-      { 
-        q:'Hauptanliegen des gesamten Textes ist es, ...', 
-        options:[
-          'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
-          'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
-          'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
-          'vor den Gefahren des normalen REM-Schlafs zu warnen.'
-        ], 
-        correct:1 
-      }
+      { q:'In Absatz 1 wird gesagt, dass ...', options:['die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.','die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.','eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.','luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:['eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.','eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.','schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.','eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:['Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften','Die Ablehnung von Klarträumen in östlichen Kulturkreisen','Kulturübergreifendes und historisches Interesse an der Traumbewusstheit','Die Erfindung des Klartraums durch die moderne Psychoanalyse'], correct:2 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:['Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.','Patienten mit chronischen Schlafstörungen vollständig heilen.','Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.','den REM-Schlaf künstlich um mehrere Stunden verlängern.'], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:['Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.','Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.','Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.','Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'], correct:1 },
+      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:['Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.','Er fordert das Verbot jeglicher Schlafforschung am Menschen.','Er steht der Trauminduktion völlig gleichgültig gegenüber.','Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'], correct:3 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:['Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.','über den Forschungsstand und die Komplexität des Klarträumens zu informieren.','die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.','vor den Gefahren des normalen REM-Schlafs zu warnen.'], correct:1 }
     ]
   },
-
-  /* AUFGABE 4 (Niveau C1) */
   { ...TEMPLATE[3],
-    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
     title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
     passageText:`Die verhängnisvolle Annahme, dass der Menschheit durch unkontrollierten Konsum zwangsläufig der Kollaps droht und wir daher eine drastische Wachstumsrücknahme erzwingen müssen, gehört zum festen Dogma moderner Umweltdebatten. <strong>[1] Ob diese radikale Verzichtshypothese in wissenschaftlicher Hinsicht jedoch tatsächlich belastbar ist, darf ernsthaft in Zweifel gezogen werden.</strong> Durch fortschrittliche biochemische Verfahren ist die Synthetisierung von Rohstoffen bereits heute Realität. <strong>[2] Man muss allerdings unumwunden einräumen, dass derartige Syntheseverfahren derzeit noch außerordentlich energieintensiv und kostspielig sind.</strong> Der technologische Wandel vollzieht sich jedoch exponentiell. Womöglich werden molekulare Fertigungsverfahren in wenigen Jahrzehnten Rohstoffknappheiten komplett überflüssig machen. Die Theorie der Grenzen des Wachstums entpuppt sich somit womöglich als gedanklicher Rückschritt. <strong>[3] Dass sich dieses Bedrohungsszenario dennoch so hartnäckig in den Köpfen hält, dürfte vor allem darin begründet liegen, dass unser Denken in steinzeitlichen Kategorien begrenzter Vorräte verhaftet bleibt.</strong> In einer von Innovation geprägten Welt sind Ressourcen im Wesentlichen unbegrenzt. <strong>[4] Dank menschlicher Erfindungskraft und technologischem Pioniergeist werden wir künftig in der Lage sein, völlig neue Energie- und Materialquellen zu erschließen.</strong>`,
     textStellen:[1, 2, 3, 4],
@@ -291,12 +221,10 @@ const MT1 = [
     ],
     correct:[4, 3, 5, 2]
   },
-
-  /* AUFGABE 5 (Mise à jour d'après la capture d'écran Klett - 4 Colonnes C1) */
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
     title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
-    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen[span_0](start_span)[span_0](end_span). Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit[span_1](start_span)[span_1](end_span). Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen[span_2](start_span)[span_2](end_span). Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus[span_3](start_span)[span_3](end_span). Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt[span_4](start_span)[span_4](end_span). Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren[span_5](start_span)[span_5](end_span). Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet[span_6](start_span)[span_6](end_span). Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen[span_7](start_span)[span_7](end_span).',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
     columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
     items:[
       {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
@@ -308,8 +236,6 @@ const MT1 = [
       {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
     ]
   },
-
-  /* AUFGABE 6 (Niveau C1) */
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
@@ -326,8 +252,6 @@ const MT1 = [
     ],
     correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
   },
-
-  /* Aufgabe 7 */
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Wachstum des E-Commerce',
@@ -347,8 +271,118 @@ const MT1 = [
   }
 ];
 
+/* MODELLTEST 2 */
+const MT2 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Netzstabilität im Zeitalter erneuerbarer Energien',
+    segments:[
+      'Die Umstellung der Energieversorgung auf erneuerbare Quellen stellt die Betreiber von Stromnetzen vor erhebliche ',
+      ' Herausforderungen. Da die Einspeisung von Wind- und Sonnenenergie stark von Witterungsbedingungen ',
+      ', kommt es im Netzverband häufiger zu Schwankungen. Um eine flächendeckende Stromversorgung weiterhin zu ',
+      ', müssen neuartige Speichermedien und intelligente Steuerungssysteme implementiert werden. Wissenschaftler betonen, dass ohne einen konsequenten Ausbau der Infrastruktur das Ausfallrisiko messbar ',
+      ' könnte. Aus diesem Grund werden derzeit umfassende Investitionen in sogenannte Smart Grids '
+    ],
+    gaps:[
+      {options:['technische','überflüssige','unbedeutende','historische'], correct:0},
+      {options:['abhängt','profitiert','resultiert','verzichtet'], correct:0},
+      {options:['gewährleisten','unterbrechen','verhindern','verzögern'], correct:0},
+      {options:['steigen','sinken','stagnieren','verschwinden'], correct:0},
+      {options:['getätigt','verhindert','abgebrochen','kritisiert'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Meilensteine der Künstlichen Intelligenz',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Die Geburtsstunde der Erforschung künstlicher Intelligenz schlug im Jahr 1956 auf einer historischen Konferenz am Dartmouth College.',
+      'In den darauf folgenden Jahrzehnten wechselten sich Phasen großer Euphorie mit Zeiten ernüchternder Rückschläge und gekürzter Forschungsgelder ab.',
+      'Erst der rasante Anstieg von Rechenkapazitäten und die Verfügbarkeit gewaltiger Datenmengen leiteten ab den 2010er Jahren eine Wende ein.',
+      'Durch den Einsatz tiefgestaffelter neuronaler Netze erzielten Systeme plötzlich verblüffende Erfolge bei der Bild- und Spracherkennung.',
+      'Heute ist die Technologie aus Schlüsselbereichen wie der medizinischen Diagnostik oder der Logistik nicht mehr wegzudenken.'
+    ],
+    shuffledStart:[3,0,4,1,2]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Nudging und die Architektur menschlicher Entscheidungen',
+    passage:[
+      '(1) Das Konzept des sogenannten "Nudging" (Anstupsen) beruht auf verhaltensökonomischen Erkenntnissen über menschliche Entscheidungsmuster. Anstatt Verhalten durch Verbote oder finanzielle Anreize zu erzwingen, werden Wahlarchitekturen so gestaltet, dass Menschen ganz subtil zu vorteilhaften Entscheidungen bewegt werden.',
+      '(2) Kritiker dieser Methode bemängeln oft eine versteckte Manipulation, da den Betroffenen die Beeinflussung selten bewusst ist. Befürworter entgegnen jedoch, dass Entscheidungssituationen niemals neutral gestaltet sein können und staatliches Handeln hier im Sinne des Gemeinwohls eingesetzt werden sollte.',
+      '(3) In zahlreichen Feldstudien konnte gezeigt werden, dass bereits geringfügige Umgestaltungen in Kantinen – etwa das Platzieren von Obst auf Augenhöhe – den Konsum gesünderer Lebensmittel signifikant steigern können, ohne die Wahlfreiheit einzuschränken.'
+    ],
+    questions:[
+      { q:'Was ist das Grundprinzip von "Nudging" laut Absatz 1?', options:['Der Einsatz strenger gesetzlicher Verbote zur Verhaltensänderung.','Die gezielte Beeinflussung von Entscheidungen durch Gestaltung des Umfelds.','Die finanzielle Belohnung von Bürgern bei umweltfreundlichem Verhalten.','Die vollständige Abschaffung jeglicher Entscheidungsoptionen.'], correct:1 },
+      { q:'Welcher Kritikpunkt wird in Absatz 2 gegenüber Nudging geäußert?', options:['Es verursache zu hohe Kosten für staatliche Institutionen.','Es beruhe auf veralteten psychologischen Theorien.','Es könne als unbewusste Manipulation der Bürger wahrgenommen werden.','Es führe zu einer drastischen Erhöhung von Bußgeldern.'], correct:2 },
+      { q:'Was belegen die Studien zur Kantinengestaltung in Absatz 3?', options:['Dass Wahlfreiheit durch Nudging komplett aufgehoben wird.','Dass Kunden ausschließlich ungesunde Nahrungsmittel bevorzugen.','Dass unauffällige Änderungen im Raumangebot das Essverhalten positiv steuern.','Dass Preise von Lebensmitteln wöchentlich angepasst werden müssen.'], correct:2 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar zur Finanzierung von Grundlagenforschung',
+    passageText:`Die Forderung, dass wissenschaftliche Forschung stets einen unmittelbaren wirtschaftlichen Nutzen erbringen muss, greift zu kurz. <strong>[1] Wer Wissenschaft rein nach ihrer kurzfristigen Rendite beurteilt, verkennt das Wesen echter Innovationen.</strong> Wegweisende Entdeckungen entstehen selten nach Fahrplan. <strong>[2] Ein beträchtlicher Teil unseres heutigen Wohlstands basiert auf Erkenntnissen, deren praktische Relevanz bei ihrer Entdeckung völlig ungewiss war.</strong> Natürlich stehen Forschungsförderer unter dem Druck, öffentliche Gelder zu rechtfertigen. <strong>[3] Dennoch birgt eine Verengung der Geldvergabe auf reine Zweckforschung das Risiko, den Nährboden für radikal neue Denkansätze auszutrocknen.</strong> Wenn nur noch risikofreie Projekte finanziert werden, stagniert der Fortschritt. <strong>[4] Wir benötigen daher dringend wieder mehr Mut zur ergebnisoffenen Grundlagenforschung ohne Verwertungsdruck.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte fordert ein Umdenken bei Entscheidungsträgern.',
+      'Der Experte kritisiert eine einseitige ökonomische Sichtweise.',
+      'Der Experte nennt ein historisches Beispiel für Erfolg.',
+      'Der Experte verweist auf den Wert unerwarteter Ergebnisse.',
+      'Der Experte warnt vor den negativen Folgen einer verfehlten Strategie.',
+      'Der Experte schlägt die Abschaffung öffentlicher Gelder vor.'
+    ],
+    correct:[1, 3, 4, 0]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Stadtmodell A, Stadtmodell B, zu beiden oder zu keinem Modell passt.',
+    title:'Aufgabe 5: Konzepte für die nachhaltige Stadtentwicklung',
+    passage:'Im Diskurs um die Zukunftsfähigkeit urbaner Zentren stehen sich zwei dominante Konzepte gegenüber. Stadtmodell A setzt auf die "Kompakte Stadt der kurzen Wege": Durch extreme bauliche Nachverdichtung, Mischung von Wohn- und Gewerbeflächen sowie den Rückbau der automobilen Infrastruktur soll der Energiebedarf minimiert werden. Kritiker verweisen hierbei auf die erhöhte Hitzebelastung in dicht bebauten Innenstädten. Stadtmodell B hingegen vertritt die "Schwammstadt": Hier stehen dezentrale Grünflächen, unversiegelte Böden und unterirdische Rückhaltebecken im Fokus, um Starkregenereignisse abzufangen und das Mikroklima zu kühlen. Beide Modelle streben eine Reduktion der CO2-Emissionen an, jedoch mit konträren baulichen Prioritäten.',
+    columns:['Stadtmodell A','Stadtmodell B','beide','passt nicht'],
+    items:[
+      {text:'Sucht nach Lösungen zur Vermeidung von Hitzestau durch großflächige Bepflanzung.', correct:1},
+      {text:'Fokussiert sich auf die funktionale Mischung von Arbeiten und Wohnen auf engem Raum.', correct:0},
+      {text:'Verfolgt das Ziel, den städtischen CO2-Ausstoß nachhaltig zu senken.', correct:2},
+      {text:'Sieht den vollständigen Abriss aller historischen Altbauten zwingend vor.', correct:3},
+      {text:'Plädiert für den gezielten Rückbau von Autostraßen zugunsten dichter Bebauung.', correct:0},
+      {text:'Setzt auf die Zwischenspeicherung von Niederschlagswasser zur Vermeidung von Überflutungen.', correct:1},
+      {text:'Empfiehlt die Verlegung von Wohngebieten in weit entfernte Vororte.', correct:3}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vor- und Nachteile der ökologischen Landwirtschaft',
+    passage:'Die ökologische Landwirtschaft gilt als Schlüssel zur Erhaltung der Biodiversität und zum Schutz der Grundwasservorkommen, da weitgehend auf synthetische Pflanzenschutzmittel verzichtet wird. Ein weiterer zentraler Vorteil ist der langfristige Erhalt der Bodenfruchtbarkeit durch organische Düngung und vielfältige Fruchtfolgen. Allerdings bringt diese Anbauform auch deutliche Nachteile mit sich: Die Erträge pro Hektar liegen spürbar unter denen der konventionellen Landwirtschaft, was für die gleiche Nahrungsmenge einen höheren Flächenbedarf erforderlich macht. Zudem führt der erhöhte Arbeitsaufwand bei der Unkrautbekämpfung zu deutlich höheren Endverbraucherpreisen.',
+    aussagen:[
+      { key:'a', text:'[a] Erhöhter Flächenbedarf aufgrund geringerer Hektarerträge' },
+      { key:'b', text:'[b] Schonung der Grundwasservorkommen durch Verzicht auf Chemie' },
+      { key:'c', text:'[c] Erforderlichkeit höherer Verkaufspreise wegen Mehraufwands' },
+      { key:'d', text:'[d] Völlige Immunität der Pflanzen gegen Schädlinge' },
+      { key:'e', text:'[e] Langfristige Förderung der natürlichen Bodenfruchtbarkeit' },
+      { key:'f', text:'[f] Garantie für weltweite Nahrungssicherheit ohne Ausnahmen' }
+    ],
+    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Elektromobilität im Schienenverkehr',
+    passage:'Der Elektrifizierungsgrad des deutschen Schienennetzes lag im Jahr 2023 bei rund 62 Prozent. Während der Fernverkehr bereits zu über 90 Prozent elektrisch betrieben wird, fahren im regionalen Güterverkehr noch immer zahlreiche Dieselfahrzeuge. Die Bundesregierung strebt an, bis 2030 einen Elektrifizierungsgrad von 75 Prozent zu erreichen. Als Übergangslösung für nicht-elektrifizierte Strecken werden zunehmend Akku- und Wasserstoffzüge getestet.',
+    graphicData:[{year:'2015',val:58},{year:'2018',val:60},{year:'2020',val:61},{year:'2023',val:62}],
+    graphicCaption:'Grafik: Anteil des elektrifizierten Schienennetzes in Deutschland (%)',
+    sentences:[
+      {text:'Der Elektrifizierungsgrad des Schienennetzes lag 2023 bei etwa 62 Prozent.', wrong:false},
+      {text:'Der Fernverkehr wird heute noch mehrheitlich mit Diesel betrieben.', wrong:true},
+      {text:'Das Ziel für 2030 liegt bei einem Elektrifizierungsgrad von 75 Prozent.', wrong:false},
+      {text:'Auf nicht-elektrifizierten Strecken kommen Testzüge mit Akku- oder Wasserstoffantrieb zum Einsatz.', wrong:false},
+      {text:'Im Jahr 2015 lag der Elektrifizierungsgrad laut Grafik bereits bei über 70 Prozent.', wrong:true},
+      {text:'Der regionale Güterverkehr nutzt noch teilweise Diesel-Fahrzeuge.', wrong:false},
+      {text:'Die Bundesregierung plant den Rückbau elektrischer Oberleitungen.', wrong:true}
+    ]
+  }
+];
+
 const TESTS = [
-  {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1}
+  {id: 1, title: 'Modelltest 1 (Klett / Humanmedizin)', teile: MT1},
+  {id: 2, title: 'Modelltest 2 (Technik & Psychologie)', teile: MT2}
 ];
 
 let currentTestIdx = 0;
