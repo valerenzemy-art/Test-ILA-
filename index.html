@@ -2,1185 +2,1055 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deutsch TestDaF / B2-C1 — 4 Modelltests</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TestDaF C1 — Modelltests Lesen (Digital)</title>
 <style>
-  :root {
-    --bg-dark: #0f172a;
-    --bg-card: #1e293b;
-    --bg-card-hover: #334155;
-    --text-light: #f8fafc;
-    --text-muted: #94a3b8;
-    --teal-primary: #0d9488;
-    --teal-light: #14b8a6;
-    --teal-dark: #0f766e;
-    --accent-blue: #38bdf8;
-    --correct-bg: #134e4a;
-    --correct-border: #2dd4bf;
-    --wrong-bg: #7f1d1d;
-    --wrong-border: #f87171;
-    --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  :root{
+    --teal-dark:#0f3d47; --teal:#155a68; --teal-light:#1d7285;
+    --bg-page:#f4f8f9; --bg-instructions:#e7f1f3; --card-bg:#ffffff;
+    --border:#cfe0e4; --text:#1e2d31; --text-soft:#516268;
+    --correct:#1c7a4a; --wrong:#b3262c;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
   }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-    font-family: var(--font-main);
-    line-height: 1.6;
-    padding-bottom: 80px;
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
+      --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
+    }
   }
-
-  header {
-    background: linear-gradient(135deg, var(--bg-card), var(--teal-dark));
-    padding: 2rem 1rem;
-    text-align: center;
-    border-bottom: 2px solid var(--teal-primary);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  :root[data-theme="dark"]{
+    --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
+    --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
   }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg-page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
+  .app{max-width:920px;margin:0 auto;min-height:100vh;background:var(--card-bg);box-shadow:0 0 24px rgba(0,0,0,.06);}
+  header.topbar{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;padding:18px 20px 14px;padding-top:calc(18px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;align-items:flex-start;}
+  header.topbar .brand{font-size:1.5rem;font-weight:700;letter-spacing:.5px;}
+  header.topbar .subbrand{font-size:.72rem;opacity:.8;margin-top:2px;}
+  header.topbar .tag{font-size:.8rem;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:20px;white-space:nowrap;}
+  .select-screen{padding:36px 20px 60px;text-align:center;}
+  .select-screen h2{color:var(--teal-dark);margin-bottom:6px;}
+  .select-screen p{color:var(--text-soft);font-size:.92rem;max-width:560px;margin:0 auto 26px;}
+  .cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+  .sel-card{width:260px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
+  .sel-card:hover{border-color:var(--teal);}
+  .sel-card .sc-title{font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
+  .sel-card .sc-desc{font-size:.8rem;color:var(--text-soft);}
+  .select-note{font-size:.78rem;color:var(--text-soft);max-width:560px;margin:22px auto 0;}
+  .taskbar{background:var(--bg-instructions);border-bottom:1px solid var(--border);padding:16px 20px 18px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+  .task-count{display:flex;align-items:baseline;gap:6px;min-width:70px;}
+  .task-count .n{font-size:2.1rem;font-weight:800;color:var(--teal-dark);line-height:1;}
+  .task-count .of{font-size:1rem;color:var(--text-soft);}
+  .task-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin-bottom:2px;}
+  .timer-wrap{display:flex;flex-direction:column;align-items:center;}
+  .timer-circle{width:74px;height:74px;border-radius:50%;border:3px solid var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;color:var(--teal-dark);background:var(--card-bg);flex-shrink:0;}
+  .timer-circle.warn{border-color:var(--wrong);color:var(--wrong);}
+  .timer-caption{font-size:.65rem;color:var(--text-soft);margin-top:4px;}
+  .instructions{flex:1;min-width:220px;}
+  .instructions .title{font-weight:700;margin-bottom:4px;font-size:1rem;}
+  .instructions p{margin:2px 0;font-size:.9rem;color:var(--text-soft);}
+  .instructions .time-hint{font-weight:600;color:var(--teal-dark);}
+  main{padding:22px 20px 100px;}
+  h2.task-title{margin-top:0;font-size:1.2rem;color:var(--teal-dark);}
+  .passage{font-size:0.95rem;text-align:justify;line-height:1.65;}
+  .passage p{margin:0 0 16px;}
+  select.gapselect{border:none;border-bottom:2px solid var(--teal);background:var(--bg-instructions);font:inherit;font-weight:600;color:var(--teal-dark);padding:3px 6px;border-radius:4px 4px 0 0;min-width:130px;}
+  select.gapselect.answered{background:#dff0e4;border-color:var(--correct);}
+  .order-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .order-item{border:1px solid var(--border);border-radius:8px;padding:12px 14px;background:var(--bg-instructions);display:flex;gap:10px;align-items:flex-start;}
+  .order-item .pos{font-weight:800;color:#fff;background:var(--teal);border-radius:50%;width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .order-item .txt{flex:1;font-size:.92rem;}
+  .order-controls{display:flex;flex-direction:column;gap:4px;}
+  .order-controls button{border:1px solid var(--border);background:var(--card-bg);color:var(--teal-dark);border-radius:5px;width:30px;height:26px;font-size:.85rem;cursor:pointer;}
+  .order-controls button:disabled{opacity:.3;cursor:default;}
+  .qblock{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+  .qblock:last-child{border-bottom:none;}
+  .qtext{font-weight:600;margin-bottom:8px;font-size:0.95rem;}
+  .opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:.92rem;}
+  .opt:hover{background:var(--bg-instructions);}
+  .opt input{margin-top:3px;}
+  .matchrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;padding:10px;background:var(--bg-instructions);border-radius:8px;}
+  .matchrow .ptxt{flex:1;min-width:200px;font-size:.9rem;}
+  .matchrow select{font:inherit;padding:6px 8px;border-radius:6px;border:1px solid var(--border);min-width:220px;}
+  table.tzt{width:100%;border-collapse:collapse;margin-top:8px;font-size:.83rem;}
+  table.tzt th, table.tzt td{border:1px solid var(--border);padding:8px 6px;text-align:center;}
+  table.tzt th{background:var(--teal);color:#fff;font-weight:600;font-size:.76rem;}
+  table.tzt td.label{text-align:left;font-weight:500;}
+  table.tzt input[type=radio]{width:16px;height:16px;}
+  .graphic-box{background:var(--bg-instructions);border:1px solid var(--border);border-radius:10px;padding:14px;margin:16px 0;}
+  .graphic-box .cap{font-size:.76rem;color:var(--text-soft);margin-top:6px;text-align:center;}
+  .summary-item{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:6px;font-size:.9rem;}
+  .summary-item:hover{background:var(--bg-instructions);}
+  .summary-item input{margin-top:4px;}
+  .count-hint{font-size:.82rem;color:var(--text-soft);margin:10px 0;}
+  footer.navbar{position:sticky;bottom:0;background:var(--card-bg);border-top:1px solid var(--border);padding:12px 20px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  footer .foot-note{font-size:.68rem;color:var(--text-soft);}
+  .btn{border:none;border-radius:6px;padding:11px 18px;font-size:.88rem;font-weight:700;cursor:pointer;color:#fff;background:var(--teal-dark);}
+  .btn.next{background:var(--teal);}
+  .btn:hover{filter:brightness(1.08);}
+  .btn.ghost{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);}
+  .results h2{color:var(--teal-dark);}
+  .score-hero{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:22px;}
+  .score-hero .pct{font-size:2.6rem;font-weight:800;}
+  .score-hero .tdn{font-size:1rem;opacity:.9;margin-top:4px;}
+  .result-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.9rem;}
+  .result-row .ok{color:var(--correct);font-weight:700;}
+  .result-row .no{color:var(--wrong);font-weight:700;}
+  .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
 
-  header h1 {
-    font-size: 1.8rem;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
+  .a6-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+  .a6-statements { background: var(--bg-instructions); padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
+  .a6-statements-title { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
+  .a6-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size:0.88rem; }
+  table.a6-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  table.a6-table th, table.a6-table td { border: 1px solid var(--border); padding: 10px; text-align: left; }
+  table.a6-table th { background: var(--teal); color: #fff; width: 50%; }
+  table.a6-table select { width: 100%; padding: 6px; border-radius: 4px; border: 1px solid var(--border); font: inherit; }
+
+  .corr-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .corr-title { font-weight: 700; color: var(--teal-dark); margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .corr-item { font-size: 0.88rem; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+  .corr-item:last-child { border-bottom: none; }
+  .corr-tag-ok { color: var(--correct); font-weight: 700; }
+  .corr-tag-no { color: var(--wrong); font-weight: 700; }
+
+  @media (max-width:480px){
+    header.topbar{padding:14px 14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px));}
+    .taskbar{padding:14px 14px;gap:12px;}
+    main{padding:18px 14px 90px;}
+    footer.navbar{padding:10px 14px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));}
+    .timer-circle{width:62px;height:62px;font-size:.92rem;}
+    .cards{flex-direction:column;align-items:center;}
+    table.tzt{font-size:.7rem;}
+    .a6-list { grid-template-columns: 1fr; }
   }
-
-  header p {
-    color: var(--accent-blue);
-    font-size: 1rem;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-
-  /* TEST SELECTION */
-  .grid-select {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-
-  .card-select {
-    background: var(--bg-card);
-    border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 1.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .card-select:hover {
-    background: var(--bg-card-hover);
-    border-color: var(--teal-light);
-    transform: translateY(-3px);
-  }
-
-  .card-select h3 {
-    color: var(--accent-blue);
-    margin-bottom: 0.5rem;
-  }
-
-  .card-select p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .btn-start {
-    background: var(--teal-primary);
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    align-self: flex-start;
-  }
-
-  /* TASK UI */
-  .task-card {
-    background: var(--bg-card);
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border: 1px solid #334155;
-  }
-
-  .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #334155;
-  }
-
-  .task-title {
-    color: var(--teal-light);
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  .timer-box {
-    background: #090d16;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    color: #f59e0b;
-    font-weight: bold;
-    font-family: monospace;
-    border: 1px solid #d97706;
-  }
-
-  .task-text {
-    background: #0f172a;
-    padding: 1.2rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    border-left: 4px solid var(--teal-primary);
-    white-space: pre-line;
-  }
-
-  /* INTERACTIVE ELEMENTS */
-  select, input[type="text"] {
-    background: #0f172a;
-    color: var(--text-light);
-    border: 1px solid var(--teal-primary);
-    padding: 0.4rem 0.6rem;
-    border-radius: 6px;
-    font-size: 0.95rem;
-    margin: 0 0.2rem;
-  }
-
-  .mc-option {
-    display: block;
-    margin: 0.5rem 0;
-    padding: 0.8rem;
-    background: #0f172a;
-    border: 1px solid #334155;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-
-  .mc-option:hover {
-    border-color: var(--teal-light);
-  }
-
-  .mc-option input {
-    margin-right: 0.8rem;
-  }
-
-  .order-item {
-    background: #0f172a;
-    padding: 0.8rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #334155;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .order-item select {
-    width: 70px;
-  }
-
-  .table-grid {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-  }
-
-  .table-grid th, .table-grid td {
-    border: 1px solid #334155;
-    padding: 0.8rem;
-    text-align: left;
-  }
-
-  .table-grid th {
-    background: #0f172a;
-    color: var(--accent-blue);
-  }
-
-  /* BOTTOM NAVIGATION BAR */
-  .navbar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #090d16;
-    padding: 0.8rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #334155;
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.5);
-    z-index: 100;
-  }
-
-  .btn {
-    background: #334155;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-  }
-
-  .btn:hover { background: #475569; }
-
-  .btn.next {
-    background: var(--teal-primary);
-  }
-
-  .btn.next:hover {
-    background: var(--teal-light);
-  }
-
-  .taskbar {
-    display: flex;
-    gap: 0.4rem;
-  }
-
-  .task-dot {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #1e293b;
-    border: 1px solid #475569;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.85rem;
-    cursor: pointer;
-  }
-
-  .task-dot.active {
-    border-color: var(--teal-light);
-    background: var(--teal-dark);
-  }
-
-  /* RESULTS VIEW */
-  .results {
-    background: var(--bg-card);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid #334155;
-  }
-
-  .score-hero {
-    text-align: center;
-    padding: 2rem;
-    background: #0f172a;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    border: 2px solid var(--teal-primary);
-  }
-
-  .pct { font-size: 2.5rem; font-weight: bold; color: var(--accent-blue); }
-  .tdn { font-size: 1.2rem; color: var(--teal-light); margin-top: 0.5rem; }
-
-  .result-row {
-    padding: 0.8rem;
-    border-bottom: 1px solid #334155;
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .ok { color: var(--teal-light); font-weight: bold; }
-  .no { color: #f87171; font-weight: bold; }
-
-  .summary-sentence {
-    padding: 0.5rem;
-    margin: 0.3rem 0;
-    border-radius: 4px;
-    background: #0f172a;
-    cursor: pointer;
-    border: 1px solid #334155;
-  }
-
-  .summary-sentence.checked {
-    border-color: #f87171;
-    background: #450a0a;
-  }
-
-  .corr-box {
-    margin-top: 1.5rem;
-    background: #0f172a;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #334155;
-  }
-
-  .corr-item {
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #1e293b;
-  }
-
-  .corr-tag-ok { color: #2dd4bf; font-weight: bold; }
-  .corr-tag-no { color: #f87171; font-weight: bold; }
 </style>
 </head>
 <body>
-
-<header>
-  <h1>Deutsch TestDaF / B2-C1 — Modelltests</h1>
-  <p>Systematisches Leseverstehen & Wissenschaftssprache</p>
-</header>
-
-<div class="container" id="main"></div>
-
-<div class="navbar" id="navbar" style="display:none;">
-  <button class="btn" id="btnPrev">← Zurück</button>
+<div class="app">
+  <header class="topbar">
+    <div>
+      <div class="brand">LESEN C1</div>
+      <div class="subbrand">Digitaler TestDaF · Niveau C1 Niveauanforderung</div>
+    </div>
+    <div class="tag">Niveau C1</div>
+  </header>
   <div class="taskbar" id="taskbar"></div>
-  <button class="btn next" id="btnNext">Weiter →</button>
+  <main id="main"></main>
+  <footer class="navbar" id="navbar"></footer>
 </div>
 
 <script>
-/* ==========================================================================
-   MODELLTEST 1
-   ========================================================================== */
+const TEMPLATE = [
+  {teil:1, type:'gap',     time:240,  label:'Lückentext ergänzen'},
+  {teil:2, type:'order',   time:300,  label:'Textabschnitte ordnen'},
+  {teil:3, type:'mc',      time:900,  label:'Multiple Choice (C1 Level)'},
+  {teil:4, type:'match',   time:360,  label:'Textstellen zuordnen (C1 Level)'},
+  {teil:5, type:'table',   time:540,  label:'Aussagen Kategorien zuordnen'},
+  {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
+  {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
+];
+
+/* MODELLTEST 1 */
 const MT1 = [
-  {
-    teil: 1,
-    title: "Aufgabe 1: Lückentext — Humanmedizin im Wandel",
-    text: "Die universitäre Ausbildung in der Humanmedizin steht vor neuen Herausforderungen. Die stetige <1> von Wissen verlangt neue didaktische Konzepte. Medizinstudierende müssen lernen, Informationen nicht nur auswendig zu lernen, sondern kritisch zu <2>. Zudem gewinnt die empathische Kommunikation mit Patienten zunehmend an <3>. Studiengänge versuchen daher, theoretische Grundlagen früher mit praktischen Erfahrungen zu <4>. Dadurch soll die Kompetenz der zukünftigen Ärztinnen und Ärzte nachhaltig <5> werden.",
-    type: "lückentext",
-    gaps: [
-      { id: 1, options: ["Zunahme", "Abnahme", "Veränderung", "Stagnation"], correct: 0 },
-      { id: 2, options: ["vergessen", "hinterfragen", "kopieren", "sammeln"], correct: 1 },
-      { id: 3, options: ["Bedeutung", "Gefahr", "Schwierigkeit", "Unsicherheit"], correct: 0 },
-      { id: 4, options: ["trennen", "verknüpfen", "isolieren", "beenden"], correct: 1 },
-      { id: 5, options: ["gestärkt", "geschwächt", "gemessen", "geprüft"], correct: 0 }
-    ]
-  },
-  {
-    teil: 2,
-    title: "Aufgabe 2: Satzreihenfolge — Die Entwicklung der Immuntherapie",
-    text: "Bringt die folgenden Abschnitte in eine logische Reihenfolge.",
-    type: "order",
-    items: [
-      { id: "A", text: "Schließlich wurden zielgerichtete Krebstherapien entwickelt, die das Immunsystem direkt aktivieren." },
-      { id: "B", text: "Die Immunologie gehört zu den dynamischsten Forschungsfeldern der modernen Medizin." },
-      { id: "C", text: "Bereits im 19. Jahrhundert erkannte man erste Zusammenhänge zwischen Abwehrkräften und Krankheitserregern." },
-      { id: "D", text: "Später führten die Entdeckungen von Impfstoffen zu einer dramatischen Senkung der Säuglingssterblichkeit." }
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Schlafmangel und kognitive Leistungsfähigkeit',
+    segments:[
+      'Zahlreiche akademische Studien belegen, dass chronischer Schlafmangel die kognitive Leistungsfähigkeit erheblich ',
+      ' kann, selbst wenn Betroffene subjektiv das Gefühl haben, sich an den reduzierten Schlaf gewöhnt zu haben. Besonders betroffen ist dabei das Arbeitsgedächtnis, das für die kurzfristige Speicherung und Verarbeitung komplexer Informationen ',
+      ' ist. Bereits eine einzige durchwachte Nacht kann die Reaktionsgeschwindigkeit messbar ',
+      ', vergleichbar mit den Effekten eines erhöhten Alkoholspiegels. Langfristig wird chronischer Schlafmangel zudem mit einem erhöhten Risiko für verschiedene Herz-Kreislauf-Erkrankungen in ',
+      ' gebracht. Schlafforscherinnen und Schlafforscher empfehlen daher, feste Schlafenszeiten ',
+      ', um dem Körper einen stabilen Rhythmus zu ermöglichen.'
     ],
-    correctOrder: ["B", "C", "D", "A"]
-  },
-  {
-    teil: 3,
-    title: "Aufgabe 3: Multiple Choice — Studienplatzvergabe in der Medizin",
-    text: "Das Auswahlverfahren für das Medizinstudium in Deutschland wurde reformiert. Neben der Abiturnote spielen nun auch Eignungstests (wie der TMS) und praktische Vorerfahrungen eine größere Rolle. Das Ziel dieser Reform ist es, auch Bewerberinnen und Bewerbern mit einem etwas schlechteren Notendurchschnitt eine Chance zu geben, wenn sie eine hohe soziale und praktische Kompetenz aufweisen.",
-    type: "mc",
-    questions: [
-      {
-        text: "Was ist das Hauptziel der Reform des Auswahlverfahrens?",
-        options: [
-          "Abo-Noten sollen gar keine Rolle mehr spielen.",
-          "Mehr Kriterien neben der Schulnote sollen berücksichtigt werden.",
-          "Das Studium soll insgesamt verkürzt werden.",
-          "Praktische Vorerfahrungen werden abgeschafft."
-        ],
-        correct: 1
-      }
+    gaps:[
+      {options:['beeinträchtigen','fördern','stabilisieren','ignorieren'], correct:0},
+      {options:['zuständig','begeistert','abhängig','überzeugt'], correct:0},
+      {options:['verringern','erhöhen','stabilisieren','ausgleichen'], correct:0},
+      {options:['Verbindung','Kontakt','Rücksicht','Hinsicht'], correct:0},
+      {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
     ]
   },
-  {
-    teil: 4,
-    title: "Aufgabe 4: Zuordnung — Meinungen zum Numerus Clausus",
-    text: "Ordnet die Aussagen den Personen zu.",
-    type: "match",
-    options: [
-      { id: "A", text: "Befürwortet den Numerus Clausus als verlässliches Leistungsprinzip." },
-      { id: "B", text: "Kritisiert, dass gute Schulnoten nicht automatisch gute Ärzte machen." },
-      { id: "C", text: "Schlägt vor, Auswahlgespräche als wichtigstes Kriterium zu nutzen." }
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Die Entdeckung des Penicillins',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Der schottische Bakteriologe Alexander Fleming bemerkte 1928 in seinem Labor eher zufällig, dass sich auf einer vergessenen Bakterienkultur ein Schimmelpilz gebildet hatte.',
+      'Er stellte fest, dass rund um den Schimmelpilz keine Bakterien mehr wuchsen, und vermutete, dass der Pilz eine bakterienabtötende Substanz absondern müsse.',
+      'Fleming veröffentlichte seine Beobachtungen, doch zunächst zeigte die wissenschaftliche Gemeinschaft nur wenig Interesse an einer praktischen Anwendung der Entdeckung.',
+      'Erst rund ein Jahrzehnt später gelang es einem Forschungsteam um Howard Florey und Ernst Chain, den Wirkstoff Penicillin in ausreichender Reinheit und Menge für klinische Tests herzustellen.',
+      'Während des Zweiten Weltkriegs wurde Penicillin schließlich in großem Maßstab produziert und rettete Schätzungen zufolge Hunderttausenden verwundeter Soldaten das Leben.'
     ],
-    questions: [
-      { text: "1. 'Ein Notendurchschnitt von 1,0 zeigt Disziplin und Belastbarkeit, was im Studium unverzichtbar ist.'", correct: "A" },
-      { text: "2. 'Empathie und praktische Begabung lassen sich nicht durch eine Mathe-Klausur messen.'", correct: "B" }
+    shuffledStart:[2,4,0,3,1]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
+    passage:[
+      '(1) Das Phänomen des luziden Träumens, bei dem sich der Schläfende seines Traumzustands bewusst ist und diesen mitunter aktiv steuern kann, wurde lange Zeit von der empirischen Wissenschaft skeptisch betrachtet. Erst mit der Standardisierung elektroenzephalografischer Messungen im REM-Schlaf gelang der schlüssige Nachweis: Etwa die Hälfte der Weltbevölkerung hat mindestens einmal im Leben ein solches Phänomen erfahren, während nur eine kleine Minderheit in der Lage ist, dieses Phänomen regelmäßig und gezielt herbeizuführen.',
+      '(2) Neurowissenschaftlich zeichnet sich der Klartraum durch eine hybride Bewusstseinsform aus. Während der REM-Schlaf gewöhnlich durch eine Deaktivierung des dorsolateralen präfrontalen Kortex gekennzeichnet ist – was den Verlust des kritischen Denkens und der Orientierung erklärt –, zeigt sich bei Klarträumern in genau dieser Region eine signifikante Reaktivierung. Dies ermöglicht das Wiedererlangen von Selbstreflexion, logischer Urteilskraft und metakognitiven Fähigkeiten mitten im Traumgeschehen.',
+      '(3) Historisch gesehen ist die Faszination für das Phänomen keineswegs ein modernes Nebenprodukt der modernen Psychologie. Bereits in antiken philosophischen Abhandlungen sowie in indigenen und östlichen Traditionen spielte die Schulung des Traum-Bewusstseins eine zentrale Rolle. Diese kulturübergreifende Kontinuität verdeutlicht, dass das Streben nach Kontrolle über den eigenen Geist im Schlaf ein tief verankertes menschliches Anliegen darstellt.',
+      '(4) In der therapeutischen Praxis eröffnet die Klartraumforschung vielversprechende Ansätze zur Linderung schwerer psychischer Leiden. Insbesondere Patienten mit posttraumatischen Belastungsstörungen (PTBS), die unter chronischen Alpträumen leiden, profitieren von verhaltenstherapeutischen Techniken des luziden Träumens. Durch das gezielte Einüben von Re-Skripting-Strategien lernen Betroffene, bedrohliche Traumszenarien umzugestalten und so emotionale Erleichterung zu erfahren.',
+      '(5) Ein weiterer Aspekt betrifft die plastischen Veränderungen im Gehirn durch sensomotorisches Training im Schlaflabor. Studien zeigen, dass das gedankliche Durchspielen komplexer Sportarten oder Bewegungsabläufe im Klartraum dieselben motorischen Areale im Gehirn stimuliert wie die reale Ausführung. Folglich lassen sich solche Traumerfahrungen messbar auf die motorische Leistungsfähigkeit in der Wachrealität übertragen.',
+      '(6) Trotz dieser Potenziale mahnt die akademische Forschung hinsichtlich der unkritischen Verbreitung von Techniken zur künstlichen Trauminduktion zur Vorsicht. Die unkontrollierte Anwendung von elektrischer Hirnstimulation oder pharmakologischen Präparaten zur Herbeiführung von Klarträumen kann die Schlafarchitektur nachhaltig stören, psychische Dissoziationen begünstigen und schwere Schlafstörungen nach sich ziehen.',
+      '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:['die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.','die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.','eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.','luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:['eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.','eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.','schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.','eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:['Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften','Die Ablehnung von Klarträumen in östlichen Kulturkreisen','Kulturübergreifendes und historisches Interesse an der Traumbewusstheit','Die Erfindung des Klartraums durch die moderne Psychoanalyse'], correct:2 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:['Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.','Patienten mit chronischen Schlafstörungen vollständig heilen.','Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.','den REM-Schlaf künstlich um mehrere Stunden verlängern.'], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:['Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.','Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.','Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.','Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'], correct:1 },
+      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:['Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.','Er fordert das Verbot jeglicher Schlafforschung am Menschen.','Er steht der Trauminduktion völlig gleichgültig gegenüber.','Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'], correct:3 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:['Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.','über den Forschungsstand und die Komplexität des Klarträumens zu informieren.','die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.','vor den Gefahren des normalen REM-Schlafs zu warnen.'], correct:1 }
     ]
   },
-  {
-    teil: 5,
-    title: "Aufgabe 5: Kategorisierung — Diagnoseverfahren",
-    text: "Ordnet die Verfahren der passenden Kategorie zu.",
-    type: "twocat",
-    cat1: "Invasive Verfahren (Eingriff in den Körper)",
-    cat2: "Nicht-invasive Verfahren (von außen)",
-    items: [
-      { text: "1. Magnetresonanztomographie (MRT)", cat: 2 },
-      { text: "2. Gewebeentnahme (Biopsie)", cat: 1 },
-      { text: "3. Ultraschalluntersuchung (Sonographie)", cat: 2 },
-      { text: "4. Herzkatheteruntersuchung", cat: 1 }
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
+    passageText:`Die verhängnisvolle Annahme, dass der Menschheit durch unkontrollierten Konsum zwangsläufig der Kollaps droht und wir daher eine drastische Wachstumsrücknahme erzwingen müssen, gehört zum festen Dogma moderner Umweltdebatten. <strong>[1] Ob diese radikale Verzichtshypothese in wissenschaftlicher Hinsicht jedoch tatsächlich belastbar ist, darf ernsthaft in Zweifel gezogen werden.</strong> Durch fortschrittliche biochemische Verfahren ist die Synthetisierung von Rohstoffen bereits heute Realität. <strong>[2] Man muss allerdings unumwunden einräumen, dass derartige Syntheseverfahren derzeit noch außerordentlich energieintensiv und kostspielig sind.</strong> Der technologische Wandel vollzieht sich jedoch exponentiell. Womöglich werden molekulare Fertigungsverfahren in wenigen Jahrzehnten Rohstoffknappheiten komplett überflüssig machen. Die Theorie der Grenzen des Wachstums entpuppt sich somit womöglich als gedanklicher Rückschritt. <strong>[3] Dass sich dieses Bedrohungsszenario dennoch so hartnäckig in den Köpfen hält, dürfte vor allem darin begründet liegen, dass unser Denken in steinzeitlichen Kategorien begrenzter Vorräte verhaftet bleibt.</strong> In einer von Innovation geprägten Welt sind Ressourcen im Wesentlichen unbegrenzt. <strong>[4] Dank menschlicher Erfindungskraft und technologischem Pioniergeist werden wir künftig in der Lage sein, völlig neue Energie- und Materialquellen zu erschließen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt ein psychologisches Phänomen.',
+      'Der Experte hofft auf eine internationale Regulierung.',
+      'Der Experte prognostiziert eine technologische Entwicklung.',
+      'Der Experte räumt einen aktuellen Nachteil ein.',
+      'Der Experte stellt eine weit verbreitete Annahme in Frage.',
+      'Der Experte vermutet eine Ursache für das Denkmuster.',
+      'Der Experte verteidigt die Position der Verzichtsökonomie.',
+      'Der Experte widerspricht den Grundlagen der Biologie.'
+    ],
+    correct:[4, 3, 5, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
+    title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
+    columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
+      {text:'Diese Gruppe hinterfragt bestehende Normen und Werte eher kritisch.', correct:1},
+      {text:'Diese Gruppe zeigt eine positive Einstellung gegenüber hierarchischen Rangordnungen.', correct:0},
+      {text:'Diese Menschen zeigen sich im sozialen Umgang zugänglicher und verträglicher.', correct:0},
+      {text:'Diese Menschen wählen Haustiere gezielt nach der Übereinstimmung mit dem eigenen Charakter aus.', correct:3},
+      {text:'Diese Gruppe weist eine geringere emotionale Stabilität auf.', correct:1},
+      {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
     ]
   },
-  {
-    teil: 6,
-    title: "Aufgabe 6: Vor- und Nachteile der Telemedizin",
-    text: "Klassifiziert die Aspekte der Telemedizin.",
-    type: "table",
-    headers: ["Vorteil", "Nachteil", "Neutrale Information"],
-    rows: [
-      { text: "Schnelle Konsultation für Patienten im ländlichen Raum.", correctCol: 0 },
-      { text: "Möglicher Verlust des persönlichen Kontakts zwischen Arzt und Patient.", correctCol: 1 },
-      { text: "Verwendung von Videokonferenz-Software zur Beratung.", correctCol: 2 }
-    ]
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
+    passage:'Die wissenschaftliche Pflanzenheilkunde (Phytotherapie) blickt auf eine jahrtausendealte Erfahrungstradition zurück. Im Vergleich zu synthetischen Reinstoffen zeichnen sich phytotherapeutische Vielstoffgemische durch eine bemerkenswerte physiologische Verträglichkeit aus. Dies liegt primär daran, dass die Wirkstoffe in natürlichen Matrixstrukturen vorliegen, was Nebenwirkungen minimiert. Ein weiterer Vorteil besteht in der vielseitigen Verwendbarkeit phytotherapeutischer Präparate, die sowohl topisch als auch systemisch angewendet werden können und oft eine einfache hauseigene Zubereitung erlauben. Demgegenüber stehen jedoch gravierende Nachteile: Im Gegensatz zu synthetischen Arzneimitteln setzt die therapeutische Wirkung von Pflanzenextrakten häufig erst nach einer erheblichen Latenzzeit von mehreren Wochen ein, was einen Akuteinsatz ausschließt. Zudem bergen pflanzliche Inhaltsstoffe ein nicht zu unterschätzendes allergenes Potenzial sowie das Risiko unvorhersehbarer Organreaktionen bei Langzeiteinnahme.',
+    aussagen:[
+      { key:'a', text:'[a] Eigenständige und unkomplizierte Verarbeitung zu Präparaten' },
+      { key:'b', text:'[b] Vollständige Ungiftigkeit pflanzlicher Substanzen' },
+      { key:'c', text:'[c] Hervorragende Eignung für die Notfallmedizin' },
+      { key:'d', text:'[d] Fehlende pharmakologische Nachweisbarkeit' },
+      { key:'e', text:'[e] Längere Dauer bis zum spürbaren Wirkungseintritt' },
+      { key:'f', text:'[f] Möglicherweise Auslösung unvorhergesehener Allergien' },
+      { key:'g', text:'[g] Garantiertes Ersetzen sämtlicher synthetischer Medikamente' },
+      { key:'h', text:'[h] Zahlreiche unterschiedliche Einsatzformen vorhanden' }
+    ],
+    correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
   },
-  {
-    teil: 7,
-    title: "Aufgabe 7: Fehlersuche in der Zusammenfassung",
-    text: "Markiert die Sätze, die inhaltlich falsch sind.",
-    type: "summary",
-    sentences: [
-      { text: "Die Telemedizin ermöglicht Beratungen über digitale Medien.", wrong: false },
-      { text: "Sie ersetzt die persönliche Untersuchung in Notfällen vollständig.", wrong: true },
-      { text: "Viele Patienten schätzen die Zeitersparnis durch Online-Sprechstunden.", wrong: false }
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Wachstum des E-Commerce',
+    passage:'Der Anteil des Online-Handels am gesamten Einzelhandelsumsatz in Deutschland ist in den vergangenen Jahren kontinuierlich gestiegen. Lag der Anteil im Jahr 2015 noch bei rund 9 Prozent, so erreichte er im Jahr 2023 bereits über 19 Prozent. Besonders stark war der Zuwachs zwischen 2020 und 2021, was Fachleute vor allem auf veränderte Einkaufsgewohnheiten während der Pandemie zurückführen. Am stärksten wächst der Online-Handel im Bereich Mode und Elektronik, während Lebensmittel bislang einen vergleichsweise kleinen Anteil ausmachen. Kleinere, inhabergeführte Geschäfte berichten dabei überproportional häufig von Umsatzeinbußen, während große Online-Plattformen ihre Marktanteile weiter ausbauen konnten.',
+    graphicData:[{year:'2015',val:9},{year:'2018',val:12},{year:'2020',val:14},{year:'2021',val:17},{year:'2023',val:19}],
+    graphicCaption:'Grafik: Anteil des Online-Handels am Einzelhandelsumsatz in Deutschland (in Prozent)',
+    sentences:[
+      {text:'Der Online-Handel-Anteil ist von rund 9 Prozent 2015 auf über 19 Prozent 2023 gestiegen.', wrong:false},
+      {text:'Der stärkste Zuwachs war zwischen 2020 und 2021 zu beobachten.', wrong:false},
+      {text:'Lebensmittel machen bislang den größten Anteil am Online-Handel aus.', wrong:true},
+      {text:'Kleinere, inhabergeführte Geschäfte berichten überproportional häufig von Umsatzeinbußen.', wrong:false},
+      {text:'Große Online-Plattformen haben laut Text Marktanteile verloren.', wrong:true},
+      {text:'Der Zuwachs wird unter anderem mit veränderten Einkaufsgewohnheiten während der Pandemie erklärt.', wrong:false},
+      {text:'Mode und Elektronik zählen zu den am stärksten wachsenden Online-Handel-Bereichen.', wrong:false},
+      {text:'Der Anteil des Online-Handels ist seit 2015 nahezu unverändert geblieben.', wrong:true}
     ]
   }
 ];
 
-/* ==========================================================================
-   MODELLTEST 2
-   ========================================================================== */
+/* MODELLTEST 2 */
 const MT2 = [
-  {
-    teil: 1,
-    title: "Aufgabe 1: Lückentext — Künstliche Intelligenz im Ingenieurwesen",
-    text: "In den Ingenieurwissenschaften führt der Einsatz von Künstlicher Intelligenz (KI) zu grundlegenden Veränderungen. Durch maschinelles Lernen können komplexe Bauteile schneller <1> werden. Die KI analysiert Datenmuster und schlägt optimale Strukturen vor. Dies spart Material und <2> die Effizienz. Ingenieure müssen jedoch die erzeugten Modelle weiterhin sorgfältig <3>. Ein blindes Vertrauen in Algorithmen könnte sonst zu Sicherheitsrisiken <4>. Die Weiterbildung im Bereich Datenanalyse ist daher unumgänglich geworden.",
-    type: "lückentext",
-    gaps: [
-      { id: 1, options: ["berechnet", "konstruiert", "zerstört", "verkauft"], correct: 1 },
-      { id: 2, options: ["steigert", "verringert", "verhindert", "stoppt"], correct: 0 },
-      { id: 3, options: ["überprüfen", "löschen", "ignorieren", "drucken"], correct: 0 },
-      { id: 4, options: ["führen", "helfen", "schützen", "siegen"], correct: 0 }
-    ]
-  },
-  {
-    teil: 2,
-    title: "Aufgabe 2: Satzreihenfolge — Die Psychologie des Lernens",
-    text: "Ordnet die Schritte des Lernprozesses logisch.",
-    type: "order",
-    items: [
-      { id: "A", text: "Durch Wdh. wird die Information schließlich ins Langzeitgedächtnis übertragen." },
-      { id: "B", text: "Zunächst nimmt unser Gehirn Reize aus der Umwelt über die Sinnesorgane auf." },
-      { id: "C", text: "Nur aufmerksam verarbeitete Reize gelangen in das Kurzzeitgedächtnis." }
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Netzstabilität im Zeitalter erneuerbarer Energien',
+    segments:[
+      'Die Umstellung der Energieversorgung auf erneuerbare Quellen stellt die Betreiber von Stromnetzen vor erhebliche ',
+      ' Herausforderungen. Da die Einspeisung von Wind- und Sonnenenergie stark von Witterungsbedingungen ',
+      ', kommt es im Netzverband häufiger zu Schwankungen. Um eine flächendeckende Stromversorgung weiterhin zu ',
+      ', müssen neuartige Speichermedien und intelligente Steuerungssysteme implementiert werden. Wissenschaftler betonen, dass ohne einen konsequenten Ausbau der Infrastruktur das Ausfallrisiko messbar ',
+      ' könnte. Aus diesem Grund werden derzeit umfassende Investitionen in sogenannte Smart Grids '
     ],
-    correctOrder: ["B", "C", "A"]
-  },
-  {
-    teil: 3,
-    title: "Aufgabe 3: Multiple Choice — Autonomes Fahren",
-    text: "Autonomes Fahren verspricht mehr Sicherheit im Straßenverkehr, da die meisten Unfälle auf menschliches Versagen zurückzuführen sind. Dennoch gibt es noch rechtliche und ethische Hürden. Wer haftet zum Beispiel bei einem Unfall, wenn das Fahrzeug von einer Software gesteuert wurde?",
-    type: "mc",
-    questions: [
-      {
-        text: "Warum gilt autonomes Fahren als vielversprechend?",
-        options: [
-          "Weil es menschliche Fahrfehler reduzieren kann.",
-          "Weil die Autos dadurch viel billiger werden.",
-          "Weil keine Gesetze mehr nötig sind.",
-          "Weil man keinen Führerschein mehr machen muss."
-        ],
-        correct: 0
-      }
+    gaps:[
+      {options:['technische','überflüssige','unbedeutende','historische'], correct:0},
+      {options:['abhängt','profitiert','resultiert','verzichtet'], correct:0},
+      {options:['gewährleisten','unterbrechen','verhindern','verzögern'], correct:0},
+      {options:['steigen','sinken','stagnieren','verschwinden'], correct:0},
+      {options:['getätigt','verhindert','abgebrochen','kritisiert'], correct:0}
     ]
   },
-  {
-    teil: 4,
-    title: "Aufgabe 4: Zuordnung — Psychologische Phänomene",
-    text: "Ordnet die Beschreibungen den Begriffen zu.",
-    type: "match",
-    options: [
-      { id: "A", text: "Confirmation Bias (Bestätigungsfehler)" },
-      { id: "B", text: "Placebo-Effekt" }
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Meilensteine der Künstlichen Intelligenz',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Die Geburtsstunde der Erforschung künstlicher Intelligenz schlug im Jahr 1956 auf einer historischen Konferenz am Dartmouth College.',
+      'In den darauf folgenden Jahrzehnten wechselten sich Phasen großer Euphorie mit Zeiten ernüchternder Rückschläge und gekürzter Forschungsgelder ab.',
+      'Erst der rasante Anstieg von Rechenkapazitäten und die Verfügbarkeit gewaltiger Datenmengen leiteten ab den 2010er Jahren eine Wende ein.',
+      'Durch den Einsatz tiefgestaffelter neuronaler Netze erzielten Systeme plötzlich verblüffende Erfolge bei der Bild- und Spracherkennung.',
+      'Heute ist die Technologie aus Schlüsselbereichen wie der medizinischen Diagnostik oder der Logistik nicht mehr wegzudenken.'
     ],
-    questions: [
-      { text: "1. Man sucht nur nach Informationen, die die eigene Meinung stützen.", correct: "A" },
-      { text: "2. Eine Scheinbehandlung führt zu einer messbaren Besserung der Gesundheit.", correct: "B" }
+    shuffledStart:[3,0,4,1,2]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Nudging und die Architektur menschlicher Entscheidungen',
+    passage:[
+      '(1) Das Konzept des sogenannten "Nudging" (Anstupsen) beruht auf verhaltensökonomischen Erkenntnissen über menschliche Entscheidungsmuster. Anstatt Verhalten durch Verbote oder finanzielle Anreize zu erzwingen, werden Wahlarchitekturen so gestaltet, dass Menschen ganz subtil zu vorteilhaften Entscheidungen bewegt werden.',
+      '(2) Kritiker dieser Methode bemängeln oft eine versteckte Manipulation, da den Betroffenen die Beeinflussung selten bewusst ist. Befürworter entgegnen jedoch, dass Entscheidungssituationen niemals neutral gestaltet sein können und staatliches Handeln hier im Sinne des Gemeinwohls eingesetzt werden sollte.',
+      '(3) In zahlreichen Feldstudien konnte gezeigt werden, dass bereits geringfügige Umgestaltungen in Kantinen – etwa das Platzieren von Obst auf Augenhöhe – den Konsum gesünderer Lebensmittel signifikant steigern können, ohne die Wahlfreiheit einzuschränken.'
+    ],
+    questions:[
+      { q:'Was ist das Grundprinzip von "Nudging" laut Absatz 1?', options:['Der Einsatz strenger gesetzlicher Verbote zur Verhaltensänderung.','Die gezielte Beeinflussung von Entscheidungen durch Gestaltung des Umfelds.','Die finanzielle Belohnung von Bürgern bei umweltfreundlichem Verhalten.','Die vollständige Abschaffung jeglicher Entscheidungsoptionen.'], correct:1 },
+      { q:'Welcher Kritikpunkt wird in Absatz 2 gegenüber Nudging geäußert?', options:['Es verursache zu hohe Kosten für staatliche Institutionen.','Es beruhe auf veralteten psychologischen Theorien.','Es könne als unbewusste Manipulation der Bürger wahrgenommen werden.','Es führe zu einer drastischen Erhöhung von Bußgeldern.'], correct:2 },
+      { q:'Was belegen die Studien zur Kantinengestaltung in Absatz 3?', options:['Dass Wahlfreiheit durch Nudging komplett aufgehoben wird.','Dass Kunden ausschließlich ungesunde Nahrungsmittel bevorzugen.','Dass unauffällige Änderungen im Raumangebot das Essverhalten positiv steuern.','Dass Preise von Lebensmitteln wöchentlich angepasst werden müssen.'], correct:2 }
     ]
   },
-  {
-    teil: 5,
-    title: "Aufgabe 5: Kategorisierung — Erneuerbare Energien",
-    text: "Kategorisiert die Energiequellen.",
-    type: "twocat",
-    cat1: "Wetterabhängig",
-    cat2: "Wetterunabhängig / Steuerbar",
-    items: [
-      { text: "1. Photovoltaik (Solar)", cat: 1 },
-      { text: "2. Geothermie (Erdwärme)", cat: 2 },
-      { text: "3. Windkraft", cat: 1 },
-      { text: "4. Biomasse", cat: 2 }
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar zur Finanzierung von Grundlagenforschung',
+    passageText:`Die Forderung, dass wissenschaftliche Forschung stets einen unmittelbaren wirtschaftlichen Nutzen erbringen muss, greift zu kurz. <strong>[1] Wer Wissenschaft rein nach ihrer kurzfristigen Rendite beurteilt, verkennt das Wesen echter Innovationen.</strong> Wegweisende Entdeckungen entstehen selten nach Fahrplan. <strong>[2] Ein beträchtlicher Teil unseres heutigen Wohlstands basiert auf Erkenntnissen, deren praktische Relevanz bei ihrer Entdeckung völlig ungewiss war.</strong> Natürlich stehen Forschungsförderer unter dem Druck, öffentliche Gelder zu rechtfertigen. <strong>[3] Dennoch birgt eine Verengung der Geldvergabe auf reine Zweckforschung das Risiko, den Nährboden für radikal neue Denkansätze auszutrocknen.</strong> Wenn nur noch risikofreie Projekte finanziert werden, stagniert der Fortschritt. <strong>[4] Wir benötigen daher dringend wieder mehr Mut zur ergebnisoffenen Grundlagenforschung ohne Verwertungsdruck.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte fordert ein Umdenken bei Entscheidungsträgern.',
+      'Der Experte kritisiert eine einseitige ökonomische Sichtweise.',
+      'Der Experte nennt ein historisches Beispiel für Erfolg.',
+      'Der Experte verweist auf den Wert unerwarteter Ergebnisse.',
+      'Der Experte warnt vor den negativen Folgen einer verfehlten Strategie.',
+      'Der Experte schlägt die Abschaffung öffentlicher Gelder vor.'
+    ],
+    correct:[1, 3, 4, 0]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Stadtmodell A, Stadtmodell B, zu beiden oder zu keinem Modell passt.',
+    title:'Aufgabe 5: Konzepte für die nachhaltige Stadtentwicklung',
+    passage:'Im Diskurs um die Zukunftsfähigkeit urbaner Zentren stehen sich zwei dominante Konzepte gegenüber. Stadtmodell A setzt auf die "Kompakte Stadt der kurzen Wege": Durch extreme bauliche Nachverdichtung, Mischung von Wohn- und Gewerbeflächen sowie den Rückbau der automobilen Infrastruktur soll der Energiebedarf minimiert werden. Kritiker verweisen hierbei auf die erhöhte Hitzebelastung in dicht bebauten Innenstädten. Stadtmodell B hingegen vertritt die "Schwammstadt": Hier stehen dezentrale Grünflächen, unversiegelte Böden und unterirdische Rückhaltebecken im Fokus, um Starkregenereignisse abzufangen und das Mikroklima zu kühlen. Beide Modelle streben eine Reduktion der CO2-Emissionen an, jedoch mit konträren baulichen Prioritäten.',
+    columns:['Stadtmodell A','Stadtmodell B','beide','passt nicht'],
+    items:[
+      {text:'Sucht nach Lösungen zur Vermeidung von Hitzestau durch großflächige Bepflanzung.', correct:1},
+      {text:'Fokussiert sich auf die funktionale Mischung von Arbeiten und Wohnen auf engem Raum.', correct:0},
+      {text:'Verfolgt das Ziel, den städtischen CO2-Ausstoß nachhaltig zu senken.', correct:2},
+      {text:'Sieht den vollständigen Abriss aller historischen Altbauten zwingend vor.', correct:3},
+      {text:'Plädiert für den gezielten Rückbau von Autostraßen zugunsten dichter Bebauung.', correct:0},
+      {text:'Setzt auf die Zwischenspeicherung von Niederschlagswasser zur Vermeidung von Überflutungen.', correct:1},
+      {text:'Empfiehlt die Verlegung von Wohngebieten in weit entfernte Vororte.', correct:3}
     ]
   },
-  {
-    teil: 6,
-    title: "Aufgabe 6: Vor- und Nachteile von Smart Homes",
-    text: "Sortiert die Eigenschaften von intelligenten Wohnungen.",
-    type: "table",
-    headers: ["Vorteil", "Nachteil", "Neutral"],
-    rows: [
-      { text: "Automatisches Sparen von Heizenergie.", correctCol: 0 },
-      { text: "Risiko von Hackerangriffen auf vernetzte Geräte.", correctCol: 1 },
-      { text: "Installation von Sensoren in allen Räumen.", correctCol: 2 }
-    ]
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vor- und Nachteile der ökologischen Landwirtschaft',
+    passage:'Die ökologische Landwirtschaft gilt als Schlüssel zur Erhaltung der Biodiversität und zum Schutz der Grundwasservorkommen, da weitgehend auf synthetische Pflanzenschutzmittel verzichtet wird. Ein weiterer zentraler Vorteil ist der langfristige Erhalt der Bodenfruchtbarkeit durch organische Düngung und vielfältige Fruchtfolgen. Allerdings bringt diese Anbauform auch deutliche Nachteile mit sich: Die Erträge pro Hektar liegen spürbar unter denen der konventionellen Landwirtschaft, was für die gleiche Nahrungsmenge einen höheren Flächenbedarf erforderlich macht. Zudem führt der erhöhte Arbeitsaufwand bei der Unkrautbekämpfung zu deutlich höheren Endverbraucherpreisen.',
+    aussagen:[
+      { key:'a', text:'[a] Erhöhter Flächenbedarf aufgrund geringerer Hektarerträge' },
+      { key:'b', text:'[b] Schonung der Grundwasservorkommen durch Verzicht auf Chemie' },
+      { key:'c', text:'[c] Erforderlichkeit höherer Verkaufspreise wegen Mehraufwands' },
+      { key:'d', text:'[d] Völlige Immunität der Pflanzen gegen Schädlinge' },
+      { key:'e', text:'[e] Langfristige Förderung der natürlichen Bodenfruchtbarkeit' },
+      { key:'f', text:'[f] Garantie für weltweite Nahrungssicherheit ohne Ausnahmen' }
+    ],
+    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
   },
-  {
-    teil: 7,
-    title: "Aufgabe 7: Fehlersuche — Stressbewältigung",
-    text: "Findet den falschen Satz.",
-    type: "summary",
-    sentences: [
-      { text: "Chronischer Stress kann die körperliche Gesundheit beeinträchtigen.", wrong: false },
-      { text: "Kurze Erholungsphasen reichen aus, um extremen Dauerstress vollständig zu neutralisieren.", wrong: true }
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Elektromobilität im Schienenverkehr',
+    passage:'Der Elektrifizierungsgrad des deutschen Schienennetzes lag im Jahr 2023 bei rund 62 Prozent. Während der Fernverkehr bereits zu über 90 Prozent elektrisch betrieben wird, fahren im regionalen Güterverkehr noch immer zahlreiche Dieselfahrzeuge. Die Bundesregierung strebt an, bis 2030 einen Elektrifizierungsgrad von 75 Prozent zu erreichen. Als Übergangslösung für nicht-elektrifizierte Strecken werden zunehmend Akku- und Wasserstoffzüge getestet.',
+    graphicData:[{year:'2015',val:58},{year:'2018',val:60},{year:'2020',val:61},{year:'2023',val:62}],
+    graphicCaption:'Grafik: Anteil des elektrifizierten Schienennetzes in Deutschland (%)',
+    sentences:[
+      {text:'Der Elektrifizierungsgrad des Schienennetzes lag 2023 bei etwa 62 Prozent.', wrong:false},
+      {text:'Der Fernverkehr wird heute noch mehrheitlich mit Diesel betrieben.', wrong:true},
+      {text:'Das Ziel für 2030 liegt bei einem Elektrifizierungsgrad von 75 Prozent.', wrong:false},
+      {text:'Auf nicht-elektrifizierten Strecken kommen Testzüge mit Akku- oder Wasserstoffantrieb zum Einsatz.', wrong:false},
+      {text:'Im Jahr 2015 lag der Elektrifizierungsgrad laut Grafik bereits bei über 70 Prozent.', wrong:true},
+      {text:'Der regionale Güterverkehr nutzt noch teilweise Diesel-Fahrzeuge.', wrong:false},
+      {text:'Die Bundesregierung plant den Rückbau elektrischer Oberleitungen.', wrong:true}
     ]
   }
 ];
 
-/* ==========================================================================
-   MODELLTEST 3 (COMPLEXIFIÉ - TDN 5 / C1+)
-   ========================================================================== */
+/* MODELLTEST 3 */
 const MT3 = [
-  {
-    teil: 1,
-    title: "Aufgabe 1: Lückentext — Die Komplexität der urbanen Verkehrswende",
-    text: "Die Transformation urbaner Mobilitätsinfrastrukturen stellt Kommunen vor erhebliche Herausforderungen. Eine nachhaltige Reduktion des motorisierten Individualverkehrs lässt sich nur realisieren, wenn alternative Beförderungsarten nicht nur bereitgestellt, sondern auch konsequent präferiert werden. Experten betonen, dass bloße Appelle an das ökologische Bewusstsein der Bürger kaum messbare Verhaltensänderungen <1>. Vielmehr bedarf es einer systematischen Restrukturierung des öffentlichen Raums, die mit einer spürbaren Verknappung von Parkflächen und der Bepreisung fossiler Mobilität <2>. Gleichzeitig muss der öffentliche Personennahverkehr (ÖPNV) taktmäßig so verdichtet werden, dass er bezüglich Flexibilität und Komfort mit dem eigenen Pkw <3>. Bisherige Modellversuche zeigen jedoch, dass Maßnahmen ohne adressatengerechte Begleitkommunikation rasch auf gesellschaftliche Widerstände <4>. Um eine breite Akzeptanz zu verankern, gilt es, die synergetischen Potenziale von Radverkehr, Mikromobilität und digital vernetzten Sharing-Angeboten systematisch zu <5>.",
-    type: "lückentext",
-    gaps: [
-      { id: 1, options: ["zeitigen", "ausführen", "bewirken", "herbeiführen"], correct: 0 },
-      { id: 2, options: ["korreliert", "einhergeht", "zusammenfällt", "anfällt"], correct: 1 },
-      { id: 3, options: ["standhält", "konkurriert", "rivalisiert", "gleichzieht"], correct: 3 },
-      { id: 4, options: ["prallen", "stoßen", "treffen", "gerät"], correct: 1 },
-      { id: 5, options: ["ausschöpfen", "verwerten", "generieren", "steigern"], correct: 0 }
-    ]
-  },
-  {
-    teil: 2,
-    title: "Aufgabe 2: Satzreihenfolge — Grüner Wasserstoff in der Schwerindustrie",
-    text: "Ordnen Sie die Abschnitte so, dass ein schlüssiger argumentativer Text entsteht.",
-    type: "order",
-    items: [
-      { id: "A", text: "Infolgedessen erfordert die großtechnische Skalierung der Elektrolysekapazitäten massive Investitionen in Erneuerbare-Energien-Anlagen, um die bilanziere Klimaneutralität überhaupt gewährleisten zu können." },
-      { id: "B", text: "Die Dekarbonisierung primärer Industriezweige wie der Stahl- und Zementherstellung gilt als einer der komplexesten Pfeiler der globalen Energiewende." },
-      { id: "C", text: "Grüner Wasserstoff nimmt hierbei eine Schlüsselrolle ein, da er als CO2-neutrales Reduktionsmittel fossile Energieträger in hochtemperaturbasierten Prozessen adäquat ersetzen kann." },
-      { id: "D", text: "Besagte Erzeugung beruht allerdings auf der Zufuhr beträchtlicher Mengen an grünem Strom, dessen Verfügbarkeit gegenwärtig noch eng begrenzt ist." },
-      { id: "E", text: "Solange diese Kapazitäten fehlen, droht der Import aus Drittstaaten mit unzureichenden Ökostandards den angestrebten Nachhaltigkeitseffekt wieder zu untergraben." }
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Die Verkehrswende in Ballungsräumen',
+    segments:[
+      'Die Transformation der urbanen Mobilität gilt als zentraler Baustein zur Erreichung der gesetzlich verankerten Klimaziele. Um den CO2-Ausstoß im Transportsektor drastisch zu ',
+      ', setzen viele Metropolen auf den gezielten Ausbau des öffentlichen Personennahverkehrs sowie geschützter Radverkehrsnetze. Experten betonen jedoch, dass reine Anreizsysteme oft nicht ',
+      ', um Autofahrer zum Umstieg zu bewegen. Ergänzend bedürfe es verkehrslenkender Maßnahmen wie einer Parkraumbewirtschaftung oder City-Maut. Die erfolgreiche Umsetzung dieser Strategien erfordert allerdings eine verlässliche ',
+      ' öffentlicher Fördermittel sowie eine hohe Akzeptanz innerhalb der Bevölkerung. Fehlt diese gesellschaftliche Unterstützung, drohen langwierige politische ',
+      ' und erhebliche Verzögerungen beim Infrastrukturausbau.'
     ],
-    correctOrder: ["B", "C", "D", "A", "E"]
-  },
-  {
-    teil: 3,
-    title: "Aufgabe 3: Multiple Choice — Mikroplastik in marinen Ökosystemen",
-    text: "Die weltweite Akkumulation von Kunststoffen in marinen Ökosystemen hat Ausmaße erreicht, die weit über rein ästhetische Beeinträchtigungen von Küstenregionen hinausgehen. Besorgniserregend ist primär das Verhalten von sekundärem Mikroplastik — Partikeln mit einem Durchmesser unter fünf Millimetern, die durch physikalische und chemische Verwitterungsprozesse größerer Plastikfragmente entstehen. Aufgrund ihrer Hydrophobie besitzen diese Partikel das ausgeprägte Potenzial, im Meerwasser gelöste persistente organische Schadstoffe an ihrer Oberfläche anzureichern. Wenn marine Organismen der unteren Trophieebenen diese Partikel irrtümlich als Nahrung aufnehmen, gelangen nicht nur die Polymere selbst, sondern auch die daran gebundenen Toxine in das biologische System. Die Forschung konzentriert sich zunehmend auf die Frage, inwieweit diese Substanzen eine Bioakkumulation entlang der Nahrungskette vollziehen und letztlich trophische Stufen bis hin zum menschlichen Konsumenten gefährden.",
-    type: "mc",
-    questions: [
-      {
-        text: "Welche zentrale Problematik bezüglich Mikroplastik hebt der Autor im Text hervor?",
-        options: [
-          "Die ästhetische Verunstaltung maritimer Küstengebiete beeinträchtigt den globalen Tourismus maßgeblich.",
-          "Mikroplastikpartikel fungieren als chemische Katalysatoren, die die Entstehung neuer Schadstoffe im Meerwasser beschleunigen.",
-          "Die Partikel wirken als Vektoren für hochgradig langlebige Giftstoffe, die in das marine Nahrungsnetz eingeschleust werden.",
-          "Die Verwitterung von Großplastik führt zu einer irreversiblen Absenkung des Sauerstoffgehalts in Ozeanen."
-        ],
-        correct: 2
-      },
-      {
-        text: "Was lässt sich dem Text über das Entstehen und die Wirkung sekundären Mikroplastiks entnehmen?",
-        options: [
-          "Es wird industriell in gezielten Partikelgrößen hergestellt, um in Konsumgütern eingesetzt zu werden.",
-          "Es bindet aufgrund seiner physikalisch-chemischen Eigenschaften bevorzugt im Wasser gelöste Umweltgifte.",
-          "Es reichert sich ausschließlich in Organismen der höchsten trophischen Ebenen direkt an.",
-          "Es wird von marinen Mikroorganismen vollständig biologisch zu unschädlichen Monomeren abgebaut."
-        ],
-        correct: 1
-      }
+    gaps:[
+      {options:['senken','steigerungsfähig','steigern','blockieren'], correct:0},
+      {options:['ausreichen','scheitern','versagen','enttäuschen'], correct:0},
+      {options:['Bereitstellung','Verweigerung','Kürzung','Stornierung'], correct:0},
+      {options:['Auseinandersetzungen','Harmonien','Einigungen','Zustimmungen'], correct:0},
+      {options:['Verzögerungen','Beschleunigungen','Fortschritte','Erfolge'], correct:0}
     ]
   },
-  {
-    teil: 4,
-    title: "Aufgabe 4: Zuordnung — Perspektiven auf die Transformation des Homeoffice",
-    text: "Ordnen Sie die Aussagen (1–4) den passenden Expertisen (A–D) zu.",
-    type: "match",
-    options: [
-      { id: "A", text: "Kritisiert die Entgrenzung von Arbeits- und Privatleben und fordert klare rechtliche Leitplanken gegen permanente digitale Erreichbarkeit." },
-      { id: "B", text: "Hebt die betriebswirtschaftlichen Einsparpotenziale durch reduzierte Büroflächen hervor, warnt jedoch vor einem Verfall der Unternehmenskultur." },
-      { id: "C", text: "Befürwortet ortsunabhängiges Arbeiten als zentrales Instrument zur Erhöhung der Chancengleichheit auf dem Arbeitsmarkt." },
-      { id: "D", text: "Verweist auf die Verlagerung von Energiekosten und infrastrukturellen Ausgaben vom Arbeitgeber auf die Beschäftigten." }
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Evolution des Wasserstoffs als Energieträger',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Bereits im 19. Jahrhundert wurde Wasserstoff von Wissenschaftlern als potenzieller Energieträger der Zukunft diskutiert.',
+      'Aufgrund der billigen Verfügbarkeit fossiler Brennstoffe geriet die Technologie jedoch für viele Jahrzehnte wieder in den Hintergrund.',
+      'Mit dem Beginn der globalen Dekarbonisierungsbemühungen erlebte das Element schließlich eine Renaissance in der Energiewirtschaft.',
+      'Moderne Elektrolyseverfahren ermöglichen es heute, grünen Wasserstoff mithilfe erneuerbarer Energien klimaneutral herzustellen.',
+      'Insbesondere in schwer elektrifizierbaren Industriezweigen wie der Stahlproduktion gilt Wasserstoff nun als unverzichtbarer Schlüsselbaustein.'
     ],
-    questions: [
-      { text: "1. 'Die Einsparung fester Arbeitsplätze entlastet zwar das Firmenbudget, erschwert aber die Identifikation der Angestellten mit den Zielen des Betriebes.'", correct: "B" },
-      { text: "2. 'Wenn das Arbeitszimmer im Wohnbereich liegt, verschwimmen zeitliche Grenzen, was ohne gesetzliche Schutznormen zu chronischer Belastung führt.'", correct: "A" },
-      { text: "3. 'Der scheinbare Effizienzgewinn der Betriebe beruht teilweise darauf, dass Ausgaben für Strom, Heizung und Hardware privatisiert werden.'", correct: "D" },
-      { text: "4. 'Flexible Arbeitsmodelle ermöglichen es qualifizierten Kräften außerhalb der Ballungsräume, gleichberechtigt am Berufsleben teilzunehmen.'", correct: "C" }
+    shuffledStart:[1,3,0,4,2]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Mikroplastik in marinen Ökosystemen',
+    passage:[
+      '(1) Die Akkumulation von Kunststoffen in Weltmeeren stellt eine der gravierendsten ökologischen Herausforderungen des 21. Jahrhunderts dar. Besonders gefährlich sind Partikel mit einem Durchmesser von weniger als fünf Millimetern, bekannt als Mikroplastik. Diese entstehen entweder durch den witterungsbedingten Zerfall größerer Plastikabfälle oder werden Produkten direkt industriell zugesetzt.',
+      '(2) Die biologischen Auswirkungen auf marine Organismen sind vielfältig und komplex. Fische und Filterfehrer verwechseln die Partikel häufig mit natürlicher Nahrung. Dies führt nicht nur zu physikalischen Blockaden im Verdauungstrakt, sondern auch zur Aufnahme von Anlagerungen toxischer Umweltgifte, die sich im Gewebe anreichern.',
+      '(3) Trotz zunehmender Forschung bleiben die langfristigen Konsequenzen für die menschliche Gesundheit über den Konsum von Meeresfrüchten noch nicht vollständig geklärt. Wissenschaftler fordern daher strengere internationale Abkommen zur Vermeidung von Plastikmüll an der Quelle.'
+    ],
+    questions:[
+      { q:'Wie entsteht Mikroplastik laut Absatz 1?', options:['Ausschließlich durch die Zersetzung von Industriemüll im Meer.','Durch Zerfall von Plastik oder durch direkte industrielle Beimischung.','Durch die chemische Reaktion von Plastik mit Salzwasser.','Durch die Verbrennung von Müll an Küstenregionen.'], correct:1 },
+      { q:'Welche Gefahr wird in Absatz 2 für Meerestiere beschrieben?', options:['Verlust des Orientierungssinns beim Schwimmen.','Aufnahme von Toxinen und Verstopfung des Verdauungssystems.','Schnelleres Wachstum durch synthetische Nährstoffe.','Unfruchtbarkeit durch veränderte Wassertemperaturen.'], correct:1 },
+      { q:'Was fordern Wissenschaftler in Absatz 3?', options:['Ein vollständiges Verbot des Verzehrs von Meeresfrüchten.','Internationale Abkommen zur Vermeidung von Plastikmüll.','Die Einstellung der Forschung an Mikroplastik.','Den Bau von Plastikfiltern an allen Flussmündungen.'], correct:1 }
     ]
   },
-  {
-    teil: 5,
-    title: "Aufgabe 5: Kategorisierung — Ansätze der Kreislaufwirtschaft",
-    text: "Ordnen Sie die Strategien den jeweiligen Paradigmen der Kreislaufwirtschaft zu.",
-    type: "twocat",
-    cat1: "Effizienz-Paradigma (Ressourceneinsparung / Recycling)",
-    cat2: "Suffizienz-Paradigma (Konsumreduktion / Lebensdauerverlängerung)",
-    items: [
-      { text: "1. Substitution von Neurohstoffen durch hochwertiges Sekundärmaterial in der Fertigung.", cat: 1 },
-      { text: "2. Konstruktion von Modulen, die Reparaturen und das Wiederverwenden von Komponenten durch Endverbraucher erleichtern.", cat: 2 },
-      { text: "3. Optimierung von Verbrennungsprozessen zur energetischen Verwertung nicht mehr recycelbarer Rückstände.", cat: 1 },
-      { text: "4. Etablierung nutzungsbasierter Sharing-Systeme anstelle des individuellen Erwerbs von langlebigen Konsumgütern.", cat: 2 }
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Die Transformation der Arbeitswelt durch Homeoffice',
+    passageText:`Die schlagartige Zunahme von Telearbeit hat die Unternehmenskultur nachhaltig verändert. <strong>[1] Der flächendeckende Übergang zu hybriden Arbeitsmodellen hat bewiesen, dass Produktivität nicht an ständige Präsenz im Büro gebunden ist.</strong> Dennoch birgt die Entgrenzung von Arbeit und Privatleben erhebliche Risiken. <strong>[2] Beschäftigte berichten signifikant häufiger über Schwierigkeiten, nach Feierabend gedanklich von beruflichen Aufgaben abzuschalten.</strong> Führungskräfte stehen vor der Herausforderung, den Zusammenhalt in virtuellen Teams aufrechtzuerhalten. <strong>[3] Das Fehlen informeller Flurgespräche schwächt auf Dauer das Zugehörigkeitsgefühl und die Innovationskraft.</strong> Es braucht daher klare betriebliche Vereinbarungen zur Erreichbarkeit. <strong>[4] Nur durch verbindliche Regeln lässt sich verhindern, dass der digitale Fortschritt zu einer psychischen Überlastung führt.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte fordert regulierende Schutzmaßnahmen.',
+      'Der Experte hebt eine Wiederlegung traditioneller Annahmen hervor.',
+      'Der Experte beschreibt ein psychologisches Entgrenzungsproblem.',
+      'Der Experte verweist auf den Verlust sozialer Dynamiken.',
+      'Der Experte empfiehlt die komplette Abschaffung von Büros.'
+    ],
+    correct:[1, 2, 3, 0]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Konzept A (Homeoffice), Konzept B (Präsenzarbeit), zu beiden oder zu keinem passt.',
+    title:'Aufgabe 5: Vergleich von Arbeitsplatzkonzepten',
+    passage:'In der Debatte um die Ausgestaltung moderner Arbeitswelten stehen sich zwei Arbeitsplatzmodelle gegenüber. Modell A (Remote/Homeoffice) setzt auf maximale zeitliche und ortsbezogene Flexibilität. Mitarbeiter sparen Pendelzeiten und können ihre Arbeit autonom organisieren. Kritiker betonen jedoch das Risiko sozialer Isolation und die Erschwerung von Einarbeitungsprozessen. Modell B (Klassische Präsenzarbeit) fördert den direkten, spontanen Austausch im Kollegium und erleichtert die Abgrenzung von Arbeit und Freizeit durch eine physische Trennung. Dafür nehmen Beschäftigte tägliche Anfahrtswege und weniger flexible Tagesabläufe in Kauf. Beide Modelle streben eine hohe Arbeitsqualität an.',
+    columns:['Modell A (Remote)','Modell B (Präsenz)','beide','passt nicht'],
+    items:[
+      {text:'Ermöglicht eine klare räumliche Trennung zwischen Berufs- und Privatleben.', correct:1},
+      {text:'Fördert den spontanen, ungeplanten Wissensaustausch im Team.', correct:1},
+      {text:'Spart den täglichen Zeitaufwand für den Arbeitsweg ein.', correct:0},
+      {text:'Erhöht das Risiko von Isolation und erschwert die Einarbeitung neuer Mitarbeiter.', correct:0},
+      {text:'Verlangt die ständige Überwachung der Mitarbeiter per Video.', correct:3},
+      {text:'Strebt die Sicherung einer hohen Arbeitsqualität an.', correct:2},
+      {text:'Garantiert ein höheres Gehalt für alle Angestellten.', correct:3}
     ]
   },
-  {
-    teil: 6,
-    title: "Aufgabe 6: Vor- und Nachteile der synthetischen Biologie",
-    text: "Sortieren Sie die Aussagen nach Chancen, Risiken oder faktisch neutralen Aspekten.",
-    type: "table",
-    headers: ["Vorteil / Chance", "Nachteil / Risiko", "Neutrale Information"],
-    rows: [
-      { text: "Gezielte Neukonstruktion biologischer Systeme ermöglicht die Erzeugung maßgeschneiderter Biotreibstoffe.", correctCol: 0 },
-      { text: "Das unkontrollierte Entweichen gentechnisch veränderter Organismen könnte natürliche Ökosysteme irreversibel destabilisieren.", correctCol: 1 },
-      { text: "Die Methode basiert auf der computergestützten Dekodierung und Synthese komplexer DNA-Sequenzen.", correctCol: 2 },
-      { text: "Patentierungsansprüche auf künstliche Lebensformen drohen zu Monopolbildungen internationaler Konzerne zu führen.", correctCol: 1 }
-    ]
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vor- und Nachteile von Smart-Grid-Technologien',
+    passage:'Intelligente Stromnetze (Smart Grids) gelten als Schlüssel zur Bewältigung der Energiewende. Ein wesentlicher Vorteil liegt in der Echtzeit-Überwachung des Netzzustands, die eine schnelle Reaktion auf Lastspitzen und eine optimale Einbindung dezentraler erneuerbarer Energien ermöglicht. Zudem erlauben sie es Verbrauchern, ihren Energieverbrauch durch dynamische Tarife kostenoptimiert zu steuern. Demgegenüber stehen jedoch signifikante Nachteile: Die Umstellung erfordert immense Anfangsinvestitionen in digitale Zähler und Steuerungsgeräte. Zudem erhöht die vernetzte Infrastruktur die Verwundbarkeit gegenüber Cyberangriffen und wirft komplexe Datenschutzfragen bezüglich der Nutzerdaten auf.',
+    aussagen:[
+      { key:'a', text:'[a] Erhöhte Anfälligkeit für Cyberangriffe und Datenmissbrauch' },
+      { key:'b', text:'[b] Optimale Integration dezentraler erneuerbarer Energiequellen' },
+      { key:'c', text:'[c] Hohe initiale Investitionskosten für die digitale Infrastruktur' },
+      { key:'d', text:'[d] Völlige Befreiung der Verbraucher von jeglichen Stromkosten' },
+      { key:'e', text:'[e] Möglichkeiten zur verbrauchsabhängigen Kostensteuerung' },
+      { key:'f', text:'[f] Garantiert störungsfreier Betrieb ohne jeglichen Wartungsaufwand' }
+    ],
+    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
   },
-  {
-    teil: 7,
-    title: "Aufgabe 7: Fehlersuche im Fachtext — Ökologische Ökonomie",
-    text: "Markieren Sie die Sätze im Synthese-Text, die den fachlichen Gehalt der Ausgangsstudie fehlerhaft wiedergeben.",
-    type: "summary",
-    sentences: [
-      { text: "Die Ökologische Ökonomie begreift das Wirtschaftssystem als ein eingebettetes Subsystem der thermodynamisch begrenzten Biosphäre.", wrong: false },
-      { text: "Im Gegensatz zur Neoklassik geht sie davon aus, dass technologischer Fortschritt den Naturkapitalverbrauch unbegrenzt kompensieren kann.", wrong: true },
-      { text: "Daraus folgt die Prämisse, dass permanentes quantitatives Wachstum auf einem endlichen Planeten physisch unmöglich ist.", wrong: false },
-      { text: "Gängige Erfolgsindikatoren wie das Bruttoinlandsprodukt berücksichtigen dabei den durch Ressourcenabbau verursachten Wohlstandsverlust in vollem Umfang.", wrong: true }
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Entwicklung der Treibhausgasemissionen',
+    passage:'Die Gesamtemissionen von Treibhausgasen in Deutschland sind von 1990 bis 2022 um etwa 40 Prozent gesunken. Während der Energiesektor durch den Ausbau erneuerbarer Energien erhebliche Einsparungen erzielte, verfehlte der Verkehrssektor seine Sektorziele wiederholt. Der Einsatz fossiler Brennstoffe im Transportbereich bleibt weiterhin auf hohem Niveau.',
+    graphicData:[{year:'1990',val:100},{year:'2000',val:82},{year:'2010',val:74},{year:'2022',val:60}],
+    graphicCaption:'Grafik: Relative Entwicklung der Treibhausgasemissionen in Deutschland (1990 = 100%)',
+    sentences:[
+      {text:'Die Emissionen sind im Vergleich zu 1990 um rund 40 Prozent gesunken.', wrong:false},
+      {text:'Der Verkehrssektor hat seine Reduktionsziele stets problemlos erreicht.', wrong:true},
+      {text:'Der Energiesektor konnte erhebliche Einsparungen verzeichnen.', wrong:false},
+      {text:'Laut Grafik lagen die Emissionen im Jahr 2000 höher als 1990.', wrong:true},
+      {text:'Der Einsatz fossiler Brennstoffe im Transportbereich ist weiterhin hoch.', wrong:false},
+      {text:'Im Jahr 2022 lagen die Emissionen bei 60 Prozent des Werts von 1990.', wrong:false},
+      {text:'Der Verkehrssektor ist der einzige Bereich mit ständigen Nullemissionen.', wrong:true}
     ]
   }
 ];
 
-/* ==========================================================================
-   MODELLTEST 4 (COMPLEXIFIÉ - TDN 5 / C1+)
-   ========================================================================== */
+/* MODELLTEST 4 */
 const MT4 = [
-  {
-    teil: 1,
-    title: "Aufgabe 1: Lückentext — Neuroplastizität und kognitive Reserve",
-    text: "Die Fähigkeit des menschlichen Gehirns, seine Struktur und Funktion dynamisch an veränderte Umweltbedingungen anzupassen, wird als Neuroplastizität bezeichnet. Lange Zeit ging die Neurowissenschaft davon aus, dass die neuronale Architektur nach dem Abschluss der Adoleszenz weitgehend <1> sei. Neuere neuroimaging-basierte Studien widerlegen dieses Paradigma jedoch nachhaltig. Sie belegen, dass auch im fortgeschrittenen Lebensalter kontinuierliche Synaptogenese stattfindet, sofern das Gehirn adäquaten kognitiven Stimuli <2> wird. Dies bildet das Fundament des Konzepts der kognitiven Reserve, welches erklärt, warum manche Individuen neuropathologische Veränderungen strukturell kompensieren können, ohne klinische Symptome zu <3>. Allerdings ist der Aufbau dieser Reserve nicht zwangsläufig das Resultat isolierter Denkaufgaben; vielmehr scheint eine Verknüpfung von komplexen intellektuellen Anforderungen mit körperlicher Aktivität den größten protektiven Effekt zu <4>. Diese Erkenntnisse implizieren eine Neuausrichtung präventiver therapeutischer Ansätze, die vermehrt auf ganzheitliche Lebensstilinterventionen <5>.",
-    type: "lückentext",
-    gaps: [
-      { id: 1, options: ["determiniert", "konsolidiert", "arrangiert", "statisch"], correct: 0 },
-      { id: 2, options: ["ausgesetzt", "unterworfen", "zugeführt", "überlassen"], correct: 0 },
-      { id: 3, options: ["manifestieren", "aufweisen", "entwickeln", "erleiden"], correct: 1 },
-      { id: 4, options: ["entfalten", "generieren", "ausüben", "bewirken"], correct: 0 },
-      { id: 5, options: ["abzielen", "bauen", "vertrauen", "fußen"], correct: 3 }
-    ]
-  },
-  {
-    teil: 2,
-    title: "Aufgabe 2: Satzreihenfolge — Epigenetische Genregulierung",
-    text: "Bringt die Argumentationskette bezüglich transgenerationaler Epigenetik in die logische Reihenfolge.",
-    type: "order",
-    items: [
-      { id: "A", text: "Diese Modifikationen verändern nicht die zugrunde liegende DNA-Sequenz selbst, sondern steuern vielmehr deren Zugänglichkeit für die zelluläre Transkriptionsmaschinerie." },
-      { id: "B", text: "Die Epigenetik erforscht molekulare Mechanismen, die die Aktivität von Genen unter dem Einfluss externer Umweltfaktoren nachhaltig regulieren." },
-      { id: "C", text: "Besonders signifikant ist hierbei die Erkenntnis, dass solche Umwelteinflüsse wie Mangelernährung oder dramatischer Stress chemische Marken auf dem Chromatin hinterlassen." },
-      { id: "D", text: "Folglich können phänotypische Anpassungen, die durch individuelle Lebenserfahrungen erworben wurden, unter bestimmten Bedingungen an nachfolgende Generationen weitergegeben werden." },
-      { id: "E", text: "Dies stellt das bisherige Dogma infrage, dass genetische Vererbung ausschließlich über die reine Abfolge der Nukleotidbasen erfolgt." }
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Spracherwerb und neuronale Plastizität',
+    segments:[
+      'Die Fähigkeit des menschlichen Gehirns, in den ersten Lebensjahren mühelos eine oder mehrere Sprachen zu erwerben, fasziniert die Sprachwissenschaft seit Jahrzehnten. Diese frühe Lernphase zeichnet sich durch eine besonders hohe neuronale ',
+      ' aus, die es Kleinkindern ermöglicht, lautliche Nuancen präzise zu verarbeiten. Im Laufe der Pubertät nimmt diese Fähigkeit jedoch ab, da sich spezialisierte Hirnstrukturen ',
+      '. Zwar können auch Erwachsene eine Zweitsprache bis zu einem hohen Niveau erlernen, doch erfordert dies meist mehr kognitive ',
+      ' und führt selten zu einer völlig akzentfreien Aussprache. Neurowissenschaftler betonen daher die Bedeutung einer frühkindlichen ',
+      ', um das volle sprachliche Potenzial auszuschöpfen.'
     ],
-    correctOrder: ["B", "C", "A", "D", "E"]
-  },
-  {
-    teil: 3,
-    title: "Aufgabe 3: Multiple Choice — Ethik der KI-Gouvernance",
-    text: "Die Implementierung von Systemen der Künstlichen Intelligenz (KI) in entscheidungstragende Prozesse der öffentlichen Verwaltung wirft schwerwiegende ethische und rechtsstaatliche Fragen auf. Zwar verspricht der Einsatz automatisierter Algorithmen eine Effizienzsteigerung und eine Verringerung menschlicher Willkür, doch birgt er das immanente Risiko der Reproduktion und Amplifikation historischer Diskriminierungen. Da generative und prädiktive Modelle auf historischen Datensätzen trainiert werden, spiegeln deren Output-Strukturen zwangsläufig die in den Daten enthaltenen gesellschaftlichen Vorurteile wider. Wenn solche Algorithmen zur Bewertung von Kreditwürdigkeit, Rückfallrisiken im Strafvollzug oder Qualifikationen im Rekrutierungsprozess genutzt werden, droht eine Verfestigung systemischer Benachteiligungen unter dem Deckmantel technologischer Neutralität. Die regulatorische Herausforderung besteht somit darin, Transparenz- und Rechenschaftspflichten zu etablieren, ohne die technologische Innovationsdynamik vollständig zu lähmen.",
-    type: "mc",
-    questions: [
-      {
-        text: "Welche Gefahr bezüglich des Einsatzes von KI-Systemen steht im Zentrum der Argumentation?",
-        options: [
-          "Algorithmen führen zu einer unvermeidbaren Überlastung der gerichtlichen Instanzen aufgrund von Fehlentscheidungen.",
-          "Vergangene gesellschaftliche Asymmetrien werden durch den Rückgriff auf vorgeprägte Datenstrukturen systematisch fortgeschritten.",
-          "Die technologische Komplexität führt zu einem vollständigen Stillstand staatlicher Verwaltungsprozesse.",
-          "KI-Modelle verweigern grundsätzlich die Befolgung rechtsstaatlicher Transparenznormen."
-        ],
-        correct: 1
-      },
-      {
-        text: "Was fordert der Text im Hinblick auf die Regulierung von Künstlicher Intelligenz?",
-        options: [
-          "Ein vollständiges Moratorium für den Einsatz automatisierter Entscheidungssysteme im öffentlichen Sektor.",
-          "Eine absolute Freistellung innovativer Algorithmen von staatlichen Kontrollmechanismen.",
-          "Eine Balance zwischen der gesetzlichen Einforderung von Nachvollziehbarkeit und dem Erhalt von Innovationskraft.",
-          "Die ausschließliche Verwendung von synthetischen Trainingsdaten zur Umgehung von Vorurteilen."
-        ],
-        correct: 2
-      }
+    gaps:[
+      {options:['Plastizität','Trägheit','Rigidität','Blockade'], correct:0},
+      {options:['verfestigen','auflösen','zurückbilden','Verschlechtern'], correct:0},
+      {options:['Anstrengung','Passivität','Gleichgültigkeit','Ruhe'], correct:0},
+      {options:['Förderung','Vernachlässigung','Isolierung','Hemmung'], correct:0},
+      {options:['auszuschöpfen','zu unterdrücken','zu begrenzen','zu ignorieren'], correct:0}
     ]
   },
-  {
-    teil: 4,
-    title: "Aufgabe 4: Zuordnung — Positionen zur Wissenschaftskommunikation",
-    text: "Ordnen Sie die Zitate den wissenschaftstheoretischen Standpunkten zu.",
-    type: "match",
-    options: [
-      { id: "A", text: "Warnt vor einer Vereinfachung komplexer Befunde und betont, dass Unsicherheiten und wissenschaftliche Kontroversen transparent benannt werden müssen." },
-      { id: "B", text: "Fordert eine strikte Trennung zwischen objektiver Befunderhebung und politischen Handlungsempfehlungen zur Wahrung der wissenschaftlichen Neutralität." },
-      { id: "C", text: "Sieht Forschende in der Pflicht, sich aktiv an gesellschaftlichen Debatten zu beteiligen und politische Entscheidungen direkt einzufordern." },
-      { id: "D", text: "Plädiert für die vorrangige Nutzung digitaler Massenmedien zur schnellen Verbreitung vorläufiger Forschungsergebnisse." }
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Der Wandel des wissenschaftlichen Publizierens',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Über Jahrhunderte hinweg wurden wissenschaftliche Erkenntnisse fast ausschließlich in gedruckten Fachzeitschriften veröffentlicht.',
+      'Zugang zu diesen Aufsätzen hatten meist nur Universitäten, die teure Abonnement-Gebühren an Großverlage zahlten.',
+      'Mit dem Siegeszug des Internets entstand Ende des 20. Jahrhunderts die Open-Access-Bewegung als Gegenentwurf.',
+      'Ziel dieser Initiative ist es, wissenschaftliche Publikationen für jedermann kostenfrei und digital zugänglich zu machen.',
+      'Heute verlangen viele öffentliche Forschungsförderer explizit die Veröffentlichung in Open-Access-Organen.'
     ],
-    questions: [
-      { text: "1. 'Wissenschaft verliert ihre Glaubwürdigkeit, wenn sie wissenschaftliche Vorbehalte verschweigt, nur um einfache Antworten für die Öffentlichkeit zu produzieren.'", correct: "A" },
-      { text: "2. 'Forscher dürfen sich nicht auf die Rolle des passiven Datenlieferanten beschränken; sie müssen die Implikationen ihrer Daten aktiv im Diskurs vertreten.'", correct: "C" },
-      { text: "3. 'Die Aufgabe der Forschung endet bei der Bereitstellung valider Daten; die normative Bewertung und Umsetzung obliegt einzig den demokratischen Institutionen.'", correct: "B" },
-      { text: "4. 'In Krisenzeiten müssen vorläufige Erkenntnisse ohne langwierige Peer-Review-Prozesse sofort über soziale Medien geteilt werden.'", correct: "D" }
+    shuffledStart:[2,0,4,1,3]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Epigenetik – Die Brücke zwischen Umwelt und Genen',
+    passage:[
+      '(1) Die klassische Genetik ging lange Zeit davon aus, dass der DNA-Code das unveränderliche Bauprogramm eines Organismus darstellt. Die Disziplin der Epigenetik zeigt jedoch, dass Umweltfaktoren wie Ernährung, Stress oder Schadstoffe chemische Markierungen an den Genen anbringen können, ohne deren Grundsequenz zu verändern.',
+      '(2) Diese epigenetischen Modifikationen fungieren als Molekularschalter, die Genaktivitäten an- oder ausschalten. Besonders bemerkenswert ist, dass manche dieser Anpassungen über Generationen hinweg vererbt werden können, was das traditionelle Verständnis der Vererbungslehre grundlegend erweitert.',
+      '(3) In der Medizin eröffnet die Epigenetik neue Wege zur Früherkennung und Behandlung schwerer Krankheiten wie Krebs, da epigenetische Veränderungen im Gegensatz zu Gendefekten potenziell reversibel sind.'
+    ],
+    questions:[
+      { q:'Was zeigt die Epigenetik laut Absatz 1?', options:['Dass der DNA-Code durch Ernährung komplett gelöscht wird.','Dass Umweltfaktoren Genaktivitäten ohne Sequenzänderung beeinflussen.','Dass Gene keinen Einfluss auf die Entwicklung des Körpers haben.','Dass Schadstoffe die biologische Rasse verändern.'], correct:1 },
+      { q:'Was ist das Besondere an epigenetischen Modifikationen laut Absatz 2?', options:['Sie verschwinden nach wenigen Sekunden wieder.','Sie können unter Umständen an nachfolgende Generationen weitergegeben werden.','Sie verhindern jegliche Vererbung von Eigenschaften.','Sie zerstören die molekulare Struktur der DNA.'], correct:1 },
+      { q:'Warum ist die Epigenetik für die Medizin so attraktiv (Absatz 3)?', options:['Weil epigenetische Modifikationen wieder rückgängig gemacht werden können.','Weil sie chirurgische Eingriffe völlig überflüssig macht.','Weil sie Gendefekte innerhalb von Minuten heilt.','Weil sie keine wissenschaftliche Forschung erfordert.'], correct:0 }
     ]
   },
-  {
-    teil: 5,
-    title: "Aufgabe 5: Kategorisierung — Open-Access-Publikationsmodelle",
-    text: "Kategorisieren Sie die Merkmale der wissenschaftlichen Publikationswege.",
-    type: "twocat",
-    cat1: "Gold Open Access (Direkte Erstveröffentlichung)",
-    cat2: "Grün Open Access (Zweitveröffentlichung / Selbstarchivierung)",
-    items: [
-      { text: "1. Das finale Manuskript wird parallel oder zeitversetzt auf einem institutionellen Repositorium frei zugänglich gemacht.", cat: 2 },
-      { text: "2. Der Artikel ist unmittelbar mit dem Tag der Publikation auf der Website des Verlags für jeden kostenfrei abrufbar.", cat: 1 },
-      { text: "3. Die Finanzierung erfolgt in der Regel über vom Autor oder dessen Institution zu entrichtende Artikelbearbeitungsgebühren (APCs).", cat: 1 },
-      { text: "4. Verlage gewähren oft eine Karenzzeit (Embargofrist), bevor die Arbeit im eigenen Archiv hochgeladen werden darf.", cat: 2 }
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Die Zukunft des universitären Studium',
+    passageText:`Die Digitalisierung der Hochschullehre hat durch den Schub der letzten Jahre eine neue Stufe erreicht. <strong>[1] Digitale Lehrformate bieten den Studierenden eine noch nie dagewesene zeitliche und räumliche Flexibilität beim Wissenserwerb.</strong> Doch reine Online-Lehre stößt schnell an Grenzen. <strong>[2] Das akademische Studium lebt vom unmittelbaren Diskurs, dem gemeinsamen Experimentieren und dem persönlichen Austausch auf dem Campus.</strong> Eine reine Virtualisierung würde den Kern der akademischen Bildung entkerten. <strong>[3] Es besteht die Gefahr, dass soziale Ungleichheiten durch rein digitale Lernumgebungen eher verstärkt als abgebaut werden.</strong> Hochschulen müssen daher zukunftsfähige Hybridmodelle entwickeln. <strong>[4] Nur eine durchdachte Kombination aus digitalen Werkzeugen und Präsenzlehre sichert eine hohe Qualität der Ausbildung.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte empfiehlt eine ausgewogene Synthese verschiedener Lernwelten.',
+      'Der Experte hebt Vorteile ortsunabhängigen Lernens hervor.',
+      'Der Experte unterstreicht die unersetzbare Bedeutung des Campuslebens.',
+      'Der Experte äußert Bedenken bezüglich der Chancengerechtigkeit.',
+      'Der Experte fordert die sofortige Schließung aller Universitätsgebäude.'
+    ],
+    correct:[1, 2, 3, 0]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Methode A (Klassische KI), Methode B (Deep Learning), zu beiden oder zu keiner passt.',
+    title:'Aufgabe 5: Vergleich von Ansätzen der Künstlichen Intelligenz',
+    passage:'In der Informatik unterscheidet man zwei grundlegende Ansätze zur Entwicklung intelligenter Systeme. Methode A (Symbolische KI) basiert auf explizit einprogrammierten Regeln und logischen Verknüpfungen. Sie ist hochgradig transparent und nachvollziehbar, stößt jedoch bei unstrukturierten Daten wie Bildern oder Sprache schnell an Grenzen. Methode B (Deep Learning) nutzt künstliche neuronale Netze, die selbstständig aus riesigen Datenmengen lernen. Sie erzielt herausragende Ergebnisse bei der Mustererkennung, leidet jedoch unter dem Problem der fehlenden Erklärbarkeit ("Black-Box-Problem"). Beide Methoden zielen darauf ab, kognitive Aufgaben automatisiert zu lösen.',
+    columns:['Methode A (Symbolisch)','Methode B (Deep Learning)','beide','passt nicht'],
+    items:[
+      {text:'Basiert auf manuell programmierten logischen Regelwerken.', correct:0},
+      {text:'Lent Muster eigenständig aus großen Datenmengen ohne feste Regeln.', correct:1},
+      {text:'Zeigt herausragende Leistung bei der automatischen Bild- und Spracherkennung.', correct:1},
+      {text:'Ist im Entscheidungsprozess transparent und Schritt für Schritt nachvollziehbar.', correct:0},
+      {text:'Leidet unter dem sogenannten Black-Box-Problem der fehlenden Transparenz.', correct:1},
+      {text:'Zielt auf die automatisierte Bewältigung kognitiver Aufgaben ab.', correct:2},
+      {text:'Wird ausschließlich in biologischen Gehirnen angewendet.', correct:3}
     ]
   },
-  {
-    teil: 6,
-    title: "Aufgabe 6: Bewertung des Einsatzes von Geothermie",
-    text: "Klassifizieren Sie die Aspekte der tiefen Geothermie.",
-    type: "table",
-    headers: ["Chancen / Vorteile", "Risiken / Nachteile", "Neutrale Fakten"],
-    rows: [
-      { text: "Bietet eine witterungsunabhängige, kontinuierliche Grundlastabdeckung mit sehr geringem Flächenbedarf an der Oberfläche.", correctCol: 0 },
-      { text: "Injektionen von Wasser unter hohem Druck können unter ungesteuerten Bedingungen induzierte Mikroseismizität auslösen.", correctCol: 1 },
-      { text: "Verfahren nutzen thermische Energie aus Tiefenschichten von mehr als 400 Metern unter der Erdoberfläche.", correctCol: 2 },
-      { text: "Hohe Füllungs- und Fündigkeitsrisiken bei Tiefbohrungen stellen ein beträchtliches finanzielles Verlustrisiko für Investoren dar.", correctCol: 1 }
-    ]
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Fachtext und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vor- und Nachteile von KI in der medizinischen Diagnostik',
+    passage:'Der Einsatz künstlicher Intelligenz (KI) in der medizinischen Bildgebung verspricht eine Revolution bei der Früherkennung von Erkrankungen. Ein Hauptvorteil besteht in der extrem hohen Geschwindigkeit und Präzision, mit der Algorithmen Aufnahmen wie MRTs oder Röntgenbilder analysieren und selbst kleinste Gewebeveränderungen erkennen können. Zudem entlastet dies Ärzte von Routineaufgaben. Demgegenüber stehen gravierende Nachteile: Bei fehlerhaften Trainingsdaten drohen systematische Fehlentscheidungen der Systeme. Darüber hinaus sind haftungsrechtliche Fragen bei medizinischen Fehldiagnosen durch autonome Software bis heute rechtlich unzureichend geklärt.',
+    aussagen:[
+      { key:'a', text:'[a] Ungeklärte juristische Haftung bei fälschlicherweise gestellten Diagnosen' },
+      { key:'b', text:'[b] Extrem schnelle und präzise Auswertung medizinischer Bilddaten' },
+      { key:'c', text:'[c] Risiko von Fehldiagnosen durch fehlerhafte oder verzerrte Trainingsdaten' },
+      { key:'d', text:'[d] Vollständige Abschaffung aller menschlichen Ärztinnen und Ärzte' },
+      { key:'e', text:'[e] Entlastung des Fachpersonals bei zeitaufwendigen Routineanalysen' },
+      { key:'f', text:'[f] Garantiert 100-prozentige Heilung aller Krebserkrankungen' }
+    ],
+    correctMap: { v1: 'b', v2: 'e', n3: 'a', n4: 'c' }
   },
-  {
-    teil: 7,
-    title: "Aufgabe 7: Fehlersuche im Fachtext — Hirnforschung und Willensfreiheit",
-    text: "Identifizieren Sie die Aussagen in der Zusammenfassung, die falsche Behauptungen enthalten.",
-    type: "summary",
-    sentences: [
-      { text: "Das berühmte Libet-Experiment zeigte, dass dem bewussten Handlungsentschluss ein unbewusstes Bereitschaftspotenzial im Gehirn vorausgeht.", wrong: false },
-      { text: "Daraus zogen Deterministisch orientierte Neurowissenschaftler den Schluss, dass der menschliche freie Wille eine reine Illusion darstellt.", wrong: false },
-      { text: "Kritiker betonen jedoch, dass einfache motorische Abläufe im Labor nicht auf komplexe, langfristige Lebensentscheidungen übertragbar sind.", wrong: false },
-      { text: "Die moderne Hirnforschung hat inzwischen unumstößlich bewiesen, dass der Mensch keinerlei Veto-Recht gegen unbewusste Impulse besitzt.", wrong: true }
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Entwicklung der Studierendenzahlen in Deutschland',
+    passage:'Die Zahl der Studierenden an deutschen Hochschulen ist von 2005 bis 2020 kontinuierlich angestiegen und erreichte einen Höchststand von knapp 3 Millionen. Seit 2021 ist jedoch erstmals wieder ein leichtes Abschmelzen der Erstsemesterzahlen zu beobachten, was Experten primär auf demografische Faktoren zurückführen.',
+    graphicData:[{year:'2005',val:2.0},{year:'2010',val:2.2},{year:'2015',val:2.7},{year:'2020',val:2.9},{year:'2022',val:2.8}],
+    graphicCaption:'Grafik: Anzahl der Studierenden in Deutschland (in Millionen)',
+    sentences:[
+      {text:'Die Studierendenzahl stieg zwischen 2005 und 2020 stetig an.', wrong:false},
+      {text:'Seit 2021 geht die Zahl der Erstsemester leicht zurück.', wrong:false},
+      {text:'Im Jahr 2005 gab es laut Grafik bereits 3,5 Millionen Studierende.', wrong:true},
+      {text:'Demografische Faktoren gelten als Hauptgrund für den aktuellen Rückgang.', wrong:false},
+      {text:'Die Studierendenzahl hat sich von 2005 bis 2020 mehr als verdreifacht.', wrong:true},
+      {text:'Im Jahr 2020 wurde ein Spitzenwert von knapp 3 Millionen erreicht.', wrong:false},
+      {text:'An deutschen Hochschulen studieren heute überhaupt keine Menschen mehr.', wrong:true}
     ]
   }
 ];
 
-/* ==========================================================================
-   ANWENDUNGSLOGIK & ZUSTANDSMANAGEMENT
-   ========================================================================== */
 const TESTS = [
-  { id: 1, title: 'Modelltest 1 (Humanmedizin & Forschung)', teile: MT1 },
-  { id: 2, title: 'Modelltest 2 (Technik & Psychologie)', teile: MT2 },
-  { id: 3, title: 'Modelltest 3 (Transformation & Rohstoffökonomie - C1+)', teile: MT3 },
-  { id: 4, title: 'Modelltest 4 (Neurowissenschaften & Gouvernance - C1+)', teile: MT4 }
+  {id: 1, title: 'Modelltest 1 (Klett / Humanmedizin)', teile: MT1},
+  {id: 2, title: 'Modelltest 2 (Technik & Psychologie)', teile: MT2},
+  {id: 3, title: 'Modelltest 3 (Klimawandel & Mobilität)', teile: MT3},
+  {id: 4, title: 'Modelltest 4 (Neurowissenschaften & KI)', teile: MT4}
 ];
-
-// Configuration des temps spécifiques par Aufgabe (en secondes)
-// Aufgabe 1: 4 min (240s)
-// Aufgabe 2: 5 min (300s)
-// Aufgabe 3: 15 min (900s)
-// Aufgabe 4: 6 min (360s)
-// Aufgabe 5: 9 min (540s)
-// Aufgabe 6: 7 min (420s)
-// Aufgabe 7: 7 min (420s)
-const TASK_TIMES_SECONDS = [240, 300, 900, 360, 540, 420, 420];
 
 let currentTestIdx = 0;
 let current = 0;
-let userAnswers = {};
 let timerInterval = null;
-let timeLeft = 0;
+let remaining = 0;
+const answers = {};
 
-function escapeHtml(text) {
-  if (!text) return '';
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+function fmt(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return m+":"+s;
+}
+function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
+function startTimer(seconds){
+  clearTimer(); remaining = seconds; updateTimerDisplay();
+  timerInterval = setInterval(()=>{
+    remaining--;
+    if(remaining <= 0){ remaining = 0; updateTimerDisplay(); clearTimer(); }
+    else { updateTimerDisplay(); }
+  },1000);
+}
+function updateTimerDisplay(){
+  const el = document.getElementById('timerText');
+  const circle = document.getElementById('timerCircle');
+  if(!el) return;
+  el.textContent = fmt(remaining);
+  if(remaining <= 30){ circle.classList.add('warn'); } else { circle.classList.remove('warn'); }
+}
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function getBucket(test, task){
+  if(!answers[test.id]) answers[test.id] = {};
+  if(!answers[test.id][task.teil]) answers[test.id][task.teil] = {};
+  return answers[test.id][task.teil];
 }
 
-function showTestSelect() {
+function showTestSelect(){
   clearTimer();
-  document.getElementById('navbar').style.display = 'none';
-  let html = `
-    <h2>TestDaF Modelltests auswählen</h2>
-    <p style="color:var(--text-muted); margin-bottom:1.5rem;">Wählen Sie einen der vier verfügbaren Modelltests zur Vorbereitung aus:</p>
-    <div class="grid-select">
-  `;
-
-  TESTS.forEach((t, i) => {
-    html += `
-      <div class="card-select" onclick="selectTest(${i})">
-        <div>
-          <h3>${escapeHtml(t.title)}</h3>
-          <p>7 wissenschaftssprachliche Aufgaben mit individuellen Zeitlimits (B2 bis C1+ / TDN 5 Niveau)</p>
-        </div>
-        <button class="btn-start">Test starten</button>
-      </div>
-    `;
+  document.getElementById('taskbar').innerHTML = '';
+  document.getElementById('navbar').innerHTML = '';
+  let cards = '';
+  TESTS.forEach((test, idx)=>{
+    cards += `<div class="sel-card" data-idx="${idx}">
+      <div class="sc-title">${test.title}</div>
+      <div class="sc-desc">7 Aufgaben · Niveau C1 · Akribische Fachsprache</div>
+    </div>`;
   });
-
-  html += `</div>`;
-  document.getElementById('main').innerHTML = html;
-}
-
-function selectTest(idx) {
-  currentTestIdx = idx;
-  current = 0;
-  userAnswers = {};
-  document.getElementById('navbar').style.display = 'flex';
-  renderTask();
-}
-
-function startTimer() {
-  clearTimer();
-  // Attribution du temps spécifique selon l'Aufgabe active
-  timeLeft = TASK_TIMES_SECONDS[current] || 300;
-  updateTimerDisplay();
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerDisplay();
-    if (timeLeft <= 0) {
-      clearTimer();
-      alert(`Die Zeit für Aufgabe ${current + 1} ist abgelaufen!`);
-      if (current < TESTS[currentTestIdx].teile.length - 1) {
-        current++;
-        renderTask();
-      } else {
-        showResults();
-      }
-    }
-  }, 1000);
-}
-
-function clearTimer() {
-  if (timerInterval) clearInterval(timerInterval);
-}
-
-function updateTimerDisplay() {
-  const el = document.getElementById('timer');
-  if (!el) return;
-  const m = Math.floor(timeLeft / 60);
-  const s = timeLeft % 60;
-  el.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-}
-
-function renderTask() {
-  startTimer();
-  const test = TESTS[currentTestIdx];
-  const task = test.teile[current];
-  
-  // Render Taskbar Navigation
-  let tbHtml = '';
-  test.teile.forEach((_, i) => {
-    tbHtml += `<div class="task-dot ${i === current ? 'active' : ''}" onclick="goToTask(${i})">${i+1}</div>`;
-  });
-  document.getElementById('taskbar').innerHTML = tbHtml;
-
-  let bodyHtml = '';
-
-  if (task.type === 'lückentext') {
-    let t = escapeHtml(task.text);
-    task.gaps.forEach(g => {
-      const savedVal = (userAnswers[current] && userAnswers[current][g.id]) || '';
-      let optsHtml = `<option value="">-- ? --</option>`;
-      g.options.forEach(opt => {
-        const sel = savedVal === opt ? 'selected' : '';
-        optsHtml += `<option value="${escapeHtml(opt)}" ${sel}>${escapeHtml(opt)}</option>`;
-      });
-      const selectHtml = `<select onchange="saveGap(${g.id}, this.value)">${optsHtml}</select>`;
-      t = t.replace(`&lt;${g.id}&gt;`, selectHtml);
-    });
-    bodyHtml = `<div class="task-text">${t}</div>`;
-  }
-  else if (task.type === 'order') {
-    bodyHtml = `<div class="task-text">${escapeHtml(task.text)}</div><div>`;
-    task.items.forEach(item => {
-      const savedPos = (userAnswers[current] && userAnswers[current][item.id]) || '';
-      let opts = `<option value="">-</option>`;
-      for (let i = 1; i <= task.items.length; i++) {
-        opts += `<option value="${i}" ${savedPos == i ? 'selected' : ''}>${i}</option>`;
-      }
-      bodyHtml += `
-        <div class="order-item">
-          <select onchange="saveOrder('${item.id}', this.value)">${opts}</select>
-          <span><strong>${item.id}:</strong> ${escapeHtml(item.text)}</span>
-        </div>`;
-    });
-    bodyHtml += `</div>`;
-  }
-  else if (task.type === 'mc') {
-    bodyHtml = `<div class="task-text">${escapeHtml(task.text)}</div>`;
-    task.questions.forEach((q, qIdx) => {
-      bodyHtml += `<div style="margin-bottom:1.5rem;">
-        <p style="font-weight:600; margin-bottom:0.5rem;">${qIdx+1}. ${escapeHtml(q.text)}</p>`;
-      q.options.forEach((opt, oIdx) => {
-        const checked = (userAnswers[current] && userAnswers[current][qIdx] === oIdx) ? 'checked' : '';
-        bodyHtml += `
-          <label class="mc-option">
-            <input type="radio" name="mc_${qIdx}" value="${oIdx}" ${checked} onchange="saveMC(${qIdx}, ${oIdx})">
-            ${escapeHtml(opt)}
-          </label>`;
-      });
-      bodyHtml += `</div>`;
-    });
-  }
-  else if (task.type === 'match') {
-    bodyHtml = `<div class="task-text">${escapeHtml(task.text)}</div>`;
-    bodyHtml += `<div style="background:#0f172a; padding:1rem; border-radius:8px; margin-bottom:1rem;">`;
-    task.options.forEach(o => {
-      bodyHtml += `<div><strong>${o.id}:</strong> ${escapeHtml(o.text)}</div>`;
-    });
-    bodyHtml += `</div>`;
-    task.questions.forEach((q, qIdx) => {
-      const savedVal = (userAnswers[current] && userAnswers[current][qIdx]) || '';
-      let selectOpts = `<option value="">-- Choice --</option>`;
-      task.options.forEach(o => {
-        selectOpts += `<option value="${o.id}" ${savedVal === o.id ? 'selected' : ''}>${o.id}</option>`;
-      });
-      bodyHtml += `
-        <div style="margin-bottom:0.8rem;">
-          <select onchange="saveMatch(${qIdx}, this.value)">${selectOpts}</select>
-          <span>${escapeHtml(q.text)}</span>
-        </div>`;
-    });
-  }
-  else if (task.type === 'twocat') {
-    bodyHtml = `<div class="task-text">${escapeHtml(task.text)}</div>`;
-    task.items.forEach((item, iIdx) => {
-      const savedCat = userAnswers[current] && userAnswers[current][iIdx];
-      bodyHtml += `
-        <div style="margin-bottom:1rem; background:#0f172a; padding:0.8rem; border-radius:6px;">
-          <p style="margin-bottom:0.4rem;">${escapeHtml(item.text)}</p>
-          <label style="margin-right:1rem;"><input type="radio" name="cat_${iIdx}" value="1" ${savedCat === 1 ? 'checked' : ''} onchange="saveCat(${iIdx}, 1)"> ${escapeHtml(task.cat1)}</label>
-          <label><input type="radio" name="cat_${iIdx}" value="2" ${savedCat === 2 ? 'checked' : ''} onchange="saveCat(${iIdx}, 2)"> ${escapeHtml(task.cat2)}</label>
-        </div>`;
-    });
-  }
-  else if (task.type === 'table') {
-    bodyHtml = `<div class="task-text">${escapeHtml(task.text)}</div>
-      <table class="table-grid">
-        <thead>
-          <tr>
-            <th>Aussage</th>
-            ${task.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}
-          </tr>
-        </thead>
-        <tbody>`;
-    task.rows.forEach((r, rIdx) => {
-      const savedCol = userAnswers[current] && userAnswers[current][rIdx];
-      bodyHtml += `<tr>
-        <td>${escapeHtml(r.text)}</td>
-        ${task.headers.map((_, cIdx) => `
-          <td style="text-align:center;">
-            <input type="radio" name="tbl_${rIdx}" value="${cIdx}" ${savedCol === cIdx ? 'checked' : ''} onchange="saveTable(${rIdx},${cIdx})">
-          </td>
-        `).join('')}
-      </tr>`;
-    });
-    bodyHtml += `</tbody></table>`;
-  }
-  else if (task.type === 'summary') {
-    bodyHtml = `<div class="task-text">${escapeHtml(task.text)}</div>
-      <p style="margin-bottom:0.8rem; color:var(--text-muted);">Klicken Sie auf Sätze, die fehlerhafte Informationen enthalten:</p>`;
-    task.sentences.forEach((s, sIdx) => {
-      const isChecked = userAnswers[current] && userAnswers[current][sIdx];
-      bodyHtml += `
-        <div class="summary-sentence ${isChecked ? 'checked' : ''}" id="sum_${sIdx}" onclick="toggleSummary(${sIdx})">
-          ${sIdx + 1}. ${escapeHtml(s.text)}
-        </div>`;
-    });
-  }
-
   document.getElementById('main').innerHTML = `
-    <div class="task-card">
-      <div class="task-header">
-        <span class="task-title">Teil ${task.teil}: ${escapeHtml(task.title)}</span>
-        <span class="timer-box" id="timer">--:--</span>
-      </div>
-      ${bodyHtml}
+    <div class="select-screen">
+      <h2>Leseverstehen C1 — Modelltest wählen</h2>
+      <p>Anspruchsvolle Texte, wissenschaftliches Vokabular und komplexe Satzstrukturen zur optimalen Vorbereitung auf den Digitalen TestDaF (TDN 4 / TDN 5).</p>
+      <div class="cards">${cards}</div>
+      <p class="select-note">Akademisches Übungsmaterial Niveau C1.</p>
     </div>
   `;
+  document.querySelectorAll('.sel-card[data-idx]').forEach(card=>{
+    card.onclick = ()=>{ currentTestIdx = parseInt(card.dataset.idx); current = 0; renderTask(); };
+  });
+}
 
-  // Update Footer Buttons
-  document.getElementById('btnPrev').onclick = () => { if(current > 0) { current--; renderTask(); } };
-  document.getElementById('btnNext').innerText = current === test.teile.length - 1 ? 'Auswerten' : 'Weiter →';
-  document.getElementById('btnNext').onclick = () => {
-    if (current < test.teile.length - 1) {
-      current++;
-      renderTask();
-    } else {
-      showResults();
-    }
+function renderTaskbar(task, test){
+  const tb = document.getElementById('taskbar');
+  tb.innerHTML = `
+    <div class="task-count">
+      <div>
+        <div class="task-label">${test.title} · Aufgabe</div>
+        <span class="n">${task.teil}</span><span class="of">/${test.teile.length}</span>
+      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
+      <div class="timer-caption">verbleibend</div>
+    </div>
+    <div class="instructions">
+      <div class="title">${task.label}</div>
+      <p>${task.instructions}</p>
+      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
+    </div>
+  `;
+}
+function renderNavbar(isLast, test){
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `
+    <button class="btn ghost" id="btnMenu">Modelltests</button>
+    <span class="foot-note">Niveau C1 · TestDaF Format</span>
+    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
+  `;
+  document.getElementById('btnMenu').onclick = ()=>{
+    if(confirm('Zurück zur Auswahlliste? Ihre Antworten bleiben gespeichert.')) showTestSelect();
+  };
+  document.getElementById('btnNext').onclick = ()=>{
+    if(isLast){ showResults(); } else { current++; renderTask(); }
   };
 }
 
-function goToTask(idx) {
-  current = idx;
-  renderTask();
+function renderTask(){
+  const test = TESTS[currentTestIdx];
+  const task = test.teile[current];
+  renderTaskbar(task, test);
+  startTimer(task.time);
+  const main = document.getElementById('main');
+  main.innerHTML = `<h2 class="task-title">${task.title}</h2><div id="taskBody"></div>`;
+  const body = document.getElementById('taskBody');
+  switch(task.type){
+    case 'gap': renderGap(task, test, body); break;
+    case 'order': renderOrder(task, test, body); break;
+    case 'mc': renderMC(task, test, body); break;
+    case 'match': renderMatch(task, test, body); break;
+    case 'table': renderTable(task, test, body); break;
+    case 'twocat': renderTwoCat(task, test, body); break;
+    case 'summary': renderSummary(task, test, body); break;
+  }
+  renderNavbar(current === test.teile.length-1, test);
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
-/* state persistence functions */
-function initAnswerObject() {
-  if (!userAnswers[current]) userAnswers[current] = {};
-}
-function saveGap(id, val) { initAnswerObject(); userAnswers[current][id] = val; }
-function saveOrder(id, val) { initAnswerObject(); userAnswers[current][id] = val; }
-function saveMC(qIdx, oIdx) { initAnswerObject(); userAnswers[current][qIdx] = oIdx; }
-function saveMatch(qIdx, val) { initAnswerObject(); userAnswers[current][qIdx] = val; }
-function saveCat(iIdx, cat) { initAnswerObject(); userAnswers[current][iIdx] = cat; }
-function saveTable(rIdx, cIdx) { initAnswerObject(); userAnswers[current][rIdx] = cIdx; }
-function toggleSummary(sIdx) {
-  initAnswerObject();
-  userAnswers[current][sIdx] = !userAnswers[current][sIdx];
-  const el = document.getElementById(`sum_${sIdx}`);
-  if (el) el.classList.toggle('checked');
+function renderGap(task, test, body){
+  let html = '<div class="passage"><p>';
+  task.segments.forEach((seg, i)=>{
+    html += escapeHtml(seg);
+    if(i < task.gaps.length){
+      const gap = task.gaps[i];
+      html += `<select class="gapselect" data-idx="${i}"><option value="">(${i+1}) wählen …</option>`;
+      gap.options.forEach((opt, oi)=>{ html += `<option value="${oi}">${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</option>`; });
+      html += `</select>`;
+    }
+  });
+  html += '</p></div>';
+  body.innerHTML = html;
+  const a = getBucket(test, task);
+  body.querySelectorAll('.gapselect').forEach(sel=>{
+    const idx = sel.dataset.idx;
+    if(a[idx] !== undefined){ sel.value = a[idx]; sel.classList.add('answered'); }
+    sel.addEventListener('change', ()=>{ a[idx] = sel.value; sel.classList.toggle('answered', sel.value !== ''); });
+  });
 }
 
-/* scoring and results */
-function scoreTask(task, test) {
-  const ans = userAnswers[test.teile.indexOf(task)] || {};
-  let correct = 0, total = 0;
-
-  if (task.type === 'lückentext') {
-    total = task.gaps.length;
-    task.gaps.forEach(g => { if (ans[g.id] === g.correct) correct++; });
-  } else if (task.type === 'order') {
-    total = task.items.length;
-    let userOrder = task.items.map(it => ({ id: it.id, pos: parseInt(ans[it.id]) || 99 }));
-    userOrder.sort((a, b) => a.pos - b.pos);
-    let userSortedIds = userOrder.map(u => u.id);
-    task.correctOrder.forEach((id, idx) => { if (userSortedIds[idx] === id) correct++; });
-  } else if (task.type === 'mc') {
-    total = task.questions.length;
-    task.questions.forEach((q, i) => { if (ans[i] === q.correct) correct++; });
-  } else if (task.type === 'match') {
-    total = task.questions.length;
-    task.questions.forEach((q, i) => { if (ans[i] === q.correct) correct++; });
-  } else if (task.type === 'twocat') {
-    total = task.items.length;
-    task.items.forEach((it, i) => { if (ans[i] === it.cat) correct++; });
-  } else if (task.type === 'table') {
-    total = task.rows.length;
-    task.rows.forEach((r, i) => { if (ans[i] === r.correctCol) correct++; });
-  } else if (task.type === 'summary') {
-    total = task.sentences.length;
-    task.sentences.forEach((s, i) => {
-      const uChecked = !!ans[i];
-      if ((s.wrong && uChecked) || (!s.wrong && !uChecked)) correct++;
+function renderOrder(task, test, body){
+  const a = getBucket(test, task);
+  if(!a.order) a.order = [...task.shuffledStart];
+  const order = a.order;
+  function draw(){
+    let html = '<ul class="order-list">';
+    order.forEach((origIdx, pos)=>{
+      html += `<li class="order-item"><div class="pos">${pos+1}</div><div class="txt">${escapeHtml(task.items[origIdx])}</div>
+        <div class="order-controls">
+          <button data-dir="up" data-pos="${pos}" ${pos===0?'disabled':''}>▲</button>
+          <button data-dir="down" data-pos="${pos}" ${pos===order.length-1?'disabled':''}>▼</button>
+        </div></li>`;
+    });
+    html += '</ul>';
+    body.innerHTML = html;
+    body.querySelectorAll('button[data-dir]').forEach(btn=>{
+      btn.onclick = ()=>{
+        const pos = parseInt(btn.dataset.pos);
+        const swapWith = btn.dataset.dir === 'up' ? pos-1 : pos+1;
+        [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
+        draw();
+      };
     });
   }
+  draw();
+}
 
-  return { correct, total };
+function renderMC(task, test, body){
+  let html = '<div class="passage">';
+  task.passage.forEach(p=> html += `<p>${escapeHtml(p)}</p>`);
+  html += '</div><div style="margin-top:20px;">';
+  const a = getBucket(test, task);
+  task.questions.forEach((q, qi)=>{
+    html += `<div class="qblock"><div class="qtext">Frage ${qi+1}: ${escapeHtml(q.q)}</div>`;
+    q.options.forEach((opt, oi)=>{
+      const checked = a[qi] == oi ? 'checked' : '';
+      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
+    });
+    html += `</div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  task.questions.forEach((q, qi)=>{
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[qi] = inp.value));
+  });
+}
+
+function renderMatch(task, test, body){
+  let html = `<div class="passage"><p>${task.passageText}</p></div>`;
+  html += `<h3 style="margin-top:20px;">Aussagen</h3><ul style="list-style:none;padding:0;">`;
+  task.options.forEach((opt, oi)=>{
+    html += `<li style="margin-bottom:6px;font-size:0.9rem;"><strong>${String.fromCharCode(97+oi)}</strong> ${escapeHtml(opt)}</li>`;
+  });
+  html += `</ul><div style="margin-top:20px;">`;
+  
+  const a = getBucket(test, task);
+  task.textStellen.forEach((ts, ti)=>{
+    html += `<div class="matchrow"><div class="ptxt"><strong>Textstelle [${ts}]:</strong></div>
+      <select data-ti="${ti}"><option value="">Aussage wählen …</option>
+      ${task.options.map((o,oi)=>`<option value="${oi}">Aussage ${String.fromCharCode(97+oi)}</option>`).join('')}
+      </select></div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  
+  body.querySelectorAll('select[data-ti]').forEach(sel=>{
+    const ti = sel.dataset.ti;
+    if(a[ti] !== undefined) sel.value = a[ti];
+    sel.addEventListener('change', ()=> a[ti] = sel.value);
+  });
+}
+
+function renderTable(task, test, body){
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  const a = getBucket(test, task);
+  task.items.forEach((item, ii)=>{
+    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
+    task.columns.forEach((c, ci)=>{
+      const checked = a[ii] == ci ? 'checked' : '';
+      html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
+    });
+    html += `</tr>`;
+  });
+  html += '</tbody></table>';
+  body.innerHTML = html;
+  task.items.forEach((item, ii)=>{
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[ii] = inp.value));
+  });
+}
+
+function renderTwoCat(task, test, body){
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<div class="a6-container"><div class="a6-statements"><div class="a6-statements-title">Aussagen</div><div class="a6-list">`;
+  task.aussagen.forEach(item => {
+    html += `<div>${escapeHtml(item.text)}</div>`;
+  });
+  html += `</div></div>`;
+  
+  const a = getBucket(test, task);
+  
+  const makeSelect = (id) => {
+    let s = `<select data-key="${id}"><option value="">-- Wählen --</option>`;
+    task.aussagen.forEach(item => {
+      const selected = a[id] === item.key ? 'selected' : '';
+      s += `<option value="${item.key}" ${selected}>${item.text}</option>`;
+    });
+    s += `</select>`;
+    return s;
+  };
+
+  html += `<table class="a6-table">
+    <thead>
+      <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
+      <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
+    </tbody>
+  </table></div>`;
+
+  body.innerHTML = html;
+  body.querySelectorAll('select[data-key]').forEach(sel=>{
+    sel.addEventListener('change', ()=>{
+      a[sel.dataset.key] = sel.value;
+    });
+  });
+}
+
+function renderSummary(task, test, body){
+  const maxVal = Math.max(...task.graphicData.map(d=>d.val));
+  let bars = '';
+  task.graphicData.forEach(d=>{
+    const h = Math.round((d.val/maxVal)*90)+10;
+    bars += `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+      <div style="font-size:.68rem;color:var(--text-soft);">${d.val}</div>
+      <div style="width:70%;height:${h}px;background:var(--teal);border-radius:4px 4px 0 0;"></div>
+      <div style="font-size:.7rem;color:var(--text-soft);">${d.year}</div></div>`;
+  });
+  const wrongCount = task.sentences.filter(s=>s.wrong).length;
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>
+  <div class="graphic-box"><div style="display:flex;align-items:flex-end;gap:6px;height:120px;">${bars}</div>
+  <div class="cap">${escapeHtml(task.graphicCaption)}</div></div>
+  <h3 style="color:var(--teal-dark);font-size:1rem;">Zusammenfassung</h3>
+  <div class="count-hint">Kreuzen Sie genau <strong>${wrongCount}</strong> Sätze an, die inhaltlich falsche Informationen enthalten. Ausgewählt: <span id="cnt">0</span>/${wrongCount}</div>
+  <div id="sentList">`;
+  const a = getBucket(test, task);
+  task.sentences.forEach((s, si)=>{
+    const checked = a[si] ? 'checked' : '';
+    html += `<label class="summary-item"><input type="checkbox" data-si="${si}" ${checked}><span>${escapeHtml(s.text)}</span></label>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  function updateCount(){
+    const n = task.sentences.filter((s,si)=>a[si]).length;
+    document.getElementById('cnt').textContent = n;
+  }
+  body.querySelectorAll('input[data-si]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
+  });
+  updateCount();
+}
+
+function scoreTask(task, test){
+  const a = getBucket(test, task);
+  let correct = 0, total = 0;
+  switch(task.type){
+    case 'gap':
+      total = task.gaps.length;
+      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
+      break;
+    case 'order':
+      total = task.correctOrder.length;
+      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
+      break;
+    case 'mc':
+      total = task.questions.length;
+      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      break;
+    case 'match':
+      total = task.correct.length;
+      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
+      break;
+    case 'table':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'twocat':
+      total = 4;
+      if(a.v1 === task.correctMap.v1) correct++;
+      if(a.v2 === task.correctMap.v2) correct++;
+      if(a.n3 === task.correctMap.n3) correct++;
+      if(a.n4 === task.correctMap.n4) correct++;
+      break;
+    case 'summary':
+      total = task.sentences.filter(s=>s.wrong).length;
+      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
+      break;
+  }
+  return {correct, total};
 }
 
 function renderCorrections(test) {
-  let html = `<h3 style="color:var(--accent-blue); margin-top:2rem; margin-bottom:1rem;">Detaillierte Auswertung & Korrektur</h3>`;
+  let html = `<h2 style="margin-top:32px;color:var(--teal-dark);">Detaillierte Korrektur</h2>`;
 
-  test.teile.forEach((task, tIdx) => {
-    const a = userAnswers[tIdx] || {};
-    html += `<div class="corr-box">
-      <h4 style="color:var(--teal-light); margin-bottom:0.5rem;">Teil ${task.teil}: ${escapeHtml(task.title)}</h4>`;
+  test.teile.forEach(task => {
+    const a = getBucket(test, task);
+    html += `<div class="corr-card">
+      <div class="corr-title">Aufgabe ${task.teil}: ${escapeHtml(task.title)}</div>`;
 
-    if (task.type === 'lückentext') {
-      task.gaps.forEach(g => {
-        const uVal = a[g.id] || 'Keine Antwort';
+    if (task.type === 'gap') {
+      task.gaps.forEach((g, i) => {
+        const uVal = parseInt(a[i]);
         const isOk = uVal === g.correct;
+        const uText = uVal >= 0 ? g.options[uVal] : 'Keine Antwort';
+        const cText = g.options[g.correct];
         html += `<div class="corr-item">
-          Lücke ${g.id}: <strong>${escapeHtml(uVal)}</strong> 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${isOk ? '✓ Richtig' : '✗ Falsch'}</span> 
-          ${!isOk ? `(Richtig: <strong>${escapeHtml(g.correct)}</strong>)` : ''}
+          <strong>Lücke ${i+1}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span> 
+          ${!isOk ? `(Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>)` : ''}
         </div>`;
       });
     } 
     else if (task.type === 'order') {
-      let userOrder = task.items.map(it => ({ id: it.id, pos: parseInt(a[it.id]) || 99 }));
-      userOrder.sort((a, b) => a.pos - b.pos);
-      let userSortedIds = userOrder.map(u => u.id).join(' - ');
-      let correctSortedIds = task.correctOrder.join(' - ');
-      const isOk = userSortedIds === correctSortedIds;
-
-      html += `<div class="corr-item">
-        Ihre Reihenfolge: <strong>${escapeHtml(userSortedIds)}</strong><br>
-        Richtige Reihenfolge: <strong>${escapeHtml(correctSortedIds)}</strong><br>
-        Status: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${isOk ? '✓ Vollständig Richtig' : '✗ Fehlerhaft'}</span>
-      </div>`;
+      const userOrder = a.order || task.shuffledStart;
+      userOrder.forEach((origIdx, pos) => {
+        const isOk = task.correctOrder[pos] === origIdx;
+        const correctOrigIdx = task.correctOrder[pos];
+        html += `<div class="corr-item">
+          <strong>Position ${pos+1}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(task.items[origIdx])}</span>
+          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(task.items[correctOrigIdx])}</strong>` : ''}
+        </div>`;
+      });
     } 
     else if (task.type === 'mc') {
       task.questions.forEach((q, i) => {
-        const uAns = a[i];
-        const isOk = uAns === q.correct;
+        const uVal = parseInt(a[i]);
+        const isOk = uVal === q.correct;
+        const uText = uVal >= 0 ? String.fromCharCode(97+uVal) + ') ' + q.options[uVal] : 'Keine Antwort';
+        const cText = String.fromCharCode(97+q.correct) + ') ' + q.options[q.correct];
         html += `<div class="corr-item">
-          <strong>Frage ${i+1}:</strong> ${escapeHtml(q.text)}<br>
-          Ihre Wahl: <em>${uAns !== undefined ? escapeHtml(q.options[uAns]) : 'Keine Antwort'}</em> — 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${isOk ? '✓ Richtig' : '✗ Falsch'}</span>
-          ${!isOk ? `<br>Richtig: <strong>${escapeHtml(q.options[q.correct])}</strong>` : ''}
+          <strong>Frage ${i+1}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
         </div>`;
       });
     } 
     else if (task.type === 'match') {
-      task.questions.forEach((q, i) => {
-        const uAns = a[i] || 'Keine Auswahl';
-        const isOk = uAns === q.correct;
+      task.textStellen.forEach((ts, i) => {
+        const uVal = parseInt(a[i]);
+        const cVal = task.correct[i];
+        const isOk = uVal === cVal;
+        const uText = uVal >= 0 ? 'Aussage ' + String.fromCharCode(97+uVal) : 'Keine Auswahl';
+        const cText = 'Aussage ' + String.fromCharCode(97+cVal);
         html += `<div class="corr-item">
-          <strong>Aussage ${i+1}:</strong> "${escapeHtml(q.text)}"<br>
-          Ihre Zuordnung: <strong>${escapeHtml(uAns)}</strong> — 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${isOk ? '✓ Richtig' : '✗ Falsch'}</span>
-          ${!isOk ? ` (Richtig: <strong>${escapeHtml(q.correct)}</strong>)` : ''}
-        </div>`;
-      });
-    } 
-    else if (task.type === 'twocat') {
-      task.items.forEach((it, i) => {
-        const uCat = a[i];
-        const isOk = uCat === it.cat;
-        const uStr = uCat === 1 ? task.cat1 : (uCat === 2 ? task.cat2 : 'Keine Auswahl');
-        const cStr = it.cat === 1 ? task.cat1 : task.cat2;
-        html += `<div class="corr-item">
-          <strong>Item ${i+1}:</strong> "${escapeHtml(it.text)}"<br>
-          Ihre Wahl: <em>${escapeHtml(uStr)}</em> — 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${isOk ? '✓ Richtig' : '✗ Falsch'}</span>
-          ${!isOk ? `<br>Richtig: <strong>${escapeHtml(cStr)}</strong>` : ''}
+          <strong>Textstelle [${ts}]:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? ` (Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>)` : ''}
         </div>`;
       });
     } 
     else if (task.type === 'table') {
-      task.rows.forEach((r, i) => {
-        const uCol = a[i];
-        const isOk = uCol === r.correctCol;
-        const uStr = uCol !== undefined ? task.headers[uCol] : 'Keine Auswahl';
-        const cStr = task.headers[r.correctCol];
+      task.items.forEach((item, i) => {
+        const uVal = parseInt(a[i]);
+        const isOk = uVal === item.correct;
+        const uText = uVal >= 0 ? task.columns[uVal] : 'Keine Auswahl';
+        const cText = task.columns[item.correct];
         html += `<div class="corr-item">
-          <strong>Aussage ${i+1}:</strong> "${escapeHtml(r.text)}"<br>
-          Ihre Wahl: <em>${escapeHtml(uStr)}</em> — 
-          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${isOk ? '✓ Richtig' : '✗ Falsch'}</span>
-          ${!isOk ? `<br>Richtig: <strong>${escapeHtml(cStr)}</strong>` : ''}
+          <strong>${i+1}. ${escapeHtml(item.text)}</strong><br>
+          Ihre Wahl: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? ` | Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'twocat') {
+      const keys = [
+        {k:'v1', label:'Vorteil 1'}, {k:'v2', label:'Vorteil 2'},
+        {k:'n3', label:'Nachteil 1'}, {k:'n4', label:'Nachteil 2'}
+      ];
+      keys.forEach(item => {
+        const uKey = a[item.k];
+        const cKey = task.correctMap[item.k];
+        const isOk = uKey === cKey;
+        const uObj = task.aussagen.find(x => x.key === uKey);
+        const cObj = task.aussagen.find(x => x.key === cKey);
+        const uText = uObj ? uObj.text : 'Keine Auswahl';
+        const cText = cObj ? cObj.text : '';
+        html += `<div class="corr-item">
+          <strong>${item.label}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
         </div>`;
       });
     } 
     else if (task.type === 'summary') {
       task.sentences.forEach((s, i) => {
-        const uChecked = !!a[i];
-        const isOk = (s.wrong && uChecked) || (!s.wrong && !uChecked);
+        const userChecked = !!a[i];
+        const isWrongSentence = s.wrong;
+        const isOk = userChecked === isWrongSentence;
         html += `<div class="corr-item">
-          <strong>Satz ${i+1}:</strong> "${escapeHtml(s.text)}"<br>
-          Status: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${uChecked ? 'Als falsch markiert' : 'Nicht markiert'}</span> 
-          ${!isOk ? ` (Sollte ${s.wrong ? 'als falsch markiert werden' : 'unmarkiert bleiben'})` : ''}
+          <span>"${escapeHtml(s.text)}"</span><br>
+          Sollte angekreuzt werden: <strong>${isWrongSentence ? 'JA (Falsch)' : 'NEIN (Richtig)'}</strong> | 
+          Ihre Auswahl: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${userChecked ? 'Angekreuzt' : 'Nicht angekreuzt'}</span>
         </div>`;
       });
     }
@@ -1191,55 +1061,39 @@ function renderCorrections(test) {
   return html;
 }
 
-function showResults() {
+function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   const test = TESTS[currentTestIdx];
-  let totC = 0, totT = 0;
-  let rowsHtml = '';
-  
-  test.teile.forEach(task => {
-    const sc = scoreTask(task, test);
-    totC += sc.correct;
-    totT += sc.total;
-    const ok = sc.correct === sc.total;
-    rowsHtml += `<div class="result-row">
-      <span>Aufgabe ${task.teil}: ${escapeHtml(task.title)}</span>
-      <span class="${ok ? 'ok' : 'no'}">${sc.correct} / ${sc.total}</span>
-    </div>`;
-  });
-  
-  const pct = Math.round((totC / totT) * 100);
-  let tdn = "Unter TDN 3";
-  if(pct >= 80) tdn = "TDN 5 (Sehr gut)";
-  else if(pct >= 65) tdn = "TDN 4 (Gut / B2-C1 Bestanden)";
-  else if(pct >= 50) tdn = "TDN 3";
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `<button class="btn ghost" id="btnMenu2">Modelltests</button><span class="foot-note">Niveau C1 Auswertung</span><button class="btn" id="btnRestart">Neu starten</button>`;
+  document.getElementById('btnRestart').onclick = ()=>{ answers[test.id] = {}; current = 0; renderTask(); };
+  document.getElementById('btnMenu2').onclick = ()=> showTestSelect();
 
-  const correctionsHtml = renderCorrections(test);
+  let sumCorrect = 0, sumTotal = 0;
+  let rows = '';
+  test.teile.forEach(task=>{
+    const {correct, total} = scoreTask(task, test);
+    sumCorrect += correct; sumTotal += total;
+    rows += `<div class="result-row"><span>Aufgabe ${task.teil} — ${task.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
+  });
+  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+  let tdn = 'unterhalb TDN 3';
+  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)'; else if(pct >= 44) tdn = 'TDN 3 (B2)';
+
+  const corrHtml = renderCorrections(test);
 
   document.getElementById('main').innerHTML = `
     <div class="results">
-      <h2>Auswertung — ${escapeHtml(test.title)}</h2>
-      <div class="score-hero">
-        <div class="pct">${totC} / ${totT} Punkte (${pct}%)</div>
-        <div class="tdn">Ergebnis: <strong>${tdn}</strong></div>
-      </div>
-      <h3 style="color:var(--teal-light);">Ergebnisse pro Aufgabe</h3>
-      ${rowsHtml}
-      ${correctionsHtml}
+      <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
+      <h2>Ergebnisse — ${test.title}</h2>
+      ${rows}
+      ${corrHtml}
+      <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
     </div>
   `;
-  
-  document.getElementById('navbar').innerHTML = `
-    <button class="btn" id="btnReselect">Weiterer Modelltest</button>
-    <button class="btn next" id="btnRestart">Diesen Test wiederholen</button>
-  `;
-  document.getElementById('btnReselect').onclick = () => showTestSelect();
-  document.getElementById('btnRestart').onclick = () => { current = 0; renderTask(); };
-  window.scrollTo({top:0, behavior:'instant'});
 }
 
-// App initialisieren
 showTestSelect();
 </script>
 </body>
