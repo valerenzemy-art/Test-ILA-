@@ -111,6 +111,13 @@
   table.a6-table th { background: var(--teal); color: #fff; width: 50%; }
   table.a6-table select { width: 100%; padding: 6px; border-radius: 4px; border: 1px solid var(--border); font: inherit; }
 
+  .corr-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .corr-title { font-weight: 700; color: var(--teal-dark); margin-bottom: 10px; font-size: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  .corr-item { font-size: 0.88rem; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+  .corr-item:last-child { border-bottom: none; }
+  .corr-tag-ok { color: var(--correct); font-weight: 700; }
+  .corr-tag-no { color: var(--wrong); font-weight: 700; }
+
   @media (max-width:480px){
     header.topbar{padding:14px 14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px));}
     .taskbar{padding:14px 14px;gap:12px;}
@@ -724,6 +731,118 @@ function scoreTask(task, test){
   return {correct, total};
 }
 
+function renderCorrections(test) {
+  let html = `<h2 style="margin-top:32px;color:var(--teal-dark);">Detaillierte Korrektur</h2>`;
+
+  test.teile.forEach(task => {
+    const a = getBucket(test, task);
+    html += `<div class="corr-card">
+      <div class="corr-title">Aufgabe ${task.teil}: ${escapeHtml(task.title)}</div>`;
+
+    if (task.type === 'gap') {
+      task.gaps.forEach((g, i) => {
+        const uVal = parseInt(a[i]);
+        const isOk = uVal === g.correct;
+        const uText = uVal >= 0 ? g.options[uVal] : 'Keine Antwort';
+        const cText = g.options[g.correct];
+        html += `<div class="corr-item">
+          <strong>Lücke ${i+1}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span> 
+          ${!isOk ? `(Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>)` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'order') {
+      const userOrder = a.order || task.shuffledStart;
+      userOrder.forEach((origIdx, pos) => {
+        const isOk = task.correctOrder[pos] === origIdx;
+        const correctOrigIdx = task.correctOrder[pos];
+        html += `<div class="corr-item">
+          <strong>Position ${pos+1}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(task.items[origIdx])}</span>
+          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(task.items[correctOrigIdx])}</strong>` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'mc') {
+      task.questions.forEach((q, i) => {
+        const uVal = parseInt(a[i]);
+        const isOk = uVal === q.correct;
+        const uText = uVal >= 0 ? String.fromCharCode(97+uVal) + ') ' + q.options[uVal] : 'Keine Antwort';
+        const cText = String.fromCharCode(97+q.correct) + ') ' + q.options[q.correct];
+        html += `<div class="corr-item">
+          <strong>Frage ${i+1}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'match') {
+      task.textStellen.forEach((ts, i) => {
+        const uVal = parseInt(a[i]);
+        const cVal = task.correct[i];
+        const isOk = uVal === cVal;
+        const uText = uVal >= 0 ? 'Aussage ' + String.fromCharCode(97+uVal) : 'Keine Auswahl';
+        const cText = 'Aussage ' + String.fromCharCode(97+cVal);
+        html += `<div class="corr-item">
+          <strong>Textstelle [${ts}]:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? ` (Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>)` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'table') {
+      task.items.forEach((item, i) => {
+        const uVal = parseInt(a[i]);
+        const isOk = uVal === item.correct;
+        const uText = uVal >= 0 ? task.columns[uVal] : 'Keine Auswahl';
+        const cText = task.columns[item.correct];
+        html += `<div class="corr-item">
+          <strong>${i+1}. ${escapeHtml(item.text)}</strong><br>
+          Ihre Wahl: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? ` | Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'twocat') {
+      const keys = [
+        {k:'v1', label:'Vorteil 1'}, {k:'v2', label:'Vorteil 2'},
+        {k:'n3', label:'Nachteil 1'}, {k:'n4', label:'Nachteil 2'}
+      ];
+      keys.forEach(item => {
+        const uKey = a[item.k];
+        const cKey = task.correctMap[item.k];
+        const isOk = uKey === cKey;
+        const uObj = task.aussagen.find(x => x.key === uKey);
+        const cObj = task.aussagen.find(x => x.key === cKey);
+        const uText = uObj ? uObj.text : 'Keine Auswahl';
+        const cText = cObj ? cObj.text : '';
+        html += `<div class="corr-item">
+          <strong>${item.label}:</strong> 
+          <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${escapeHtml(uText)}</span>
+          ${!isOk ? `<br>→ Richtig: <strong class="corr-tag-ok">${escapeHtml(cText)}</strong>` : ''}
+        </div>`;
+      });
+    } 
+    else if (task.type === 'summary') {
+      task.sentences.forEach((s, i) => {
+        const userChecked = !!a[i];
+        const isWrongSentence = s.wrong;
+        const isOk = userChecked === isWrongSentence;
+        html += `<div class="corr-item">
+          <span>"${escapeHtml(s.text)}"</span><br>
+          Sollte angekreuzt werden: <strong>${isWrongSentence ? 'JA (Falsch)' : 'NEIN (Richtig)'}</strong> | 
+          Ihre Auswahl: <span class="${isOk ? 'corr-tag-ok' : 'corr-tag-no'}">${userChecked ? 'Angekreuzt' : 'Nicht angekreuzt'}</span>
+        </div>`;
+      });
+    }
+
+    html += `</div>`;
+  });
+
+  return html;
+}
+
 function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
@@ -744,11 +863,14 @@ function showResults(){
   let tdn = 'unterhalb TDN 3';
   if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)'; else if(pct >= 44) tdn = 'TDN 3 (B2)';
 
+  const corrHtml = renderCorrections(test);
+
   document.getElementById('main').innerHTML = `
     <div class="results">
       <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
       <h2>Ergebnisse — ${test.title}</h2>
       ${rows}
+      ${corrHtml}
       <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
     </div>
   `;
