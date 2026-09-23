@@ -170,7 +170,7 @@ const MT2 = [
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
     segments:[
-      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzieller Schlüsselpunkt ist: Demnach ',
+      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzielle Schlüsselpunkt ist: Demnach ',
       ' diese Organismen in thermisch belasteten Gewässern dank spezialisierter Lipidzusammensetzungen, die ein Aufschmelzen der zellulären Barrieren verhindern. Doch die molekularen Feinheiten dieses Schutzmechanismus blieben lange Zeit im Verborgenen. Zudem schien die ',
       ' von Wissenschaftlern, es handele sich hierbei um eine rein passive Schutzreaktion, zunehmend fragwürdig. In einer neuen molekularbiologischen Untersuchung konnten Forscher nun eindeutig ',
       ', dass sich die fluiden Eigenschaften der Membranen aktiv und dynamisch an die Umgebungstemperatur anpassen. Mit einer Dicke, die dem Bruchteil einer Mikrometerschicht entspricht, reagiert die Zelle wesentlich schneller auf thermischen Stress als bisher angenommen. Der interessanteste Aspekt allerdings: Es handelt sich keineswegs um einen starren Panzer. Wie aus den proteomischen Analysen hervorgeht, verhält sich die Zytoplasmastruktur stattdessen hochelastisch und besitzt komplexe Regulationsmechanismen. Dieses ',
@@ -257,7 +257,7 @@ const MT2 = [
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
-    passageText:`Die Vorstellung, dass wir bei der Energiewende vollständig von globalen Lieferketten abhängig bleiben und kritische Rohstoffe nur unter ökologisch fragwürdigen Bedingungen aus Übersee importieren können, ist eine These, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch innovative geothermische Verfahren Lithium direkt aus hiesigem Thermalwasser zu gewinnen. Dabei wird das Leichtmetall in einem komplexen technischen Kreislauf herausgefiltert, während das abgekühlte Wasser CO2-neutral in die Tiefe zurückgeleitet wird. <strong>[2] Diese Verfahren sind zugebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt extrem schnell voran. Vielleicht werden wir in Zukunft in der Lage sein, den gesamten hiesigen Bedarf an Batteriematerialien lokal und umweltschonend zu decken. Oder wir werden in den Genuss kommen, dass modernste Bergbautechnologien die Umweltauswirkungen auf ein absolutes Minimum reduzieren. Wenn Sie vor 100 Jahren einem Gelehrten gesagt hatten, dass wir schon bald durch automatisierte Fördertechniken und chemische Direktextraktion gigantische Industrimengen an Rohstoffen gewinnen können, hätte er Sie nur mitleidig angesehen. Und wenn Sie ihm gesagt hatten, dass diese Verfahren mit einem Bruchteil der ökologischen Belastung herkömmlicher Minen arbeiten wurden, hätte er Sie für komplett verrückt erklärt. Doch durch wissenschaftliche und ingenieurtechnische Meisterleistungen ist uns genau das gelungen.<br><br>Die Idee, dass heimische Rohstoffprojekte grundsätzlich zum Scheitern verurteilt sind, könnte auch ein Irrglaube sein. <strong>[3] Dass sie dennoch so unpopulär sind, hängt damit zusammen, dass unsere Vorstellung von der heimischen Natur immer noch von einer unberührten Idylle geprägt ist.</strong> Damals hiess es: Jede technische Eingriff in den Untergrund zerstört unweigerlich die Landschaft. Wenn alle Vorkommen erschlossen sind, wird die Region dauerhaft geschädigt. In Wahrheit sind unsere geologischen Potenziale jedoch enorm und die modernen Sicherheitsstandards extrem hoch. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Ingenieurskunst werden wir immer besser in der Lage sein, die Rohstoffe im Einklang mit der Umwelt zu fördern.</strong>`,
+    passageText:`Die Vorstellung, dass wir bei der Energiewende vollständig von globalen Lieferketten abhängig bleiben und kritische Rohstoffe nur unter ökologisch fragwürdigen Bedingungen aus Übersee importieren können, ist eine Thesis, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch innovative geothermische Verfahren Lithium direkt aus hiesigem Thermalwasser zu gewinnen. Dabei wird das Leichtmetall in einem komplexen technischen Kreislauf herausgefiltert, während das abgekühlte Wasser CO2-neutral in die Tiefe zurückgeleitet wird. <strong>[2] Diese Verfahren sind zugebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt extrem schnell voran. Vielleicht werden wir in Zukunft in der Lage sein, den gesamten hiesigen Bedarf an Batteriematerialien lokal und umweltschonend zu decken. Oder wir werden in den Genuss kommen, dass modernste Bergbautechnologien die Umweltauswirkungen auf ein absolutes Minimum reduzieren. Wenn Sie vor 100 Jahren einem Gelehrten gesagt hatten, dass wir schon bald durch automatisierte Fördertechniken und chemische Direktextraktion gigantische Industrimengen an Rohstoffen gewinnen können, hätte er Sie nur mitleidig angesehen. Und wenn Sie ihm gesagt hatten, dass diese Verfahren mit einem Bruchteil der ökologischen Belastung herkömmlicher Minen arbeiten wurden, hätte er Sie für komplett verrückt erklärt. Doch durch wissenschaftliche und ingenieurtechnische Meisterleistungen ist uns genau das gelungen.<br><br>Die Idee, dass heimische Rohstoffprojekte grundsätzlich zum Scheitern verurteilt sind, könnte auch ein Irrglaube sein. <strong>[3] Dass sie dennoch so unpopulär sind, hängt damit zusammen, dass unsere Vorstellung von der heimischen Natur immer noch von einer unberührten Idylle geprägt ist.</strong> Damals hiess es: Jede technische Eingriff in den Untergrund zerstört unweigerlich die Landschaft. Wenn alle Vorkommen erschlossen sind, wird die Region dauerhaft geschädigt. In Wahrheit sind unsere geologischen Potenziale jedoch enorm und die modernen Sicherheitsstandards extrem hoch. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Ingenieurskunst werden wir immer besser in der Lage sein, die Rohstoffe im Einklang mit der Umwelt zu fördern.</strong>`,
     textStellen:[1, 2, 3, 4],
     options:[
       'Der Experte erklärt etwas.',
@@ -303,7 +303,7 @@ const MT2 = [
     correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'h' }
   },
   { ...TEMPLATE[6],
-    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten. Es gibt genau drei inhaltlich falsche Sätze.',
     title:'Aufgabe 7: Der Rhythmus des Lernens: Wie Musik das Gehirn beeinflusst',
     passage:'Ein regelmäßiger Musikkonsum beim Lernen kostet zwar Zeit und Aufmerksamkeit, doch er entlastet nachweislich das Gehirn, senkt den Cortisolspiegel und fördert die Konzentrationsfähigkeit im Vergleich zum Arbeiten in völliger Stille. Sogar die Schüler, die beim Lernen intensiv über laute Kopfhörer beschallt werden, leiden häufiger unter akustischer Reizüberflutung und Konzentrationsproblemen. Doch nicht nur die Oberstufenschüler, sondern auch die Jüngsten zeigen oft ein verändertes Hör- und Lernverhalten. Wie in einer aktuellen Studie in Deutschland festgestellt wurde, benötigen Schüler im Schnitt 32 Minuten, um sich morgens durch gezieltes Musikhören in eine optimale Lernstimmung zu versetzen. Während bei immerhin 22 Prozent der Schüler der Weg zur Schule kürzer als zehn Minuten ist, brauchen 12 Prozent dafür 45 Minuten und länger. Wären sie musikalisch aktiv, würde man sie als klassische Melomanen bezeichnen.<br><br>Wie die Forscher herausfanden, geht das ständige Musikhören im Alltag an den Jugendlichen nicht spurlos vorüber. Ähnlich wie Erwachsene leiden besonders Jugendliche mit langen Lernphasen unter mentaler Erschöpfung. Sie sind zudem unkonzentriert und fühlen sich weniger leistungsfähig. Doch auch Schüler, die gar keine Musik hören, leiden unter derartigen Folgen. Auf Reaktionen aus der Politik wartet man bislang vergeblich und eine Abhilfe scheint nicht in Sicht. In den letzten zehn Jahren mussten immer mehr Musikschulen schließen, weil beispielsweise qualifizierte Musiklehrer fehlten. Für die Schüler ist dies fatal: Sie müssen immer monotonere Lehrmethoden in Kauf nehmen – und damit auch die mangelnde Kreativität, die damit verbunden ist. Zum Bildungserfolg der Jugendlichen trägt das sicherlich nicht bei.',
     graphicData:[{year:'1. Satz',val:1},{year:'2. Satz',val:1},{year:'3. Satz',val:1},{year:'4. Satz',val:1},{year:'5. Satz',val:1},{year:'6. Satz',val:1}],
@@ -654,14 +654,34 @@ function fmt(sec){
   return m+":"+s;
 }
 function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
+
+function handleTimerExpired(){
+  clearTimer();
+  const test = TESTS[currentTestIdx];
+  const isLast = (current === test.teile.length - 1);
+  if(isLast){
+    showResults();
+  } else {
+    current++;
+    renderTask();
+  }
+}
+
 function startTimer(seconds){
   clearTimer(); remaining = seconds; updateTimerDisplay();
   timerInterval = setInterval(()=>{
     remaining--;
-    if(remaining <= 0){ remaining = 0; updateTimerDisplay(); clearTimer(); }
-    else { updateTimerDisplay(); }
+    if(remaining <= 0){
+      remaining = 0; 
+      updateTimerDisplay(); 
+      clearTimer();
+      handleTimerExpired(); // Déclenche le passage automatique à l'Aufgabe suivant
+    } else { 
+      updateTimerDisplay(); 
+    }
   },1000);
 }
+
 function updateTimerDisplay(){
   const el = document.getElementById('timerText');
   const circle = document.getElementById('timerCircle');
@@ -940,6 +960,19 @@ function renderSummary(task, test, body){
     cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
   });
   updateCount();
+}
+
+function showResults(){
+  clearTimer();
+  document.getElementById('taskbar').innerHTML = '';
+  document.getElementById('navbar').innerHTML = '';
+  document.getElementById('main').innerHTML = `
+    <div class="select-screen">
+      <h2>Test beendet</h2>
+      <p>Ihre Antworten wurden erfolgreich erfasst.</p>
+      <button class="btn next" onclick="showTestSelect()" style="margin-top:20px;">Zurück zur Übersicht</button>
+    </div>
+  `;
 }
 
 // Lancement initial de l'application
