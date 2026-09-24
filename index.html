@@ -2,19 +2,72 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TestDaF C1 - Portal</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; background: #f4f8f9; color: #333; }
-        .btn { display: block; width: 300px; margin: 20px auto; padding: 20px; font-size: 1.2rem; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; }
+        * {
+            box-sizing: border-box;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333; 
+        }
+        .portal-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        p {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        .btn { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%; 
+            margin: 15px 0; 
+            padding: 18px 20px; 
+            font-size: 1.2rem; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
         .btn-lesen { background: #3f909a; }
         .btn-schreiben { background: #8e44ad; }
     </style>
 </head>
 <body>
-    <h1>TestDaF C1 Vorbereitung</h1>
-    <p>Choisis ton module d'entraînement :</p>
-    <br>
-    <a href="lesen.html" class="btn btn-lesen">📖 Lesen (Lecture)</a>
-    <a href="schreiben.html" class="btn btn-schreiben">✍️ Schreiben (Écriture)</a>
+    <div class="portal-card">
+        <h1>TestDaF C1 Vorbereitung</h1>
+        <p>Choisis ton module d'entraînement :</p>
+        
+        <a href="lesen.html" class="btn btn-lesen"><span>📖</span> Lesen (Lecture)</a>
+        <a href="schreiben.html" class="btn btn-schreiben"><span>✍️</span> Schreiben (Écriture)</a>
+    </div>
 </body>
 </html>
