@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modellprüfung TestDaF – Schreiben Modelltest 2</title>
+<style>
+:root{--teal:#3f909a;--teal-d:#2d6f78;--mint:#cfe3e1;--ink:#1f2a2c;--line:#9aa7a8;--paper:#fff;--bg:#e9eeee;--warn:#d9822b;--bad:#c0392b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5}
+.sheet{max-width:820px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 0 18px rgba(0,0,0,.12)}
+header.top{background:var(--teal);color:#fff;display:flex;justify-content:space-between;align-items:baseline;padding:18px 28px;font-size:1.5rem;font-weight:300;gap:12px;flex-wrap:wrap}
+header.top b{font-weight:400}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--teal);display:flex;align-items:center;gap:14px;padding:10px 28px;flex-wrap:wrap}
+.timer{margin-left:auto;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--teal-d);min-width:84px;text-align:right}
+main{padding:24px 28px 40px}
+.task{background:var(--mint);padding:16px 20px;margin-bottom:22px;font-size:.95rem}
+.task h2{margin:0 0 8px;font-size:1rem}
+.task p{margin:6px 0}
+.source h3{margin:0 0 10px;font-size:1rem}
+.source p{margin:0 0 10px;font-size:.93rem;text-align:justify;hyphens:auto}
+figure{margin:18px auto;border:1px solid #444;max-width:560px}
+figure figcaption{background:var(--teal-d);color:#fff;font-size:.72rem;font-weight:600;padding:4px 10px}
+textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden;min-height:1152px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
+.status{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:2px solid var(--teal);padding-top:10px;margin-top:20px;font-size:.92rem}
+.tools button{border:1px solid var(--teal);background:#fff;color:var(--teal-d);padding:5px 12px;cursor:pointer;font:inherit;margin-left:6px}
+.back-link{display:inline-block;margin-top:20px;color:var(--teal-d);text-decoration:none;font-weight:600}
+@media(max-width:560px){header.top,.bar,main{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header class="top"><span>Modellprüfung <b>Digitaler TestDaF</b></span><span>Schreiben – Modelltest 2</span></header>
+  <div class="bar">
+    <div class="timer" id="timer">60:00</div>
+  </div>
+  <main>
+    <section class="task-block">
+      <div class="task">
+        <h2>Aufgabe 1/2</h2>
+        <p>Auf einer Lernplattform diskutieren Sie mit Ihrem Dozenten und anderen Seminarteilnehmenden über das Thema „Berufswahl“.<br>Schreiben Sie einen kurzen Beitrag.</p>
+        <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für den Einzelnen und die Gesellschaft haben kann, wenn die Mehrheit der Menschen ihren Beruf eher nach Leidenschaft als nach Sicherheit wählt.</strong></p>
+        <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
+      </div>
+    </section>
+
+    <section class="task-block">
+      <div class="task">
+        <h2>Aufgabe 2/2</h2>
+        <p>In Ihrem Seminar für Psychologie schreiben Sie eine Hausarbeit zum Thema „Persönliche Entwicklung und beruflicher Werdegang“. In einem Abschnitt wollen Sie sich mit folgender Frage beschäftigen:<br><strong>Welche Bedeutung hat das Scheitern für die persönliche und berufliche Weiterentwicklung?</strong><br>Fassen Sie zu dieser Frage Informationen aus dem Text und der Grafik zusammen. Benutzen Sie eigene Formulierungen. Das Abschreiben von Textpassagen ist nicht erlaubt.</p>
+        <p>Schreiben Sie <strong>ca. 100–150 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
+      </div>
+      <div class="source">
+        <h3>Scheitern als Chance</h3>
+        <p>In der modernen Leistungsgesellschaft wird das Phänomen des Scheiterns konventionell meist als Makel, persönliches Versagen oder unüberwindbarer Karriereknick stigmatisiert. Dennoch wandelt sich der wissenschaftliche Diskurs zunehmend hin zu einer Neubewertung von Fehlschlägen als unverzichtbaren Katalysator für individuelle Reifungsprozesse und gesellschaftliche Innovation. Aus psychologischer Perspektive birgt eine Krise das fundamentale Potenzial, destruktive Verhaltensmuster sowie veraltete Denkgewohnheiten radikal zu hinterfragen. Anstatt als endgültige Sackgasse wahrgenommen zu werden, fungiert das Scheitern als präzises diagnostisches Instrument, das blinde Flecken offenbart und strategische Kurskorrekturen ermöglicht. Individuen, die den Mut aufbringen, aus ihren Niederlagen zu lernen, entwickeln eine substanziell höhere Resilienz sowie ausgeprägte Problemlösungskompetenzen. Diese psychische Widerstandskraft ist in einer sich rasant verändernden, globalisierten Arbeitswelt von existenzieller Bedeutung, da sie den Übergang von bloßem Funktionieren zu proaktiver Gestaltungskraft begünstigt.</p>
+        <p>Darüber hinaus zeigt sich, dass die Bewältigung von Rückschlägen die intrinsische Motivation nachhaltig stärkt, indem sie Individuen von dem perfekten, oft lähmenden Erwartungsdruck der Außenwelt befreit. Experimentierfreudigkeit und Kreativität gedeihen folglich genau dort, wo das Risiko des Scheiterns entstigmatisiert wird und als normaler Bestandteil jedes wissenschaftlichen sowie unternehmerischen Innovationszyklus gilt. So belegen soziologische Untersuchungen, dass Gründerinnen und Gründer nach einem durchlebten geschäftlichen Misserfolg bei nachfolgenden Projekten signifikant höhere Erfolgsquoten aufweisen, da sie aus den initialen Fehlern fundierte strategische Erkenntnisse gezogen haben. Das Risiko des Scheiterns verliert somit seinen Schrecken und wandelt sich in eine wertvolle Ressource für die persönliche Zukunftsfähigkeit.</p>
+        <figure>
+          <figcaption>Zyklus der Krisenbewältigung</figcaption>
+          <svg viewBox="0 0 600 160" width="100%" role="img" aria-label="Zyklus der Krisenbewältigung" font-family="Segoe UI,Arial,sans-serif" font-size="12"><rect x="2" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="52.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Initialer</text><text x="52.0" y="92.0" text-anchor="middle" fill="#1f2a2c">Misserfolg</text><path d="M104 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M124 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="126" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="176.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Frustration /</text><text x="176.0" y="92.0" text-anchor="middle" fill="#1f2a2c">Reflexion</text><path d="M228 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M248 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="250" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="300.0" y="84.0" text-anchor="middle" fill="#1f2a2c">Kurskorrektur</text><path d="M352 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M372 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="374" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="424.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Kompetenz-</text><text x="424.0" y="92.0" text-anchor="middle" fill="#1f2a2c">gewinn</text><path d="M476 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M496 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="498" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="548.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Langfristiger</text><text x="548.0" y="92.0" text-anchor="middle" fill="#1f2a2c">Erfolg</text></svg>
+        </figure>
+      </div>
+    </section>
+
+    <div class="writing">
+      <textarea id="ta" spellcheck="false" placeholder="Schreiben Sie hier …" aria-label="Schreibfeld"></textarea>
+      <div class="status">
+        <div class="count"><b id="wc">0</b> Wörter</div>
+        <div class="tools"><button id="copy">Text kopieren</button></div>
+      </div>
+    </div>
+    <a href="schreiben.html" class="back-link">← Zurück zur Übersicht</a>
+  </main>
+</div>
+<script>
+let time = 60 * 60;
+const tm = document.getElementById('timer');
+const ta = document.getElementById('ta');
+setInterval(() => {
+  let m = Math.floor(time / 60), s = time % 60;
+  tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+  if(time > 0) time--;
+}, 1000);
+ta.addEventListener('input', () => {
+  let words = ta.value.trim().match(/\S+/g);
+  document.getElementById('wc').textContent = words ? words.length : 0;
+});
+document.getElementById('copy').onclick = () => {
+  navigator.clipboard.writeText(ta.value);
+  alert("Text kopiert!");
+};
+</script>
+</body>
+</html>
