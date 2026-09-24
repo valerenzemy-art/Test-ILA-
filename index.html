@@ -1,73 +1,323 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestDaF C1 - Portal</title>
+    <title>TestDaF C1 Vorbereitung</title>
+    <!-- Importation de Google Fonts pour un design moderne -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Importation de FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #0a0a0a;
+            color: #a0a0a0;
+            text-align: center;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #222;
+        }
+
+        /* Header / Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: rgba(18, 18, 18, 0.95);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #38bdf8;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333; 
-        }
-        .portal-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 450px;
-            width: 90%;
+            padding: 0 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
+                        url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
         }
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #2c3e50;
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
-        p {
-            font-size: 1rem;
-            color: #7f8c8d;
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            max-width: 600px;
             margin-bottom: 30px;
         }
-        .btn { 
+
+        .cta-button {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: #0ea5e9;
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Modules Section */
+        .modules-section {
+            padding: 80px 8%;
+            background-color: #161616;
+            text-align: center;
+        }
+
+        .modules-section h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .modules-section .subtitle {
+            color: #9ca3af;
+            margin-bottom: 50px;
+            font-size: 1rem;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .module-card {
+            background-color: #1f1f1f;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 40px 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%; 
-            margin: 15px 0; 
-            padding: 18px 20px; 
-            font-size: 1.2rem; 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 12px; 
-            font-weight: bold; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .btn:active {
-            transform: scale(0.98);
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
         }
-        .btn-lesen { background: #3f909a; }
-        .btn-schreiben { background: #8e44ad; }
+
+        .module-card.highlight {
+            border-color: #38bdf8;
+            background: linear-gradient(145deg, #1f1f1f, #1e293b);
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        .module-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .module-card p {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .module-btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 150px;
+            text-align: center;
+        }
+
+        .module-btn:hover {
+            background-color: #0ea5e9;
+            color: #ffffff;
+        }
+
+        .module-card.disabled {
+            opacity: 0.6;
+        }
+
+        .module-card.disabled .module-btn {
+            background-color: #374151;
+            color: #9ca3af;
+            pointer-events: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a0a;
+            padding: 30px 8%;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #71717a;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 5%;
+            }
+            nav ul {
+                display: none; /* Simplifié pour mobile, peut être étendu avec un menu hamburger */
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="portal-card">
-        <h1>TestDaF C1 Vorbereitung</h1>
-        <p>Choisis ton module d'entraînement :</p>
-        
-        <a href="lesen.html" class="btn btn-lesen"><span>📖</span> Lesen (Lecture)</a>
-        <a href="schreiben.html" class="btn btn-schreiben"><span>✍️</span> Schreiben (Écriture)</a>
+
+    <!-- Barre supérieure de contact -->
+    <div class="top-bar">
+        Besoin d'aide pour votre préparation ? Contactez-nous à support@testdaf-prep.com
     </div>
+
+    <!-- En-tête / Navigation -->
+    <header>
+        <div class="logo">TESTDAF <span>C1</span></div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Accueil</a></li>
+                <li><a href="#modules">Modules</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section Hero (En-tête visuel) -->
+    <section class="hero">
+        <h1>Préparez votre TestDaF C1 avec succès</h1>
+        <p>Optimisez vos chances de réussite aux épreuves officielles grâce à nos modules d'entraînement ciblés.</p>
+        <a href="#modules" class="cta-button">Commencer l'entraînement</a>
+    </section>
+
+    <!-- Section des Modules (Mettant bien en valeur Lesen et Schreiben) -->
+    <section class="modules-section" id="modules">
+        <h2>Choisissez votre module d'entraînement</h2>
+        <div class="subtitle">Sélectionnez une épreuve pour commencer vos exercices pratiques</div>
+        
+        <div class="modules-grid">
+            <!-- Module Lesen (Lecture) -->
+            <div class="module-card highlight">
+                <div class="module-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h3>Lesen (Lecture)</h3>
+                <p>Maîtrisez les textes complexes et les différentes tâches de compréhension écrite.</p>
+                <a href="#" class="module-btn">Réservez</a>
+            </div>
+
+            <!-- Module Schreiben (Écriture) -->
+            <div class="module-card highlight">
+                <div class="module-icon">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <h3>Schreiben (Écriture)</h3>
+                <p>Entraînez-vous à rédiger des argumentations structurées et des analyses de graphiques.</p>
+                <a href="#" class="module-btn">Réservez</a>
+            </div>
+
+            <!-- Module Hören (Bientôt disponible) -->
+            <div class="module-card disabled">
+                <div class="module-icon">
+                    <i class="fa-solid fa-headphones"></i>
+                </div>
+                <h3>Hören (Écoute)</h3>
+                <p>Améliorez votre compréhension orale avec des enregistrements audio de niveau universitaire.</p>
+                <a href="#" class="module-btn">Bientôt</a>
+            </div>
+
+            <!-- Module Sprechen (Bientôt disponible) -->
+            <div class="module-card disabled">
+                <div class="module-icon">
+                    <i class="fa-solid fa-microphone-lines"></i>
+                </div>
+                <h3>Sprechen (Expression)</h3>
+                <p>Pratiquez l'expression orale et argumentez efficacement face à des situations types.</p>
+                <a href="#" class="module-btn">Bientôt</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2026 TestDaF C1 Vorbereitung. Tous droits réservés.</p>
+    </footer>
+
 </body>
 </html>
