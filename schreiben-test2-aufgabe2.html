@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modelltest 2 – Aufgabe 2</title>
+<style>
+    :root {
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-main: #1e293b;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        background: var(--bg-color);
+        color: var(--text-main);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    header {
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--border);
+        padding: 12px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .header-title { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
+    .timer-badge {
+        background: #eef2ff;
+        color: var(--primary);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+    .timer-badge.warn { color: #d9822b; background: #fdf6ec; }
+    .timer-badge.over { color: #c0392b; background: #fdf0ee; }
+
+    .workspace {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        flex: 1;
+        overflow: hidden;
+    }
+    @media (max-width: 900px) {
+        .workspace { grid-template-columns: 1fr; overflow-y: auto; height: auto; }
+    }
+
+    .left-panel {
+        padding: 30px;
+        overflow-y: auto;
+        border-right: 1px solid var(--border);
+        background: var(--card-bg);
+    }
+    .task-card {
+        background: #f1f5f9;
+        border-left: 4px solid var(--primary);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .task-card h2 { margin-top: 0; font-size: 1.1rem; color: var(--text-main); }
+    .source-section { margin-top: 20px; }
+    .source-section h3 { font-size: 1rem; color: var(--text-main); margin-bottom: 10px; border-bottom: 2px solid var(--border); padding-bottom: 5px; }
+    .source-section p { font-size: 0.93rem; line-height: 1.6; color: var(--text-muted); text-align: justify; hyphens: auto; }
+
+    .right-panel {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-color);
+    }
+    .editor-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    textarea {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 20px;
+        font-size: 1rem;
+        line-height: 1.6;
+        font-family: inherit;
+        resize: none;
+        background: transparent;
+    }
+    .editor-footer {
+        padding: 12px 20px;
+        border-top: 1px solid var(--border);
+        background: #f8fafc;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+    }
+    .btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.2s;
+    }
+    .btn:hover { background: var(--primary-dark); }
+    .back-link { display: inline-block; margin-bottom: 15px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .back-link:hover { color: var(--text-main); }
+</style>
+</head>
+<body>
+
+    <header>
+        <span class="header-title">Modelltest 2 — Aufgabe 2</span>
+        <div class="timer-badge" id="timer">30:00</div>
+    </header>
+
+    <div class="workspace">
+        <div class="left-panel">
+            <a href="schreiben-test2.html" class="back-link">← Zurück zu Modelltest 2</a>
+            
+            <div class="task-card">
+                <h2>Aufgabenstellung</h2>
+                <p>Fassen Sie die Informationen aus dem Text und der Grafik zusammen. (Modelltest 2)</p>
+                <p><em>Schreiben Sie ca. 100–150 Wörter. Zeit: 30 Minuten.</em></p>
+            </div>
+
+            <div class="source-section">
+                <h3>Textquelle</h3>
+                <p>Hier kannst du den Text für Modelltest 2 – Aufgabe 2 einfügen.</p>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="editor-container">
+                <textarea id="ta" placeholder="Schreiben Sie hier Ihre Zusammenfassung..."></textarea>
+                <div class="editor-footer">
+                    <div><b id="wc">0</b> Wörter</div>
+                    <button class="btn" id="copy">Text kopieren</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+let time = 30 * 60;
+const tm = document.getElementById('timer');
+const ta = document.getElementById('ta');
+
+const timerInterval = setInterval(() => {
+  let m = Math.floor(time / 60), s = time % 60;
+  tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+  if(time <= 180) tm.className = "timer-badge warn";
+  if(time <= 0) {
+    tm.className = "timer-badge over";
+    clearInterval(timerInterval);
+  } else {
+    time--;
+  }
+}, 1000);
+
+ta.addEventListener('input', () => {
+  let words = ta.value.trim().match(/\S+/g);
+  document.getElementById('wc').textContent = words ? words.length : 0;
+});
+
+document.getElementById('copy').onclick = () => {
+  navigator.clipboard.writeText(ta.value);
+  alert("Text erfolgreich kopiert!");
+};
+</script>
+</body>
+</html>
