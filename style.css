@@ -19,8 +19,27 @@
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px);}
 *{box-sizing:border-box;}
-body{margin:0;background:var(--bg-page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
-.app{max-width:920px;margin:0 auto;min-height:100vh;background:var(--card-bg);box-shadow:0 0 24px rgba(0,0,0,.06);}
+
+body{
+  margin:0;
+  background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('fond-flyer.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;
+}
+
+.app{
+  max-width:920px;
+  margin:0 auto;
+  min-height:100vh;
+  background: rgba(21, 29, 32, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 header.topbar{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;padding:18px 20px 14px;padding-top:calc(18px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;align-items:flex-start;}
 header.topbar .brand{font-size:1.5rem;font-weight:700;letter-spacing:.5px;}
 header.topbar .subbrand{font-size:.72rem;opacity:.8;margin-top:2px;}
