@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelltest 1 – Aufgabe 1</title>
+<style>
+:root{--teal:#3f909a;--teal-d:#2d6f78;--mint:#cfe3e1;--ink:#1f2a2c;--line:#9aa7a8;--paper:#fff;--bg:#e9eeee;--warn:#d9822b;--bad:#c0392b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5}
+.sheet{max-width:820px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 0 18px rgba(0,0,0,.12)}
+header.top{background:var(--teal);color:#fff;display:flex;justify-content:space-between;align-items:baseline;padding:18px 28px;font-size:1.3rem;font-weight:300}
+.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--teal);display:flex;align-items:center;padding:10px 28px}
+.timer{margin-left:auto;font-size:1.7rem;font-weight:600;color:var(--teal-d)}
+.timer.warn{color:var(--warn)}.timer.over{color:var(--bad)}
+main{padding:24px 28px 40px}
+.task{background:var(--mint);padding:16px 20px;margin-bottom:22px;font-size:.95rem}
+.task h2{margin:0 0 8px;font-size:1rem}
+.task p{margin:6px 0}
+textarea{display:block;width:100%;border:0;outline:0;resize:none;min-height:400px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
+.status{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--teal);padding-top:10px;margin-top:20px;font-size:.92rem}
+.tools button{border:1px solid var(--teal);background:#fff;color:var(--teal-d);padding:5px 12px;cursor:pointer;font:inherit}
+.back-link{display:inline-block;margin-top:20px;color:var(--teal-d);text-decoration:none;font-weight:600}
+@media(max-width:560px){header.top,.bar,main{padding-left:14px;padding-right:14px}}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header class="top"><span>Modelltest 1</span><span>Aufgabe 1/2</span></header>
+  <div class="bar">
+    <div class="timer" id="timer">30:00</div>
+  </div>
+  <main>
+    <div class="task">
+      <h2>Aufgabe 1/2</h2>
+      <p>Auf einer Lernplattform diskutieren Sie mit Ihrem Dozenten und anderen Seminarteilnehmenden über das Thema „Bildungsexpansion“.<br>Schreiben Sie einen kurzen Beitrag.</p>
+      <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für den Einzelnen und die Gesellschaft haben kann, wenn die Mehrheit der jungen Menschen einen Hochschulabschluss erwirbt.</strong></p>
+      <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
+    </div>
+
+    <textarea id="ta" spellcheck="false" placeholder="Schreiben Sie hier …"></textarea>
+    <div class="status">
+      <div class="count"><b id="wc">0</b> Wörter</div>
+      <div class="tools"><button id="copy">Text kopieren</button></div>
+    </div>
+
+    <a href="schreiben-test1.html" class="back-link">← Zurück zu Modelltest 1</a>
+  </main>
+</div>
+<script>
+let time = 30 * 60;
+const tm = document.getElementById('timer');
+const ta = document.getElementById('ta');
+
+const timerInterval = setInterval(() => {
+  let m = Math.floor(time / 60), s = time % 60;
+  tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
+  if(time <= 180) tm.className = "timer warn";
+  if(time <= 0) {
+    tm.className = "timer over";
+    clearInterval(timerInterval);
+  } else {
+    time--;
+  }
+}, 1000);
+
+ta.addEventListener('input', () => {
+  let words = ta.value.trim().match(/\S+/g);
+  document.getElementById('wc').textContent = words ? words.length : 0;
+});
+
+document.getElementById('copy').onclick = () => {
+  navigator.clipboard.writeText(ta.value);
+  alert("Text kopiert!");
+};
+</script>
+</body>
+</html>
