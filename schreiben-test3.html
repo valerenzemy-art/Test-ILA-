@@ -1,109 +1,78 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Modellprüfung TestDaF – Schreiben Modelltest 3</title>
-<style>
-:root{--teal:#3f909a;--teal-d:#2d6f78;--mint:#cfe3e1;--ink:#1f2a2c;--line:#9aa7a8;--paper:#fff;--bg:#e9eeee;--warn:#d9822b;--bad:#c0392b}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5}
-.sheet{max-width:820px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 0 18px rgba(0,0,0,.12)}
-header.top{background:var(--teal);color:#fff;display:flex;justify-content:space-between;align-items:baseline;padding:18px 28px;font-size:1.5rem;font-weight:300;gap:12px;flex-wrap:wrap}
-header.top b{font-weight:400}
-.bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--teal);display:flex;align-items:center;gap:14px;padding:10px 28px;flex-wrap:wrap}
-.timer{margin-left:auto;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--teal-d);min-width:84px;text-align:right}
-main{padding:24px 28px 40px}
-.task-block{margin-bottom:40px;border-bottom:3px solid var(--teal);padding-bottom:30px}
-.task{background:var(--mint);padding:16px 20px;margin-bottom:22px;font-size:.95rem}
-.task h2{margin:0 0 8px;font-size:1rem}
-.task p{margin:6px 0}
-.source h3{margin:0 0 10px;font-size:1rem}
-.source p{margin:0 0 10px;font-size:.93rem;text-align:justify;hyphens:auto}
-figure{margin:18px auto;border:1px solid #444;max-width:560px}
-figure figcaption{background:var(--teal-d);color:#fff;font-size:.72rem;font-weight:600;padding:4px 10px}
-textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden;min-height:400px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
-.status{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:2px solid var(--teal);padding-top:10px;margin-top:20px;font-size:.92rem}
-.tools button{border:1px solid var(--teal);background:#fff;color:var(--teal-d);padding:5px 12px;cursor:pointer;font:inherit;margin-left:6px}
-.back-link{display:inline-block;margin-top:20px;color:var(--teal-d);text-decoration:none;font-weight:600}
-@media(max-width:560px){header.top,.bar,main{padding-left:14px;padding-right:14px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestDaF C1 - Modelltest 3</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 600px; width: 100%; text-align: center; }
+        h1 { font-size: 1.8rem; color: #2c3e50; margin-bottom: 10px; }
+        p.subtitle { font-size: 1rem; color: #7f8c8d; margin-bottom: 30px; }
+        .task-card {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+            text-align: left;
+            border-left: 6px solid #4f46e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .task-info h2 { font-size: 1.15rem; color: #2c3e50; margin: 0 0 6px 0; }
+        .task-info p { font-size: 0.9rem; color: #555; margin: 0; }
+        .btn-start {
+            background: #4f46e5;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .btn-start:hover { background: #4338ca; }
+        .back-link { display: inline-block; margin-top: 20px; color: #2c3e50; text-decoration: none; font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
 </head>
 <body>
-<div class="sheet">
-  <header class="top"><span>Modellprüfung <b>Digitaler TestDaF</b></span><span>Schreiben – Modelltest 3</span></header>
-  <div class="bar">
-    <div class="timer" id="timer">60:00</div>
-  </div>
-  <main>
-    <!-- Aufgabe 1 -->
-    <section class="task-block">
-      <div class="task">
-        <h2>Aufgabe 1/2</h2>
-        <p>Auf einer Lernplattform diskutieren Sie mit Ihrem Dozenten und anderen Seminarteilnehmenden über das Thema „Work-Life-Balance“.<br>Schreiben Sie einen kurzen Beitrag.</p>
-        <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für den Einzelnen und die Gesellschaft haben kann, wenn die Mehrheit der Berufstätigen der Work-Life-Balance Vorrang vor der Karriere gibt.</strong></p>
-        <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
-      </div>
-      <div class="writing">
-        <textarea id="ta1" spellcheck="false" placeholder="Schreiben Sie hier für Aufgabe 1 …" aria-label="Schreibfeld Aufgabe 1"></textarea>
-        <div class="status">
-          <div class="count"><b id="wc1">0</b> Wörter</div>
-          <div class="tools"><button onclick="copyText('ta1')">Text kopieren</button></div>
+    <div class="container">
+        <h1>Modelltest 3</h1>
+        <p class="subtitle">Wähle die Aufgabe aus, die du bearbeiten möchtest.</p>
+
+        <div class="task-card">
+            <div class="task-info">
+                <h2>Aufgabe 1</h2>
+                <p>Diskussion / Argumentation (Min. 200 Wörter, 30 Min.)</p>
+            </div>
+            <a href="schreiben-test3-aufgabe1.html" class="btn-start">Starten</a>
         </div>
-      </div>
-    </section>
 
-    <!-- Aufgabe 2 -->
-    <section class="task-block">
-      <div class="task">
-        <h2>Aufgabe 2/2</h2>
-        <p>In Ihrem Seminar für Psychologie schreiben Sie eine Hausarbeit zum Thema „Mentale Gesundheit und menschliche Widerstandskraft“. In einem Abschnitt wollen Sie sich mit folgender Frage beschäftigen:<br><strong>Welche Bedeutung hat Optimismus für die Bewältigung von Krisen und widrigen Lebensumständen?</strong><br>Fassen Sie zu dieser Frage Informationen aus dem Text und der Grafik zusammen. Benutzen Sie eigene Formulierungen. Das Abschreiben von Textpassagen ist nicht erlaubt.</p>
-        <p>Schreiben Sie <strong>ca. 100–150 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
-      </div>
-      <div class="source">
-        <h3>Optimismus als psychologische Überlebensstrategie</h3>
-        <p>In einer von Krisen, Planungsunsicherheiten und permanenter Belastung geprägten Epoche wird Optimismus häufig fälschlicherweise als naive Realitätsverweigerung oder blinde Euphorie missverstanden. Die moderne psychologische Forschung zeichnet jedoch ein gänzlich anderes Bild und definiert eine zuversichtliche Grundhaltung als unverzichtbare mentale Ressource. Aus neurobiologischer Sicht befähigt Optimismus den Menschen dazu, auch unter widrigsten Bedingungen – symbolisiert durch das Aufkeimen von Leben selbst im harten Asphalt – lösungsorientierte Handlungsoptionen zu erkennen. Anstatt in destruktiver Starre zu verharren, bewerten optimistische Individuen unvorhersehbare Rückschläge als temporäre und überwindbare Hürden. Diese kognitive Neubewertung schützt das psychische Immunsystem vor chronischem Stress, reduziert Angstsymptome signifikant und fördert gleichzeitig die physische Regeneration bei körperlichen Erkrankungen.</p>
-        <p>Darüber hinaus zeigt sich, dass eine positive Lebenseinstellung die soziale Bindungskraft und die berufliche Leistungsfähigkeit maßgeblich erhöht. Menschen mit einer ausgeprägten Zuversicht neigen eher dazu, proaktive Strategien zur Problemlösung zu entwickeln und Unterstützung in ihrem sozialen Umfeld zu aktivieren. Langzeitstudien belegen zudem, dass optimistische Persönlichkeiten eine höhere Ausdauer bei der Erreichung langfristiger Ziele aufweisen, da sie Misserfolge als konstruktives Feedback anstatt als persönliches Endurteil begreifen. Zusammenfassend lässt sich konstatieren, dass Optimismus keineswegs die Augen vor realen Gefahren verschließt, sondern vielmehr das Fundament darstellt, auf dem innere Stärke, Anpassungsfähigkeit und nachhaltiger persönlicher Erfolg gedeihen.</p>
-        <figure>
-          <figcaption>Einfluss von Optimismus auf die Stressbewältigung</figcaption>
-          <svg viewBox="0 0 600 230" width="100%" role="img" aria-label="Einfluss von Optimismus auf die Stressbewältigung" font-family="Segoe UI,Arial,sans-serif" font-size="12"><rect x="15" y="85" width="190" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="110.0" y="111.0" text-anchor="middle" fill="#1f2a2c">Optimistische</text><text x="110.0" y="127.0" text-anchor="middle" fill="#1f2a2c">Grundhaltung</text><rect x="360" y="15" width="225" height="70" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="472.5" y="46.0" text-anchor="middle" fill="#1f2a2c">Schnellere Cortisol-Normalisierung</text><text x="472.5" y="62.0" text-anchor="middle" fill="#1f2a2c">nach Krisensituationen</text><rect x="360" y="145" width="225" height="70" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="472.5" y="176.0" text-anchor="middle" fill="#1f2a2c">Gesteigerte Problemlösungs-</text><text x="472.5" y="192.0" text-anchor="middle" fill="#1f2a2c">kompetenz im Beruf</text><g stroke="#2d6f78" stroke-width="2" fill="none"><path d="M207 105L356 55"/><path d="M207 125L356 175"/></g><g fill="#2d6f78"><path d="M358 54l-9 1 4 7z"/><path d="M358 176l-9-1 4-7z"/></g><text x="255" y="70" text-anchor="middle" fill="#2d6f78" font-weight="600">Korrelation</text><text x="255" y="192" text-anchor="middle" fill="#2d6f78" font-weight="600">Korrelation</text></svg>
-        </figure>
-      </div>
-      <div class="writing" style="margin-top:20px;">
-        <textarea id="ta2" spellcheck="false" placeholder="Schreiben Sie hier für Aufgabe 2 …" aria-label="Schreibfeld Aufgabe 2"></textarea>
-        <div class="status">
-          <div class="count"><b id="wc2">0</b> Wörter</div>
-          <div class="tools"><button onclick="copyText('ta2')">Text kopieren</button></div>
+        <div class="task-card">
+            <div class="task-info">
+                <h2>Aufgabe 2</h2>
+                <p>Zusammenfassung mit Text & Grafik (100–150 Wörter, 30 Min.)</p>
+            </div>
+            <a href="schreiben-test3-aufgabe2.html" class="btn-start">Starten</a>
         </div>
-      </div>
-    </section>
 
-    <a href="schreiben.html" class="back-link">← Zurück zur Übersicht</a>
-  </main>
-</div>
-<script>
-let time = 60 * 60;
-const tm = document.getElementById('timer');
-setInterval(() => {
-  let m = Math.floor(time / 60), s = time % 60;
-  tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
-  if(time > 0) time--;
-}, 1000);
-
-['ta1', 'ta2'].forEach(id => {
-  let ta = document.getElementById(id);
-  let wc = document.getElementById(id.replace('ta', 'wc'));
-  ta.addEventListener('input', () => {
-    let words = ta.value.trim().match(/\S+/g);
-    wc.textContent = words ? words.length : 0;
-  });
-});
-
-function copyText(id) {
-  let ta = document.getElementById(id);
-  navigator.clipboard.writeText(ta.value);
-  alert("Text kopiert!");
-}
-</script>
+        <a href="schreiben.html" class="back-link">← Zurück zur Übersicht</a>
+    </div>
 </body>
 </html>
