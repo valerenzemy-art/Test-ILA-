@@ -1018,13 +1018,21 @@ function scoreTask(task, test){
 }
 
 function showResults(){
-  clearTimer();
-  document.getElementById('taskbar').innerHTML = '';
-  const test = TESTS[currentTestIdx];
-  const nb = document.getElementById('navbar');
-  nb.innerHTML = `<button class="btn ghost" id="btnMenu2">Modelltests</button><span class="foot-note">Niveau C1 Auswertung</span><button class="btn" id="btnRestart">Neu starten</button>`;
-  document.getElementById('btnRestart').onclick = ()=>{ answers[test.id] = {}; current = 0; renderTask(); };
-  document.getElementById('btnMenu2').onclick = ()=> showTestSelect();
+    clearTimer();
+    document.getElementById('taskbar').innerHTML = '';
+    const test = TESTS[currentTestIdx];
+    const nb = document.getElementById('navbar');
+    
+    // On recrée proprement les boutons de navigation pour les résultats
+    nb.innerHTML = `<button class="btn ghost" id="btnRestart">Recommencer</button><button class="btn ghost" id="btnMenu2">Modelltests</button>`;
+    
+    document.getElementById('btnRestart').onclick = () => { 
+        answers[test.id] = {}; 
+        current = 0; 
+        renderTask(); 
+    };
+    document.getElementById('btnMenu2').onclick = () => showTestSelect();
+}
 
   let sumCorrect = 0, sumTotal = 0;
   let rows = '';
