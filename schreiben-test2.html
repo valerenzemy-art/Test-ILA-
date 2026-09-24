@@ -14,6 +14,7 @@ header.top b{font-weight:400}
 .bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--teal);display:flex;align-items:center;gap:14px;padding:10px 28px;flex-wrap:wrap}
 .timer{margin-left:auto;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--teal-d);min-width:84px;text-align:right}
 main{padding:24px 28px 40px}
+.task-block{margin-bottom:40px;border-bottom:3px solid var(--teal);padding-bottom:30px}
 .task{background:var(--mint);padding:16px 20px;margin-bottom:22px;font-size:.95rem}
 .task h2{margin:0 0 8px;font-size:1rem}
 .task p{margin:6px 0}
@@ -21,7 +22,7 @@ main{padding:24px 28px 40px}
 .source p{margin:0 0 10px;font-size:.93rem;text-align:justify;hyphens:auto}
 figure{margin:18px auto;border:1px solid #444;max-width:560px}
 figure figcaption{background:var(--teal-d);color:#fff;font-size:.72rem;font-weight:600;padding:4px 10px}
-textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden;min-height:1152px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
+textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden;min-height:400px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
 .status{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:2px solid var(--teal);padding-top:10px;margin-top:20px;font-size:.92rem}
 .tools button{border:1px solid var(--teal);background:#fff;color:var(--teal-d);padding:5px 12px;cursor:pointer;font:inherit;margin-left:6px}
 .back-link{display:inline-block;margin-top:20px;color:var(--teal-d);text-decoration:none;font-weight:600}
@@ -35,6 +36,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden
     <div class="timer" id="timer">60:00</div>
   </div>
   <main>
+    <!-- Aufgabe 1 -->
     <section class="task-block">
       <div class="task">
         <h2>Aufgabe 1/2</h2>
@@ -42,8 +44,16 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden
         <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für den Einzelnen und die Gesellschaft haben kann, wenn die Mehrheit der Menschen ihren Beruf eher nach Leidenschaft als nach Sicherheit wählt.</strong></p>
         <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
       </div>
+      <div class="writing">
+        <textarea id="ta1" spellcheck="false" placeholder="Schreiben Sie hier für Aufgabe 1 …" aria-label="Schreibfeld Aufgabe 1"></textarea>
+        <div class="status">
+          <div class="count"><b id="wc1">0</b> Wörter</div>
+          <div class="tools"><button onclick="copyText('ta1')">Text kopieren</button></div>
+        </div>
+      </div>
     </section>
 
+    <!-- Aufgabe 2 -->
     <section class="task-block">
       <div class="task">
         <h2>Aufgabe 2/2</h2>
@@ -59,35 +69,41 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden
           <svg viewBox="0 0 600 160" width="100%" role="img" aria-label="Zyklus der Krisenbewältigung" font-family="Segoe UI,Arial,sans-serif" font-size="12"><rect x="2" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="52.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Initialer</text><text x="52.0" y="92.0" text-anchor="middle" fill="#1f2a2c">Misserfolg</text><path d="M104 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M124 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="126" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="176.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Frustration /</text><text x="176.0" y="92.0" text-anchor="middle" fill="#1f2a2c">Reflexion</text><path d="M228 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M248 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="250" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="300.0" y="84.0" text-anchor="middle" fill="#1f2a2c">Kurskorrektur</text><path d="M352 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M372 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="374" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="424.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Kompetenz-</text><text x="424.0" y="92.0" text-anchor="middle" fill="#1f2a2c">gewinn</text><path d="M476 80h20" stroke="#2d6f78" stroke-width="2"/><path d="M496 80l-6-4v8z" fill="#2d6f78" stroke="#2d6f78"/><rect x="498" y="50" width="100" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="548.0" y="76.0" text-anchor="middle" fill="#1f2a2c">Langfristiger</text><text x="548.0" y="92.0" text-anchor="middle" fill="#1f2a2c">Erfolg</text></svg>
         </figure>
       </div>
+      <div class="writing" style="margin-top:20px;">
+        <textarea id="ta2" spellcheck="false" placeholder="Schreiben Sie hier für Aufgabe 2 …" aria-label="Schreibfeld Aufgabe 2"></textarea>
+        <div class="status">
+          <div class="count"><b id="wc2">0</b> Wörter</div>
+          <div class="tools"><button onclick="copyText('ta2')">Text kopieren</button></div>
+        </div>
+      </div>
     </section>
 
-    <div class="writing">
-      <textarea id="ta" spellcheck="false" placeholder="Schreiben Sie hier …" aria-label="Schreibfeld"></textarea>
-      <div class="status">
-        <div class="count"><b id="wc">0</b> Wörter</div>
-        <div class="tools"><button id="copy">Text kopieren</button></div>
-      </div>
-    </div>
     <a href="schreiben.html" class="back-link">← Zurück zur Übersicht</a>
   </main>
 </div>
 <script>
 let time = 60 * 60;
 const tm = document.getElementById('timer');
-const ta = document.getElementById('ta');
 setInterval(() => {
   let m = Math.floor(time / 60), s = time % 60;
   tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
   if(time > 0) time--;
 }, 1000);
-ta.addEventListener('input', () => {
-  let words = ta.value.trim().match(/\S+/g);
-  document.getElementById('wc').textContent = words ? words.length : 0;
+
+['ta1', 'ta2'].forEach(id => {
+  let ta = document.getElementById(id);
+  let wc = document.getElementById(id.replace('ta', 'wc'));
+  ta.addEventListener('input', () => {
+    let words = ta.value.trim().match(/\S+/g);
+    wc.textContent = words ? words.length : 0;
+  });
 });
-document.getElementById('copy').onclick = () => {
+
+function copyText(id) {
+  let ta = document.getElementById(id);
   navigator.clipboard.writeText(ta.value);
   alert("Text kopiert!");
-};
+}
 </script>
 </body>
 </html>
