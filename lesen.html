@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -120,45 +122,6 @@
     table.tzt{font-size:.7rem;}
     .a6-list { grid-template-columns: 1fr; }
   }
-
-  /* ===== Design-Update : lisibilité + cartes numérotées ===== */
-  :root{--title:#0f3d47;}
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){--title:#7dd3fc;}
-  }
-  :root[data-theme="dark"]{--title:#7dd3fc;}
-  .select-screen h2,.sel-card .sc-title,h2.task-title,
-  .task-count .n,.timer-circle,.instructions .time-hint,
-  .results h2,.btn.ghost,select.gapselect,
-  .order-controls button{color:var(--title);}
-  .app h3{color:var(--title)!important;}
-  select.gapselect.answered{color:#0f3d47;}
-  .select-screen{padding:44px 20px 70px;}
-  .select-screen h2{font-size:clamp(1.5rem,5.5vw,2.1rem);line-height:1.25;letter-spacing:-.3px;margin:0 0 12px;}
-  .select-screen p{line-height:1.7;}
-  .cards{counter-reset:t;flex-direction:column;align-items:center;gap:14px;}
-  .sel-card{position:relative;width:100%;max-width:440px;padding:20px 52px 20px 74px;border-radius:18px;transition:transform .2s,border-color .2s,box-shadow .2s;}
-  .sel-card::before{counter-increment:t;content:counter(t);position:absolute;left:18px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--teal-light));color:#fff;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;}
-  .sel-card::after{content:"›";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:1.9rem;color:var(--title);opacity:.6;}
-  .sel-card:hover,.sel-card:active{transform:translateY(-3px);border-color:var(--teal-light);box-shadow:0 10px 24px rgba(0,0,0,.2);}
-
-  /* ===== Fond flyer scientifique ===== */
-  body{background:#050b12;}
-  .app{position:relative;z-index:1;background:transparent;box-shadow:none;}
-  .app::before{
-    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:
-      linear-gradient(180deg,rgba(4,10,18,.30),rgba(4,10,18,.10) 45%,rgba(4,10,18,.35)),
-      url("fond/fond-flyer.jpg") center top / cover no-repeat;
-    background-color:#050b12;
-  }
-  main{background:var(--card-bg);background:color-mix(in srgb,var(--card-bg) 94%,transparent);}
-  main:has(.select-screen){background:transparent;}
-  .select-screen h2{color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.75);}
-  .select-screen p,.select-note{color:#e3eef2;text-shadow:0 1px 8px rgba(0,0,0,.75);}
-  .sel-card{background:rgba(6,18,28,.72);border-color:rgba(125,211,252,.4);}
-  .sel-card .sc-title{color:#7dd3fc;}
-  .sel-card .sc-desc{color:#dbe9ee;}
 </style>
 </head>
 <body>
@@ -185,20 +148,640 @@ const TEMPLATE = [
   {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
   {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
 ];
-</script>
-<!-- Les Modelltests : un fichier par test. Un fichier absent = test simplement non affiché. -->
-<script src="tests/mt1.js"></script>
-<script src="tests/mt2.js"></script>
-<script src="tests/mt3.js"></script>
-<script src="tests/mt4.js"></script>
 
-<script>
+const MT1 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Schlafmangel und kognitive Leistungsfähigkeit',
+    segments:[
+      'Zahlreiche akademische Studien belegen, dass chronischer Schlafmangel die kognitive Leistungsfähigkeit erheblich ',
+      ' kann, selbst wenn Betroffene subjektiv das Gefühl haben, sich an den reduzierten Schlaf gewöhnt zu haben. Besonders betroffen ist dabei das Arbeitsgedächtnis, das für die kurzfristige Speicherung und Verarbeitung komplexer Informationen ',
+      ' ist. Bereits eine einzige durchwachte Nacht kann die Reaktionsgeschwindigkeit messbar ',
+      ', vergleichbar mit den Effekten eines erhöhten Alkoholspiegels. Langfristig wird chronischer Schlafmangel zudem mit einem erhöhten Risiko für verschiedene Herz-Kreislauf-Erkrankungen in ',
+      ' gebracht. Schlafforscherinnen und Schlafforscher empfehlen daher, feste Schlafenszeiten ',
+      ', um dem Körper einen stabilen Rhythmus zu ermöglichen.'
+    ],
+    gaps:[
+      {options:['beeinträchtigen','fördern','stabilisieren','ignorieren'], correct:0},
+      {options:['zuständig','begeistert','abhängig','überzeugt'], correct:0},
+      {options:['verringern','erhöhen','stabilisieren','ausgleichen'], correct:0},
+      {options:['Verbindung','Kontakt','Rücksicht','Hinsicht'], correct:0},
+      {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Die Entdeckung des Penicillins',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Der schottische Bakteriologe Alexander Fleming bemerkte 1928 in seinem Labor eher zufällig, dass sich auf einer vergessenen Bakterienkultur ein Schimmelpilz gebildet hatte.',
+      'Er stellte fest, dass rund um den Schimmelpilz keine Bakterien mehr wuchsen, und vermutete, dass der Pilz eine bakterienabtötende Substanz absondern müsse.',
+      'Fleming veröffentlichte seine Beobachtungen, doch zunächst zeigte die wissenschaftliche Gemeinschaft nur wenig Interesse an einer praktischen Anwendung der Entdeckung.',
+      'Erst rund ein Jahrzehnt später gelang es einem Forschungsteam um Howard Florey und Ernst Chain, den Wirkstoff Penicillin in ausreichender Reinheit und Menge für klinische Tests herzustellen.',
+      'Während des Zweiten Weltkriegs wurde Penicillin schließlich in großem Maßstab produziert und rettete Schätzungen zufolge Hunderttausenden verwundeter Soldaten das Leben.'
+    ],
+    shuffledStart:[2,4,0,3,1]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
+    passage:[
+      '(1) Das Phänomen des luziden Träumens, bei dem sich der Schläfende seines Traumzustands bewusst ist und diesen mitunter aktiv steuern kann, wurde lange Zeit von der empirischen Wissenschaft skeptisch betrachtet. Erst mit der Standardisierung elektroenzephalografischer Messungen im REM-Schlaf gelang der schlüssige Nachweis: Etwa die Hälfte der Weltbevölkerung hat mindestens einmal im Leben ein solches Phänomen erfahren, während nur eine kleine Minderheit in der Lage ist, dieses Phänomen regelmäßig und gezielt herbeizuführen.',
+      '(2) Neurowissenschaftlich zeichnet sich der Klartraum durch eine hybride Bewusstseinsform aus. Während der REM-Schlaf gewöhnlich durch eine Deaktivierung des dorsolateralen präfrontalen Kortex gekennzeichnet ist – was den Verlust des kritischen Denkens und der Orientierung erklärt –, zeigt sich bei Klarträumern in genau dieser Region eine signifikante Reaktivierung. Dies ermöglicht das Wiedererlangen von Selbstreflexion, logischer Urteilskraft und metakognitiven Fähigkeiten mitten im Traumgeschehen.',
+      '(3) Historisch gesehen ist die Faszination für das Phänomen keineswegs ein modernes Nebenprodukt der modernen Psychologie. Bereits in antiken philosophischen Abhandlungen sowie in indigenen und östlichen Traditionen spielte die Schulung des Traum-Bewusstseins eine zentrale Rolle. Diese kulturübergreifende Kontinuität verdeutlicht, dass das Streben nach Kontrolle über den eigenen Geist im Schlaf ein tief verankertes menschliches Anliegen darstellt.',
+      '(4) In der therapeutischen Praxis eröffnet die Klartraumforschung vielversprechende Ansätze zur Linderung schwerer psychischer Leiden. Insbesondere Patienten mit posttraumatischen Belastungsstörungen (PTBS), die unter chronischen Alpträumen leiden, profitieren von verhaltenstherapeutischen Techniken des luziden Träumens. Durch das gezielte Einüben von Re-Skripting-Strategien lernen Betroffene, bedrohliche Traumszenarien umzugestalten und so emotionale Erleichterung zu erfahren.',
+      '(5) Ein weiterer Aspekt betrifft die plastischen Veränderungen im Gehirn durch sensomotorisches Training im Schlaflabor. Studien zeigen, dass das gedankliche Durchspielen komplexer Sportarten oder Bewegungsabläufe im Klartraum dieselben motorischen Areale im Gehirn stimuliert wie die reale Ausführung. Folglich lassen sich solche Traumerfahrungen messbar auf die motorische Leistungsfähigkeit in der Wachrealität übertragen.',
+      '(6) Trotz dieser Potenziale mahnt die akademische Forschung hinsichtlich der unkritischen Verbreitung von Techniken zur künstlichen Trauminduktion zur Vorsicht. Die unkontrollierte Anwendung von elektrischer Hirnstimulation oder pharmakologischen Präparaten zur Herbeiführung von Klarträumern kann die Schlafarchitektur nachhaltig stören, psychische Dissoziationen begünstigen und schwere Schlafstörungen nach sich ziehen.',
+      '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
+        'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
+        'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
+        'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
+      ], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:[
+        'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
+        'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
+        'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
+        'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
+        'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
+        'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
+        'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
+        'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
+      ], correct:2 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:[
+        'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
+        'Patienten mit chronischen Schlafstörungen vollständig heilen.',
+        'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
+        'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
+      ], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
+        'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
+        'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
+        'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
+        'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
+      ], correct:1 },
+      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:[
+        'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
+        'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
+        'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
+        'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
+      ], correct:3 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
+        'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
+        'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
+        'vor den Gefahren des normalen REM-Schlafs zu warnen.'
+      ], correct:1 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
+    passageText:`Die verhängnisvolle Annahme, dass der Menschheit durch unkontrollierten Konsum zwangsläufig der Kollaps droht und wir daher eine drastische Wachstumsrücknahme erzwingen müssen, gehört zum festen Dogma moderner Umweltdebatten. <strong>[1] Ob diese radikale Verzichtshypothese in wissenschaftlicher Hinsicht jedoch tatsächlich belastbar ist, darf ernsthaft in Zweifel gezogen werden.</strong> Durch fortschrittliche biochemische Verfahren ist die Synthetisierung von Rohstoffen bereits heute Realität. <strong>[2] Man muss allerdings unumwunden einräumen, dass derartige Syntheseverfahren derzeit noch außerordentlich energieintensiv und kostspielig sind.</strong> Der technologische Wandel vollzieht sich jedoch exponentiell. Womöglich werden molekulare Fertigungsverfahren in wenigen Jahrzehnten Rohstoffknappheiten komplett überflüssig machen. Die Theorie der Grenzen des Wachstums entpuppt sich somit womöglich als gedanklicher Rückschritt. <strong>[3] Dass sich dieses Bedrohungsszenario dennoch so hartnäckig in den Köpfen hält, dürfte vor allem darin begründet liegen, dass unser Denken in steinzeitlichen Kategorien begrenzter Vorräte verhaftet bleibt.</strong> In einer von Innovation geprägten Welt sind Ressourcen im Wesentlichen unbegrenzt. <strong>[4] Dank menschlicher Erfindungskraft und technologischem Pioniergeist werden wir künftig in der Lage sein, völlig neue Energie- und Materialquellen zu erschließen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt ein psychologisches Phänomen.',
+      'Der Experte hofft auf eine internationale Regulierung.',
+      'Der Experte prognostiziert eine technologische Entwicklung.',
+      'Der Experte räumt einen aktuellen Nachteil ein.',
+      'Der Experte stellt eine weit verbreitete Annahme in Frage.',
+      'Der Experte vermutet eine Ursache für das Denkmuster.',
+      'Der Experte verteidigt die Position der Verzichtsökonomie.',
+      'Der Experte widerspricht den Grundlagen der Biologie.'
+    ],
+    correct:[4, 3, 5, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
+    title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
+    columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
+      {text:'Diese Gruppe hinterfragt bestehende Normen und Werte eher kritisch.', correct:1},
+      {text:'Diese Gruppe zeigt eine positive Einstellung gegenüber hierarchischen Rangordnungen.', correct:0},
+      {text:'Diese Menschen zeigen sich im sozialen Umgang zugänglicher und verträglicher.', correct:0},
+      {text:'Diese Menschen wählen Haustiere gezielt nach der Übereinstimmung mit dem eigenen Charakter aus.', correct:3},
+      {text:'Diese Gruppe weist eine geringere emotionale Stabilität auf.', correct:1},
+      {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
+    passage:'Die wissenschaftliche Pflanzenheilkunde (Phytotherapie) blickt auf eine jahrtausendealte Erfahrungstradition zurück. Im Vergleich zu synthetischen Reinstoffen zeichnen sich phytotherapeutische Vielstoffgemische durch eine bemerkenswerte physiologische Verträglichkeit aus. Dies liegt primär daran, dass die Wirkstoffe in natürlichen Matrixstrukturen vorliegen, was Nebenwirkungen minimiert. Ein weiterer Vorteil besteht in der vielseitigen Verwendbarkeit phytotherapeutischer Präparate, die sowohl topisch als auch systemisch angewendet werden können und oft eine einfache hauseigene Zubereitung erlauben. Demgegenüber stehen jedoch gravierende Nachteile: Im Gegensatz zu synthetischen Arzneimitteln setzt die therapeutische Wirkung von Pflanzenextrakten häufig erst nach einer erheblichen Latenzzeit von mehreren Wochen ein, was einen Akuteinsatz ausschließt. Zudem bergen pflanzliche Inhaltsstoffe ein nicht zu unterschätzendes allergenes Potenzial sowie das Risiko unvorhersehbarer Organreaktionen bei Langzeiteinnahme.',
+    aussagen:[
+      { key:'a', text:'[a] Eigenständige und unkomplizierte Verarbeitung zu Präparaten' },
+      { key:'b', text:'[b] Vollständige Ungiftigkeit pflanzlicher Substanzen' },
+      { key:'c', text:'[c] Hervorragende Eignung für die Notfallmedizin' },
+      { key:'d', text:'[d] Fehlende pharmakologische Nachweisbarkeit' },
+      { key:'e', text:'[e] Längere Dauer bis zum spürbaren Wirkungseintritt' },
+      { key:'f', text:'[f] Möglicherweise Auslösung unvorhergesehener Allergien' },
+      { key:'g', text:'[g] Garantiertes Ersetzen sämtlicher synthetischer Medikamente' },
+      { key:'h', text:'[h] Zahlreiche unterschiedliche Einsatzformen vorhanden' }
+    ],
+    correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Wachstum des E-Commerce',
+    passage:'Der Anteil des Online-Handels am gesamten Einzelhandelsumsatz in Deutschland ist in den vergangenen Jahren kontinuierlich gestiegen. Lag der Anteil im Jahr 2015 noch bei rund 9 Prozent, so erreichte er im Jahr 2023 bereits über 19 Prozent. Besonders stark war der Zuwachs zwischen 2020 und 2021, was Fachleute vor allem auf veränderte Einkaufsgewohnheiten während der Pandemie zurückführen. Am stärksten wächst der Online-Handel im Bereich Mode und Elektronik, während Lebensmittel bislang einen vergleichsweise kleinen Anteil ausmachen. Kleinere, inhabergeführte Geschäfte berichten dabei überproportional häufig von Umsatzeinbußen, während große Online-Plattformen ihre Marktanteile weiter ausbauen konnten.',
+    graphicData:[{year:'2015',val:9},{year:'2018',val:12},{year:'2020',val:14},{year:'2021',val:17},{year:'2023',val:19}],
+    graphicCaption:'Grafik: Anteil des Online-Handels am Einzelhandelsumsatz in Deutschland (in Prozent)',
+    sentences:[
+      {text:'Der Online-Handel-Anteil ist von rund 9 Prozent 2015 auf über 19 Prozent 2023 gestiegen.', wrong:false},
+      {text:'Der stärkste Zuwachs war zwischen 2020 und 2021 zu beobachten.', wrong:false},
+      {text:'Lebensmittel machen bislang den größten Anteil am Online-Handel aus.', wrong:true},
+      {text:'Kleinere, inhabergeführte Geschäfte berichten überproportional häufig von Umsatzeinbußen.', wrong:false},
+      {text:'Große Online-Plattformen haben laut Text Marktanteile verloren.', wrong:true},
+      {text:'Der Zuwachs wird unter anderem mit veränderten Einkaufsgewohnheiten während der Pandemie erklärt.', wrong:false},
+      {text:'Mode und Elektronik zählen zu den am stärksten wachsenden Online-Handel-Bereichen.', wrong:false},
+      {text:'Der Anteil des Online-Handels ist seit 2015 nahezu unverändert geblieben.', wrong:true}
+    ]
+  }
+];
+
+const MT2 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
+    segments:[
+      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzieller Schlüsselpunkt ist: Demnach ',
+      ' diese Organismen in thermisch belasteten Gewässern dank spezialisierter Lipidzusammensetzungen, die ein Aufschmelzen der zellulären Barrieren verhindern. Doch die molekularen Feinheiten dieses Schutzmechanismus blieben lange Zeit im Verborgenen. Zudem schien die ',
+      ' von Wissenschaftlern, es handele sich hierbei um eine rein passive Schutzreaktion, zunehmend fragwürdig. In einer neuen molekularbiologischen Untersuchung konnten Forscher nun eindeutig ',
+      ', dass sich die fluiden Eigenschaften der Membranen aktiv und dynamisch an die Umgebungstemperatur anpassen. Mit einer Dicke, die dem Bruchteil einer Mikrometerschicht entspricht, reagiert die Zelle wesentlich schneller auf thermischen Stress als bisher angenommen. Der interessanteste Aspekt allerdings: Es handelt sich keineswegs um einen starren Panzer. Wie aus den proteomischen Analysen hervorgeht, verhält sich die Zytoplasmastruktur stattdessen hochelastisch und besitzt komplexe Regulationsmechanismen. Dieses ',
+      ' Verhalten lässt darauf schließen, dass sich die Organismen bei plötzlicher Erhitzung nicht irreversibel denaturieren. Stattdessen ',
+      ' sich rasch schützende Hitzeschockproteine, die den intrazellulären Zusammenbruch verhindern. Das Geheimnis der enormen Überlebensfähigkeit liegt demnach in den raffinierten biochemischen Schutzreaktionen dieser Spezies.'
+    ],
+    gaps:[
+      {options:['geht','überlebt','gleitet','agiert'], correct:1},
+      {options:['Annahme','Erklärung','Mitteilung','Meldung'], correct:0},
+      {options:['erweisen','nachweisen','verweisen','zurückweisen'], correct:1},
+      {options:['unangekündigte','unerwartete','unvergleichbare','unvorhergesehene'], correct:1},
+      {options:['bildet','entlädt','formt','trennt'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Quantenphysik & Schrödingers Katze',
+    correctOrder:[2,1,0,4,3],
+    items:[
+      'Dass dieses Gedankenexperiment im makroskopischen Alltag jedoch völlig absurd erscheint, liegt an einem physikalischen Phänomen namens Dekohärenz: Sobald ein Quantensystem mit seiner Umwelt – sei es auch nur mit einem einzigen Luftmolekül – in Wechselwirkung tritt, kollabiert der Überlagerungszustand augenblicklich in eine klassische Realität.',
+      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, der theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
+      'In der mikroskopischen Welt der Quantenmechanik gilt ein physikalisches System, solange es nicht gemessen oder beobachtet wird, in einer sogenannten Superposition – es befindet sich also gleichzeitig in mehreren unterschiedlichen Zuständen.',
+      'Dennoch versuchen moderne Quantenphysiker weltweit immer wieder, diese unsichtbare Grenze zwischen Quanten- und Makrowelt zu verschieben, um extrem empfindliche Quantencomputer zu konstruieren, die weit über die Leistung klassischer Rechenmaschinen hinausgehen.',
+      'Genau aus diesem Grund gelingt es Wissenschaftlern bis heute nicht, makroskopische Objekte wie Katzen oder alltägliche Gegenstände in einen dauerhaften Quantenzustand zu versetzen, da die unkontrollierbare thermische Umgebung jede quantenmechanische Kohärenz innerhalb von Bruchteilen einer Mikrosekunde zerstört.'
+    ],
+    shuffledStart:[0,1,2,3,4]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7.',
+    title:'Aufgabe 3: Neue Unterart von Eiszeit-Leoparden in Thüringen entdeckt',
+    passage:[
+      '(1) Lange Zeit galt die europäische Quartärfauna als gut erforscht, insbesondere was die großen Beutegreifer des Pleistozäns betrifft. Doch eine unscheinbare fossile Unterkieferfragment-Entdeckung in Thüringen hat das herkömmliche Bild der eiszeitlichen Raubkatzenpopulationen ins Wanken gebracht. Paläontologen konnten nachweisen, dass es sich bei den Überresten nicht etwa um eine bereits bekannte Population von Höhlenlöwen oder eurasischen Leoparden handelt, sondern um eine bislang unbeschriebene, eigenständige Unterart des Eiszeit-Leoparden. Dieser Fund wirft ein neues Licht auf die Anpassungsfähigkeit großräumiger Raubtiere an die extremen Klimaschwankungen des eiszeitlichen Europas.',
+      '(2) Die morphologische Analyse der Zähne und des Knochenmaterials offenbarte anatomische Besonderheiten, die eine präzise evolutionäre Einordnung erlaubten. Während moderne Leoparden vor allem in tropischen und subtropischen Wald- oder Savannengebieten heimisch sind, zeigte diese thüringische Form robuste Kiefernstrukturen und markante Zahnabnutzungen, die auf eine spezialisierte Beutejagd in kaltzeitlichen Offenlandschaften hindeuteten. Das Tier war anatomisch exakt auf das Erlegen von mittelgroßen Huftieren wie Renten oder Wildpferden ausgerichtet. Die Forscher sprechen von einer evolutionären Nischenbesetzung, die es der Raubkatze ermöglichte, in direkter Konkurrenz zu etablierten Großräubern wie dem Höhlenbären oder dem Wolf zu überleben.',
+      '(3) Historisch betrachtet stieß die Suche nach eiszeitlichen Raubkatzenresten in Mitteleuropa im 19. Jahrhundert oft auf Skepsis und wissenschaftlichen Streit. Damals neigten Naturforscher dazu, fossile Knochenfragmente vorschnell bestehenden Arten zuzuordnen, um das klassische, hierarchische System der Tierwelt nicht zu gefährden. Kleinere Abweichungen wurden meist als individuelle Anomalien oder geografische Varianten abgetan. Erst mit der Etablierung moderner biometrischer Untersuchungsmethoden und der Paläogenetik im späten 20. Jahrhundert änderte sich dieses Dogma fundamental. Dennoch blieben Funde von echten Leoparden in Mitteleuropa extrem rar, was Skeptiker lange Zeit zu der Annahme verleitete, es habe sich lediglich um saisonale Wanderungsbewegungen einzelner Individuen statt um eine dauerhafte Population gehandelt.',
+      '(4) Heutzutage rücken derartige paläontologische Entdeckungen vor allem deshalb in den Fokus der Biodiversitätsforschung, weil sie präzise Rückschlüsse auf die Robustheit von Ökosystemen bei rasantem Klimawandel zulassen. Für Wissenschaftler ist besonders faszinierend, dass genetische Spuren aus Knochenkollagen belegen, wie stark sich die Populationen während der Kältehöhepunkte isolierten. Dies führte zu genetischen Engpässen, aber auch zu evolutionären Innovationsschüben. Aus naturschutzfachlicher Sicht liefert die Erforschung solcher pleistozäner Relikte wertvolle Analogien dazu, wie moderne Wildtiere auf Habitatfragmentierung und globale Erwärmung reagieren könnten.',
+      '(5) Abseits der rein theoretischen Evolutionsbiologie nutzen Paläontologen hochentwickelte bildgebende Verfahren, um innere Knochenstrukturen zu analysieren, ohne das wertvolle Originalmaterial zu zerstören. Ein kürzlich angewandtes mikro-CT-Verfahren machte es möglich, die Mikrostruktur des Dentins dreidimensional abzubilden, wodurch das Alter und der Ernährungszustand des Tieres exakt rekonstruiert werden konnten. Kritische Stimmen aus dem Fachbereich warnen davor, aus einzelnen Fossilien zu weit reichende Schlüsse über das gesamte regionale Ökosystem zu ziehen, da lokale Mikroklimata die Überlieferung verzerren können.',
+      '(6) Der Umgang mit fossilen Funden und deren wissenschaftliche Interpretation erfordert folglich äußerste methodische Akribie. Dennoch existieren standardisierte Protokolle zur Dokumentation, die weltweit von Museen und Grabungsteams angewendet werden. Dazu gehört die lückenlose Registrierung jedes Fundstücks in zentralen Datenbanken sowie der Verzicht auf invasive Präparationstechniken, sofern diese nicht absolut zwingend sind. Obgleich diese Richtlinien etabliert sind, mahnen Experten zur Wachsamkeit: Der illegale Handel mit Fossilien und die Zerstörung paläontologischer Fundstätten durch unkoordinierte Grabungen gefährden unwiederbringliche Archive unserer Erdgeschichte, weshalb der behördliche Schutz massiv verstärkt werden muss.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'die europäische Quartärfauna bereits vollständig erforscht ist.',
+        'es sich bei dem Fund in Thüringen um eine völlig neue Unterart handelt.',
+        'Höhlenlöwen und Leoparden in Thüringen denselben Lebensraum teilten.',
+        'Klimaschwankungen keine Auswirkungen auf Raubtiere hatten.'
+      ], correct:1 },
+      { q:'Wodurch zeichnet sich laut Absatz 2 die thüringische Form des Eiszeit-Leoparden aus? Durch ...', options:[
+        'Anpassung an tropische Waldgebiete.',
+        'spezialisierte Jagd auf große Beutetiere in Offenlandschaften.',
+        'eine Koexistenz mit modernen Leoparden.',
+        'physische Merkmale, die denen von Höhlenbären ähneln.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich am besten zu Absatz 3?', options:[
+        'Der wissenschaftliche Streit um fossile Klassifikationen im Wandel',
+        'Die Entstehung der modernen Paläogenetik im 19. Jahrhundert',
+        'Warum Leoparden dauerhaft nach Mitteleuropa einwanderten',
+        'Die Überwindung von Migrationsmythen durch Geologen'
+      ], correct:0 },
+      { q:'Laut Absatz 4 rücken paläontologische Entdeckungen heute in den Fokus, weil sie ...', options:[
+        'die Ausbreitung moderner Wildtiere verhindern helfen.',
+        'Einblicke in die Widerstandskraft von Ökosystemen bei Klimawandel geben.',
+        'genetische Engpässe bei heutigen Raubtieren künstlich ausgleichen.',
+        'den Nachweis erbringen, dass Eiszeit-Tiere nicht isoliert lebten.'
+      ], correct:1 },
+      { q:'Was fasst den Inhalt von Absatz 5 korrekt zusammen?', options:[
+        'Mikro-CT-Verfahren zerstören stets das empfindliche Knochenmaterial.',
+        'Kritiker lehnen den Einsatz moderner Technologie in der Paläontologie ab.',
+        'Moderne Bildgebung ermöglicht präzise Analysen, doch Vorsicht bei Generalisierungen ist geboten.',
+        'Lokale Mikroklimat machen die Untersuchung von Fossilien unmöglich.'
+      ], correct:2 },
+      { q:'Welche Meinung vertritt der Autor in Absatz 6?', options:[
+        'Er fordert einen verstärkten behördlichen Schutz gegen illegale Grabungen.',
+        'Er hält internationale Standardprotokolle für überflüssig.',
+        'Er empfiehlt den uneingeschränkten Einsatz invasiver Präparationen.',
+        'Er glaubt, dass Museen keine Kontrolle über Funde haben.'
+      ], correct:0 },
+      { q:'Hauptanliegen des Textes ist es, ...', options:[
+        'die Ausgrabungsmethoden in Thüringen lückenlos zu dokumentieren.',
+        'eine neu entdeckte Eiszeit-Leopardenart und deren wissenschaftliche Bedeutung vorzustellen.',
+        'vor dem Aussterben moderner Raubkatzen durch den Klimawandel zu warnen.',
+        'die Fehler früherer Naturforscher im 19. Jahrhundert zu kritisieren.'
+      ], correct:1 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
+    passageText:`Die Vorstellung, dass wir bei der Energiewende vollständig von globalen Lieferketten abhängig bleiben und kritische Rohstoffe nur unter ökologisch fragwürdigen Bedingungen aus Übersee importieren können, ist eine These, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch innovative geothermische Verfahren Lithium direkt aus hiesigem Thermalwasser zu gewinnen. Dabei wird das Leichtmetall in einem komplexen technischen Kreislauf herausgefiltert, während das abgekühlte Wasser CO2-neutral in die Tiefe zurückgeleitet wird. <strong>[2] Diese Verfahren sind zugebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt extrem schnell voran. Vielleicht werden wir in Zukunft in der Lage sein, den gesamten hiesigen Bedarf an Batteriematerialien lokal und umweltschonend zu decken. Oder wir werden in den Genuss kommen, dass modernste Bergbautechnologien die Umweltauswirkungen auf ein absolutes Minimum reduzieren. Wenn Sie vor 100 Jahren einem Gelehrten gesagt hatten, dass wir schon bald durch automatisierte Fördertechniken und chemische Direktextraktion gigantische Industrimengen an Rohstoffen gewinnen können, hätte er Sie nur mitleidig angesehen. Und wenn Sie ihm gesagt hatten, dass diese Verfahren mit einem Bruchteil der ökologischen Belastung herkömmlicher Minen arbeiten wurden, hätte er Sie für komplett verrückt erklärt. Doch durch wissenschaftliche und ingenieurtechnische Meisterleistungen ist uns genau das gelungen.<br><br>Die Idee, dass heimische Rohstoffprojekte grundsätzlich zum Scheitern verurteilt sind, könnte auch ein Irrglaube sein. <strong>[3] Dass sie dennoch so unpopulär sind, hängt damit zusammen, dass unsere Vorstellung von der heimischen Natur immer noch von einer unberührten Idylle geprägt ist.</strong> Damals hiess es: Jede technische Eingriff in den Untergrund zerstört unweigerlich die Landschaft. Wenn alle Vorkommen erschlossen sind, wird die Region dauerhaft geschädigt. In Wahrheit sind unsere geologischen Potenziale jedoch enorm und die modernen Sicherheitsstandards extrem hoch. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Ingenieurskunst werden wir immer besser in der Lage sein, die Rohstoffe im Einklang mit der Umwelt zu fördern.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt etwas.',
+      'Der Experte hofft auf etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte räumt etwas ein.',
+      'Der Experte stellt etwas in Frage.',
+      'Der Experte vermutet etwas.',
+      'Der Experte verteidigt etwas.',
+      'Der Experte widerspricht etwas.'
+    ],
+    correct:[4, 3, 5, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
+    title:'Aufgabe 5: Wie finanzielle Zusatzleistungen die Kindergesundheit beeinflussen',
+    passage:'Ob sich die gesundheitliche Entwicklung von Kindern durch direkte finanzielle Hilfen für Mütter signifikant verbessern lässt – und wie die Effekte im Vergleich zu klassischen Sachleistungen ausgeprägt sind –, untersuchen Gesundheitsökonomen und Soziologen bereits seit Jahren. Eine aktuelle europaweite Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden zwei Gruppen von Müttern im Hinblick auf fünf gesundheits- und entwicklungsspezifische Indikatoren untersucht: Mütter, die einen monatlichen, bedingungslosen Finanzbonus (Zusatzgeld) erhalten, und Mütter, die im traditionellen, an strenge Auflagen geknüpften Regelsystem der staatlichen Sozialhilfe verblieben sind. Personen der ersten Gruppe, die sich selbst als Empfängerinnen des Zusatzgeldes bezeichneten, erwiesen sich in den Kennzahlen zu Ernährungssicherheit, Vorsorgeuntersuchungen und psychischem Wohlbefinden ihrer Kinder als deutlich proaktiver - sie gaben beispielsweise an, flexibler auf kindliche Bedürfnisse reagieren zu können, ausgewogenere Nahrungsmittel zu kaufen und präventive Arztbesuche termingerecht wahrzunehmen. Mütter im herkömmlichen Regelsystem erzielten dagegen niedrigere Werte in puncto Ernährungsqualität und wiesen häufiger stressbedingte Erschöpfungssymptome auf. Sie sind damit im Mittel stärker von akuten finanziellen Sorgen geplagt, wodurch auch die mentale Gesundheit der Kinder indirekt beeinträchtigt wird.',
+    columns:['Mutter mit Zusatzgeld','Mutter im Regelsystem','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3},
+      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0},
+      {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0},
+      {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1},
+      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0},
+      {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3},
+      {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Wie künstliche Intelligenz unsere Sprache verarmt',
+    passage:'Der Einfluss künstlicher Intelligenz auf unsere alltägliche Kommunikation und Sprachkultur ist in den letzten Jahren rasant gewachsen. Einerseits bieten generative KI-Systeme enorme Potenziale: Sie können Texte in Sekundenschnelle zusammenfassen, fehlerfrei übersetzen und stilistisch anpassen. Die Effizienzsteigerung im akademischen und beruflichen Bereich ist unbestritten, da wiederkehrende Schreibarbeiten automatisiert erledigt werden. Doch diese Bequemlichkeit hat ihren Preis. Linguisten warnen vor einer schleichenden Verarmung unseres Wortschatzes und dem Verlust individueller Ausdrucksformen. Wenn wir uns zunehmend auf standardisierte Textvorschläge verlassen, schrumpft die sprachliche Vielfalt, und komplexe Nuancen gehen verloren.<br><br>Besonders kritisch sehen Sprachforscher die Tatsache, dass generative Modelle oft zu sprachlichen Klischees und vorhersehbaren Formulierungen neigen. Dies führt zu einer Homogenisierung des schriftlichen Ausdrucks, bei der persönliche Stimmen und kreative Stilmittel zugunsten einer glatten, aber sterilen Durchschnittssprache verblassen. Zwar lässt sich durch den gezielten Einsatz von KI die Produktivität massiv steigern, doch wer verlernt, komplexe Gedanken selbst in Worte zu fassen, gefährdet langfristig seine kognitive und rhetorische Flexibilität. Dennoch wäre es verfehlt, KI-Technologien pauschal zu verteufeln. Sie können wertvolle Werkzeuge sein, sofern sie kritisch und ergänzend genutzt werden, anstatt das eigene Nachdenken und Formulieren komplett zu ersetzen. Der bewusste Umgang mit diesen neuen Werkzeugen ist daher entscheidend, um die sprachliche Kreativität und den Facettenreichtum unseres Wortschatzes zu bewahren.',
+    aussagen:[
+      { key:'a', text:'[a] Deutliche Effizienzsteigerung bei standardisierten Schreibarbeiten' },
+      { key:'b', text:'[b] Vollständiger Ersatz des eigenen kreativen Denkens' },
+      { key:'c', text:'[c] Schleichende Verarmung des individuellen Wortschatzes' },
+      { key:'d', text:'[d] Erhaltung sämtlicher rhetorischer Nuancen' },
+      { key:'e', text:'[e] Homogenisierung und Sterilität des schriftlichen Ausdrucks' },
+      { key:'f', text:'[f] Unproblematische uneingeschränkte Nutzung ohne jegliche Kritik' },
+      { key:'g', text:'[g] Förderung einer enormen sprachlichen Vielfalt' },
+      { key:'h', text:'[h] Verlust der kognitiven Flexibilität bei vollständiger Abhängigkeit' }
+    ],
+    correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'h' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Der Rhythmus des Lernens: Wie Musik das Gehirn beeinflusst',
+    passage:'Ein regelmäßiger Musikkonsum beim Lernen kostet zwar Zeit und Aufmerksamkeit, doch er entlastet nachweislich das Gehirn, senkt den Cortisolspiegel und fördert die Konzentrationsfähigkeit im Vergleich zum Arbeiten in völliger Stille. Sogar die Schüler, die beim Lernen intensiv über laute Kopfhörer beschallt werden, leiden häufiger unter akustischer Reizüberflutung und Konzentrationsproblemen. Doch nicht nur die Oberstufenschüler, sondern auch die Jüngsten zeigen oft ein verändertes Hör- und Lernverhalten. Wie in einer aktuellen Studie in Deutschland festgestellt wurde, benötigen Schüler im Schnitt 32 Minuten, um sich morgens durch gezieltes Musikhören in eine optimale Lernstimmung zu versetzen. Während bei immerhin 22 Prozent der Schüler der Weg zur Schule kürzer als zehn Minuten ist, brauchen 12 Prozent dafür 45 Minuten und länger. Wären sie musikalisch aktiv, würde man sie als klassische Melomanen bezeichnen.<br><br>Wie die Forscher herausfanden, geht das ständige Musikhören im Alltag an den Jugendlichen nicht spurlos vorüber. Ähnlich wie Erwachsene leiden besonders Jugendliche mit langen Lernphasen unter mentaler Erschöpfung. Sie sind zudem unkonzentriert und fühlen sich weniger leistungsfähig. Doch auch Schüler, die gar keine Musik hören, leiden unter derartigen Folgen. Auf Reaktionen aus der Politik wartet man bislang vergeblich und eine Abhilfe scheint nicht in Sicht. In den letzten zehn Jahren mussten immer mehr Musikschulen schließen, weil beispielsweise qualifizierte Musiklehrer fehlten. Für die Schüler ist dies fatal: Sie müssen immer monotonere Lehrmethoden in Kauf nehmen – und damit auch die mangelnde Kreativität, die damit verbunden ist. Zum Bildungserfolg der Jugendlichen trägt das sicherlich nicht bei.',
+    graphicData:[{year:'1. Satz',val:1},{year:'2. Satz',val:1},{year:'3. Satz',val:1},{year:'4. Satz',val:1},{year:'5. Satz',val:1},{year:'6. Satz',val:1}],
+    graphicCaption:'Grafik zur Zusammenfassung der Sätze (Modelltest 2)',
+    sentences:[
+      {text:'Musik hebt unsere Stimmung und hilft dabei, Anspannung abzubauen.', wrong:false},
+      {text:'Sie wirkt sich auf Schüler ebenso positiv aus wie auf Erwachsene.', wrong:false},
+      {text:'Häufige Folgen des Musikhörens bei zu hoher Lautstärke sind Gehörschäden und Konzentrationsstörungen.', wrong:true},
+      {text:'Diese Auswirkungen zeigen sich bei Jugendlichen ab einer Beschallungsdauer von einer knappen halben Stunde.', wrong:false},
+      {text:'Das ist die Dauer eines durchschnittlichen Schulwegs in Deutschland.', wrong:false},
+      {text:'Erst- und Zweitklässler hören noch häufiger Musik beim Lernen als ältere Schüler.', wrong:true},
+      {text:'Ältere Schüler sind stärker von der positiven Gehirnstimulation überzeugt.', wrong:false},
+      {text:'Eine Verbesserung der Situation wurde nun politisch angekündigt.', wrong:true}
+    ]
+  }
+];
+
+const MT3 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1–5, welches Wort passt.',
+    title:'Warum werden Städte nachts immer wärmer?',
+    segments:[
+      'Dass sich Städte während des Tages stärker erwärmen als ihr Umland, ist seit Langem bekannt. Weniger offensichtlich ist jedoch, warum dieser Temperaturunterschied auch nach Sonnenuntergang bestehen bleibt. Einen wesentlichen Grund sehen Forschende in den Materialien, aus denen Straßen und Gebäude bestehen. Beton und Asphalt nehmen tagsüber große Mengen an Wärme auf und geben diese während der Nacht nur langsam wieder ab. Dadurch entsteht ein Effekt, der als städtische Wärmeinsel ',
+      ' wird. Allerdings lässt sich das Phänomen nicht allein durch die verwendeten Baustoffe erklären. Untersuchungen haben gezeigt, dass auch die geringe Luftzirkulation zwischen dicht stehenden Gebäuden dazu ',
+      ', dass die gespeicherte Wärme langsamer entweichen kann. Hinzu kommt die Abwärme, die von Fahrzeugen, Klimaanlagen und industriellen Anlagen ',
+      ' wird. Interessanterweise können selbst kleine Veränderungen der Stadtplanung messbare Auswirkungen haben. Begrünte Dächer und Bäume beispielsweise ',
+      ' nicht nur Schatten, sondern tragen durch die Verdunstung von Wasser auch zur Abkühlung der Umgebung bei. Einige Städte versuchen deshalb inzwischen, gezielt Flächen zu schaffen, auf denen sich die nächtliche Wärme ',
+      ' stark ansammelt.'
+    ],
+    gaps:[
+      {options:['bezeichnet','bezeichnet sich','benennt','n nennt sich'], correct:0},
+      {options:['beiträgt','führt','verursacht','bewirkt'], correct:0},
+      {options:['abgegeben','ausgestoßen','entlassen','ausgesetzt'], correct:0},
+      {options:['spenden','gewähren','leisten','bieten'], correct:0},
+      {options:['nicht','weniger','kaum','selten'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Lesen Sie die Textabschnitte rechts. Bringen Sie die 5 Textabschnitte in die richtige Reihenfolge.',
+    title:'Forscher erzeugen neuartiges „Super-Eis“',
+    correctOrder:[0,1,3,2,4],
+    items:[
+      'Obwohl erste theoretische Modelle zu dieser extremen Phase bereits in den späten 1990er Jahren formuliert wurden, scheiterte die experimentelle Verifikation jahrzehntelang an den astronomischen Druckverhältnissen, die für eine Stabilisierung im Labor notwendig schienen.',
+      'Erst als ein interdisziplinäres Team im September 2026 mithilfe von neuartigen Diamantstempelzellen und präzisen Laserschock-Techniken einen Quantensprung erzielte, wandelte sich die hypothetische Materie in eine greifbare Realität.',
+      'Dieses radikal modifizierte Gittergefüge verleiht dem Material physikalische Anomalien, darunter eine thermische Leitfähigkeit, die konventionelles Wassereis um ein Vielfaches übertrifft, und eine bemerkenswerte Resistenz gegenüber extremen Temperaturen.',
+      'Das so geschaffene, als „Super-Eis“ bezeichnete Konglomerat unterscheidet sich fundamental von irdischem Eis, da seine Moleküle unter immensem physikalischem Zwang in eine dichte, hochsymmetrische Kristallstruktur gepresst werden, die selbst bei Raumtemperatur stabil bleibt.',
+      'Sollten sich die aktuellen Skalierungstests in der Raumfahrt- und Energieindustrie als erfolgreich erweisen, könnte dieser Stoff in naher Zukunft als revolutionäres Kühlmedium in thermischen Isolationssystemen dienen.'
+    ],
+    shuffledStart:[4,2,0,1,3]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1-7. Entscheiden Sie, welche Lösung passt.',
+    title:'Adaptive KI-Robotik und menschliche Motorik',
+    passage:[
+      '(1) Die Schnittstelle zwischen künstlicher Intelligenz und hochkomplexer Robotik hat in den letzten Jahren jene technologischen Grenzen verschoben, die lange Zeit als unüberwindbar galten. Während traditionelle Industrieroboter vor allem starr programmierte, repetitive Aufgaben in isolierten Fabrikzellen ausführen, verlangen moderne physische Assistenzsysteme nach einer gänzlich neuen Dimension der sensorischen Adaption. Ein herausragendes Beispiel hierfür sind Kl-gesteuerte humanoide Robotersysteme, die in Echtzeit physikalische Parameter wie Flugbahnen, Reibung und kinetische Energie berechnen können, um beispielsweise hochentwickelte sportliche Interaktionen wie das Fangen und Schlagen von Baseball-Bällen zu meistern eine Aufgabe, die selbst für geschulte menschliche Athleten ein Höchstmaß an visuell-motorischer Koordination erfordert.',
+      '(2) Warum diese Integration von maschinellem Lernen und mechanischer Ausführung so komplex ist, liegt vor allem an der unvorhersehbaren Dynamik realer Umgebungen. Nachgewiesen ist, dass Algorithmen zwar immense Datenmengen in Millisekunden verarbeiten können, die physikalische Umsetzung durch Aktoren jedoch oft träge reagiert. Bei menschlichen Bewegungen steuert das Kleinhirn unbewusst die Feinabstimmung, während Kortex-Areale strategische Entscheidungen treffen. Moderne Roboterarchitekturen versuchen diesen biologischen Dualismus durch neuronale Netze nachzuahmen. Dennoch unterscheiden sich autonome Systeme von biologischen Organismen grundlegend dadurch, dass ihnen das intuitive, erfahrungsbasierte "Gefühl" für physakalisches Material fehlt, weshalb jede Abweichung von der Norm zu Fehlkalkulationen führt.',
+      '(3) Während in Europa die Entwicklung solcher dynamischen Roboterarme stark sicherheitsgetrieben und regulativ gebremst wird, setzt man in anderen Innovationszentren auf kompromisslose Praxistests unter Extrembedingungen. Ingenieure nutzen dort fortschrittliche Simulationen, um Tausende von Wurfszenarien zu generieren, bevor die Hardware überhaupt physisch beansprucht wird. In der westlichen Welt galt lange Zeit eine skeptische Haltung gegenüber autonomen Maschinen, die in direkter physischer Nähe zum Menschen agieren. Erst nachdem internationale Forschungsteams in kontrollierten Testlaboren nachweisen konnten, dass moderne Kollisionserkennungssysteme absolut verlässlich arbeiten, erhielten solche Roboter eine breitere gesellschaftliche und industrielle Akzeptanz.',
+      '(4) Heutzutage stehen autonome KI-Systeme vor allem im Fokus der Materialwissenschaft und der Logistikoptimierung. Denn über physikalische Interaktionskräfte wissen wir oft weniger, als intuitiv angenommen wird, da sich mechanische Belastungen in dreidimensionalen Räumen unvorhersehbar überlagern. Roboter sind für Forscher besonders wertvoll, da sie als messbare Versuchsträger dienen: Das System registriert und quantifiziert jeden Millimeterbruchteil einer Bewegung. Dieser empirische Datensatz kann auch in der Rehabilitation genutzt werden: Ein gewisser Prozentsatz von Patienten leidet unter neurologisch bedingten Bewegungsstörungen nach Schlaganfällen. Es ist bereits wissenschaftlich belegt, dass präzise haptische Feedback-Roboter helfen können, neuronale Bahnen im Gehirn zu reaktivieren und motorische Fähigkeiten gezielt wiederherzustellen.',
+      '(5) Anders als die Ingenieure beschäftigen sich Kognitionswissenschaftler mit der Frage, inwiefern die algorithmische Entscheidungsfindung Aufschluss über menschliche Denkprozesse geben kann. Einer der Forscher analysierte, ob neuronale KI-Modelle das menschliche Antizipationsvermögen bei High-Speed-Reaktionen simulieren können. Nach eigenen Angaben konnte er dadurch neue Muster im menschlichen Lernverhalten entschlüsseln. Mittlerweile ist auch anderweitig belegt, dass derartige Simulationen für das Verstehen einfacher Bewegungsabläufe hervorragend funktionieren. Bei hochkomplexen, intuitiven Handlungen geraten die Algorithmen jedoch an ihre Grenzen, da menschliche Kreativität und Spontaneität mathematisch kaum fassbar sind.',
+      '(6) Die Beherrschung solcher Systeme lässt sich indes steuern und optimieren. Es gibt verschiedene Methoden, die zum technologischen Durchbruch führen können. Bekannt ist vor allem das Reinforcement-Learning-Modell: Dabei optimiert sich die KI durch Millionen von Simulationen selbst, indem sie Bestrafungen für Fehler und Belohnungen für erfolgreiche Treffer registriert. Eine andere Möglichkeit besteht darin, Roboter direkt durch menschliche Vormacher (Teleoperation) zu trainieren. Im Idealfall nähert sich die Maschine so der menschlichen Flexibilität an. Mittlerweile ist es auch möglich, Roboter durch KI-gesteuerte Sensorik in Echtzeit anzupassen. Diese Technologie ist jedoch extrem teuer und rechenintensiv, weshalb ein flächendeckender Einsatz in der Industrie noch auf sich warten lässt.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'traditionelle Roboter flexibler als moderne Systeme sind.',
+        'moderne KI-Roboter komplexe physikalische Abläufe in Echtzeit berechnen.',
+        'das Fangen von Baseball-Bällen für Menschen unmöglich ist.',
+        'Fabrikzellen ausschließlich durch autonome Roboter gesteuert werden.'
+      ], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 autonome KI-Systeme aus? Durch ...', options:[
+        'ein intuitives, erfahrungsbasiertes Materialgefühl.',
+        'eine absolut fehlerfreie mechanische Umsetzung.',
+        'eine rein biologische Nachahmung des Kleinhims.',
+        'Schwierigkeiten bei normAbweichungen aufgrund fehlender Intuition.'
+      ], correct:3 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
+        'Unterschiedliche globale Herangehensweisen und Akzeptanz',
+        'Die technologische Vorreiterrolle Europas in der Sicherheit',
+        'Internationale Vorschriften für Roboterarme im Labor',
+        'Die strikte Ablehnung von Simulationen in der westlichen Welt'
+      ], correct:0 },
+      { q:'Laut Absatz 4 kann man mithilfe von KI-Robotern in der Medizin ...', options:[
+        'neurologische Störungen endgültig heilen.',
+        'mechanische Belastungen im Raum komplett eliminieren.',
+        'neuronale Bahnen durch haptisches Feedback reaktivieren.',
+        'das menschliche Gehim vollständig digitalisieren.'
+      ], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
+        'KI-Simulationen erfassen menschliche Spontaneität vollständig.',
+        'Kognitionswissenschaftler nutzen KI zur Analyse menschlicher Lernmuster.',
+        'Menschliches Antizipationsvermögen lässt sich mathematisch exakt berechnen.',
+        'Komplexe Bewegungen werden von KI besser ausgeführt als von Menschen.'
+      ], correct:1 },
+      { q:'Welche Meinung hat der Autor in Absatz 6 über den Einsatz von KI-Sensorik?', options:[
+        'Er hält ihn für unmittelbar flächendeckend realisierbar.',
+        'Er kritisiert die mangelnde Leistungsfähigkeit der Algorithmen.',
+        'Er lehnt den Einsatz von Reinforcement Learning ab.',
+        'Er dämpft die Erwartungen wegen hoher Kosten und Rechenintensität.'
+      ], correct:3 },
+      { q:'Hauptanliegen des Textes ist es,...', options:[
+        'die Fortschritte und Grenzen adaptiver KI-Robotik darzulegen.',
+        'ausschliesslich die sportlichen Anwendungen von Robotern zu vergleichen.',
+        'vor den Gefahren autonomer Maschinen im Alltag zu warmen.',
+        'die Überlegenheit von Robotern gegenüber Menschen zu beweisen.'
+      ], correct:0 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
+    title:'Kommentar eines Experten zu Künstlicher Intelligenz und Arbeitsmarkt',
+    passageText:`Die Annahme, dass generative Künstliche Intelligenz in naher Zukunft weite Teile der intellektuellen Arbeitswelt revolutionieren und zu einer massiven Entwertung akademischer Berufe führen wird, wird in Fachkreisen kaum noch ernsthaft bestritten. <strong>[1] Ob diese technologische Disruption jedoch linear verläuft oder durch unvorhersehbare regulatorische und gesellschaftliche Hürden abgebremst wird, entzieht sich aktuell jeder verlässlichen Prognose.</strong> Bereits heute existieren Algorithmen, die komplexe juristische Schriftsätze verfassen und medizinische Diagnosen mit einer Präzision stellen können, die das menschliche Fehlerrisiko in bestimmten Teilbereichen signifikant unterscheidet. <strong>[2] Diese Applikationen basieren auf gigantischen Rechenkapazitäten und probabilistischen Modellen, deren interne Entscheidungsprozesse für den Anwender eine absolute Blackbox darstellen.</strong> Doch während Kritiker vor einem irreversiblen Vertrauensverlust in automatisierte Systeme warnen, schreitet die Implementierung in sicherheitskritischen Infrastrukturen rasant voran. Vielleicht erleben wir schon bald den Punkt, an dem autonome Agenten eigenständig ökonomische Strategien für globale Konzerne entwickeln. Wenn Sie vor zwanzig Jahren einem Pionier der Informatik gesagt hätten, dass Computer semantische Nuancen menschlicher Sprache fehlerfrei erfassen und imitieren können, hätte er Sie vermutlich ungläubig angeschaut. Und wenn Sie ihm gesagt hätten, dass diese Systeme kreative Prozesse wie das Komponieren von Symphonien in Sekundenschnelle und mit bruchteilhaften Energiekosten im Vergleich zu menschlichen Künstlern bewältigen, hätte er das für völlig absurd erklärt. Doch durch algorithmische Optimierung und massive Skalierung ist uns genau das gelungen.<br><br>Die Idee des unaufhaltsamen technologischen Fortschritts könnte also ein Trugschluss sein. <strong>[3] Dass sie dennoch so populär ist, hängt damit zusammen, dass unser kollektives Narrativ von Innovation immer noch tief im linearen Denken der industriellen Revolution verwurzelt ist.</strong> Damals hieß es: Wer effizienter maschinell produziert, gewinnt den Markt. Wenn heute alle alten Paradigmen obsolet werden, müssen wir unsere ökonomischen Grundregeln völlig neu definieren. In Wahrheit sind unsere Grenzen unserer technologischen Leistungsfähigkeit keineswegs erreicht. <strong>[4] Und mit unserem rasant wachsenden Verständnis neuronaler Netze und synthetischer Daten werden wir immer besser in der Lage sein, kognitive Engpässe zu überwinden.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt etwas.',
+      'Der Experte hofft auf etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte räumt etwas ein.',
+      'Der Experte stellt etwas in Frage.',
+      'Der Experte vermutet etwas.',
+      'Der Experte verteidigt etwas.',
+      'Der Experte widerspricht etwas.'
+    ],
+    correct:[5, 3, 7, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Analytikern, zu Intuitionistikern oder zu beiden passt.',
+    title:'Wie analytische und intuitive Köpfe ticken',
+    passage:'Ob sich menschliche Denkstrukturen in kognitive Extreme wie strikte Analytik und fluid-intuitive Verarbeitung aufteilen lassen – und wie stark diese Unterschiede im Einzelfall ausgeprägt sind –, diskutieren Neurowissenschaftler seit Jahrzehnten kontrovers. Eine aktuelle multidisziplinäre Studie liefert nun tiefere Einblicke in diese kognitive Dichotomie. Dabei wurden Probanden hinsichtlich fünf fundamentaler neurokognitiver Merkmale untersucht: algorithmische Stringenz, Offenheit für sensorische Ambiguität, Gewissenhaftigkeit, kognitive Flexibilität d.h. die Fähigkeit zur schnellen Reorientierung, sowie neuronale Erregbarkeit bzw. emotionale Stabilität unter Entscheidungsdruck. Personen, die sich selbst als primär analytisch veranlagt einstuften, erzielen im Schnitt höhere Werte in puncto systematischer Planung, formaler Logik und methodischer Vorhersehbarkeit – sie neigen also dazu, Probleme strikt strukturiert und Schritt für Schritt anzugehen. Intuitionistischer veranlagte Probanden verzeichnen dagegen höhere Werte bei holistischer Mustererkennung und divergentem Denken. Sie sind damit im Mittel etwas risikofreudiger und fehlerintoleranter gegenüber starren Hierarchien; gleichzeitig werden sie jedoch auch häufiger von unbewussten kognitiven Verzerrungen und spontanen Fehleinschätzungen geplagt. Ein relativ ähnliches Bild liefert auch eine andere Untersuchung: Insgesamt deuten die neueren Studien auf einen engen Zusammenhang zwischen unserer neuronalen Verschaltung und der Präferenz für einen ganz bestimmten Problemlösungsstil hin. Wie dieser Zusammenhang genau aussehen könnte, ist jedoch nicht abschließend geklärt. Australische Forscher vertreten die These, dass wir kognitive Strategien präferieren, die unsere angeborene mentale Architektur optimal ergänzen. Um ihre Vermutung zu überprüfen, untersuchten sie in zwei unterschiedlichen Studien mit jeweils rund 500 Teilnehmern, ob dominante Analytiker im Schnitt eine ausgeprägtere Dominanzorientierung besaßen als intuitive Köpfe – sie präferierten also eine feste gedankliche Hierarchie und glaubten, dass übergeordnete Systeme stets mit einem niedrigen Rang dominieren sollten. Paaroffene Fragen hinterlässt die Untersuchung allerdings: Die Wissenschaftler sehen das als Hinweis darauf, dass analytischere Personen Führungspositionen anstreben, die nicht primär auf emotionalem Konsens beruhen, sondern bereit sind, harte rationale Kriterien anzulegen – was auf mathematische Disziplinen eher zutrifft als auf rein künstlerisch-intuitive Domänen. So konnten die Wissenschaftler hinsichtlich Durchsetzungsvermögen und Narzissmus – zwei Eigenschaften, die ebenfalls mit kognitiver Dominanz zusammenhängen – keine signifikanten Unterschiede zwischen ihren Versuchspersonen finden: Analytiker waren weder durchsetzungsstärker noch selbstbezogener als Intuitionistiker. Wie das genau zu ihrer Hypothese passt, konnten die Wissenschaftler allerdings nicht abschließend erklären.',
+    columns:['Analytiker','Intuitionistiker','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen neigen zu einem starken Narzissmus.', correct:3},
+      {text:'Diese Gruppe hinterfragt ständige gedankliche Hierarchien.', correct:1},
+      {text:'Diese Personen schätzen eine systematische und methodische Vorhersehbarkeit.', correct:0},
+      {text:'Diese Gruppe profitiert von einer flexiblen holistischen Mustererkennung.', correct:1},
+      {text:'Diese Personen lassen sich stark durch unbewusste kognitive Verzerrungen leiten.', correct:1},
+      {text:'Diese Gruppe weist ein nachweislich höheres Durchsetzungsvermögen auf.', correct:3},
+      {text:'Diese Personen meiden Führungspositionen in harten rationalen Disziplinen.', correct:3}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Flechten: Das komplexe Zusammenspiel der Symbiose',
+    passage:'Flechten gehören zu den faszinierendsten und zugleich widerstandsfähigsten Organismen der Erde, obwohl sie streng biologisch gesehen keine eigenständigen Lebewesen im klassischen Sinne darstellen. Vielmehr handelt es sich bei ihnen um eine Lebensgemeinschaft, die klassischerweise aus einem Pilz und mindestens einem phototrophen Partner, meist einer Grünalge oder einem Cyanobakterium, besteht. Diese Symbiose wird von der Mykologie traditionell als ein austariertes System gegenseitiger Abhängigkeit verstanden, bei dem der Pilz dem phototrophen Partner ein schützendes Gehäuse sowie Wasser und Mineralsalze bietet, während die Alge im Gegenzug durch Photosynthese gewonnene Kohlenhydrate beisteuert. Jüngste wissenschaftliche Untersuchungen enthüllen jedoch eine weitaus komplexere Realität: Oftmals sind an diesem vermeintlich dualen System heimlich noch weitere Pilzarten oder spezialisierte Hefen beteiligt, die maßgeblich zur Stabilität der Flechtenrinde beitragen. Trotz dieser evolutionären Raffinesse erweist sich die Kultivierung von Flechten unter Laborbedingungen als außerordentlich schwierig. Da die symbiotischen Partner in der Natur extrem langsam wachsen und in ein feines, chemisch hochkomplexes Wechselspiel eingebunden sind, schlagen künstliche Zuchtversuche im kontrollierten Umfeld meist fehl. Zudem reagieren Flechten extrem empfindlich auf anthropogene Schadstoffe. Da sie keine echten Wurzeln besitzen, nehmen sie sämtliche Nährstoffe und Flüssigkeiten direkt über die gesamte Oberfläche aus der Atmosphäre auf. Das macht sie zu hervorragenden Bioindikatoren für die Luftgüte, setzt sie aber gleichzeitig der unkontrollierten Anreicherung von Schwermetallen und Schwefeldioxid aus, was mancherorts zu massiven Bestandsrückgängen führt. Andererseits besitzen sie die erstaunliche Fähigkeit, extreme Austrocknungsphasen schadlos zu überstehen, indem sie ihren Stoffwechsel nahezu komplett herunterfahren und in eine Art metabolische Starre verfallen, aus der sie beim ersten Kontakt mit Feuchtigkeit sofort wieder erwachen.',
+    aussagen:[
+      { key:'a', text:'[a] Unkontrollierte Aufnahme von Schadstoffen aus der Luft' },
+      { key:'b', text:'[b] Vollständiger Verzicht auf externe Nährstoffzufuhr' },
+      { key:'c', text:'[c] Beteiligung von mehr als nur zwei Organismenarten' },
+      { key:'d', text:'[d] Problematische künstliche Kultivierung im Labor' },
+      { key:'e', text:'[e] Schneller und unkontrollierter Wuchs in feuchten Regionen' },
+      { key:'f', text:'[f] Ausschließlich ausschließliche Abhängigkeit von Grünalgen' },
+      { key:'g', text:'[g] Hohe Widerstandsfähigkeit gegen langanhaltende Dürreperioden' },
+      { key:'h', text:'[h] Unmittelbare Gefahr für das Menschen beim Berühren der Thalli' }
+    ],
+    correctMap: { v1: 'c', v2: 'g', n3: 'a', n4: 'd' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten. Es gibt genau drei inhaltlich falsche Sätze.',
+    title:'Das Erdsystem an den Belastungsgrenzen',
+    passage:'Das Konzept der planetaren Grenzen, das erstmals im Jahr 2009 von einem internationalen Forscherteam um Johan Rockström und Will Steffen vorgestellt wurde, definiert den sicheren Handlungsraum für die Menschheit. Jüngste wissenschaftliche Aktualisierungen zeichnen jedoch ein alarmierendes Bild: Mittlerweile sind sieben von neun definierten Grenzen überschritten worden. Zu den kritisch fortgeschrittenen Bereichen gehören neben dem Klimawandel vor allem die Intégrität der Biosphäre, der Verlust von Ökosystemfunktionen sowie massive Störungen der biogeochemischen Kreisläufe von Stickstoff und Phosphor. Besonders besorgniserregend ist die Tatsache, dass diese Subsysteme des Erdsystems nicht isoliert voneinander betrachtet werden dürfen. Sie stehen in einem hochkomplexen, nicht-linearen Wechselverhältnis. So schwächt die anhaltende Entwaldung tropischer Regenwälder nicht nur die globale Kohlenstoffsenke, sondern beschleunigt gleichzeitig das Artensterben dramatisch. Wissenschaftler betonen, dass das Überschreiten dieser Schwellenwerte das Risiko unumkehrbarer Kippelemente signifikant erhöht, was kaskadenartige Kollapse ganzer Naturräume zur Folge haben kann. Zwar existieren auf internationaler Ebene zahlreiche Abkommen wie das Pariser Klimaschutzabkommen, doch kritisieren Experten immer wieder die mangelnde politische Entschlossenheit bei der Umsetzung konsequenter Gegenmaßnahmen. Ohne eine grundlegende sozial-ökologische Transformation droht die Stabilität des gesamten Erdsystems irreversibel zu kippen, wodurch die Lebensgrundlagen künftiger Generationen akut gefährdet werden.',
+    graphicData:[{year:'Klima',val:4},{year:'Biosphäre',val:5},{year:'Stickstoff',val:3},{year:'Landnutzung',val:4}],
+    graphicCaption:'Grafik: Zustand der planetaren Grenzen im Erdsystem',
+    sentences:[
+      {text:'(1) Das wissenschaftliche Konzept der planetaren Grenzen wurde zu Beginn des 21. Jahrhunderts eingeführt, um den sicheren Handlungsraum der Menschheit zu definieren.', wrong:false},
+      {text:'(2) Aktuellen Erhebungen zufolge gilt inzwischen die Mehrheit der neun untersuchten ökologischen Hauptgrenzen als überschritten.', wrong:false},
+      {text:'(3) Zu den stabilsten und unbedenklichsten Bereichen zählen derzeit die globalen Stickstoff- und Phosphorkreisläufe.', wrong:true},
+      {text:'(4) Die einzelnen Subsysteme des Erdsystems agieren voneinander völlig unabhängig und beeinflussen sich gegenseitig kaum.', wrong:true},
+      {text:'(5) Die Zerstörung tropischer Regenwälder reduziert parallel die globale Kohlenstoffsenke und verstärkt den Biodiversitätsverlust.', wrong:false},
+      {text:'(6) Das Überschreiten kritischer Schwellenwerte erhöht drastisch die Gefahr abrupter und unumkehrbarer Kippeffekte.', wrong:false},
+      {text:'(7) Internationale Vereinbarungen wie das Pariser Abkommen werden von Fachleuten wegen konsequenter politischer Umsetzung einhellig gelobt.', wrong:true},
+      {text:'(8) Komplexe ökologische Veränderungen können potenziell kaskadenartige und weitreichende Systemkollapse auslösen.', wrong:false},
+      {text:'(9) Ohne einen tiefgreifenden systemischen Wandel steht die langfristige Stabilität des gesamten Erdsystems auf dem Spiel.', wrong:false}
+    ]
+  }
+];
+
+const MT4 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Die Evolution der Biolumineszenz in den Tiefen der Ozeane',
+    segments:[
+      'Die Fähigkeit zahlreicher mariner Organismen, eigenes Licht zu erzeugen – die sogenannte Biolumineszenz –, stellt einen der faszinierendsten Anpassungsmechanismen an die extremen Bedingungen der Tiefsee dar. In absoluter Dunkelheit dient dieses biologische Leuchten vor allem der Kommunikation, der Abwehr von Fressfeinden oder dem Anlocken von Beute. Biochemisch basiert dieser Prozess auf einer enzymatisch katalysierten Oxidation, bei der das Substrat Luciferin durch das Enzym Luciferase umgewandelt wird. Forschern zufolge ',
+      ' sich dieser komplexe Mechanismus im Laufe der Erdgeschichte unabhängig voneinander in Dutzenden verschiedenen Tierstämmen entwickelt. Lange Zeit gab es unter Meeresbiologen eine intensive ',
+      ' darüber, ob diese evolutionäre Vielfalt eher auf einen urspünglichen, gemeinsamen Vorfahren oder auf konvergente Evolution zurückzuführen ist. Neuere phylogenetische Analysen konnten jedoch überzeugend ',
+      ', dass die konvergente Entstehung bei den meisten Taxa das wahrscheinlichere Szenario darstellt. Dies verdeutlicht, wie stark der Selektionsdruck in lichtlosen Meereszonen auf innovative Überlebensstrategien ',
+      '. Zukünftige Expeditionen mit autonom gesteuerten Unterwasserfahrzeugen sollen nun weitere unbekannte Spezies dokumentieren und helfen, die ökologischen Dynamiken dieser sensiblen Ökosysteme besser zu ',
+      '.'
+    ],
+    gaps:[
+      {options:['hat','scheint','vermutet','lässt'], correct:0},
+      {options:['Diskussion','Meldung','Mitteilung','Rede'], correct:0},
+      {options:['zeigen','verweisen','zurückweisen','hinweisen'], correct:0},
+      {options:['einwirkt','auswirkt','nachwirkt','vorwirkt'], correct:0},
+      {options:['begreifen','erfassen','verstehen','erkennen'], correct:2}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Die Entstehung von Mikroplastik in terrestrischen Böden',
+    correctOrder:[1,0,3,2,4],
+    items:[
+      'Durch mechanische Belastung, UV-Strahlung und mikrobiellen Abbau zerfallen diese Makroplastikreste im Laufe der Zeit in immer kleinere Fragmente, bis sie die definierte Mikroplastik-Grenze unterschreiten.',
+      'Lange Zeit konzentrierte sich die ökologische Forschung im Zusammenhang mit Plastikmüll fast ausschließlich auf die Weltmeere, während terrestrische Böden als vergleichsweise unbedeutend galten.',
+      'Diese winzigen Partikel reichern sich im Humus an, verändern dort physikalische Bodeneigenschaften wie das Wasserspeichervermögen und können von Regenwürmern oder Mikroorganismen aufgenommen werden.',
+      'Aktuelle bodenkundliche Studien zeigen jedoch, dass landwirtschaftlich genutzte Flächen – unter anderem durch Klärschlammdüngung und Mulchfolien – massiv mit makroskopischen Kunststoffabfällen belastet sind.',
+      'Ob diese synthetischen Fremdkörper langfristig über die Nahrungskette auch die Gesundheit von Pflanzen und Tieren nachhaltig schädigen, wird derzeit von toxikologischen Instituten weltweit intensiv untersucht.'
+    ],
+    shuffledStart:[4,2,0,3,1]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Die Psychologie des kollektiven Vergessens',
+    passage:[
+      '(1) Das Phänomen des kollektiven Gedächtnisses und dessen Gegenstück, das kollektive Vergessen, prägen die kulturelle Identität von Gesellschaften nachhaltig. Während historische Forschung meist darauf ausgerichtet ist, Ereignisse durch Dokumente und Artefakte im Bewusstsein zu halten, zeigt die Soziologie, dass Gesellschaften selektiv vorgehen. Nicht alles, was erinnert werden könnte, wird auch über Generationen hinweg tradiert. Vielmehr unterliegt das gesellschaftliche Erinnern einer ständigen Reinterpretation, die stark von gegenwärtigen Interessen, politischen Machtstrukturen und sozialen Bedürfnissen beeinflusst wird.',
+      '(2) Ein zentraler Mechanismus des Vergessens ist die institutionelle Verdrängung. Wenn schmerzhafte oder beschämende Kapitel der nationalen Geschichte im Widerspruch zum aktuellen Selbstbild einer Nation stehen, neigen kollektive Akteure dazu, diese Erzählungen schrittweise aus Lehrplänen, Denkmälern und Gedenkveranstaltungen zu entfernen. Dieser Prozess verläuft oft unbemerkt, führt jedoch langfristig zu einer tiefgreifenden Verzerrung des historischen Bewusstseins, was den kritischen Diskurs über historische Verantwortung erheblich erschwert.',
+      '(3) Historisch gesehen war der Umgang mit kollektivem Gedächtnis stark durch staatliche Lenkung und nationale Meistererzählungen geprägt. Im 19. und frühen 20. Jahrhundert diente die Geschichtsschreibung vor allem der Nationsbildung und der Erzeugung eines homogenen Wir-Gefühls, weshalb abweichende oder widersprüchliche Stimmen systematisch marginalisiert wurden. Erst mit dem Aufkommen postmoderner geschichtswissenschaftlicher Ansätze und der Etablierung einer pluralistischen Erinnerungskultur im späten 20. Jahrhundert wurde dieses starre Dogma grundlegend aufgebrochen.',
+      '(4) In der modernen Medienlandschaft vollzieht sich dieser Prozess unter völlig neuen Vorzeichen. Durch die Beschleunigung der Informationsströme und die digitale Flut an tagesaktuellen Nachrichten droht ein beschleunigtes Vergessen von Großereignissen, die noch vor wenigen Jahren als epochal galten. Soziologen sprechen in diesem Zusammenhang von einer Verkürzung der historischen Halbwertszeit: Ereignisse schrumpfen im digitalen Speicher zu ephemeren Datenpunkten, die kaum noch tiefere Spuren im kollektiven Bewusstsein hinterlassen.',
+      '(5) Dennoch gibt es gegenläufige Tendenzen, die durch digitale Graswurzelbewegungen und zivilgesellschaftliche Initiativen getragen werden. Mithilfe von Online-Archiven, Crowdsourcing-Projekten und virtuellen Gedenkorten versuchen Aktivisten, marginalisierte Geschichten und vergessene historische Opfer dem Vergessen zu entreißen. Diese dezentralen Initiativen demokratisieren den Zugang zur Vergangenheit, stehen jedoch gleichzeitig vor dem Problem der Verifizierung und der schieren Unüberschneidbarkeit der verfügbaren Datenmengen.',
+      '(6) Kritische Stimmen aus den Kulturwissenschaften warnen vor einer Inflation des Gedenkens. Wenn nahezu jedes historische Detail mit Gedenktagen, digitalen Hashtags oder symbolischen Akten bedacht wird, droht eine Übersättigung, die das eigentliche Erinnern trivialisiert und in eine oberflächliche Eventkultur mündet. Echtes historisches Verstehen erfordert jedoch Kontinuität, kritische Analyse und die Bereitschaft, sich mit unbequemen Wahrheiten auseinanderzusetzen, statt sich in einer ritualisierten Erinnerungsrhetorik zu erschöpfen.',
+      '(7) Zusammenfassend lässt sich festhalten, dass das kollektive Gedächtnis ein dynamisches, umkämpftes Terrain darstellt. Die Untersuchung seiner Mechanismen liefert wichtige Einblicke in die seelische Verfassung moderner Gesellschaften und zeigt auf, wie fragile die Balance zwischen Erinnern und Vergessen in einer sich rasant verändernden Welt ist.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird dargelegt, dass das kollektive Gedächtnis ...', options:[
+        'stets alle historischen Ereignisse unbestechlich und lückenlos bewahrt.',
+        'starken Einflüssen der jeweiligen Gegenwart und aktuellen Machtstrukturen unterliegt.',
+        'ausschließlich durch schriftliche Dokumente und Denkmäler definiert wird.',
+        'von den Mitgliedern einer Gesellschaft völlig unabhängig vom Zeitgeist gesteuert wird.'
+      ], correct:1 },
+      { q:'Was bewirkt laut Absatz 2 die institutionelle Verdrängung?', options:[
+        'Eine objektive und fehlerfreie Aufarbeitung aller historischen Krisen.',
+        'Die dauerhafte Stärkung des kritischen gesellschaftlichen Diskurses.',
+        'Eine schrittweise Verzerrung des historischen Bewusstseins durch das Entfernen unpassender Kapitel.',
+        'Die unmittelbare Errichtung neuer Denkmäler für vergessene Opfer.'
+      ], correct:2 },
+      { q:'Welche Überschrift passt am besten zu Absatz 3?', options:[
+        'Die staatliche Lenkung der Geschichtsschreibung im Wandel der Epochen',
+        'Warum das 19. Jahrhundert völlig frei von nationalen Mythen war',
+        'Die Entstehung der modernen digitalen Medien im späten 20. Jahrhundert',
+        'Der dauerhafte Erfolg starrer nationaler Meistererzählungen bis in die Gegenwart'
+      ], correct:0 },
+      { q:'In Absatz 4 wird über die digitale Medienlandschaft ausgesagt, dass ...', options:[
+        'sie die historische Halbwertszeit von Ereignissen durch digitale Speicherung massiv verlängert.',
+        'sie dafür sorgt, dass epochale Ereignisse niemals in Vergessenheit geraten.',
+        'sie durch die Informationsflut zu einer Verkürzung der historischen Halbwertszeit führt.',
+        'sie den Menschen hilft, historische Zusammenhänge tiefgreifender zu analysieren.'
+      ], correct:2 },
+      { q:'Welche Rolle spielen laut Absatz 5 zivilgesellschaftliche Initiativen?', options:[
+        'Sie verschärfen die staatliche Zensur historischer Archive.',
+        'Sie demokratisieren den Zugang zur Vergangenheit durch Online-Projekte und Archive.',
+        'Sie sorgen für eine perfekte Verifizierung und Vereinheitlichung aller historischen Daten.',
+        'Sie verhindern vollständig, dass digitale Daten unüberschaubar werden.'
+      ], correct:1 },
+      { q:'Welche Sorge äußern Kulturwissenschaftler laut Absatz 6?', options:[
+        'Dass zu wenig an historische Ereignisse erinnert wird.',
+        'Dass eine Inflation des Gedenkens zu einer oberflächlichen Eventkultur führt.',
+        'Dass digitale Hashtags die wissenschaftliche Geschichtsschreibung komplett ersetzen.',
+        'Dass historische Wahrheiten für immer im Verborgenen bleiben.'
+      ], correct:1 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'eine Anleitung zur perfekten Gestaltung von Gedenkstätten zu geben.',
+        'die Mechanismen, Dynamiken und Konflikte des kollektiven Erinnerns und Vergessens zu beleuchten.',
+        'zu beweisen, dass Vergessen für eine moderne Gesellschaft stets schädlich ist.',
+        'die digitale Medienlandschaft als einzige Ursache für Geschichtsverlust darzustellen.'
+      ], correct:1 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Kommentar zur Zukunft der urbanen Mobilität',
+    passageText:`Die feste Überzeugung, dass das private Auto in unseren Städten langfristig völlig obsolet wird und durch vollautomatisierte Schwarmtaxis komplett ersetzt werden kann, gilt in verkehrspolitischen Debatten mancherorts als unumstößliches Dogma. <strong>[1] Ob diese optimistische Verkehrswende-Hypothese jedoch realitätsnah ist, muss stark bezweifelt werden.</strong> Zwar schreitet die Entwicklung autonomer Fahrzeugflotten rasch voran. <strong>[2] Man muss allerdings anerkennen, dass die rechtlichen und infrastrukturellen Hürden für den Mischverkehr in historischen Altstädten gigantisch sind.</strong> Der urbane Raum ist begrenzt. Womöglich werden individuelle Mobilitätsbedürfnisse auch in Zukunft hybride Lösungen erfordern, bei denen der öffentliche Nahverkehr mit flexiblen Individualangeboten verschmilzt. Die Vision der autolosen Smart City könnte sich somit als voreiliger Schnellschuss erweisen. <strong>[3] Dass sich dieser radikale Ansatz dennoch so großer Beliebtheit erfreut, liegt vor allem daran, dass er perfekt in das moderne Sehnsuchtsbild einer emissionsfreien, lärmfreien Retortenstadt passt.</strong> In einer von Digitalisierung geprägten Euphorie werden physikalische Kapazitätsgrenzen des Straßenraums oft ausgeblendet. <strong>[4] Dank moderner Verkehrssteuerung und intelligentem Flächenmanagement werden wir jedoch hoffentlich in der Lage sein, den städtischen Raum gerechter und effizienter aufzuteilen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt ein soziologisches Wunschdenken.',
+      'Der Experte hofft auf eine gerechtere Flächenverteilung.',
+      'Der Experte prognostiziert eine technische Revolution.',
+      'Der Experte räumt eine aktuelle Hürde ein.',
+      'Der Experte stellt eine populäre Annahme in Frage.',
+      'Der Experte beschreibt die historischen Ursprünge der Autostadt.',
+      'Der Experte verteidigt die uneingeschränkte Autonutzung.',
+      'Der Experte widerspricht den Gesetzen der Physik.'
+    ],
+    correct:[4, 3, 0, 1]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
+    title:'Aufgabe 5: Das Konsumverhalten von Millennials und Generation Z',
+    passage:'Untersuchungen zum Kaufverhalten jüngerer Generationen – insbesondere der Millennials und der Generation Z – stehen im Fokus moderner marktwirtschaftlicher Analysen. Eine aktuelle europaweite Studie verglich das Konsumverhalten dieser Gruppen anhand von fünf Kernindikatoren mit dem traditioneller Käuferschichten: Markenloyalität, Nachhaltigkeitsbewusstsein, Relevanz von Online-Bewertungen, Preis-Leistungs-Verhältnis sowie Impulskaufneigung. Probanden der jüngeren Kohorten erwiesen sich in den Punkten ökologische Transparenz und digitale Recherche als wesentlich anspruchsvoller – sie gaben an, vor jedem Kauf gezielt nach Zertifikaten zu suchen, Rezensionen zu prüfen und Marken bei ethischen Verfehlungen sofort zu boykottieren. Ältere Verbrauchergruppen erzielten dagegen höhere Werte bei klassischer Markenloyalität und zeigten sich weniger geneigt, etablierte Anbieter zugunsten unbekannter Start-ups zu verlassen. Sie vertrauen eher auf langjährige Gewohnheiten und persönliche Empfehlungen aus ihrem unmittelbaren sozialen Umfeld. Hinsichtlich der generellen Zahlungsbereitschaft für umweltfreundliche Produkte zeigten sich jedoch kaum statistisch signifikante Unterschiede zwischen den Altersgruppen, sofern die finanzielle Belastung einen bestimmten Rahmen nicht überschritt.',
+    columns:['Jüngere Generationen (Millennials/Gen Z)','Ältere Verbrauchergruppen','beide','passt nicht'],
+    items:[
+      {text:'Diese Gruppe wechselt Marken bei ethischen Verfehlungen sofort.', correct:0},
+      {text:'Diese Personen zeigen eine ausgeprägte Treue gegenüber etablierten Anbietern.', correct:1},
+      {text:'Diese Verbraucher sind bereit, für zertifizierte Bio-Produkte mehr zu bezahlen.', correct:2},
+      {text:'Diese Käuferschicht verlässt sich primär auf persönliche Empfehlungen aus dem Bekanntenkreis.', correct:1},
+      {text:'Diese Personen boykottieren Unternehmen aktiv wegen mangelnder Transparenz.', correct:0},
+      {text:'Diese Gruppe kauft ausschließlich im stationären Handel vor Ort ein.', correct:3},
+      {text:'Diese Verbraucher prüfen vor dem Erwerb intensiv Online-Bewertungen.', correct:0}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Vertikaler Landbau (Vertical Farming)',
+    passage:'Der urbane oder vertikale Landbau gilt als zukunftsweisender Ansatz, um die Nahrungsmittelversorgung in stark verdichteten Ballungsräumen sicherzustellen. Durch den anbaumäßig gestapelten Anbau in geschlossenen Gebäuden unter kontrollierten Licht- und Klimabedingungen lassen sich Erträge pro Quadratmeter massiv steigern. Ein weiterer großer Vorzug ist der extrem sparsame Umgang mit Wasser, da moderne Hydrokultursysteme den Großteil der Flüssigkeit im geschlossenen Kreislauf recyceln, wodurch der Wasserverbrauch im Vergleich zur Freilandwirtschaft um bis zu 95 Prozent sinkt. Zudem entfallen lange Transportwege, da die Produktion direkt in den Konsumzentren stattfindet. Dennoch ist das Konzept mit gravierenden Nachteilen verbunden: Der energetische Aufwand für künstliche LED-Beleuchtung und hochkomplexe Klimatisierung ist enorm und treibt die Betriebskosten in die Höhe. Darüber hinaus ist das Spektrum der sinnvoll anbaubaren Kulturpflanzen derzeit noch stark auf schnell wachsende Blattgemüse- und Kräuterarten beschränkt, während der großflächige Anbau von Grundnahrungsmitteln wie Getreide oder Kartoffeln wirtschaftlich völlig unrentabel bleibt.',
+    aussagen:[
+      { key:'a', text:'[a] Drastische Einsparung von wertvollem Wasser' },
+      { key:'b', text:'[b] Geringer Energiebedarf dank natürlicher Sonneneinstrahlung' },
+      { key:'c', text:'[c] Lokale Produktion und dadurch entfallende Transportwege' },
+      { key:'d', text:'[d] Wirtschaftlich rentabler Anbau von Getreide und Kartoffeln' },
+      { key:'e', text:'[e] Enorme Stromkosten durch künstliche Beleuchtung' },
+      { key:'f', text:'[f] Vollständiger Verzicht auf jegliche Pflanzennährstoffe' },
+      { key:'g', text:'[g] Stark eingeschränkte Pflanzenauswahl im Vergleich zum Freiland' },
+      { key:'h', text:'[h] Garantierte Senkung der Lebensmittelpreise für Endverbraucher' }
+    ],
+    correctMap: { v1: 'a', v2: 'c', n3: 'e', n4: 'g' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Aufgabe 7: Die Renaissance der Kernfusion',
+    passage:'Die Kernfusion, bei der atomare Leichtkerne unter extremen Temperaturen verschmolzen werden, gilt seit Jahrzehnten als der heilige Gral der Energietechnik. Im Gegensatz zur Kernspaltung entsteht bei diesem Prozess kein langlebiger radioaktiver Abfall, und es besteht keine Gefahr einer unkontrollierten Kettenreaktion. Jüngste experimentelle Durchbrüche an internationalen Forschungseinrichtungen haben gezeigt, dass es erstmals gelungen ist, in einem kontrollierten Plasmareaktor kurzzeitig mehr Fusionsenergie freizusetzen, als für die Aufheizung des Plasmas aufgewendet werden musste – ein historischer Meilenstein auf dem Weg zur Netto-Energiegewinnung. Dennoch warnen Physiker vor übertriebenem Optimismus: Bis kommerzielle Fusionskraftwerke stablien Strom ins Netz einspeisen, werden voraussichtlich noch mehrere Jahrzehnte vergehen, da gigantische materialwissenschaftliche und thermische Herausforderungen ungelöst sind.',
+    graphicData:[{year:'2010',val:10},{year:'2015',val:25},{year:'2020',val:50},{year:'2023',val:100}],
+    graphicCaption:'Grafik: Entwicklung der Netto-Energiegewinnung bei Fusionsexperimenten (symbolisch)',
+    sentences:[
+      {text:'Bei der Kernfusion werden Atomkerne verschmolzen.', wrong:false},
+      {text:'Im Vergleich zur Kernspaltung entsteht hierbei langlebiger radioaktiver Atommüll in großen Mengen.', wrong:true},
+      {text:'Kürzlich gelang es Forschern erstmals, mehr Fusionsenergie zu erzeugen, als für das Aufheizen investiert wurde.', wrong:false},
+      {text:'Kommerzielle Fusionskraftwerke stehen nach übereinstimmender Expertenmeinung bereits im nächsten Jahr flächendeckend zur Verfügung.', wrong:true},
+      {text:'Es gibt weiterhin erhebliche materialwissenschaftliche und thermische Hürden zu bewältigen.', wrong:false},
+      {text:'Der Fusionsprozess birgt kein Risiko einer unkontrollierten nuklearen Kettenreaktion.', wrong:false},
+      {text:'Die physikalischen Prinzipien der Kernfusion sind wissenschaftlich noch völlig unerforscht.', wrong:true},
+      {text:'Die Technologie gilt in Fachkreisen als potenzieller Meilenstein für eine saubere Energieversorgung der Zukunft.', wrong:false}
+    ]
+  }
+];
+
 const TESTS = [
-  {id:1, title:'Modelltest C1 (Akademisch)', teile: typeof MT1!=='undefined' ? MT1 : null},
-  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: typeof MT2!=='undefined' ? MT2 : null},
-  {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: typeof MT3!=='undefined' ? MT3 : null},
-  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: typeof MT4!=='undefined' ? MT4 : null}
-].filter(t=>t.teile);
+  {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
+  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
+  {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
+  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4}
+];
 
 let currentTestIdx = 0;
 let current = 0;
