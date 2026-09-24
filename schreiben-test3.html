@@ -14,6 +14,7 @@ header.top b{font-weight:400}
 .bar{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--teal);display:flex;align-items:center;gap:14px;padding:10px 28px;flex-wrap:wrap}
 .timer{margin-left:auto;font-variant-numeric:tabular-nums;font-size:1.7rem;font-weight:600;color:var(--teal-d);min-width:84px;text-align:right}
 main{padding:24px 28px 40px}
+.task-block{margin-bottom:40px;border-bottom:3px solid var(--teal);padding-bottom:30px}
 .task{background:var(--mint);padding:16px 20px;margin-bottom:22px;font-size:.95rem}
 .task h2{margin:0 0 8px;font-size:1rem}
 .task p{margin:6px 0}
@@ -21,7 +22,7 @@ main{padding:24px 28px 40px}
 .source p{margin:0 0 10px;font-size:.93rem;text-align:justify;hyphens:auto}
 figure{margin:18px auto;border:1px solid #444;max-width:560px}
 figure figcaption{background:var(--teal-d);color:#fff;font-size:.72rem;font-weight:600;padding:4px 10px}
-textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden;min-height:1152px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
+textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden;min-height:400px;padding:0 4px;font:1.05rem/32px "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--line) 31px,var(--line) 32px)}
 .status{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-top:2px solid var(--teal);padding-top:10px;margin-top:20px;font-size:.92rem}
 .tools button{border:1px solid var(--teal);background:#fff;color:var(--teal-d);padding:5px 12px;cursor:pointer;font:inherit;margin-left:6px}
 .back-link{display:inline-block;margin-top:20px;color:var(--teal-d);text-decoration:none;font-weight:600}
@@ -35,6 +36,7 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden
     <div class="timer" id="timer">60:00</div>
   </div>
   <main>
+    <!-- Aufgabe 1 -->
     <section class="task-block">
       <div class="task">
         <h2>Aufgabe 1/2</h2>
@@ -42,8 +44,16 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden
         <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für den Einzelnen und die Gesellschaft haben kann, wenn die Mehrheit der Berufstätigen der Work-Life-Balance Vorrang vor der Karriere gibt.</strong></p>
         <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
       </div>
+      <div class="writing">
+        <textarea id="ta1" spellcheck="false" placeholder="Schreiben Sie hier für Aufgabe 1 …" aria-label="Schreibfeld Aufgabe 1"></textarea>
+        <div class="status">
+          <div class="count"><b id="wc1">0</b> Wörter</div>
+          <div class="tools"><button onclick="copyText('ta1')">Text kopieren</button></div>
+        </div>
+      </div>
     </section>
 
+    <!-- Aufgabe 2 -->
     <section class="task-block">
       <div class="task">
         <h2>Aufgabe 2/2</h2>
@@ -59,35 +69,41 @@ textarea{display:block;width:100%;border:0;outline:0;resize:none;overflow:hidden
           <svg viewBox="0 0 600 230" width="100%" role="img" aria-label="Einfluss von Optimismus auf die Stressbewältigung" font-family="Segoe UI,Arial,sans-serif" font-size="12"><rect x="15" y="85" width="190" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="110.0" y="111.0" text-anchor="middle" fill="#1f2a2c">Optimistische</text><text x="110.0" y="127.0" text-anchor="middle" fill="#1f2a2c">Grundhaltung</text><rect x="360" y="15" width="225" height="70" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="472.5" y="46.0" text-anchor="middle" fill="#1f2a2c">Schnellere Cortisol-Normalisierung</text><text x="472.5" y="62.0" text-anchor="middle" fill="#1f2a2c">nach Krisensituationen</text><rect x="360" y="145" width="225" height="70" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="472.5" y="176.0" text-anchor="middle" fill="#1f2a2c">Gesteigerte Problemlösungs-</text><text x="472.5" y="192.0" text-anchor="middle" fill="#1f2a2c">kompetenz im Beruf</text><g stroke="#2d6f78" stroke-width="2" fill="none"><path d="M207 105L356 55"/><path d="M207 125L356 175"/></g><g fill="#2d6f78"><path d="M358 54l-9 1 4 7z"/><path d="M358 176l-9-1 4-7z"/></g><text x="255" y="70" text-anchor="middle" fill="#2d6f78" font-weight="600">Korrelation</text><text x="255" y="192" text-anchor="middle" fill="#2d6f78" font-weight="600">Korrelation</text></svg>
         </figure>
       </div>
+      <div class="writing" style="margin-top:20px;">
+        <textarea id="ta2" spellcheck="false" placeholder="Schreiben Sie hier für Aufgabe 2 …" aria-label="Schreibfeld Aufgabe 2"></textarea>
+        <div class="status">
+          <div class="count"><b id="wc2">0</b> Wörter</div>
+          <div class="tools"><button onclick="copyText('ta2')">Text kopieren</button></div>
+        </div>
+      </div>
     </section>
 
-    <div class="writing">
-      <textarea id="ta" spellcheck="false" placeholder="Schreiben Sie hier …" aria-label="Schreibfeld"></textarea>
-      <div class="status">
-        <div class="count"><b id="wc">0</b> Wörter</div>
-        <div class="tools"><button id="copy">Text kopieren</button></div>
-      </div>
-    </div>
     <a href="schreiben.html" class="back-link">← Zurück zur Übersicht</a>
   </main>
 </div>
 <script>
 let time = 60 * 60;
 const tm = document.getElementById('timer');
-const ta = document.getElementById('ta');
 setInterval(() => {
   let m = Math.floor(time / 60), s = time % 60;
   tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
   if(time > 0) time--;
 }, 1000);
-ta.addEventListener('input', () => {
-  let words = ta.value.trim().match(/\S+/g);
-  document.getElementById('wc').textContent = words ? words.length : 0;
+
+['ta1', 'ta2'].forEach(id => {
+  let ta = document.getElementById(id);
+  let wc = document.getElementById(id.replace('ta', 'wc'));
+  ta.addEventListener('input', () => {
+    let words = ta.value.trim().match(/\S+/g);
+    wc.textContent = words ? words.length : 0;
+  });
 });
-document.getElementById('copy').onclick = () => {
+
+function copyText(id) {
+  let ta = document.getElementById(id);
   navigator.clipboard.writeText(ta.value);
   alert("Text kopiert!");
-};
+}
 </script>
 </body>
 </html>
