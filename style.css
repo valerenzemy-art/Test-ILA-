@@ -1,7 +1,7 @@
 :root{
   --teal-dark:#0f3d47; --teal:#155a68; --teal-light:#1d7285;
   --bg-page:#f4f8f9; --bg-instructions:#e7f1f3; --card-bg:#ffffff;
-  --border:#cfe0e4; --text:#1e2d31; --text-soft:#516268;
+  --border:#cfe0e4; --text:#eaf1f2; --text-soft:#9fb2b7;
   --correct:#1c7a4a; --wrong:#b3262c;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
