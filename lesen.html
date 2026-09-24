@@ -197,7 +197,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            font-size: 0.95srem;
+            font-size: 0.95rem;
             color: var(--accent);
             background: var(--bg-page);
         }
@@ -565,35 +565,35 @@ const TEMPLATE = [
 const MT1 = [
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
-    title:'Schlafmangel und kognitive Leistungsfähigkeit',
+    title:'Festigkeitslehre und Elastizität',
     segments:[
-      'Zahlreiche akademische Studien belegen, dass chronischer Schlafmangel die kognitive Leistungsfähigkeit erheblich ',
-      ', selbst wenn Betroffene subjektiv das Gefühl haben, sich an den reduzierten Schlaf gewöhnt zu haben. Besonders betroffen ist dabei das Arbeitsgedächtnis, das für die kurzfristige Speicherung und Verarbeitung komplexer Informationen ',
-      ' ist. Bereits eine einzige durchwachte Nacht kann die Reaktionsgeschwindigkeit messbar ',
-      ', vergleichbar mit den Effekten eines erhöhten Alkoholspiegels. Langfristig wird chronischer Schlafmangel zudem mit einem erhöhten Risiko für verschiedene Herz-Kreislauf-Erkrankungen in ',
-      ' gebracht. Schlafforscherinnen und Schlafforscher empfehlen daher, feste Schlafenszeiten ',
-      ', um dem Körper einen stabilen Rhythmus zu ermöglichen.'
+      'In der technischen Mechanik beschreibt das Hookesche Gesetz den Zusammenhang zwischen mechanischer Spannung (σ) und Dehnung (ε) im elastischen Bereich. Solange die Proportionalitätsgrenze nicht überschritten wird, verhalten sich Kraft und Längenänderung ',
+      ', wobei der Elastizitätsmodul (E) als konstanter Materialparameter dient. Bei mehrachsigen Beanspruchungen wird dieser lineare Zusammenhang durch den ',
+      'der Elastizitätsmatrix erweitert. Wirkt eine Querkraft auf einen Balken, entsteht zusätzlich zur Normalspannung eine Schubspannung (τ), die zu einer ',
+      'der Querschnittsfläche führt. Um die maximale Tragfähigkeit von Bauteilen aus Stahl oder Beton zu gewährleisten, müssen Ingenieure stets die zulässigen ',
+      'einhalten und Ermüdungserscheinungen durch zyklische Lastwechsel ',
+      '.'
     ],
     gaps:[
-      {options:['beeinträchtigen','fördern','stabilisieren','ignorieren'], correct:0},
-      {options:['zuständig','begeistert','abhängig','überzeugt'], correct:0},
-      {options:['verringern','erhöhen','stabilisieren','ausgleichen'], correct:0},
-      {options:['Verbindung','Kontakt','Rücksicht','Hinsicht'], correct:0},
-      {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
+      {options:['linear','exponentiell','logarithmisch','quadratisch'], correct:0},
+      {options:['Tensor','Skalar','Vektor','Wert'], correct:0},
+      {options:['Verformung','Verstärkung','Versteifung','Verteilung'], correct:0},
+      {options:['Grenzwerte','Mittelwerte','Zahlen','Faktoren'], correct:0},
+      {options:['vermeiden','verursachen','verstärken','verbinden'], correct:0}
     ]
   },
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
-    title:'Die Entdeckung des Penicillins',
-    correctOrder:[0,1,2,3,4],
+    title:'Der Prozess des Stranggießens',
+    correctOrder:[1,3,0,4,2],
     items:[
-      'Der schottische Bakteriologe Alexander Fleming bemerkte 1928 in seinem Labor eher zufällig, dass sich auf einer vergessenen Bakterienkultur ein Schimmelpilz gebildet hatte.',
-      'Er stellte fest, dass rund um den Schimmelpilz keine Bakterien mehr wuchsen, und vermutete, dass der Pilz eine bakterienabtötende Substanz absondern müsse.',
-      'Fleming veröffentlichte seine Beobachtungen, doch zunächst zeigte die wissenschaftliche Gemeinschaft nur wenig Interesse an einer praktischen Anwendung der Entdeckung.',
-      'Erst rund ein Jahrzehnt später gelang es einem Forschungsteam um Howard Florey und Ernst Chain, den Wirkstoff Penicillin in ausreichender Reinheit und Menge für klinische Tests herzustellen.',
-      'Während des Zweiten Weltkriegs wurde Penicillin schließlich in großem Maßstab produziert und rettete Schätzungen zufolge Hunderttausenden verwundeter Soldaten das Leben.'
+      'Durch den direkten Kontakt mit der intensiv gekühlten Kupferkokille erstarrt die äußere Stahlschale augenblicklich.',
+      'Am Anfang des Verfahrens wird flüssiger Stahl aus der Pfanne in den Zwischenbehälter (Tundish) geleitet.',
+      'Schließlich wird der kontinuierliche Stahlstrang durch Rollenführungen transportiert und mittels Brennschneidmaschinen auf Fixlängen geteilt.',
+      'Von dort aus fließt die Schmelze dosiert in eine wassergekühlte Oszillationskokille, die ein Ankleben des Metalls verhindert.',
+      'Unterhalb der Kokille stützen Rollen den Strang, während er durch Sekundärkühlung mit Wasser vollständig durcherstarrt.'
     ],
-    shuffledStart:[2,4,0,3,1]
+    shuffledStart:[0,1,2,3,4]
   },
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
@@ -718,7 +718,7 @@ const MT1 = [
 ];
 
 const TESTS = [
-  {id:1, title:'Modelltest 1 (Akademisch)', teile: MT1}
+  {id:1, title:'Modelltest 1 (Akademisch & Technisch)', teile: MT1}
 ];
 
 let currentTestIdx = 0;
