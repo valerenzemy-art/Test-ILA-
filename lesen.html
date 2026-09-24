@@ -683,7 +683,18 @@ function startTimer(seconds){
   clearTimer(); remaining = seconds; updateTimerDisplay();
   timerInterval = setInterval(()=>{
     remaining--;
-    if(remaining <= 0){ remaining = 0; updateTimerDisplay(); clearTimer(); }
+    if(remaining <= 0){ 
+    remaining = 0; 
+    updateTimerDisplay(); 
+    clearTimer(); 
+    if(typeof isLast !== 'undefined' && isLast){ 
+        showResults(); 
+    } else { 
+        current++; 
+        renderTask(); 
+    }
+}
+
     else { updateTimerDisplay(); }
   },1000);
 }
