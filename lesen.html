@@ -1,555 +1,179 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TestDaF C1 — Modelltest (Leseverstehen)</title>
-    <!-- Importation de Google Fonts et FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-page: #0a0a0a;
-            --card-bg: #141414;
-            --text: #ffffff;
-            --text-soft: #9ca3af;
-            --accent: #38bdf8;
-            --border: #1f2937;
-            --correct: #22c55e;
-            --wrong: #ef4444;
-            --bg-instructions: #111827;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-page);
-            color: var(--text);
-            padding-bottom: 60px;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Barre supérieure */
-        .top-bar {
-            background-color: #050505;
-            color: var(--accent);
-            text-align: center;
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            border-bottom: 1px solid var(--border);
-            letter-spacing: 0.5px;
-        }
-
-        /* En-tête / Navigation */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background-color: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: var(--text);
-            text-decoration: none;
-        }
-
-        .logo span {
-            color: var(--accent);
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-        }
-
-        .back-home {
-            color: var(--text-soft);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-
-        .back-home:hover {
-            color: var(--accent);
-        }
-
-        /* Conteneur principal */
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-            flex: 1;
-            width: 100%;
-        }
-
-        /* Écran de sélection des tests */
-        .select-screen h2 {
-            font-size: 2.1rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .select-screen p {
-            text-align: center;
-            color: var(--text-soft);
-            margin-bottom: 40px;
-            font-size: 0.95rem;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-        }
-
-        .sel-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sel-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            background: linear-gradient(145deg, #141414, #111827);
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
-        }
-
-        .sel-card .sc-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 8px;
-        }
-
-        .sel-card .sc-desc {
-            font-size: 0.85rem;
-            color: var(--text-soft);
-        }
-
-        /* Barre de tâche active (Chrono & Instructions) */
-        .taskbar {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 20px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .task-count {
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
-
-        .task-count .n {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .task-count .of {
-            font-size: 0.9rem;
-            color: var(--text-soft);
-        }
-
-        .timer-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-left: auto;
-        }
-
-        .timer-circle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--accent);
-            background: var(--bg-page);
-        }
-
-        .timer-circle.warn {
-            border-color: var(--wrong);
-            color: var(--wrong);
-        }
-
-        .timer-caption {
-            font-size: 0.7rem;
-            color: var(--text-soft);
-            margin-top: 4px;
-        }
-
-        .instructions {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .instructions .title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .instructions p {
-            font-size: 0.85rem;
-            color: var(--text-soft);
-            line-height: 1.5;
-        }
-
-        /* Corps des exercices */
-        .task-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-
-        .passage {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 25px;
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            color: #d1d5db;
-        }
-
-        .passage p {
-            margin-bottom: 15px;
-        }
-
-        .passage p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Éléments interactifs */
-        select.gapselect {
-            border: none;
-            border-bottom: 2px solid var(--accent);
-            background: var(--card-bg);
-            font: inherit;
-            font-weight: 600;
-            color: var(--accent);
-            padding: 4px 8px;
-            border-radius: 4px;
-            outline: none;
-            margin: 0 4px;
-        }
-
-        select.gapselect.answered {
-            background: rgba(34, 197, 94, 0.1);
-            border-color: var(--correct);
-            color: #4ade80;
-        }
-
-        .order-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .order-item {
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 15px;
-            background: var(--card-bg);
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .order-item .pos {
-            font-weight: 700;
-            color: #000;
-            background: var(--accent);
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            flex-shrink: 0;
-        }
-
-        .order-item .txt {
-            flex: 1;
-            font-size: 0.9rem;
-        }
-
-        .order-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .order-controls button {
-            border: 1px solid var(--border);
-            background: var(--bg-page);
-            color: var(--text);
-            border-radius: 4px;
-            width: 28px;
-            height: 24px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .order-controls button:hover:not(:disabled) {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .order-controls button:disabled {
-            opacity: 0.3;
-            cursor: default;
-        }
-
-        .qblock {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .qtext {
-            font-weight: 600;
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-        }
-
-        .opt {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-            padding: 8px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            color: var(--text-soft);
-            transition: background 0.2s;
-        }
-
-        .opt:hover {
-            background: rgba(56, 189, 248, 0.05);
-            color: var(--text);
-        }
-
-        .opt input {
-            margin-top: 3px;
-            accent-color: var(--accent);
-        }
-
-        .matchrow {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 15px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-        }
-
-        .matchrow .ptxt {
-            flex: 1;
-            min-width: 220px;
-            font-size: 0.9rem;
-        }
-
-        .matchrow select {
-            font: inherit;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            background: var(--bg-page);
-            color: var(--text);
-            min-width: 240px;
-            outline: none;
-        }
-
-        table.tzt {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        table.tzt th, table.tzt td {
-            border: 1px solid var(--border);
-            padding: 12px 10px;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-
-        table.tzt th {
-            background: #1e293b;
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        table.tzt td.label {
-            text-align: left;
-            font-weight: 500;
-        }
-
-        table.tzt input[type=radio] {
-            accent-color: var(--accent);
-            width: 18px;
-            height: 18px;
-        }
-
-        .summary-item {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            padding: 12px 15px;
-            border: 1px solid var(--border);
-            background: var(--card-bg);
-            border-radius: 10px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .summary-item:hover {
-            border-color: var(--accent);
-        }
-
-        .summary-item input {
-            margin-top: 3px;
-            accent-color: var(--accent);
-        }
-
-        /* Boutons de navigation bas de page */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn {
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn.next {
-            background: var(--accent);
-            color: #050505;
-        }
-
-        .btn.next:hover {
-            opacity: 0.9;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-        }
-
-        .btn.ghost {
-            background: transparent;
-            color: var(--text-soft);
-            border: 1px solid var(--border);
-        }
-
-        .btn.ghost:hover {
-            border-color: var(--text);
-            color: var(--text);
-        }
-
-        .score-hero {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-        }
-
-        .score-hero .pct {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        /* Pied de page */
-        footer {
-            background-color: #050505;
-            padding: 25px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            color: var(--text-soft);
-            font-size: 0.85rem;
-            margin-top: auto;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TestDaF C1 — Modelltests Lesen (Digital)</title>
+<style>
+  :root{
+    --teal-dark:#0f3d47; --teal:#155a68; --teal-light:#1d7285;
+    --bg-page:#f4f8f9; --bg-instructions:#e7f1f3; --card-bg:#ffffff;
+    --border:#cfe0e4; --text:#1e2d31; --text-soft:#516268;
+    --correct:#1c7a4a; --wrong:#b3262c;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark) {
+      --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
+      --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg-page:#0e1416; --card-bg:#151d20; --border:#2b3a3f;
+    --text:#eaf1f2; --text-soft:#9fb2b7; --bg-instructions:#132a2f;
+  }
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg-page);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;}
+  .app{max-width:920px;margin:0 auto;min-height:100vh;background:var(--card-bg);box-shadow:0 0 24px rgba(0,0,0,.06);}
+  header.topbar{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;padding:18px 20px 14px;padding-top:calc(18px + env(safe-area-inset-top,0px));display:flex;justify-content:space-between;align-items:flex-start;}
+  header.topbar .brand{font-size:1.5rem;font-weight:700;letter-spacing:.5px;}
+  header.topbar .subbrand{font-size:.72rem;opacity:.8;margin-top:2px;}
+  header.topbar .tag{font-size:.8rem;background:rgba(255,255,255,.15);padding:4px 10px;border-radius:20px;white-space:nowrap;}
+  .select-screen{padding:36px 20px 60px;text-align:center;}
+  .select-screen h2{color:var(--teal-dark);margin-bottom:6px;}
+  .select-screen p{color:var(--text-soft);font-size:.92rem;max-width:560px;margin:0 auto 26px;}
+  .cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+  .sel-card{width:240px;border:1px solid var(--border);border-radius:14px;padding:20px 16px;background:var(--bg-instructions);cursor:pointer;text-align:left;}
+  .sel-card:hover{border-color:var(--teal);}
+  .sel-card .sc-title{font-size:1.05rem;font-weight:700;color:var(--teal-dark);margin-bottom:6px;}
+  .sel-card .sc-desc{font-size:.8rem;color:var(--text-soft);}
+  .select-note{font-size:.78rem;color:var(--text-soft);max-width:560px;margin:22px auto 0;}
+  .taskbar{background:var(--bg-instructions);border-bottom:1px solid var(--border);padding:16px 20px 18px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+  .task-count{display:flex;align-items:baseline;gap:6px;min-width:70px;}
+  .task-count .n{font-size:2.1rem;font-weight:800;color:var(--teal-dark);line-height:1;}
+  .task-count .of{font-size:1rem;color:var(--text-soft);}
+  .task-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--text-soft);margin-bottom:2px;}
+  .timer-wrap{display:flex;flex-direction:column;align-items:center;}
+  .timer-circle{width:74px;height:74px;border-radius:50%;border:3px solid var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.05rem;color:var(--teal-dark);background:var(--card-bg);flex-shrink:0;}
+  .timer-circle.warn{border-color:var(--wrong);color:var(--wrong);}
+  .timer-caption{font-size:.65rem;color:var(--text-soft);margin-top:4px;}
+  .instructions{flex:1;min-width:220px;}
+  .instructions .title{font-weight:700;margin-bottom:4px;font-size:1rem;}
+  .instructions p{margin:2px 0;font-size:.9rem;color:var(--text-soft);}
+  .instructions .time-hint{font-weight:600;color:var(--teal-dark);}
+  main{padding:22px 20px 100px;}
+  h2.task-title{margin-top:0;font-size:1.2rem;color:var(--teal-dark);}
+  .passage{font-size:0.95rem;text-align:justify;line-height:1.65;}
+  .passage p{margin:0 0 16px;}
+  select.gapselect{border:none;border-bottom:2px solid var(--teal);background:var(--bg-instructions);font:inherit;font-weight:600;color:var(--teal-dark);padding:3px 6px;border-radius:4px 4px 0 0;min-width:130px;}
+  select.gapselect.answered{background:#dff0e4;border-color:var(--correct);}
+  .order-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .order-item{border:1px solid var(--border);border-radius:8px;padding:12px 14px;background:var(--bg-instructions);display:flex;gap:10px;align-items:flex-start;}
+  .order-item .pos{font-weight:800;color:#fff;background:var(--teal);border-radius:50%;width:26px;height:26px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+  .order-item .txt{flex:1;font-size:.92rem;}
+  .order-controls{display:flex;flex-direction:column;gap:4px;}
+  .order-controls button{border:1px solid var(--border);background:var(--card-bg);color:var(--teal-dark);border-radius:5px;width:30px;height:26px;font-size:.85rem;cursor:pointer;}
+  .order-controls button:disabled{opacity:.3;cursor:default;}
+  .qblock{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--border);}
+  .qblock:last-child{border-bottom:none;}
+  .qtext{font-weight:600;margin-bottom:8px;font-size:0.95rem;}
+  .opt{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:6px;cursor:pointer;font-size:.92rem;}
+  .opt:hover{background:var(--bg-instructions);}
+  .opt input{margin-top:3px;}
+  .matchrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px;padding:10px;background:var(--bg-instructions);border-radius:8px;}
+  .matchrow .ptxt{flex:1;min-width:200px;font-size:.9rem;}
+  .matchrow select{font:inherit;padding:6px 8px;border-radius:6px;border:1px solid var(--border);min-width:220px;}
+  table.tzt{width:100%;border-collapse:collapse;margin-top:8px;font-size:.83rem;}
+  table.tzt th, table.tzt td{border:1px solid var(--border);padding:8px 6px;text-align:center;}
+  table.tzt th{background:var(--teal);color:#fff;font-weight:600;font-size:.76rem;}
+  table.tzt td.label{text-align:left;font-weight:500;}
+  table.tzt input[type=radio]{width:16px;height:16px;}
+  .graphic-box{background:var(--bg-instructions);border:1px solid var(--border);border-radius:10px;padding:14px;margin:16px 0;}
+  .graphic-box .cap{font-size:.76rem;color:var(--text-soft);margin-top:6px;text-align:center;}
+  .summary-item{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:6px;font-size:.9rem;}
+  .summary-item:hover{background:var(--bg-instructions);}
+  .summary-item input{margin-top:4px;}
+  .count-hint{font-size:.82rem;color:var(--text-soft);margin:10px 0;}
+  footer.navbar{position:sticky;bottom:0;background:var(--card-bg);border-top:1px solid var(--border);padding:12px 20px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  footer .foot-note{font-size:.68rem;color:var(--text-soft);}
+  .btn{border:none;border-radius:6px;padding:11px 18px;font-size:.88rem;font-weight:700;cursor:pointer;color:#fff;background:var(--teal-dark);}
+  .btn.next{background:var(--teal);}
+  .btn:hover{filter:brightness(1.08);}
+  .btn.ghost{background:transparent;color:var(--teal-dark);border:1px solid var(--teal);}
+  .results h2{color:var(--teal-dark);}
+  .score-hero{background:linear-gradient(135deg,var(--teal-dark),var(--teal));color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:22px;}
+  .score-hero .pct{font-size:2.6rem;font-weight:800;}
+  .score-hero .tdn{font-size:1rem;opacity:.9;margin-top:4px;}
+  .result-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.9rem;}
+  .result-row .ok{color:var(--correct);font-weight:700;}
+  .result-row .no{color:var(--wrong);font-weight:700;}
+  .keylist{font-size:.82rem;color:var(--text-soft);margin-top:4px;}
+  .a6-container { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+  .a6-statements { background: var(--bg-instructions); padding: 14px; border-radius: 8px; border: 1px solid var(--border); }
+  .a6-statements-title { font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
+  .a6-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size:0.88rem; }
+  table.a6-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  table.a6-table th, table.a6-table td { border: 1px solid var(--border); padding: 10px; text-align: left; }
+  table.a6-table th { background: var(--teal); color: #fff; width: 50%; }
+  table.a6-table select { width: 100%; padding: 6px; border-radius: 4px; border: 1px solid var(--border); font: inherit; }
+
+  @media (max-width:480px){
+    header.topbar{padding:14px 14px 12px;padding-top:calc(14px + env(safe-area-inset-top,0px));}
+    .taskbar{padding:14px 14px;gap:12px;}
+    main{padding:18px 14px 90px;}
+    footer.navbar{padding:10px 14px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));}
+    .timer-circle{width:62px;height:62px;font-size:.92rem;}
+    .cards{flex-direction:column;align-items:center;}
+    table.tzt{font-size:.7rem;}
+    .a6-list { grid-template-columns: 1fr; }
+  }
+
+  /* ===== Design-Update : lisibilité + cartes numérotées ===== */
+  :root{--title:#0f3d47;}
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){--title:#7dd3fc;}
+  }
+  :root[data-theme="dark"]{--title:#7dd3fc;}
+  .select-screen h2,.sel-card .sc-title,h2.task-title,
+  .task-count .n,.timer-circle,.instructions .time-hint,
+  .results h2,.btn.ghost,select.gapselect,
+  .order-controls button{color:var(--title);}
+  .app h3{color:var(--title)!important;}
+  select.gapselect.answered{color:#0f3d47;}
+  .select-screen{padding:44px 20px 70px;}
+  .select-screen h2{font-size:clamp(1.5rem,5.5vw,2.1rem);line-height:1.25;letter-spacing:-.3px;margin:0 0 12px;}
+  .select-screen p{line-height:1.7;}
+  .cards{counter-reset:t;flex-direction:column;align-items:center;gap:14px;}
+  .sel-card{position:relative;width:100%;max-width:440px;padding:20px 52px 20px 74px;border-radius:18px;transition:transform .2s,border-color .2s,box-shadow .2s;}
+  .sel-card::before{counter-increment:t;content:counter(t);position:absolute;left:18px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--teal-light));color:#fff;font-weight:800;font-size:1.1rem;display:flex;align-items:center;justify-content:center;}
+  .sel-card::after{content:"›";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:1.9rem;color:var(--title);opacity:.6;}
+  .sel-card:hover,.sel-card:active{transform:translateY(-3px);border-color:var(--teal-light);box-shadow:0 10px 24px rgba(0,0,0,.2);}
+
+  /* ===== Fond flyer scientifique ===== */
+  body{background:#050b12;}
+  .app{position:relative;z-index:1;background:transparent;box-shadow:none;}
+  .app::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(4,10,18,.30),rgba(4,10,18,.10) 45%,rgba(4,10,18,.35)),
+      url("fond/fond-flyer.jpg") center top / cover no-repeat;
+    background-color:#050b12;
+  }
+  main{background:var(--card-bg);background:color-mix(in srgb,var(--card-bg) 94%,transparent);}
+  main:has(.select-screen){background:transparent;}
+  .select-screen h2{color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.75);}
+  .select-screen p,.select-note{color:#e3eef2;text-shadow:0 1px 8px rgba(0,0,0,.75);}
+  .sel-card{background:rgba(6,18,28,.72);border-color:rgba(125,211,252,.4);}
+  .sel-card .sc-title{color:#7dd3fc;}
+  .sel-card .sc-desc{color:#dbe9ee;}
+</style>
 </head>
 <body>
-
-    <!-- Barre supérieure -->
-    <div class="top-bar">
-        <span><i class="fa-solid fa-atom"></i> Module Lesen — Compréhension et Analyse Scientifique C1</span>
+<div class="app">
+  <header class="topbar">
+    <div>
+      <div class="brand">LESEN C1</div>
+      <div class="subbrand">Digitaler TestDaF · Niveau C1 Niveauanforderung</div>
     </div>
-
-    <!-- En-tête -->
-    <header>
-        <a href="#" class="logo" onclick="showTestSelect(); return false;">TESTDAF <span>C1</span></a>
-        <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Retour à l'accueil</a>
-    </header>
-
-    <div class="container" id="appContainer">
-        <!-- Contenu dynamique injecté ici -->
-    </div>
-
-    <footer>
-        <p>&copy; 2026 TestDaF C1 Vorbereitung. Wissenschaft, Struktur und Exzellenz.</p>
-    </footer>
+    <div class="tag">Niveau C1</div>
+  </header>
+  <div class="taskbar" id="taskbar"></div>
+  <main id="main"></main>
+  <footer class="navbar" id="navbar"></footer>
+</div>
 
 <script>
 const TEMPLATE = [
@@ -561,165 +185,20 @@ const TEMPLATE = [
   {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
   {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
 ];
+</script>
+<!-- Les Modelltests : un fichier par test. Un fichier absent = test simplement non affiché. -->
+<script src="tests/mt1.js"></script>
+<script src="tests/mt2.js"></script>
+<script src="tests/mt3.js"></script>
+<script src="tests/mt4.js"></script>
 
-const MT1 = [
-  { ...TEMPLATE[0],
-    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
-    title:'Festigkeitslehre und Elastizität',
-    segments:[
-      'In der technischen Mechanik beschreibt das Hookesche Gesetz den Zusammenhang zwischen mechanischer Spannung (σ) und Dehnung (ε) im elastischen Bereich. Solange die Proportionalitätsgrenze nicht überschritten wird, verhalten sich Kraft und Längenänderung ',
-      ', wobei der Elastizitätsmodul (E) als konstanter Materialparameter dient. Bei mehrachsigen Beanspruchungen wird dieser lineare Zusammenhang durch den ',
-      'der Elastizitätsmatrix erweitert. Wirkt eine Querkraft auf einen Balken, entsteht zusätzlich zur Normalspannung eine Schubspannung (τ), die zu einer ',
-      'der Querschnittsfläche führt. Um die maximale Tragfähigkeit von Bauteilen aus Stahl oder Beton zu gewährleisten, müssen Ingenieure stets die zulässigen ',
-      'einhalten und Ermüdungserscheinungen durch zyklische Lastwechsel ',
-      '.'
-    ],
-    gaps:[
-      {options:['linear','exponentiell','logarithmisch','quadratisch'], correct:0},
-      {options:['Tensor','Skalar','Vektor','Wert'], correct:0},
-      {options:['Verformung','Verstärkung','Versteifung','Verteilung'], correct:0},
-      {options:['Grenzwerte','Mittelwerte','Zahlen','Faktoren'], correct:0},
-      {options:['vermeiden','verursachen','verstärken','verbinden'], correct:0}
-    ]
-  },
-  { ...TEMPLATE[1],
-    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
-    title:'Der Prozess des Stranggießens',
-    correctOrder:[1,3,0,4,2],
-    items:[
-      'Durch den direkten Kontakt mit der intensiv gekühlten Kupferkokille erstarrt die äußere Stahlschale augenblicklich.',
-      'Am Anfang des Verfahrens wird flüssiger Stahl aus der Pfanne in den Zwischenbehälter (Tundish) geleitet.',
-      'Schließlich wird der kontinuierliche Stahlstrang durch Rollenführungen transportiert und mittels Brennschneidmaschinen auf Fixlängen geteilt.',
-      'Von dort aus fließt die Schmelze dosiert in eine wassergekühlte Oszillationskokille, die ein Ankleben des Metalls verhindert.',
-      'Unterhalb der Kokille stützen Rollen den Strang, während er durch Sekundärkühlung mit Wasser vollständig durcherstarrt.'
-    ],
-    shuffledStart:[0,1,2,3,4]
-  },
-  { ...TEMPLATE[2],
-    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
-    title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
-    passage:[
-      '(1) Das Phänomen des luziden Träumens, bei dem sich der Schläfende seines Traumzustands bewusst ist und diesen mitunter aktiv steuern kann, wurde lange Zeit von der empirischen Wissenschaft skeptisch betrachtet. Erst mit der Standardisierung elektroenzephalografischer Messungen im REM-Schlaf gelang der schlüssige Nachweis: Etwa die Hälfte der Weltbevölkerung hat mindestens einmal im Leben ein solches Phänomen erfahren, während nur eine kleine Minderheit in der Lage ist, dieses Phänomen regelmäßig und gezielt herbeizuführen.',
-      '(2) Neurowissenschaftlich zeichnet sich der Klartraum durch eine hybride Bewusstseinsform aus. Während der REM-Schlaf gewöhnlich durch eine Deaktivierung des dorsolateralen präfrontalen Kortex gekennzeichnet ist – was den Verlust des kritischen Denkens und der Orientierung erklärt –, zeigt sich bei Klarträumern in genau dieser Region eine signifikante Reaktivierung. Dies ermöglicht das Wiedererlangen von Selbstreflexion, logischer Urteilskraft und metakognitiven Fähigkeiten mitten im Traumgeschehen.',
-      '(3) Historisch gesehen ist die Faszination für das Phänomen keineswegs ein modernes Nebenprodukt der modernen Psychologie. Bereits in antiken philosophischen Abhandlungen sowie in indigenen und östlichen Traditionen spielte die Schulung des Traum-Bewusstseins eine zentrale Rolle. Diese kulturübergreifende Kontinuität verdeutlicht, dass das Streben nach Kontrolle über den eigenen Geist im Schlaf ein tief verankertes menschliches Anliegen darstellt.',
-      '(4) In der therapeutischen Praxis eröffnet die Klartraumforschung vielversprechende Ansätze zur Linderung schwerer psychischer Leiden. Insbesondere Patienten mit posttraumatischen Belastungsstörungen (PTBS), die unter chronischen Alpträumen leiden, profitieren von verhaltenstherapeutischen Techniken des luziden Träumens. Durch das gezielte Einüben von Re-Skripting-Strategien lernen Betroffene, bedrohliche Traumszenarien umzugestalten und so emotionale Erleichterung zu erfahren.',
-      '(5) Ein weiterer Aspekt betrifft die plastischen Veränderungen im Gehirn durch sensomotorisches Training im Schlaflabor. Studien zeigen, dass das gedankliche Durchspielen komplexer Sportarten oder Bewegungsabläufe im Klartraum dieselben motorischen Areale im Gehirn stimuliert wie die reale Ausführung. Folglich lassen sich solche Traumerfahrungen messbar auf die motorische Leistungsfähigkeit in der Wachrealität übertragen.',
-      '(6) Trotz dieser Potenziale mahnt die akademische Forschung hinsichtlich der unkritischen Verbreitung von Techniken zur künstlichen Trauminduktion zur Vorsicht. Die unkontrollierte Anwendung von elektrischer Hirnstimulation oder pharmakologischen Präparaten zur Herbeiführung von Klarträumern kann die Schlafarchitektur nachhaltig stören, psychische Dissoziationen begünstigen und schwere Schlafstörungen nach sich ziehen.',
-      '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
-    ],
-    questions:[
-      { q:'In Absatz 1 wird gesagt, dass ...', options:[
-        'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
-        'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
-        'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
-        'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
-      ], correct:1 },
-      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:[
-        'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
-        'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
-        'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
-        'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
-      ], correct:1 },
-      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
-        'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
-        'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
-        'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
-        'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
-      ], correct:2 },
-      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:[
-        'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
-        'Patienten mit chronischen Schlafstörungen vollständig heilen.',
-        'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
-        'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
-      ], correct:2 },
-      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
-        'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
-        'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
-        'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
-        'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
-      ], correct:1 },
-      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:[
-        'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
-        'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
-        'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
-        'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
-      ], correct:3 },
-      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
-        'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
-        'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
-        'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
-        'vor den Gefahren des normalen REM-Schlafs zu warnen.'
-      ], correct:1 }
-    ]
-  },
-  { ...TEMPLATE[3],
-    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu.',
-    title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
-    passageText:`Die verhängnisvolle Annahme, dass der Menschheit durch unkontrollierten Konsum zwangsläufig der Kollaps droht und wir daher eine drastische Wachstumsrücknahme erzwingen müssen, gehört zum festen Dogma moderner Umweltdebatten. <strong>[1] Ob diese radikale Verzichtshypothese in wissenschaftlicher Hinsicht jedoch tatsächlich belastbar ist, darf ernsthaft in Zweifel gezogen werden.</strong> Durch fortschrittliche biochemische Verfahren ist die Synthetisierung von Rohstoffen bereits heute Realität. <strong>[2] Man muss allerdings unumwunden einräumen, dass derartige Syntheseverfahren derzeit noch außerordentlich energieintensiv und kostspielig sind.</strong> Der technologische Wandel vollzieht sich jedoch exponentiell. Womöglich werden molekulare Fertigungsverfahren in wenigen Jahrzehnten Rohstoffknappheiten komplett überflüssig machen. Die Theorie der Grenzen des Wachstums entpuppt sich somit womöglich als gedanklicher Rückschritt. <strong>[3] Dass sich dieses Bedrohungsszenario dennoch so hartnäckig in den Köpfen hält, dürfte vor allem darin begründet liegen, dass unser Denken in steinzeitlichen Kategorien begrenzter Vorräte verhaftet bleibt.</strong> In einer von Innovation geprägten Welt sind Ressourcen im Wesentlichen unbegrenzt. <strong>[4] Dank menschlicher Erfindungskraft und technologischem Pioniergeist werden wir künftig in der Lage sein, völlig neue Energie- und Materialquellen zu erschließen.</strong>`,
-    textStellen:[1, 2, 3, 4],
-    options:[
-      'Der Experte erklärt ein psychologisches Phänomen.',
-      'Der Experte hofft auf eine internationale Regulierung.',
-      'Der Experte prognostiziert eine technologische Entwicklung.',
-      'Der Experte räumt einen aktuellen Nachteil ein.',
-      'Der Experte stellt eine weit verbreitete Annahme in Frage.',
-      'Der Experte vermutet eine Ursache für das Denkmuster.',
-      'Der Experte verteidigt die Position der Verzichtsökonomie.',
-      'Der Experte widerspricht den Grundlagen der Biologie.'
-    ],
-    correct:[4, 3, 5, 2]
-  },
-  { ...TEMPLATE[4],
-    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu.',
-    title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
-    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt.',
-    columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
-    items:[
-      {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
-      {text:'Diese Gruppe hinterfragt bestehende Normen und Werte eher kritisch.', correct:1},
-      {text:'Diese Gruppe zeigt eine positive Einstellung gegenüber hierarchischen Rangordnungen.', correct:0},
-      {text:'Diese Menschen zeigen sich im sozialen Umgang zugänglicher und verträglicher.', correct:0},
-      {text:'Diese Menschen wählen Haustiere gezielt nach der Übereinstimmung mit dem eigenen Charakter aus.', correct:3},
-      {text:'Diese Gruppe weist eine geringere emotionale Stabilität auf.', correct:1},
-      {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
-    ]
-  },
-  { ...TEMPLATE[5],
-    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
-    title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
-    passage:'Die wissenschaftliche Pflanzenheilkunde (Phytotherapie) blickt auf eine jahrtausendealte Erfahrungstradition zurück. Im Vergleich zu synthetischen Reinstoffen zeichnen sich phytotherapeutische Vielstoffgemische durch eine bemerkenswerte physiologische Verträglichkeit aus. Dies liegt primär daran, dass die Wirkstoffe in natürlichen Matrixstrukturen vorliegen, was Nebenwirkungen minimiert. Ein weiterer Vorteil besteht in der vielseitigen Verwendbarkeit phytotherapeutischer Präparate. Demgegenüber stehen jedoch gravierende Nachteile: Im Gegensatz zu synthetischen Arzneimitteln setzt die therapeutische Wirkung von Pflanzenextrakten häufig erst nach einer erheblichen Latenzzeit von mehreren Wochen ein.',
-    aussagen:[
-      { key:'a', text:'[a] Eigenständige und unkomplizierte Verarbeitung zu Präparaten' },
-      { key:'b', text:'[b] Vollständige Ungiftigkeit pflanzlicher Substanzen' },
-      { key:'c', text:'[c] Hervorragende Eignung für die Notfallmedizin' },
-      { key:'d', text:'[d] Fehlende pharmakologische Nachweisbarkeit' },
-      { key:'e', text:'[e] Längere Dauer bis zum spürbaren Wirkungseintritt' },
-      { key:'f', text:'[f] Möglicherweise Auslösung unvorhergesehener Allergien' },
-      { key:'g', text:'[g] Garantiertes Ersetzen sämtlicher synthetischer Medikamente' },
-      { key:'h', text:'[h] Zahlreiche unterschiedliche Einsatzformen vorhanden' }
-    ],
-    correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
-  },
-  { ...TEMPLATE[6],
-    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
-    title:'Wachstum des E-Commerce',
-    passage:'Der Anteil des Online-Handels am gesamten Einzelhandelsumsatz in Deutschland ist in den vergangenen Jahren kontinuierlich gestiegen. Lag der Anteil im Jahr 2015 noch bei rund 9 Prozent, so erreichte er im Jahr 2023 bereits über 19 Prozent.',
-    sentences:[
-      {text:'Der Online-Handel-Anteil ist von rund 9 Prozent 2015 auf über 19 Prozent 2023 gestiegen.', wrong:false},
-      {text:'Der stärkste Zuwachs war zwischen 2020 und 2021 zu beobachten.', wrong:false},
-      {text:'Lebensmittel machen bislang den größten Anteil am Online-Handel aus.', wrong:true},
-      {text:'Kleinere, inhabergeführte Geschäfte berichten überproportional häufig von Umsatzeinbußen.', wrong:false},
-      {text:'Große Online-Plattformen haben laut Text Marktanteile verloren.', wrong:true},
-      {text:'Der Zuwachs wird unter anderem mit veränderten Einkaufsgewohnheiten während der Pandemie erklärt.', wrong:false},
-      {text:'Mode und Elektronik zählen zu den am stärksten wachsenden Online-Handel-Bereichen.', wrong:false},
-      {text:'Der Anteil des Online-Handels ist seit 2015 nahezu unverändert geblieben.', wrong:true}
-    ]
-  }
-];
-
+<script>
 const TESTS = [
-  {id:1, title:'Modelltest 1 (Akademisch & Technisch)', teile: MT1}
-];
+  {id:1, title:'Modelltest C1 (Akademisch)', teile: typeof MT1!=='undefined' ? MT1 : null},
+  {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: typeof MT2!=='undefined' ? MT2 : null},
+  {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: typeof MT3!=='undefined' ? MT3 : null},
+  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: typeof MT4!=='undefined' ? MT4 : null}
+].filter(t=>t.teile);
 
 let currentTestIdx = 0;
 let current = 0;
@@ -732,9 +211,7 @@ function fmt(sec){
   const s = Math.floor(sec%60).toString().padStart(2,'0');
   return m+":"+s;
 }
-
 function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
-
 function startTimer(seconds){
   clearTimer(); remaining = seconds; updateTimerDisplay();
   timerInterval = setInterval(()=>{
@@ -743,7 +220,6 @@ function startTimer(seconds){
     else { updateTimerDisplay(); }
   },1000);
 }
-
 function updateTimerDisplay(){
   const el = document.getElementById('timerText');
   const circle = document.getElementById('timerCircle');
@@ -751,11 +227,9 @@ function updateTimerDisplay(){
   el.textContent = fmt(remaining);
   if(remaining <= 30){ circle.classList.add('warn'); } else { circle.classList.remove('warn'); }
 }
-
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-
 function getBucket(test, task){
   if(!answers[test.id]) answers[test.id] = {};
   if(!answers[test.id][task.teil]) answers[test.id][task.teil] = {};
@@ -764,18 +238,21 @@ function getBucket(test, task){
 
 function showTestSelect(){
   clearTimer();
+  document.getElementById('taskbar').innerHTML = '';
+  document.getElementById('navbar').innerHTML = '';
   let cards = '';
   TESTS.forEach((test, idx)=>{
     cards += `<div class="sel-card" data-idx="${idx}">
       <div class="sc-title">${test.title}</div>
-      <div class="sc-desc"><i class="fa-solid fa-layer-group" style="color:var(--accent);"></i> 7 Aufgaben · Niveau C1</div>
+      <div class="sc-desc">7 Aufgaben · Niveau C1 · Akribische Fachsprache</div>
     </div>`;
   });
-  document.getElementById('appContainer').innerHTML = `
+  document.getElementById('main').innerHTML = `
     <div class="select-screen">
-      <h2><i class="fa-solid fa-microscope" style="color: var(--accent); margin-right: 10px;"></i> Leseverstehen — <span>Modelltest wählen</span></h2>
-      <p>Anspruchsvolle Texte, wissenschaftliches Vokabular und komplexe Satzstrukturen zur optimalen Vorbereitung auf den Digitalen TestDaF.</p>
+      <h2>Leseverstehen C1 — Modelltest wählen</h2>
+      <p>Anspruchsvolle Texte, wissenschaftliches Vokabular und komplexe Satzstrukturen zur optimalen Vorbereitung auf den Digitalen TestDaF (TDN 4 / TDN 5).</p>
       <div class="cards">${cards}</div>
+      <p class="select-note">Akademisches Übungsmaterial Niveau C1.</p>
     </div>
   `;
   document.querySelectorAll('.sel-card[data-idx]').forEach(card=>{
@@ -784,44 +261,48 @@ function showTestSelect(){
 }
 
 function renderTaskbar(task, test){
-  return `
-    <div class="taskbar">
-      <div class="task-count">
+  const tb = document.getElementById('taskbar');
+  tb.innerHTML = `
+    <div class="task-count">
+      <div>
+        <div class="task-label">${test.title} · Aufgabe</div>
         <span class="n">${task.teil}</span><span class="of">/${test.teile.length}</span>
       </div>
-      <div class="instructions">
-        <div class="title">${task.label}</div>
-        <p>${task.instructions}</p>
-      </div>
-      <div class="timer-wrap">
-        <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
-        <div class="timer-caption">verbleibend</div>
-      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
+      <div class="timer-caption">verbleibend</div>
+    </div>
+    <div class="instructions">
+      <div class="title">${task.label}</div>
+      <p>${task.instructions}</p>
+      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
     </div>
   `;
 }
-
-function renderNavbar(isLast){
-  return `
-    <div class="navbar">
-      <button class="btn ghost" onclick="showTestSelect()"><i class="fa-solid fa-arrow-left"></i> Übersicht</button>
-      <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse anzeigen <i class="fa-solid fa-check"></i>' : 'Nächste Aufgabe <i class="fa-solid fa-arrow-right"></i>'}</button>
-    </div>
+function renderNavbar(isLast, test){
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `
+    <button class="btn ghost" id="btnMenu">Modelltests</button>
+    <span class="foot-note">Niveau C1 · TestDaF Format</span>
+    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
   `;
+  document.getElementById('btnMenu').onclick = ()=>{
+    if(confirm('Zurück zur Auswahlliste? Ihre Antworten bleiben gespeichert.')) showTestSelect();
+  };
+  document.getElementById('btnNext').onclick = ()=>{
+    if(isLast){ showResults(); } else { current++; renderTask(); }
+  };
 }
 
 function renderTask(){
   const test = TESTS[currentTestIdx];
   const task = test.teile[current];
+  renderTaskbar(task, test);
   startTimer(task.time);
-  
-  let html = renderTaskbar(task, test);
-  html += `<h2 class="task-title">${task.title}</h2><div id="taskBody"></div>`;
-  html += renderNavbar(current === test.teile.length-1);
-  
-  document.getElementById('appContainer').innerHTML = html;
+  const main = document.getElementById('main');
+  main.innerHTML = `<h2 class="task-title">${task.title}</h2><div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
-  
   switch(task.type){
     case 'gap': renderGap(task, test, body); break;
     case 'order': renderOrder(task, test, body); break;
@@ -831,11 +312,8 @@ function renderTask(){
     case 'twocat': renderTwoCat(task, test, body); break;
     case 'summary': renderSummary(task, test, body); break;
   }
-  
-  document.getElementById('btnNext').onclick = ()=>{
-    if(current === test.teile.length-1){ showResults(); } else { current++; renderTask(); }
-  };
-  window.scrollTo({top:0, behavior:'smooth'});
+  renderNavbar(current === test.teile.length-1, test);
+  window.scrollTo({top:0, behavior:'instant'});
 }
 
 function renderGap(task, test, body){
@@ -868,8 +346,8 @@ function renderOrder(task, test, body){
     order.forEach((origIdx, pos)=>{
       html += `<li class="order-item"><div class="pos">${pos+1}</div><div class="txt">${escapeHtml(task.items[origIdx])}</div>
         <div class="order-controls">
-          <button data-dir="up" data-pos="${pos}" ${pos===0?'disabled':''}><i class="fa-solid fa-chevron-up"></i></button>
-          <button data-dir="down" data-pos="${pos}" ${pos===order.length-1?'disabled':''}><i class="fa-solid fa-chevron-down"></i></button>
+          <button data-dir="up" data-pos="${pos}" ${pos===0?'disabled':''}>▲</button>
+          <button data-dir="down" data-pos="${pos}" ${pos===order.length-1?'disabled':''}>▼</button>
         </div></li>`;
     });
     html += '</ul>';
@@ -889,112 +367,210 @@ function renderOrder(task, test, body){
 function renderMC(task, test, body){
   let html = '<div class="passage">';
   task.passage.forEach(p=> html += `<p>${escapeHtml(p)}</p>`);
-  html += '</div><div>';
+  html += '</div><div style="margin-top:20px;">';
   const a = getBucket(test, task);
   task.questions.forEach((q, qi)=>{
     html += `<div class="qblock"><div class="qtext">Frage ${qi+1}: ${escapeHtml(q.q)}</div>`;
     q.options.forEach((opt, oi)=>{
       const checked = a[qi] == oi ? 'checked' : '';
-      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> <span>${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</span></label>`;
+      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
     });
     html += `</div>`;
   });
   html += '</div>';
   body.innerHTML = html;
   task.questions.forEach((q, qi)=>{
-    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=>{
-      inp.onchange = ()=>{ a[qi] = inp.value; };
-    });
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[qi] = inp.value));
   });
 }
 
 function renderMatch(task, test, body){
-  let html = '<div class="passage"><p>' + task.passageText + '</p></div><div style="margin-top:20px;">';
+  let html = `<div class="passage"><p>${task.passageText}</p></div>`;
+  html += `<h3 style="margin-top:20px;">Aussagen</h3><ul style="list-style:none;padding:0;">`;
+  task.options.forEach((opt, oi)=>{
+    html += `<li style="margin-bottom:6px;font-size:0.9rem;"><strong>${String.fromCharCode(97+oi)}</strong> ${escapeHtml(opt)}</li>`;
+  });
+  html += `</ul><div style="margin-top:20px;">`;
+  
   const a = getBucket(test, task);
-  task.textStellen.forEach((ts, idx)=>{
-    html += `<div class="matchrow"><div class="ptxt">Textstelle [<strong>${ts}</strong>]</div>
-      <select data-idx="${idx}"><option value="">Bitte zuordnen...</option>`;
-    task.options.forEach((opt, oi)=>{
-      html += `<option value="${oi}">${escapeHtml(opt)}</option>`;
-    });
-    html += `</select></div>`;
+  task.textStellen.forEach((ts, ti)=>{
+    html += `<div class="matchrow"><div class="ptxt"><strong>Textstelle [${ts}]:</strong></div>
+      <select data-ti="${ti}"><option value="">Aussage wählen …</option>
+      ${task.options.map((o,oi)=>`<option value="${oi}">Aussage ${String.fromCharCode(97+oi)}</option>`).join('')}
+      </select></div>`;
   });
   html += '</div>';
   body.innerHTML = html;
-  body.querySelectorAll('select').forEach(sel=>{
-    const idx = sel.dataset.idx;
-    if(a[idx] !== undefined) sel.value = a[idx];
-    sel.onchange = ()=>{ a[idx] = sel.value; };
+  
+  body.querySelectorAll('select[data-ti]').forEach(sel=>{
+    const ti = sel.dataset.ti;
+    if(a[ti] !== undefined) sel.value = a[ti];
+    sel.addEventListener('change', ()=> a[ti] = sel.value);
   });
 }
 
 function renderTable(task, test, body){
-  let html = '<div class="passage"><p>' + escapeHtml(task.passage) + '</p></div><table class="tzt"><tr><th>Aussage</th>';
-  task.columns.forEach(c => html += `<th>${escapeHtml(c)}</th>`);
-  html += '</tr>';
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   const a = getBucket(test, task);
   task.items.forEach((item, ii)=>{
-    html += `<tr><td class="label">${escapeHtml(item.text)}</td>`;
+    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
     task.columns.forEach((c, ci)=>{
       const checked = a[ii] == ci ? 'checked' : '';
-      html += `<td><input type="radio" name="titem${ii}" value="${ci}" ${checked}></td>`;
+      html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
     });
     html += `</tr>`;
   });
-  html += '</table>';
+  html += '</tbody></table>';
   body.innerHTML = html;
   task.items.forEach((item, ii)=>{
-    body.querySelectorAll(`input[name="titem${ii}"]`).forEach(inp=>{
-      inp.onchange = ()=>{ a[ii] = inp.value; };
-    });
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[ii] = inp.value));
   });
 }
 
 function renderTwoCat(task, test, body){
-  let html = '<div class="passage"><p>' + escapeHtml(task.passage) + '</p></div><div style="margin-top:20px;">';
-  const a = getBucket(test, task);
-  ['v1','v2','n3','n4'].forEach((k, idx)=>{
-    html += `<div class="matchrow"><div class="ptxt">Auswahl ${idx+1}</div><select data-key="${k}"><option value="">Wählen...</option>`;
-    task.aussagen.forEach(opt=>{
-      html += `<option value="${opt.key}">${escapeHtml(opt.text)}</option>`;
-    });
-    html += `</select></div>`;
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
+  html += `<div class="a6-container"><div class="a6-statements"><div class="a6-statements-title">Aussagen</div><div class="a6-list">`;
+  task.aussagen.forEach(item => {
+    html += `<div>${escapeHtml(item.text)}</div>`;
   });
-  html += '</div>';
+  html += `</div></div>`;
+  
+  const a = getBucket(test, task);
+  
+  const makeSelect = (id) => {
+    let s = `<select data-key="${id}"><option value="">-- Wählen --</option>`;
+    task.aussagen.forEach(item => {
+      const selected = a[id] === item.key ? 'selected' : '';
+      s += `<option value="${item.key}" ${selected}>${item.text}</option>`;
+    });
+    s += `</select>`;
+    return s;
+  };
+
+  html += `<table class="a6-table">
+    <thead>
+      <tr><th>Vorteile</th><th>Nachteile</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
+      <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
+    </tbody>
+  </table></div>`;
+
   body.innerHTML = html;
-  body.querySelectorAll('select').forEach(sel=>{
-    const key = sel.dataset.key;
-    if(a[key] !== undefined) sel.value = a[key];
-    sel.onchange = ()=>{ a[key] = sel.value; };
+  body.querySelectorAll('select[data-key]').forEach(sel=>{
+    sel.addEventListener('change', ()=>{
+      a[sel.dataset.key] = sel.value;
+    });
   });
 }
 
 function renderSummary(task, test, body){
-  let html = '<div class="passage"><p>' + escapeHtml(task.passage) + '</p></div><div style="margin-top:15px;font-weight:600;margin-bottom:10px;">Wählen Sie die falschen Sätze aus:</div><div>';
+  const maxVal = Math.max(...task.graphicData.map(d=>d.val));
+  let bars = '';
+  task.graphicData.forEach(d=>{
+    const h = Math.round((d.val/maxVal)*90)+10;
+    bars += `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
+      <div style="font-size:.68rem;color:var(--text-soft);">${d.val}</div>
+      <div style="width:70%;height:${h}px;background:var(--teal);border-radius:4px 4px 0 0;"></div>
+      <div style="font-size:.7rem;color:var(--text-soft);">${d.year}</div></div>`;
+  });
+  const wrongCount = task.sentences.filter(s=>s.wrong).length;
+  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>
+  <div class="graphic-box"><div style="display:flex;align-items:flex-end;gap:6px;height:120px;">${bars}</div>
+  <div class="cap">${escapeHtml(task.graphicCaption)}</div></div>
+  <h3 style="color:var(--teal-dark);font-size:1rem;">Zusammenfassung</h3>
+  <div class="count-hint">Kreuzen Sie genau <strong>${wrongCount}</strong> Sätze an, die inhaltlich falsche Informationen enthalten. Ausgewählt: <span id="cnt">0</span>/${wrongCount}</div>
+  <div id="sentList">`;
   const a = getBucket(test, task);
   task.sentences.forEach((s, si)=>{
     const checked = a[si] ? 'checked' : '';
-    html += `<label class="summary-item"><input type="checkbox" data-si="${si}" ${checked}> <span>${escapeHtml(s.text)}</span></label>`;
+    html += `<label class="summary-item"><input type="checkbox" data-si="${si}" ${checked}><span>${escapeHtml(s.text)}</span></label>`;
   });
   html += '</div>';
   body.innerHTML = html;
-  body.querySelectorAll('input[type="checkbox"]').forEach(box=>{
-    box.onchange = ()=>{ a[box.dataset.si] = box.checked; };
+  function updateCount(){
+    const n = task.sentences.filter((s,si)=>a[si]).length;
+    document.getElementById('cnt').textContent = n;
+  }
+  body.querySelectorAll('input[data-si]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
   });
+  updateCount();
+}
+
+function scoreTask(task, test){
+  const a = getBucket(test, task);
+  let correct = 0, total = 0;
+  switch(task.type){
+    case 'gap':
+      total = task.gaps.length;
+      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
+      break;
+    case 'order':
+      total = task.correctOrder.length;
+      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
+      break;
+    case 'mc':
+      total = task.questions.length;
+      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      break;
+    case 'match':
+      total = task.correct.length;
+      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
+      break;
+    case 'table':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'twocat':
+      total = 4;
+      if(a.v1 === task.correctMap.v1) correct++;
+      if(a.v2 === task.correctMap.v2) correct++;
+      if(a.n3 === task.correctMap.n3) correct++;
+      if(a.n4 === task.correctMap.n4) correct++;
+      break;
+    case 'summary':
+      total = task.sentences.filter(s=>s.wrong).length;
+      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
+      break;
+  }
+  return {correct, total};
 }
 
 function showResults(){
   clearTimer();
-  document.getElementById('appContainer').innerHTML = `
-    <div class="score-hero">
-      <div class="pct"><i class="fa-solid fa-circle-check"></i> Modelltest beendet</div>
-      <p style="color:var(--text-soft); margin-bottom: 25px;">Ihre Antworten wurden erfolgreich erfasst. Viel Erfolg beim Digitalen TestDaF!</p>
-      <button class="btn next" onclick="showTestSelect()">Zurück zur Übersicht</button>
+  document.getElementById('taskbar').innerHTML = '';
+  const test = TESTS[currentTestIdx];
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `<button class="btn ghost" id="btnMenu2">Modelltests</button><span class="foot-note">Niveau C1 Auswertung</span><button class="btn" id="btnRestart">Neu starten</button>`;
+  document.getElementById('btnRestart').onclick = ()=>{ answers[test.id] = {}; current = 0; renderTask(); };
+  document.getElementById('btnMenu2').onclick = ()=> showTestSelect();
+
+  let sumCorrect = 0, sumTotal = 0;
+  let rows = '';
+  test.teile.forEach(task=>{
+    const {correct, total} = scoreTask(task, test);
+    sumCorrect += correct; sumTotal += total;
+    rows += `<div class="result-row"><span>Aufgabe ${task.teil} — ${task.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
+  });
+  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+  let tdn = 'unterhalb TDN 3';
+  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)'; else if(pct >= 44) tdn = 'TDN 3 (B2)';
+
+  document.getElementById('main').innerHTML = `
+    <div class="results">
+      <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
+      <h2>Ergebnisse — ${test.title}</h2>
+      ${rows}
+      <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
     </div>
   `;
 }
 
-window.onload = showTestSelect;
+showTestSelect();
 </script>
+<div style="background: #3f909a; padding: 10px; text-align: center;"><a href="schreiben.html" style="color: white; font-weight: bold; font-size: 1.1rem; text-decoration: none;">✍️ Accéder à l'entraînement Schreiben (Écriture)</a></div>
 </body>
 </html>
