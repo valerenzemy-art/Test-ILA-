@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TestDaF C1 — Modelltests Hören (Digital)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div>
+      <div class="brand">HÖREN C1</div>
+      <div class="subbrand">Digitaler TestDaF · Hörverstehen Niveau C1</div>
+    </div>
+    <div class="tag">Niveau C1</div>
+  </header>
+  <div class="taskbar" id="taskbar"></div>
+  <main id="main"></main>
+  <footer class="navbar" id="navbar"></footer>
+</div>
+
+<script>
+const TEMPLATE_HOEREN = [
+  {teil:1, type:'kurz_uebersicht', time:300, label:'Kurzantwort: Übersicht ergänzen'},
+  {teil:2, type:'kurz_begriff',    time:360, label:'Kurzantwort: Begriffspaar notieren'},
+  {teil:3, type:'summary_hoer',    time:420, label:'Fehler in Zusammenfassung erkennen'},
+  {teil:4, type:'match_personen',  time:360, label:'Aussagen Personen zuordnen'},
+  {teil:5, type:'kurz_vortrag',    time:480, label:'Kurzantwort: Gliederungspunkte ergänzen'},
+  {teil:6, type:'mc_hoeren',       time:420, label:'Multiple-Choice'},
+  {teil:7, type:'laut_schrift',    time:360, label:'Laut- und Schriftbild abgleichen'}
+];
+
+const HOREN_MT1 = [
+  { ...TEMPLATE_HOEREN[0],
+    instructions:'Hören Sie das Gespräch und ergänzen Sie die Übersicht mit kurzen Wörtern.',
+    title:'Aufgabe 1: Das akademische Mentoring-Programm',
+    mediaType: 'audio',
+    mediaUrl: 'media/hoeren_t1.mp3',
+    questions:[
+      { q: 'Zielgruppe des Programms:', correct: 'Studierende' },
+      { q: 'Dauer der Betreuung:', correct: 'ein Semester' },
+      { q: 'Wöchentlicher Zeitaufwand:', correct: 'zwei Stunden' }
+    ]
+  },
+  { ...TEMPLATE_HOEREN[1],
+    instructions:'Hören Sie den Radiobeitrag und ordnen Sie die Aussagen den Begriffspaaren zu.',
+    title:'Aufgabe 2: Stadtentwicklung im Wandel',
+    mediaType: 'audio',
+    mediaUrl: 'media/hoeren_t2.mp3',
+    pairs: [
+      { term: 'Ökologie vs. Wirtschaft', options: ['Aussage A', 'Aussage B', 'Beide', 'Keine'], correct: 0 },
+      { term: 'Zentrum vs. Peripherie', options: ['Aussage A', 'Aussage B', 'Beide', 'Keine'], correct: 1 }
+    ]
+  },
+  { ...TEMPLATE_HOEREN[2],
+    instructions:'Hören Sie den Vortrag. Kreuzen Sie genau die Sätze an, die falsche Informationen enthalten.',
+    title:'Aufgabe 3: Künstliche Photosynthese',
+    mediaType: 'audio',
+    mediaUrl: 'media/hoeren_t3.mp3',
+    sentences:[
+      {text:'Die künstliche Photosynthese wandelt Sonnenlicht direkt in chemische Energie um.', wrong:false},
+      {text:'Als Endprodukt entsteht ausschließlich reines Trinkwasser.', wrong:true},
+      {text:'Die Technologie befindet sich derzeit noch im experimentellen Laborstadium.', wrong:false},
+      {text:'Kommerzielle Anlagen decken bereits 50 Prozent des Energiebedarfs.', wrong:true}
+    ]
+  },
+  { ...TEMPLATE_HOEREN[3],
+    instructions:'Hören Sie das Interview mit drei Experten (A, B, C). Wer vertritt welche Ansicht?',
+    title:'Aufgabe 4: Die Zukunft der Arbeit',
+    mediaType: 'audio',
+    mediaUrl: 'media/hoeren_t4.mp3',
+    items:[
+      {text:'Die Vier-Tage-Woche steigert die Gesamteffizienz massiv.', correct:0},
+      {text:'Homeoffice führt zu einer Entkopplung des sozialen Zusammenhalts.', correct:1},
+      {text:'Künstliche Intelligenz wird klassische Berufe komplett ersetzen.', correct:2}
+    ],
+    columns:['Experte A','Experte B','Experte C']
+  },
+  { ...TEMPLATE_HOEREN[4],
+    instructions:'Hören Sie den wissenschaftlichen Vortrag und ergänzen Sie die Gliederungspunkte.',
+    title:'Aufgabe 5: Meeresströmungen und Klima',
+    mediaType: 'video',
+    mediaUrl: 'media/hoeren_t5.mp4',
+    questions:[
+      { q: 'Hauptantrieb der Thermohalinen Zirkulation:', correct: 'Dichteunterschiede' },
+      { q: 'Folge des Abschmelzens von Grönlandeis:', correct: 'Abschwächung des Golfstroms' }
+    ]
+  },
+  { ...TEMPLATE_HOEREN[5],
+    instructions:'Hören Sie das Gespräch und beantworten Sie die Fragen mit a, b, c oder d.',
+    title:'Aufgabe 6: Universitäre Forschungsförderung',
+    mediaType: 'audio',
+    mediaUrl: 'media/hoeren_t6.mp3',
+    questions:[
+      { q:'Was kritisiert der Referent an den aktuellen Fördergeldern?', options:[
+        'Die Verteilung erfolgt zu bürokratisch und langsam.',
+        'Es wird zu wenig in geisteswissenschaftliche Projekte investiert.',
+        'Die Laufzeiten der Projekte sind viel zu kurz bemessen.',
+        'Private Unternehmen haben keinen Zugriff auf die Ergebnisse.'
+      ], correct:2 }
+    ]
+  },
+  { ...TEMPLATE_HOEREN[6],
+    instructions:'Hören Sie den Text und vergleichen Sie das gesprochene Wort mit dem Schriftbild. Welche Abweichungen gibt es?',
+    title:'Aufgabe 7: Nanotechnologie in der Medizin',
+    mediaType: 'audio',
+    mediaUrl: 'media/hoeren_t7.mp3',
+    sentences:[
+      {text:'Im gesprochenen Text wird von Nanopartikeln statt von Mikropartikeln berichtet.', wrong:false},
+      {text:'Die genannte Jahreszahl im Audio weicht vom geschriebenen Text ab.', wrong:true},
+      {text:'Der medizinische Fachbegriff wurde im Skript korrekt wiedergegeben.', wrong:false},
+      {text:'Im Audio wird eine höhere Erfolgsquote genannt als im gedruckten Text.', wrong:true}
+    ]
+  }
+];
+
+const HOREN_TESTS = [
+  {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1}
+];
+
+let currentTestIdx = 0;
+let current = 0;
+let timerInterval = null;
+let remaining = 0;
+const hoerenAnswers = {};
+
+function fmt(sec){
+  const m = Math.floor(sec/60).toString().padStart(2,'0');
+  const s = Math.floor(sec%60).toString().padStart(2,'0');
+  return m+":"+s;
+}
+function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
+
+function startTimer(seconds){
+  clearTimer(); remaining = seconds; updateTimerDisplay();
+  timerInterval = setInterval(()=>{
+    remaining--;
+    if(remaining <= 0){ 
+      remaining = 0; 
+      updateTimerDisplay(); 
+      clearTimer(); 
+      const test = HOREN_TESTS[currentTestIdx];
+      if(current === test.teile.length - 1){ 
+        showResults(); 
+      } else { 
+        current++; 
+        renderTask(); 
+      }
+    } else { 
+      updateTimerDisplay(); 
+    }
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const el = document.getElementById('timerText');
+  const circle = document.getElementById('timerCircle');
+  if(!el) return;
+  el.textContent = fmt(remaining);
+  if(remaining <= 30){ circle.classList.add('warn'); } else { circle.classList.remove('warn'); }
+}
+
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getBucket(test, task){
+  if(!hoerenAnswers[test.id]) hoerenAnswers[test.id] = {};
+  if(!hoerenAnswers[test.id][task.teil]) hoerenAnswers[test.id][task.teil] = {};
+  return hoerenAnswers[test.id][task.teil];
+}
+
+function showTestSelect(){
+  clearTimer();
+  document.getElementById('taskbar').innerHTML = '';
+  document.getElementById('navbar').innerHTML = '';
+  let cards = '';
+  HOREN_TESTS.forEach((test, idx)=>{
+    cards += `<div class="sel-card" data-idx="${idx}">
+      <div class="sc-title">${test.title}</div>
+      <div class="sc-desc">7 Hörverstehen-Aufgaben · Niveau C1 · TestDaF Format</div>
+    </div>`;
+  });
+  document.getElementById('main').innerHTML = `
+    <div class="select-screen">
+      <h2>Hörverstehen C1 — Modelltest wählen</h2>
+      <p>Audio- und Videodateien zur optimalen Vorbereitung auf den Digitalen TestDaF (Hören).</p>
+      <div class="cards">${cards}</div>
+    </div>
+  `;
+  document.querySelectorAll('.sel-card[data-idx]').forEach(card=>{
+    card.onclick = ()=>{ currentTestIdx = parseInt(card.dataset.idx); current = 0; renderTask(); };
+  });
+}
+
+function renderTaskbar(task, test){
+  const tb = document.getElementById('taskbar');
+  tb.innerHTML = `
+    <div class="task-count">
+      <div>
+        <div class="task-label">${test.title} · Aufgabe</div>
+        <span class="n">${task.teil}</span><span class="of">/${test.teile.length}</span>
+      </div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
+      <div class="timer-caption">verbleibend</div>
+    </div>
+    <div class="instructions">
+      <div class="title">${task.label}</div>
+      <p>${task.instructions}</p>
+      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
+    </div>
+  `;
+}
+
+function renderNavbar(isLast, test){
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = `
+    <button class="btn ghost" id="btnMenu">Modelltests</button>
+    <span class="foot-note">Niveau C1 · Hörverstehen</span>
+    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
+  `;
+  document.getElementById('btnMenu').onclick = ()=>{
+    if(confirm('Zurück zur Auswahlliste? Ihre Antworten bleiben gespeichert.')) showTestSelect();
+  };
+  document.getElementById('btnNext').onclick = ()=>{
+    if(isLast){ showResults(); } else { current++; renderTask(); }
+  };
+}
+
+function renderTask(){
+  const test = HOREN_TESTS[currentTestIdx];
+  const task = test.teile[current];
+  renderTaskbar(task, test);
+  startTimer(task.time);
+  
+  const main = document.getElementById('main');
+  
+  let mediaHtml = '';
+  if(task.mediaType === 'audio' && task.mediaUrl){
+    mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
+      <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
+      <audio controls controlsList="nodownload" style="width:100%; max-width:500px;">
+        <source src="${task.mediaUrl}" type="audio/mpeg">
+        Ihr Browser unterstützt das Audio-Element nicht.
+      </audio>
+    </div>`;
+  } else if(task.mediaType === 'video' && task.mediaUrl){
+    mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
+      <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎥 Videosequenz abspielen:</p>
+      <video controls controlsList="nodownload" style="width:100%; max-width:600px; border-radius:6px;">
+        <source src="${task.mediaUrl}" type="video/mp4">
+        Ihr Browser unterstützt das Video-Element nicht.
+      </video>
+    </div>`;
+  }
+
+  main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
+  const body = document.getElementById('taskBody');
+
+  switch(task.type){
+    case 'kurz_uebersicht':
+    case 'kurz_vortrag':
+      renderKurzAntwort(task, test, body);
+      break;
+    case 'kurz_begriff':
+    case 'match_personen':
+      renderMatchHoeren(task, test, body);
+      break;
+    case 'summary_hoer':
+    case 'laut_schrift':
+      renderSummaryHoeren(task, test, body);
+      break;
+    case 'mc_hoeren':
+      renderMCHoeren(task, test, body);
+      break;
+  }
+  renderNavbar(current === test.teile.length-1, test);
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+function renderKurzAntwort(task, test, body){
+  const a = getBucket(test, task);
+  let html = '<div class="passage" style="display:flex; flex-direction:column; gap:12px;">';
+  task.questions.forEach((item, qi)=>{
+    html += `<div style="display:flex; align-items:center; gap:10px;">
+      <strong style="min-width:250px;">${escapeHtml(item.q)}</strong>
+      <input type="text" class="kurz-input" data-qi="${qi}" value="${escapeHtml(a[qi]||'')}" placeholder="Antwort eingeben..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px;">
+    </div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  body.querySelectorAll('.kurz-input').forEach(inp=>{
+    inp.addEventListener('input', ()=> a[inp.dataset.qi] = inp.value);
+  });
+}
+
+function renderMatchHoeren(task, test, body){
+  const a = getBucket(test, task);
+  let html = '<div class="passage"><table style="width:100%; border-collapse:collapse;">';
+  const list = task.pairs || task.items;
+  list.forEach((item, ii)=>{
+    html += `<tr style="border-bottom:1px solid #eee;"><td style="padding:10px; font-weight:bold;">${escapeHtml(item.term || item.text)}</td><td style="padding:10px;">`;
+    const opts = item.options || task.columns;
+    opts.forEach((opt, oi)=>{
+      const checked = a[ii] == oi ? 'checked' : '';
+      html += `<label style="margin-right:15px;"><input type="radio" name="match${ii}" value="${oi}" ${checked}> ${escapeHtml(opt)}</label>`;
+    });
+    html += `</td></tr>`;
+  });
+  html += '</table></div>';
+  body.innerHTML = html;
+  list.forEach((_, ii)=>{
+    body.querySelectorAll(`input[name="match${ii}"]`).forEach(inp=>{
+      inp.addEventListener('change', ()=> a[ii] = inp.value);
+    });
+  });
+}
+
+function renderSummaryHoeren(task, test, body){
+  const a = getBucket(test, task);
+  let html = '<div class="passage" style="display:flex; flex-direction:column; gap:10px;">';
+  task.sentences.forEach((s, si)=>{
+    const checked = a[si] ? 'checked' : '';
+    html += `<label class="summary-item" style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;"><input type="checkbox" data-si="${si}" ${checked} style="margin-top:4px;"><span>${escapeHtml(s.text)}</span></label>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  body.querySelectorAll('input[data-si]').forEach(cb=>{
+    cb.addEventListener('change', ()=> a[cb.dataset.si] = cb.checked);
+  });
+}
+
+function renderMCHoeren(task, test, body){
+  const a = getBucket(test, task);
+  let html = '<div class="passage">';
+  task.questions.forEach((q, qi)=>{
+    html += `<div class="qblock" style="margin-bottom:15px;"><div class="qtext" style="font-weight:bold; margin-bottom:5px;">${escapeHtml(q.q)}</div>`;
+    q.options.forEach((opt, oi)=>{
+      const checked = a[qi] == oi ? 'checked' : '';
+      html += `<label class="opt" style="display:block; margin-bottom:4px;"><input type="radio" name="mcq${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
+    });
+    html += `</div>`;
+  });
+  html += '</div>';
+  body.innerHTML = html;
+  task.questions.forEach((_, qi)=>{
+    body.querySelectorAll(`input[name="mcq${qi}"]`).forEach(inp=>{
+      inp.addEventListener('change', ()=> a[qi] = inp.value);
+    });
+  });
+}
+
+function scoreTask(task, test){
+  const a = getBucket(test, task);
+  let correct = 0, total = 0;
+  switch(task.type){
+    case 'kurz_uebersicht':
+    case 'kurz_vortrag':
+      total = task.questions.length;
+      task.questions.forEach((item, i)=>{
+        if(a[i] && item.correct && a[i].trim().toLowerCase() === item.correct.toLowerCase()) correct++;
+      });
+      break;
+    case 'kurz_begriff':
+    case 'match_personen':
+      const list = task.pairs || task.items;
+      total = list.length;
+      list.forEach((item, i)=>{
+        if(parseInt(a[i]) === item.correct) correct++;
+      });
+      break;
+    case 'summary_hoer':
+    case 'laut_schrift':
+      total = task.sentences.filter(s=>s.wrong).length;
+      task.sentences.forEach((s, i)=>{
+        if(s.wrong && a[i]) correct++;
+      });
+      break;
+    case 'mc_hoeren':
+      total = task.questions.length;
+      task.questions.forEach((q, i)=>{
+        if(parseInt(a[i]) === q.correct) correct++;
+      });
+      break;
+  }
+  return {correct, total};
+}
+
+function showResults(){
+  clearTimer();
+  document.getElementById('taskbar').innerHTML = '';
+  const test = HOREN_TESTS[currentTestIdx];
+  const nb = document.getElementById('navbar');
+  nb.innerHTML = '<button class="btn ghost" id="btnRestart">Recommencer</button><button class="btn next" id="btnMenu2">Menu</button>';
+
+  document.getElementById('btnRestart').onclick = () => {
+    hoerenAnswers[test.id] = {};
+    current = 0;
+    renderTask();
+  };
+  document.getElementById('btnMenu2').onclick = () => showTestSelect();
+
+  let sumCorrect = 0, sumTotal = 0;
+  let rows = '';
+  test.teile.forEach(task => {
+    const {correct, total} = scoreTask(task, test);
+    sumCorrect += correct; sumTotal += total;
+    rows += `<div class="result-row"><span>Aufgabe ${task.teil} - ${task.label}</span><span class="${correct === total ? 'ok' : 'no'}">${correct} / ${total}</span></div>`;
+  });
+  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+  let tdn = 'unterhalb TDN 3';
+  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)';
+
+  document.getElementById('main').innerHTML = `
+  <div class="results">
+    <div class="score-hero">
+      <div class="pct">${pct}%</div>
+      <div class="tdn">${tdn}</div>
+      <div class="tdn" style="margin-top:6px;">${sumCorrect} von ${sumTotal} Punkten erreicht</div>
+    </div>
+    <h2>Hörverstehen — Resultate</h2>
+    ${rows}
+  </div>`;
+}
+
+showTestSelect();
+</script>
+<div style="background: #3f909a; padding: 10px; text-align: center;"><a href="lesen.html" style="color: white; font-weight: bold; font-size: 1.1rem; text-decoration: none;">📖 Retour au Lesen</a></div>
+</body>
+</html>
