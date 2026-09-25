@@ -25,13 +25,25 @@ const HOREN_MT1 = [
     ]
   },
   { ...TEMPLATE_HOEREN[1],
-    instructions:'Hören Sie den Radiobeitrag und ordnen Sie die Aussagen den Begriffspaaren zu.',
-    title:'Aufgabe 2: Stadtentwicklung im Wandel',
+    instructions:'Sie hören eine Podiumsdiskussion zum Thema „Minimalismus“. Sie hören den Text einmal. Notieren Sie für jede Person auf der linken Seite, welches Ziel die Person nennt, und auf der rechten Seite das dazugehörige Vorgehen in Stichpunkten. Nach dem Hören haben Sie 3 Minuten Zeit, um Ihre Antworten zu kontrollieren.',
+    title:'Aufgabe 2: Podiumsdiskussion zum Thema „Minimalismus“',
     mediaType: 'audio',
-    mediaUrl: 'media/hoeren_t2.mp3',
-    pairs: [
-      { term: 'Ökologie vs. Wirtschaft', options: ['Aussage A', 'Aussage B', 'Beide', 'Keine'], correct: 0 },
-      { term: 'Zentrum vs. Peripherie', options: ['Aussage A', 'Aussage B', 'Beide', 'Keine'], correct: 1 }
+    mediaUrl: 'media/exercice_t2.mp3',
+    personsData: [
+      {
+        name: 'Herr Schuster',
+        fields: [
+          { label: 'Übergeordnetes Ziel', placeholder: 'Ziel 1 eingeben...' },
+          { label: 'Konkretes Vorgehen', placeholder: 'Ziel 2 eingeben...' }
+        ]
+      },
+      {
+        name: 'Frau Bach',
+        fields: [
+          { label: 'Übergeordnetes Ziel', placeholder: 'Ziel 3 eingeben...' },
+          { label: 'Konkretes Vorgehen', placeholder: 'Ziel 4 eingeben...' }
+        ]
+      }
     ]
   },
   { ...TEMPLATE_HOEREN[2],
