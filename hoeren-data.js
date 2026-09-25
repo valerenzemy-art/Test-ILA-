@@ -47,15 +47,20 @@ const HOREN_MT1 = [
     ]
   },
   { ...TEMPLATE_HOEREN[2],
-    instructions:'Hören Sie den Vortrag. Kreuzen Sie genau die Sätze an, die falsche Informationen enthalten.',
-    title:'Aufgabe 3: Künstliche Photosynthese',
+    instructions:'Sie hören einen Ausschnitt aus einer Vorlesung im Fach Entwicklungspsychologie zum Thema „Kindheitsamnesie“. Sie hören den Text einmal. Machen Sie sich beim Hören Notizen. Nach dem Hörtext sehen Sie eine schriftliche Zusammenfassung. Finden Sie die zwei Sätze in der Zusammenfassung, die falsche Informationen enthalten.',
+    title:'Aufgabe 3: Kindheitsamnesie',
     mediaType: 'audio',
     mediaUrl: 'media/hoeren_t3.mp3',
-    sentences:[
-      {text:'Die künstliche Photosynthese wandelt Sonnenlicht direkt in chemische Energie um.', wrong:false},
-      {text:'Als Endprodukt entsteht ausschließlich reines Trinkwasser.', wrong:true},
-      {text:'Die Technologie befindet sich derzeit noch im experimentellen Laborstadium.', wrong:false},
-      {text:'Kommerzielle Anlagen decken bereits 50 Prozent des Energiebedarfs.', wrong:true}
+    segments:[
+      { text: 'Schon seit Langem ist wissenschaftlich bekannt, dass die frühesten Erinnerungen bei erwachsenen Menschen etwa im Alter von drei Jahren beginnen.', wrong: false },
+      { text: 'Psychologen erklären dazu, dass sich Kinder im Alter von zwei bis drei Jahren kaum an vergangene Ereignisse erinnern.', wrong: false },
+      { text: 'Doch anschließend passiert eine Veränderung im Gedächtnis.', wrong: false },
+      { text: 'Forscherinnen untersuchten in einer Studie, wann die Erinnerungen von Kindern an ihre ersten Lebensjahre zu verschwinden beginnen.', wrong: false },
+      { text: 'Sie stellten fest, dass dieses Phänomen im Alter von fünf bis neun Jahren immer stärker zu beobachten ist.', wrong: false },
+      { text: 'Eine Erklärung dafür kann sein, dass im Gedächtnis von kleinen Kindern Erinnerungen in nichtsprachlicher Form abgespeichert werden.', wrong: false },
+      { text: 'Mit zunehmendem Alter erfolgt das Abspeichern mehr in sprachlicher Form.', wrong: false },
+      { text: 'Die sprachliche Entwicklung erschwert die Erinnerung an frühkindliche Erlebnisse.', wrong: false },
+      { text: 'Erinnerungen an Ereignisse aus der frühen Kindheit können Kinder schlechter in nichtsprachlicher als in sprachlicher Form beschreiben.', wrong: true }
     ]
   },
   { ...TEMPLATE_HOEREN[3],
