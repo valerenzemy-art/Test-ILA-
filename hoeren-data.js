@@ -15,7 +15,7 @@ const HOREN_MT1 = [
     instructions:'Sie hören ein Gespräch zwischen zwei Studierenden und einer Bibliotheksmitarbeiterin zum Thema „Orientierung in der Bibliothek“. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.',
     title:'Aufgabe 1: Orientierung in der Bibliothek',
     mediaType: 'audio',
-    mediaUrl: 'media/consigne_t1.mp3',
+    mediaUrl: 'media/exercice_t1.mp3', // Point vers l'audio principal de l'exercice 1
     questions:[
       { q: 'Nutzung der Schließfächer:', correct: 'Montag bis Sonntag' },
       { q: 'Erlaubte Getränke in der Bibliothek:', correct: 'Wasser' },
@@ -90,7 +90,7 @@ const HOREN_MT1 = [
     sentences:[
       {text:'Im gesprochenen Text wird von Nanopartikeln statt von Mikropartikeln berichtet.', wrong:false},
       {text:'Die genannte Jahreszahl im Audio weicht vom geschriebenen Text ab.', wrong:true},
-      {text:'Der medizinische Fachbegriff wurde im Skript korrekt wiedergegeben.', wrong:false},
+      {text:'Der medizinische Fachbegrieff wurde im Skript korrekt wiedergegeben.', wrong:false},
       {text:'Im Audio wird eine höhere Erfolgsquote genannt als im gedruckten Text.', wrong:true}
     ]
   }
