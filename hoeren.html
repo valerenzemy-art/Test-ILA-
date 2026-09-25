@@ -179,12 +179,23 @@ function renderTask(){
     const playlist = [
       { type: 'audio', src: 'media/consigne_t1.mp3' },
       { type: 'pause', duration: 15000 },
-      { type: 'audio', src: 'media/exercice_t1.mp3' }
+      { type: 'audio', src: 'media/exercice_t1.mp3' },
+      { type: 'pause_end', duration: 20000 } // 20 secondes de pause à la fin pour vérifier les réponses
     ];
     let currentIndex = 0;
 
     function playSequence(index) {
-      if (index >= playlist.length) return;
+      if (index >= playlist.length) {
+        // Fin de la séquence : passage automatique à l'exercice suivant
+        const test = HOREN_TESTS[currentTestIdx];
+        if (current < test.teile.length - 1) {
+          current++;
+          renderTask();
+        } else {
+          showResults();
+        }
+        return;
+      }
       let currentItem = playlist[index];
 
       if (currentItem.type === 'audio') {
@@ -197,7 +208,7 @@ function renderTask(){
           currentIndex++;
           playSequence(currentIndex);
         };
-      } else if (currentItem.type === 'pause') {
+      } else if (currentItem.type === 'pause' || currentItem.type === 'pause_end') {
         player.pause();
         player.removeAttribute('src');
         setTimeout(function() {
