@@ -119,7 +119,7 @@ function renderTask(){
   main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
 
-  // Gestion des séquences audio automatiques (Teil 1 et Teil 2)
+  // Séquence audio pour Teil 1
   if(task.teil === 1) {
     const player = document.getElementById('sequentialAudio');
     const playlist = [
@@ -154,13 +154,14 @@ function renderTask(){
       if (!sequenceStarted) { sequenceStarted = true; currentIndex = 0; player.pause(); playSequence(0); }
     });
   } 
+  // Séquence audio pour Teil 2 (Consigne -> Exercice sans pause -> 3 minutes de pause finale)
   else if(task.teil === 2) {
     const player = document.getElementById('sequentialAudio');
     const statusText = document.getElementById('mediaStatus');
     const playlist = [
       { type: 'audio', src: 'media/consigne_t2.mp3', label: '🎧 Anweisung wird abgespielt...' },
       { type: 'audio', src: 'media/exercice_t2.mp3', label: '🎧 Podiumsdiskussion läuft...' },
-      { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit...' } // 3 minutes = 180 000 ms
+      { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit...' } // 180 000 ms = 3 minutes
     ];
     let currentIndex = 0;
 
@@ -403,7 +404,7 @@ function scoreTask(task, test){
       if(task.teil === 2) {
         total = 4;
         for(let i=0; i<4; i++){
-          if(a[i] && a[i].trim().length > 0) correct++; // Comptabilisé s'il y a du texte rempli
+          if(a[i] && a[i].trim().length > 0) correct++;
         }
       } else {
         const list = task.pairs || task.items;
