@@ -26,45 +26,7 @@
 <script>
 let currentTestIdx = 0;
 let current = 0;
-let timerInterval = null;
-let remaining = 0;
 const hoerenAnswers = {};
-
-function fmt(sec){
-  const m = Math.floor(sec/60).toString().padStart(2,'0');
-  const s = Math.floor(sec%60).toString().padStart(2,'0');
-  return m+":"+s;
-}
-function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
-
-function startTimer(seconds){
-  clearTimer(); remaining = seconds; updateTimerDisplay();
-  timerInterval = setInterval(()=>{
-    remaining--;
-    if(remaining <= 0){ 
-      remaining = 0; 
-      updateTimerDisplay(); 
-      clearTimer(); 
-      const test = HOREN_TESTS[currentTestIdx];
-      if(current === test.teile.length - 1){ 
-        showResults(); 
-      } else { 
-        current++; 
-        renderTask(); 
-      }
-    } else { 
-      updateTimerDisplay(); 
-    }
-  },1000);
-}
-
-function updateTimerDisplay(){
-  const el = document.getElementById('timerText');
-  const circle = document.getElementById('timerCircle');
-  if(!el) return;
-  el.textContent = fmt(remaining);
-  if(remaining <= 30){ circle.classList.add('warn'); } else { circle.classList.remove('warn'); }
-}
 
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -77,7 +39,6 @@ function getBucket(test, task){
 }
 
 function showTestSelect(){
-  clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   document.getElementById('navbar').innerHTML = '';
   let cards = '';
@@ -108,14 +69,9 @@ function renderTaskbar(task, test){
         <span class="n">${task.teil}</span><span class="of">/${test.teile.length}</span>
       </div>
     </div>
-    <div class="timer-wrap">
-      <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
-      <div class="timer-caption">verbleibend</div>
-    </div>
-    <div class="instructions">
+    <div class="instructions" style="flex: 1; margin-left: 20px;">
       <div class="title">${task.label}</div>
       <p>${task.instructions}</p>
-      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
     </div>
   `;
 }
@@ -139,7 +95,6 @@ function renderTask(){
   const test = HOREN_TESTS[currentTestIdx];
   const task = test.teile[current];
   renderTaskbar(task, test);
-  startTimer(task.time);
   
   const main = document.getElementById('main');
   
@@ -422,7 +377,6 @@ function scoreTask(task, test){
 }
 
 function showResults(){
-  clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   const test = HOREN_TESTS[currentTestIdx];
   const nb = document.getElementById('navbar');
