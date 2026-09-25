@@ -33,7 +33,7 @@ const TEMPLATE_HOEREN = [
 
 const HOREN_MT1 = [
   { ...TEMPLATE_HOEREN[0],
-    instructions:'Sie hören ein Gespräch zwischen zwei Studierenden und einer Bibliotheksmitarbeiterin zum Thema „Orientierung in der Bibliothek“. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle.',
+    instructions:'Sie hören ein Gespräch zwischen zwei Studierenden und einer Bibliotheksmitarbeiterin zum Thema „Orientierung in der Bibliothek“. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.',
     title:'Aufgabe 1: Orientierung in der Bibliothek',
     mediaType: 'audio',
     mediaUrl: 'media/consigne_t1.mp3',
@@ -338,15 +338,89 @@ function renderTask(){
 
 function renderKurzAntwort(task, test, body){
   const a = getBucket(test, task);
-  let html = '<div class="passage" style="display:flex; flex-direction:column; gap:12px;">';
-  task.questions.forEach((item, qi)=>{
-    html += `<div style="display:flex; align-items:center; gap:10px;">
-      <strong style="min-width:250px;">${escapeHtml(item.q)}</strong>
-      <input type="text" class="kurz-input" data-qi="${qi}" value="${escapeHtml(a[qi]||'')}" placeholder="Antwort eingeben..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px;">
-    </div>`;
-  });
-  html += '</div>';
-  body.innerHTML = html;
+  
+  if(task.teil === 1) {
+    // Structure spécifique exacte de l'Aufgabe 1 (Tableau "Nutzung der Universitätsbibliothek")
+    let html = `
+      <div class="passage" style="max-width: 800px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 20px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Nutzung der Universitätsbibliothek</h3>
+        
+        <div style="border: 1px solid #b5b5b5; display: flex; flex-direction: column;">
+          
+          <!-- 1. Öffnungszeiten -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten:</div>
+            <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 8.00 bis 24.00 Uhr</div>
+            <div style="font-size: 0.95rem; color: #333;">Samstag und Sonntag 8.00 bis 23.00 Uhr</div>
+          </div>
+
+          <!-- 2. Nutzung der Schließfächer (CHAMP 1) -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Nutzung der Schließfächer:</div>
+            <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">Montag bis Sonntag</div>
+            <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+          </div>
+
+          <!-- 3. Öffnungszeiten Bibliothekscafé -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten Bibliothekscafé:</div>
+            <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 10.00 bis 18.00 Uhr</div>
+          </div>
+
+          <!-- 4. Erlaubte Getränke in der Bibliothek (CHAMP 2) -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Erlaubte Getränke in der Bibliothek:</div>
+            <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+          </div>
+
+          <!-- 5. Maximale Ausleihfrist für Bücher (CHAMP 3) -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Maximale Ausleihfrist für Bücher:</div>
+            <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+          </div>
+
+          <!-- 6. Strafgebühr bei verspäteter Bücherrückgabe -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Strafgebühr bei verspäteter Bücherrückgabe:</div>
+            <div style="font-size: 0.95rem; color: #333;">Fünf Euro pro Buch pro Tag</div>
+          </div>
+
+          <!-- 7. Nicht ausleihbare Bücher (CHAMP 4) -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Nicht ausleihbare Bücher:</div>
+            <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+          </div>
+
+          <!-- 8. Fernleihe -->
+          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Fernleihe:</div>
+            <div style="font-size: 0.95rem; color: #333;">Bücher kommen innerhalb von zwei bis drei Tagen</div>
+          </div>
+
+          <!-- 9. Lernräume für Lerngruppen (CHAMP 5) -->
+          <div style="padding: 12px 15px;">
+            <div style="font-weight: bold; margin-bottom: 4px;">Lernräume für Lerngruppen:</div>
+            <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">2. Stock,</div>
+            <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+          </div>
+
+        </div>
+      </div>
+    `;
+    body.innerHTML = html;
+  } else {
+    // Autres tâches de type kurz_vortrag / autres
+    let html = '<div class="passage" style="display:flex; flex-direction:column; gap:12px;">';
+    task.questions.forEach((item, qi)=>{
+      html += `<div style="display:flex; align-items:center; gap:10px;">
+        <strong style="min-width:250px;">${escapeHtml(item.q)}</strong>
+        <input type="text" class="kurz-input" data-qi="${qi}" value="${escapeHtml(a[qi]||'')}" placeholder="Antwort eingeben..." style="flex:1; padding:8px; border:1px solid #ccc; border-radius:4px;">
+      </div>`;
+    });
+    html += '</div>';
+    body.innerHTML = html;
+  }
+
   body.querySelectorAll('.kurz-input').forEach(inp=>{
     inp.addEventListener('input', ()=> a[inp.dataset.qi] = inp.value);
   });
