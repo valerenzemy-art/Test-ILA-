@@ -33,14 +33,16 @@ const TEMPLATE_HOEREN = [
 
 const HOREN_MT1 = [
   { ...TEMPLATE_HOEREN[0],
-    instructions:'Hören Sie das Gespräch und ergänzen Sie die Übersicht durch Texteingabe.',
-    title:'Aufgabe 1: Das akademische Mentoring-Programm',
+    instructions:'Sie hören ein Gespräch zwischen zwei Studierenden und einer Bibliotheksmitarbeiterin zum Thema „Orientierung in der Bibliothek“. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle.',
+    title:'Aufgabe 1: Orientierung in der Bibliothek',
     mediaType: 'audio',
-    mediaUrl: 'media/consigne_t1.mp3', // Point de départ de la séquence double-audio
+    mediaUrl: 'media/consigne_t1.mp3',
     questions:[
-      { q: 'Zielgruppe des Programms:', correct: 'Studierende' },
-      { q: 'Dauer der Betreuung:', correct: 'ein Semester' },
-      { q: 'Wöchentlicher Zeitaufwand:', correct: 'zwei Stunden' }
+      { q: 'Nutzung der Schließfächer:', correct: 'Montag bis Sonntag' },
+      { q: 'Erlaubte Getränke in der Bibliothek:', correct: 'Wasser' },
+      { q: 'Maximale Ausleihfrist für Bücher:', correct: 'vier Wochen' },
+      { q: 'Nicht ausleihbare Bücher:', correct: 'Präsenzbestand' },
+      { q: 'Lernräume für Lerngruppen:', correct: '2. Stock' }
     ]
   },
   { ...TEMPLATE_HOEREN[1],
@@ -241,7 +243,6 @@ function renderTask(){
   let mediaHtml = '';
   if(task.mediaType === 'audio' && task.mediaUrl){
     if(task.teil === 1) {
-      // Lecteur séquentiel spécial pour l'Aufgabe 1 (Consigne -> Pause 15s -> Exercice)
       mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
         <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
         <audio id="sequentialAudio" controls controlsList="nodownload" style="width:100%; max-width:500px;">
@@ -270,7 +271,6 @@ function renderTask(){
   main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
 
-  // Initialisation de la logique séquentielle si on est sur Aufgabe 1
   if(task.teil === 1) {
     const player = document.getElementById('sequentialAudio');
     const playlist = [
