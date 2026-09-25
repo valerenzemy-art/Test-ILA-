@@ -1022,35 +1022,37 @@ function showResults(){
     document.getElementById('taskbar').innerHTML = '';
     const test = TESTS[currentTestIdx];
     const nb = document.getElementById('navbar');
-    
-    // On recrée proprement les boutons de navigation pour les résultats
-    nb.innerHTML = `<button class="btn ghost" id="btnRestart">Recommencer</button><button class="btn ghost" id="btnMenu2">Modelltests</button>`;
-    
-    document.getElementById('btnRestart').onclick = () => { 
-        answers[test.id] = {}; 
-        current = 0; 
-        renderTask(); 
+
+    nb.innerHTML = '<button class="btn ghost" id="btnRestart">Recommencer</button><button class="btn next" id="btnMenu2">Menu</button>';
+
+    document.getElementById('btnRestart').onclick = () => {
+        answers[test.id] = {};
+        current = 0;
+        renderTask();
     };
     document.getElementById('btnMenu2').onclick = () => showTestSelect();
-  let sumCorrect = 0, sumTotal = 0;
-  let rows = '';
-  test.teile.forEach(task=>{
-    const {correct, total} = scoreTask(task, test);
-    sumCorrect += correct; sumTotal += total;
-    rows += `<div class="result-row"><span>Aufgabe ${task.teil} — ${task.label}</span><span class="${correct===total?'ok':'no'}">${correct} / ${total}</span></div>`;
-  });
-  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
-  let tdn = 'unterhalb TDN 3';
-  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)'; else if(pct >= 44) tdn = 'TDN 3 (B2)';
 
-  document.getElementById('main').innerHTML = `
+    let sumCorrect = 0, sumTotal = 0;
+    let rows = '';
+    test.teile.forEach(task => {
+        const {correct, total} = scoreTask(task, test);
+        sumCorrect += correct; sumTotal += total;
+        rows += `<div class="result-row"><span>Aufgabe ${task.teil} - ${task.label}</span><span class="${correct === total ? 'ok' : 'no'}">${correct} / ${total}</span></div>`;
+    });
+    const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+    let tdn = 'unterhalb TDN 3';
+    if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)';
+
+    document.getElementById('main').innerHTML = `
     <div class="results">
-      <div class="score-hero"><div class="pct">${pct}%</div><div>${sumCorrect} von ${sumTotal} Punkten</div><div class="tdn">Einstufung: ${tdn}</div></div>
-      <h2>Ergebnisse — ${test.title}</h2>
+      <div class="score-hero">
+        <div class="pct">${pct}%</div>
+        <div class="tdn">${tdn}</div>
+        <div class="tdn" style="margin-top:6px;">${sumCorrect} von ${sumTotal} Punkten erreicht</div>
+      </div>
+      <h2>Détails des résultats</h2>
       ${rows}
-      <p class="keylist" style="margin-top:16px;">Systematische C1-Bewertung im digitalen TestDaF-Standard.</p>
-    </div>
-  `;
+    </div>`;
 }
 
 showTestSelect();
