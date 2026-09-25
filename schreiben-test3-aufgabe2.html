@@ -2,189 +2,281 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modelltest 3 – Aufgabe 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelltest 3 – Aufgabe 2 – TestDaF Schreiben</title>
 <style>
-    :root {
-        --primary: #4f46e5;
-        --primary-dark: #4338ca;
-        --bg-color: #f8fafc;
-        --card-bg: #ffffff;
-        --text-main: #1e293b;
-        --text-muted: #64748b;
-        --border: #e2e8f0;
-    }
-    * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        background: var(--bg-color);
-        color: var(--text-main);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    header {
-        background: var(--card-bg);
-        border-bottom: 1px solid var(--border);
-        padding: 12px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-    .header-title { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
-    .timer-badge {
-        background: #eef2ff;
-        color: var(--primary);
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-    .timer-badge.warn { color: #d9822b; background: #fdf6ec; }
-    .timer-badge.over { color: #c0392b; background: #fdf0ee; }
-
-    .workspace {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        flex: 1;
-        overflow: hidden;
-    }
-    @media (max-width: 900px) {
-        .workspace { grid-template-columns: 1fr; overflow-y: auto; height: auto; }
-    }
-
-    .left-panel {
-        padding: 30px;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-        background: var(--card-bg);
-    }
-    .task-card {
-        background: #f1f5f9;
-        border-left: 4px solid var(--primary);
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-    .task-card h2 { margin-top: 0; font-size: 1.1rem; color: var(--text-main); }
-    .source-section { margin-top: 20px; }
-    .source-section h3 { font-size: 1rem; color: var(--text-main); margin-bottom: 10px; border-bottom: 2px solid var(--border); padding-bottom: 5px; }
-    .source-section p { font-size: 0.93rem; line-height: 1.6; color: var(--text-muted); text-align: justify; hyphens: auto; }
-
-    .right-panel {
-        padding: 30px;
-        display: flex;
-        flex-direction: column;
-        background: var(--bg-color);
-    }
-    .editor-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    }
-    textarea {
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 20px;
-        font-size: 1rem;
-        line-height: 1.6;
-        font-family: inherit;
-        resize: none;
-        background: transparent;
-    }
-    .editor-footer {
-        padding: 12px 20px;
-        border-top: 1px solid var(--border);
-        background: #f8fafc;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-    }
-    .btn {
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: background 0.2s;
-    }
-    .btn:hover { background: var(--primary-dark); }
-    .back-link { display: inline-block; margin-bottom: 15px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
-    .back-link:hover { color: var(--text-main); }
+:root{--bg:#eef1f4;--card:#fff;--ink:#1b2430;--sub:#5b6675;--line:#e3e7eb;--navy:#2f3d52;--navy-d:#232e3f;--red:#e2574c;--yellow:#ffd54f;--yellow-d:#f3c02f;--green:#4fa07a;--green-d:#3d8a67;--shadow:0 2px 10px rgba(20,30,45,.07)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:5;background:#fff;box-shadow:var(--shadow);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.02rem;color:var(--navy);white-space:nowrap}
+.brand span{color:var(--red)}
+.ctl{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.ctl button{border:0;padding:8px 15px;border-radius:999px;cursor:pointer;font:inherit;font-weight:700;font-size:.85rem;background:var(--bg);color:var(--navy)}
+.ctl button.primary{background:var(--navy);color:#fff}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.3rem;color:var(--navy);background:var(--bg);border-radius:10px;padding:4px 12px}
+.timer.warn{color:#a86a00;background:#fff2cf}.timer.over{color:#fff;background:var(--red)}
+.banner{background:var(--red);color:#fff;padding:9px 18px;text-align:center;font-weight:700;font-size:.92rem}
+.hidden{display:none}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;padding:20px 22px 60px;max-width:1180px;margin:0 auto}
+.panel.left{position:sticky;top:66px;max-height:calc(100vh - 90px);overflow-y:auto;padding-right:4px}
+@media(max-width:900px){.split{grid-template-columns:1fr;padding:16px 14px 50px}.panel.left{position:static;max-height:none}}
+.meta{background:linear-gradient(180deg,var(--yellow),var(--yellow-d));border-left:6px solid var(--red);border-radius:14px;padding:14px 18px;font-weight:800;font-size:1.02rem;color:#3a2e05;text-align:center;box-shadow:var(--shadow);margin-bottom:16px}
+.card{background:var(--card);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.task h2{display:inline-block;background:var(--red);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:6px 15px;border-radius:999px;margin:0 0 14px}
+.task p{margin:8px 0;font-size:.98rem}
+.task p strong{color:var(--navy-d)}
+.source{background:var(--card);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow)}
+.source h3{margin:0 0 16px;font-size:1.2rem;font-weight:800;text-align:center;color:var(--navy-d)}
+.source p{margin:0 0 12px;font-size:.94rem;text-align:justify;hyphens:auto;color:#333}
+figure{margin:18px 0 0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+figure figcaption{background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;padding:8px 14px;text-align:center}
+figure svg{display:block;background:#fff}
+.status-card{background:var(--card);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.stat{background:var(--bg);border-radius:10px;padding:8px 14px;font-weight:700;font-size:.9rem;color:var(--navy-d);font-variant-numeric:tabular-nums}
+.stat.bad b{color:var(--red)}
+.stat b{color:var(--green-d)}
+.tools{margin-left:auto;display:flex;gap:8px}
+.tools button{border:0;padding:9px 16px;border-radius:12px;cursor:pointer;font:inherit;font-weight:700;font-size:.85rem}
+#copy{background:linear-gradient(160deg,#6cc79c,var(--green-d));color:#fff;box-shadow:0 3px 10px rgba(61,138,103,.35)}
+#clear{background:var(--bg);color:var(--navy-d)}
+.writecard{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:6px}
+textarea{display:block;width:100%;border:0;outline:0;resize:vertical;min-height:480px;padding:16px;border-radius:14px;font:1.02rem/1.7 "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:#fff}
+textarea::placeholder{color:#9aa5b1}
+textarea.locked{background-color:#f4f6f7;color:#444;cursor:not-allowed}
+.goalrow{margin-top:8px;font-size:.85rem;color:var(--sub);text-align:right}
+.ok{color:var(--green-d);font-weight:700}.no{color:var(--red);font-weight:700}
+.tips{font-size:.85rem;color:var(--sub);margin-top:14px;background:var(--bg);border-radius:10px;padding:10px 14px}
+.eval{margin-top:20px;background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:20px 22px}
+.eval h2{margin:0 0 6px;font-size:1.08rem;color:var(--navy-d)}
+.eval h3{font-size:.98rem;margin:16px 0 8px}
+.hint{font-size:.83rem;color:var(--sub);margin:4px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{font-size:.82rem;padding:4px 11px;border-radius:999px;font-weight:600}
+.chip.ok{color:var(--green-d);background:#e6f5ee}
+.chip.no{color:var(--red);background:#fdeceb}
+.crit{margin:12px 0}.crit p{margin:0 0 6px;font-size:.9rem}
+.rate{display:flex;gap:5px;flex-wrap:wrap}
+.rate button{border:0;background:var(--bg);padding:6px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:.82rem;font-weight:600;color:var(--navy-d)}
+.rate button.on{background:var(--navy);color:#fff}
+.cta{margin-top:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.cta button{border:0;background:var(--navy);color:#fff;padding:10px 18px;border-radius:12px;cursor:pointer;font:inherit;font-weight:700}
+.cta a{color:var(--navy-d);font-size:.9rem;font-weight:600}
+.corr{margin-top:16px;border-top:2px solid var(--line);padding-top:14px;font-size:.93rem;line-height:1.65}
+.score{font-weight:800;color:var(--navy-d);margin-top:14px;font-size:1.02rem}
+button:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:560px){.topbar{padding:9px 12px}.timer{font-size:1.1rem}}
 </style>
 </head>
 <body>
+<div class="topbar">
+  <span class="brand">TestDaF <span>Schreiben</span> · Modelltest 3 – Aufgabe 2</span>
+  <div class="ctl">
+    <button class="primary" id="start">Start</button>
+    <button id="submit">Abgeben</button>
+    <button id="reset">Reset</button>
+  </div>
+  <div class="timer" id="timer">30:00</div>
+</div>
+<div class="banner hidden" id="banner"></div>
 
-    <header>
-        <span class="header-title">Modelltest 3 — Aufgabe 2</span>
-        <div class="timer-badge" id="timer">30:00</div>
-    </header>
-
-    <div class="workspace">
-        <div class="left-panel">
-            <a href="schreiben-test3.html" class="back-link">← Zurück zu Modelltest 3</a>
-            
-            <div class="task-card">
-                <h2>Aufgabenstellung</h2>
-                <p>Fassen Sie die Informationen aus dem Text und der Grafik zusammen. (Modelltest 3)</p>
-                <p><em>Schreiben Sie ca. 100–150 Wörter. Zeit: 30 Minuten.</em></p>
-            </div>
-
-            <div class="source-section">
-                <h3>Textquelle</h3>
-                <p>Hier kannst du den Text für Modelltest 3 – Aufgabe 2 einfügen.</p>
-            </div>
+<main class="split">
+  <section class="panel left">
+    <div class="meta" id="meta"></div>
+<section class="task-block" data-kind="summary" data-min="100" data-max="150" data-time="30" data-keys='{"Grafik-Informationen": ["cortisol|stresshormon", "problemlös", "korrelation|zusammenhang"], "Text-Informationen": ["ressource|realitätsverweigerung|euphorie|missverstand", "rückschläge|hürden|überwindbar|temporär", "stress|angst|regeneration|gesund", "sozial|umfeld|unterstützung|bindung", "ausdauer|langfristig|ziele|feedback"]}'>
+        <div class="task">
+          <h2>Aufgabe 2/2</h2>
+          <p>In Ihrem Seminar für Psychologie schreiben Sie eine Hausarbeit zum Thema „Mentale Gesundheit und menschliche Widerstandskraft“. In einem Abschnitt wollen Sie sich mit folgender Frage beschäftigen:<br><strong>Welche Bedeutung hat Optimismus für die Bewältigung von Krisen und widrigen Lebensumständen?</strong><br>Fassen Sie zu dieser Frage Informationen aus dem Text und der Grafik zusammen. Benutzen Sie eigene Formulierungen. Das Abschreiben von Textpassagen ist nicht erlaubt.</p>
+          <p>Schreiben Sie <strong>ca. 100–150 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
         </div>
-
-        <div class="right-panel">
-            <div class="editor-container">
-                <textarea id="ta" placeholder="Schreiben Sie hier Ihre Zusammenfassung..."></textarea>
-                <div class="editor-footer">
-                    <div><b id="wc">0</b> Wörter</div>
-                    <button class="btn" id="copy">Text kopieren</button>
-                </div>
-            </div>
+        <div class="source">
+          <h3>Optimismus als psychologische Überlebensstrategie</h3>
+          <p>In einer von Krisen, Planungsunsicherheiten und permanenter Belastung geprägten Epoche wird Optimismus häufig fälschlicherweise als naive Realitätsverweigerung oder blinde Euphorie missverstanden. Die moderne psychologische Forschung zeichnet jedoch ein gänzlich anderes Bild und definiert eine zuversichtliche Grundhaltung als unverzichtbare mentale Ressource. Aus neurobiologischer Sicht befähigt Optimismus den Menschen dazu, auch unter widrigsten Bedingungen – symbolisiert durch das Aufkeimen von Leben selbst im harten Asphalt – lösungsorientierte Handlungsoptionen zu erkennen. Anstatt in destruktiver Starre zu verharren, bewerten optimistische Individuen unvorhersehbare Rückschläge als temporäre und überwindbare Hürden. Diese kognitive Neubewertung schützt das psychische Immunsystem vor chronischem Stress, reduziert Angstsymptome signifikant und fördert gleichzeitig die physische Regeneration bei körperlichen Erkrankungen.</p>
+          <p>Darüber hinaus zeigt sich, dass eine positive Lebenseinstellung die soziale Bindungskraft und die berufliche Leistungsfähigkeit maßgeblich erhöht. Menschen mit einer ausgeprägten Zuversicht neigen eher dazu, proaktive Strategien zur Problemlösung zu entwickeln und Unterstützung in ihrem sozialen Umfeld zu aktivieren. Langzeitstudien belegen zudem, dass optimistische Persönlichkeiten eine höhere Ausdauer bei der Erreichung langfristiger Ziele aufweisen, da sie Misserfolge als konstruktives Feedback anstatt als persönliches Endurteil begreifen. Zusammenfassend lässt sich konstatieren, dass Optimismus keineswegs die Augen vor realen Gefahren verschließt, sondern vielmehr das Fundament darstellt, auf dem innere Stärke, Anpassungsfähigkeit und nachhaltiger persönlicher Erfolg gedeihen.</p>
+          <figure>
+            <figcaption>Einfluss von Optimismus auf die Stressbewältigung</figcaption>
+            <svg viewBox="0 0 600 230" width="100%" role="img" aria-label="Einfluss von Optimismus auf die Stressbewältigung" font-family="Segoe UI,Arial,sans-serif" font-size="12"><rect x="15" y="85" width="190" height="60" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="110.0" y="111.0" text-anchor="middle" fill="#1f2a2c">Optimistische</text><text x="110.0" y="127.0" text-anchor="middle" fill="#1f2a2c">Grundhaltung</text><rect x="360" y="15" width="225" height="70" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="472.5" y="46.0" text-anchor="middle" fill="#1f2a2c">Schnellere Cortisol-Normalisierung</text><text x="472.5" y="62.0" text-anchor="middle" fill="#1f2a2c">nach Krisensituationen</text><rect x="360" y="145" width="225" height="70" rx="5" fill="#e6efee" stroke="#2d6f78"/><text x="472.5" y="176.0" text-anchor="middle" fill="#1f2a2c">Gesteigerte Problemlösungs-</text><text x="472.5" y="192.0" text-anchor="middle" fill="#1f2a2c">kompetenz im Beruf</text><g stroke="#2d6f78" stroke-width="2" fill="none"><path d="M207 105L356 55"/><path d="M207 125L356 175"/></g><g fill="#2d6f78"><path d="M358 54l-9 1 4 7z"/><path d="M358 176l-9-1 4-7z"/></g><text x="255" y="70" text-anchor="middle" fill="#2d6f78" font-weight="600">Korrelation</text><text x="255" y="192" text-anchor="middle" fill="#2d6f78" font-weight="600">Korrelation</text></svg>
+          </figure>
         </div>
+        </section>
+
+      </section>
+  </section>
+  <section class="panel right">
+    <div class="status-card">
+      <div class="stat">Wörter: <b id="wc">0</b>/<span id="wgoal">–</span></div>
+      <div class="stat">Zeichen: <b id="ch">0</b></div>
+      <div class="tools"><button id="copy">Text kopieren</button><button id="clear">Leeren</button></div>
     </div>
-
-<script>
-let time = 30 * 60;
-const tm = document.getElementById('timer');
-const ta = document.getElementById('ta');
-
-const timerInterval = setInterval(() => {
-  let m = Math.floor(time / 60), s = time % 60;
-  tm.textContent = String(m).padStart(2,'0') + ":" + String(s).padStart(2,'0');
-  if(time <= 180) tm.className = "timer-badge warn";
-  if(time <= 0) {
-    tm.className = "timer-badge over";
-    clearInterval(timerInterval);
-  } else {
-    time--;
+    <div class="writecard">
+      <textarea id="ta" spellcheck="false" placeholder="Fangen Sie hier an zu schreiben …" aria-label="Schreibfeld"></textarea>
+    </div>
+    <p class="goalrow" id="goal"></p>
+    <p class="tips" id="tips"></p>
+    <section id="eval" class="eval hidden"></section>
+  </section>
+</main>
+<script>(function(){
+  var $=function(i){return document.getElementById(i)};
+  var CRIT={
+    argument:["Sprachliche Mittel: Verfügen Sie über ausreichend Grammatik, Wortschatz und Redemittel, um sich angemessen und präzise auszudrücken?",
+      "Bleibt der Text trotz sprachlicher Fehler gut verständlich?",
+      "Aufgabenstellung: Wurden alle Aspekte behandelt (positiv und negativ, Einzelner und Gesellschaft, begründet)?",
+      "Ist der Text nachvollziehbar und strukturiert?"],
+    summary:["Wurden beide Quellen (Text und Grafik) berücksichtigt?",
+      "Sind die Informationen in Bezug auf die Fragestellung inhaltlich korrekt zusammengefasst?",
+      "Wurden eigene Formulierungen benutzt (kein Abschreiben von Textpassagen)?",
+      "Bleibt der Text trotz sprachlicher Fehler gut verständlich?"]
+  };
+  var TIPS={
+    argument:"Struktur: Einleitung (Thema, Ihre Position) – Vorteile für den Einzelnen – Vorteile für die Gesellschaft – Nachteile für beide – Fazit. Verwenden Sie Konnektoren und begründen Sie jede Aussage mit Beispiel oder Folge.",
+    summary:"Keine eigene Meinung. Geben Sie Text und Grafik in eigenen Worten wieder. Nutzen Sie Passiv, Nominalisierungen und Konjunktiv I für Fremdmeinungen."
+  };
+  var LV=["nicht erfüllt","teilweise","weitgehend","voll erfüllt"];
+  var CONN=["einerseits","andererseits","jedoch","dennoch","deshalb","daher","außerdem","zudem","darüber hinaus","folglich","dagegen","hingegen","zwar","obwohl","allerdings","zunächst","abschließend","zusammenfassend","insgesamt","beispielsweise","weil","während","dadurch","somit"];
+  var STORE="tdf_mt3_a2_v1";
+  var k=(function(){var b=document.querySelector(".task-block");
+    return{el:b,kind:b.dataset.kind||"argument",min:+b.dataset.min||0,max:b.dataset.max?+b.dataset.max:null,time:(+b.dataset.time||30)*60,
+      keys:b.dataset.keys?JSON.parse(b.dataset.keys):null,aspects:b.dataset.aspects?JSON.parse(b.dataset.aspects):null};
+  })();
+  var run=null,end=0,sampleFn=null,left=k.time,text="",done=false,ev=[-1,-1,-1,-1],corr="";
+  var ta=$("ta"),tm=$("timer");
+  try{
+    var s=JSON.parse(localStorage.getItem(STORE)||"null");
+    if(s){text=s.text||"";left=(s.left!=null?s.left:k.time);done=!!s.done;ev=s.ev||ev;corr=s.corr||""}
+  }catch(e){}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify({text:text,left:left,done:done,ev:ev,corr:corr}))}catch(e){}}
+  function fmt(t){var m=Math.floor(Math.abs(t)/60),s=Math.abs(t)%60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+  function words(t){var m=t.trim().match(/\S+/g);return m?m.length:0}
+  function locked(){return done||left<=0}
+  function startLabel(){return left<k.time&&left>0?"Weiter":"Start"}
+  function goal(){return k.max?"Ziel: "+k.min+"–"+k.max+" Wörter":"Ziel: mindestens "+k.min+" Wörter"}
+  function norm(s){return s.toLowerCase().replace(/[^a-zäöüß0-9\s]/g," ").split(/\s+/).filter(Boolean)}
+  function grams(a){var o={},i;for(i=0;i+4<=a.length;i++)o[a.slice(i,i+4).join(" ")]=1;return o}
+  function chk(ok,t){return'<span class="chip '+(ok?"ok":"no")+'">'+(ok?"✓ ":"✗ ")+t+"</span>"}
+  function auto(){
+    var t=ta.value,l=t.toLowerCase(),n=words(t),h="",c=0,key;
+    h+=chk(n>=k.min&&(!k.max||n<=k.max+10),n+" Wörter ("+goal().replace("Ziel: ","")+")");
+    if(k.kind==="argument"){
+      var f=CONN.filter(function(x){return l.indexOf(x)>-1});
+      h+=chk(f.length>=5,f.length+" Konnektoren (mind. 5 empfohlen)");
+      if(k.aspects)for(key in k.aspects)h+=chk(new RegExp(k.aspects[key]).test(l),key);
+      h+=chk(t.split(/\n\s*\n/).filter(function(p){return p.trim()}).length>=3,"Absätze (Einleitung, Hauptteil, Fazit)");
+    }else{
+      var src=k.el.querySelector(".source");
+      if(src){var sg=grams(norm(src.textContent)),tg=grams(norm(t)),tot=Object.keys(tg).length,g;
+        for(g in tg)if(sg[g])c++;
+        var pct=tot?Math.round(c/tot*100):0;
+        h+=chk(pct<=20,pct+" % wörtlich übernommene Wortfolgen (max. ca. 20 %)")}
+      if(k.keys)for(key in k.keys){var arr=k.keys[key],fnd=arr.filter(function(r){return new RegExp(r).test(l)}).length;
+        h+=chk(fnd>=Math.ceil(arr.length*.6),fnd+" von "+arr.length+" "+key)}
+    }
+    return h;
   }
-}, 1000);
-
-ta.addEventListener('input', () => {
-  let words = ta.value.trim().match(/\S+/g);
-  document.getElementById('wc').textContent = words ? words.length : 0;
-});
-
-document.getElementById('copy').onclick = () => {
-  navigator.clipboard.writeText(ta.value);
-  alert("Text erfolgreich kopiert!");
-};
+  function buildPrompt(){
+    var task=k.el.querySelector(".task").innerText.trim().replace(/\n{2,}/g,"\n");
+    var used=fmt(k.time-Math.max(0,left)),n=words(ta.value),m="Corrige mon texte TestDaF Schreiben, niveau C1.\n\n";
+    m+="=== CONSIGNE ===\n"+task+"\n\n";
+    var src=k.el.querySelector(".source");
+    if(src)m+="=== QUELLES (texte + graphique) ===\n"+src.innerText.trim().replace(/\n{2,}/g,"\n")+"\n\n";
+    m+="=== MON TEXTE ("+n+" mots, temps utilisé : "+used+" sur "+fmt(k.time)+") ===\n"+ta.value.trim()+"\n\n";
+    m+="=== MON AUTO-ÉVALUATION (0 = non rempli, 3 = pleinement rempli) ===\n";
+    CRIT[k.kind].forEach(function(c,i){m+="- "+c+" : "+(ev[i]>=0?ev[i]+"/3":"non évalué")+"\n"});
+    m+="\n=== FORMAT DE RÉPONSE DEMANDÉ ===\n";
+    m+="1. Niveau estimé (TDN 3, TDN 4, TDN 5 ou en dessous de TDN 3), justifié critère par critère avec les critères officiels ci-dessus"+(k.kind==="argument"?" (sprachliche Mittel, Fehler et Verständnis, Aspekte der Aufgabenstellung, Struktur)":" (beide Quellen, inhaltliche Korrektheit, eigene Formulierungen, Fehler et Verständnis)")+". Précise que c'est une estimation, pas une note officielle.\n";
+    m+="2. Mes erreurs classées (grammaire, Rektion, connecteurs, registre), en signalant celles qui reviennent.\n";
+    m+="3. Une version corrigée au niveau C1, SANS changer mes idées ni mes arguments : seuls la langue et la structure des phrases changent, avec les modifications bien visibles. Les arguments faibles ou non justifiés sont signalés à part, sans être modifiés.\n";
+    m+="Sois rigoureux et honnête : ne me valide pas par complaisance.";
+    return m;
+  }
+  function copyStr(s,btn){
+    var ok=function(){var o=btn.textContent;btn.textContent="Kopiert – jetzt bei Claude einfügen";setTimeout(function(){btn.textContent=o},2500)};
+    function fb(){var t=document.createElement("textarea");t.value=s;document.body.appendChild(t);t.select();try{document.execCommand("copy");ok()}catch(e){}document.body.removeChild(t)}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(ok,fb)}else fb();
+  }
+  function fmtCorr(t){
+    if(!t)return"";
+    return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/^#+\s*(.+)$/gm,"<b>$1</b>").replace(/\n/g,"<br>");
+  }
+  function runAI(){
+    var btn=$("ai");btn.disabled=true;btn.textContent="Claude korrigiert … (bis zu 60 s)";
+    sampleFn(buildPrompt()+"\n\nRéponds en français, sauf la version corrigée qui est en allemand. N'utilise pas de tableaux.",{modelTier:"complex",cache:false,onText:function(o){corr=o.text;var el=$("corr");if(el)el.innerHTML=fmtCorr(o.text)}})
+    .then(function(x){corr=x.text;save();renderEval()})
+    .catch(function(e){
+      var el=$("corr");if(el)el.innerHTML=fmtCorr(corr)+'<p class="no">'+(e&&e.code==="not_granted"?"Zugriff nicht erlaubt. Bitte die Anfrage bestätigen und erneut versuchen.":e&&e.code==="rate_limited"?"Zu viele Anfragen. Bitte kurz warten.":"Die Korrektur ist fehlgeschlagen. Bitte erneut versuchen.")+"</p>";
+      if(btn){btn.disabled=false;btn.textContent="Korrektur mit Claude starten"}
+    });
+  }
+  function renderEval(){
+    var h='<h2>Auswertung</h2><p class="hint">Automatische Hinweise (Näherungswerte, sie ersetzen keine Korrektur):</p><div class="chips">'+auto()+'</div><h3>Selbsteinschätzung nach den TestDaF-Kriterien</h3>';
+    CRIT[k.kind].forEach(function(c,i){
+      h+='<div class="crit"><p>'+c+'</p><div class="rate">';
+      LV.forEach(function(x,j){h+='<button data-i="'+i+'" data-k="'+j+'"'+(ev[i]===j?' class="on"':"")+">"+x+"</button>"});
+      h+="</div></div>";
+    });
+    var r=ev.filter(function(v){return v>=0}),sum=r.reduce(function(a,b){return a+b},0);
+    h+='<p class="score">'+sum+" / 12 ("+r.length+" von 4 Kriterien bewertet)</p><p class=\"hint\">Selbstbewertungen fallen oft großzügiger aus als die echte Bewertung. Lass deinen Text zusätzlich korrigieren.</p>";
+    if(sampleFn)h+='<div class="cta"><button id="ai">Korrektur mit Claude starten</button></div><div id="corr" class="corr">'+fmtCorr(corr)+'</div>';
+    else h+='<p class="hint">Die automatische Korrektur läuft nur in der claude.ai-Version dieser Seite. Auf anderen Seiten kopierst du den Auftrag und fügst ihn bei Claude ein.</p>';
+    h+='<div class="cta"><button id="prompt">Korrektur-Auftrag kopieren</button><a href="https://claude.ai/new" target="_blank" rel="noopener">Claude öffnen</a></div>';
+    $("eval").innerHTML=h;
+  }
+  function applyLock(){
+    var l=locked();
+    ta.readOnly=l;ta.classList.toggle("locked",l);
+    $("clear").disabled=l;$("start").disabled=l||!!run;$("submit").disabled=l;
+    $("banner").classList.toggle("hidden",!l);
+    $("banner").textContent=left<=0?"Die Zeit ist um. Das Schreibfeld ist gesperrt.":"Abgegeben. Das Schreibfeld ist gesperrt.";
+    $("eval").classList.toggle("hidden",!l);
+    if(l)renderEval();
+  }
+  function paintTimer(){
+    tm.textContent=fmt(left);
+    tm.className="timer"+(left<=0?" over":left<=300?" warn":"");
+    applyLock();
+  }
+  function paintCount(){
+    var n=words(ta.value),ok=n>=k.min&&(!k.max||n<=k.max+10);
+    $("wc").textContent=n;$("wgoal").textContent=k.max?k.max:k.min;
+    $("wc").parentNode.classList.toggle("bad",!ok);
+    $("ch").textContent=ta.value.length;
+    $("goal").innerHTML='<span class="'+(ok?"ok":"no")+'">'+goal()+"</span>";
+  }
+  function paintBanner(){
+    var mins=Math.round(k.time/60);
+    $("meta").textContent="Zeit: "+mins+" Minuten | "+(k.max?"ca. "+k.min+"–"+k.max+" Wörter":"mindestens "+k.min+" Wörter");
+  }
+  function stop(){if(run){clearInterval(run);run=null}$("start").textContent=startLabel()}
+  function tick(){
+    left=Math.max(0,Math.round((end-Date.now())/1000));
+    if(left<=0){text=ta.value;stop()}
+    paintTimer();save();
+  }
+  $("start").onclick=function(){
+    if(locked()||run)return;
+    end=Date.now()+left*1000;run=setInterval(tick,250);$("start").textContent="Läuft …";paintTimer();ta.focus();
+  };
+  $("submit").onclick=function(){
+    if(locked()||!confirm("Jetzt abgeben? Danach kannst du nicht mehr schreiben."))return;
+    text=ta.value;stop();done=true;paintTimer();save();
+  };
+  $("reset").onclick=function(){
+    if(!confirm("Zeit zurücksetzen, Schreibfeld entsperren und Bewertung löschen?"))return;
+    stop();left=k.time;done=false;ev=[-1,-1,-1,-1];corr="";paintTimer();paintCount();save();$("start").textContent="Start";
+  };
+  $("eval").onclick=function(e){
+    if(e.target.id==="ai"){if(sampleFn)runAI();return}
+    if(e.target.id==="prompt"){copyStr(buildPrompt(),e.target);return}
+    var b=e.target.closest("button[data-k]");if(!b)return;
+    ev[+b.dataset.i]=+b.dataset.k;save();renderEval();
+  };
+  ta.addEventListener("input",function(){if(locked())return;text=ta.value;paintCount();save()});
+  $("copy").onclick=function(){copyStr(ta.value,$("copy"))};
+  $("clear").onclick=function(){if(confirm("Text löschen?")){ta.value="";text="";paintCount();save()}};
+  try{if(window.claude&&window.claude.use)window.claude.use("sample").then(function(f){if(f){sampleFn=f;if(locked())renderEval()}},function(){})}catch(e){}
+  ta.value=text;$("tips").textContent=TIPS[k.kind];$("start").textContent=startLabel();
+  paintTimer();paintCount();paintBanner();
+})();
 </script>
 </body>
 </html>
