@@ -2,167 +2,157 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Modelltest 2 – Aufgabe 2</title>
 <style>
-    :root {
-        --primary: #4f46e5;
-        --primary-dark: #4338ca;
-        --bg-color: #f8fafc;
-        --card-bg: #ffffff;
-        --text-main: #1e293b;
-        --text-muted: #64748b;
-        --border: #e2e8f0;
-    }
-    * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        background: var(--bg-color);
-        color: var(--text-main);
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    header {
-        background: var(--card-bg);
-        border-bottom: 1px solid var(--border);
-        padding: 12px 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-    }
-    .header-title { font-size: 1.1rem; font-weight: 600; color: var(--text-main); }
-    .timer-badge {
-        background: #eef2ff;
-        color: var(--primary);
-        padding: 6px 14px;
-        border-radius: 20px;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-    .timer-badge.warn { color: #d9822b; background: #fdf6ec; }
-    .timer-badge.over { color: #c0392b; background: #fdf0ee; }
+  :root{
+    --teal-dark:#0f3d47; --teal:#155a68; --teal-light:#1d7285; --accent:#7dd3fc;
+    --card:#ffffff; --soft:#e7f1f3; --text:#1e2d31; --muted:#516268; --border:#cfe0e4;
+    --ok:#1c7a4a; --warn:#b45f06; --bad:#c0392b;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--card:#151d20;--soft:#132a2f;--text:#eaf1f2;--muted:#9fb2b7;--border:#2b3a3f;--teal-dark:#7dd3fc;}
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;min-height:100vh;min-height:100dvh;background:#050b12;color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    display:flex;flex-direction:column;
+  }
+  /* Fond flyer (même image que Lesen) */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      linear-gradient(180deg,rgba(4,10,18,.45),rgba(4,10,18,.25) 50%,rgba(4,10,18,.5)),
+      url("fond/fond-flyer.jpg") center top / cover no-repeat #050b12;
+  }
 
-    .workspace {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        flex: 1;
-        overflow: hidden;
-    }
-    @media (max-width: 900px) {
-        .workspace { grid-template-columns: 1fr; overflow-y: auto; height: auto; }
-    }
+  header{
+    position:sticky;top:0;z-index:20;
+    background:linear-gradient(135deg,#0f3d47,#155a68);color:#fff;
+    padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+    box-shadow:0 2px 12px rgba(0,0,0,.25);
+  }
+  .header-title{font-size:1.02rem;font-weight:700;letter-spacing:.2px;}
+  .header-title small{display:block;font-size:.68rem;font-weight:500;opacity:.8;letter-spacing:.06em;text-transform:uppercase;}
+  .timer-badge{
+    background:rgba(255,255,255,.18);color:#fff;padding:7px 15px;border-radius:20px;
+    font-weight:700;font-size:1rem;font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .timer-badge.warn{background:#fdf6ec;color:#b45f06;}
+  .timer-badge.over{background:#fdf0ee;color:#c0392b;}
 
-    .left-panel {
-        padding: 30px;
-        overflow-y: auto;
-        border-right: 1px solid var(--border);
-        background: var(--card-bg);
-    }
-    .task-card {
-        background: #f1f5f9;
-        border-left: 4px solid var(--primary);
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-    }
-    .task-card h2 { margin-top: 0; font-size: 1.1rem; color: var(--text-main); }
-    .source-section { margin-top: 20px; }
-    .source-section h3 { font-size: 1rem; color: var(--text-main); margin-bottom: 10px; border-bottom: 2px solid var(--border); padding-bottom: 5px; }
-    .source-section p { font-size: 0.93rem; line-height: 1.6; color: var(--text-muted); text-align: justify; hyphens: auto; }
+  .workspace{display:grid;grid-template-columns:1fr;gap:16px;padding:16px;flex:1;width:100%;max-width:1400px;margin:0 auto;}
+  .panel{
+    background:var(--card);
+    background:color-mix(in srgb,var(--card) 94%,transparent);
+    border:1px solid var(--border);border-radius:16px;
+  }
+  .left-panel{padding:18px;}
+  .back-link{display:inline-block;margin-bottom:14px;color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:600;}
+  .back-link:hover{color:var(--teal-dark);}
 
-    .right-panel {
-        padding: 30px;
-        display: flex;
-        flex-direction: column;
-        background: var(--bg-color);
-    }
-    .editor-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    }
-    textarea {
-        flex: 1;
-        border: none;
-        outline: none;
-        padding: 20px;
-        font-size: 1rem;
-        line-height: 1.6;
-        font-family: inherit;
-        resize: none;
-        background: transparent;
-    }
-    .editor-footer {
-        padding: 12px 20px;
-        border-top: 1px solid var(--border);
-        background: #f8fafc;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-    }
-    .btn {
-        background: var(--primary);
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 500;
-        transition: background 0.2s;
-    }
-    .btn:hover { background: var(--primary-dark); }
-    .back-link { display: inline-block; margin-bottom: 15px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
-    .back-link:hover { color: var(--text-main); }
+  details{margin-bottom:14px;}
+  summary{
+    list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+    font-weight:700;font-size:1.05rem;color:var(--teal-dark);padding:4px 0;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"▾";font-size:1rem;opacity:.7;transition:transform .2s;}
+  details:not([open]) summary::after{transform:rotate(-90deg);}
+  .task-card{background:var(--soft);border-left:4px solid var(--teal);padding:14px 16px;border-radius:12px;}
+  .task-card p{font-size:.95rem;line-height:1.6;margin:.6em 0;}
+  .source-section p{font-size:.95rem;line-height:1.7;color:var(--muted);text-align:justify;hyphens:auto;margin:.8em 0;}
+  .source-section h3{font-size:1rem;color:var(--teal-dark);margin:.4em 0 .2em;}
+  .hint-chip{display:inline-block;background:var(--teal);color:#fff;border-radius:20px;padding:3px 12px;font-size:.78rem;font-weight:600;}
+
+  .right-panel{display:flex;flex-direction:column;padding:0;}
+  .editor-head{padding:14px 18px 0;display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+  .editor-head b{color:var(--teal-dark);font-size:1.02rem;}
+  .editor-head span{font-size:.8rem;color:var(--muted);}
+  textarea{
+    display:block;width:100%;border:none;outline:none;background:transparent;color:var(--text);
+    padding:14px 18px 24px;font-size:17px;line-height:1.7;font-family:inherit;resize:none;
+    min-height:60vh;min-height:60dvh;overflow:hidden;
+  }
+  textarea::placeholder{color:var(--muted);opacity:.7;}
+  .editor-footer{
+    position:sticky;bottom:0;z-index:10;
+    background:var(--soft);border-top:1px solid var(--border);border-radius:0 0 16px 16px;
+    padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+  }
+  .bar{height:6px;border-radius:6px;background:var(--border);overflow:hidden;margin-bottom:9px;}
+  .bar i{display:block;height:100%;width:0;background:var(--warn);border-radius:6px;transition:width .25s,background .25s;}
+  .bar i.ok{background:var(--ok);} .bar i.over{background:var(--bad);}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .wc-line{font-size:.92rem;color:var(--muted);line-height:1.3;}
+  .wc-line b{font-size:1.15rem;color:var(--text);}
+  .wc-line small{display:block;font-size:.74rem;}
+  .btn{
+    background:var(--teal);color:#fff;border:none;padding:11px 18px;border-radius:10px;
+    cursor:pointer;font-weight:700;font-size:.92rem;transition:background .2s;white-space:nowrap;
+  }
+  .btn:hover{background:var(--teal-light);}
+  .btn.done{background:var(--ok);}
+
+  /* Ordinateur : deux colonnes, chacune défile seule */
+  @media (min-width:901px){
+    body{height:100vh;height:100dvh;}
+    .workspace{grid-template-columns:1fr 1fr;min-height:0;overflow:hidden;}
+    .left-panel{overflow-y:auto;}
+    .right-panel{min-height:0;}
+    textarea{flex:1;min-height:0;overflow-y:auto;}
+    .editor-footer{position:static;}
+  }
 </style>
 </head>
 <body>
 
-    <header>
-        <span class="header-title">Modelltest 2 — Aufgabe 2</span>
-        <div class="timer-badge" id="timer">30:00</div>
-    </header>
+  <header>
+    <span class="header-title">Modelltest 2 — Aufgabe 2<small>Schreiben · Zusammenfassung</small></span>
+    <div class="timer-badge" id="timer">30:00</div>
+  </header>
 
-    <div class="workspace">
-        <div class="left-panel">
-            <a href="schreiben-test2.html" class="back-link">← Zurück zu Modelltest 2</a>
-            
-            <div class="task-card">
-                <h2>Aufgabenstellung</h2>
-                <p>Fassen Sie die Informationen aus dem Text und der Grafik zusammen. (Modelltest 2)</p>
-                <p><em>Schreiben Sie ca. 100–150 Wörter. Zeit: 30 Minuten.</em></p>
-            </div>
+  <div class="workspace">
+    <div class="panel left-panel">
+      <a href="schreiben-test2.html" class="back-link">← Zurück zu Modelltest 2</a>
 
-            <div class="source-section">
-                <h3>Textquelle</h3>
-                <p>Hier kannst du den Text für Modelltest 2 – Aufgabe 2 einfügen.</p>
-            </div>
+      <details open>
+        <summary>Aufgabenstellung</summary>
+        <div class="task-card">
+          <p>Fassen Sie die Informationen aus dem Text und der Grafik zusammen. (Modelltest 2)</p>
+          <p><span class="hint-chip">ca. 100–150 Wörter</span> <span class="hint-chip">30 Minuten</span></p>
         </div>
+      </details>
 
-        <div class="right-panel">
-            <div class="editor-container">
-                <textarea id="ta" placeholder="Schreiben Sie hier Ihre Zusammenfassung..."></textarea>
-                <div class="editor-footer">
-                    <div><b id="wc">0</b> Wörter</div>
-                    <button class="btn" id="copy">Text kopieren</button>
-                </div>
-            </div>
-        </div>
+      <details open class="source-section">
+        <summary>Textquelle</summary>
+        <p>Hier kannst du den Text für Modelltest 2 – Aufgabe 2 einfügen.</p>
+      </details>
     </div>
+
+    <div class="panel right-panel">
+      <div class="editor-head"><b>Ihre Zusammenfassung</b><span>wird automatisch gespeichert</span></div>
+      <textarea id="ta" placeholder="Schreiben Sie hier Ihre Zusammenfassung..." spellcheck="false" autocorrect="off" autocapitalize="sentences"></textarea>
+      <div class="editor-footer">
+        <div class="bar"><i id="bar"></i></div>
+        <div class="foot-row">
+          <div class="wc-line"><b id="wc">0</b> Wörter<small id="hint">Ziel: 100–150 Wörter</small></div>
+          <button class="btn" id="copy">Text kopieren</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script>
 let time = 30 * 60;
 const tm = document.getElementById('timer');
 const ta = document.getElementById('ta');
+const bar = document.getElementById('bar');
+const hint = document.getElementById('hint');
+const KEY = 'schreiben-test2-aufgabe2';
 
 const timerInterval = setInterval(() => {
   let m = Math.floor(time / 60), s = time % 60;
@@ -176,14 +166,39 @@ const timerInterval = setInterval(() => {
   }
 }, 1000);
 
-ta.addEventListener('input', () => {
-  let words = ta.value.trim().match(/\S+/g);
-  document.getElementById('wc').textContent = words ? words.length : 0;
-});
+function autosize(){
+  if(window.matchMedia('(min-width:901px)').matches){ ta.style.height=''; return; }
+  ta.style.height = 'auto';
+  ta.style.height = ta.scrollHeight + 'px';
+}
+function updateCount(){
+  const words = ta.value.trim().match(/\S+/g);
+  const n = words ? words.length : 0;
+  document.getElementById('wc').textContent = n;
+  bar.style.width = Math.min(100, n / 150 * 100) + '%';
+  bar.className = n > 150 ? 'over' : (n >= 100 ? 'ok' : '');
+  hint.textContent = n < 100 ? 'Noch ' + (100 - n) + ' bis 100 Wörter (Ziel: 100–150)'
+                   : n <= 150 ? 'Im Zielbereich (100–150 Wörter)'
+                   : (n - 150) + ' Wörter über dem Ziel (100–150)';
+}
 
-document.getElementById('copy').onclick = () => {
-  navigator.clipboard.writeText(ta.value);
-  alert("Text erfolgreich kopiert!");
+ta.addEventListener('input', () => {
+  updateCount(); autosize();
+  try { localStorage.setItem(KEY, ta.value); } catch(e) {}
+});
+window.addEventListener('resize', autosize);
+try { ta.value = localStorage.getItem(KEY) || ''; } catch(e) {}
+updateCount(); autosize();
+
+const copyBtn = document.getElementById('copy');
+copyBtn.onclick = async () => {
+  try {
+    await navigator.clipboard.writeText(ta.value);
+  } catch(e) {
+    ta.select(); document.execCommand('copy');
+  }
+  copyBtn.textContent = 'Kopiert ✓'; copyBtn.classList.add('done');
+  setTimeout(() => { copyBtn.textContent = 'Text kopieren'; copyBtn.classList.remove('done'); }, 1800);
 };
 </script>
 </body>
