@@ -36,7 +36,7 @@ const HOREN_MT1 = [
     instructions:'Hören Sie das Gespräch und ergänzen Sie die Übersicht durch Texteingabe.',
     title:'Aufgabe 1: Das akademische Mentoring-Programm',
     mediaType: 'audio',
-    mediaUrl: 'media/hoeren_t1.mp3',
+    mediaUrl: 'media/consigne_t1.mp3', // Point de départ de la séquence double-audio
     questions:[
       { q: 'Zielgruppe des Programms:', correct: 'Studierende' },
       { q: 'Dauer der Betreuung:', correct: 'ein Semester' },
@@ -240,13 +240,23 @@ function renderTask(){
   
   let mediaHtml = '';
   if(task.mediaType === 'audio' && task.mediaUrl){
-    mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
-      <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
-      <audio controls controlsList="nodownload" style="width:100%; max-width:500px;">
-        <source src="${task.mediaUrl}" type="audio/mpeg">
-        Ihr Browser unterstützt das Audio-Element nicht.
-      </audio>
-    </div>`;
+    if(task.teil === 1) {
+      // Lecteur séquentiel spécial pour l'Aufgabe 1 (Consigne -> Pause 15s -> Exercice)
+      mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
+        <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
+        <audio id="sequentialAudio" controls controlsList="nodownload" style="width:100%; max-width:500px;">
+          Ihr Browser unterstützt das Audio-Element nicht.
+        </audio>
+      </div>`;
+    } else {
+      mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
+        <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
+        <audio controls controlsList="nodownload" style="width:100%; max-width:500px;">
+          <source src="${task.mediaUrl}" type="audio/mpeg">
+          Ihr Browser unterstützt das Audio-Element nicht.
+        </audio>
+      </div>`;
+    }
   } else if(task.mediaType === 'video' && task.mediaUrl){
     mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
       <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎥 Videosequenz abspielen:</p>
@@ -259,6 +269,51 @@ function renderTask(){
 
   main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
+
+  // Initialisation de la logique séquentielle si on est sur Aufgabe 1
+  if(task.teil === 1) {
+    const player = document.getElementById('sequentialAudio');
+    const playlist = [
+      { type: 'audio', src: 'media/consigne_t1.mp3' },
+      { type: 'pause', duration: 15000 },
+      { type: 'audio', src: 'media/exercice_t1.mp3' }
+    ];
+    let currentIndex = 0;
+
+    function playSequence(index) {
+      if (index >= playlist.length) return;
+      let currentItem = playlist[index];
+
+      if (currentItem.type === 'audio') {
+        player.src = currentItem.src;
+        player.load();
+        player.play().catch(error => {
+          console.log("Lecture automatique bloquée :", error);
+        });
+        player.onended = function() {
+          currentIndex++;
+          playSequence(currentIndex);
+        };
+      } else if (currentItem.type === 'pause') {
+        player.pause();
+        player.removeAttribute('src');
+        setTimeout(function() {
+          currentIndex++;
+          playSequence(currentIndex);
+        }, currentItem.duration);
+      }
+    }
+
+    let sequenceStarted = false;
+    player.addEventListener('play', function() {
+      if (!sequenceStarted) {
+        sequenceStarted = true;
+        currentIndex = 0;
+        player.pause();
+        playSequence(0);
+      }
+    });
+  }
 
   switch(task.type){
     case 'kurz_uebersicht':
