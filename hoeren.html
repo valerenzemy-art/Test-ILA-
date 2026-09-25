@@ -100,22 +100,12 @@ function renderTask(){
   
   let mediaHtml = '';
   if(task.mediaType === 'audio' && task.mediaUrl){
-    if(task.teil === 1) {
-      mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
-        <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
-        <audio id="sequentialAudio" controls controlsList="nodownload" style="width:100%; max-width:500px;">
-          Ihr Browser unterstützt das Audio-Element nicht.
-        </audio>
-      </div>`;
-    } else {
-      mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
-        <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
-        <audio controls controlsList="nodownload" style="width:100%; max-width:500px;">
-          <source src="${task.mediaUrl}" type="audio/mpeg">
-          Ihr Browser unterstützt das Audio-Element nicht.
-        </audio>
-      </div>`;
-    }
+    mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
+      <p id="mediaStatus" style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
+      <audio id="sequentialAudio" controls controlsList="nodownload" style="width:100%; max-width:500px;">
+        Ihr Browser unterstützt das Audio-Element nicht.
+      </audio>
+    </div>`;
   } else if(task.mediaType === 'video' && task.mediaUrl){
     mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
       <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎥 Videosequenz abspielen:</p>
@@ -129,44 +119,79 @@ function renderTask(){
   main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
 
+  // Gestion des séquences audio automatiques (Teil 1 et Teil 2)
   if(task.teil === 1) {
     const player = document.getElementById('sequentialAudio');
     const playlist = [
       { type: 'audio', src: 'media/consigne_t1.mp3' },
       { type: 'pause', duration: 15000 },
       { type: 'audio', src: 'media/exercice_t1.mp3' },
-      { type: 'pause_end', duration: 20000 } // 20 secondes de pause à la fin pour vérifier les réponses
+      { type: 'pause_end', duration: 20000 }
     ];
     let currentIndex = 0;
 
     function playSequence(index) {
       if (index >= playlist.length) {
-        // Fin de la séquence : passage automatique à l'exercice suivant
         const test = HOREN_TESTS[currentTestIdx];
-        if (current < test.teile.length - 1) {
-          current++;
-          renderTask();
-        } else {
-          showResults();
-        }
+        if (current < test.teile.length - 1) { current++; renderTask(); } else { showResults(); }
         return;
       }
       let currentItem = playlist[index];
+      if (currentItem.type === 'audio') {
+        player.src = currentItem.src;
+        player.load();
+        player.play().catch(e => console.log("Autoplay bloqué :", e));
+        player.onended = function() { currentIndex++; playSequence(currentIndex); };
+      } else {
+        player.pause();
+        player.removeAttribute('src');
+        setTimeout(function() { currentIndex++; playSequence(currentIndex); }, currentItem.duration);
+      }
+    }
+
+    let sequenceStarted = false;
+    player.addEventListener('play', function() {
+      if (!sequenceStarted) { sequenceStarted = true; currentIndex = 0; player.pause(); playSequence(0); }
+    });
+  } 
+  else if(task.teil === 2) {
+    const player = document.getElementById('sequentialAudio');
+    const statusText = document.getElementById('mediaStatus');
+    const playlist = [
+      { type: 'audio', src: 'media/consigne_t2.mp3', label: '🎧 Anweisung wird abgespielt...' },
+      { type: 'audio', src: 'media/exercice_t2.mp3', label: '🎧 Podiumsdiskussion läuft...' },
+      { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit...' } // 3 minutes = 180 000 ms
+    ];
+    let currentIndex = 0;
+
+    function playSequence(index) {
+      if (index >= playlist.length) {
+        const test = HOREN_TESTS[currentTestIdx];
+        if (current < test.teile.length - 1) { current++; renderTask(); } else { showResults(); }
+        return;
+      }
+      let currentItem = playlist[index];
+      statusText.innerText = currentItem.label;
 
       if (currentItem.type === 'audio') {
         player.src = currentItem.src;
         player.load();
-        player.play().catch(error => {
-          console.log("Lecture automatique bloquée :", error);
-        });
-        player.onended = function() {
-          currentIndex++;
-          playSequence(currentIndex);
-        };
-      } else if (currentItem.type === 'pause' || currentItem.type === 'pause_end') {
+        player.play().catch(e => console.log("Autoplay bloqué :", e));
+        player.onended = function() { currentIndex++; playSequence(currentIndex); };
+      } else {
         player.pause();
         player.removeAttribute('src');
+        let remaining = currentItem.duration / 1000;
+        const interval = setInterval(() => {
+          remaining--;
+          let mins = Math.floor(remaining / 60);
+          let secs = remaining % 60;
+          statusText.innerText = `⏱️ Nachbereitung: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
+          if (remaining <= 0) clearInterval(interval);
+        }, 1000);
+
         setTimeout(function() {
+          clearInterval(interval);
           currentIndex++;
           playSequence(currentIndex);
         }, currentItem.duration);
@@ -175,21 +200,23 @@ function renderTask(){
 
     let sequenceStarted = false;
     player.addEventListener('play', function() {
-      if (!sequenceStarted) {
-        sequenceStarted = true;
-        currentIndex = 0;
-        player.pause();
-        playSequence(0);
-      }
+      if (!sequenceStarted) { sequenceStarted = true; currentIndex = 0; player.pause(); playSequence(0); }
     });
   }
 
+  // Rendu des tâches selon leur type
   switch(task.type){
     case 'kurz_uebersicht':
     case 'kurz_vortrag':
       renderKurzAntwort(task, test, body);
       break;
     case 'kurz_begriff':
+      if(task.teil === 2) {
+        renderPodiumAntwort(task, test, body);
+      } else {
+        renderMatchHoeren(task, test, body);
+      }
+      break;
     case 'match_personen':
       renderMatchHoeren(task, test, body);
       break;
@@ -207,62 +234,50 @@ function renderTask(){
 
 function renderKurzAntwort(task, test, body){
   const a = getBucket(test, task);
-  
   if(task.teil === 1) {
     let html = `
       <div class="passage" style="max-width: 800px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
         <h3 style="margin-bottom: 20px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Nutzung der Universitätsbibliothek</h3>
-        
         <div style="border: 1px solid #b5b5b5; display: flex; flex-direction: column;">
-          
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten:</div>
             <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 8.00 bis 24.00 Uhr</div>
             <div style="font-size: 0.95rem; color: #333;">Samstag und Sonntag 8.00 bis 23.00 Uhr</div>
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Nutzung der Schließfächer:</div>
             <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">Montag bis Sonntag</div>
             <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten Bibliothekscafé:</div>
             <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 10.00 bis 18.00 Uhr</div>
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Erlaubte Getränke in der Bibliothek:</div>
             <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Maximale Ausleihfrist für Bücher:</div>
             <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Strafgebühr bei verspäteter Bücherrückgabe:</div>
             <div style="font-size: 0.95rem; color: #333;">Fünf Euro pro Buch pro Tag</div>
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Nicht ausleihbare Bücher:</div>
             <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
           </div>
-
           <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Fernleihe:</div>
             <div style="font-size: 0.95rem; color: #333;">Bücher kommen innerhalb von zwei bis drei Tagen</div>
           </div>
-
           <div style="padding: 12px 15px;">
             <div style="font-weight: bold; margin-bottom: 4px;">Lernräume für Lerngruppen:</div>
             <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">2. Stock,</div>
             <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
           </div>
-
         </div>
       </div>
     `;
@@ -278,8 +293,41 @@ function renderKurzAntwort(task, test, body){
     html += '</div>';
     body.innerHTML = html;
   }
-
   body.querySelectorAll('.kurz-input').forEach(inp=>{
+    inp.addEventListener('input', ()=> a[inp.dataset.qi] = inp.value);
+  });
+}
+
+function renderPodiumAntwort(task, test, body){
+  const a = getBucket(test, task);
+  let html = `<div class="passage" style="max-width: 900px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">`;
+  
+  let globalIdx = 0;
+  task.personsData.forEach((person, pi) => {
+    html += `
+      <div style="border: 1px solid #b5b5b5; margin-bottom: 20px; border-radius: 4px;">
+        <div style="background: #f0f2f5; padding: 10px 15px; font-weight: bold; border-bottom: 1px solid #b5b5b5; font-size: 1rem;">${escapeHtml(person.name)}</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; min-height: 120px;">
+    `;
+    person.fields.forEach((f, fi) => {
+      const currentQi = globalIdx++;
+      html += `
+        <div style="padding: 12px 15px; border-right: ${fi === 0 ? '1px solid #b5b5b5' : 'none'}; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 4px; color: #444;">${escapeHtml(f.label)}</div>
+            <div style="font-size: 0.85rem; color: #666; margin-bottom: 8px;">(${currentQi + 1})</div>
+          </div>
+          <textarea class="podium-input" data-qi="${currentQi}" placeholder="${escapeHtml(f.placeholder)}" style="width: 100%; height: 70px; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem; resize: vertical;">${escapeHtml(a[currentQi]||'')}</textarea>
+        </div>
+      `;
+    });
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  body.innerHTML = html;
+
+  body.querySelectorAll('.podium-input').forEach(inp=>{
     inp.addEventListener('input', ()=> a[inp.dataset.qi] = inp.value);
   });
 }
@@ -352,6 +400,19 @@ function scoreTask(task, test){
       });
       break;
     case 'kurz_begriff':
+      if(task.teil === 2) {
+        total = 4;
+        for(let i=0; i<4; i++){
+          if(a[i] && a[i].trim().length > 0) correct++; // Comptabilisé s'il y a du texte rempli
+        }
+      } else {
+        const list = task.pairs || task.items;
+        total = list.length;
+        list.forEach((item, i)=>{
+          if(parseInt(a[i]) === item.correct) correct++;
+        });
+      }
+      break;
     case 'match_personen':
       const list = task.pairs || task.items;
       total = list.length;
