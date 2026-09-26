@@ -107,12 +107,34 @@ function renderTask(){
       </audio>
     </div>`;
   } else if(task.mediaType === 'video' && task.mediaUrl){
+    // Si c'est l'Aufgabe 5, on insère l'image de l'anatomie de la nasse avec l'emplacement du conférencier comme sur la maquette
+    let extraVisual = '';
+    if(task.teil === 5) {
+      extraVisual = `
+        <div style="background:#fff; border:1px solid #ccc; border-radius:6px; padding:15px; margin-bottom:15px; text-align:center;">
+          <h3 style="margin-bottom:12px; font-size:1.2rem; color:#333;">Anatomie der Nase</h3>
+          <div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:15px;">
+            <img src="media/anatomie_nase.png" alt="Anatomie der Nase" style="max-width:350px; height:auto; border:1px solid #ddd; border-radius:4px;">
+            <div style="border:1px solid #ddd; padding:10px; border-radius:4px; background:#fafafa; display:flex; flex-direction:column; align-items:center;">
+              <!-- Emplacement de la vidéo / du conférencier -->
+              <video id="sequentialVideo" controls controlsList="nodownload" style="width:100%; max-width:280px; border-radius:4px; display:block;">
+                <source src="${task.mediaUrl}" type="video/mp4">
+                Ihr Browser unterstützt das Video-Element nicht.
+              </video>
+            </div>
+          </div>
+        </div>`;
+    } else {
+      extraVisual = `
+        <video id="sequentialVideo" controls controlsList="nodownload" style="width:100%; max-width:600px; border-radius:6px; display:block; margin: 0 auto;">
+          <source src="${task.mediaUrl}" type="video/mp4">
+          Ihr Browser unterstützt das Video-Element nicht.
+        </video>`;
+    }
+
     mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <p id="mediaStatus" style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎥 Videosequenz abspielen:</p>
-      <video id="sequentialVideo" controls controlsList="nodownload" style="width:100%; max-width:600px; border-radius:6px; display:block; margin: 0 auto;">
-        <source src="${task.mediaUrl}" type="video/mp4">
-        Ihr Browser unterstützt das Video-Element nicht.
-      </video>
+      ${extraVisual}
     </div>`;
   }
 
@@ -228,6 +250,13 @@ function renderTask(){
         { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz läuft (Sie sehen das Video einmal)...' },
         { type: 'pause_end', duration: 45000, label: '⏱️ Nachbereitung: Sie haben 45 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
       ];
+    } else if(task.teil === 5) {
+      playlist = [
+        { type: 'audio', src: 'media/consigne_t5.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'pause', duration: 10000, label: '⏱️ Lesezeit: Sie haben 10 Sekunden Zeit, sich die Gliederungspunkte anzuschauen...' },
+        { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz läuft (Sie sehen das Video einmal)...' },
+        { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit, um Ihre Antworten zu kontrollieren...' }
+      ];
     } else {
       playlist = [
         { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz abspielen:' }
@@ -273,8 +302,8 @@ function renderTask(){
       } else {
         if(player) {
           player.pause();
-          if(task.teil === 4) {
-            player.style.display = 'block'; // Garder le lecteur visible pendant les pauses de lecture/contrôle
+          if(task.teil === 4 || task.teil === 5) {
+            player.style.display = 'block'; // Garder visible
           } else {
             player.style.display = 'none';
           }
@@ -285,12 +314,13 @@ function renderTask(){
 
         pauseInterval = setInterval(() => {
           remaining--;
+          let mins = Math.floor(remaining / 60);
           let secs = remaining % 60;
           if(statusText) {
-            if(currentItem.type === 'pause' && task.teil === 4) {
-              statusText.innerText = `⏱️ Lesezeit: ${secs}s verbleibend...`;
-            } else if(currentItem.type === 'pause_end' && task.teil === 4) {
-              statusText.innerText = `⏱️ Nachbereitung: ${secs}s verbleibend...`;
+            if(task.teil === 5 && currentItem.type === 'pause_end') {
+              statusText.innerText = `⏱️ Nachbereitung: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
+            } else if(currentItem.type === 'pause' || currentItem.type === 'pause_end') {
+              statusText.innerText = `⏱️ ${currentItem.label.split(':')[0]}: ${secs}s verbleibend...`;
             } else {
               statusText.innerText = `⏱️ Pause: ${secs}s verbleibend...`;
             }
@@ -397,6 +427,23 @@ function renderKurzAntwort(task, test, body){
         </div>
       </div>
     `;
+    body.innerHTML = html;
+  } else if(task.teil === 5) {
+    let html = `
+      <div class="passage" style="max-width: 900px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 15px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Anosmie</h3>
+        <div style="border: 1px solid #b5b5b5; display: flex; flex-direction: column;">
+    `;
+    task.questions.forEach((item, qi)=>{
+      const borderStyle = qi < task.questions.length - 1 ? 'border-bottom: 1px solid #b5b5b5;' : '';
+      html += `
+        <div style="${borderStyle} padding: 12px 15px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-weight: bold; font-size: 0.95rem; color: #222;">${escapeHtml(item.q)}</div>
+          <input type="text" class="kurz-input" data-qi="${qi}" value="${escapeHtml(a[qi]||'')}" placeholder="${escapeHtml(item.placeholder || 'Stichpunkt eingeben...')}" style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+        </div>
+      `;
+    });
+    html += `</div></div>`;
     body.innerHTML = html;
   } else {
     let html = '<div class="passage" style="display:flex; flex-direction:column; gap:12px;">';
