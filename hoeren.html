@@ -107,7 +107,6 @@ function renderTask(){
       </audio>
     </div>`;
   } else if(task.mediaType === 'video' && task.mediaUrl){
-    // Si c'est l'Aufgabe 5, on insère l'image de l'anatomie de la nasse avec l'emplacement du conférencier comme sur la maquette
     let extraVisual = '';
     if(task.teil === 5) {
       extraVisual = `
@@ -116,7 +115,6 @@ function renderTask(){
           <div style="display:flex; justify-content:center; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:15px;">
             <img src="media/anatomie_nase.png" alt="Anatomie der Nase" style="max-width:350px; height:auto; border:1px solid #ddd; border-radius:4px;">
             <div style="border:1px solid #ddd; padding:10px; border-radius:4px; background:#fafafa; display:flex; flex-direction:column; align-items:center;">
-              <!-- Emplacement de la vidéo / du conférencier -->
               <video id="sequentialVideo" controls controlsList="nodownload" style="width:100%; max-width:280px; border-radius:4px; display:block;">
                 <source src="${task.mediaUrl}" type="video/mp4">
                 Ihr Browser unterstützt das Video-Element nicht.
@@ -166,6 +164,13 @@ function renderTask(){
         { type: 'audio', src: task.mediaUrl, label: '🎧 Vorlesung läuft...' },
         { type: 'pause_end', duration: 150000, label: '⏱️ Bearbeitungszeit: Sie haben 2 Minuten und 30 Sekunden Zeit...' }
       ];
+    } else if(task.teil === 6) {
+      playlist = [
+        { type: 'audio', src: 'media/consigne_t6.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'pause', duration: 90000, label: '⏱️ Lesezeit: Sie haben 1 Minute und 30 Sekunden Zeit, um die Fragen zu lesen...' },
+        { type: 'audio', src: 'media/exercice_t6.mp3', label: '🎧 Vortrag läuft...' },
+        { type: 'pause_end', duration: 90000, label: '⏱️ Nachbereitung: Sie haben 1 Minute und 30 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
+      ];
     } else {
       playlist = [
         { type: 'audio', src: task.mediaUrl, label: '🎧 Audiospur abspielen:' }
@@ -211,6 +216,8 @@ function renderTask(){
               statusText.innerText = `⏱️ Nachbereitung: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
             } else if(task.teil === 3 && currentItem.type === 'pause_end') {
               statusText.innerText = `⏱️ Bearbeitungszeit: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
+            } else if(task.teil === 6 && (currentItem.type === 'pause' || currentItem.type === 'pause_end')) {
+              statusText.innerText = `⏱️ ${currentItem.label.split(':')[0]}: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
             } else {
               statusText.innerText = `⏱️ Pause: ${secs}s verbleibend...`;
             }
@@ -303,7 +310,7 @@ function renderTask(){
         if(player) {
           player.pause();
           if(task.teil === 4 || task.teil === 5) {
-            player.style.display = 'block'; // Garder visible
+            player.style.display = 'block';
           } else {
             player.style.display = 'none';
           }
