@@ -15,7 +15,7 @@ const HOREN_MT1 = [
     instructions:'Sie hören ein Gespräch zwischen zwei Studierenden und einer Bibliotheksmitarbeiterin zum Thema „Orientierung in der Bibliothek“. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.',
     title:'Aufgabe 1: Orientierung in der Bibliothek',
     mediaType: 'audio',
-    mediaUrl: 'media/exercice_t1.mp3', // Point vers l'audio principal de l'exercice 1
+    mediaUrl: 'media/exercice_t1.mp3',
     questions:[
       { q: 'Nutzung der Schließfächer:', correct: 'Montag bis Sonntag' },
       { q: 'Erlaubte Getränke in der Bibliothek:', correct: 'Wasser' },
@@ -64,16 +64,24 @@ const HOREN_MT1 = [
     ]
   },
   { ...TEMPLATE_HOEREN[3],
-    instructions:'Hören Sie das Interview mit drei Experten (A, B, C). Wer vertritt welche Ansicht?',
-    title:'Aufgabe 4: Die Zukunft der Arbeit',
-    mediaType: 'video',  // Active la séquence vidéo avec pause
-    mediaUrl: 'media/hoeren_t4.mov',  // Modifié pour pointer vers le fichier .mov présent sur GitHub
-    items:[
-      {text:'Die Vier-Tage-Woche steigert die Gesamteffizienz massiv.', correct:0},
-      {text:'Homeoffice führt zu einer Entkopplung des sozialen Zusammenhalts.', correct:1},
-      {text:'Künstliche Intelligenz wird klassische Berufe komplett ersetzen.', correct:2}
+    instructions:'Sie sehen eine Podiumsdiskussion zum Thema „Fake Science“.\nSie sehen das Video einmal.\nNotieren Sie, zu wem die Aussagen 1-6 passen.\nFür jede Aussage gibt es genau eine richtige Lösung.\n\nNach dem Video haben Sie 45 Sekunden Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 45 Sekunden Zeit, um die Aussagen zu lesen.',
+    title:'Aufgabe 4: Fake Science',
+    mediaType: 'video',
+    mediaUrl: 'media/hoeren_t4.mov',
+    columns: [
+      'nur Herr Krick [A]',
+      'nur Frau Dressel [B]',
+      'beide [C]',
+      'keiner [D]'
     ],
-    columns:['Experte A','Experte B','Experte C']
+    items: [
+      { text: 'Deutsche Forscher waren wohl nicht nur unschuldige Opfer von Scheinverlagen.', correct: 0 },
+      { text: 'Das Veröffentlichen in angeblichen Fachzeitschriften verschafft den Autoren einen persönlichen Vorteil.', correct: 1 },
+      { text: 'Durch Publikationen seriöser Forscher in Scheinverlagen profitieren Betrüger.', correct: 2 },
+      { text: 'Fake Science ist eine Gefahr für die wissenschaftliche Glaubwürdigkeit.', correct: 2 },
+      { text: 'Betroffene Wissenschaftler klären im Internet ihre Kollegen über Scheinverlage auf.', correct: 0 },
+      { text: 'Das Phänomen von Fake Science ist teilweise überwunden.', correct: 3 }
+    ]
   },
   { ...TEMPLATE_HOEREN[4],
     instructions:'Hören Sie den wissenschaftlichen Vortrag und ergänzen Sie die Gliederungspunkte durch Texteingabe.',
