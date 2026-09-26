@@ -1,4 +1,4 @@
-// hoeren-data.js — Contient toutes les données des exercices d'écoute (Aufgabe 1 à 7)
+// // hoeren-data.js — Contient toutes les données des exercices d'écoute (Aufgabe 1 à 7)
 
 const TEMPLATE_HOEREN = [
   {teil:1, type:'kurz_uebersicht', time:300, label:'Kurzantwort: Übersicht ergänzen'},
@@ -68,19 +68,37 @@ const HOREN_MT1 = [
     title:'Aufgabe 4: Fake Science',
     mediaType: 'video',
     mediaUrl: 'media/hoeren_t4.mov',
-    columns: [
-      'nur Herr Krick [A]',
-      'nur Frau Dressel [B]',
-      'beide [C]',
-      'keiner [D]'
-    ],
-    items: [
-      { text: 'Deutsche Forscher waren wohl nicht nur unschuldige Opfer von Scheinverlagen.', correct: 0 },
-      { text: 'Das Veröffentlichen in angeblichen Fachzeitschriften verschafft den Autoren einen persönlichen Vorteil.', correct: 1 },
-      { text: 'Durch Publikationen seriöser Forscher in Scheinverlagen profitieren Betrüger.', correct: 2 },
-      { text: 'Fake Science ist eine Gefahr für die wissenschaftliche Glaubwürdigkeit.', correct: 2 },
-      { text: 'Betroffene Wissenschaftler klären im Internet ihre Kollegen über Scheinverlage auf.', correct: 0 },
-      { text: 'Das Phänomen von Fake Science ist teilweise überwunden.', correct: 3 }
+    pairs:[
+      { 
+        term: '1. Deutsche Forscher waren wohl nicht nur unschuldige Opfer von Scheinverlagen.', 
+        options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
+        correct: 0 
+      },
+      { 
+        term: '2. Das Veröffentlichen in angeblichen Fachzeitschriften verschafft den Autoren einen persönlichen Vorteil.', 
+        options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
+        correct: 1 
+      },
+      { 
+        term: '3. Durch Publikationen seriöser Forscher in Scheinverlagen profitieren Betrüger.', 
+        options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
+        correct: 2 
+      },
+      { 
+        term: '4. Fake Science ist eine Gefahr für die wissenschaftliche Glaubwürdigkeit.', 
+        options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
+        correct: 2 
+      },
+      { 
+        term: '5. Betroffene Wissenschaftler klären im Internet ihre Kollegen über Scheinverlage auf.', 
+        options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
+        correct: 0 
+      },
+      { 
+        term: '6. Das Phänomen von Fake Science ist teilweise überwunden.', 
+        options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
+        correct: 3 
+      }
     ]
   },
   { ...TEMPLATE_HOEREN[4],
