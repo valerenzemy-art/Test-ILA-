@@ -66,8 +66,8 @@ const HOREN_MT1 = [
   { ...TEMPLATE_HOEREN[3],
     instructions:'Hören Sie das Interview mit drei Experten (A, B, C). Wer vertritt welche Ansicht?',
     title:'Aufgabe 4: Die Zukunft der Arbeit',
-    mediaType: 'audio',
-    mediaUrl: 'media/hoeren_t4.mp3',
+    mediaType: 'video',  // Corrigé en 'video' pour activer la séquence vidéo avec pause de 45s
+    mediaUrl: 'media/hoeren_t4.mp4',  // Pointe désormais vers le fichier vidéo requis
     items:[
       {text:'Die Vier-Tage-Woche steigert die Gesamteffizienz massiv.', correct:0},
       {text:'Homeoffice führt zu einer Entkopplung des sozialen Zusammenhalts.', correct:1},
