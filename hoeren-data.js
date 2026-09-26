@@ -7,7 +7,7 @@ const TEMPLATE_HOEREN = [
   {teil:4, type:'match_personen',  time:360, label:'Aussagen Personen zuordnen'},
   {teil:5, type:'kurz_vortrag',    time:480, label:'Kurzantwort: Gliederungspunkte ergänzen'},
   {teil:6, type:'mc_hoeren',       time:480, label:'Multiple-Choice'}, 
-  {teil:7, type:'laut_schrift',    time:20,  label:'Laut- und Schriftbild abgleichen'} // Temps de contrôle de 20 secondes
+  {teil:7, type:'laut_schrift',    time:20,  label:'Laut- und Schriftbild abgleichen'}
 ];
 
 const HOREN_MT1 = [
@@ -50,7 +50,7 @@ const HOREN_MT1 = [
     instructions:'Sie hören einen Ausschnitt aus einer Vorlesung im Fach Entwicklungspsychologie zum Thema „Kindheitsamnesie“. Sie hören den Text einmal. Machen Sie sich beim Hören Notizen. Nach dem Hörtext sehen Sie eine schriftliche Zusammenfassung. Finden Sie die zwei Sätze in der Zusammenfassung, die falsche Informationen enthalten.',
     title:'Aufgabe 3: Kindheitsamnesie',
     mediaType: 'audio',
-    mediaUrl: 'media/hoeren_t3.mp3',
+    mediaUrl: 'media/exercice_t3.mp3',
     segments:[
       { text: 'Schon seit Langem ist wissenschaftlich bekannt, dass die frühesten Erinnerungen bei erwachsenen Menschen etwa im Alter von drei Jahren beginnen.', wrong: false },
       { text: 'Psychologen erklären dazu, dass sich Kinder im Alter von zwei bis drei Jahren kaum an vergangene Ereignisse erinnern.', wrong: false },
