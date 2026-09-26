@@ -119,7 +119,7 @@ function renderTask(){
   main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
 
-  // Gestion robuste de la séquence multimédia pour Teil 1, 2, 3 et 4
+  // Gestion des flux audio (Aufgaben 1, 2, 3, 6, 7)
   if(task.mediaType === 'audio' && task.mediaUrl) {
     const player = document.getElementById('sequentialAudio');
     const statusText = document.getElementById('mediaStatus');
@@ -214,6 +214,8 @@ function renderTask(){
         playSequence(0);
       }
     });
+
+  // Gestion des flux vidéo (Aufgaben 4 et 5)
   } else if(task.mediaType === 'video' && task.mediaUrl) {
     const player = document.getElementById('sequentialVideo');
     const statusText = document.getElementById('mediaStatus');
@@ -247,9 +249,8 @@ function renderTask(){
       if(statusText) statusText.innerText = currentItem.label;
 
       if (currentItem.type === 'audio') {
-        if(player.style.display !== 'none') player.style.display = 'none';
+        if(player) player.style.display = 'none';
         
-        // Création d'un élément audio temporaire pour la consigne
         let audioTemp = new Audio(currentItem.src);
         audioTemp.play().catch(e => console.log("Autoplay bloqué ou erreur audio :", e));
         
@@ -258,21 +259,25 @@ function renderTask(){
           playVideoSequence(currentIndex);
         };
       } else if (currentItem.type === 'video') {
-        player.style.display = 'block';
-        player.src = currentItem.src;
-        player.load();
-        player.play().catch(e => console.log("Autoplay bloqué ou erreur vidéo :", e));
-        
-        player.onended = function() {
-          currentIndex++;
-          playVideoSequence(currentIndex);
-        };
+        if(player) {
+          player.style.display = 'block';
+          player.src = currentItem.src;
+          player.load();
+          player.play().catch(e => console.log("Autoplay bloqué ou erreur vidéo :", e));
+          
+          player.onended = function() {
+            currentIndex++;
+            playVideoSequence(currentIndex);
+          };
+        }
       } else {
-        player.pause();
-        if(task.teil === 4) {
-          player.style.display = 'block'; // Garder la vidéo visible au milieu pendant la pause
-        } else {
-          player.style.display = 'none';
+        if(player) {
+          player.pause();
+          if(task.teil === 4) {
+            player.style.display = 'block'; // Garder le lecteur visible pendant les pauses de lecture/contrôle
+          } else {
+            player.style.display = 'none';
+          }
         }
         
         let remaining = currentItem.duration / 1000;
@@ -280,7 +285,6 @@ function renderTask(){
 
         pauseInterval = setInterval(() => {
           remaining--;
-          let mins = Math.floor(remaining / 60);
           let secs = remaining % 60;
           if(statusText) {
             if(currentItem.type === 'pause' && task.teil === 4) {
@@ -304,14 +308,16 @@ function renderTask(){
       }
     }
 
-    player.addEventListener('play', function() {
-      if (!isPlayingSequence) {
-        isPlayingSequence = true;
-        currentIndex = 0;
-        player.pause();
-        playVideoSequence(0);
-      }
-    });
+    if(player) {
+      player.addEventListener('play', function() {
+        if (!isPlayingSequence) {
+          isPlayingSequence = true;
+          currentIndex = 0;
+          player.pause();
+          playVideoSequence(0);
+        }
+      });
+    }
   }
 
   // Rendu des tâches selon leur type
