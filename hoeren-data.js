@@ -1,4 +1,4 @@
-// // hoeren-data.js — Contient toutes les données des exercices d'écoute (Aufgabe 1 à 7)
+// hoeren-data.js — Contient toutes les données des exercices d'écoute (Aufgabe 1 à 7)
 
 const TEMPLATE_HOEREN = [
   {teil:1, type:'kurz_uebersicht', time:300, label:'Kurzantwort: Übersicht ergänzen'},
@@ -102,13 +102,16 @@ const HOREN_MT1 = [
     ]
   },
   { ...TEMPLATE_HOEREN[4],
-    instructions:'Hören Sie den wissenschaftlichen Vortrag und ergänzen Sie die Gliederungspunkte durch Texteingabe.',
-    title:'Aufgabe 5: Meeresströmungen und Klima',
+    instructions:'Sie sehen einen Ausschnitt aus einer Vorlesung im Fach Neurowissenschaften zum Thema „Anosmie“.\nSie sehen das Video einmal.\nErgänzen Sie beim Hören die Gliederungspunkte in den Textfeldern in Stichpunkten.\n\nNach dem Video haben Sie 3 Minuten Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 10 Sekunden Zeit, sich die Gliederungspunkte anzuschauen.',
+    title:'Aufgabe 5: Anosmie',
     mediaType: 'video',
-    mediaUrl: 'media/hoeren_t5.mp4',
+    mediaUrl: 'media/hoeren_t5.mov',
+    image: 'media/anatomie_nase.png', // Image de l'Anatomie de la Nase avec le conférencier
     questions:[
-      { q: 'Hauptantrieb der Thermohalinen Zirkulation:', correct: 'Dichteunterschiede' },
-      { q: 'Folge des Abschmelzens von Grönlandeis:', correct: 'Abschwächung des Golfstroms' }
+      { q: 'Grund für Anosmie bei jungen Menschen:', correct: '' },
+      { q: 'Riechzellen können sich nicht erneuern, wenn:', correct: '' },
+      { q: 'Andere Form von Störung bei der Geruchswahrnehmung (nennen Sie ein Beispiel):', correct: '' },
+      { q: 'Früher Hinweis auf Parkinson:', correct: '' }
     ]
   },
   { ...TEMPLATE_HOEREN[5],
