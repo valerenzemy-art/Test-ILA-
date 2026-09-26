@@ -6,7 +6,7 @@ const TEMPLATE_HOEREN = [
   {teil:3, type:'summary_hoer',    time:420, label:'Fehler in Zusammenfassung erkennen'},
   {teil:4, type:'match_personen',  time:360, label:'Aussagen Personen zuordnen'},
   {teil:5, type:'kurz_vortrag',    time:480, label:'Kurzantwort: Gliederungspunkte ergänzen'},
-  {teil:6, type:'mc_hoeren',       time:420, label:'Multiple-Choice'},
+  {teil:6, type:'mc_hoeren',       time:480, label:'Multiple-Choice'}, // Temps ajusté pour inclure les temps de pause
   {teil:7, type:'laut_schrift',    time:360, label:'Laut- und Schriftbild abgleichen'}
 ];
 
@@ -115,17 +115,61 @@ const HOREN_MT1 = [
     ]
   },
   { ...TEMPLATE_HOEREN[5],
-    instructions:'Hören Sie das Gespräch und beantworten Sie die Fragen mit a, b, c oder d.',
-    title:'Aufgabe 6: Universitäre Forschungsförderung',
+    instructions:'Sie hören einen Ausschnitt aus einem Vortrag zum Thema „Glück“.\nSie hören den Text einmal.\nBeantworten Sie die Fragen 1-5.\nEntscheiden Sie, welche Lösung passt.\nFür jede Frage gibt es genau eine richtige Lösung.\n\nNach dem Hören haben Sie 1 Minute und 30 Sekunden Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 1 Minute und 30 Sekunden Zeit, um die Fragen zu lesen.',
+    title:'Aufgabe 6: Glück',
     mediaType: 'audio',
-    mediaUrl: 'media/hoeren_t6.mp3',
+    mediaUrl: 'media/exercice_t6.mp3', // Mis à jour avec exercice_t6
     questions:[
-      { q:'Was kritisiert der Referent an den aktuellen Fördergeldern?', options:[
-        'Die Verteilung erfolgt zu bürokratisch und langsam.',
-        'Es wird zu wenig in geisteswissenschaftliche Projekte investiert.',
-        'Die Laufzeiten der Projekte sind viel zu kurz bemessen.',
-        'Private Unternehmen haben keinen Zugriff auf die Ergebnisse.'
-      ], correct:2 }
+      { 
+        q: '1. Der Sprecher führt den Begriff „Glück“ ein, indem er', 
+        options: [
+          'ihn von einem anderen Begriff abgrenzt.', 
+          'alltägliche Situationen beschreibt.', 
+          'den Begriff definiert.', 
+          'eine persönliche Anekdote erzählt.'
+        ], 
+        correct: 2 
+      },
+      { 
+        q: '2. Langfristige Grundzufriedenheit im Leben', 
+        options: [
+          'hängt nicht von kurzfristigen Glückserlebnissen ab.', 
+          'ist die Folge vieler kleiner glücklicher Erlebnisse.', 
+          'ist wichtiger als kleine glückliche Momente.', 
+          'beeinflusst die Fähigkeit, glückliche Augenblicke zu erleben.'
+        ], 
+        correct: 1 
+      },
+      { 
+        q: '3. Eine Verbindung zwischen Geld und Glück', 
+        options: [
+          'existiert bis zu einem bestimmten Einkommen.', 
+          'ist wissenschaftlich nicht feststellbar.', 
+          'lässt sich vor allem in reichen Ländern nachweisen.', 
+          'sieht man ab einem Jahresverdienst von 20.000 Dollar.'
+        ], 
+        correct: 0 
+      },
+      { 
+        q: '4. Arbeitslosen fehlt vor allem', 
+        options: [
+          'das Eingebundensein in ein berufliches Umfeld.', 
+          'der durch Arbeit erlangte soziale Status.', 
+          'der zwischenmenschliche Kontakt zu den Kollegen.', 
+          'eine sinnvolle tägliche Aufgabe.'
+        ], 
+        correct: 3 
+      },
+      { 
+        q: '5. Das Hauptziel des Vortrags besteht darin,', 
+        options: [
+          'die Suche der Menschen nach Glück zu hinterfragen.', 
+          'eine Anleitung für ein glücklicheres Leben zu geben.', 
+          'über das Phänomen „Glück“ zu informieren.', 
+          'vor einer falschen Idee von Glück zu warnen.'
+        ], 
+        correct: 2 
+      }
     ]
   },
   { ...TEMPLATE_HOEREN[6],
