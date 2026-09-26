@@ -105,8 +105,8 @@ const HOREN_MT1 = [
     instructions:'Sie sehen einen Ausschnitt aus einer Vorlesung im Fach Neurowissenschaften zum Thema „Anosmie“.\nSie sehen das Video einmal.\nErgänzen Sie beim Hören die Gliederungspunkte in den Textfeldern in Stichpunkten.\n\nNach dem Video haben Sie 3 Minuten Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 10 Sekunden Zeit, sich die Gliederungspunkte anzuschauen.',
     title:'Aufgabe 5: Anosmie',
     mediaType: 'video',
-    mediaUrl: 'media/hoeren_t5.mov',
-    image: 'media/anatomie_nase.png', // Image de l'Anatomie de la Nase avec le conférencier
+    mediaUrl: 'media/hoeren_t5.MP4',
+    image: 'media/anatomie_nase.png',
     questions:[
       { q: 'Grund für Anosmie bei jungen Menschen:', correct: '' },
       { q: 'Riechzellen können sich nicht erneuern, wenn:', correct: '' },
