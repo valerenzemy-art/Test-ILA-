@@ -107,9 +107,9 @@ function renderTask(){
       </audio>
     </div>`;
   } else if(task.mediaType === 'video' && task.mediaUrl){
-    mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
-      <p style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎥 Videosequenz abspielen:</p>
-      <video controls controlsList="nodownload" style="width:100%; max-width:600px; border-radius:6px;">
+    mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <p id="mediaStatus" style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎥 Videosequenz abspielen:</p>
+      <video id="sequentialVideo" controls controlsList="nodownload" style="width:100%; max-width:600px; border-radius:6px; display:block; margin: 0 auto;">
         <source src="${task.mediaUrl}" type="video/mp4">
         Ihr Browser unterstützt das Video-Element nicht.
       </video>
@@ -119,7 +119,7 @@ function renderTask(){
   main.innerHTML = `<h2 class="task-title">${task.title}</h2>${mediaHtml}<div id="taskBody"></div>`;
   const body = document.getElementById('taskBody');
 
-  // Gestion robuste de la séquence audio pour Teil 1, Teil 2 et Teil 3
+  // Gestion robuste de la séquence multimédia pour Teil 1, 2, 3 et 4
   if(task.mediaType === 'audio' && task.mediaUrl) {
     const player = document.getElementById('sequentialAudio');
     const statusText = document.getElementById('mediaStatus');
@@ -212,6 +212,104 @@ function renderTask(){
         currentIndex = 0;
         player.pause();
         playSequence(0);
+      }
+    });
+  } else if(task.mediaType === 'video' && task.mediaUrl) {
+    const player = document.getElementById('sequentialVideo');
+    const statusText = document.getElementById('mediaStatus');
+
+    let playlist = [];
+    if(task.teil === 4) {
+      playlist = [
+        { type: 'audio', src: 'media/consigne_t4.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'pause', duration: 45000, label: '⏱️ Lesezeit: Sie haben 45 Sekunden Zeit, um die Aussagen zu lesen...' },
+        { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz läuft (Sie sehen das Video einmal)...' },
+        { type: 'pause_end', duration: 45000, label: '⏱️ Nachbereitung: Sie haben 45 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
+      ];
+    } else {
+      playlist = [
+        { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz abspielen:' }
+      ];
+    }
+
+    let currentIndex = 0;
+    let isPlayingSequence = false;
+    let pauseInterval = null;
+
+    function playVideoSequence(index) {
+      if (index >= playlist.length) {
+        const testObj = HOREN_TESTS[currentTestIdx];
+        if (current < testObj.teile.length - 1) { current++; renderTask(); } else { showResults(); }
+        return;
+      }
+      
+      let currentItem = playlist[index];
+      if(statusText) statusText.innerText = currentItem.label;
+
+      if (currentItem.type === 'audio') {
+        if(player.style.display !== 'none') player.style.display = 'none';
+        
+        // Création d'un élément audio temporaire pour la consigne
+        let audioTemp = new Audio(currentItem.src);
+        audioTemp.play().catch(e => console.log("Autoplay bloqué ou erreur audio :", e));
+        
+        audioTemp.onended = function() {
+          currentIndex++;
+          playVideoSequence(currentIndex);
+        };
+      } else if (currentItem.type === 'video') {
+        player.style.display = 'block';
+        player.src = currentItem.src;
+        player.load();
+        player.play().catch(e => console.log("Autoplay bloqué ou erreur vidéo :", e));
+        
+        player.onended = function() {
+          currentIndex++;
+          playVideoSequence(currentIndex);
+        };
+      } else {
+        player.pause();
+        if(task.teil === 4) {
+          player.style.display = 'block'; // Garder la vidéo visible au milieu pendant la pause
+        } else {
+          player.style.display = 'none';
+        }
+        
+        let remaining = currentItem.duration / 1000;
+        if(pauseInterval) clearInterval(pauseInterval);
+
+        pauseInterval = setInterval(() => {
+          remaining--;
+          let mins = Math.floor(remaining / 60);
+          let secs = remaining % 60;
+          if(statusText) {
+            if(currentItem.type === 'pause' && task.teil === 4) {
+              statusText.innerText = `⏱️ Lesezeit: ${secs}s verbleibend...`;
+            } else if(currentItem.type === 'pause_end' && task.teil === 4) {
+              statusText.innerText = `⏱️ Nachbereitung: ${secs}s verbleibend...`;
+            } else {
+              statusText.innerText = `⏱️ Pause: ${secs}s verbleibend...`;
+            }
+          }
+          if (remaining <= 0) {
+            clearInterval(pauseInterval);
+          }
+        }, 1000);
+
+        setTimeout(function() {
+          clearInterval(pauseInterval);
+          currentIndex++;
+          playVideoSequence(currentIndex);
+        }, currentItem.duration);
+      }
+    }
+
+    player.addEventListener('play', function() {
+      if (!isPlayingSequence) {
+        isPlayingSequence = true;
+        currentIndex = 0;
+        player.pause();
+        playVideoSequence(0);
       }
     });
   }
@@ -371,7 +469,6 @@ function renderSummaryHoeren(task, test, body){
   let html = '<div class="passage" style="max-width: 850px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); line-height: 1.8; font-size: 1.05rem;">';
   html += '<h3 style="margin-bottom: 15px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Zusammenfassung</h3><p>';
   
-  // Utilisation de task.segments pour le texte cliquable interactif
   const segmentsList = task.segments || task.sentences;
   segmentsList.forEach((seg, si)=>{
     const isSelected = a[si] ? 'background-color: #ffeb3b; border-bottom: 2px solid #fbc02d;' : 'background-color: transparent;';
