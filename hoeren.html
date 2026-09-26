@@ -171,6 +171,12 @@ function renderTask(){
         { type: 'audio', src: 'media/exercice_t6.mp3', label: '🎧 Vortrag läuft...' },
         { type: 'pause_end', duration: 90000, label: '⏱️ Nachbereitung: Sie haben 1 Minute und 30 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
       ];
+    } else if(task.teil === 7) {
+      playlist = [
+        { type: 'audio', src: 'media/consigne_t7.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: task.mediaUrl, label: '🎧 Text läuft...' },
+        { type: 'pause_end', duration: 20000, label: '⏱️ Nachbereitung: Sie haben 20 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
+      ];
     } else {
       playlist = [
         { type: 'audio', src: task.mediaUrl, label: '🎧 Audiospur abspielen:' }
@@ -218,6 +224,8 @@ function renderTask(){
               statusText.innerText = `⏱️ Bearbeitungszeit: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
             } else if(task.teil === 6 && (currentItem.type === 'pause' || currentItem.type === 'pause_end')) {
               statusText.innerText = `⏱️ ${currentItem.label.split(':')[0]}: ${mins}:${secs < 10 ? '0' : ''}${secs} verbleibend...`;
+            } else if(task.teil === 7 && currentItem.type === 'pause_end') {
+              statusText.innerText = `⏱️ Nachbereitung: ${secs}s verbleibend...`;
             } else {
               statusText.innerText = `⏱️ Pause: ${secs}s verbleibend...`;
             }
@@ -374,8 +382,10 @@ function renderTask(){
       renderMatchHoeren(task, test, body);
       break;
     case 'summary_hoer':
-    case 'laut_schrift':
       renderSummaryHoeren(task, test, body);
+      break;
+    case 'laut_schrift':
+      renderLautSchrift(task, test, body);
       break;
     case 'mc_hoeren':
       renderMCHoeren(task, test, body);
@@ -529,7 +539,7 @@ function renderSummaryHoeren(task, test, body){
   let html = '<div class="passage" style="max-width: 850px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); line-height: 1.8; font-size: 1.05rem;">';
   html += '<h3 style="margin-bottom: 15px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Zusammenfassung</h3><p>';
   
-  const segmentsList = task.segments || task.sentences;
+  const segmentsList = task.segments;
   segmentsList.forEach((seg, si)=>{
     const isSelected = a[si] ? 'background-color: #ffeb3b; border-bottom: 2px solid #fbc02d;' : 'background-color: transparent;';
     html += `<span class="text-segment" data-si="${si}" style="cursor: pointer; padding: 2px 4px; border-radius: 3px; transition: background 0.2s; ${isSelected}">${escapeHtml(seg.text)} </span>`;
@@ -543,6 +553,29 @@ function renderSummaryHoeren(task, test, body){
       const si = span.dataset.si;
       a[si] = !a[si];
       renderSummaryHoeren(task, test, body);
+    });
+  });
+}
+
+function renderLautSchrift(task, test, body){
+  const a = getBucket(test, task);
+  let html = '<div class="passage" style="max-width: 850px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); line-height: 2.2; font-size: 1.1rem; text-align: justify;">';
+  html += '<h3 style="margin-bottom: 15px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Wikinger in Grönland</h3><p>';
+  
+  const wordsList = task.words;
+  wordsList.forEach((w, wi)=>{
+    const isSelected = a[wi] ? 'background-color: #ffeb3b; border-bottom: 2px solid #fbc02d; font-weight: bold;' : 'background-color: transparent;';
+    html += `<span class="word-segment" data-wi="${wi}" style="cursor: pointer; padding: 2px 4px; border-radius: 3px; transition: background 0.2s; display: inline-block; ${isSelected}">${escapeHtml(w.text)}</span> `;
+  });
+  
+  html += '</p><p style="margin-top: 20px; font-size: 0.9rem; color: #666; font-style: italic;">💡 Hinweis: Klicken Sie auf die 4 Wörter im Text, die nicht dem Hörtext entsprechen.</p></div>';
+  body.innerHTML = html;
+
+  body.querySelectorAll('.word-segment').forEach(span=>{
+    span.addEventListener('click', ()=>{
+      const wi = span.dataset.wi;
+      a[wi] = !a[wi];
+      renderLautSchrift(task, test, body);
     });
   });
 }
@@ -600,11 +633,18 @@ function scoreTask(task, test){
       });
       break;
     case 'summary_hoer':
-    case 'laut_schrift':
-      const segs = task.segments || task.sentences;
+      const segs = task.segments;
       total = segs.filter(s=>s.wrong).length;
       segs.forEach((s, i)=>{
         if(s.wrong && a[i]) correct++;
+      });
+      break;
+    case 'laut_schrift':
+      const words = task.words;
+      total = words.filter(w=>w.isWrong).length;
+      // Note: si isWrong n'est pas explicitement défini dans chaque mot, on attend 4 sélections globales ou selon le paramétrage
+      words.forEach((w, i)=>{
+        if(w.isWrong && a[i]) correct++;
       });
       break;
     case 'mc_hoeren':
