@@ -90,7 +90,7 @@ const HOREN_MT1 = [
         correct: 2 
       },
       { 
-        term: '5. Betroffene Wissenschaftler klären im Internet ihre Kollegen über Scheinverlage auf.', 
+        term: '5. Betroffene Wissenschaftler klären im Internet ihre Kollegen über Scheinverlagen auf.', 
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], 
         correct: 0 
       },
@@ -181,7 +181,7 @@ const HOREN_MT1 = [
       { text: "Um", isWrong: false },
       { text: "das", isWrong: false },
       { text: "Jahr", isWrong: false },
-      { text: "986", isWrong: false },
+      { text: "986", isWrong: true },       // Indice d'erreur 1
       { text: "kamen", isWrong: false },
       { text: "die", isWrong: false },
       { text: "ersten", isWrong: false },
@@ -189,7 +189,7 @@ const HOREN_MT1 = [
       { text: "von", isWrong: false },
       { text: "Island", isWrong: false },
       { text: "zur", isWrong: false },
-      { text: "Südspitze", isWrong: false },
+      { text: "Südspitze", isWrong: true },    // Indice d'erreur 2
       { text: "Grönlands.", isWrong: false },
       { text: "In", isWrong: false },
       { text: "der", isWrong: false },
@@ -212,7 +212,7 @@ const HOREN_MT1 = [
       { text: "die", isWrong: false },
       { text: "Bevölkerung", isWrong: false },
       { text: "etwa", isWrong: false },
-      { text: "6000", isWrong: false },
+      { text: "6000", isWrong: true },       // Indice d'erreur 3
       { text: "Einwohner.", isWrong: false },
       { text: "Doch", isWrong: false },
       { text: "gegen", isWrong: false },
@@ -251,7 +251,7 @@ const HOREN_MT1 = [
       { text: "eine", isWrong: false },
       { text: "Verschlechterung", isWrong: false },
       { text: "des", isWrong: false },
-      { text: "Klimas", isWrong: false },
+      { text: "Klimas", isWrong: true },       // Indice d'erreur 4
       { text: "in", isWrong: false },
       { text: "der", isWrong: false },
       { text: "Region", isWrong: false },
