@@ -144,6 +144,23 @@ const HOREN_MT1 = [
   }
 ];
 
+const HOREN_MT2 = [
+  { ...TEMPLATE_HOEREN[0],
+    instructions:'Sie hören ein Gespräch zwischen einer Studienberaterin und einem Mitarbeiter des Studierendenmarketings zum Thema „Unser erster eigener Podcast: Erst Abi, dann Uni“. Sie hören den Text einmal. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.',
+    title:'Aufgabe 1: Unser erster eigener Podcast: Erst Abi, dann Uni',
+    mediaType: 'audio',
+    mediaUrl: 'media/mt2_exercice_t1.mp3',
+    questions:[
+      { q: 'Medium zur Vermittlung der Studienorientierung:', correct: 'Podcast' },
+      { q: 'Verantwortungsbereich der Berater neben der Studienorientierung:', correct: 'Studierende unterstützen' },
+      { q: 'Grund für Annikas anfängliche Ablehnung des Lehramtsstudiums:', correct: 'Mutti Lehrerin' },
+      { q: 'Person, die Annika maßgeblich zum Lehramt geraten hat:', correct: 'viele Leute' },
+      { q: 'Annika heutige Haltung zu ihrem ehemaligen Studienfach:', correct: 'nicht bereuen' }
+    ]
+  }
+];
+
 const HOREN_TESTS = [
-  {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1}
+  {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
+  {id:2, title:'Modelltest 2 (Hörverstehen)', teile: HOREN_MT2}
 ];
