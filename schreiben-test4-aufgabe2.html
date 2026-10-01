@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
@@ -66,6 +66,18 @@ textarea.locked{background-color:#f4f6f7;color:#444;cursor:not-allowed}
 .score{font-weight:800;color:var(--navy-d);margin-top:14px;font-size:1.02rem}
 button:disabled{opacity:.5;cursor:not-allowed}
 @media(max-width:560px){.topbar{padding:9px 12px}.timer{font-size:1.1rem}}
+.tdn-badge{display:inline-block;font-weight:900;font-size:1.4rem;padding:10px 24px;border-radius:14px;margin-bottom:10px;color:#fff}
+.tdn-badge.tdn-5{background:var(--green-d)}
+.tdn-badge.tdn-4{background:var(--navy)}
+.tdn-badge.tdn-3{background:#c9821f}
+.tdn-badge.tdn-low{background:var(--red)}
+.errlist{display:flex;flex-direction:column;gap:10px;margin:10px 0}
+.errline{border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.etag{display:inline-block;background:var(--bg);color:var(--navy-d);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.ewrong{color:var(--red);text-decoration:line-through;font-size:.94rem;margin:3px 0}
+.eright{color:var(--green-d);font-weight:700;font-size:.94rem;margin:3px 0}
+.enote{color:var(--sub);font-size:.82rem;margin-top:4px}
+.cversion{background:var(--bg);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7;margin-top:6px}
 </style>
 </head>
 <body>
@@ -182,10 +194,18 @@ button:disabled{opacity:.5;cursor:not-allowed}
     m+="=== MON TEXTE ("+n+" mots, temps utilisé : "+used+" sur "+fmt(k.time)+") ===\n"+ta.value.trim()+"\n\n";
     m+="=== MON AUTO-ÉVALUATION (0 = non rempli, 3 = pleinement rempli) ===\n";
     CRIT[k.kind].forEach(function(c,i){m+="- "+c+" : "+(ev[i]>=0?ev[i]+"/3":"non évalué")+"\n"});
-    m+="\n=== FORMAT DE RÉPONSE DEMANDÉ ===\n";
-    m+="1. Niveau estimé (TDN 3, TDN 4, TDN 5 ou en dessous de TDN 3), justifié critère par critère avec les critères officiels ci-dessus"+(k.kind==="argument"?" (sprachliche Mittel, Fehler et Verständnis, Aspekte der Aufgabenstellung, Struktur)":" (beide Quellen, inhaltliche Korrektheit, eigene Formulierungen, Fehler et Verständnis)")+". Précise que c'est une estimation, pas une note officielle.\n";
-    m+="2. Mes erreurs classées (grammaire, Rektion, connecteurs, registre), en signalant celles qui reviennent.\n";
-    m+="3. Une version corrigée au niveau C1, SANS changer mes idées ni mes arguments : seuls la langue et la structure des phrases changent, avec les modifications bien visibles. Les arguments faibles ou non justifiés sont signalés à part, sans être modifiés.\n";
+    m+="\n=== FORMAT DE RÉPONSE DEMANDÉ (STRICT, à respecter EXACTEMENT) ===\n";
+    m+="Réponds UNIQUEMENT dans ce format, sans texte avant, sans texte après, sans markdown ni backticks :\n\n";
+    m+="TDN: <3, 4, 5 ou <3>\n";
+    m+="BEGRUENDUNG: <2-3 phrases en français qui justifient ce niveau selon les critères officiels ci-dessus"+(k.kind==="argument"?" (sprachliche Mittel, Fehler et Verständnis, Aspekte der Aufgabenstellung, Struktur)":" (beide Quellen, inhaltliche Korrektheit, eigene Formulierungen, Fehler et Verständnis)")+">\n";
+    m+="---FEHLER---\n";
+    m+="TYP: <Grammatik | Rechtschreibung | Wortschatz | Formulierung | Struktur>\n";
+    m+="FALSCH: <passage exact et fautif de mon texte, en allemand>\n";
+    m+="RICHTIG: <la correction, en allemand>\n";
+    m+="ERKLAERUNG: <une phrase en français expliquant l'erreur>\n";
+    m+="(répète ce bloc ---FEHLER--- pour chaque erreur trouvée, au moins 3 si le texte en contient)\n";
+    m+="---VERSION---\n";
+    m+="<version corrigée complète en allemand, niveau C1, SANS changer mes idées ni mes arguments ; les arguments faibles restent tels quels>\n\n";
     m+="Sois rigoureux et honnête : ne me valide pas par complaisance.";
     return m;
   }
@@ -198,12 +218,48 @@ button:disabled{opacity:.5;cursor:not-allowed}
     if(!t)return"";
     return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/^#+\s*(.+)$/gm,"<b>$1</b>").replace(/\n/g,"<br>");
   }
+  function escH(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function parseCorr(t){
+    if(!t)return null;
+    var tdnM=t.match(/TDN:\s*([^\n\r]+)/i);
+    var begM=t.match(/BEGRUENDUNG:\s*([\s\S]*?)(?=\n---FEHLER---|\n---VERSION---|$)/i);
+    var errs=[];
+    var re=/---FEHLER---\s*TYP:\s*([^\n\r]+)\s*FALSCH:\s*([^\n\r]+)\s*RICHTIG:\s*([^\n\r]+)\s*ERKLAERUNG:\s*([^\n\r]+)/gi;
+    var m;
+    while((m=re.exec(t))){errs.push({typ:m[1].trim(),falsch:m[2].trim(),richtig:m[3].trim(),erkl:m[4].trim()})}
+    var verM=t.match(/---VERSION---\s*([\s\S]*)$/i);
+    if(!tdnM&&!errs.length&&!verM)return null;
+    return{tdn:tdnM?tdnM[1].trim():"",beg:begM?begM[1].trim():"",errs:errs,version:verM?verM[1].trim():""};
+  }
+  function tdnClass(s){
+    if(s&&/<\s*3/.test(s))return"tdn-low";
+    var n=parseInt(s,10);
+    if(n>=5)return"tdn-5";if(n===4)return"tdn-4";if(n===3)return"tdn-3";return"tdn-low";
+  }
+  function renderCorr(t){
+    var p=parseCorr(t);
+    if(!p)return fmtCorr(t);
+    var h="";
+    if(p.tdn)h+='<div class="tdn-badge '+tdnClass(p.tdn)+'">TDN '+escH(p.tdn)+'</div>';
+    if(p.beg)h+='<p class="hint">'+escH(p.beg)+'</p>';
+    if(p.errs.length){
+      h+='<div class="errlist">';
+      p.errs.forEach(function(e){
+        h+='<div class="errline"><span class="etag">'+escH(e.typ)+'</span><div class="ewrong">'+escH(e.falsch)+'</div><div class="eright">'+escH(e.richtig)+'</div><div class="enote">'+escH(e.erkl)+'</div></div>';
+      });
+      h+='</div>';
+    }
+    if(p.version){
+      h+='<h3>Korrigierte Version (C1)</h3><div class="cversion">'+escH(p.version).replace(/\n/g,'<br>')+'</div>';
+    }
+    return h||fmtCorr(t);
+  }
   function runAI(){
     var btn=$("ai");btn.disabled=true;btn.textContent="Claude korrigiert … (bis zu 60 s)";
-    sampleFn(buildPrompt()+"\n\nRéponds en français, sauf la version corrigée qui est en allemand. N'utilise pas de tableaux.",{modelTier:"complex",cache:false,onText:function(o){corr=o.text;var el=$("corr");if(el)el.innerHTML=fmtCorr(o.text)}})
+    sampleFn(buildPrompt()+"\n\nRespecte EXACTEMENT le format demandé (TDN:, BEGRUENDUNG:, ---FEHLER---, TYP:, FALSCH:, RICHTIG:, ERKLAERUNG:, ---VERSION---), sans aucun texte hors de ce format.",{modelTier:"complex",cache:false,onText:function(o){corr=o.text;var el=$("corr");if(el)el.innerHTML=renderCorr(o.text)}})
     .then(function(x){corr=x.text;save();renderEval()})
     .catch(function(e){
-      var el=$("corr");if(el)el.innerHTML=fmtCorr(corr)+'<p class="no">'+(e&&e.code==="not_granted"?"Zugriff nicht erlaubt. Bitte die Anfrage bestätigen und erneut versuchen.":e&&e.code==="rate_limited"?"Zu viele Anfragen. Bitte kurz warten.":"Die Korrektur ist fehlgeschlagen. Bitte erneut versuchen.")+"</p>";
+      var el=$("corr");if(el)el.innerHTML=renderCorr(corr)+'<p class="no">'+(e&&e.code==="not_granted"?"Zugriff nicht erlaubt. Bitte die Anfrage bestätigen und erneut versuchen.":e&&e.code==="rate_limited"?"Zu viele Anfragen. Bitte kurz warten.":"Die Korrektur ist fehlgeschlagen. Bitte erneut versuchen.")+"</p>";
       if(btn){btn.disabled=false;btn.textContent="Korrektur mit Claude starten"}
     });
   }
@@ -216,7 +272,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
     });
     var r=ev.filter(function(v){return v>=0}),sum=r.reduce(function(a,b){return a+b},0);
     h+='<p class="score">'+sum+" / 12 ("+r.length+" von 4 Kriterien bewertet)</p><p class=\"hint\">Selbstbewertungen fallen oft großzügiger aus als die echte Bewertung. Lass deinen Text zusätzlich korrigieren.</p>";
-    if(sampleFn)h+='<div class="cta"><button id="ai">Korrektur mit Claude starten</button></div><div id="corr" class="corr">'+fmtCorr(corr)+'</div>';
+    if(sampleFn)h+='<div class="cta"><button id="ai">Korrektur mit Claude starten</button></div><div id="corr" class="corr">'+renderCorr(corr)+'</div>';
     else h+='<p class="hint">Die automatische Korrektur läuft nur in der claude.ai-Version dieser Seite. Auf anderen Seiten kopierst du den Auftrag und fügst ihn bei Claude ein.</p>';
     h+='<div class="cta"><button id="prompt">Korrektur-Auftrag kopieren</button><a href="https://claude.ai/new" target="_blank" rel="noopener">Claude öffnen</a></div>';
     $("eval").innerHTML=h;
