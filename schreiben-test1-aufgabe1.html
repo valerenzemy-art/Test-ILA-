@@ -310,12 +310,7 @@ function LT_check(text){
   };
 
   ta.addEventListener("input",function(){if(locked())return;text=ta.value;paintCount();save()});
-  $("copy").onclick = function() {
-    navigator.clipboard.writeText(ta.value).then(function() {
-      $("copy").textContent = "Kopiert!";
-      setTimeout(function() { $("copy").textContent = "Text kopieren"; }, 1500);
-    });
-  };
+  $("copy").onclick=function(){copyStr(ta.value,$("copy"))};
   $("clear").onclick=function(){if(confirm("Text löschen?")){ta.value="";text="";paintCount();save()}};
   $("check").onclick=runCheck;
   window.addEventListener("beforeunload",save);
