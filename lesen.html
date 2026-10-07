@@ -20,15 +20,17 @@
   <footer class="navbar" id="navbar"></footer>
 </div>
 
-<!-- Externe Datendatei einbinden -->
+<!-- Externe Datendateien und Storage-Logik einbinden -->
 <script src="lesen-data.js"></script>
+<script src="storage.js"></script>
 
 <script>
+// Charger les réponses sauvegardées depuis le localStorage au démarrage
+let answers = loadAllAnswers();
 let currentTestIdx = 0;
 let current = 0;
 let timerInterval = null;
 let remaining = 0;
-const answers = {};
 
 function fmt(sec){
   const m = Math.floor(sec/60).toString().padStart(2,'0');
@@ -66,10 +68,13 @@ function updateTimerDisplay(){
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+
+// Fonction personnalisée utilisant le module storage.js et persistant automatiquement
 function getBucket(test, task){
-  if(!answers[test.id]) answers[test.id] = {};
-  if(!answers[test.id][task.teil]) answers[test.id][task.teil] = {};
-  return answers[test.id][task.teil];
+  return window.getBucket(test, task, answers);
+}
+function persistAnswers(){
+  saveAllAnswers(answers);
 }
 
 function showTestSelect(){
@@ -169,7 +174,11 @@ function renderGap(task, test, body){
   body.querySelectorAll('.gapselect').forEach(sel=>{
     const idx = sel.dataset.idx;
     if(a[idx] !== undefined){ sel.value = a[idx]; sel.classList.add('answered'); }
-    sel.addEventListener('change', ()=>{ a[idx] = sel.value; sel.classList.toggle('answered', sel.value !== ''); });
+    sel.addEventListener('change', ()=>{ 
+      a[idx] = sel.value; 
+      sel.classList.toggle('answered', sel.value !== ''); 
+      persistAnswers();
+    });
   });
 }
 
@@ -193,6 +202,7 @@ function renderOrder(task, test, body){
         const pos = parseInt(btn.dataset.pos);
         const swapWith = btn.dataset.dir === 'up' ? pos-1 : pos+1;
         [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
+        persistAnswers();
         draw();
       };
     });
@@ -216,7 +226,10 @@ function renderMC(task, test, body){
   html += '</div>';
   body.innerHTML = html;
   task.questions.forEach((q, qi)=>{
-    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[qi] = inp.value));
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
+      a[qi] = inp.value; 
+      persistAnswers();
+    }));
   });
 }
 
@@ -241,7 +254,10 @@ function renderMatch(task, test, body){
   body.querySelectorAll('select[data-ti]').forEach(sel=>{
     const ti = sel.dataset.ti;
     if(a[ti] !== undefined) sel.value = a[ti];
-    sel.addEventListener('change', ()=> a[ti] = sel.value);
+    sel.addEventListener('change', ()=>{ 
+      a[ti] = sel.value; 
+      persistAnswers();
+    });
   });
 }
 
@@ -260,7 +276,10 @@ function renderTable(task, test, body){
   html += '</tbody></table>';
   body.innerHTML = html;
   task.items.forEach((item, ii)=>{
-    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[ii] = inp.value));
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
+      a[ii] = inp.value; 
+      persistAnswers();
+    }));
   });
 }
 
@@ -298,6 +317,7 @@ function renderTwoCat(task, test, body){
   body.querySelectorAll('select[data-key]').forEach(sel=>{
     sel.addEventListener('change', ()=>{
       a[sel.dataset.key] = sel.value;
+      persistAnswers();
     });
   });
 }
@@ -331,7 +351,11 @@ function renderSummary(task, test, body){
     document.getElementById('cnt').textContent = n;
   }
   body.querySelectorAll('input[data-si]').forEach(cb=>{
-    cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
+    cb.addEventListener('change', ()=>{ 
+      a[cb.dataset.si] = cb.checked; 
+      updateCount(); 
+      persistAnswers();
+    });
   });
   updateCount();
 }
@@ -384,7 +408,7 @@ function showResults(){
   nb.innerHTML = '<button class="btn ghost" id="btnRestart">Neu starten</button><button class="btn next" id="btnMenu2">Menü</button>';
 
   document.getElementById('btnRestart').onclick = () => {
-      answers[test.id] = {};
+      clearTestAnswers(test.id, answers);
       current = 0;
       renderTask();
   };
