@@ -263,7 +263,7 @@ function renderMatch(task, test, body){
 
 function renderTable(task, test, body){
   let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
-  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  html += `<div class="tzt-wrapper"><table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   const a = getBucket(test, task);
   task.items.forEach((item, ii)=>{
     html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
@@ -273,7 +273,7 @@ function renderTable(task, test, body){
     });
     html += `</tr>`;
   });
-  html += '</tbody></table>';
+  html += `</tbody></table></div>`;
   body.innerHTML = html;
   task.items.forEach((item, ii)=>{
     body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
@@ -303,7 +303,7 @@ function renderTwoCat(task, test, body){
     return s;
   };
 
-  html += `<table class="a6-table">
+  html += `<div class="a6-table-wrapper"><table class="a6-table">
     <thead>
       <tr><th>Vorteile</th><th>Nachteile</th></tr>
     </thead>
@@ -311,7 +311,7 @@ function renderTwoCat(task, test, body){
       <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
       <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
     </tbody>
-  </table></div>`;
+  </table></div></div>`;
 
   body.innerHTML = html;
   body.querySelectorAll('select[data-key]').forEach(sel=>{
