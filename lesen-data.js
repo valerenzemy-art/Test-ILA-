@@ -635,9 +635,32 @@ const MT4 = [
   }
 ];
 
+const MT5 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort. Für jede Lücke gibt es genau eine richtige Lösung.',
+    title:'Dekade des Dialogs: Zehn Jahre Runder Tisch Meeresmüll',
+    segments:[
+      'Seit nunmehr zehn Jahren fungiert der Runde Tisch Meeresmüll als transdisziplinäres Forum, das Akteure aus Wissenschaft, Wirtschaft und Zivilgesellschaft vereint, um koordinierten Maßnahmen gegen die schleichende Kontamination der maritimen Ökosysteme Einhalt zu ',
+      ' Was seinerzeit als intermediäre Plattform initiiert wurde, hat sich zu einem essenziellen Instrument der politischen Willensbildung entwickelt, wenngleich die Umsetzung konkreter Restriktionen angesichts divergierender Lobbyinteressen oft ',
+      ' verläuft. Insbesondere die ubiquitäre Verbreitung von Mikroplastik, das sich durch den sukzessiven Zerfall makroskopischer Kunststoffe in den Sedimenten akkumuliert, stellt die Forschergemeinde vor enorme Herausforderungen. Jüngste Analysen ',
+      ' unmissverständlich, dass selbst entlegene Tiefseeregionen mittlerweile von synthetischen Polymeren durchdrungen sind, wodurch die marine Biodiversität nachhaltig kompromittiert wird. Um diesem schleichenden Kollaps entgegenzuwirken, fordert das Gremium eine drastische Entbürokratisierung der Kreislaufwirtschaft sowie die Implementierung verbindlicher Sanktionsmechanismen. Das inhärente Dilemma dieses Dialogformats besteht jedoch darin, dass freiwillige Selbstverpflichtungen der Industrie häufig ',
+      ' bleiben, sofern ihnen keine legislativen Zwangsmittel unterlegt werden. Dennoch manifestiert sich am Ende der Dekade ein gewisser Paradigmenwechsel, ',
+      ' Implementierung die gesamtgesellschaftliche Sensibilisierung für einen nachhaltigen Ressourcengebrauch maßgeblich vorangetrieben hat.'
+    ],
+    gaps:[
+      {options:['gewähren','gebieten','verwehren','stiften'], correct:1},
+      {options:['schleppend','rasant','schleunig','abrupt'], correct:0},
+      {options:['evozieren','konstatieren','postulieren','insinuieren'], correct:1},
+      {options:['wirkungslos','omnipräsent','marginal','latent'], correct:0},
+      {options:['der','den','dessen','denen'], correct:2}
+    ]
+  }
+];
+
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
   {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
-  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4}
+  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
+  {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5}
 ];
