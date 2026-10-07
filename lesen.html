@@ -20,17 +20,15 @@
   <footer class="navbar" id="navbar"></footer>
 </div>
 
-<!-- Externe Datendateien und Storage-Logik einbinden -->
+<!-- Externe Datendatei einbinden -->
 <script src="lesen-data.js"></script>
-<script src="storage.js"></script>
 
 <script>
-// Charger les réponses sauvegardées depuis le localStorage au démarrage
-let answers = loadAllAnswers();
 let currentTestIdx = 0;
 let current = 0;
 let timerInterval = null;
 let remaining = 0;
+const answers = {};
 
 function fmt(sec){
   const m = Math.floor(sec/60).toString().padStart(2,'0');
@@ -68,13 +66,10 @@ function updateTimerDisplay(){
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-
-// Fonction personnalisée utilisant le module storage.js et persistant automatiquement
 function getBucket(test, task){
-  return window.getBucket(test, task, answers);
-}
-function persistAnswers(){
-  saveAllAnswers(answers);
+  if(!answers[test.id]) answers[test.id] = {};
+  if(!answers[test.id][task.teil]) answers[test.id][task.teil] = {};
+  return answers[test.id][task.teil];
 }
 
 function showTestSelect(){
@@ -174,11 +169,7 @@ function renderGap(task, test, body){
   body.querySelectorAll('.gapselect').forEach(sel=>{
     const idx = sel.dataset.idx;
     if(a[idx] !== undefined){ sel.value = a[idx]; sel.classList.add('answered'); }
-    sel.addEventListener('change', ()=>{ 
-      a[idx] = sel.value; 
-      sel.classList.toggle('answered', sel.value !== ''); 
-      persistAnswers();
-    });
+    sel.addEventListener('change', ()=>{ a[idx] = sel.value; sel.classList.toggle('answered', sel.value !== ''); });
   });
 }
 
@@ -202,7 +193,6 @@ function renderOrder(task, test, body){
         const pos = parseInt(btn.dataset.pos);
         const swapWith = btn.dataset.dir === 'up' ? pos-1 : pos+1;
         [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
-        persistAnswers();
         draw();
       };
     });
@@ -226,10 +216,7 @@ function renderMC(task, test, body){
   html += '</div>';
   body.innerHTML = html;
   task.questions.forEach((q, qi)=>{
-    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
-      a[qi] = inp.value; 
-      persistAnswers();
-    }));
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[qi] = inp.value));
   });
 }
 
@@ -254,16 +241,13 @@ function renderMatch(task, test, body){
   body.querySelectorAll('select[data-ti]').forEach(sel=>{
     const ti = sel.dataset.ti;
     if(a[ti] !== undefined) sel.value = a[ti];
-    sel.addEventListener('change', ()=>{ 
-      a[ti] = sel.value; 
-      persistAnswers();
-    });
+    sel.addEventListener('change', ()=> a[ti] = sel.value);
   });
 }
 
 function renderTable(task, test, body){
   let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
-  html += `<div class="tzt-wrapper"><table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   const a = getBucket(test, task);
   task.items.forEach((item, ii)=>{
     html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
@@ -273,13 +257,10 @@ function renderTable(task, test, body){
     });
     html += `</tr>`;
   });
-  html += `</tbody></table></div>`;
+  html += '</tbody></table>';
   body.innerHTML = html;
   task.items.forEach((item, ii)=>{
-    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
-      a[ii] = inp.value; 
-      persistAnswers();
-    }));
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[ii] = inp.value));
   });
 }
 
@@ -303,7 +284,7 @@ function renderTwoCat(task, test, body){
     return s;
   };
 
-  html += `<div class="a6-table-wrapper"><table class="a6-table">
+  html += `<table class="a6-table">
     <thead>
       <tr><th>Vorteile</th><th>Nachteile</th></tr>
     </thead>
@@ -311,13 +292,12 @@ function renderTwoCat(task, test, body){
       <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
       <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
     </tbody>
-  </table></div></div>`;
+  </table></div>`;
 
   body.innerHTML = html;
   body.querySelectorAll('select[data-key]').forEach(sel=>{
     sel.addEventListener('change', ()=>{
       a[sel.dataset.key] = sel.value;
-      persistAnswers();
     });
   });
 }
@@ -351,11 +331,7 @@ function renderSummary(task, test, body){
     document.getElementById('cnt').textContent = n;
   }
   body.querySelectorAll('input[data-si]').forEach(cb=>{
-    cb.addEventListener('change', ()=>{ 
-      a[cb.dataset.si] = cb.checked; 
-      updateCount(); 
-      persistAnswers();
-    });
+    cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
   });
   updateCount();
 }
@@ -408,7 +384,7 @@ function showResults(){
   nb.innerHTML = '<button class="btn ghost" id="btnRestart">Neu starten</button><button class="btn next" id="btnMenu2">Menü</button>';
 
   document.getElementById('btnRestart').onclick = () => {
-      clearTestAnswers(test.id, answers);
+      answers[test.id] = {};
       current = 0;
       renderTask();
   };
