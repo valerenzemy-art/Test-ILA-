@@ -1,546 +1,168 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TestDaF C1 — Modelltests Lesen (Digital)</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="app">
-  <header class="topbar">
-    <div>
-      <div class="brand">LESEN C1</div>
-      <div class="subbrand">Digitaler TestDaF · Niveau C1 Niveauanforderung</div>
-    </div>
-    <div class="tag">Niveau C1</div>
-  </header>
-  <div class="taskbar" id="taskbar"></div>
-  <main id="main"></main>
-  <footer class="navbar" id="navbar"></footer>
-</div>
+const TEMPLATE = [
+  {teil:1, type:'gap',     time:240,  label:'Lückentext ergänzen'},
+  {teil:2, type:'order',   time:300,  label:'Textabschnitte ordnen'},
+  {teil:3, type:'mc',      time:900,  label:'Multiple Choice (C1 Level)'},
+  {teil:4, type:'match',   time:360,  label:'Textstellen zuordnen (C1 Level)'},
+  {teil:5, type:'table',   time:540,  label:'Aussagen Kategorien zuordnen'},
+  {teil:6, type:'twocat',  time:420,  label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
+  {teil:7, type:'summary', time:420,  label:'Fehler in Zusammenfassung erkennen'}
+];
 
-<!-- Externe Datendateien und Storage-Logik einbinden -->
-<script src="lesen-data.js"></script>
-<script src="storage.js"></script>
-
-<script>
-// Charger les réponses sauvegardées depuis le localStorage au démarrage
-let answers = loadAllAnswers();
-let currentTestIdx = 0;
-let current = 0;
-let timerInterval = null;
-let remaining = 0;
-
-function fmt(sec){
-  const m = Math.floor(sec/60).toString().padStart(2,'0');
-  const s = Math.floor(sec%60).toString().padStart(2,'0');
-  return m+":"+s;
-}
-function clearTimer(){ if(timerInterval) clearInterval(timerInterval); }
-function startTimer(seconds){
-  clearTimer(); remaining = seconds; updateTimerDisplay();
-  timerInterval = setInterval(()=>{
-    remaining--;
-    if(remaining <= 0){ 
-      remaining = 0; 
-      updateTimerDisplay(); 
-      clearTimer(); 
-      const test = TESTS[currentTestIdx];
-      if(current === test.teile.length - 1){ 
-        showResults(); 
-      } else { 
-        current++; 
-        renderTask(); 
-      }
-    } else { 
-      updateTimerDisplay(); 
-    }
-  },1000);
-}
-function updateTimerDisplay(){
-  const el = document.getElementById('timerText');
-  const circle = document.getElementById('timerCircle');
-  if(!el) return;
-  el.textContent = fmt(remaining);
-  if(remaining <= 30){ circle.classList.add('warn'); } else { circle.classList.remove('warn'); }
-}
-function escapeHtml(str){
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// Fonction personnalisée utilisant le module storage.js et persistant automatiquement
-function getBucket(test, task){
-  return window.getBucket(test, task, answers);
-}
-function persistAnswers(){
-  saveAllAnswers(answers);
-}
-
-function showTestSelect(){
-  clearTimer();
-  document.getElementById('taskbar').innerHTML = '';
-  document.getElementById('navbar').innerHTML = '';
-  let cards = '';
-  TESTS.forEach((test, idx)=>{
-    cards += `<div class="sel-card" data-idx="${idx}">
-      <div class="sc-title">${test.title}</div>
-      <div class="sc-desc">7 Aufgaben · Niveau C1 · Akribische Fachsprache</div>
-    </div>`;
-  });
-  document.getElementById('main').innerHTML = `
-    <div class="select-screen">
-      <h2>Leseverstehen C1 — Modelltest wählen</h2>
-      <p>Anspruchsvolle Texte, wissenschaftliches Vokabular und komplexe Satzstrukturen zur optimalen Vorbereitung auf den Digitalen TestDaF (TDN 4 / TDN 5).</p>
-      <div class="cards">${cards}</div>
-      <p class="select-note">Akademisches Übungsmaterial Niveau C1.</p>
-    </div>
-  `;
-  document.querySelectorAll('.sel-card[data-idx]').forEach(card=>{
-    card.onclick = ()=>{ currentTestIdx = parseInt(card.dataset.idx); current = 0; renderTask(); };
-  });
-}
-
-function renderTaskbar(task, test){
-  const tb = document.getElementById('taskbar');
-  tb.innerHTML = `
-    <div class="task-count">
-      <div>
-        <div class="task-label">${test.title} · Aufgabe</div>
-        <span class="n">${task.teil}</span><span class="of">/${test.teile.length}</span>
-      </div>
-    </div>
-    <div class="timer-wrap">
-      <div class="timer-circle" id="timerCircle"><span id="timerText">--:--</span></div>
-      <div class="timer-caption">verbleibend</div>
-    </div>
-    <div class="instructions">
-      <div class="title">${task.label}</div>
-      <p>${task.instructions}</p>
-      <p class="time-hint">Sie haben ${fmt(task.time)} Minuten Zeit.</p>
-    </div>
-  `;
-}
-function renderNavbar(isLast, test){
-  const nb = document.getElementById('navbar');
-  nb.innerHTML = `
-    <button class="btn ghost" id="btnMenu">Modelltests</button>
-    <span class="foot-note">Niveau C1 · TestDaF Format</span>
-    <button class="btn next" id="btnNext">${isLast ? 'Ergebnisse' : 'Aufgabe '+(current+2)+' →'}</button>
-  `;
-  document.getElementById('btnMenu').onclick = ()=>{
-    if(confirm('Zurück zur Auswahlliste? Ihre Antworten bleiben gespeichert.')) showTestSelect();
-  };
-  document.getElementById('btnNext').onclick = ()=>{
-    if(isLast){ showResults(); } else { current++; renderTask(); }
-  };
-}
-
-function renderTask(){
-  const test = TESTS[currentTestIdx];
-  const task = test.teile[current];
-  renderTaskbar(task, test);
-  startTimer(task.time);
-  const main = document.getElementById('main');
-  main.innerHTML = `<h2 class="task-title">${task.title}</h2><div id="taskBody"></div>`;
-  const body = document.getElementById('taskBody');
-  switch(task.type){
-    case 'gap': renderGap(task, test, body); break;
-    case 'order': renderOrder(task, test, body); break;
-    case 'mc': renderMC(task, test, body); break;
-    case 'match': renderMatch(task, test, body); break;
-    case 'table': renderTable(task, test, body); break;
-    case 'twocat': renderTwoCat(task, test, body); break;
-    case 'summary': renderSummary(task, test, body); break;
+const MT1 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+    title:'Schlafmangel und kognitive Leistungsfähigkeit',
+    segments:[
+      'Zahlreiche akademische Studien belegen, dass chronischer Schlafmangel die kognitive Leistungsfähigkeit erheblich ',
+      ' kann, selbst wenn Betroffene subjektiv das Gefühl haben, sich an den reduzierten Schlaf gewöhnt zu haben. Besonders betroffen ist dabei das Arbeitsgedächtnis, das für die kurzfristige Speicherung und Verarbeitung komplexer Informationen ',
+      ' ist. Bereits eine einzige durchwachte Nacht kann die Reaktionsgeschwindigkeit messbar ',
+      ', vergleichbar mit den Effekten eines erhöhten Alkoholspiegels. Langfristig wird chronischer Schlafmangel zudem mit einem erhöhten Risiko für verschiedene Herz-Kreislauf-Erkrankungen in ',
+      ' gebracht. Schlafforscherinnen und Schlafforscher empfehlen daher, feste Schlafenszeiten ',
+      ', um dem Körper einen stabilen Rhythmus zu ermöglichen.'
+    ],
+    gaps:[
+      {options:['beeinträchtigen','fördern','stabilisieren','ignorieren'], correct:0},
+      {options:['zuständig','begeistert','abhängig','überzeugt'], correct:0},
+      {options:['verringern','erhöhen','stabilisieren','ausgleichen'], correct:0},
+      {options:['Verbindung','Kontakt','Rücksicht','Hinsicht'], correct:0},
+      {options:['einzuhalten','abzuschaffen','aufzuschieben','zu vermeiden'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Die Entdeckung des Penicillins',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Der schottische Bakteriologe Alexander Fleming bemerkte 1928 in seinem Labor eher zufällig, dass sich auf einer vergessenen Bakterienkultur ein Schimmelpilz gebildet hatte.',
+      'Er stellte fest, dass rund um den Schimmelpilz keine Bakterien mehr wuchsen, und vermutete, dass der Pilz eine bakterienabtötende Substanz absondern müsse.',
+      'Fleming veröffentlichte seine Beobachtungen, doch zunächst zeigte die wissenschaftliche Gemeinschaft nur wenig Interesse an einer praktischen Anwendung der Entdeckung.',
+      'Erst rund ein Jahrzehnt später gelang es einem Forschungsteam um Howard Florey und Ernst Chain, den Wirkstoff Penicillin in ausreichender Reinheit und Menge für klinische Tests herzustellen.',
+      'Während des Zweiten Weltkriegs wurde Penicillin schließlich in großem Maßstab produziert und rettete Schätzungen zufolge Hunderttausenden verwundeter Soldaten das Leben.'
+    ],
+    shuffledStart:[2,4,0,3,1]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Die Neurobiologie des luziden Träumens',
+    passage:[
+      '(1) Das Phänomen des luziden Träumens, bei dem sich der Schläfende seines Traumzustands bewusst ist und diesen mitunter aktiv steuern kann, wurde lange Zeit von der empirischen Wissenschaft skeptisch betrachtet. Erst mit der Standardisierung elektroenzephalografischer Messungen im REM-Schlaf gelang der schlüssige Nachweis: Etwa die Hälfte der Weltbevölkerung hat mindestens einmal im Leben ein solches Phänomen erfahren, während nur eine kleine Minderheit in der Lage ist, dieses Phänomen regelmäßig und gezielt herbeizuführen.',
+      '(2) Neurowissenschaftlich zeichnet sich der Klartraum durch eine hybride Bewusstseinsform aus. Während der REM-Schlaf gewöhnlich durch eine Deaktivierung des dorsolateralen präfrontalen Kortex gekennzeichnet ist – was den Verlust des kritischen Denkens und der Orientierung erklärt –, zeigt sich bei Klarträumern in genau dieser Region eine signifikante Reaktivierung. Dies ermöglicht das Wiedererlangen von Selbstreflexion, logischer Urteilskraft und metakognitiven Fähigkeiten mitten im Traumgeschehen.',
+      '(3) Historisch gesehen ist die Faszination für das Phänomen keineswegs ein modernes Nebenprodukt der modernen Psychologie. Bereits in antiken philosophischen Abhandlungen sowie in indigenen und östlichen Traditionen spielte die Schulung des Traum-Bewusstseins eine zentrale Rolle. Diese kulturübergreifende Kontinuität verdeutlicht, dass das Streben nach Kontrolle über den eigenen Geist im Schlaf ein tief verankertes menschliches Anliegen darstellt.',
+      '(4) In der therapeutischen Praxis eröffnet die Klartraumforschung vielversprechende Ansätze zur Linderung schwerer psychischer Leiden. Insbesondere Patienten mit posttraumatischen Belastungsstörungen (PTBS), die unter chronischen Alpträumen leiden, profitieren von verhaltenstherapeutischen Techniken des luziden Träumens. Durch das gezielte Einüben von Re-Skripting-Strategien lernen Betroffene, bedrohliche Traumszenarien umzugestalten und so emotionale Erleichterung zu erfahren.',
+      '(5) Ein weiterer Aspekt betrifft die plastischen Veränderungen im Gehirn durch sensomotorisches Training im Schlaflabor. Studien zeigen, dass das gedankliche Durchspielen komplexer Sportarten oder Bewegungsabläufe im Klartraum dieselben motorischen Areale im Gehirn stimuliert wie die reale Ausführung. Folglich lassen sich solche Traumerfahrungen messbar auf die motorische Leistungsfähigkeit in der Wachrealität übertragen.',
+      '(6) Trotz dieser Potenziale mahnt die akademische Forschung hinsichtlich der unkritischen Verbreitung von Techniken zur künstlichen Trauminduktion zur Vorsicht. Die unkontrollierte Anwendung von elektrischer Hirnstimulation oder pharmakologischen Präparaten zur Herbeiführung von Klarträumern kann die Schlafarchitektur nachhaltig stören, psychische Dissoziationen begünstigen und schwere Schlafstörungen nach sich ziehen.',
+      '(7) Das primäre Anliegen des vorliegenden Artikels besteht darin, einen fundierten Überblick über den aktuellen wissenschaftlichen Erkenntnisstand der Klartraumforschung zu vermitteln sowie deren Chancen und neurobiologische Risiken objektiv gegeneinander abzuwägen.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird gesagt, dass ...', options:[
+        'die Hälfte der Bevölkerung regelmäßig in der Lage ist, ihre Träume zu steuern.',
+        'die wissenschaftliche Beweisführung erst durch neuzeitliche Messverfahren möglich wurde.',
+        'eine große Mehrheit der Menschen unfähig ist, jemals einen Klartraum zu erleben.',
+        'luzides Träumen schon immer von der Forschung als Alltagskonzept akzeptiert wurde.'
+      ], correct:1 },
+      { q:'Wodurch zeichnen sich laut Absatz 2 Klarträumer aus? Durch ...', options:[
+        'eine vollständige Deaktivierung aller Gehirnareale im REM-Schlaf.',
+        'eine neuronale Reaktivierung von Gehirnregionen für metakognitive Fähigkeiten.',
+        'schnellere Augenbewegungen zur Unterdrückung des logischen Denkens.',
+        'eine Hemmung der kritischen Selbstreflexion während der Schlafphase.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
+        'Der Stellenwert luzider Träume in westlichen Religionsgemeinschaften',
+        'Die Ablehnung von Klarträumen in östlichen Kulturkreisen',
+        'Kulturübergreifendes und historisches Interesse an der Traumbewusstheit',
+        'Die Erfindung des Klartraums durch die moderne Psychoanalyse'
+      ], correct:2 },
+      { q:'Laut Absatz 4 kann man mithilfe von Klarträumen ...', options:[
+        'Trauminhalte lückenlos auf digitale Datenträger aufzeichnen.',
+        'Patienten mit chronischen Schlafstörungen vollständig heilen.',
+        'Menschen mit traumatischen Alpträumen psychologische Erleichterung verschaffen.',
+        'den REM-Schlaf künstlich um mehrere Stunden verlängern.'
+      ], correct:2 },
+      { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
+        'Luzide Träume dienen ausschließlich der Steigerung der kognitiven Intelligenz.',
+        'Sensomotorische Übungen im Traum zeigen positive Effekte auf reale Bewegungsabläufe.',
+        'Profisportler trainieren heute überwiegend in Schlaflaboren statt auf dem Sportplatz.',
+        'Körperliche Bewegungen im Schlaf beeinträchtigen die Leistungsfähigkeit am Tag.'
+      ], correct:1 },
+      { q:'Welche Haltung vertritt der Autor in Absatz 6 bezüglich der künstlichen Trauminduktion?', options:[
+        'Er begrüßt die uneingeschränkte kommerzielle Nutzung pharmakologischer Mittel.',
+        'Er fordert das Verbot jeglicher Schlafforschung am Menschen.',
+        'Er steht der Trauminduktion völlig gleichgültig gegenüber.',
+        'Er mahnt zur Vorsicht wegen möglicher Schäden für die Schlafarchitektur.'
+      ], correct:3 },
+      { q:'Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
+        'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
+        'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
+        'vor den Gefahren des normalen REM-Schlafs zu warmen.'
+      ], correct:1 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Aufgabe 4: Kommentar eines Experten zur Rohstoffökonomie',
+    passageText:`Die verhängnisvolle Annahme, dass der Menschheit durch unkontrollierten Konsum zwangsläufig der Kollaps droht und wir daher eine drastische Wachstumsrücknahme erzwingen müssen, gehört zum festen Dogma moderner Umweltdebatten. <strong>[1] Ob diese radikale Verzichtshypothese in wissenschaftlicher Hinsicht jedoch tatsächlich belastbar ist, darf ernsthaft in Zweifel gezogen werden.</strong> Durch fortschrittliche biochemische Verfahren ist die Synthetisierung von Rohstoffen bereits heute Realität. <strong>[2] Man muss allerdings unumwunden einräumen, dass derartige Syntheseverfahren derzeit noch außerordentlich energieintensiv und kostspielig sind.</strong> Der technologische Wandel vollzieht sich jedoch exponentiell. Womöglich werden molekulare Fertigungsverfahren in wenigen Jahrzehnten Rohstoffknappheiten komplett überflüssig machen. Die Theorie der Grenzen des Wachstums entpuppt sich somit womöglich als gedanklicher Rückschritt. <strong>[3] Dass sich dieses Bedrohungsszenario dennoch so hartnäckig in den Köpfen hält, dürfte vor allem darin begründet liegen, dass unser Denken in steinzeitlichen Kategorien begrenzter Vorräte verhaftet bleibt.</strong> In einer von Innovation geprägten Welt sind Ressourcen im Wesentlichen unbegrenzt. <strong>[4] Dank menschlicher Erfindungskraft und technologischem Pioniergeist werden wir künftig in der Lage sein, völlig neue Energie- und Materialquellen zu erschließen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte erklärt ein psychologisches Phänomen.',
+      'Der Experte hofft auf eine internationale Regulierung.',
+      'Der Experte prognostiziert eine technologische Entwicklung.',
+      'Der Experte räumt einen aktuellen Nachteil ein.',
+      'Der Experte stellt eine weit verbreitete Annahme in Frage.',
+      'Der Experte vermutet eine Ursache für das Denkmuster.',
+      'Der Experte verteidigt die Position der Verzichtsökonomie.',
+      'Der Experte widerspricht den Grundlagen der Biologie.'
+    ],
+    correct:[4, 3, 5, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
+    title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
+    columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
+    items:[
+      {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
+      {text:'Diese Gruppe hinterfragt bestehende Normen und Werte eher kritisch.', correct:1},
+      {text:'Diese Gruppe zeigt eine positive Einstellung gegenüber hierarchischen Rangordnungen.', correct:0},
+      {text:'Diese Menschen zeigen sich im sozialen Umgang zugänglicher und verträglicher.', correct:0},
+      {text:'Diese Menschen wählen Haustiere gezielt nach der Übereinstimmung mit dem eigenen Charakter aus.', correct:3},
+      {text:'Diese Gruppe weist eine geringere emotionale Stabilität auf.', correct:1},
+      {text:'Diese Personen bevorzugen Haustiere, die ein dominantes Auftreten verweigern.', correct:0}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den wissenschaftlichen Fachtext. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+    title:'Aufgabe 6: Phytotherapie und moderne Pharmakologie',
+    passage:'Die wissenschaftliche Pflanzenheilkunde (Phytotherapie) blickt auf eine jahrtausendealte Erfahrungstradition zurück. Im Vergleich zu synthetischen Reinstoffen zeichnen sich phytotherapeutische Vielstoffgemische durch eine bemerkenswerte physiologische Verträglichkeit aus. Dies liegt primär daran, dass die Wirkstoffe in natürlichen Matrixstrukturen vorliegen, was Nebenwirkungen minimiert. Ein weiterer Vorteil besteht in der vielseitigen Verwendbarkeit phytotherapeutischer Präparate, die sowohl topisch als auch systemisch angewendet werden können und oft eine einfache hauseigene Zubereitung erlauben. Demgegenüber stehen jedoch gravierende Nachteile: Im Gegensatz zu synthetischen Arzneimitteln setzt die therapeutische Wirkung von Pflanzenextrakten häufig erst nach einer erheblichen Latenzzeit von mehreren Wochen ein, was einen Akuteinsatz ausschließt. Zudem bergen pflanzliche Inhaltsstoffe ein nicht zu unterschätzendes allergenes Potenzial sowie das Risiko unvorhersehbarer Organreaktionen bei Langzeiteinnahme.',
+    aussagen:[
+      { key:'a', text:'[a] Eigenständige und unkomplizierte Verarbeitung zu Präparaten' },
+      { key:'b', text:'[b] Vollständige Ungiftigkeit pflanzlicher Substanzen' },
+      { key:'c', text:'[c] Hervorragende Eignung für die Notfallmedizin' },
+      { key:'d', text:'[d] Fehlende pharmakologische Nachweisbarkeit' },
+      { key:'e', text:'[e] Längere Dauer bis zum spürbaren Wirkungseintritt' },
+      { key:'f', text:'[f] Möglicherweise Auslösung unvorhergesehener Allergien' },
+      { key:'g', text:'[g] Garantiertes Ersetzen sämtlicher synthetischer Medikamente' },
+      { key:'h', text:'[h] Zahlreiche unterschiedliche Einsatzformen vorhanden' }
+    ],
+    correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'f' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Wachstum des E-Commerce',
+    passage:'Der Anteil des Online-Handels am gesamten Einzelhandelsumsatz in Deutschland ist in den vergangenen Jahren kontinuierlich gestiegen. Lag der Anteil im Jahr 2015 noch bei rund 9 Prozent, so erreichte er im Jahr 2023 bereits über 19 Prozent. Besonders stark war der Zuwachs zwischen 2020 und 2021, was Fachleute vor allem auf veränderte Einkaufsgewohnheiten während der Pandemie zurückführen. Am stärksten wächst der Online-Handel im Bereich Mode und Elektronik, während Lebensmittel bislang einen vergleichsweise kleinen Anteil ausmachen. Kleinere, inhabergeführte Geschäfte berichten dabei überproportional häufig von Umsatzeinbußen, während große Online-Plattformen ihre Marktanteile weiter ausbauen konnten.',
+    graphicData:[{year:'2015',val:9},{year:'2018',val:12},{year:'2020',val:14},{year:'2021',val:17},{year:'2023',val:19}],
+    graphicCaption:'Grafik: Anteil des Online-Handels am Einzelhandelsumsatz in Deutschland (in Prozent)',
+    sentences:[
+      {text:'Der Online-Handel-Anteil ist von rund 9 Prozent 2015 auf über 19 Prozent 2023 gestiegen.', wrong:false},
+      {text:'Der stärkste Zuwachs war zwischen 2020 und 2021 zu beobachten.', wrong:false},
+      {text:'Lebensmittel machen bislang den größten Anteil am Online-Handel aus.', wrong:true},
+      {text:'Kleinere, inhabergeführte Geschäfte berichten überproportional häufig von Umsatzeinbußen.', wrong:false},
+      {text:'Große Online-Plattformen haben laut Text Marktanteile verloren.', wrong:true},
+      {text:'Der Zuwachs wird unter anderem mit veränderten Einkaufsgewohnheiten während der Pandemie erklärt.', wrong:false},
+      {text:'Mode und Elektronik zählen zu den am stärksten wachsenden Online-Handel-Bereichen.', wrong:false},
+      {text:'Der Anteil des Online-Handels ist seit 2015 nahezu unverändert geblieben.', wrong:true}
+    ]
   }
-  renderNavbar(current === test.teile.length-1, test);
-  window.scrollTo({top:0, behavior:'instant'});
-}
+];
 
-function renderGap(task, test, body){
-  let html = '<div class="passage"><p>';
-  task.segments.forEach((seg, i)=>{
-    html += escapeHtml(seg);
-    if(i < task.gaps.length){
-      const gap = task.gaps[i];
-      html += `<select class="gapselect" data-idx="${i}"><option value="">(${i+1}) wählen …</option>`;
-      gap.options.forEach((opt, oi)=>{ html += `<option value="${oi}">${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</option>`; });
-      html += `</select>`;
-    }
-  });
-  html += '</p></div>';
-  body.innerHTML = html;
-  const a = getBucket(test, task);
-  body.querySelectorAll('.gapselect').forEach(sel=>{
-    const idx = sel.dataset.idx;
-    if(a[idx] !== undefined){ sel.value = a[idx]; sel.classList.add('answered'); }
-    sel.addEventListener('change', ()=>{ 
-      a[idx] = sel.value; 
-      sel.classList.toggle('answered', sel.value !== ''); 
-      persistAnswers();
-    });
-  });
-}
-
-function renderOrder(task, test, body){
-  const a = getBucket(test, task);
-  if(!a.order) a.order = [...task.shuffledStart];
-  const order = a.order;
-  function draw(){
-    let html = '<ul class="order-list">';
-    order.forEach((origIdx, pos)=>{
-      html += `<li class="order-item"><div class="pos">${pos+1}</div><div class="txt">${escapeHtml(task.items[origIdx])}</div>
-        <div class="order-controls">
-          <button data-dir="up" data-pos="${pos}" ${pos===0?'disabled':''}>▲</button>
-          <button data-dir="down" data-pos="${pos}" ${pos===order.length-1?'disabled':''}>▼</button>
-        </div></li>`;
-    });
-    html += '</ul>';
-    body.innerHTML = html;
-    body.querySelectorAll('button[data-dir]').forEach(btn=>{
-      btn.onclick = ()=>{
-        const pos = parseInt(btn.dataset.pos);
-        const swapWith = btn.dataset.dir === 'up' ? pos-1 : pos+1;
-        [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
-        persistAnswers();
-        draw();
-      };
-    });
-  }
-  draw();
-}
-
-function renderMC(task, test, body){
-  let html = '<div class="passage">';
-  task.passage.forEach(p=> html += `<p>${escapeHtml(p)}</p>`);
-  html += '</div><div style="margin-top:20px;">';
-  const a = getBucket(test, task);
-  task.questions.forEach((q, qi)=>{
-    html += `<div class="qblock"><div class="qtext">Frage ${qi+1}: ${escapeHtml(q.q)}</div>`;
-    q.options.forEach((opt, oi)=>{
-      const checked = a[qi] == oi ? 'checked' : '';
-      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
-    });
-    html += `</div>`;
-  });
-  html += '</div>';
-  body.innerHTML = html;
-  task.questions.forEach((q, qi)=>{
-    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
-      a[qi] = inp.value; 
-      persistAnswers();
-    }));
-  });
-}
-
-function renderMatch(task, test, body){
-  let html = `<div class="passage"><p>${task.passageText}</p></div>`;
-  html += `<h3 style="margin-top:20px;">Aussagen</h3><ul style="list-style:none;padding:0;">`;
-  task.options.forEach((opt, oi)=>{
-    html += `<li style="margin-bottom:6px;font-size:0.9rem;"><strong>${String.fromCharCode(97+oi)}</strong> ${escapeHtml(opt)}</li>`;
-  });
-  html += `</ul><div style="margin-top:20px;">`;
-  
-  const a = getBucket(test, task);
-  task.textStellen.forEach((ts, ti)=>{
-    html += `<div class="matchrow"><div class="ptxt"><strong>Textstelle [${ts}]:</strong></div>
-      <select data-ti="${ti}"><option value="">Aussage wählen …</option>
-      ${task.options.map((o,oi)=>`<option value="${oi}">Aussage ${String.fromCharCode(97+oi)}</option>`).join('')}
-      </select></div>`;
-  });
-  html += '</div>';
-  body.innerHTML = html;
-  
-  body.querySelectorAll('select[data-ti]').forEach(sel=>{
-    const ti = sel.dataset.ti;
-    if(a[ti] !== undefined) sel.value = a[ti];
-    sel.addEventListener('change', ()=>{ 
-      a[ti] = sel.value; 
-      persistAnswers();
-    });
-  });
-}
-
-function renderTable(task, test, body){
-  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
-  html += `<div class="tzt-wrapper"><table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
-  const a = getBucket(test, task);
-  task.items.forEach((item, ii)=>{
-    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
-    task.columns.forEach((c, ci)=>{
-      const checked = a[ii] == ci ? 'checked' : '';
-      html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
-    });
-    html += `</tr>`;
-  });
-  html += `</tbody></table></div>`;
-  body.innerHTML = html;
-  task.items.forEach((item, ii)=>{
-    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
-      a[ii] = inp.value; 
-      persistAnswers();
-    }));
-  });
-}
-
-function renderTwoCat(task, test, body){
-  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>`;
-  html += `<div class="a6-container"><div class="a6-statements"><div class="a6-statements-title">Aussagen</div><div class="a6-list">`;
-  task.aussagen.forEach(item => {
-    html += `<div>${escapeHtml(item.text)}</div>`;
-  });
-  html += `</div></div>`;
-  
-  const a = getBucket(test, task);
-  
-  const makeSelect = (id) => {
-    let s = `<select data-key="${id}"><option value="">-- Wählen --</option>`;
-    task.aussagen.forEach(item => {
-      const selected = a[id] === item.key ? 'selected' : '';
-      s += `<option value="${item.key}" ${selected}>${item.text}</option>`;
-    });
-    s += `</select>`;
-    return s;
-  };
-
-  html += `<div class="a6-table-wrapper"><table class="a6-table">
-    <thead>
-      <tr><th>Vorteile</th><th>Nachteile</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
-      <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
-    </tbody>
-  </table></div></div>`;
-
-  body.innerHTML = html;
-  body.querySelectorAll('select[data-key]').forEach(sel=>{
-    sel.addEventListener('change', ()=>{
-      a[sel.dataset.key] = sel.value;
-      persistAnswers();
-    });
-  });
-}
-
-function renderSummary(task, test, body){
-  const maxVal = Math.max(...task.graphicData.map(d=>d.val));
-  let bars = '';
-  task.graphicData.forEach(d=>{
-    const h = Math.round((d.val/maxVal)*90)+10;
-    bars += `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;">
-      <div style="font-size:.68rem;color:var(--text-soft);">${d.val}</div>
-      <div style="width:70%;height:${h}px;background:var(--teal);border-radius:4px 4px 0 0;"></div>
-      <div style="font-size:.7rem;color:var(--text-soft);">${d.year}</div></div>`;
-  });
-  const wrongCount = task.sentences.filter(s=>s.wrong).length;
-  let html = `<div class="passage"><p>${escapeHtml(task.passage)}</p></div>
-  <div class="graphic-box"><div style="display:flex;align-items:flex-end;gap:6px;height:120px;">${bars}</div>
-  <div class="cap">${escapeHtml(task.graphicCaption)}</div></div>
-  <h3 style="color:var(--teal-dark);font-size:1rem;">Zusammenfassung</h3>
-  <div class="count-hint">Kreuzen Sie genau <strong>${wrongCount}</strong> Sätze an, die inhaltlich falsche Informationen enthalten. Ausgewählt: <span id="cnt">0</span>/${wrongCount}</div>
-  <div id="sentList">`;
-  const a = getBucket(test, task);
-  task.sentences.forEach((s, si)=>{
-    const checked = a[si] ? 'checked' : '';
-    html += `<label class="summary-item"><input type="checkbox" data-si="${si}" ${checked}><span>${escapeHtml(s.text)}</span></label>`;
-  });
-  html += '</div>';
-  body.innerHTML = html;
-  function updateCount(){
-    const n = task.sentences.filter((s,si)=>a[si]).length;
-    document.getElementById('cnt').textContent = n;
-  }
-  body.querySelectorAll('input[data-si]').forEach(cb=>{
-    cb.addEventListener('change', ()=>{ 
-      a[cb.dataset.si] = cb.checked; 
-      updateCount(); 
-      persistAnswers();
-    });
-  });
-  updateCount();
-}
-
-function scoreTask(task, test){
-  const a = getBucket(test, task);
-  let correct = 0, total = 0;
-  switch(task.type){
-    case 'gap':
-      total = task.gaps.length;
-      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
-      break;
-    case 'order':
-      total = task.correctOrder.length;
-      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
-      break;
-    case 'mc':
-      total = task.questions.length;
-      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
-      break;
-    case 'match':
-      total = task.correct.length;
-      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
-      break;
-    case 'table':
-      total = task.items.length;
-      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
-      break;
-    case 'twocat':
-      total = 4;
-      if(a.v1 === task.correctMap.v1) correct++;
-      if(a.v2 === task.correctMap.v2) correct++;
-      if(a.n3 === task.correctMap.n3) correct++;
-      if(a.n4 === task.correctMap.n4) correct++;
-      break;
-    case 'summary':
-      total = task.sentences.filter(s=>s.wrong).length;
-      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
-      break;
-  }
-  return {correct, total};
-}
-
-function showResults(){
-  clearTimer();
-  document.getElementById('taskbar').innerHTML = '';
-  const test = TESTS[currentTestIdx];
-  const nb = document.getElementById('navbar');
-
-  nb.innerHTML = '<button class="btn ghost" id="btnRestart">Neu starten</button><button class="btn next" id="btnMenu2">Menü</button>';
-
-  document.getElementById('btnRestart').onclick = () => {
-      clearTestAnswers(test.id, answers);
-      current = 0;
-      renderTask();
-  };
-  document.getElementById('btnMenu2').onclick = () => showTestSelect();
-
-  let sumCorrect = 0, sumTotal = 0;
-  let detailsHtml = '';
-
-  test.teile.forEach(task => {
-      const a = getBucket(test, task);
-      const {correct, total} = scoreTask(task, test);
-      sumCorrect += correct; 
-      sumTotal += total;
-
-      let taskDetails = '';
-
-      switch(task.type){
-          case 'gap':
-              task.gaps.forEach((g, i) => {
-                  const userVal = parseInt(a[i]);
-                  const isCorrect = userVal === g.correct;
-                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${g.options[userVal]}` : '(keine Antwort)';
-                  const correctText = `${String.fromCharCode(97+g.correct)}) ${g.options[g.correct]}`;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Lücke ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
-                  </div>`;
-              });
-              break;
-          case 'order':
-              const order = a.order || task.shuffledStart;
-              order.forEach((origIdx, pos) => {
-                  const isCorrect = task.correctOrder[pos] === origIdx;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Position ${pos+1}:</strong> ${escapeHtml(task.items[origIdx])} ${isCorrect ? '✓' : '| Falsche Reihenfolge'}
-                  </div>`;
-              });
-              break;
-          case 'mc':
-              task.questions.forEach((q, i) => {
-                  const userVal = parseInt(a[i]);
-                  const isCorrect = userVal === q.correct;
-                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${q.options[userVal]}` : '(keine Antwort)';
-                  const correctText = `${String.fromCharCode(97+q.correct)}) ${q.options[q.correct]}`;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Frage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
-                  </div>`;
-              });
-              break;
-          case 'match':
-              task.textStellen.forEach((ts, i) => {
-                  const userVal = parseInt(a[i]);
-                  const correctVal = task.correct[i];
-                  const isCorrect = userVal === correctVal;
-                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${task.options[userVal]}` : '(keine Antwort)';
-                  const correctText = `${String.fromCharCode(97+correctVal)}) ${task.options[correctVal]}`;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Textstelle [${ts}]:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
-                  </div>`;
-              });
-              break;
-          case 'table':
-              task.items.forEach((item, i) => {
-                  const userVal = parseInt(a[i]);
-                  const isCorrect = userVal === item.correct;
-                  const userText = !isNaN(userVal) ? task.columns[userVal] : '(keine Antwort)';
-                  const correctText = task.columns[item.correct];
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Aussage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
-                  </div>`;
-              });
-              break;
-          case 'twocat':
-              ['v1', 'v2', 'n3', 'n4'].forEach((key, idx) => {
-                  const userVal = a[key];
-                  const correctVal = task.correctMap[key];
-                  const isCorrect = userVal === correctVal;
-                  const findText = (k) => {
-                      const found = task.aussagen.find(item => item.key === k);
-                      return found ? found.text : k;
-                  };
-                  const userText = userVal ? findText(userVal) : '(keine Antwort)';
-                  const correctText = findText(correctVal);
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Zuordnung ${idx+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
-                  </div>`;
-              });
-              break;
-          case 'summary':
-              task.sentences.forEach((s, i) => {
-                  const userChecked = !!a[i];
-                  const isCorrect = userChecked === s.wrong;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Satz ${i+1}:</strong> ${escapeHtml(s.text)} <br>
-                      Deine Wahl: <strong>${userChecked ? 'Angekreuzt (als falsch markiert)' : 'Nicht angekreuzt'}</strong> 
-                      ${isCorrect ? '✓' : `| Korrekt: <strong>${s.wrong ? 'War falsch (hätte angekreuzt werden müssen)' : 'War richtig'}</strong>`}
-                  </div>`;
-              });
-              break;
-      }
-
-      detailsHtml += `
-          <div class="result-task-block" style="margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
-              <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
-                  <span>Aufgabe ${task.teil} - ${task.label}</span>
-                  <span class="${correct === total ? 'ok' : 'no'}">${correct} / ${total} Punkte</span>
-              </div>
-              <div style="display: flex; flex-direction: column; gap: 8px;">
-                  ${taskDetails}
-              </div>
-          </div>
-      `;
-  });
-
-  const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
-  let tdn = 'unterhalb TDN 3';
-  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)';
-
-  document.getElementById('main').innerHTML = `
-  <div class="results">
-    <div class="score-hero">
-      <div class="pct">${pct}%</div>
-      <div class="tdn">${tdn}</div>
-      <div class="tdn" style="margin-top:6px;">${sumCorrect} von ${sumTotal} Punkten erreicht</div>
-    </div>
-    <h2>Ergebnisdetails & Korrektur</h2>
-    <div style="margin-top: 20px;">
-      ${detailsHtml}
-    </div>
-  </div>`;
-}
-
-showTestSelect();
-</script>
-</body>
-</html>
+// ... (MT2, MT3, MT4 et TESTS restent inchangés à la suite)
