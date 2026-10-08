@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Importateur TestDaF Lesen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 850px;
+      margin: 35px auto;
+      padding: 20px;
+      background: #f4f6f8;
+      color: #20242a;
+    }
+    main {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+    }
+    button {
+      padding: 12px 18px;
+      margin: 8px 5px 8px 0;
+      cursor: pointer;
+    }
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      box-sizing: border-box;
+      margin-top: 12px;
+    }
+    #status { white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>TestDaF – Importer Lesen</h1>
+  <p>Sélectionne les 7 PDF de ton Modelltest.</p>
+
+  <input id="pdfs" type="file"
+         accept="application/pdf,.pdf" multiple>
+
+  <p id="status">Aucun fichier traité.</p>
+
+  <button id="extract">Extraire le texte</button>
+  <button id="download" disabled>
+    Télécharger lesen-data.js
+  </button>
+
+  <h2>Aperçu du texte extrait</h2>
+  <textarea id="preview" readonly
+    placeholder="Le texte extrait apparaîtra ici."></textarea>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+  const input = document.getElementById("pdfs");
+  const status = document.getElementById("status");
+  const preview = document.getElementById("preview");
+  const extract = document.getElementById("extract");
+  const download = document.getElementById("download");
+
+  let tasks = [];
+
+  extract.addEventListener("click", async () => {
+    const files = [...input.files]
+      .filter(file => file.name.toLowerCase().endsWith(".pdf"))
+      .sort((a, b) =>
+        a.name.localeCompare(b.name, "de", { numeric: true })
+      );
+
+    if (files.length !== 7) {
+      status.textContent =
+        "Sélectionne exactement 7 fichiers PDF.";
+      return;
+    }
+
+    tasks = [];
+    download.disabled = true;
+    extract.disabled = true;
+    preview.value = "";
+
+    try {
+      for (let i = 0; i < files.length; i++) {
+        status.textContent =
+          `Extraction : ${i + 1}/7 — ${files[i].name}`;
+
+        const buffer = await files[i].arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({
+          data: new Uint8Array(buffer)
+        }).promise;
+
+        const pages = [];
+
+        for (let p = 1; p <= pdf.numPages; p++) {
+          const page = await pdf.getPage(p);
+          const content = await page.getTextContent();
+
+          const text = content.items
+            .filter(item => "str" in item)
+            .map(item => item.str)
+            .join(" ");
+
+          pages.push({ page: p, text });
+        }
+
+        tasks.push({
+          id: i + 1,
+          source: files[i].name,
+          pages
+        });
+      }
+
+      preview.value = tasks.map(task =>
+        `AUFGABE ${task.id} — ${task.source}\n\n` +
+        task.pages.map(page =>
+          `Page ${page.page}\n${page.text}`
+        ).join("\n\n")
+      ).join("\n\n====================\n\n");
+
+      status.textContent =
+        "Extraction terminée. Vérifie le texte avant l'export.";
+
+      download.disabled = false;
+    } catch (error) {
+      status.textContent =
+        "Erreur : " + error.message +
+        "\nVérifie les PDF et réessaie.";
+    } finally {
+      extract.disabled = false;
+    }
+  });
+
+  download.addEventListener("click", () => {
+    const content =
+      "// Texte extrait des PDF — à vérifier avant intégration\n" +
+      "window.LESEN_IMPORT = " +
+      JSON.stringify(tasks, null, 2) + ";\n";
+
+    const blob = new Blob([content], {
+      type: "text/javascript;charset=utf-8"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "lesen-data.js";
+    link.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+</script>
+</body>
+</html>
