@@ -698,7 +698,7 @@ const MT5 = [
         'Der Preis hat seine Funktion als Nutzenbringer zugunsten reiner Finanzinteressen eingebüßt.'
       ], correct:1 },
       { q:'Wie bewertet der Verfasser in Absatz 4 die gegenwärtige Funktion des Nobelpreises?', options:[
-        'Er sieht ihn primär as rückwärtsgewandte Ehrung ohne nennenswerte Auswirkungen auf Technologien.',
+        'Er sieht ihn primär als rückwärtsgewandte Ehrung ohne nennenswerte Auswirkungen auf Technologien.',
         'Er kritisiert, dass der Preis keinerlei Einfluss mehr auf die globale Verteilung von Forschungsbudgets ausübt.',
         'Er hebt hervor, dass die Auszeichnung als steuerndes Instrument für Forschungsströme fungiert, trotz Defiziten.',
         'Er stellt fest, dass die strukturellen Probleme bezüglich Diversität mittlerweile vollständig behoben sind.'
@@ -807,6 +807,7 @@ const MT5 = [
     ]
   }
 ];
+
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
