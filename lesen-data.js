@@ -793,33 +793,40 @@ const MT5 = [
     }
   },
   { 
-    teil: 7,
-    type: 'summary',
-    label: 'Zusammenfassung & Korrektur',
-    instructions: 'Lesen Sie den Text. Identifizieren Sie jene Aussagen in der Zusammenfassung, welche sachlich inkorrekte oder verfälschte Informationen beinhalten.',
-    time: 420,
-    title: 'Aufgabe 7: Das Paradigma des globalen Kapitalismus im Diskurs',
-    passage: 'Angesichts multipler globaler Krisen unterliegt die Konzeption moderner Wirtschaftsstrukturen einem tiefgreifenden Paradigmenwechsel...',
-    graphicData: [
-      { year: '2020', val: 120 },
-      { year: '2021', val: 135 },
-      { year: '2022', val: 150 },
-      { year: '2023', val: 161 }
-    ],
-    graphicCaption: 'Entwicklung der analysierten Volkswirtschaften im Global Capitalism Index',
-    sentences: [
-      { text: 'Der Global Capitalism Index unterzog exakt 161 Volkswirtschaften einer umfassenden vergleichenden Analyse.', wrong: false },
-      { text: 'Die ökonomische Valenz einer Nation wird laut den Studienautoren primär anhand traditioneller Bruttoinlandsprodukt-Metriken bemessen.', wrong: true },
-      { text: 'Etablierte Industrienationen in Europa und Nordamerika beanspruchen traditionell die vorderen Ränge des Indikators für sich.', wrong: false },
-      { text: 'In westlichen Demokratien lässt sich eine progrediente Schere zwischen Kapitalrenditen und Reallöhnen nachweisen.', wrong: false },
-      { text: 'Etwa 34 Prozent der analysierten Schwellenländer sind mit gravierenden institutionellen Defiziten im Bereich der Rechtssicherheit konfrontiert.', wrong: false },
-      { text: 'Politische Entscheidungsträger haben umgehend auf die wissenschaftlichen Forderungen reagiert und umfassende Strukturreformen implementiert.', wrong: true },
-      { text: 'In den letzten zehn Jahren führte die restriktivere Kreditvergabe infolge strengerer Bankenvorgaben zur Insolvenz zahlreicher KMU.', wrong: false },
-      { text: 'Das akute Defizit an Risikokapital limitiert nachhaltig die Innovationsdynamik sowie das langfristige Wachstumspotenzial.', wrong: false },
-      { text: 'Die gegenwärtige wirtschaftliche Entwicklung begünstigt und maximiert die Zukunftsfähigkeit der betroffenen Regionen.', wrong: true }
-    ]
-  }
-];
+  teil: 7,
+  type: 'summary',
+  time: 420,
+  label: 'Fehler in Zusammenfassung erkennen',
+  title: 'Das Paradigma des globalen Kapitalismus im Diskurs',
+  instructions: 'Lesen Sie den Text[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span). Beachten Sie auch die differenzierten Informationen aus der Grafik[span_4](start_span)[span_4](end_span). Rechts sehen Sie eine wissenschaftlich fundierte Zusammenfassung[span_5](start_span)[span_5](end_span). Die Zusammenfassung folgt nicht dem Textverlauf[span_6](start_span)[span_6](end_span). Identifizieren Sie jene Aussagen in der Zusammenfassung, welche sachlich inkorrekte oder verfälschte Informationen beinhalten[span_7](start_span)[span_7](end_span). Es existieren exakt drei inhaltlich fehlerhafte Aussagen[span_8](start_span)[span_8](end_span).',
+  passage: `Angesichts multipler globaler Krisen unterliegt die Konzeption moderner Wirtschaftsstrukturen einem tiefgreifenden Paradigmenwechsel. Im Rahmen des jüngst publizierten Global Capitalism Index (GCI) wurden exakt 161 Volkswirtschaften einer komparativen Analyse unterzogen, um deren makroökonomische Resilienz, institutionelle Integrität und soziale Wohlstandsverteilung zu quantifizieren[span_9](start_span)[span_9](end_span). Die empirischen Befunde offenbaren gravierende Diskrepanzen: Während etablierte Industrienationen in Nordamerika und Europa traditionell Spitzenränge einnehmen, avancieren aufstrebende Märkte im globalen Süden zunehmend zu differenzierten Gravitationszentren[span_10](start_span)[span_10](end_span). Ökonomen betonen hierbei nachdrücklich, dass die wirtschaftliche Valenz einer Nation heutzutage primär an intangiblen Faktoren wie Humankapitalinvestitionen, digitaler Adaptionsfähigkeit und ökologischer Nachhaltigkeit gemessen wird, wohingegen traditionelle Bruttoinlandsprodukt-Metriken an aussagekräftiger Relevanz einbüßen[span_11](start_span)[span_11](end_span).
+
+Nichtsdestotrotz indizieren die erhobenen Daten besorgniserregende strukturelle Dysfunktionalitäten. Exemplarisch dafür steht das Phänomen einer sich sukzessive vertiefenden Kluft zwischen stagnierenden Reallöhnen und exponentiell steigenden Kapitalrenditen in westlichen Demokratien[span_12](start_span)[span_12](end_span). Darüber hinaus konstatieren die Forscher, dass rund 34 Prozent der untersuchten Schwellenländer unter massiven Defiziten im Bereich der Rechtssicherheit leiden, wodurch transnationale Investitionsströme nachhaltig inhibiert werden[span_13](start_span)[span_13](end_span).
+
+Trotz dringender Apprufe seitens wissenschaftlicher Expertisen zur Restrukturierung der globalen Finanzarchitektur verharren politische Entscheidungsträger in beharrlicher Passivität; eine international koordinierte Trendwende bleibt bislang aus[span_14](start_span)[span_14](end_span). Flankierend hierzu mussten im Laufe des vergangenen Jahrzehnts zahllose kleine und mittlere Unternehmen (KMU) infolge verschärfter regulatorischer Bankenvorgaben und restriktiver Kreditvergabepraktiken Insolvenz anmelden[span_15](start_span)[span_15](end_span). Diese Kapitalverknappung entfaltet verheerende Konsequenzen für die volkswirtschaftliche Innovationskraft: Es mangelt an essenzieller Risikofinanzierung für disruptive Zukunftstechnologien, wodurch die langfristige Wettbewerbsfähigkeit der betroffenen Staaten maßgeblich präjudiziert und geschwächt wird[span_16](start_span)[span_16](end_span).
+
+In Anbetracht dieser multiplen Friktionen konstatieren Beobachter, dass die fortgesetzte Vernachlässigung struktureller Reformen die sozioökonomische Stabilität des globalen Gefüges mittel- bis langfristig gravierend gefährdet[span_17](start_span)[span_17](end_span).`,
+  graphicData: [
+    { year: '2022', val: 45 },
+    { year: '2023', val: 62 },
+    { year: '2024', val: 78 },
+    { year: '2025', val: 94 },
+    { year: '2026', val: 115 }
+  ],
+  graphicCaption: 'Entwicklung der weltweiten Investitionsströme in disruptive Zukunftstechnologien (in Mrd. USD)',
+  sentences: [
+    { text: 'Der Global Capitalism Index unterzog exakt 161 Volkswirtschaften einer umfassenden vergleichenden Analyse.', wrong: false },
+    { text: 'Die ökonomische Valenz einer Nation wird laut den Studienautoren primär anhand traditioneller Bruttoinlandsprodukt-Metriken bemessen.', wrong: true }, // Faux (le texte dit qu'elles perdent de la pertinence au profit des facteurs intangibles)
+    { text: 'Etablierte Industrienationen in Europa und Nordamerika beanspruchen traditionell die vorderen Ränge des Indikators für sich.', wrong: false },
+    { text: 'In westlichen Demokratien lässt sich eine progrediente Schere zwischen Kapitalrenditen und Reallöhnen nachweisen.', wrong: false },
+    { text: 'Etwa 34 Prozent der analysierten Schwellenländer sind mit gravierenden institutionellen Defiziten im Bereich der Rechtssicherheit konfrontiert.', wrong: false },
+    { text: 'Politische Entscheidungsträger haben umgehend auf die wissenschaftlichen Forderungen reagiert und umfassende Strukturreformen implementiert.', wrong: true }, // Faux (le texte dit qu'ils persistent dans une passivité obstinée)
+    { text: 'In den letzten zehn Jahren führte die restriktivere Kreditvergabe infolge strengerer Bankenvorgaben zur Insolvenz zahlreicher KMU.', wrong: false },
+    { text: 'Das akute Defizit an Risikokapital limitiert nachhaltig die Innovationsdynamik sowie das langfristige Wachstumspotenzial.', wrong: false },
+    { text: 'Die gegenwärtige wirtschaftliche Entwicklung begünstigt und maximiert die Zukunftsfähigkeit der betroffenen Regionen.', wrong: true } // Faux (le texte parle de compromission de la compétitivité et de menace pour la stabilité)
+  ]
+};
+
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
