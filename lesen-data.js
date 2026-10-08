@@ -751,7 +751,6 @@ const MT5 = [
     correct: [4, 3, 7, 1] // Indices correspondants dans options (ajustés selon la logique du test)
   },
   { 
-      { 
     teil: 5,
     type: 'table',
     label: 'Tabellarische Zuordnung',
@@ -770,6 +769,7 @@ const MT5 = [
       { text: 'Diese Personen zeigen keine Unterschiede in ihrer sprachlichen Präzision.', correct: 2 }
     ]
   },
+
   { 
     teil: 6,
     type: 'twocat',
