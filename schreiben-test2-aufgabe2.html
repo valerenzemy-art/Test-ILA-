@@ -78,6 +78,26 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .eright{color:var(--green-d);font-weight:700;font-size:.94rem;margin:3px 0}
 .enote{color:var(--sub);font-size:.82rem;margin-top:4px}
 .cversion{background:var(--bg);border-radius:12px;padding:14px 16px;font-size:.92rem;line-height:1.7;margin-top:6px}
+
+.checkbtn{background:linear-gradient(160deg,#6cc79c,var(--green-d));color:#fff;border:0;padding:9px 18px;border-radius:12px;cursor:pointer;font:inherit;font-weight:700;font-size:.9rem;box-shadow:0 3px 10px rgba(61,138,103,.35);display:inline-flex;align-items:center;gap:6px}
+.checkbtn:disabled{opacity:.6;cursor:not-allowed}
+.scorecard{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:18px 20px;margin-top:16px}
+.scorerow{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.scoretotal{font-weight:900;font-size:1.3rem;color:#fff;border-radius:999px;padding:6px 18px}
+.grade-A{background:var(--green-d)}.grade-B{background:#3d8a67}.grade-C{background:#c9821f}.grade-D{background:#c9821f}.grade-E{background:var(--red)}
+.gradeline{font-weight:700;margin-bottom:10px}
+.subrow{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--line);font-size:.92rem}
+.subrow b{color:var(--navy-d)}
+.tdnline{margin-top:10px;font-size:.85rem;color:var(--sub)}
+.tdnline b{color:var(--navy-d)}
+.matchcard{background:#fff8e1;border-left:4px solid var(--yellow-d);border-radius:10px;padding:10px 14px;margin:10px 0}
+.matchcard .mtitle{font-size:.75rem;font-weight:800;color:#a86a00;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px}
+.matchcard .mctx{font-family:ui-monospace,monospace;font-size:.86rem;background:#fff;border-radius:8px;padding:8px 10px;line-height:1.6}
+.matchcard .mctx mark{background:var(--red);color:#fff;border-radius:4px;padding:0 3px}
+.matchcard .msug{margin-top:6px;font-size:.85rem}
+.matchcard .msug span{display:inline-block;background:#e6f5ee;color:var(--green-d);border-radius:8px;padding:2px 8px;margin-right:4px;font-weight:600}
+.nomatches{color:var(--green-d);font-weight:700;padding:10px 0}
+.checknote{font-size:.8rem;color:var(--sub);margin:8px 0}
 </style>
 </head>
 <body>
@@ -118,7 +138,7 @@ button:disabled{opacity:.5;cursor:not-allowed}
     <div class="status-card">
       <div class="stat">Wörter: <b id="wc">0</b>/<span id="wgoal">–</span></div>
       <div class="stat">Zeichen: <b id="ch">0</b></div>
-      <div class="tools"><button id="copy">Text kopieren</button><button id="clear">Leeren</button></div>
+      <div class="tools"><button class="checkbtn" id="check">🔍 Text überprüfen</button><button id="copy">Text kopieren</button><button id="clear">Leeren</button></div>
     </div>
     <div class="writecard">
       <textarea id="ta" spellcheck="false" placeholder="Fangen Sie hier an zu schreiben …" aria-label="Schreibfeld"></textarea>
@@ -185,106 +205,84 @@ button:disabled{opacity:.5;cursor:not-allowed}
     }
     return h;
   }
-  function buildPrompt(){
-    var task=k.el.querySelector(".task").innerText.trim().replace(/\n{2,}/g,"\n");
-    var used=fmt(k.time-Math.max(0,left)),n=words(ta.value),m="Corrige mon texte TestDaF Schreiben, niveau C1.\n\n";
-    m+="=== CONSIGNE ===\n"+task+"\n\n";
-    var src=k.el.querySelector(".source");
-    if(src)m+="=== QUELLES (texte + graphique) ===\n"+src.innerText.trim().replace(/\n{2,}/g,"\n")+"\n\n";
-    m+="=== MON TEXTE ("+n+" mots, temps utilisé : "+used+" sur "+fmt(k.time)+") ===\n"+ta.value.trim()+"\n\n";
-    m+="=== MON AUTO-ÉVALUATION (0 = non rempli, 3 = pleinement rempli) ===\n";
-    CRIT[k.kind].forEach(function(c,i){m+="- "+c+" : "+(ev[i]>=0?ev[i]+"/3":"non évalué")+"\n"});
-    m+="\n=== FORMAT DE RÉPONSE DEMANDÉ (STRICT, à respecter EXACTEMENT) ===\n";
-    m+="Réponds UNIQUEMENT dans ce format, sans texte avant, sans texte après, sans markdown ni backticks :\n\n";
-    m+="TDN: <3, 4, 5 ou <3>\n";
-    m+="BEGRUENDUNG: <2-3 phrases en français qui justifient ce niveau selon les critères officiels ci-dessus"+(k.kind==="argument"?" (sprachliche Mittel, Fehler et Verständnis, Aspekte der Aufgabenstellung, Struktur)":" (beide Quellen, inhaltliche Korrektheit, eigene Formulierungen, Fehler et Verständnis)")+">\n";
-    m+="---FEHLER---\n";
-    m+="TYP: <Grammatik | Rechtschreibung | Wortschatz | Formulierung | Struktur>\n";
-    m+="FALSCH: <passage exact et fautif de mon texte, en allemand>\n";
-    m+="RICHTIG: <la correction, en allemand>\n";
-    m+="ERKLAERUNG: <une phrase en français expliquant l'erreur>\n";
-    m+="(répète ce bloc ---FEHLER--- pour chaque erreur trouvée, au moins 3 si le texte en contient)\n";
-    m+="---VERSION---\n";
-    m+="<version corrigée complète en allemand, niveau C1, SANS changer mes idées ni mes arguments ; les arguments faibles restent tels quels>\n\n";
-    m+="Sois rigoureux et honnête : ne me valide pas par complaisance.";
-    return m;
+function LT_check(text){
+    return fetch("https://api.languagetool.org/v2/check",{
+      method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:"text="+encodeURIComponent(text)+"&language=de-DE"
+    }).then(function(r){if(!r.ok)throw new Error("LT HTTP "+r.status);return r.json()}).then(function(j){return j.matches||[]});
   }
-  function copyStr(s,btn){
-    var ok=function(){var o=btn.textContent;btn.textContent="Kopiert – jetzt bei Claude einfügen";setTimeout(function(){btn.textContent=o},2500)};
-    function fb(){var t=document.createElement("textarea");t.value=s;document.body.appendChild(t);t.select();try{document.execCommand("copy");ok()}catch(e){}document.body.removeChild(t)}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(s).then(ok,fb)}else fb();
-  }
-  function fmtCorr(t){
-    if(!t)return"";
-    return t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>").replace(/^#+\s*(.+)$/gm,"<b>$1</b>").replace(/\n/g,"<br>");
-  }
-  function escH(t){return t.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
-  function parseCorr(t){
-    if(!t)return null;
-    var tdnM=t.match(/TDN:\s*([^\n\r]+)/i);
-    var begM=t.match(/BEGRUENDUNG:\s*([\s\S]*?)(?=\n---FEHLER---|\n---VERSION---|$)/i);
-    var errs=[];
-    var re=/---FEHLER---\s*TYP:\s*([^\n\r]+)\s*FALSCH:\s*([^\n\r]+)\s*RICHTIG:\s*([^\n\r]+)\s*ERKLAERUNG:\s*([^\n\r]+)/gi;
-    var m;
-    while((m=re.exec(t))){errs.push({typ:m[1].trim(),falsch:m[2].trim(),richtig:m[3].trim(),erkl:m[4].trim()})}
-    var verM=t.match(/---VERSION---\s*([\s\S]*)$/i);
-    if(!tdnM&&!errs.length&&!verM)return null;
-    return{tdn:tdnM?tdnM[1].trim():"",beg:begM?begM[1].trim():"",errs:errs,version:verM?verM[1].trim():""};
-  }
-  function tdnClass(s){
-    if(s&&/<\s*3/.test(s))return"tdn-low";
-    var n=parseInt(s,10);
-    if(n>=5)return"tdn-5";if(n===4)return"tdn-4";if(n===3)return"tdn-3";return"tdn-low";
-  }
-  function renderCorr(t){
-    var p=parseCorr(t);
-    if(!p)return fmtCorr(t);
+  function escH(t){return (t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function renderMatches(matches,text){
+    if(!matches.length)return '<p class="nomatches">✓ Keine Rechtschreib- oder Grammatikfehler gefunden (automatische Prüfung).</p>';
     var h="";
-    if(p.tdn)h+='<div class="tdn-badge '+tdnClass(p.tdn)+'">TDN '+escH(p.tdn)+'</div>';
-    if(p.beg)h+='<p class="hint">'+escH(p.beg)+'</p>';
-    if(p.errs.length){
-      h+='<div class="errlist">';
-      p.errs.forEach(function(e){
-        h+='<div class="errline"><span class="etag">'+escH(e.typ)+'</span><div class="ewrong">'+escH(e.falsch)+'</div><div class="eright">'+escH(e.richtig)+'</div><div class="enote">'+escH(e.erkl)+'</div></div>';
-      });
+    matches.slice(0,20).forEach(function(m){
+      var from=Math.max(0,m.context.offset-0),ctx=m.context.text,off=m.context.offset,len=m.context.length;
+      var before=escH(ctx.slice(0,off)),bad=escH(ctx.slice(off,off+len)),after=escH(ctx.slice(off+len));
+      var sug=(m.replacements||[]).slice(0,3).map(function(r){return escH(r.value)});
+      h+='<div class="matchcard"><div class="mtitle">'+escH(m.rule&&m.rule.category&&m.rule.category.name||"Hinweis")+'</div>';
+      h+='<div class="mctx">…'+before+'<mark>'+bad+'</mark>'+after+'…</div>';
+      if(sug.length)h+='<div class="msug">Vorschlag: '+sug.map(function(s){return'<span>'+s+'</span>'}).join("")+'</div>';
       h+='</div>';
-    }
-    if(p.version){
-      h+='<h3>Korrigierte Version (C1)</h3><div class="cversion">'+escH(p.version).replace(/\n/g,'<br>')+'</div>';
-    }
-    return h||fmtCorr(t);
-  }
-  function runAI(){
-    var btn=$("ai");btn.disabled=true;btn.textContent="Claude korrigiert … (bis zu 60 s)";
-    sampleFn(buildPrompt()+"\n\nRespecte EXACTEMENT le format demandé (TDN:, BEGRUENDUNG:, ---FEHLER---, TYP:, FALSCH:, RICHTIG:, ERKLAERUNG:, ---VERSION---), sans aucun texte hors de ce format.",{modelTier:"complex",cache:false,onText:function(o){corr=o.text;var el=$("corr");if(el)el.innerHTML=renderCorr(o.text)}})
-    .then(function(x){corr=x.text;save();renderEval()})
-    .catch(function(e){
-      var el=$("corr");if(el)el.innerHTML=renderCorr(corr)+'<p class="no">'+(e&&e.code==="not_granted"?"Zugriff nicht erlaubt. Bitte die Anfrage bestätigen und erneut versuchen.":e&&e.code==="rate_limited"?"Zu viele Anfragen. Bitte kurz warten.":"Die Korrektur ist fehlgeschlagen. Bitte erneut versuchen.")+"</p>";
-      if(btn){btn.disabled=false;btn.textContent="Korrektur mit Claude starten"}
     });
+    if(matches.length>20)h+='<p class="checknote">+ '+(matches.length-20)+' weitere Hinweise (nicht alle angezeigt).</p>';
+    return h;
   }
-  function renderEval(){
-    var h='<h2>Auswertung</h2><p class="hint">Automatische Hinweise (Näherungswerte, sie ersetzen keine Korrektur):</p><div class="chips">'+auto()+'</div><h3>Selbsteinschätzung nach den TestDaF-Kriterien</h3>';
-    CRIT[k.kind].forEach(function(c,i){
-      h+='<div class="crit"><p>'+c+'</p><div class="rate">';
-      LV.forEach(function(x,j){h+='<button data-i="'+i+'" data-k="'+j+'"'+(ev[i]===j?' class="on"':"")+">"+x+"</button>"});
-      h+="</div></div>";
-    });
-    var r=ev.filter(function(v){return v>=0}),sum=r.reduce(function(a,b){return a+b},0);
-    h+='<p class="score">'+sum+" / 12 ("+r.length+" von 4 Kriterien bewertet)</p><p class=\"hint\">Selbstbewertungen fallen oft großzügiger aus als die echte Bewertung. Lass deinen Text zusätzlich korrigieren.</p>";
-    if(sampleFn)h+='<div class="cta"><button id="ai">Korrektur mit Claude starten</button></div><div id="corr" class="corr">'+renderCorr(corr)+'</div>';
-    else h+='<p class="hint">Die automatische Korrektur läuft nur in der claude.ai-Version dieser Seite. Auf anderen Seiten kopierst du den Auftrag und fügst ihn bei Claude ein.</p>';
-    h+='<div class="cta"><button id="prompt">Korrektur-Auftrag kopieren</button><a href="https://claude.ai/new" target="_blank" rel="noopener">Claude öffnen</a></div>';
+  function localScore(matches){
+    var t=ta.value,l=t.toLowerCase(),n=words(t);
+    var inhalt=0,gram=0,koh=0,format=0;
+    // Inhalt & Aufgabe (/12)
+    var wScore;
+    if(k.max){ // résumé: proche de la fourchette
+      wScore = (n>=k.min&&n<=k.max)?6:(n>0?Math.max(0,6-Math.ceil(Math.abs(n-((k.min+k.max)/2))/15)):0);
+    }else{
+      wScore = Math.min(6,Math.round(6*Math.min(n/Math.max(1,k.min),1)));
+    }
+    var aspScore=6,foundA=0,totalA=0;
+    if(k.aspects){var key;totalA=Object.keys(k.aspects).length;for(key in k.aspects)if(new RegExp(k.aspects[key]).test(l))foundA++;aspScore=totalA?Math.round(6*foundA/totalA):6}
+    else if(k.keys){var arrAll=[],fndAll=0;for(var kk in k.keys){arrAll=arrAll.concat(k.keys[kk])}totalA=arrAll.length;arrAll.forEach(function(r){if(new RegExp(r).test(l))fndAll++});foundA=fndAll;aspScore=totalA?Math.round(6*fndAll/totalA):6}
+    inhalt=Math.min(12,wScore+aspScore);
+    // Grammatik & Wortschatz (/12)
+    var per100=n>0?(matches.length/n*100):0;
+    gram=Math.max(0,Math.min(12,12-Math.round(per100*1.3)));
+    // Kohärenz & Struktur (/12)
+    var conn=CONN.filter(function(x){return l.indexOf(x)>-1}).length;
+    var paras=t.split(/\n\s*\n/).filter(function(p){return p.trim()}).length;
+    koh=Math.min(12,Math.round(conn*1.4)+Math.round(Math.min(4,paras*1.3)));
+    // Format & Stil (/9)
+    var within = k.max ? (n>=k.min-5&&n<=k.max+15) : (n>=k.min);
+    format = within ? 7 : Math.max(0,4-Math.round(Math.abs(n-k.min)/30));
+    if(paras>=2)format=Math.min(9,format+2);
+    var total=inhalt+gram+koh+format;
+    var grade = total>=38?"A":total>=30?"B":total>=22?"C":total>=14?"D":"E";
+    var gradeLabel = {A:"Sehr gut",B:"Gut",C:"Befriedigend",D:"Ausreichend",E:"Nicht ausreichend"}[grade];
+    var tdn = total>=36?"TDN 5":total>=26?"TDN 4":total>=16?"TDN 3":"unter TDN 3";
+    return {inhalt:inhalt,gram:gram,koh:koh,format:format,total:total,grade:grade,gradeLabel:gradeLabel,tdn:tdn};
+  }
+  function runCheck(){
+    var btn=$("check");btn.disabled=true;btn.textContent="🔍 Wird geprüft …";
+    var text=ta.value;
+    LT_check(text).then(function(matches){
+      renderResult(matches,null);
+    }).catch(function(e){
+      renderResult([],"Rechtschreib-/Grammatikprüfung aktuell nicht erreichbar (Verbindungsproblem). Die Inhaltsbewertung unten basiert nur auf Länge, Stichwörtern und Struktur.");
+    }).then(function(){btn.disabled=false;btn.textContent="🔍 Text überprüfen"});
+  }
+  function renderResult(matches,note){
+    var sc=localScore(matches);
+    var h='<div class="scorecard"><div class="tdnline" style="margin-top:0">Geschätztes Niveau: <b>'+sc.tdn+'</b></div>';
+    h+='<p class="checknote">Automatische, lokale Schätzung auf Basis von Wortzahl, Stichwörtern, Konnektoren und Fehlerdichte — kein offizielles TestDaF-Ergebnis.</p>';
+    h+='</div>';
+    if(note)h+='<p class="checknote">'+note+'</p>';
+    h+='<h3 style="margin-top:16px">Rechtschreibung &amp; Grammatik</h3>'+renderMatches(matches,ta.value);
     $("eval").innerHTML=h;
+    $("eval").classList.remove("hidden");
   }
-  function applyLock(){
+    function applyLock(){
     var l=locked();
     ta.readOnly=l;ta.classList.toggle("locked",l);
     $("clear").disabled=l;$("start").disabled=l||!!run;$("submit").disabled=l;
     $("banner").classList.toggle("hidden",!l);
     $("banner").textContent=left<=0?"Die Zeit ist um. Das Schreibfeld ist gesperrt.":"Abgegeben. Das Schreibfeld ist gesperrt.";
-    $("eval").classList.toggle("hidden",!l);
-    if(l)renderEval();
   }
   function paintTimer(){
     tm.textContent=fmt(left);
@@ -320,16 +318,13 @@ button:disabled{opacity:.5;cursor:not-allowed}
     if(!confirm("Zeit zurücksetzen, Schreibfeld entsperren und Bewertung löschen?"))return;
     stop();left=k.time;done=false;ev=[-1,-1,-1,-1];corr="";paintTimer();paintCount();save();$("start").textContent="Start";
   };
-  $("eval").onclick=function(e){
-    if(e.target.id==="ai"){if(sampleFn)runAI();return}
-    if(e.target.id==="prompt"){copyStr(buildPrompt(),e.target);return}
-    var b=e.target.closest("button[data-k]");if(!b)return;
-    ev[+b.dataset.i]=+b.dataset.k;save();renderEval();
-  };
+
   ta.addEventListener("input",function(){if(locked())return;text=ta.value;paintCount();save()});
   $("copy").onclick=function(){copyStr(ta.value,$("copy"))};
   $("clear").onclick=function(){if(confirm("Text löschen?")){ta.value="";text="";paintCount();save()}};
-  try{if(window.claude&&window.claude.use)window.claude.use("sample").then(function(f){if(f){sampleFn=f;if(locked())renderEval()}},function(){})}catch(e){}
+  $("check").onclick=runCheck;
+  window.addEventListener("beforeunload",save);
+  document.addEventListener("visibilitychange",function(){if(document.hidden)save()});
   ta.value=text;$("tips").textContent=TIPS[k.kind];$("start").textContent=startLabel();
   paintTimer();paintCount();paintBanner();
 })();
