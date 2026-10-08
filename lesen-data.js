@@ -748,7 +748,7 @@ const MT5 = [
       'Der Experte widerspricht etwas.'
     ],
     textStellen: [1, 2, 3, 4],
-    correct: [4, 3, 7, 1] // Indices correspondants dans options (ajustés selon la logique du test)
+    correct: [4, 3, 7, 1]
   },
   { 
     teil: 5,
@@ -828,4 +828,3 @@ const TESTS = [
   {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
   {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5}
 ];
-
