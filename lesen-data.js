@@ -634,10 +634,185 @@ const MT4 = [
     ]
   }
 ];
+const MT5 = [
+  { ...TEMPLATE[1],
+    instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1-5, welches Wort am besten passt.',
+    title:'Dekade des Dialogs: Zehn Jahre Runder Tisch Meeresmüll',
+    segments:[
+      'Seit nunmehr zehn Jahren fungiert der Runde Tisch Meeresmüll als transdisziplinäres Forum, das Akteure aus Wissenschaft, Wirtschaft und Zivilgesellschaft vereint, um koordinierten Maßnahmen gegen die schleichende Kontamination der maritimen Ökosysteme Einhalt zu ',
+      ' Was seinerzeit als intermediäre Plattform initiiert wurde, hat sich zu einem essenziellen Instrument der politischen Willensbildung entwickelt, wenngleich die Umsetzung konkreter Restriktionen angesichts divergierender Lobbyinteressen oft ',
+      ' verläuft. Insbesondere die ubiquitäre Verbreitung von Mikroplastik, das sich durch den sukzessiven Zerfall makroskopischer Kunststoffe in den Sedimenten akkumuliert, stellt die Forschergemeinde vor enorme Herausforderungen. Jüngste Analysen ',
+      ' unmissverständlich, dass selbst entlegene Tiefseeregionen mittlerweile von synthetischen Polymeren durchdrungen sind, wodurch die marine Biodiversität nachhaltig kompromittiert wird. Um diesem schleichenden Kollaps entgegenzuwirken, fordert das Gremium eine drastische Entbürokratisierung der Kreislaufwirtschaft sowie die Implementierung verbindlicher Sanktionsmechanismen. Das inhärente Dilemma dieses Dialogformats besteht jedoch darin, dass freiwillige Selbstverpflichtungen der Industrie häufig ',
+      ' bleiben, sofern ihnen keine legislativen Zwangsmittel unterlegt werden. Dennoch manifestiert sich am Ende der Dekade ein gewisser Paradigmenwechsel, ',
+      ' Implementierung die gesamtgesellschaftliche Sensibilisierung für einen nachhaltigen Ressourcengebrauch maßgeblich vorangetrieben hat.'
+    ],
+    gaps:[
+      {options:['gewähren','gebieten','verwehren','stiften'], correct:1},
+      {options:['schleppend','rasant','schleunig','abrupt'], correct:0},
+      {options:['evozieren','konstatieren','postulieren','insinuieren'], correct:1},
+      {options:['wirkungslos','omnipräsent','marginal','latent'], correct:0},
+      {options:['der','den','dessen','denen'], correct:2}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Aufgabe 2: Neutrinos und IceCube',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Der kubikkilometergroße Detektor IceCube, der tief im antarktischen Inlandeis versenkt wurde, stellt eine technologische Meisterleistung dar, deren Konzeption und Errichtung die Grenzen des Machbaren jahrelang ausgereizt hat.',
+      'Im Zentrum dieser astrophysikalischen Bemühungen stehen hochenergetische Neutrinos, jene flüchtigen Elementarteilchen, die als kosmische Boten unbeschadet immense Distanzen aus den heftigsten Regionen des Universums überwinden.',
+      'Da diese Geisterteilchen nahezu wechselwirkungsfrei Materie durchqueren, gleicht ihr Nachweis der sprichwörtlichen Suche nach der Stecknadel im Heuhaufen und erforderte die Ausnutzung optischer Eigenschaften des reinen Eises.',
+      'Die akribische Pionierarbeit von Physikern wie Francis Halzen, die diese Detektion letztlich ermöglichte, öffnet ein neues Fenster zur Erforschung kataklysmischer kosmischer Phänomene und revolutioniert unser Verständnis der Astrophysik.',
+      'Dank dieser wegweisenden Entdeckungen und der präzisen Lokalisierung hochenergetischer Neutrinoquellen gilt die Auszeichnung mit dem Nobelpreis für Physik als folgerichtige Würdigung jahrzehntelanger wissenschaftlicher Exzellenz.'
+    ],
+    shuffledStart:[2,0,4,1,3]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+    title:'Aufgabe 3: Das Faszinosum der Nobelpreis-Verleihung',
+    passage:[
+      '(1) Wenn im Oktoberturnus die Pforten der Königlich-Schwedischen Akademie der Wissenschaften in Stockholm geöffnet werden, blickt die globale Wissenschaftsgemeinschaft gebannt auf den skandinavischen Norden. Die Verkündung des Chemie-Nobelpreises markiert dabei alljährlich einen liminalen Moment, in dem monatelange, bisweilen spekulative Diskurse der Fachpresse in eine finale Realität übergehen. Dass dieses Prozedere trotz modernster Kommunikationsstrukturen von einer fast anachronistischen Geheimhaltung umgeben ist, verleiht dem Ritual eine Aura der Unberechenbarkeit. Dennoch offenbart die Historie, dass selbst vermeintlich hermetisch abriegelbare Gremienprozesse bisweilen durch menschliches Versagen oder administrative Indiskretionen kontaminiert wurden, was dem Mythos der Unfehlbarkeit temporär Risse zufügte.',
+      '(2) Den zeitlichen Korridor vor der Bekanntgabe prägt ein inhärentes Paradoxon: Einerseits kulminieren die szientifischen Prognosen in einer schier unüberschaubaren Fülle von Analysen, andererseits agieren die Entscheidungsträger in einem Vakuum absoluten Stillschweigens. Fachleute aus Disziplinen wie der Bioinformatik, der supramolekularen Chemie oder der physikalischen Chemie liefern sich im Vorfeld einen Schlagabtausch über epistemische Durchbrüche, deren Tragweite oft erst Dekaden später gänzlich ermessen werden kann. Die Kontroverse entzündet sich hierbei primär an der restriktiven Statutarregelung, wonach eine Würdigung auf maximal drei Personen limitiert ist – ein Umstand, der in Zeiten vernetzter, kollaborativer Großforschung zunehmend als dysfunktionales Korsett empfunden wird.',
+      '(3) In seiner ursprünglichen Intention von Alfred Nobel konzipiert als Katalysator für jene Errungenschaften, welche der Menschheit den größten Nutzen geleistet haben, hat sich der Preis zu einem machtpolitischen und reputationsökonomischen Instrument sondergleichen entwickelt. Der historische Bedeutungswandel lässt sich dabei unschwer an der Verschiebung des wissenschaftlichen Paradigmas ablesen: Dominierten zu Beginn des 20. Jahrhunderts noch bahnbrechende Syntheseverfahren und makroskopische Stoffanalysen, so reflektiert das heutige Preisspektrum die Durchdringung der Disziplinen an ihren Schnittstellen – etwa dort, wo Chemie, Nanotechnologie und molekulare Biomedizin untrennbar verschmelzen.',
+      '(4) So fungiert der Nobelpreis längst nicht mehr nur als retrospektive Retrospektive für Lebenswerke, sondern zunehmend als prospektiver Wegbereiter für zukünftige technologische Paradigmenwechsel. Die Verleihung katalysiert globale Investitionen, lenkt die akademische Aufmerksamkeit auf vernachlässigte Forschungsnischen und determiniert nicht selten die Karriereverläufe ganzer Forschergenerationen. Kritiker monieren allerdings seit Jahren eine gewisse Eurozentrismus-Schieflage sowie eine hartnäckige Unterrepräsentanz von Forscherinnen, obgleich die Institution in jüngerer Vergangenheit spürbare Anstrengungen unternimmt, diversicheren Kriterien Rechnung zu tragen und den eurozentrischen Habitus aufzubrechen.',
+      '(5) Abseits der rein wissenschaftlichen und ökonomischen Dimension hat sich rund um die Bekanntgabe ein globaler medialer Event-Charakter etabliert. Live-Streams, Expertendiskussionen in Nachrichtensendungen und spekulative Wettquoten begleiten die Stunden vor der Öffnung des goldenen Umschlags in Stockholm. Während einige Medienwissenschaftler diesen Hype als notwendige und zeitgemäße Popularisierung der Wissenschaft begrüßen, warnen Soziologen vor einer oberflächlichen Eventisierung, bei der komplexe Grundlagenforschung auf reißhafte Schlagzeilen reduziert und die eigentliche intellektuelle Leistung entwertet wird.',
+      '(6) Trotz aller berechtigten Kritik an der Inszenierung und den starren Auswahlkriterien bleibt die Strahlkraft des Chemie-Nobelpreises ungebrochen. Er fungiert als ultimativer Gradmesser wissenschaftlichen Fortschritts und erinnert die Welt daran, dass transformative Entdeckungen oft das Resultat jahrzehntelanger, geduldiger Grundlagenforschung sind. Die künftige Herausforderung für das Nobelkomitee wird darin bestehen, diesen historischen Anspruch mit den rasanten, vernetzten Realitäten der modernen Wissenschaftslandschaft in Einklang zu bringen, ohne dabei seine einzigartige historische Integrität zu opfern.'
+    ],
+    questions:[
+      { q:'In Absatz 1 wird dargelegt, dass das Auswahlverfahren ...', options:[
+        'trotz fortschrittlicher Digitalisierungsprozesse vollkommen transparent gestaltet wird.',
+        'durch seine absolute Diskretion und Unvorhersehbarkeit einen fast kultischen Charakter behält.',
+        'in der Vergangenheit häufiger durch gezielte, offizielle Vorab-Leaks an Glaubwürdigkeit verlor.',
+        'von der schwedischen Regierung und nicht von akademischen Gremien überwacht wird.'
+      ], correct:1 },
+      { q:'Welcher Sachverhalt wird in Absatz 2 bezüglich der Vorbereitungsphase konstatituiert?', options:[
+        'Die akademische Welt fordert vehement eine Aufhebung der Beschränkung auf maximal drei Preisträger.',
+        'Die Experten prognostizieren stets fehlerfrei, welche konkreten Forschungsgruppen prämiert werden.',
+        'Es herrscht ein Spannungsverhältnis zwischen öffentlichem Spekulationsdruck und institutioneller Verschwiegenheit.',
+        'Moderne Großforschungsprojekte werden aufgrund mangelnder Zusammenarbeit ausgeschlossen.'
+      ], correct:2 },
+      { q:'Welche Kernaussage lässt sich aus Absatz 3 über den historischen Wandel ableiten?', options:[
+        'Die ursprünglichen Ideale Alfred Nobels wurden im Laufe der Jahrzehnte vollständig verworfen.',
+        'Der Fokus hat sich von isolierten Einzelleistungen hin zu stark interdisziplinären Verbundforschungen verschoben.',
+        'Klassische Syntheseverfahren und makroskopische Analysen spielen in der modernen Chemie keine Rolle mehr.',
+        'Der Preis hat seine Funktion als Nutzenbringer zugunsten reiner Finanzinteressen eingebüßt.'
+      ], correct:1 },
+      { q:'Wie bewertet der Verfasser in Absatz 4 die gegenwärtige Funktion des Nobelpreises?', options:[
+        'Er sieht ihn primär als rückwärtsgewandte Ehrung ohne nennenswerte Auswirkungen auf Technologien.',
+        'Er kritisiert, dass der Preis keinerlei Einfluss mehr auf die globale Verteilung von Forschungsbudgets ausübt.',
+        'Er hebt hervor, dass die Auszeichnung als steuerndes Instrument für Forschungsströme fungiert, trotz Defiziten.',
+        'Er stellt fest, dass die strukturellen Probleme bezüglich Diversität mittlerweile vollständig behoben sind.'
+      ], correct:2 },
+      { q:'Welche Position wird in Absatz 5 bezüglich des medialen Event-Charakters vertreten?', options:[
+        'Die Eventisierung wird von Kritikern als Gefahr für die intellektuelle Tiefe der Wissenschaft gesehen.',
+        'Sämtliche Medienwissenschaftler sind sich einig, dass der Hype wissenschaftliche Arbeit exakt abbildet.',
+        'Die Live-Übertragungen haben die traditionelle Geheimhaltung in Stockholm komplett obsolet gemacht.',
+        'Die Wettquoten bestimmen mittlerweile direkt die offizielle Entscheidungsfindung des Nobelkomitees.'
+      ], correct:0 },
+      { q:'Hauptanliegen des Gesamttextes ist es, ...', options:[
+        'die exakten Namen der diesjährigen Preisträger im Voraus zu veröffentlichen.',
+        'den historischen Ursprung von Alfred Nobels testamentarischen Verfügungen zu widerlegen.',
+        'das komplexe Geflecht aus Geheimhaltung, Bedeutungswandel und medialer Inszenierung des Preises zu beleuchten.',
+        'ausschließlich die technischen Details moderner nanopartikulärer Syntheseverfahren zu erklären.'
+      ], correct:2 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
+    title:'Aufgabe 4: Nachhaltige digitale Infrastruktur',
+    passage:[
+      'Die Ansicht, dass die Digitalisierung und der stetig wachsende Datenverkehr unweigerlich zu einem dramatischen Anstieg des globalen Energieverbrauchs führen, wird in der Öffentlichkeit kaum noch diskutiert; man nimmt sie schlicht als unvermeidlich hin.',
+      '[1] Ob dieser Trend jedoch unumstößlich ist, darf bezweifelt werden. Bereits heute ist es möglich, durch hochmoderne Server-Architekturen und intelligente Kühlungssysteme den Strombedarf drastisch zu senken, sofern man auf erneuerbare Energien, optimierte Algorithmen und energieeffiziente Hardware setzt.',
+      '[2] Diese Maßnahmen erfordern zwar zu Beginn hohe Investitionen und technisches Know-how. Doch wie wir wissen, schreitet die Innovation im Bereich der Informationstechnik rasant voran. Vielleicht werden wir in absehbarer Zeit künstliche Intelligenz nutzen, um Rechenzentren vollautomatisch und abwärmefrei zu steuern. Oder wir werden in der Lage sein, überschüssige Wärme direkt in Fernwärmenetze einzuspeisen, um ganze Stadtteile zu beheizen. Wenn man vor einigen Jahrzehnten Informatikern gesagt hätte, dass wir heute gigantische Datenmengen in Bruchteilen von Sekunden verarbeiten und gleichzeitig den CO2-Ausstoß pro Rechenoperation massiv reduzieren können, hätte man sie für größenwahnsinnig erklärt. Doch durch ingenieurtechnische Höchstleistungen ist genau das gelungen.',
+      'Die Sorge vor einer unkontrollierbaren technologischen Umweltbelastung könnte also übertrieben sein.',
+      '[3] Dass diese pessimistische Sichtweise dennoch so weit verbreitet ist, liegt vor allem daran, dass unser ökologisches Bewusstsein oft noch von Schreckensszenarien geprägt ist. Damals hieß es: Jede neue Technologie zerstört die Umwelt; wenn alle Ressourcen verbraucht sind, bricht das System zusammen. In Wahrheit sind moderne Rechenzentren aber längst zu Vorreitern der Kreislaufwirtschaft geworden.',
+      '[4] Und mit unserem Erfindergeist und unserer Entschlossenheit werden wir auch in Zukunft in der Lage sein, die digitale Transformation ökologisch und ökonomisch sinnvoll zu gestalten.'
+    ],
+    statements:[
+      { key:'a', text:'Der Experte erklärt etwas.' },
+      { key:'b', text:'Der Experte hofft auf etwas.' },
+      { key:'c', text:'Der Experte prognostiziert etwas.' },
+      { key:'d', text:'Der Experte räumt etwas ein.' },
+      { key:'e', text:'Der Experte stellt etwas in Frage.' },
+      { key:'f', text:'Der Experte vermutet etwas.' },
+      { key:'g', text:'Der Experte verteidigt etwas.' },
+      { key:'h', text:'Der Experte widerspricht etwas.' }
+    ],
+    textParts:[
+      { id:1, text:'Ob dieser Trend jedoch unumstößlich ist, darf bezweifelt werden...' },
+      { id:2, text:'Diese Maßnahmen erfordern zwar zu Beginn hohe Investitionen und technisches Know-how...' },
+      { id:3, text:'Dass diese pessimistische Sichtweise dennoch so weit verbreitet ist...' },
+      { id:4, text:'Und mit unserem Erfindergeist und unserer Entschlossenheit werden wir...' }
+    ]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1-7 zu: Entscheiden Sie für jede Aussage, ob sie zu einsprachigen Menschen, zu mehrsprachigen Menschen oder zu beiden passt.',
+    title:'Aufgabe 5: Wie Sprache unser Denken und unsere Identität prägt',
+    textBody:[
+      'Ob sich Einsprachige und Mehrsprachige hinsichtlich ihrer kognitiven Flexibilität tatsächlich in messbaren Kategorien aufteilen lassen und wie stark die Unterschiede im Zweifelsfall ausgeprägt sind, diskutieren Sprachwissenschaftler und Kognitionsforscher bereits seit Jahrzehnten. Eine aktuelle Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden monolinguale und plurilinguale Personen im Hinblick auf fünf fundamentale Persönlichkeitsmerkmale und mentale Fähigkeiten untersucht: Offenheit für (neue) Erfahrungen, kognitive Kontrollfunktionen, Empathie, Flexibilität bei Perspektivwechseln sowie emotionale Belastbarkeit.',
+      'Personen, die sich selbst als einsprachig bezeichneten, erwiesen sich im Durchschnitt als strukturierter in vertrauten Routinen, zielstrebiger bei monolingualen Aufgaben und wiesen eine hohe Planungsgenauigkeit auf – sie sind also beispielsweise verlässlicher bei linearen Abläufen und planen alltägliche Handlungen eher im Voraus. Selbst ernannte Mehrsprachige erzielten dagegen höhere Werte in puncto Offenheit, kognitiver Agilität und sozialer Empathie. Sie sind damit im Mittel etwas experimentierfreudiger, neigen eher dazu, feste Denkmuster zu hinterfragen – gleichzeitig werden sie aber bisweilen auch stärker von mentaler Erschöpfung durch ständiges Abwägen geplagt. Ein relativ ähnliches Bild liefert auch eine andere Untersuchung. Insgesamt deuten die neueren Studien auf einen engen Zusammenhang zwischen sprachlicher Vielfalt und der Ausprägung spezifischer mentaler Kompetenzen hin. Wie dieser Zusammenhang genau aussehen könnte, ist jedoch nicht abschließend geklärt. Kognitionsforscher vertreten die Thesis, dass das Erlernen mehrerer Sprachen unser Gehirn flexibler macht, indem es neuronale Netzwerke stärkt, die für die Bewältigung komplexer Konflikte zuständig sind.',
+      'Um ihre Vermutung zu überprüfen, untersuchten sie in zwei unterschiedlichen Studien mit jeweils rund 500 Probanden, wie dominant monolinguale und plurilinguale Personen in Gruppenprozessen auftreten. Dabei entdeckten sie, dass Einsprachige im Schnitt eine ausgeprägte strukturierte Prozessorientierung besaßen – sie präferierten klare Hierarchien zwischen kommunikativen Regeln und glaubten, dass feste Strukturen Stabilität sichern. Die Wissenschaftler sehen das als Hinweis darauf, dass Menschen mit nur einer Muttersprache oft stabile, bewährte Rahmen bevorzugen, während Mehrsprachige bereit sind, sich flexibel an wechselnde Kontexte anzupassen. So konnten die Wissenschaftler hinsichtlich Durchsetzungsvermögen und sprachlicher Präzision keine Unterschiede zwischen ihren Versuchspersonen finden. Wie das zu ihrer Hypothese passt, konnten die Wissenschaftler allerdings nicht genau erklären.'
+    ],
+    claims:[
+      'Diese Personen neigen dazu, feste Routinen und klare Strukturen zu bevorzugen.',
+      'Diese Gruppe stellt sprachliche und gesellschaftliche Denkmuster gerne in Frage.',
+      'Diese Gruppe verfügt nachweislich über ein höheres Durchsetzungsvermögen im Beruf.',
+      'Diese Menschen sind im Durchschnitt experimentierfreudiger und offener für Neues.',
+      'Diese Personen passen sich flexibel an wechselnde kommunikative Kontexte an.',
+      'Diese Gruppe ist psychisch instabiler und leidet häufiger unter chronischer Angst.',
+      'Diese Personen zeigen keine Unterschiede in ihrer sprachlichen Präzision.'
+    ],
+    categories:['einsprachige Menschen', 'mehrsprachige Menschen', 'beide', 'passt nicht']
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen. Schreiben Sie die richtigen Aussagen an die passende Stelle in der Tabelle.',
+    title:'Aufgabe 6: Entstanden die ersten Tiere 200 Millionen Jahre früher als gedacht?',
+    passage:[
+      'Paläontologen stehen seit Jahrzehnten vor der großen Herausforderung, den exakten Ursprung des tierischen Lebens auf der Erde zu datieren. Bislang ging man in der Fachwelt davon aus, dass die ersten echten mehrzelligen Tiere erst vor rund 600 Millionen Jahren während der Ediacara-Periode entstanden. Doch neue geologische und biochemische Analysen von fossilen Gesteinsschichten werfen dieses traditionelle Zeitfenster komplett über den Haufen. Forscher analysierten winzige Biomarker – spezifische chemische Moleküle, die von urzeitlichen Schwämmen stammen könnten – in Schichten, die auf ein Alter von über 800 Millionen Jahren datiert wurden. Zwar verlief die Evolution zu jener Zeit extrem langsam, und fossile Spuren sind aufgrund tektonischer Verschiebungen nur äußerst spärlich erhalten, dennoch liefern diese chemischen Indizien eine unerwartet frühe Präsenz von primitiven Lebewesen. Dennoch sollte man bei solchen Befunden äußerst vorsichtig sein, denn bestimmte geochemische Prozesse oder abiotische Reaktionen können ähnliche Spuren hinterlassen, ohne dass jemals biologisches Leben im Spiel war. Spezifische mineralische Ablagerungen ähneln oft verblüffend den organischen Biomarkern, weshalb die Interpretation der Funde in der Fachwelt heftig umstritten bleibt. Beachten sollte man zudem, dass sich molekulare Uhren in der Genetik erheblich von klassischen Fossilienfunden unterscheiden. Während Fossilien direkte Momentaufnahmen einer vergangenen Epoche liefern, basieren genetische Stammbäume auf statistischen Hochrechnungen von Mutationsraten. Obwohl viele Forscher die neuen Daten als revolutionär feiern, darf man nicht außer Acht lassen, dass eine längere Einwirkungsdauer von Verunreinigungen in alten Gesteinsschichten die Ergebnisse verfälschen kann. Miterleben müssen wir deshalb eine kritische Neubeurteilung bisheriger Lehrminuten. Generell lässt sich sagen, dass molekulare Datierungen wertvolle Hinweise liefern, ihre absolute Verlässlichkeit jedoch stets durch physische Fossilienfunde untermauert werden muss.'
+    ],
+    options:[
+      { id:'a', text:'Molekulare Spuren als Altersindiz' },
+      { id:'b', text:'Eindeutigkeit der Funde umstritten' },
+      { id:'c', text:'Rasante Artenvielfalt im Präkambrium' },
+      { id:'d', text:'Statistische Berechnungen von Genomen' },
+      { id:'e', text:'Risiko von chemischen Verunreinigungen' },
+      { id:'f', text:'Ausschließlich fossile Beweismittel' },
+      { id:'g', text:'Vollständiger Ersatz der Geologie' },
+      { id:'h', text:'Lückenhafte Erhaltung durch Tektonik' }
+    ],
+    tableStructure:{
+      pros:[0, 2],
+      cons:[1, 4]
+    }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Identifizieren Sie jene Aussagen in der Zusammenfassung, welche sachlich inkorrekte oder verfälschte Informationen beinhalten.',
+    title:'Aufgabe 7: Das Paradigma des globalen Kapitalismus im Diskurs',
+    textBody:[
+      'Angesichts multipler globaler Krisen unterliegt die Konzeption moderner Wirtschaftsstrukturen einem tiefgreifenden Paradigmenwechsel. Im Rahmen des jüngst publizierten Global Capitalism Index (GCI) wurden exakt 161 Volkswirtschaften einer komparativen Analyse unterzogen, um deren makroökonomische Resilienz, institutionelle Integrität und soziale Wohlstandsverteilung zu quantifizieren. Die empirischen Befunde offenbaren gravierende Diskrepanzen: Während etablierte Industrienationen in Nordamerika und Europa traditionell Spitzenränge einnehmen, avancieren aufstrebende Märkte im globalen Süden zunehmend zu differenzierten Gravitationszentren. Ökonomen betonen hierbei nachdrücklich, dass die wirtschaftliche Valenz einer Nation heutzutage primär an intangiblen Faktoren wie Humankapitalinvestitionen, digitaler Adaptionsfähigkeit und ökologischer Nachhaltigkeit gemessen wird, wohingegen traditionelle Bruttoinlandsprodukt-Metriken an aussagekräftiger Relevanz einbüßen.',
+      'Nichtsdestotrotz indizieren die erhobenen Daten besorgniserregende strukturelle Dysfunktionalitäten. Exemplarisch dafür steht das Phänomen einer sich sukzessive vertiefenden Kluft zwischen stagnierenden Reallöhnen und exponentiell steigenden Kapitalrenditen in westlichen Demokratien. Darüber hinaus konstatieren die Forscher, dass rund 34 Prozent der untersuchten Schwellenländer unter massiven Defiziten im Bereich der Rechtssicherheit leiden, wodurch transnationale Investitionsströme nachhaltig inhibiert werden.',
+      'Trotz dringender Apprufe seitens wissenschaftlicher Expertisen zur Restrukturierung der globalen Finanzarchitektur verharren politische Entscheidungsträger in beharrlicher Passivität; eine international koordinierte Trendwende bleibt bislang aus. Flankierend hierzu mussten im Laufe des vergangenen Jahrzehnts zahllose kleine und mittlere Unternehmen (KMU) infolge verschärfter regulatorischer Bankenvorgaben und restriktiver Kreditvergabepraktiken Insolvenz anmelden. Diese Kapitalverknappung entfaltet verheerende Konsequenzen für die volkswirtschaftliche Innovationskraft: Es mangelt an essenzieller Risikofinanzierung für disruptive Zukunftstechnologien, wodurch die langfristige Wettbewerbsfähigkeit der betroffenen Staaten maßgeblich präjudiziert und geschwächt wird.',
+      'In Anbetracht dieser multiplen Friktionen konstatieren Beobachter, dass die fortgesetzte Vernachlässigung struktureller Reformen die sozioökonomische Stabilität des globalen Gefüges mittel- bis langfristig gravierend gefährdet.'
+    ],
+    statements:[
+      { id:1, text:'Der Global Capitalism Index unterzog exakt 161 Volkswirtschaften einer umfassenden vergleichenden Analyse.', correct:true },
+      { id:2, text:'Die ökonomische Valenz einer Nation wird laut den Studienautoren primär anhand traditioneller Bruttoinlandsprodukt-Metriken bemessen.', correct:false },
+      { id:3, text:'Etablierte Industrienationen in Europa und Nordamerika beanspruchen traditionell die vorderen Ränge des Indikators für sich.', correct:true },
+      { id:4, text:'In westlichen Demokratien lässt sich eine progrediente Schere zwischen Kapitalrenditen und Reallöhnen nachweisen.', correct:true },
+      { id:5, text:'Etwa 34 Prozent der analysierten Schwellenländer sind mit gravierenden institutionellen Defiziten im Bereich der Rechtssicherheit konfrontiert.', correct:true },
+      { id:6, text:'Politische Entscheidungsträger haben umgehend auf die wissenschaftlichen Forderungen reagiert und umfassende Strukturreformen implementiert.', correct:false },
+      { id:7, text:'In den letzten zehn Jahren führte die restriktivere Kreditvergabe infolge strengerer Bankenvorgaben zur Insolvenz zahlreicher KMU.', correct:true },
+      { id:8, text:'Das akute Defizit an Risikokapital limitiert nachhaltig die Innovationsdynamik sowie das langfristige Wachstumspotenzial.', correct:true },
+      { id:9, text:'Die gegenwärtige wirtschaftliche Entwicklung begünstigt und maximiert die Zukunftsfähigkeit der betroffenen Regionen.', correct:false }
+    ]
+  }
+];
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
   {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
-  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4}
+  {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
+  {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5}
 ];
+
