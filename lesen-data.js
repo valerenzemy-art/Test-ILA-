@@ -638,7 +638,7 @@ const MT5 = [
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1-5, welches Wort am besten passt.',
     title:'Dekade des Dialogs: Zehn Jahre Runder Tisch Meeresmüll',
-    segments:[
+    textParts:[
       'Seit nunmehr zehn Jahren fungiert der Runde Tisch Meeresmüll als transdisziplinäres Forum, das Akteure aus Wissenschaft, Wirtschaft und Zivilgesellschaft vereint, um koordinierten Maßnahmen gegen die schleichende Kontamination der maritimen Ökosysteme Einhalt zu ',
       ' Was seinerzeit als intermediäre Plattform initiiert wurde, hat sich zu einem essenziellen Instrument der politischen Willensbildung entwickelt, wenngleich die Umsetzung konkreter Restriktionen angesichts divergierender Lobbyinteressen oft ',
       ' verläuft. Insbesondere die ubiquitäre Verbreitung von Mikroplastik, das sich durch den sukzessiven Zerfall makroskopischer Kunststoffe in den Sedimenten akkumuliert, stellt die Forschergemeinde vor enorme Herausforderungen. Jüngste Analysen ',
@@ -670,7 +670,7 @@ const MT5 = [
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
     title:'Aufgabe 3: Das Faszinosum der Nobelpreis-Verleihung',
-    passage:[
+    textBody:[
       '(1) Wenn im Oktoberturnus die Pforten der Königlich-Schwedischen Akademie der Wissenschaften in Stockholm geöffnet werden, blickt die globale Wissenschaftsgemeinschaft gebannt auf den skandinavischen Norden. Die Verkündung des Chemie-Nobelpreises markiert dabei alljährlich einen liminalen Moment, in dem monatelange, bisweilen spekulative Diskurse der Fachpresse in eine finale Realität übergehen. Dass dieses Prozedere trotz modernster Kommunikationsstrukturen von einer fast anachronistischen Geheimhaltung umgeben ist, verleiht dem Ritual eine Aura der Unberechenbarkeit. Dennoch offenbart die Historie, dass selbst vermeintlich hermetisch abriegelbare Gremienprozesse bisweilen durch menschliches Versagen oder administrative Indiskretionen kontaminiert wurden, was dem Mythos der Unfehlbarkeit temporär Risse zufügte.',
       '(2) Den zeitlichen Korridor vor der Bekanntgabe prägt ein inhärentes Paradoxon: Einerseits kulminieren die szientifischen Prognosen in einer schier unüberschaubaren Fülle von Analysen, andererseits agieren die Entscheidungsträger in einem Vakuum absoluten Stillschweigens. Fachleute aus Disziplinen wie der Bioinformatik, der supramolekularen Chemie oder der physikalischen Chemie liefern sich im Vorfeld einen Schlagabtausch über epistemische Durchbrüche, deren Tragweite oft erst Dekaden später gänzlich ermessen werden kann. Die Kontroverse entzündet sich hierbei primär an der restriktiven Statutarregelung, wonach eine Würdigung auf maximal drei Personen limitiert ist – ein Umstand, der in Zeiten vernetzter, kollaborativer Großforschung zunehmend als dysfunktionales Korsett empfunden wird.',
       '(3) In seiner ursprünglichen Intention von Alfred Nobel konzipiert als Katalysator für jene Errungenschaften, welche der Menschheit den größten Nutzen geleistet haben, hat sich der Preis zu einem machtpolitischen und reputationsökonomischen Instrument sondergleichen entwickelt. Der historische Bedeutungswandel lässt sich dabei unschwer an der Verschiebung des wissenschaftlichen Paradigmas ablesen: Dominierten zu Beginn des 20. Jahrhunderts noch bahnbrechende Syntheseverfahren und makroskopische Stoffanalysen, so reflektiert das heutige Preisspektrum die Durchdringung der Disziplinen an ihren Schnittstellen – etwa dort, wo Chemie, Nanotechnologie und molekulare Biomedizin untrennbar verschmelzen.',
@@ -698,7 +698,7 @@ const MT5 = [
         'Der Preis hat seine Funktion als Nutzenbringer zugunsten reiner Finanzinteressen eingebüßt.'
       ], correct:1 },
       { q:'Wie bewertet der Verfasser in Absatz 4 die gegenwärtige Funktion des Nobelpreises?', options:[
-        'Er sieht ihn primär als rückwärtsgewandte Ehrung ohne nennenswerte Auswirkungen auf Technologien.',
+        'Er sieht ihn primär as rückwärtsgewandte Ehrung ohne nennenswerte Auswirkungen auf Technologien.',
         'Er kritisiert, dass der Preis keinerlei Einfluss mehr auf die globale Verteilung von Forschungsbudgets ausübt.',
         'Er hebt hervor, dass die Auszeichnung als steuerndes Instrument für Forschungsströme fungiert, trotz Defiziten.',
         'Er stellt fest, dass die strukturellen Probleme bezüglich Diversität mittlerweile vollständig behoben sind.'
@@ -720,7 +720,7 @@ const MT5 = [
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Aufgabe 4: Nachhaltige digitale Infrastruktur',
-    passage:[
+    textBody:[
       'Die Ansicht, dass die Digitalisierung und der stetig wachsende Datenverkehr unweigerlich zu einem dramatischen Anstieg des globalen Energieverbrauchs führen, wird in der Öffentlichkeit kaum noch diskutiert; man nimmt sie schlicht als unvermeidlich hin.',
       '[1] Ob dieser Trend jedoch unumstößlich ist, darf bezweifelt werden. Bereits heute ist es möglich, durch hochmoderne Server-Architekturen und intelligente Kühlungssysteme den Strombedarf drastisch zu senken, sofern man auf erneuerbare Energien, optimierte Algorithmen und energieeffiziente Hardware setzt.',
       '[2] Diese Maßnahmen erfordern zwar zu Beginn hohe Investitionen und technisches Know-how. Doch wie wir wissen, schreitet die Innovation im Bereich der Informationstechnik rasant voran. Vielleicht werden wir in absehbarer Zeit künstliche Intelligenz nutzen, um Rechenzentren vollautomatisch und abwärmefrei zu steuern. Oder wir werden in der Lage sein, überschüssige Wärme direkt in Fernwärmenetze einzuspeisen, um ganze Stadtteile zu beheizen. Wenn man vor einigen Jahrzehnten Informatikern gesagt hätte, dass wir heute gigantische Datenmengen in Bruchteilen von Sekunden verarbeiten und gleichzeitig den CO2-Ausstoß pro Rechenoperation massiv reduzieren können, hätte man sie für größenwahnsinnig erklärt. Doch durch ingenieurtechnische Höchstleistungen ist genau das gelungen.',
@@ -767,7 +767,7 @@ const MT5 = [
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen. Schreiben Sie die richtigen Aussagen an die passende Stelle in der Tabelle.',
     title:'Aufgabe 6: Entstanden die ersten Tiere 200 Millionen Jahre früher als gedacht?',
-    passage:[
+    textBody:[
       'Paläontologen stehen seit Jahrzehnten vor der großen Herausforderung, den exakten Ursprung des tierischen Lebens auf der Erde zu datieren. Bislang ging man in der Fachwelt davon aus, dass die ersten echten mehrzelligen Tiere erst vor rund 600 Millionen Jahren während der Ediacara-Periode entstanden. Doch neue geologische und biochemische Analysen von fossilen Gesteinsschichten werfen dieses traditionelle Zeitfenster komplett über den Haufen. Forscher analysierten winzige Biomarker – spezifische chemische Moleküle, die von urzeitlichen Schwämmen stammen könnten – in Schichten, die auf ein Alter von über 800 Millionen Jahren datiert wurden. Zwar verlief die Evolution zu jener Zeit extrem langsam, und fossile Spuren sind aufgrund tektonischer Verschiebungen nur äußerst spärlich erhalten, dennoch liefern diese chemischen Indizien eine unerwartet frühe Präsenz von primitiven Lebewesen. Dennoch sollte man bei solchen Befunden äußerst vorsichtig sein, denn bestimmte geochemische Prozesse oder abiotische Reaktionen können ähnliche Spuren hinterlassen, ohne dass jemals biologisches Leben im Spiel war. Spezifische mineralische Ablagerungen ähneln oft verblüffend den organischen Biomarkern, weshalb die Interpretation der Funde in der Fachwelt heftig umstritten bleibt. Beachten sollte man zudem, dass sich molekulare Uhren in der Genetik erheblich von klassischen Fossilienfunden unterscheiden. Während Fossilien direkte Momentaufnahmen einer vergangenen Epoche liefern, basieren genetische Stammbäume auf statistischen Hochrechnungen von Mutationsraten. Obwohl viele Forscher die neuen Daten als revolutionär feiern, darf man nicht außer Acht lassen, dass eine längere Einwirkungsdauer von Verunreinigungen in alten Gesteinsschichten die Ergebnisse verfälschen kann. Miterleben müssen wir deshalb eine kritische Neubeurteilung bisheriger Lehrminuten. Generell lässt sich sagen, dass molekulare Datierungen wertvolle Hinweise liefern, ihre absolute Verlässlichkeit jedoch stets durch physische Fossilienfunde untermauert werden muss.'
     ],
     options:[
