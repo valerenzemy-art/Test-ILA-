@@ -23,17 +23,12 @@
 <!-- Externe Datendatei einbinden -->
 <script src="lesen-data.js"></script>
 
-<!-- Modus "module" activé pour autoriser l'importation de storage.js -->
-<script type="module">
-import { loadAllAnswers, saveSingleAnswer, clearTestAnswers } from './storage.js';
-
+<script>
 let currentTestIdx = 0;
 let current = 0;
 let timerInterval = null;
 let remaining = 0;
-
-// Chargement des réponses depuis le localStorage via storage.js
-const answers = loadAllAnswers();
+const answers = {};
 
 function fmt(sec){
   const m = Math.floor(sec/60).toString().padStart(2,'0');
@@ -164,7 +159,7 @@ function renderGap(task, test, body){
     if(i < task.gaps.length){
       const gap = task.gaps[i];
       html += `<select class="gapselect" data-idx="${i}"><option value="">(${i+1}) wählen …</option>`;
-      gap.options.forEach((opt, oi)=>{ html += `<option value="${oi}">${String.fromCharCode(97+oi)})${escapeHtml(opt)}</option>`; });
+      gap.options.forEach((opt, oi)=>{ html += `<option value="${oi}">${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</option>`; });
       html += `</select>`;
     }
   });
@@ -174,11 +169,7 @@ function renderGap(task, test, body){
   body.querySelectorAll('.gapselect').forEach(sel=>{
     const idx = sel.dataset.idx;
     if(a[idx] !== undefined){ sel.value = a[idx]; sel.classList.add('answered'); }
-    sel.addEventListener('change', ()=>{ 
-      a[idx] = sel.value; 
-      sel.classList.toggle('answered', sel.value !== ''); 
-      saveSingleAnswer(test.id, task.teil, idx, sel.value);
-    });
+    sel.addEventListener('change', ()=>{ a[idx] = sel.value; sel.classList.toggle('answered', sel.value !== ''); });
   });
 }
 
@@ -202,7 +193,6 @@ function renderOrder(task, test, body){
         const pos = parseInt(btn.dataset.pos);
         const swapWith = btn.dataset.dir === 'up' ? pos-1 : pos+1;
         [order[pos], order[swapWith]] = [order[swapWith], order[pos]];
-        saveSingleAnswer(test.id, task.teil, 'order', order);
         draw();
       };
     });
@@ -216,20 +206,17 @@ function renderMC(task, test, body){
   html += '</div><div style="margin-top:20px;">';
   const a = getBucket(test, task);
   task.questions.forEach((q, qi)=>{
-    html += `<div class="qblock"><div class="qtext">Frage ${qi+1}:${escapeHtml(q.q)}</div>`;
+    html += `<div class="qblock"><div class="qtext">Frage ${qi+1}: ${escapeHtml(q.q)}</div>`;
     q.options.forEach((opt, oi)=>{
       const checked = a[qi] == oi ? 'checked' : '';
-      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)})${escapeHtml(opt)}</label>`;
+      html += `<label class="opt"><input type="radio" name="q${qi}" value="${oi}" ${checked}> ${String.fromCharCode(97+oi)}) ${escapeHtml(opt)}</label>`;
     });
     html += `</div>`;
   });
   html += '</div>';
   body.innerHTML = html;
   task.questions.forEach((q, qi)=>{
-    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
-      a[qi] = inp.value;
-      saveSingleAnswer(test.id, task.teil, qi, inp.value);
-    }));
+    body.querySelectorAll(`input[name="q${qi}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[qi] = inp.value));
   });
 }
 
@@ -237,7 +224,7 @@ function renderMatch(task, test, body){
   let html = `<div class="passage"><p>${task.passageText}</p></div>`;
   html += `<h3 style="margin-top:20px;">Aussagen</h3><ul style="list-style:none;padding:0;">`;
   task.options.forEach((opt, oi)=>{
-    html += `<li style="margin-bottom:6px;font-size:0.9rem;"><strong>${String.fromCharCode(97+oi)}</strong>${escapeHtml(opt)}</li>`;
+    html += `<li style="margin-bottom:6px;font-size:0.9rem;"><strong>${String.fromCharCode(97+oi)}</strong> ${escapeHtml(opt)}</li>`;
   });
   html += `</ul><div style="margin-top:20px;">`;
   
@@ -254,10 +241,7 @@ function renderMatch(task, test, body){
   body.querySelectorAll('select[data-ti]').forEach(sel=>{
     const ti = sel.dataset.ti;
     if(a[ti] !== undefined) sel.value = a[ti];
-    sel.addEventListener('change', ()=>{ 
-      a[ti] = sel.value;
-      saveSingleAnswer(test.id, task.teil, ti, sel.value);
-    });
+    sel.addEventListener('change', ()=> a[ti] = sel.value);
   });
 }
 
@@ -266,7 +250,7 @@ function renderTable(task, test, body){
   html += `<table class="tzt"><thead><tr><th style="text-align:left;">Aussagen</th>${task.columns.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   const a = getBucket(test, task);
   task.items.forEach((item, ii)=>{
-    html += `<tr><td class="label">${ii+1}.${escapeHtml(item.text)}</td>`;
+    html += `<tr><td class="label">${ii+1}. ${escapeHtml(item.text)}</td>`;
     task.columns.forEach((c, ci)=>{
       const checked = a[ii] == ci ? 'checked' : '';
       html += `<td><input type="radio" name="tbl${ii}" value="${ci}" ${checked}></td>`;
@@ -276,10 +260,7 @@ function renderTable(task, test, body){
   html += '</tbody></table>';
   body.innerHTML = html;
   task.items.forEach((item, ii)=>{
-    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=>{ 
-      a[ii] = inp.value;
-      saveSingleAnswer(test.id, task.teil, ii, inp.value);
-    }));
+    body.querySelectorAll(`input[name="tbl${ii}"]`).forEach(inp=> inp.addEventListener('change', ()=> a[ii] = inp.value));
   });
 }
 
@@ -308,8 +289,8 @@ function renderTwoCat(task, test, body){
       <tr><th>Vorteile</th><th>Nachteile</th></tr>
     </thead>
     <tbody>
-      <tr><td>1. ${makeSelect('v1')}</td><td>3.${makeSelect('n3')}</td></tr>
-      <tr><td>2. ${makeSelect('v2')}</td><td>4.${makeSelect('n4')}</td></tr>
+      <tr><td>1. ${makeSelect('v1')}</td><td>3. ${makeSelect('n3')}</td></tr>
+      <tr><td>2. ${makeSelect('v2')}</td><td>4. ${makeSelect('n4')}</td></tr>
     </tbody>
   </table></div>`;
 
@@ -317,7 +298,6 @@ function renderTwoCat(task, test, body){
   body.querySelectorAll('select[data-key]').forEach(sel=>{
     sel.addEventListener('change', ()=>{
       a[sel.dataset.key] = sel.value;
-      saveSingleAnswer(test.id, task.teil, sel.dataset.key, sel.value);
     });
   });
 }
@@ -351,11 +331,7 @@ function renderSummary(task, test, body){
     document.getElementById('cnt').textContent = n;
   }
   body.querySelectorAll('input[data-si]').forEach(cb=>{
-    cb.addEventListener('change', ()=>{ 
-      a[cb.dataset.si] = cb.checked; 
-      updateCount(); 
-      saveSingleAnswer(test.id, task.teil, cb.dataset.si, cb.checked);
-    });
+    cb.addEventListener('change', ()=>{ a[cb.dataset.si] = cb.checked; updateCount(); });
   });
   updateCount();
 }
@@ -408,7 +384,6 @@ function showResults(){
   nb.innerHTML = '<button class="btn ghost" id="btnRestart">Neu starten</button><button class="btn next" id="btnMenu2">Menü</button>';
 
   document.getElementById('btnRestart').onclick = () => {
-      clearTestAnswers(test.id);
       answers[test.id] = {};
       current = 0;
       renderTask();
@@ -431,10 +406,10 @@ function showResults(){
               task.gaps.forEach((g, i) => {
                   const userVal = parseInt(a[i]);
                   const isCorrect = userVal === g.correct;
-                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)})${g.options[userVal]}` : '(keine Antwort)';
-                  const correctText = `${String.fromCharCode(97+g.correct)})${g.options[g.correct]}`;
+                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${g.options[userVal]}` : '(keine Antwort)';
+                  const correctText = `${String.fromCharCode(97+g.correct)}) ${g.options[g.correct]}`;
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Lücke ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em>${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                      <strong>Lücke ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
                   </div>`;
               });
               break;
@@ -443,7 +418,7 @@ function showResults(){
               order.forEach((origIdx, pos) => {
                   const isCorrect = task.correctOrder[pos] === origIdx;
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Position ${pos+1}:</strong> ${escapeHtml(task.items[origIdx])}${isCorrect ? '✓' : '| Falsche Reihenfolge'}
+                      <strong>Position ${pos+1}:</strong> ${escapeHtml(task.items[origIdx])} ${isCorrect ? '✓' : '| Falsche Reihenfolge'}
                   </div>`;
               });
               break;
@@ -451,10 +426,10 @@ function showResults(){
               task.questions.forEach((q, i) => {
                   const userVal = parseInt(a[i]);
                   const isCorrect = userVal === q.correct;
-                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)})${q.options[userVal]}` : '(keine Antwort)';
-                  const correctText = `${String.fromCharCode(97+q.correct)})${q.options[q.correct]}`;
+                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${q.options[userVal]}` : '(keine Antwort)';
+                  const correctText = `${String.fromCharCode(97+q.correct)}) ${q.options[q.correct]}`;
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Frage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em>${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                      <strong>Frage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
                   </div>`;
               });
               break;
@@ -463,10 +438,10 @@ function showResults(){
                   const userVal = parseInt(a[i]);
                   const correctVal = task.correct[i];
                   const isCorrect = userVal === correctVal;
-                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)})${task.options[userVal]}` : '(keine Antwort)';
-                  const correctText = `${String.fromCharCode(97+correctVal)})${task.options[correctVal]}`;
+                  const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${task.options[userVal]}` : '(keine Antwort)';
+                  const correctText = `${String.fromCharCode(97+correctVal)}) ${task.options[correctVal]}`;
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Textstelle [${ts}]:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em>${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                      <strong>Textstelle [${ts}]:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
                   </div>`;
               });
               break;
@@ -477,7 +452,7 @@ function showResults(){
                   const userText = !isNaN(userVal) ? task.columns[userVal] : '(keine Antwort)';
                   const correctText = task.columns[item.correct];
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Aussage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em>${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                      <strong>Aussage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
                   </div>`;
               });
               break;
@@ -493,7 +468,7 @@ function showResults(){
                   const userText = userVal ? findText(userVal) : '(keine Antwort)';
                   const correctText = findText(correctVal);
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Zuordnung ${idx+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em>${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                      <strong>Zuordnung ${idx+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
                   </div>`;
               });
               break;
@@ -502,7 +477,7 @@ function showResults(){
                   const userChecked = !!a[i];
                   const isCorrect = userChecked === s.wrong;
                   taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Satz ${i+1}:</strong>${escapeHtml(s.text)} <br>
+                      <strong>Satz ${i+1}:</strong> ${escapeHtml(s.text)} <br>
                       Deine Wahl: <strong>${userChecked ? 'Angekreuzt (als falsch markiert)' : 'Nicht angekreuzt'}</strong> 
                       ${isCorrect ? '✓' : `| Korrekt: <strong>${s.wrong ? 'War falsch (hätte angekreuzt werden müssen)' : 'War richtig'}</strong>`}
                   </div>`;
@@ -513,8 +488,8 @@ function showResults(){
       detailsHtml += `
           <div class="result-task-block" style="margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
               <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
-                  <span>Aufgabe ${task.teil} -${task.label}</span>
-                  <span class="${correct === total ? 'ok' : 'no'}">${correct} /${total} Punkte</span>
+                  <span>Aufgabe ${task.teil} - ${task.label}</span>
+                  <span class="${correct === total ? 'ok' : 'no'}">${correct} / ${total} Punkte</span>
               </div>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                   ${taskDetails}
@@ -531,7 +506,7 @@ function showResults(){
   <div class="results">
     <div class="score-hero">
       <div class="pct">${pct}%</div>
-      <div class="tdn">${tdn}`;
+      <div class="tdn">${tdn}</div>
       <div class="tdn" style="margin-top:6px;">${sumCorrect} von ${sumTotal} Punkten erreicht</div>
     </div>
     <h2>Ergebnisdetails & Korrektur</h2>
