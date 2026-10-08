@@ -680,7 +680,7 @@ const MT5 = [
     type: 'mc',
     label: 'Multiple Choice',
     instructions: 'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
-    time: 480,
+    time: 900,
     title: 'Das Faszinosum der Nobelpreis-Verleihung',
     passage: [
       'Wenn im Oktoberturnus die Pforten der Königlich-Schwedischen Akademie der Wissenschaften in Stockholm geöffnet werden, blickt die globale Wissenschaftsgemeinschaft gebannt auf den skandinavischen Norden. Die Verkündung des Chemie-Nobelpreises markiert dabei alljährlich einen liminalen Moment, in dem monatelange, bisweilen spekulative Diskurse der Fachpresse in eine finale Realität übergehen. Dass dieses Prozedere trotz modernster Kommunikationsstrukturen von einer fast anachronistischen Geheimhaltung umgeben ist, verleiht dem Ritual eine Aura der Unberechenbarkeit. Dennoch offenbart die Historie, dass selbst vermeintlich hermetisch abriegelbare Gremienprozesse bisweilen durch menschliches Versagen oder administrative Indiskretionen kontaminiert wurden, was dem Mythos der Unfehlbarkeit temporär Risse zufügte.',
@@ -734,7 +734,7 @@ const MT5 = [
     type: 'match',
     label: 'Textstellen zuordnen',
     instructions: 'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
-    time: 300,
+    time: 360,
     title: 'Aufgabe 4: Nachhaltige digitale Infrastruktur',
     passageText: 'Die Ansicht, dass die Digitalisierung und der stetig wachsende Datenverkehr unweigerlich zu einem dramatischen Anstieg des globalen Energieverbrauchs führen, wird in der Öffentlichkeit kaum noch diskutiert; man nimmt sie schlicht als unvermeidlich hin.<br><br>[1] Ob dieser Trend jedoch unumstößlich ist, darf bezweifelt werden. Bereits heute ist es möglich, durch hochmoderne Server-Architekturen und intelligente Kühlungssysteme den Strombedarf drastisch zu senken, sofern man auf erneuerbare Energien, optimierte Algorithmen und energieeffiziente Hardware setzt.<br><br>[2] Diese Maßnahmen erfordern zwar zu Beginn hohe Investitionen und technisches Know-how. Doch wie wir wissen, schreitet die Innovation im Bereich der Informationstechnik rasant voran. Vielleicht werden wir in absehbarer Zeit künstliche Intelligenz nutzen, um Rechenzentren vollautomatisch und abwärmefrei zu steuern...<br><br>[3] Dass diese pessimistische Sichtweise dennoch so weit verbreitet ist, liegt vor allem daran, dass unser ökologisches Bewusstsein oft noch von Schreckensszenarien geprägt ist...<br><br>[4] Und mit unserem Erfindergeist und unserer Entschlossenheit werden wir auch in Zukunft in der Lage sein, die digitale Transformation ökologisch und ökonomisch sinnvoll zu gestalten.',
     options: [
@@ -775,7 +775,7 @@ const MT5 = [
     type: 'twocat',
     label: 'Zwei Kategorien',
     instructions: 'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen.',
-    time: 300,
+    time: 420,
     title: 'Aufgabe 6: Entstanden die ersten Tiere 200 Millionen Jahre früher als gedacht?',
     passage: 'Paläontologen stehen seit Jahrzehnten vor der großen Herausforderung, den exakten Ursprung des tierischen Lebens auf der Erde zu datieren...',
     aussagen: [
@@ -797,7 +797,7 @@ const MT5 = [
     type: 'summary',
     label: 'Zusammenfassung & Korrektur',
     instructions: 'Lesen Sie den Text. Identifizieren Sie jene Aussagen in der Zusammenfassung, welche sachlich inkorrekte oder verfälschte Informationen beinhalten.',
-    time: 300,
+    time: 420,
     title: 'Aufgabe 7: Das Paradigma des globalen Kapitalismus im Diskurs',
     passage: 'Angesichts multipler globaler Krisen unterliegt die Konzeption moderner Wirtschaftsstrukturen einem tiefgreifenden Paradigmenwechsel...',
     graphicData: [
