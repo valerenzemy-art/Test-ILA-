@@ -635,7 +635,7 @@ const MT4 = [
   }
 ];
 const MT5 = [
-  { ...TEMPLATE[1],
+  { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1-5, welches Wort am besten passt.',
     title:'Dekade des Dialogs: Zehn Jahre Runder Tisch Meeresmüll',
     segments:[
