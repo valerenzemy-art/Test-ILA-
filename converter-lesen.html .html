@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertisseur TestDaF Lesen — Test-ILA</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#18212f;background:#f3f6fa}
+*{box-sizing:border-box}body{margin:0;padding:20px}.wrap{max-width:1000px;margin:auto}
+header,.panel,.task{background:#fff;border:1px solid #dce3ec;border-radius:14px;padding:20px;margin-bottom:16px}
+h1{font-size:1.55rem;margin:0 0 8px}h2{font-size:1.1rem;margin:0 0 12px}
+p{line-height:1.5}.muted{color:#5c6878;font-size:.92rem}
+label{display:block;font-weight:650;margin:12px 0 6px}
+input[type=text],select,textarea{width:100%;border:1px solid #c9d3df;border-radius:8px;padding:10px;font:inherit;background:#fff}
+textarea{min-height:180px;resize:vertical}.raw{min-height:250px;font-family:ui-monospace,monospace;font-size:.88rem}
+button{border:0;border-radius:9px;padding:11px 15px;font:inherit;font-weight:650;cursor:pointer;margin:6px 8px 4px 0;background:#1d4ed8;color:#fff}
+button.secondary{background:#e7edf5;color:#172033}button:disabled{opacity:.5;cursor:not-allowed}
+.status{padding:10px;border-radius:8px;background:#edf4ff;margin-top:10px;white-space:pre-wrap}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.taskhead{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tag{font-size:.8rem;background:#eef2f7;border-radius:99px;padding:5px 9px;white-space:nowrap}
+.warning{background:#fff7e6;border-left:4px solid #d97706;padding:12px;border-radius:6px}
+#tasks[hidden],#outputPanel[hidden]{display:none}
+@media(max-width:650px){body{padding:10px}.grid{grid-template-columns:1fr}.taskhead{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Test-ILA · Convertisseur Lesen</h1>
+  <p>Importe le fichier <b>lesen-import-brut.js</b>, vérifie le texte de chaque PDF et génère directement un Modelltest HTML téléchargeable et utilisable.</p>
+  <div class="warning"><b>À savoir :</b> ce convertisseur organise le contenu, mais ne peut pas deviner de façon fiable toutes les questions, les bonnes réponses ou la structure des tableaux/graphiques. Vérifie les champs avant d'intégrer le résultat à <code>lesen-data.js</code>. Ton fichier original n'est jamais modifié.</div>
+</header>
+<section class="panel">
+  <h2>1. Charger le fichier extrait</h2>
+  <label for="file">Choisir lesen-import-brut.js</label>
+  <input id="file" type="file" accept=".js,.txt,application/javascript,text/plain">
+  <p class="muted">Le fichier doit contenir une déclaration de la forme <code>window.LESEN_IMPORT = [...]</code>, comme l'export de ton importateur PDF.</p>
+  <button id="load">Lire le fichier</button>
+  <button id="pasteDemo" class="secondary">Comment ça marche ?</button>
+  <div id="status" class="status">Aucun fichier chargé.</div>
+</section>
+<section id="tasks" hidden>
+  <div class="panel">
+    <h2>2. Organiser les 7 Aufgaben</h2>
+    <p class="muted">Choisis le type correspondant au contenu réel de chaque PDF. Le convertisseur propose un type détecté automatiquement, mais tu peux le corriger.</p>
+    <div class="grid">
+      <div>
+        <label for="testTitle">Nom du Modelltest</label>
+        <input id="testTitle" type="text" value="Modelltest 6 (Digitaler TestDaF)">
+      </div>
+      <div>
+        <label for="testId">Numéro du test</label>
+        <input id="testId" type="text" value="6">
+      </div>
+    </div>
+  </div>
+  <div id="taskList"></div>
+  <div class="panel">
+    <h2>3. Créer le Modelltest</h2>
+    <p class="muted">Le fichier téléchargé sera une page HTML autonome avec les 7 Aufgaben, le texte extrait de chaque PDF, des zones de réponse et un chronomètre. Il sera utilisable directement, sans modifier <code>lesen-data.js</code>.</p>
+    <button id="convert">Créer et télécharger le Modelltest</button>
+  </div>
+</section>
+<section id="outputPanel" class="panel" hidden>
+  <h2>4. Résultat</h2>
+  <div id="outStatus" class="status"></div>
+  <p class="muted">Le fichier HTML sera téléchargé automatiquement. Tu peux ensuite l’ouvrir dans ton navigateur ou l’intégrer à ton site.</p>
+</section>
+</div>
+<script>
+const TYPES = [
+  {value:'gap',label:'Aufgabe 1 — Lückentext',time:240,fields:'segments + gaps'},
+  {value:'order',label:'Aufgabe 2 — Textabschnitte ordnen',time:300,fields:'items + shuffledStart + correctOrder'},
+  {value:'mc',label:'Aufgabe 3 — Multiple Choice',time:900,fields:'passage + questions'},
+  {value:'match',label:'Aufgabe 4 — Textstellen zuordnen',time:360,fields:'passageText + options + textStellen + correct'},
+  {value:'table',label:'Aufgabe 5 — Aussagen kategorisieren',time:540,fields:'passage + columns + items'},
+  {value:'twocat',label:'Aufgabe 6 — Pro / Contra',time:420,fields:'passage + options + categories + correct'},
+  {value:'summary',label:'Aufgabe 7 — Fehler in Zusammenfassung',time:420,fields:'passage + statements + incorrect'}
+];
+let records=[];
+const $=id=>document.getElementById(id);
+function setStatus(msg){$('status').textContent=msg}
+function parseImport(src){
+  const marker='window.LESEN_IMPORT';
+  const start=src.indexOf(marker);
+  if(start<0) throw new Error('Déclaration window.LESEN_IMPORT introuvable.');
+  const eq=src.indexOf('=',start);
+  const begin=src.indexOf('[',eq);
+  if(eq<0||begin<0) throw new Error('Le tableau LESEN_IMPORT est invalide.');
+  let depth=0,inString=false,escape=false,stringChar='';
+  for(let i=begin;i<src.length;i++){
+    const c=src[i];
+    if(inString){
+      if(escape){escape=false;continue}
+      if(c==='\\'){escape=true;continue}
+      if(c===stringChar) inString=false;
+      continue;
+    }
+    if(c==='"'||c==="'"){inString=true;stringChar=c;continue}
+    if(c==='[') depth++;
+    if(c===']'){depth--;if(depth===0){
+      // The exported file uses JSON.stringify, so this array is valid JSON.
+      return JSON.parse(src.slice(begin,i+1));
+    }}
+  }
+  throw new Error('Fin du tableau introuvable.');
+}
+function textOf(rec){return (rec.pages||[]).map(p=>`[Page ${p.page}]\n${p.text||''}`).join('\n\n')}
+function guessType(text){
+  const t=text.toLowerCase();
+  if(/lücken|lücke|welches wort|für die lücken/.test(t)) return 'gap';
+  if(/richtige reihenfolge|textabschnitte.*reihenfolge|bringen sie.*reihenfolge/.test(t)) return 'order';
+  if(/zusammenfassung|inhaltlich fehlerhafte|sachlich inkorrekte/.test(t)) return 'summary';
+  if(/vorteile.*nachteile|pro-argumente|kontra-argumente/.test(t)) return 'twocat';
+  if(/ordnen sie die textstellen|textstellen.*aussagen/.test(t)) return 'match';
+  if(/schreiben sie die richtigen aussagen|passende stelle in der tabelle|kategorien/.test(t)) return 'table';
+  if(/multiple choice|frage 1:|genau eine richtige lösung/.test(t)) return 'mc';
+  return 'mc';
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+  $('taskList').innerHTML=records.map((r,i)=>{
+    const typ=guessType(textOf(r));
+    const opts=TYPES.map(t=>`<option value="${t.value}" ${t.value===typ?'selected':''}>${t.label}</option>`).join('');
+    return `<article class="task" data-index="${i}">
+      <div class="taskhead"><h2>PDF ${i+1}: ${escapeHtml(r.source||'Fichier sans nom')}</h2><span class="tag">${(r.pages||[]).length} page(s)</span></div>
+      <div class="grid">
+        <div><label>Type d'exercice</label><select class="type">${opts}</select></div>
+        <div><label>Titre de l'Aufgabe</label><input class="title" type="text" value="${escapeHtml((textOf(r).match(/(?:Aufgabe\\s*\\d\\s*[:/—-]?\\s*)([^\\n]{3,80})/i)||[])[1]||`Aufgabe ${i+1}`)}"></div>
+      </div>
+      <label>Consigne (à vérifier / modifier)</label>
+      <input class="instructions" type="text" value="${escapeHtml((textOf(r).match(/(?:Lesen Sie[^.]{0,180}\\.|Entscheiden Sie[^.]{0,180}\\.|Ordnen Sie[^.]{0,180}\\.)/i)||[])[0]||'TODO: consigne exacte')}">
+      <label>Texte extrait des pages (modifiable)</label>
+      <textarea class="sourceText">${escapeHtml(textOf(r))}</textarea>
+      <p class="muted">Champs requis pour ce type : <span class="fields">${TYPES.find(t=>t.value===typ).fields}</span>. Le texte complet sera inclus dans le Modelltest téléchargé.</p>
+    </article>`;
+  }).join('');
+  document.querySelectorAll('.task').forEach(card=>{
+    card.querySelector('.type').addEventListener('change',()=>{
+      const type=TYPES.find(t=>t.value===card.querySelector('.type').value);
+      card.querySelector('.fields').textContent=type.fields;
+    });
+  });
+  $('tasks').hidden=false;
+}
+$('load').addEventListener('click',async()=>{
+  try{
+    const f=$('file').files[0]; if(!f) throw new Error('Choisis d’abord le fichier lesen-import-brut.js.');
+    const src=await f.text(); records=parseImport(src);
+    if(!Array.isArray(records)||!records.length) throw new Error('Aucune Aufgabe trouvée dans le fichier.');
+    render(); setStatus(`${records.length} fichier(s)/Aufgaben chargé(s). Vérifie le type et le texte de chacun.`);
+  }catch(e){setStatus('Erreur : '+e.message)}
+});
+$('pasteDemo').addEventListener('click',()=>alert('Charge le fichier lesen-import-brut.js, vérifie les 7 Aufgaben, puis clique sur « Créer et télécharger le Modelltest ». Le fichier HTML sera généré automatiquement.'));
+function buildModelTest(title, id, cards){
+  const taskHtml=cards.map((card,i)=>{
+    const type=card.querySelector('.type').value;
+    const typeLabel=TYPES.find(t=>t.value===type).label;
+    const taskTitle=card.querySelector('.title').value.trim()||`Aufgabe ${i+1}`;
+    const instructions=card.querySelector('.instructions').value.trim()||'Bearbeiten Sie die Aufgabe.';
+    const text=card.querySelector('.sourceText').value.trim();
+    return `<section class="task"><div class="tasktop"><span>AUFGABE ${i+1} / 7</span><span>${TYPES.find(t=>t.value===type).time/60} min</span></div><h2>${escapeHtml(taskTitle)}</h2><p class="instruction">${escapeHtml(instructions)}</p><div class="source">${escapeHtml(text)}</div><label class="answerlabel" for="answer${i}">Deine Antworten / Notizen</label><textarea id="answer${i}" placeholder="Schreibe hier deine Antworten …"></textarea></section>`;
+  }).join('');
+  return `<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)}</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f8;color:#172033;font:16px/1.55 system-ui,-apple-system,Segoe UI,Arial,sans-serif}.wrap{max-width:950px;margin:auto;padding:22px}header,.task{background:#fff;border:1px solid #dce2ea;border-radius:14px;padding:22px;margin-bottom:18px}h1{margin:0 0 8px;font-size:1.7rem}h2{font-size:1.2rem;margin:8px 0}p{white-space:pre-wrap}.muted{color:#596579}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:15px}button{border:0;border-radius:8px;padding:10px 14px;background:#1d4ed8;color:#fff;font:inherit;font-weight:650;cursor:pointer}.clock{font-size:1.15rem;font-weight:750;padding:8px 12px;background:#edf2ff;border-radius:8px}.tasktop{display:flex;justify-content:space-between;color:#475569;font-size:.82rem;font-weight:750;letter-spacing:.04em}.instruction{font-weight:650}.source{white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #e1e6ee;background:#fafbfd;border-radius:8px;padding:14px;margin:14px 0}.answerlabel{display:block;font-weight:700;margin:12px 0 6px}textarea{width:100%;min-height:95px;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit}.task{break-inside:avoid}.note{font-size:.9rem;color:#596579}@media print{body{background:#fff}.wrap{padding:0;max-width:none}header,.task{border:1px solid #aaa;border-radius:0;box-shadow:none;break-inside:avoid}.tools,.note{display:none}.source{background:#fff}}
+</style></head><body><main class="wrap"><header><h1>${escapeHtml(title)}</h1><p class="muted">Digitaler Lese-Modelltest · 7 Aufgaben</p><p class="note">Hinweis: Der Inhalt stammt aus den hochgeladenen PDFs. Antworten werden in dieser Datei nicht automatisch korrigiert. Beim Drucken können die Notizfelder handschriftlich ausgefüllt werden.</p><div class="tools"><span class="clock" id="clock">00:00</span><button onclick="startClock()">Start</button><button onclick="pauseClock()">Pause</button><button onclick="resetClock()">Zurücksetzen</button><button onclick="window.print()">Drucken / PDF speichern</button></div></header>${taskHtml}</main><script>let elapsed=0,run=false,timer=null;function show(){let m=String(Math.floor(elapsed/60)).padStart(2,'0'),s=String(elapsed%60).padStart(2,'0');document.getElementById('clock').textContent=m+':'+s}function startClock(){if(run)return;run=true;timer=setInterval(()=>{elapsed++;show()},1000)}function pauseClock(){run=false;clearInterval(timer)}function resetClock(){pauseClock();elapsed=0;show()}show();<\/script></body></html>`;
+}
+$('convert').addEventListener('click',()=>{
+  try{
+    const cards=[...document.querySelectorAll('.task')];
+    if(cards.length!==7) throw new Error(`Il faut exactement 7 Aufgaben ; ${cards.length} trouvée(s).`);
+    if(cards.some(c=>!c.querySelector('.sourceText').value.trim())) throw new Error('Au moins une Aufgabe ne contient aucun texte extrait. Vérifie les PDFs importés.');
+    const id=parseInt($('testId').value,10)||6;
+    const title=$('testTitle').value.trim()||`Modelltest ${id} (Digitaler TestDaF)`;
+    const html=buildModelTest(title,id,cards);
+    const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    a.href=url;a.download=`Modelltest-${id}.html`;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1500);
+    $('outStatus').textContent=`${title} téléchargé. Ouvre le fichier Modelltest-${id}.html dans ton navigateur.`;
+    $('outputPanel').hidden=false;
+    $('outputPanel').scrollIntoView({behavior:'smooth'});
+  }catch(e){alert(e.message)}
+});
+</script>
+</body>
+</html>
