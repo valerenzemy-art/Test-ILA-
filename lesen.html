@@ -335,47 +335,7 @@ function renderSummary(task, test, body){
   });
   updateCount();
 }
-
-function scoreTask(task, test){
-  const a = getBucket(test, task);
-  let correct = 0, total = 0;
-  switch(task.type){
-    case 'gap':
-      total = task.gaps.length;
-      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
-      break;
-    case 'order':
-      total = task.correctOrder.length;
-      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
-      break;
-    case 'mc':
-      total = task.questions.length;
-      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
-      break;
-    case 'match':
-      total = task.correct.length;
-      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
-      break;
-    case 'table':
-      total = task.items.length;
-      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
-      break;
-    case 'twocat':
-      total = 4;
-      if(a.v1 === task.correctMap.v1) correct++;
-      if(a.v2 === task.correctMap.v2) correct++;
-      if(a.n3 === task.correctMap.n3) correct++;
-      if(a.n4 === task.correctMap.n4) correct++;
-      break;
-    case 'summary':
-      total = task.sentences.filter(s=>s.wrong).length;
-      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
-      break;
-  }
-  return {correct, total};
-}
-
-function showResults(){
+  function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   const test = TESTS[currentTestIdx];
@@ -408,8 +368,21 @@ function showResults(){
                   const isCorrect = userVal === g.correct;
                   const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${g.options[userVal]}` : '(keine Antwort)';
                   const correctText = `${String.fromCharCode(97+g.correct)}) ${g.options[g.correct]}`;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Lücke ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                  
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Lücke ${i+1}</span>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span><strong>Deine Wahl:</strong> ${escapeHtml(userText)}</span>
+                              <span>${isCorrect ? '✓' : '❌'}</span>
+                          </div>
+                          ${!isCorrect ? `
+                          <div class="answer-box correct-answer">
+                              <span><strong>Korrekt:</strong> ${escapeHtml(correctText)}</span>
+                              <span>✓</span>
+                          </div>` : ''}
+                      </div>
                   </div>`;
               });
               break;
@@ -417,8 +390,15 @@ function showResults(){
               const order = a.order || task.shuffledStart;
               order.forEach((origIdx, pos) => {
                   const isCorrect = task.correctOrder[pos] === origIdx;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Position ${pos+1}:</strong> ${escapeHtml(task.items[origIdx])} ${isCorrect ? '✓' : '| Falsche Reihenfolge'}
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Position ${pos+1}</span>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span>${escapeHtml(task.items[origIdx])}</span>
+                              <span>${isCorrect ? '✓ Falsche Reihenfolge' : '❌ Falsche Reihenfolge'}</span>
+                          </div>
+                      </div>
                   </div>`;
               });
               break;
@@ -428,8 +408,21 @@ function showResults(){
                   const isCorrect = userVal === q.correct;
                   const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${q.options[userVal]}` : '(keine Antwort)';
                   const correctText = `${String.fromCharCode(97+q.correct)}) ${q.options[q.correct]}`;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Frage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                  
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Frage ${i+1}</span>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span><strong>Deine Wahl:</strong> ${escapeHtml(userText)}</span>
+                              <span>${isCorrect ? '✓' : '❌'}</span>
+                          </div>
+                          ${!isCorrect ? `
+                          <div class="answer-box correct-answer">
+                              <span><strong>Korrekt:</strong> ${escapeHtml(correctText)}</span>
+                              <span>✓</span>
+                          </div>` : ''}
+                      </div>
                   </div>`;
               });
               break;
@@ -440,8 +433,21 @@ function showResults(){
                   const isCorrect = userVal === correctVal;
                   const userText = !isNaN(userVal) ? `${String.fromCharCode(97+userVal)}) ${task.options[userVal]}` : '(keine Antwort)';
                   const correctText = `${String.fromCharCode(97+correctVal)}) ${task.options[correctVal]}`;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Textstelle [${ts}]:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                  
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Textstelle [${ts}]</span>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span><strong>Deine Wahl:</strong> ${escapeHtml(userText)}</span>
+                              <span>${isCorrect ? '✓' : '❌'}</span>
+                          </div>
+                          ${!isCorrect ? `
+                          <div class="answer-box correct-answer">
+                              <span><strong>Korrekt:</strong> ${escapeHtml(correctText)}</span>
+                              <span>✓</span>
+                          </div>` : ''}
+                      </div>
                   </div>`;
               });
               break;
@@ -451,8 +457,21 @@ function showResults(){
                   const isCorrect = userVal === item.correct;
                   const userText = !isNaN(userVal) ? task.columns[userVal] : '(keine Antwort)';
                   const correctText = task.columns[item.correct];
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Aussage ${i+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                  
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Aussage ${i+1}</span>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span><strong>Deine Wahl:</strong> ${escapeHtml(userText)}</span>
+                              <span>${isCorrect ? '✓' : '❌'}</span>
+                          </div>
+                          ${!isCorrect ? `
+                          <div class="answer-box correct-answer">
+                              <span><strong>Korrekt:</strong> ${escapeHtml(correctText)}</span>
+                              <span>✓</span>
+                          </div>` : ''}
+                      </div>
                   </div>`;
               });
               break;
@@ -467,8 +486,21 @@ function showResults(){
                   };
                   const userText = userVal ? findText(userVal) : '(keine Antwort)';
                   const correctText = findText(correctVal);
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Zuordnung ${idx+1}:</strong> Deine Wahl: <em>${escapeHtml(userText)}</em> ${isCorrect ? '✓' : `| Korrekt: <strong>${escapeHtml(correctText)}</strong>`}
+                  
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Zuordnung ${idx+1}</span>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span><strong>Deine Wahl:</strong> ${escapeHtml(userText)}</span>
+                              <span>${isCorrect ? '✓' : '❌'}</span>
+                          </div>
+                          ${!isCorrect ? `
+                          <div class="answer-box correct-answer">
+                              <span><strong>Korrekt:</strong> ${escapeHtml(correctText)}</span>
+                              <span>✓</span>
+                          </div>` : ''}
+                      </div>
                   </div>`;
               });
               break;
@@ -476,20 +508,34 @@ function showResults(){
               task.sentences.forEach((s, i) => {
                   const userChecked = !!a[i];
                   const isCorrect = userChecked === s.wrong;
-                  taskDetails += `<div class="result-detail-item ${isCorrect ? 'ok' : 'no'}">
-                      <strong>Satz ${i+1}:</strong> ${escapeHtml(s.text)} <br>
-                      Deine Wahl: <strong>${userChecked ? 'Angekreuzt (als falsch markiert)' : 'Nicht angekreuzt'}</strong> 
-                      ${isCorrect ? '✓' : `| Korrekt: <strong>${s.wrong ? 'War falsch (hätte angekreuzt werden müssen)' : 'War richtig'}</strong>`}
+                  const correctStr = s.wrong ? 'War falsch (hätte angekreuzt werden müssen)' : 'War richtig';
+                  
+                  taskDetails += `
+                  <div class="question-item">
+                      <span class="question-label">Satz ${i+1}</span>
+                      <p style="margin: 0 0 8px 0; font-size: 0.9rem; font-weight: 500;">${escapeHtml(s.text)}</p>
+                      <div class="details-row">
+                          <div class="answer-box user-choice ${isCorrect ? 'correct' : 'wrong'}">
+                              <span><strong>Deine Wahl:</strong> ${userChecked ? 'Angekreuzt (als falsch markiert)' : 'Nicht angekreuzt'}</span>
+                              <span>${isCorrect ? '✓' : '❌'}</span>
+                          </div>
+                          ${!isCorrect ? `
+                          <div class="answer-box correct-answer">
+                              <span><strong>Korrekt:</strong> ${escapeHtml(correctStr)}</span>
+                              <span>✓</span>
+                          </div>` : ''}
+                      </div>
                   </div>`;
               });
               break;
       }
 
+      // Structure de la carte d'exercice globale
       detailsHtml += `
-          <div class="result-task-block" style="margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; border-radius: 8px;">
-              <div style="display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;">
-                  <span>Aufgabe ${task.teil} - ${task.label}</span>
-                  <span class="${correct === total ? 'ok' : 'no'}">${correct} / ${total} Punkte</span>
+          <div class="exercise-card">
+              <div class="exercise-header">
+                  <h3 class="exercise-title">Aufgabe ${task.teil} - ${task.label}</h3>
+                  <span class="exercise-points">${correct} / ${total} Punkte</span>
               </div>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                   ${taskDetails}
@@ -502,6 +548,7 @@ function showResults(){
   let tdn = 'unterhalb TDN 3';
   if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)';
 
+  // Affichage final avec le score en haut et les cartes de correction en bas
   document.getElementById('main').innerHTML = `
   <div class="results">
     <div class="score-hero">
@@ -509,14 +556,9 @@ function showResults(){
       <div class="tdn">${tdn}</div>
       <div class="tdn" style="margin-top:6px;">${sumCorrect} von ${sumTotal} Punkten erreicht</div>
     </div>
-    <h2>Ergebnisdetails & Korrektur</h2>
-    <div style="margin-top: 20px;">
+    <h2 class="section-title" style="margin-bottom: 16px;">Ergebnisdetails & Korrektur</h2>
+    <div style="margin-top: 10px;">
       ${detailsHtml}
     </div>
   </div>`;
 }
-
-showTestSelect();
-</script>
-</body>
-</html>
