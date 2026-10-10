@@ -299,9 +299,102 @@ table.a6-table th { background: var(--teal-dark); color: #ffffff; width: 50%; fo
 table.a6-table select { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); font: inherit; color: var(--text); background: var(--card-bg); font-weight: 600; min-height: 40px; }
 
 /* ==========================================================
+   AJOUTS POUR L'AFFICHAGE MODERNE DE LA CORRECTION
+   ========================================================== */
+
+/* Carte d'exercice harmonisée avec le design global */
+.exercise-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border);
+}
+
+.exercise-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 2px solid var(--bg-page);
+  padding-bottom: 10px;
+}
+
+.exercise-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text);
+  margin: 0;
+}
+
+.exercise-points {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+}
+
+/* Item de question individuel */
+.question-item {
+  background: var(--bg-page);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+}
+
+.question-item:last-child {
+  margin-bottom: 0;
+}
+
+.question-label {
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: block;
+  color: var(--text);
+}
+
+.details-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+/* Boîtes de choix utilisateur et correction */
+.answer-box {
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+}
+
+.user-choice.wrong {
+  background-color: rgba(185, 28, 28, 0.1);
+  color: var(--wrong);
+  border-left: 4px solid var(--wrong);
+}
+
+.user-choice.correct {
+  background-color: rgba(4, 120, 87, 0.1);
+  color: var(--correct);
+  border-left: 4px solid var(--correct);
+}
+
+.correct-answer {
+  background-color: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal-light);
+}
+
+/* ==========================================================
    RÈGLE UNIVERSELLE : TOUS LES TABLEAUX ET GRAPHIQUES DÉPASSENT
    ET FORCENT LE DÉFILEMENT HORIZONTAL DE LA PAGE (.app)
    ========================================================== */
-table, .graphic-box, img, svg {
+table:not(.a6-table):not(.tzt), .graphic-box, img, svg {
   min-width: 550px; /* Force une largeur minimale pour que l'élément dépasse de l'écran mobile et active le scroll global */
 }
