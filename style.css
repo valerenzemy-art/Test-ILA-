@@ -86,7 +86,6 @@ body {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 0;
-  /* MODIFICATION : Permet le défilement horizontal global de l'application */
   overflow-x: auto;
   overflow-y: visible;
   color: var(--text);
@@ -298,3 +297,11 @@ table.a6-table { width: 100%; border-collapse: collapse; margin-top: 10px; borde
 table.a6-table th, table.a6-table td { border: 1px solid var(--border); padding: 10px; text-align: left; color: var(--text); }
 table.a6-table th { background: var(--teal-dark); color: #ffffff; width: 50%; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 table.a6-table select { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid var(--border); font: inherit; color: var(--text); background: var(--card-bg); font-weight: 600; min-height: 40px; }
+
+/* ==========================================================
+   RÈGLE UNIVERSELLE : TOUS LES TABLEAUX ET GRAPHIQUES DÉPASSENT
+   ET FORCENT LE DÉFILEMENT HORIZONTAL DE LA PAGE (.app)
+   ========================================================== */
+table, .graphic-box, img, svg {
+  min-width: 550px; /* Force une largeur minimale pour que l'élément dépasse de l'écran mobile et active le scroll global */
+}
