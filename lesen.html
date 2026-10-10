@@ -335,7 +335,47 @@ function renderSummary(task, test, body){
   });
   updateCount();
 }
-  function showResults(){
+
+function scoreTask(task, test){
+  const a = getBucket(test, task);
+  let correct = 0, total = 0;
+  switch(task.type){
+    case 'gap':
+      total = task.gaps.length;
+      task.gaps.forEach((g,i)=>{ if(parseInt(a[i]) === g.correct) correct++; });
+      break;
+    case 'order':
+      total = task.correctOrder.length;
+      (a.order||[]).forEach((origIdx, pos)=>{ if(task.correctOrder[pos] === origIdx) correct++; });
+      break;
+    case 'mc':
+      total = task.questions.length;
+      task.questions.forEach((q,i)=>{ if(parseInt(a[i]) === q.correct) correct++; });
+      break;
+    case 'match':
+      total = task.correct.length;
+      task.correct.forEach((c,i)=>{ if(parseInt(a[i]) === c) correct++; });
+      break;
+    case 'table':
+      total = task.items.length;
+      task.items.forEach((item,i)=>{ if(parseInt(a[i]) === item.correct) correct++; });
+      break;
+    case 'twocat':
+      total = 4;
+      if(a.v1 === task.correctMap.v1) correct++;
+      if(a.v2 === task.correctMap.v2) correct++;
+      if(a.n3 === task.correctMap.n3) correct++;
+      if(a.n4 === task.correctMap.n4) correct++;
+      break;
+    case 'summary':
+      total = task.sentences.filter(s=>s.wrong).length;
+      task.sentences.forEach((s,i)=>{ if(s.wrong && a[i]) correct++; });
+      break;
+  }
+  return {correct, total};
+}
+
+function showResults(){
   clearTimer();
   document.getElementById('taskbar').innerHTML = '';
   const test = TESTS[currentTestIdx];
@@ -530,7 +570,6 @@ function renderSummary(task, test, body){
               break;
       }
 
-      // Structure de la carte d'exercice globale
       detailsHtml += `
           <div class="exercise-card">
               <div class="exercise-header">
@@ -548,7 +587,6 @@ function renderSummary(task, test, body){
   let tdn = 'unterhalb TDN 3';
   if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)';
 
-  // Affichage final avec le score en haut et les cartes de correction en bas
   document.getElementById('main').innerHTML = `
   <div class="results">
     <div class="score-hero">
@@ -562,3 +600,9 @@ function renderSummary(task, test, body){
     </div>
   </div>`;
 }
+
+// Lancement initial de la page
+showTestSelect();
+</script>
+</body>
+</html>
