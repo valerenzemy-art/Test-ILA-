@@ -1269,5 +1269,6 @@ const TESTS = [
   {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
   {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
   {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5},
-  {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}
+  {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}, 
+  {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7}
 ];
