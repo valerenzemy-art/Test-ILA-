@@ -1,42 +1,31 @@
-const STORAGE_KEY = 'lesen_c1_answers';
+// storage.js - Gestion du stockage en session (disparaît à la fermeture de l'onglet)
 
-// Cache interne pour éviter des appels répétés et coûteux à JSON.parse
+const STORAGE_KEY = 'lesen_c1_answers_session';
 let memoryCache = null;
 
-// Récupérer toutes les réponses (depuis le cache ou le localStorage)
+// Récupérer toutes les réponses
 export function loadAllAnswers() {
     if (memoryCache !== null) {
         return memoryCache;
     }
     try {
-        const data = localStorage.getItem(STORAGE_KEY);
+        const data = sessionStorage.getItem(STORAGE_KEY);
         memoryCache = data ? JSON.parse(data) : {};
     } catch (e) {
-        console.error("Erreur lors du chargement du localStorage :", e);
+        console.error("Erreur lors du chargement du sessionStorage :", e);
         memoryCache = {};
     }
     return memoryCache;
 }
 
-// Sauvegarder l'état global et mettre à jour le cache
+// Sauvegarder l'état global
 export function saveAllAnswers(answersObj) {
     try {
         memoryCache = answersObj;
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(answersObj));
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(answersObj));
     } catch (e) {
-        console.error("Erreur lors de la sauvegarde dans le localStorage :", e);
+        console.error("Erreur lors de la sauvegarde dans le sessionStorage :", e);
     }
-}
-
-// OPTIMISATION : Sauvegarder directement une réponse unique sans tout manipuler manuellement
-export function saveSingleAnswer(testId, teilId, questionKey, value) {
-    const allAnswers = loadAllAnswers();
-    
-    if (!allAnswers[testId]) allAnswers[testId] = {};
-    if (!allAnswers[testId][teilId]) allAnswers[testId][teilId] = {};
-    
-    allAnswers[testId][teilId][questionKey] = value;
-    saveAllAnswers(allAnswers);
 }
 
 // Récupérer le conteneur des réponses pour une tâche spécifique
@@ -47,7 +36,7 @@ export function getBucket(test, task) {
     return allAnswers[test.id][task.teil];
 }
 
-// Réinitialiser les réponses d'un test spécifique
+// Réinitialiser les réponses d'un test spécifique (ex: au clic sur "Neu starten")
 export function clearTestAnswers(testId) {
     const allAnswers = loadAllAnswers();
     if (allAnswers[testId]) {
@@ -56,14 +45,8 @@ export function clearTestAnswers(testId) {
     }
 }
 
-// BONUS : Permettre à l'utilisateur de télécharger sa progression en fichier JSON
-export function exportProgressAsJSON() {
-    const data = loadAllAnswers();
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `progression_c1_${new Date().toISOString().slice(0, 10)}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+// Vider entièrement la session (fin du test)
+export function clearAllSessionAnswers() {
+    memoryCache = {};
+    sessionStorage.removeItem(STORAGE_KEY);
 }
