@@ -1093,6 +1093,162 @@ const MT7 = [
     ]
   }
 ];
+const MT8 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
+    title:'Kommunikation für eine nachhaltige Mobilität',
+    segments:[
+      'Die Gestaltung einer ökologisch verträglichen Verkehrswende erfordert nicht nur infrastrukturelle Anpassungen, sondern auch ein grundsätzliches Umdenken im Mobilitätsverhalten der Bevölkerung. Wissenschaftlerinnen und Wissenschaftler haben in einer aktuellen Studie ',
+      ', dass gezielte Kommunikationsstrategien eine entscheidende Rolle bei der Akzeptanz nachhaltiger Transportmittel spielen. Personen, deren Bereitschaft zur Nutzung des öffentlichen Personennahverkehrs durch transparente Aufklärungskampagnen gestärkt wurde, zeigten eine deutlich höhere Neigung, auch auf ',
+      ' Mobilitätsformen wie das Fahrsharing umzusteigen. Die Forschenden ',
+      ' im Rahmen der Erhebung verschiedene Vermittlungsmodelle an Personen an, die dem Umstieg auf emissionsfreie Alternativen bisher skeptisch gegenüberstanden. Der zentrale Wirkmechanismus besteht dabei in der Demontage von Vorurteilen bezüglich zeitlicher Einschränkungen: Durch den Zugang zu verlässlichen Echtzeitdaten erkennen die Bürgerinnen und Bürger, dass nachhaltige Optionen keineswegs unüberwindbare ',
+      ' im Alltag verursachen. Im Anschluss an die Kommunikationsphase wiesen die Befragten eine signifikant höhere Motivation auf, ihren privaten Pkw seltener zu nutzen. Erstaunlich war zudem, dass diese Gruppe selbst ohne direkte finanzielle Anreize nachhaltigere Routen wählte. Dieser Effekt trat ein, obwohl monetäre Vergünstigungen während des gesamten Versuchszeitraums nie ',
+      ' wurden.'
+    ],
+    gaps:[
+      {options:['analysiert','durchgesetzt','festgelegt','festgestellt'], correct:3},
+      {options:['neuartige','bedenklich','hinderliche','nachteilige'], correct:0},
+      {options:['führten','passten','wandten','setzten'], correct:2},
+      {options:['Auswirkungen','Nachteile','Zustände','Ergebnisse'], correct:1},
+      {options:['angeboten','präpariert','präsentiert','verteilt'], correct:0}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Neue Regeln zum Schutz vor Greenwashing',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Verbraucherinnen und Verbraucher legen zunehmend Wert auf nachhaltigen Konsum und greifen im Supermarkt bevorzugt zu Produkten, die als umweltfreundlich, klimaneutral oder ökologisch gekennzeichnet sind.',
+      'Doch nicht überall, wo eine nachhaltige Kennzeichnung draufsteht, steckt auch eine echte ökologische Leistung dahinter, weshalb Fachleute seit Langem vor irreführendem Greenwashing warnen.',
+      'Dies hat jedoch weitreichende Konsequenzen: Wenn Konsumentinnen und Konsumenten den Aussagen der Unternehmen nicht mehr vertrauen, verlieren auch echte nachhaltige Innovationen ihren Wettbewerbsvorteil auf dem Markt.',
+      'Auf diese Herausforderung reagiert die Europäische Union nun mit verschärften Richtlinien, die strenge Nachweispflichten für umweltbezogene Werbeaussagen vorschreiben und Irreführung konsequent sanktionieren sollen.',
+      'Die Folgen dieser verschärften Regulierung sind bereits absehbar: Unternehmen müssen künftig wissenschaftliche Belege erbringen, bevor sie ihre Produkte mit grünen Siegeln werblich hervorheben dürfen.'
+    ],
+    shuffledStart:[0,3,2,1,4]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
+    title:'Nachhaltige Fassadengestaltung und Grundwasserschutz',
+    passage:[
+      '(1) Gebäudehüllen erfüllen heutzutage weit mehr Aufgaben als den bloßen Schutz vor Witterungseinflüssen. Moderne Fassaden müssen energieeffizient sein, ästhetischen Ansprüchen genügen und langlebig bleiben. Um Gebäude vor Algen- und Pilzbefall zu schützen sowie Putze und Farbanstriche wetterfest zu machen, setzt die Bauindustrie seit Jahrzehnten biozide Wirkstoffe und synthetische Chemikalien ein. Wenn Niederschlagswasser auf diese Oberflächen trifft, werden diese Substanzen im Laufe der Zeit ausgewaschen und gelangen ungefiltert in das Regenwassernetz sowie in das umliegende Erdreich. Dieser Vorgang bedroht zunehmend die Qualität des Grundwassers, das in vielen Regionen als wichtigste Ressource für die Trinkwassergewinnung dient.',
+      '(2) Um diesen Umweltrisiken entgegenzuwirken, forschen Wissenschaftler und Architekten verstärkt an umweltfreundlichen Alternativen zur herkömmlichen Beschichtung. Eine besonders vielversprechende Methode liegt in der vertikalen Begrünung von Fassaden durch Kletterpflanzen oder modulare Pflanzsysteme. Diese pflanzlichen Schutzschichten puffern starke Temperaturschwankungen ab, nehmen CO₂ auf und regulieren das Mikroklima in Städten. Wissenschaftliche Untersuchungen belegen zudem, dass schadstofffreie, physikalisch wirkende Fassadenkonstruktionen – wie etwa hinterlüftete Holz- oder Tonfassaden – den Einsatz biozider Schutzanstriche gänzlich überflüssig machen. Dadurch wird der Eintrag schädlicher Chemikalien in den Wasserkreislauf von vornherein unterbunden.',
+      '(3) Trotz der nachgewiesenen ökologischen Vorteile stoßen nachhaltige Fassadenkonzepte in der Bauwirtschaft noch immer auf Vorbehalte. Kritiker verweisen vor allem auf die erhöhten Erstinvestitionen und den kontinuierlichen Pflegeaufwand, der beispielsweise bei begrünte Systemen zur Erhaltung der Pflanzenmasse erforderlich ist. Eine europäische Richtlinie zur Gebäudeeffizienz schreibt zwar strengere Umweltstandards vor, allerdings gelten für bestehende Bauvorschriften in vielen Ländern weiterhin Übergangsfristen. Das bedeutet, dass konventionelle, chemisch behandelte Baumaterialien bis auf Weiteres verwendet werden dürfen, sofern sie vor dem Stichtag der Verordnung zugelassen wurden. Erst ab 2028 sollen sämtliche Baustoffe lückenlosen ökologischen Verträglichkeitsprüfungen unterzogen werden.',
+      '(4) Biozide in Fassadenfarben verhindern zwar unschöne Verfärbungen, wirken jedoch keineswegs selektiv. Wenn sie durch Regen ausgewaschen werden, beeinträchtigen sie Gewässerorganismen und schwächen das ökologische Gleichgewicht im Boden. Grundwasser ist weder unerschöpflich noch unantastbar. Es beherbergt empfindliche Mikroorganismen, die für die natürliche Selbstreinigung des Bodens unverzichtbar sind. Gelangen chemische Schutzmittel in tiefere Bodenschichten, können sie diese nützlichen Mikrobengemeinschaften schädigen und somit die natürliche Reinigungsleistung des Ökosystems dauerhaft herabsetzen.',
+      '(5) Auch auf lange Sicht birgt der Eintrag von Fassadenchemikalien gravierende Konsequenzen. Gelangen biozide Stoffe in Oberflächengewässer oder ins Grundwasser, verdünnen sie sich zwar rasch, verbleiben dort aber über Jahre hinweg. Unter diesem dauerhaften chemischen Stress können bodenlebende Bakterien Resistenzmechanismen gegen Schadstoffe ausbilden. Diese Eigenschaften können durch horizontalen Genstrangtransfer sogar auf Krankheitserreger übertragen werden. Dadurch entstehen Mikroorganismen, die unempfindlich gegenüber gängigen Umweltfilterprozessen sind. Durch den großflächigen Einsatz chemischer Schutzanstriche schaffen wir somit schwer kalkulierbare Gefahren für das gesamte Ökosystem – statt das Gebäude nachhaltig zu schützen.',
+      '(6) Ästhetik und Gebäudeschutz bleiben wesentliche Faktoren modernen Bauens. Gerade in urbanen Verdichtungsgebieten müssen Fassaden extremen Umweltbelastungen standhalten. Jedoch sind chemische Schutzmittel nicht das geeignete Instrument, um diesen Herausforderungen langfristig zu begegnen. Für den Werterhalt von Gebäuden und den gleichzeitigen Schutz der Umwelt reichen ausgereifte bautechnische Konstruktionen, eine fundierte Materialauswahl und begrünte Elemente völlig aus.'
+    ],
+    questions:[
+      { q:'Welche der folgenden Aussagen fasst am besten den Inhalt aus Absatz 1 zusammen?', options:[
+        'Die Verwendung von Bioziden schützt das Grundwasser vor schädlichen Einflüssen.',
+        'Der Auswaschprozess chemischer Stoffe an Fassaden gefährdet die Trinkwasserversorgung.',
+        'Moderne Fassadenanstriche verringern den Regenwassereintrag in das Erdreich.',
+        'Die Bauindustrie verzichtet heute weitgehend auf synthetische Biozide.'
+      ], correct:1 },
+      { q:'Laut Absatz 2 ist der Einsatz von chemischen Schutzanstrichen bei nachhaltigen Konstruktionen ...', options:[
+        'notwendig.',
+        'sinnvoll.',
+        'unbedenklich.',
+        'überflüssig.'
+      ], correct:3 },
+      { q:'In Absatz 3 wird gesagt, dass ...', options:[
+        'die gesetzlichen Vorschriften für Baumaterialien sofort verschärft wurden.',
+        'begrünte Fassadensysteme völlig pflegefrei funktionieren.',
+        'manche chemisch behandelten Baustoffe aufgrund von Übergangsfristen weiter genutzt werden dürfen.',
+        'die Erstinvestitionen bei nachhaltigen Fassaden niedriger sind als bei herkömmlichen.'
+      ], correct:2 },
+      { q:'Laut Absatz 4 ist Grundwasser „weder unerschöpflich noch unantastbar“, weil ...', options:[
+        'es keine Selbstreinigungskräfte besitzt.',
+        'chemische Stoffe die für das Ökosystem wichtigen Mikroorganismen schädigen können.',
+        'es ausschließlich durch Regenwasser gereinigt wird.',
+        'Biozide auf der Fassadenoberfläche verbleiben.'
+      ], correct:1 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich am besten zu Absatz 5?', options:[
+        'Biozide Anstriche führen zu resistenten Umweltkeimen',
+        'Grundwasser schützt Gebäude vor biologischem Befall',
+        'Bakterien reinigen chemisch belastete Abwässer',
+        'Fassadengestaltung verbessert das städtische Mikroklima'
+      ], correct:0 },
+      { q:'In Absatz 6 wird die Nutzung von bautechnischen Konstruktionen und begrünte Elementen ...', options:[
+        'empfohlen.',
+        'erwartet.',
+        'gelobt.',
+        'vorgeschrieben.'
+      ], correct:0 },
+      { q:'Hauptanliegen des Textes ist es, ...', options:[
+        'die neuesten Erkenntnisse aus der Farbenherstellung zu bekräftigen.',
+        'die vielseitigen Einsatzmöglichkeiten von Bioziden hervorzuheben.',
+        'über den Schutz von Fassaden im städtischen Raum zu informieren.',
+        'über die weitreichenden Umweltrisiken chemischer Fassadenanstriche aufzuklären.'
+      ], correct:3 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1–4 den Aussagen unten zu. Die Zahlen beziehen sich immer auf den nachfolgenden Satz. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Kommentar eines Experten zu REACH-Auskunftspflichten für Unternehmen',
+    passageText:`Die europaweit geltende REACH-Verordnung legt fest, dass Verbraucher ein Recht darauf haben zu erfahren, ob Produkte besonders besorgniserregende Chemikalien enthalten. Dass viele Unternehmen ihren Informationspflichten noch immer nicht vollumfänglich und transparent nachkommen, ist eine enttäuschende Realität auf dem europäischen Binnenmarkt. <strong>[1] Es steht zu befürchten, dass bei einer anhaltenden Nachlässigkeit der Hersteller unbemerkt gesundheitsschädliche Substanzen in Alltagsgegenstände wie Textilien oder Kinderspielzeug gelangen und somit langfristig die Gesundheit der Konsumenten beeinträchtigen.</strong><br><br>Obwohl die bürokratischen Hürden für kleine und mittlere Betriebe keineswegs unerheblich sind, verfehlen Klagen über den verfünffachten Aufwand das wesentliche Ziel des Verbraucherschutzes. <strong>[2] Es ist den Unternehmen dringlichst anzuraten, digitale Datenmanagementsysteme einzuführen, um Lieferketten lückenlos zu verfolgen und Auskunftsanfragen innerhalb der gesetzlichen Frist von 45 Tagen mühelos zu beantworten.</strong><br><br>Die Skepsis vieler Wirtschaftsverbände, die Transparenz könne Geschäftsgeheimnisse gefährden, erweist sich bei genauerer Betrachtung als unbegründet. <strong>[3] In Wirklichkeit ist davon auszugehen, dass Firmen, die sich frühzeitig als vertrauenswürdig und transparent positionieren, langfristig erhebliche Wettbewerbsvorteile erzielen und das Vertrauen einer zunehmend umweltbewussten Kundschaft gewinnen werden.</strong><br><br>Die bisherige Durchsetzung der Verordnung durch die nationalen Behörden verläuft stellenweise noch schleppend. <strong>[4] Es steht außer Frage, dass nur durch verschärfte Kontrollen und spürbare Sanktionen bei Verstößen eine flächendeckende Einhaltung der Verordnung garantiert werden kann; ohne diese Maßnahmen bleibt die Auskunftspflicht ein zahnloser Papiertiger.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte bedauert etwas.',
+      'Der Experte empfiehlt etwas.',
+      'Der Experte kritisiert etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte vermutet etwas.',
+      'Der Experte warnt vor etwas.',
+      'Der Experte zweifelt an etwas.',
+      'Der Experte fordert etwas.'
+    ],
+    correct:[5, 1, 3, 7]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Plastikverpackungen, zu Papier-/Glasverpackungen, zu beiden oder gar nicht passt. Für jede Aussage gibt es genau eine richtige Lösung. Die Aussagen folgen nicht dem Textverlauf.',
+    title:'Umwelt- und Gesundheitseffekte moderner Verpackungsmaterialien',
+    passage:'Die europäische Verpackungsverordnung steht vor grundlegenden Neuregelungen, da moderne Konsumgüterverpackungen zunehmend im Spannungsfeld zwischen ökologischer Nachhaltigkeit und gesundheitlicher Unbedenklichkeit diskutiert werden. Über Jahrzehnte hinweg dominierten Kunststoffe den Markt aufgrund ihres geringen Eigengewichts und ihrer hohen Barrierefunktion. Aktuelle biomechanische Analysen verweisen jedoch darauf, dass synthetische Polymere wie Polyethylen erhebliche Mengen an Weichmachern sowie Mikroplastik freisetzen können. Diese chemischen Verbindungen reichern sich über die Nahrungskette im menschlichen Fettgewebe an und stehen im Verdacht, hormonelle Störungen auszulösen. Infolgedessen gewinnen alternative Materialverbünde aus Altpapier, Kartonage und Spezialglas massiv an Marktanteilen. Papierbasierte Behältnisse zeichnen sich zwar durch eine hervorragende biolytische Abbaubarkeit aus, benötigen im Produktionszyklus jedoch signifikante Mengen an Frischwasser und Energie. Zudem ergaben toxikologische Befunde des Bundesinstituts für Risikobewertung, dass recycelter Karton mineralölhaltige Rückstände aus Druckfarben an trockene Lebensmittel abgeben kann, weshalb neuartige Schutzbeschichtungen gesetzlich vorgeschrieben werden. Interessanterweise weisen ökologische Gesamtbilanzen darauf hin, dass die Wahl des Materials allein nicht über die Umweltfreundlichkeit entscheidet: Sowohl Kunststoff- als auch Glas- und Papierverpackungen erfordern zur Optimierung ihres CO2-Fußabdrucks geschlossene Kreislaufsysteme und hocheffiziente Recyclingquoten. Fehlen diese Voraussetzungen, führt der Umstieg lediglich zu einer Verlagerung der Umweltbelastung. Zudem bergen beide Rohstoffklassen das Risiko, dass chemische Hilfsstoffe bei thermischer Beanspruchung in das Füllgut migrieren.',
+    columns:['Plastikverpackungen','Papier-/Glasverpackungen','beide','passt nicht'],
+    items:[
+      {text:'Chemische Rückstände können bei Erwärmung in die Füllgüter übergehen.', correct:2},
+      {text:'Mikropartikel lagern sich dauerhaft im organischen Gewebe an.', correct:0},
+      {text:'Die Herstellung erfordert extrem hohe Wasser- und Energieressourcen.', correct:1},
+      {text:'Ein Verbot dieser Materialien im Einzelhandel ist bereits beschlossen.', correct:3},
+      {text:'Zur nachhaltigen Nutzung sind funktionierende Recyclingkreisläufe unerlässlich.', correct:2},
+      {text:'Mineralölbestandteile aus Recyclingprozessen bedrohen die Lebensmittelreinheit.', correct:1},
+      {text:'Das verhältnismäßig geringe Eigengewicht stellt einen Marktvorteil dar.', correct:0}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Physiologische Wirkungsweisen, 2 Gesundheitliche Langzeitfolgen).',
+    title:'Erst Gemüse, dann Kohlenhydrate? Was bringt Meal Sequencing?',
+    passage:'In der Ernährungsphysiologie gewinnt ein Ansatz zunehmend an Bedeutung, der nicht die Zusammensetzung der Nahrungsmittel an sich, sondern die zeitliche Abfolge ihres Verzehrs in den Vordergrund stellt: das sogenannte Meal Sequencing. Wissenschaftliche Untersuchungen belegen, dass die Reihenfolge, in der Makronährstoffe aufgenommen werden, einen erheblichen Einfluss auf den postprandialen Glukosestoffwechsel ausübt. Wenn ballaststoffreiche Nahrungsmittel wie Gemüse sowie Proteine vor den kohlenhydratreichen Komponenten einer Mahlzeit konsumiert werden, führt dies zu einer verlangsamten Magenentleerung. Dies hat zur Folge, dass der Anstieg des Blutzuckerspiegels signifikant abgeflacht wird, wodurch die Bauchspeicheldrüse messbar entlastet wird, da sie weniger Insulin ausschütten muss. Überdies zeigt sich, dass durch die gezielte Nährstoffabfolge die Ausschüttung von Sättigungshormonen im Magen-Darm-Trakt begünstigt wird. Dieser hormonelle Effekt führt zu einem anhaltenden Sättigungsgefühl und kann somit präventiv gegen unerwünschte Heißhungerattacken wirken. Langfristig bietet diese Methode beträchtliche gesundheitliche Vorteile: Ein kontinuierlich moderater Blutzuckerverlauf reduziert das Risiko, an Diabetes Mellitus Typ 2 zu erkranken, und senkt zudem die Wahrscheinlichkeit für kardiovaskuläre Folgeschäden, die häufig mit chronisch erhöhten Insulinspiegeln korrelieren. Kritiker geben jedoch zu bedenken, dass Meal Sequencing kein Allheilmittel darstellt. Es ersetzt keineswegs eine ausgewogene Ernährung oder die Kalorienkontrolle. Wer bei einer insgesamt ungesunden Nahrungszufuhr lediglich die Reihenfolge verändert, erreicht kaum präventive Wirkungen. Dennoch betonen Ernährungswissenschaftler, dass diese leicht umsetzbare Strategie – insbesondere für Personen mit Prädiabetes oder Stoffwechselstörungen – eine wirksame, medikamentenfreie Ergänzung zur Regulierung des Glukosehaushalts bietet.',
+    aussagen:[
+      { key:'a', text:'[a] Die verzögerte Magenentleerung führt zu einer verminderten Insulinausschüttung.' },
+      { key:'b', text:'[b] Eine veränderte Verzehrreihenfolge gleicht eine dauerhaft ungesunde Ernährungsweise vollständig aus.' },
+      { key:'c', text:'[c] Der gezielte Verzehr verringert langfristig das Risiko für Herz-Kreislauf-Erkrankungen.' },
+      { key:'d', text:'[d] Die Ausschüttung von Sättigungshormonen wird durch die Reihenfolge der Nährstoffzufuhr gehemmt.' },
+      { key:'e', text:'[e] Ballaststoffe und Proteine vor Kohlenhydraten dämpfen den Anstieg des Blutzuckerspiegels.' },
+      { key:'f', text:'[f] Das Auftreten von Typ-2-Diabetes wird durch einen schwankenden Blutzuckerspiegel nachhaltig verhindert.' },
+      { key:'g', text:'[g] Die gezielte Nährstoffabfolge schützt wirksam vor plötzlichem Heißhunger.' },
+      { key:'h', text:'[h] Meal Sequencing erfordert den obligatorischen Einsatz von Medikamenten zur Stoffwechselregulation.' }
+    ],
+    correctMap: { v1: 'a', v2: 'e', n3: 'c', n4: 'g' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. In der Zusammenfassung sind genau drei Sätze inhaltlich falsch (sie widersprechen dem Text oder der Grafik). Markieren Sie diese drei Sätze.',
+    title:'Wertvolles Wasser: Neue Technologien in der industriellen Abwasseraufbereitung',
+    passage:'Süßwasser gilt weltweit als eine der kostbarsten Ressourcen des 21. Jahrhunderts. Vor dem Hintergrund fortschreitender Klimaveränderungen, intensiverer Dürreperioden und des stetigen Wachstums der Weltbevölkerung gerät insbesondere der Industriesektor unter zunehmenden Druck, seinen Wasserverbrauch drastisch zu reduzieren. In modernsten Industrieanlagen kommen daher hochkomplexe Membranfiltrationssysteme zum Einsatz. Diese ermöglichen es, selbst stark kontaminiertes Prozesswasser so gründlich zu reinigen, dass es im geschlossenen Kreislauf direkt wiederverwendet werden kann. Traditionelle mechanisch-biologische Klärverfahren stießen bei der Entfernung von mikroskopischen Schadstoffen, chemischen Rückständen und gelösten Schwerölen oft an ihre Grenzen. Neuartige Verfahren der Nanofiltration und Umkehrosmose hingegen filtern selbst kleinste Moleküle zuverlässig heraus. Die wesentliche Hürde für eine flächendeckende Implementierung liegt jedoch in den immensen Anschaffungs- und Betriebskosten. Die Herstellung sowie die regelmäßige chemische Aufbereitung der hochfunktionalen Filterfilterstrukturen erfordern nicht nur beträchtliche finanzielle Mittel, sondern auch einen enormen Energieaufwand, was vor allem kleine und mittlere Unternehmen (KMU) vor Erstinvestitionen zurückschrecken lässt. Nichtsdestotrotz zeigt der Branchenvergleich erhebliche Unterschiede bezüglich des Einsatzes dieser Aufbereitungstechnologien. Während die chemische Industrie aufgrund strenger Umweltauflagen bereits hohe Wiederverwendungsraten aufweist, hinkt die Lebensmittelverarbeitung trotz ihres immensen Gesamtverbrauchsniveaus bei der Implementierung geschlossener Kreislaufsysteme hinterher. Umweltökonomen betonen, dass ohne gezielte staatliche Förderprogramme und strenge gesetzliche Regulierungen der globale Wasserverbrauch des Industriesektors nicht nachhaltig gesenkt werden kann.',
+    graphicData:[{year:'Chemieindustrie: Frischwasser (Mio. m³)',val:320},{year:'Chemieindustrie: Recyclingquote (%)',val:68},{year:'Lebensmittelind.: Frischwasser (Mio. m³)',val:410},{year:'Lebensmittelind.: Recyclingquote (%)',val:25},{year:'Papierherstellung: Frischwasser (Mio. m³)',val:180},{year:'Papierherstellung: Recyclingquote (%)',val:52}],
+    graphicCaption:'Wasserverbrauch und Recyclingquote nach Industriesektor (in Mio. m³ / %)',
+    sentences:[
+      {text:'Aufgrund globaler Umwelteinflüsse wird eine effizientere Wassernutzung in der Industrie immer dringlicher.', wrong:false},
+      {text:'Moderne Membranfiltrationssysteme ermöglichen es heutzutage, selbst stark verunreinigtes Wasser vollständig aufzubereiten.', wrong:false},
+      {text:'Allerdings zeichnen sich diese fortschrittlichen Filtersysteme vor allem durch ihren besonders geringen Energiebedarf aus.', wrong:true},
+      {text:'Der Einsatz dieser Technologie unterscheidet sich je nach Branche erheblich.', wrong:false},
+      {text:'Die Chemieindustrie weist bereits eine sehr hohe Recyclingquote auf.', wrong:false},
+      {text:'Im Gegensatz dazu hinkt die Lebensmittelverarbeitung hinterher, obwohl sie ein hohes Verbrauchsniveau verzeichnet.', wrong:false},
+      {text:'Die Grafik zeigt zudem, dass die Papierherstellung den höchsten absoluten Frischwasserverbrauch aller Sektoren aufweist.', wrong:true},
+      {text:'Umweltökonomen sind sich einig, dass technische Innovationen allein nicht ausreichen.', wrong:false},
+      {text:'Sie fordern daher, auf staatliche Eingriffe vollständig zu verzichten und die Regulierung dem freien Markt zu überlassen.', wrong:true}
+    ]
+  }
+];
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
@@ -1101,5 +1257,6 @@ const TESTS = [
   {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
   {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5},
   {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}, 
-  {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7}
+  {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7},
+  {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8}
 ];
