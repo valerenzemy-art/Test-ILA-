@@ -1111,7 +1111,7 @@ const MT8 = [
       {options:['führten','passten','wandten','setzten'], correct:2},
       {options:['Auswirkungen','Nachteile','Zustände','Ergebnisse'], correct:1},
       {options:['angeboten','präpariert','präsentiert','verteilt'], correct:0}
-    ],
+    ]
   },
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
@@ -1249,7 +1249,6 @@ const MT8 = [
     ]
   }
 ];
-
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
