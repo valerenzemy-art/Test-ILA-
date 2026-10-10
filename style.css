@@ -1,4 +1,4 @@
-::root {
+:root {
   /* Variables pour les cartes Modelltest (Couleur de l'image) */
   --modeltest-bg: #0b313a;       /* Fond vert-bleu sombre de ton image */
   --modeltest-text: #ffffff;     /* Titres en blanc pur */
@@ -194,11 +194,24 @@ header.topbar .tag { font-size: 0.75rem; background: rgba(255, 255, 255, 0.2); c
 
 main { padding: 20px 16px 90px; background: var(--card-bg); color: var(--text); flex: 1; }
 h2.task-title { margin-top: 0; font-size: 1.2rem; color: var(--text); font-weight: 800; }
-.passage { font-size: 1rem; text-align: left; line-height: 1.65; color: var(--text); }
-@media (min-width: 768px) {
-  .passage { text-align: justify; }
+
+/* ========================================================== */
+/* MODIFICATION POUR LE DÉFILEMENT HORIZONTAL DES TEXTES/PASSAGES */
+/* ========================================================== */
+.passage { 
+  font-size: 1rem; 
+  text-align: left; 
+  line-height: 1.65; 
+  color: var(--text);
+  overflow-x: auto;                  /* Permet le défilement horizontal si le contenu dépasse */
+  -webkit-overflow-scrolling: touch; /* Fluidnalise le défilement sur les appareils tactiles */
+  white-space: nowrap;               /* Force le texte à s'étaler sur une seule ligne pour activer le glissement */
+  padding-bottom: 8px;
 }
-.passage p { margin: 0 0 14px; color: var(--text); }
+@media (min-width: 768px) {
+  .passage { text-align: left; }     /* Désactive le justify pour que le nowrap fonctionne correctement en horizontal */
+}
+.passage p { margin: 0 0 14px; color: var(--text); display: inline-block; min-width: 100%; }
 
 select.gapselect { 
   border: none; 
@@ -244,30 +257,14 @@ select.gapselect.answered { background: rgba(4, 120, 87, 0.15); border-color: va
   .matchrow select { width: auto; min-width: 220px; }
 }
 
-/* ========================================================== */
-/* COMMANDE DE DÉFILEMENT HORIZONTAL (TEXTES & TABLEAUX)      */
-/* ========================================================== */
-.scrollable-container,
 .tzt-wrapper, 
-.a6-table-wrapper {
-  width: 100%;
-  overflow-x: auto;                  /* Permet de coulisser horizontalement */
-  -webkit-overflow-scrolling: touch; /* Fluidnalise le défilement tactile sur mobile */
-  scrollbar-width: thin;             /* Barre de défilement fine (Firefox) */
+.scrollable-container { 
+  width: 100%; 
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; 
+  margin-top: 12px; 
+  border-radius: 8px; 
 }
-
-.scrollable-container::-webkit-scrollbar,
-.tzt-wrapper::-webkit-scrollbar,
-.a6-table-wrapper::-webkit-scrollbar {
-  height: 6px;
-}
-.scrollable-container::-webkit-scrollbar-thumb,
-.tzt-wrapper::-webkit-scrollbar-thumb,
-.a6-table-wrapper::-webkit-scrollbar-thumb {
-  background-color: var(--border);
-  border-radius: 3px;
-}
-
 table.tzt { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 480px; }
 table.tzt th, table.tzt td { border: 1px solid var(--border); padding: 10px 8px; text-align: center; color: var(--text); }
 table.tzt th { background: var(--teal-dark); color: #ffffff; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
@@ -307,7 +304,7 @@ footer .foot-note { font-size: 0.75rem; color: var(--text-soft); font-weight: 60
 
 .a6-container { display: flex; flex-direction: column; gap: 14px; margin-top: 14px; }
 .a6-statements { background: var(--bg-page); padding: 14px; border-radius: 10px; border: 1px solid var(--border); color: var(--text); }
-.a6-statements-title { font-weight: 700; margin-bottom: 6px; font-size: 1rem; color: var(--text); }
+.a6-statements-title { font-weight: 750; margin-bottom: 6px; font-size: 1rem; color: var(--text); }
 .a6-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr; gap: 8px; font-size: 0.9rem; color: var(--text); font-weight: 500; }
 
 @media (min-width: 600px) {
