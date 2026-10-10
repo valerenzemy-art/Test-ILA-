@@ -23,12 +23,14 @@
 <!-- Externe Datendatei einbinden -->
 <script src="lesen-data.js"></script>
 
-<script>
+<!-- Script principal en type module pour importer storage.js -->
+<script type="module">
+import { getBucket, clearTestAnswers, clearAllSessionAnswers } from './storage.js';
+
 let currentTestIdx = 0;
 let current = 0;
 let timerInterval = null;
 let remaining = 0;
-const answers = {};
 
 function fmt(sec){
   const m = Math.floor(sec/60).toString().padStart(2,'0');
@@ -65,11 +67,6 @@ function updateTimerDisplay(){
 }
 function escapeHtml(str){
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-function getBucket(test, task){
-  if(!answers[test.id]) answers[test.id] = {};
-  if(!answers[test.id][task.teil]) answers[test.id][task.teil] = {};
-  return answers[test.id][task.teil];
 }
 
 function showTestSelect(){
@@ -384,11 +381,14 @@ function showResults(){
   nb.innerHTML = '<button class="btn ghost" id="btnRestart">Neu starten</button><button class="btn next" id="btnMenu2">Menü</button>';
 
   document.getElementById('btnRestart').onclick = () => {
-      answers[test.id] = {};
+      clearTestAnswers(test.id); // Nettoie le stockage pour ce test
       current = 0;
       renderTask();
   };
-  document.getElementById('btnMenu2').onclick = () => showTestSelect();
+  document.getElementById('btnMenu2').onclick = () => {
+      clearAllSessionAnswers(); // Nettoie tout en quittant le menu
+      showTestSelect();
+  };
 
   let sumCorrect = 0, sumTotal = 0;
   let detailsHtml = '';
@@ -601,7 +601,7 @@ function showResults(){
   </div>`;
 }
 
-// Lancement initial de la page
+// Lancement initial
 showTestSelect();
 </script>
 </body>
