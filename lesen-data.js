@@ -782,10 +782,167 @@ const MT5 = [
     ]
   }
 ];
+const MT6 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
+    title:'Keine Angst vor Spinnen und Schaben',
+    segments:[
+      'Wer Angst vor Spinnen hat, fürchtet sich oft auch vor anderen Tieren wie Ratten, Schlangen oder Schaben. Forscherinnen und Forscher haben nun ',
+      ', dass sich der Erfolg einer Behandlung gegen Spinnenangst auch auf andere zuvor ',
+      ' Tiere auswirkt: Personen, die ihre Angst vor Spinnen durch ein Konfrontationstraining reduziert hatten, fürchteten auch Schaben deutlich weniger. Die Forscher ',
+      ' bei Personen, die Spinnen und Schaben gleichermaßen fürchteten, die erfolgreichste Behandlungsmethode gegen Angsterkrankungen an, die Konfrontationstherapie – allerdings nur mit Spinnen. Der zentrale Wirkmechanismus dabei ist das Umlernen der Angst: Personen mit einer Spinnenangst erkennen durch die Interaktion mit der Spinne, dass Spinnen nicht gefährlich und keine katastrophalen ',
+      ' zu befürchten sind. Im Anschluss an die Behandlung hatten die Versuchspersonen weniger Angst und Ekel vor Spinnen. Erstaunlich war zudem, dass diese Gruppe auch von weniger Angst vor Schaben berichtete. Dieser Effekt trat ein, obwohl Schaben während der Konfrontation nie ',
+      ' wurden.'
+    ],
+    gaps:[
+      {options:['analysiert','durchgesetzt','festgelegt','festgestellt'], correct:3},
+      {options:['besorgniserregende','furchteinflößende','gemeingefährliche','grauenhafte'], correct:1},
+      {options:['führten','passten','setzten','wandten'], correct:3},
+      {options:['Auswirkungen','Situationen','Verhältnisse','Zustände'], correct:0},
+      {options:['angeboten','präpariert','präsentiert','verteilt'], correct:2}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+    title:'Sprache und Sprechstörungen',
+    correctOrder:[0,1,2,3,4],
+    items:[
+      'Kaum eine menschliche Fertigkeit ist so komplex wie die Sprachbeherrschung. In Sekundenbruchteilen analysiert unser Gehirn die Grammatik gehörter oder gelesener Sätze und ordnet die Wörter ihren Bedeutungen zu.',
+      'Auch beim Sprechen fasst das Gehirn rasend schnell die Sprechabsicht in Worte und Sätze und gibt die nötigen Anweisungen an die feinen Muskeln in Zunge und Mund weiter.',
+      'Wie anfällig dieser komplizierte Prozess ist, erleben wir fast täglich: Zum Beispiel, wenn uns Worte nicht einfallen, wenn wir mitten im Satz ins Stocken geraten oder uns versprechen.',
+      'Treten Versprecher wie Buchstabendreher oder falsche Wörter häufig auf, sodass Gespräche zur Qual werden, dann liegt wahrscheinlich eine Sprach- oder Sprechstörung vor.',
+      'Die möglichen Folgen: Angst vor Gesprächssituationen, berufliche Einschränkungen, Probleme beim Schreiben und Lesen, im schlimmsten Fall Vereinsamung. Zum Glück sind aber die meisten Sprach- und Sprechstörungen gut behandelbar.'
+    ],
+    shuffledStart:[1,0,3,2,4]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
+    title:'Hygiene',
+    passage:[
+      '(1) Es ist noch keine 200 Jahre her, da starb jede zehnte Frau kurz nach der Geburt ihres Kindes. Kindbettfieber war eine häufige Diagnose. 1840 fanden Ärzte in einem österreichischen Krankenhaus heraus, dass sie durch den Einsatz von Chlorkalk das Sterblichkeitsrisiko der Schwangeren von zwölf auf knapp zwei Prozent senken konnten. Die Desinfektion war erfunden. Seitdem hat sich viel getan. Desinfektionsmittel kommen im Operationssaal zum Einsatz, um Verletzungen und lebensbedrohliche Wundinfektionen zu behandeln. Trinkwasser wird in Aufbereitungsanlagen desinfiziert, damit wir damit bedenkenlos kochen und duschen können. In diesen Bereichen ist Desinfektion wichtig.',
+      '(2) Doch viele Menschen wollen auch ihr Zuhause möglichst keimfrei machen. Sie reinigen ihre Wäsche mit Hygienewaschmitteln, reiben sich die Hände mit Hygiene-Gelen ein und desinfizieren täglich Küchenablagen, Kinderspielzeuge, Babytrinkflaschen, Türgriffe und Toiletten. Antibakterielle Mittel finden sich in Zahncremes, Deos und Kleidung. Keimfrei, das ist für viele Menschen heute ein Synonym für sauber und gesund. Im Krankenhaus mag das stimmen, doch im Alltag ist das falsch. Denn statt dem Immunsystem zu nützen, kann die übertriebene Hygiene krank machen. „In privaten Haushalten sind Desinfektionsmittel weitgehend unnötig“, sagt Ralf Dieckmann vom Bundesinstitut für Risikobewertung (BfR). „Wägt man Nutzen und Risiko von Desinfektionsmitteln gegeneinander ab, überwiegen ganz klar die Risiken“, sagt der Chemiker.',
+      '(3) Manche Inhaltsstoffe von Infektionsmitteln bergen Risiken: Antibakterielle Reinigungstücher können beispielsweise die Haut durchlässiger für Fremdstoffe machen. Eine 2012 verabschiedete Verordnung zum Einsatz von Chemikalien und Mikroorganismen regelt in der EU inzwischen sehr streng, welche Stoffe, die schädliche Organismen abtöten, von der EU anerkannt und genehmigt werden. Für Produkte, die bereits lange erhältlich sind, gibt es allerdings noch Sonderregelungen. Das heißt, sie dürfen in gewissen Fällen trotzdem weiterverkauft werden. Der Grund dafür liegt in einer Richtlinie, die bis 2012 galt. Sie regelte die Zulassungen der Mittel noch nicht so streng. Bis 2024 sollen aber auch die alten Stoffe reguliert werden. Auf der Internetseite der Bundesanstalt für Arbeitsschutz und Arbeitsmedizin gibt es eine Datenbank, in der man alle zugelassenen Produkte nachschlagen kann.',
+      '(4) Desinfektionsmittel töten Keime ab, die eigentlich gut sind. Bei Seifen ist dies nicht der Fall. Milliarden kleiner Mikroben bevölkern die Haut und das ist weder eklig noch gefährlich. Sie tragen dazu bei, das leicht saure Milieu der Haut aufrechtzuerhalten – ein Schutz gegen Infektionen. Dort, wo die ungefährlichen Bakterien leben, ist außerdem kein Platz für krankmachende Keime. „Einige Bakterien produzieren auch Substanzen, die wiederum Krankheitskeime abtöten“, sagt Dieckmann. Um eine völlig keimfreie Umgebung sollten wir uns also nicht bemühen.',
+      '(5) Auch auf lange Sicht haben Desinfektionsmittel Konsequenzen. Landen antibakterielle Mittel beispielsweise im Abwasser, werden sie stark verdünnt. In dieser Konzentration können sie den Keimen im Wasser der Kläranlagen nichts mehr anhaben. Die Bakterien bilden Abwehrmechanismen gegen die Mittel. Dann vermehren sie sich und geben ihre Resistenz weiter. Teilweise entstehen auch Kreuzresistenzen zu Antibiotika, die das Bakterium auf die gleiche Weise angreifen wie das Desinfektionsmittel. Durch große Anwendung antibakterieller Stoffe erschaffen wir also widerstandsfähigere, schwer zu besiegende Keime – statt uns zu schützen.',
+      '(6) Sauberkeit an sich ist dennoch nichts Schlechtes. Gerade in der Küche kann fehlende Hygiene Folgen haben: Jedes Jahr werden in Deutschland mehr als 100.000 Erkrankungen gemeldet, die durch Mikroorganismen, insbesondere Bakterien, Viren oder Parasiten, in Lebensmitteln verursacht werden. Nur sind Desinfektionsmittel nicht das richtige Mittel, um das zu ändern. Im Alltag reichen normale Seifen, Putz- und Waschmittel völlig aus.'
+    ],
+    questions:[
+      { q:'Welche der folgenden Aussagen fasst am besten den Inhalt aus Absatz 1 zusammen?', options:[
+        'Der Einsatz von Desinfektionsmitteln schützt vor Hauterkrankungen.',
+        'Der Gebrauch von Desinfektionsmitteln beschleunigt den Genesungsprozess.',
+        'Die Anwendung von Desinfektionsmitteln verhindert das Keimwachstum.',
+        'Die Verwendung von Desinfektionsmitteln hilft Menschenleben zu retten.'
+      ], correct:3 },
+      { q:'Laut Absatz 2 ist der Einsatz von Desinfektionsmitteln häufig ...', options:[
+        'notwendig.',
+        'sinnvoll.',
+        'unbedenklich.',
+        'überflüssig.'
+      ], correct:3 },
+      { q:'In Absatz 3 wird gesagt, dass ...', options:[
+        'die gesetzlichen Vorgaben zur Herstellung antibakterieller Mittel gelockert werden.',
+        'die Zahl der Ausnahmeregelungen beim Einsatz von Chemikalien weiter ansteigt.',
+        'einzelne seit langem auf dem Markt verfügbare Produkte weiter vertrieben werden.',
+        'Empfehlungen für bestimmte Produkte in einer Datenbank gesammelt werden.'
+      ], correct:2 },
+      { q:'Laut Absatz 4 sind Bakterien auf der Haut für den Menschen „weder eklig noch gefährlich“, weil sie ...', options:[
+        'eine Abwehr gegen Erreger bilden.',
+        'einen Teil des Immunsystems ausmachen.',
+        'unerlässlich für die Hautreinigung sind.',
+        'vor Umweltgiften schützen.'
+      ], correct:0 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich am besten zu Absatz 5?', options:[
+        'Antibakterielle Mittel führen zu resistenten Keimen',
+        'Desinfektionsmittel schützen vor gefährlichen Keimen',
+        'Hygienemittel greifen krankheitserregende Keime an',
+        'Reinigungsmittel bekämpfen widerstandsfähige Keime'
+      ], correct:0 },
+      { q:'In Absatz 6 wird die Verwendung von gewöhnlichen Putzmitteln ...', options:[
+        'empfohlen.',
+        'erwartet.',
+        'gelobt.',
+        'vorgeschrieben.'
+      ], correct:0 },
+      { q:'Hauptanliegen des Textes ist es, ...', options:[
+        'die neuesten Erkenntnisse aus der Hygieneforschung zu bekräftigen.',
+        'die vielseitigen Einsatzmöglichkeiten von Desinfektionsmitteln hervorzuheben.',
+        'über den Einsatz von Reinigungsprodukten im Haushalt zu informieren.',
+        'über die weitreichenden Risiken von Desinfektionsmitteln aufzuklären.'
+      ], correct:3 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1–4 den Aussagen unten zu. Die Zahlen beziehen sich immer auf den nachfolgenden Satz. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Kommentar eines Experten zu Künstlicher Intelligenz',
+    passageText:`Dass Maschinen jeden Tag produktiver werden und in vielen Berufszweigen mehr und mehr Aufgaben übernehmen, kann nicht mehr wegdiskutiert werden. <strong>[1] Die Sorge, dass mechanische Lösungen und Roboter den Menschen dadurch die Arbeitsplätze streitig machen, bleibt hingegen fragwürdig.</strong> In Wirklichkeit ist es so, dass für die Betriebe, die lernen neue Geschäftsmodelle zu schaffen und mit Künstlicher Intelligenz (KI) umzugehen, eine Ära des Wachstums, höherer Mitarbeitermotivation und -zufriedenheit sowie geringerer Kosten eingeläutet wird. <strong>[2] Ein zukünftiges Szenario ist, dass KI die monotonen und routinemäßigen Aufgaben übernehmen wird, die viele von uns, oft widerwillig, täglich zu erledigen haben – man also die Maschinen als willkommene neue Kollegen sehen kann.</strong> Eine verbesserte Integration von KI bringt mehr Effizienz, mehr Produktivität und letztlich mehr Chancen für Menschen, höherwertige Arbeit zu erledigen. Dadurch werden Arbeitsplätze erhalten und neue geschaffen, anstatt sie zu vernichten. <strong>[3] Viele Diskussionen über den Einsatz von KI befassen sich gegenwärtig mit den Vorteilen und Nachteilen, den Risiken und der Ethik, und das ist gut so.</strong> <strong>[4] Vor diesem Hintergrund ist es besonders wichtig, jeden Anwendungsbereich gezielt zu untersuchen und zu bewerten, um die Vorteile wirklich realisieren und die Risiken und Bedenken minimieren zu können.</strong> Der Einsatz von KI-Systemen als Werkzeuge für die Industrie bleibt vorläufig ein Zukunftsmodell.`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte bedauert etwas.',
+      'Der Experte begrüßt etwas.',
+      'Der Experte empfiehlt etwas.',
+      'Der Experte kritisiert etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte vermutet etwas.',
+      'Der Experte warnt vor etwas.',
+      'Der Experte zweifelt an etwas.'
+    ],
+    correct:[7, 4, 1, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zur Stadt, zum Land, zu beiden oder gar nicht passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
+    title:'Wohnen und Gesundheit',
+    passage:'Auf dem Land gibt es viele Möglichkeiten an der frischen Luft zu sein. Dass der Landmensch sich deshalb mehr bewegt, bestätigen Studien aber nicht eindeutig. In den USA gibt es sogar Hinweise darauf, dass Menschen auf dem Land weniger aktiv und sogar schwergewichtiger sind als Stadtmenschen. Eine aktuelle Untersuchung des Robert-Koch-Instituts zeigt für Deutschland, dass das Immunsystem von Menschen in urbanen Gebieten mehr leisten muss, da die Menschen hier deutlich öfter unter chronischen Reizungen der Haut und Atemwege leiden. Der Anteil derjenigen, die einmal in ihrem Leben von solchen Krankheitsbildern betroffen sind, steigt dabei leicht mit der Größe des Wohnorts. Einige Wissenschaftler führen hierfür die Hypothese an, dass die Luftverschmutzung in den Städten diese Allergien auslösen könnte.<br><br>Wer in der Stadt aufwächst, ist im Vergleich zu Landbewohnern auch anfälliger für Angststörungen und Schizophrenie. Woran liegt das? Um das herauszufinden, stellten Mannheimer Forscher gesunden Probanden knifflige Rechenaufgaben und setzten sie dabei zusätzlich unter Druck: Sie sagten den Freiwilligen, sie seien nicht gut genug und müssten sich noch mehr anstrengen. So konnte nachgewiesen werden, dass Stadtmenschen deutlichere Stressreaktionen zeigen als die Vergleichsgruppe vom Land. Städter haben sich also keineswegs an den höheren Stresspegel der Großstadt gewöhnt und können Stresssituationen weniger gut bewältigen.<br><br>Für eine Studie zur psychischen Gesundheit werteten Mediziner der University of Exeter die Arbeitsbedingungen und Lebensumstände von Städtern aus. Das Ergebnis: Städter, die erst in einer dicht bebauten und dann in einer Gegend mit Parkanlagen und unbebauten Grünflächen wohnten, hatten gleich nach dem Umzug und auch drei Jahre später eine bessere psychische Gesundheit, die vergleichbar mit dem psychischen Gesundheitszustand der Bewohner ländlicher Regionen war.<br><br>Dass die Natur auch zur Heilung körperlicher Erkrankungen beitragen kann, zeigte erstmals 1984 eine Studie: Patienten, die in einem Krankenhauszimmer mit Blick auf viel Grün lagen, erholten sich schneller von einer Operation und brauchten weniger Schmerzmittel, als Patienten in ähnlichen Räumen mit Blick auf ein Gebäude. Zur Stärkung der Gesundheit ist allerdings kein Acker oder Wald nötig – ein Park in der Stadt tut es manchmal auch.',
+    columns:['Stadt','Land','beide','passt nicht'],
+    items:[
+      {text:'Das Immunsystem wird besonders stark beansprucht.', correct:0},
+      {text:'Die medizinische Versorgung ist hier ein Vorteil.', correct:3},
+      {text:'Die Menschen hier haben einen aktiven Lebensstil.', correct:3},
+      {text:'Ein grünes Wohnumfeld fördert die seelische Gesundheit.', correct:2},
+      {text:'Hier sinkt das Risiko, an psychischen Störungen zu erkranken.', correct:1},
+      {text:'Stressbedingte Reaktionen sind hier besonders häufig.', correct:0},
+      {text:'Überreaktionen der körpereigenen Abwehr sind selten.', correct:1}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Veränderungen in der Branche, 2 Folgen für Urlaubsziele).',
+    title:'Tourismus',
+    passage:'Der Tourismus gilt als Wachstumsbranche mit Umsätzen in Milliardenhöhe. Reisen wird immer beliebter und durch die große Konkurrenz auf dem Markt oft auch günstiger – mit weitreichenden Folgen für die Reiseländer. Touristen geben für Urlaub viel Geld aus, was neben den Auswirkungen auf die einheimische Wirtschaft auch Abhängigkeiten schafft. In Orten, die vorwiegend vom Wirtschaftsfaktor Tourismus leben, entwickeln sich andere Wirtschaftszweige deshalb nur schwer. Zusätzlich werden verschiedene Waren und Güter mit der steigenden Zahl der Touristen so teuer, dass Einheimische sich diese kaum noch leisten können. Problematisch ist der Tourismus auch aus ökologischer Sicht. Der zunehmende Wasser- und Energieverbrauch belastet die Ressourcen und die Umwelt. Der Anstieg des Verkehrs und der Ausbau der Infrastruktur zerstören zusätzlich die Landschaft und bedrohen die Artenvielfalt.<br><br>Umstritten ist auch, inwieweit der Tourismus zur Bewahrung der einheimischen Kultur beitragen kann. Viele Reisende besuchen folkloristische Tanz- und Musikveranstaltungen als Bestandteil des Reiseprogramms. So trägt der Kontakt zwischen Einheimischen und Touristen zwar zu gegenseitigem Interesse und Verständnis bei, aber in anderen Fällen kann es auch zu Konflikten und Spannungen kommen. Zum Beispiel dann, wenn Urlauber wenig oder kaum informiert und bereit sind, Sitten und Bräuche des Reiselandes zu respektieren.<br><br>Als Reaktion auf die Schattenseiten des Tourismus – insbesondere des Massentourismus – entstehen alternative Konzepte zur nachhaltigen Bewahrung von natürlichen Ressourcen und zur Förderung der lokalen Wirtschaft. Dabei wird der Tourismus mit anderen Wirtschaftsbereichen verbunden. Beispielsweise werden in den Hotels und Restaurants Produkte aus der einheimischen Landwirtschaft verwendet. Dadurch sollen auch vernachlässigte Bereiche gestärkt werden, die nicht in erster Linie touristischen Zwecken dienen.',
+    aussagen:[
+      { key:'a', text:'[a] Der Wettbewerb führt zu preiswerten Urlaubsangeboten.' },
+      { key:'b', text:'[b] Kulturelle Veranstaltungen werden für Urlauber attraktiver.' },
+      { key:'c', text:'[c] Die einheimische Bevölkerung profitiert vom Ausbau der Infrastruktur.' },
+      { key:'d', text:'[d] Preise steigen für die einheimische Bevölkerung.' },
+      { key:'e', text:'[e] Die Entwicklung der lokalen Wirtschaft wird behindert.' },
+      { key:'f', text:'[f] Ressourcenknappheit führt zu Spannungen zwischen Einheimischen.' },
+      { key:'g', text:'[g] Die Verschmutzung der Umwelt gefährdet die Tierwelt.' },
+      { key:'h', text:'[h] Verträglichere Formen des Tourismus entwickeln sich.' }
+    ],
+    correctMap: { v1: 'a', v2: 'h', n3: 'e', n4: 'd' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Die Zusammenfassung folgt nicht dem Textverlauf. Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Operation Tierliebe',
+    passage:'Herzschrittmacher, Organtransplantationen, künstliche Hüftgelenke, Dialyse, eine hochmoderne Onkologie, seit Kurzem auch Stammzelltherapie – all das können Tierärzte mittlerweile anbieten. Die letzte Grenze ist bislang die Organtransplantation, die in den USA bei Tieren allerdings durchaus schon üblich ist. Im Prinzip kann ein Tier in den reichen Industrienationen eine genauso gute medizinische Behandlung erhalten wie ein menschlicher Privatpatient – sofern der Besitzer sich die leisten kann.<br><br>Es gibt Menschen, die wollen die 250 Euro für die Behandlung eines gebrochenen Beins nicht ausgeben. Dann gibt es diejenigen, die alles für ihr krankes Tier tun würden und mit Rechnungen um 20 000 Euro die Tierklinik verlassen.<br><br>Die durchschnittliche Lebenserwartung von Hunden und Katzen hat sich in den vergangenen Jahrzehnten vervielfacht, unter anderem aufgrund der besseren medizinischen Versorgung. Das Ergebnis sind immer mehr alte tierische Patienten, die häufiger Wohlstandserkrankungen wie Diabetes, Krebs oder sogar Demenz entwickeln. Wegen der modernen Heilverfahren sind diese Erkrankungen auch therapierbar. Die lange Lebensdauer, verbunden mit Wohlstand und dem technologischen Fortschritt, hat zu einem neuen Niveau in der Tiermedizin geführt.<br><br>Daneben steht der radikale Wandel in der Beziehung zwischen Mensch und Tier. In verschiedenen Befragungen von Haustierbesitzern, welche soziale Rolle ihr Tier für sie einnehme, antworten seit einigen Jahren über 90 Prozent der Teilnehmer, ihr Tier sei ein vollwertiges Familienmitglied. Und für die Gesundheit eines nahestehenden Wesens wollen die Leute sehr viel Geld auszugeben, auch wenn es ein Tier ist.',
+    graphicData:[{year:'Hund: Hundesteuer pro Jahr',val:100},{year:'Katze: Katzenstreu pro Jahr',val:20},{year:'Hund: Transport',val:90},{year:'Katze: Transport',val:40},{year:'Hund: Min. jährliche Tierarztkosten',val:60},{year:'Katze: Min. jährliche Tierarztkosten',val:55},{year:'Hund: Erste Impfung',val:115},{year:'Katze: Erste Impfung',val:150},{year:'Hund: Anschaffung',val:120},{year:'Katze: Anschaffung',val:340},{year:'Hund: Jährliche Futterkosten',val:160},{year:'Katze: Jährliche Futterkosten',val:400}],
+    graphicCaption:'Wie viel kosten Hund und Katze? Ausgaben in Euro €',
+    sentences:[
+      {text:'Trotz des hohen Stellenwerts von Tieren ist ihre Versorgung abhängig von den finanziellen Möglichkeiten der Besitzer.', wrong:false},
+      {text:'Durch die hoch entwickelten medizinischen Möglichkeiten können Haustiere heutzutage in vielen Ländern bessere Behandlungen erhalten als Menschen.', wrong:true},
+      {text:'Dadurch hat sich einerseits die Lebenserwartung vieler Haustiere erhöht.', wrong:false},
+      {text:'Andererseits leiden die Tiere nun an neueren Erkrankungen.', wrong:false},
+      {text:'Das führt gleichzeitig auch zu höheren Rechnungen beim Tierarzt.', wrong:false},
+      {text:'Diese Kosten zu übernehmen, widerstrebt den meisten Tierbesitzern.', wrong:true},
+      {text:'Deutlich ist ebenfalls, dass die Ausgaben für Arztbesuche die laufenden Kosten der Haustierhaltung übersteigen.', wrong:true},
+      {text:'Für Hundebesitzer entstehen in Deutschland neben den Kosten für Futter, Transport und Impfungen zusätzliche Kosten.', wrong:false},
+      {text:'Denn das Halten eines Hundes muss steuerlich abgeführt werden.', wrong:false}
+    ]
+  }
+];
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
   {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
   {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
-  {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5}
+  {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5},
+  {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}
 ];
