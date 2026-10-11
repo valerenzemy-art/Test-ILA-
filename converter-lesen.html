@@ -14,11 +14,22 @@ button{padding:9px 14px;font-size:15px}
 .box{padding:9px 11px;border-radius:8px;margin:5px 0;font-size:.95rem;word-break:break-word}
 .error{background:var(--errbg);color:var(--err)}.warn{background:var(--wrnbg);color:var(--wrn)}.ok{background:var(--okbg);color:var(--ok)}
 details{margin:8px 0}pre{white-space:pre-wrap;font-size:.82rem;margin:6px 0}code{font-family:ui-monospace,monospace;font-size:.85rem}
-</style></head><body>
+</style>
+<!-- Inclusion de PDF.js pour lire les fichiers PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+</head><body>
 <h1>Convertisseur Lesen → lesen-data.js</h1>
-<p class="mut">Tu écris un Modelltest dans un format texte simple. L'outil génère le code exact pour <code>lesen-data.js</code>, le contrôle et relit son propre résultat.</p>
+<p class="mut">Tu écris un Modelltest dans un format texte simple ou tu téléverses un PDF. L'outil génère le code exact pour <code>lesen-data.js</code>, le contrôle et relit son propre résultat.</p>
 <details><summary><b>Aide-mémoire du format</b></summary><pre id="help"></pre></details>
-<div class="row"><button id="mod">Insérer un exemple</button><button id="conv">Convertir</button></div>
+<div class="row">
+  <button id="mod">Insérer un exemple</button>
+  <input type="file" id="pdfFile" accept=".pdf" style="display:none">
+  <button id="pdfBtn">Téléverser un PDF</button>
+  <button id="conv">Convertir</button>
+</div>
 <textarea id="in" rows="18" placeholder="#MT 6&#10;#TITEL Modelltest 6 (Digitaler TestDaF)&#10;&#10;#TEIL 1&#10;..."></textarea>
 <div id="sum"></div>
 <div id="stats"></div>
@@ -457,12 +468,37 @@ var MODELL=[
 '#TEIL 7','#TITEL Wachstum des E-Commerce','#TEXT','Beispieltext.','#GRAFIK Grafik: Anteil des Online-Handels (in Prozent)','2015 = 9','2023 = 19','#SAETZE',
 'Der Anteil ist gestiegen.','!Lebensmittel machen den größten Anteil aus.','Mode wächst stark.','!Plattformen haben Marktanteile verloren.','!Der Anteil ist unverändert geblieben.'
 ].join('\n');
-var $=function(i){return document.getElementById(i);};
-$('help').textContent=HELP;
+var $=function(i){return document.getElementById(i);};$('help').textContent=HELP;
 $('mod').onclick=function(){$('in').value=MODELL;};
-function copy(id){var t=$(id);t.select();try{document.execCommand('copy');}catch(e){}}
-$('c1').onclick=function(){copy('out1');};$('c2').onclick=function(){copy('out2');};
-$('conv').onclick=function(){
+
+/* Ajout pour la gestion des PDF */
+$('pdfBtn').onclick=function(){ $('pdfFile').click(); };$('pdfFile').onchange=function(e){
+  var file = e.target.files[0];
+  if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(evt){
+    var typedarray = new Uint8Array(evt.target.result);
+    pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
+      var maxPages = pdf.numPages;
+      var countPromises = [];
+      for (var j = 1; j <= maxPages; j++) {
+        countPromises.push(pdf.getPage(j).then(function(page){
+          return page.getTextContent().then(function(textContent){
+            return textContent.items.map(function(item){ return item.str; }).join(' ');
+          });
+        }));
+      }
+      Promise.all(countPromises).then(function(texts){
+        $('in').value = texts.join('\n\n');
+      });
+    }).catch(function(err){
+      alert("Erreur lors de la lecture du PDF : " + err.message);
+    });
+  };
+  reader.readAsArrayBuffer(file);
+};
+
+function copy(id){var t=$(id);t.select();try{document.execCommand('copy');}catch(e){}}$('c1').onclick=function(){copy('out1');};$('c2').onclick=function(){copy('out2');};$('conv').onclick=function(){
   var r=build($('in').value),e=r.issues.filter(function(x){return x.sev==='error';}).length,w=r.issues.length-e;
   $('out1').value=e===0?r.code:'';$('out2').value=e===0?r.tline:'';
   var s;
