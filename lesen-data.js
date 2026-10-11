@@ -1250,6 +1250,151 @@ const MT8 = [
     ]
   }
 ];
+const MT9 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
+    title:'Den Hunger besiegen',
+    segments:[
+      'Hunger zählt trotz Fortschritten in der Landwirtschaft weiterhin zu den größten gesellschaftlichen Herausforderungen. Besonders betroffen sind Kinder in Regionen, in denen Armut, Konflikte und Klimaveränderungen zusammentreffen. Mangelernährung entsteht dabei nicht nur durch fehlende Lebensmittel, sondern auch durch unzureichendes Trinkwasser und mangelnde medizinische Versorgung. Hilfsorganisationen weisen deshalb ',
+      ' darauf hin, dass die Bekämpfung des Hungers mehr erfordert als die kurzfristige Verteilung von Nahrungsmitteln. Ein Nährstoffmangel in den ersten Lebensjahren kann sowohl das körperliche Wachstum als auch die Entwicklung des Gehirns beeinträchtigen. Die Folgen zeigen sich mitunter erst später, etwa durch gesundheitliche Probleme oder schlechtere schulische Leistungen. Frühzeitige Unterstützung ist daher entscheidend: Sie verringert nicht nur akute Risiken, sondern kann auch die Voraussetzungen für eine langfristige gesellschaftliche Teilhabe ',
+      '. Wirksame Hilfsprogramme verbinden die Versorgung mit Lebensmitteln mit Aufklärung über Ernährung, sauberem Wasser und besseren hygienischen Bedingungen. Eine Strategie, die ausschließlich Lebensmittel verteilt, greift jedoch zu kurz, weil sie die sozialen und gesundheitlichen Ursachen der Unterernährung nicht ausreichend ',
+      '. Hilfsmaßnahmen müssen außerdem zu den Lebensbedingungen vor Ort passen. Werden kulturell ungewohnte Lebensmittel verteilt oder Projekte nach dem Ende externer Finanzierung eingestellt, bleibt ihre Wirkung begrenzt. Deshalb sollten lokale Gemeinschaften an Planung und Umsetzung beteiligt werden, damit die Unterstützung nicht nur vorübergehend ',
+      ', sondern langfristig zur Verbesserung der Ernährung beiträgt. Schließlich hängt Ernährungssicherheit auch vom Einkommen ab. Selbst wenn Lebensmittel verfügbar sind, können arme Familien sie oft nicht bezahlen. Neben einer höheren landwirtschaftlichen Produktion braucht es daher stabile Einkommen, Unterstützung für Kleinbauern und soziale Sicherungssysteme. Nur durch ein abgestimmtes Vorgehen lässt sich verhindern, dass kurzfristige Erfolge langfristig wieder ',
+      ''
+    ],
+    gaps:[
+      {options:['darauf hingewiesen','dazu beigetragen','darauf bestanden','davon ausgegangen'], correct:0},
+      {options:['vermeiden','gewährleisten','veranlassen','vornehmen'], correct:1},
+      {options:['berücksichtigt','überwacht','beansprucht','voraussetzt'], correct:0},
+      {options:['stattfinden','ausreichen','wirken','verfügen'], correct:2},
+      {options:['aufgegeben werden','rückgängig gemacht werden','zur Verfügung stehen','in Anspruch genommen werden'], correct:1}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Lesen Sie die Textabschnitte rechts. Bringen Sie die Abschnitte in die richtige Reihenfolge. Es gibt genau eine richtige Reihenfolge.',
+    title:'Wie werden Nobelpreisträger ausgewählt?',
+    correctOrder:[2,4,0,3,1],
+    items:[
+      'Nach dem Ende der Nominierungsfrist werden die eingereichten Vorschläge systematisch geprüft. Je nach Fachgebiet ziehen die zuständigen Stellen zusätzliche Fachleute hinzu, die die wissenschaftliche Qualität, die Bedeutung einer Entdeckung oder den langfristigen Einfluss eines Werks beurteilen. Dabei geht es nicht allein darum, welche Leistung besonders bekannt ist, sondern auch darum, welchen Beitrag sie zum jeweiligen Gebiet geleistet hat.',
+      'Erst nach dieser intensiven Prüfung fällt die endgültige Entscheidung. Die zuständigen Gremien beraten über die vorliegenden Einschätzungen und wählen die Preisträger aus; die Entscheidung wird in der Regel nicht öffentlich begründet. Im Herbst werden die Namen bekannt gegeben, während die feierliche Preisverleihung traditionell im Dezember stattfindet. So wird aus einem zunächst vertraulichen Auswahlprozess eine weltweit beachtete Auszeichnung.',
+      'Wenn im Herbst die Namen der neuen Nobelpreisträger bekannt gegeben werden, richtet sich die Aufmerksamkeit der Öffentlichkeit auf Menschen, deren Arbeit Wissenschaft, Literatur oder gesellschaftliches Denken geprägt hat. Doch hinter der kurzen Bekanntgabe steht ein Verfahren, das sich über Monate erstreckt und strengen Regeln folgt. Wer den Preis erhält, wird also nicht einfach durch eine öffentliche Abstimmung oder durch die größte Medienpräsenz bestimmt.',
+      'Auf Grundlage dieser Gutachten vergleichen die zuständigen Komitees die Kandidatinnen und Kandidaten und diskutieren, welche Leistung die Kriterien des jeweiligen Preises am überzeugendsten erfüllt. Die Gewichtung kann je nach Kategorie unterschiedlich ausfallen: In den Naturwissenschaften spielen etwa nachweisbare Erkenntnisse eine zentrale Rolle, während bei Literatur die Qualität und Bedeutung des literarischen Schaffens bewertet werden. Persönliche Bekanntheit allein ist dabei kein ausreichendes Auswahlkriterium.',
+      'Am Anfang steht die Nominierung. Vorschläge dürfen nur von Personen eingereicht werden, die nach den Regeln der jeweiligen Preiskategorie dazu berechtigt sind; eine Selbstnominierung ist nicht vorgesehen. Die Zahl der Vorschläge kann beträchtlich sein, doch eine Nominierung bedeutet keineswegs, dass jemand automatisch in die engere Auswahl gelangt. Sie eröffnet lediglich die Möglichkeit, dass die Leistung genauer untersucht wird.'
+    ],
+    shuffledStart:[0,1,2,3,4]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
+    title:'Social Media: Studie bestätigt negative Effekte auf den Schulerfolg von Kindern',
+    passage:[
+      '(1) Die omnipräsente Nutzung digitaler Endgeräte gehört heute zum Alltag von Jugendlichen. Eine umfassende Langzeitstudie des Instituts für Bildungsforschung hat nun empirisch belegt, was Pädagogen seit Langem vermuten: Der intensive Konsum sozialer Medien steht in direktem Zusammenhang mit einem Absinken der schulischen Leistungen bei Heranwachsenden. Über einen Zeitraum von vier Jahren wurden mehr als 3.000 Schülerinnen und Schüler begleitet. Die Daten zeigen eindeutig, dass eine tägliche Bildschirmzeit von mehr als zwei Stunden auf Netzwerken wie Tik Tok, Instagram oder Snapchat signifikant schlechtere Noten in Mathematik und Sprachfächern nach sich zieht.',
+      '(2) Als primäre Ursache für diesen Leistungsabfall identifizieren die Forscher nicht primär die Inhalte selbst, sondern die gravierenden Aufmerksamkeitsstörungen und den chronischen Schlafmangel. Durch das ständige Eintreffen von Benachrichtigungen wird der Lernprozess kontinuierlich unterbrochen. Dieses Phänomen, in der Neuropsychologie als kognitive Fragmentierung bezeichnet, verhindert den Übergang von Informationen aus dem Arbeitsgedächtnis in das Langzeitgedächtnis. Zudem führt das nächtliche Aufbleiben wegen digitaler Interaktionen dazu, dass Jugendliche in der Schule unter massiven Konzentrationsdefiziten leiden.',
+      '(3) Interessanterweise offenbart die Studie geschlechtsspezifische Unterschiede bezüglich der Nutzungsarten und der daraus resultierenden Folgen. Während männliche Jugendliche häufiger interaktive Online-Spiele bevorzugen, tendieren Mädchen stärker zu visuell orientierten Netzwerken. Letzteres geht mit einem erhöhten Risiko für sozialen Vergleichsdruck und emotionale Belastungen einher. Die dadurch erzeugte psychische Anspannung beeinträchtigt die schulische Leistungsfähigkeit der Schülerinnen oft in höherem Maße als die reine Zeitkomponente der Nutzung.',
+      '(4) Ein weiterer Aspekt betrifft das soziale Umfeld und die elterliche Reglementierung. Die Untersuchung verdeutlicht, dass strikte Verbote selten den gewünschten Effekt erzielen. Vielmehr erweisen sich Maßnahmen als erfolgreich, die auf eine gemeinsame Erarbeitung von Medienkompetenz setzen. Familien, in denen feste medienfreie Zeiten vereinbart wurden – etwa während der Mahlzeiten oder eine Stunde vor dem Schlafengehen –, wiesen deutlich geringere Leistungseinbußen bei den Kindern auf als Haushalte mit rein autoritären Verboten oder völliger Zügellosigkeit.',
+      '(5) In der Bildungspolitik entfacht die Publikation der Ergebnisse eine Debatte über den Einsatz digitaler Medien im Unterricht. Kritiker warnen davor, die Digitalisierung von Schulen unreflektiert voranzutreiben. Es gelte, eine klare Trennung zwischen lernförderlichen digitalen Werkzeugen und ablenkenden Unterhaltungsmedien zu etablieren. Einige Bildungsforscher fordern bereits die Einführung des Schulfachs Medienethik und Selbstregulation, um Schüler frühzeitig auf die Fallstricke des digitalen Zeitalters vorzubereiten.',
+      '(6) Dennoch mahnen die Autoren der Studie vor voreiligen Schuldzuschreibungen. Soziale Medien sind keineswegs per se als schädlich einzustufen. Sie bieten unbestreitbar auch Potenziale für den informellen Wissenserwerb und die Pflege sozialer Kontakte. Die Herausforderung besteht vielmehr darin, Jugendlichen einen gesundheits- und lernförderlichen Umgang mit diesen Technologien zu vermitteln, ohne deren positive Facetten zu verteufeln.'
+    ],
+    questions:[
+      { q:'Welche der folgenden Aussagen fasst den Inhalt von Absatz 1 am besten zusammen?', options:[
+        'Pädagogen bezweifeln die Notwendigkeit von Beschränkungen der Bildschirmzeit.',
+        'Eine langjährige Studie belegt den negativen Einfluss hoher Social-Media-Nutzung auf Schulleistungen.',
+        'Jugendliche nutzen digitale Medien hauptsächlich für das Erlernen von Mathematik.',
+        'Die Bildschirmzeit von Schülern hat sich in den letzten vier Jahren verdoppelt.'
+      ], correct:1 },
+      { q:'Laut Absatz 2 führt die ständige Erreichbarkeit bei Jugendlichen vor allem zu...', options:[
+        'einer Beschleunigung des Lernprozesses im Arbeitsgedächtnis.',
+        'einer Verringerung der Speicherkapazität des Langzeitgedächtnisses.',
+        'Störungen der Aufmerksamkeit sowie erheblichem Schlafmangel.',
+        'einer völligen Ablehnung von Hausaufgaben.'
+      ], correct:2 },
+      { q:'In Absatz 3 wird deutlich, dass bei Mädchen...', options:[
+        'die Nutzungsdauer der Medien der einzige Grund für schlechte Noten ist.',
+        'Online-Spiele zu stärkeren Schulproblemen führen als soziale Netzwerke.',
+        'emotionaler Druck durch Vergleiche die Schulleistung stark beeinträchtigt.',
+        'das Interesse an visuellen Medien kontinuierlich abnimmt.'
+      ], correct:2 },
+      { q:'Welcher elterliche Ansatz erweist sich laut Absatz 4 als am wirksamsten?', options:[
+        'Das Erlassen strenger, kompromissloser Medienverbote.',
+        'Die Vereinbarung fester, medienfreier Zeiten im Familienalltag.',
+        'Das Überlassen der Mediennutzung in die vollständige Eigenverantwortung der Kinder.',
+        'Die Kontrolle sämtlicher Nachrichten der Jugendlichen.'
+      ], correct:1 },
+      { q:'Welche Forderung lässt sich aus den Diskussionen in Absatz 5 ableiten?', options:[
+        'Die Digitalisierung an Schulen sollte sofort gestoppt werden.',
+        'Schüler müssen lernen, gezielt zwischen Lernwerkzeugen und Unterhaltungsmitteln zu unterscheiden.',
+        'Unterhaltungsmedien sollten als Lehrmaterial integriert werden.',
+        'Lehrer sollten die Mediennutzung der Schüler in der Freizeit überwachen.'
+      ], correct:1 },
+      { q:'In Absatz 6 betonen die Forscher, dass soziale Medien...', options:[
+        'ausschließlich negative Auswirkungen auf Jugendliche haben.',
+        'unkontrolliert in den Schulalltag integriert werden sollten.',
+        'auch Chancen für das Lernen und soziale Kontakte bieten.',
+        'künftig gesetzlich verboten werden sollten.'
+      ], correct:2 },
+      { q:'Das Hauptanliegen des Gesamtextes ist es, ...', options:[
+        'über die komplexen Risiken und einen differenzierten Umgang mit Social Media aufzuklären.',
+        'ein vollständiges Verbot von Smartphones an Schulen zu fordern.',
+        'die Überlegenheit von Online-Spielen gegenüber sozialen Netzwerken zu beweisen.',
+        'Eltern für Versäumnisse in der Erziehung zu verurteilen.'
+      ], correct:0 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Kommentar eines Experten zu „Wie Bildung und Gene zusammenwirken“',
+    passageText:`Die Debatte über den Einfluss von Erbanlagen und schulischer Erziehung auf den akademischen Erfolg begleitet die Bildungsforschung seit Jahrzehnten. <strong>[1] Die weit verbreitete Befürchtung, dass genetische Prädispositionen das intellektuelle Potenzial eines Menschen unveränderlich festlegen und somit pädagogische Bemühungen wirkungslos machen könnten, ist jedoch wissenschaftlich unbegründet.</strong> In der Praxis zeigt sich, dass Gene keineswegs als starres Schicksal zu verstehen sind, sondern vielmehr als ein Rahmen, der durch gezielte Förderung und ein anregendes Lernumfeld dynamisch geformt werden kann. <strong>[2] Es ist davon auszugehen, dass künftige wissenschaftliche Methoden imstande sein werden, individuelle genetische Profile noch präziser zu entschlüsseln, um maßgeschneiderte Lernkonzepte zu entwickeln, die genau auf die Veranlagung des Einzelnen abgestimmt sind.</strong> Dadurch könnten Bildungsinstitutionen Lernende wesentlich effizienter unterstützen. <strong>[3] Bedauerlicherweise vernachlässigen viele Bildungssysteme weltweit diesen synergetischen Ansatz und verharren in veralteten, schematischen Lehrmethoden, wodurch das tatsächliche Leistungspotenzial vieler Kinder ungenutzt bleibt.</strong> <strong>[4] Vor diesem Hintergrund sollten Bildungspolitiker und Pädagogen dringend dazu übergehen, neurowissenschaftliche und genetische Erkenntnisse systematisch in die Curriculum-Entwicklung einzubeziehen, um eine gerechtere und effektivierte Bildungslandschaft zu schaffen.</strong>`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte bedauert etwas.',
+      'Der Experte begrüßt etwas.',
+      'Der Experte empfiehlt etwas.',
+      'Der Experte kritisiert etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte vermutet etwas.',
+      'Der Experte warnt vor etwas.',
+      'Der Experte zweifelt an etwas.'
+    ],
+    correct:[7, 5, 0, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zur traditionellen Leihmutterschaft (TL), zur gestationalen Leihmutterschaft (GL), zu beiden oder gar nicht passt. Für jede Aussage gibt es genau eine richtige Lösung.',
+    title:'Was sagt die Wissenschaft zur Leihmutterschaft?',
+    passage:'Die ethische und wissenschaftliche Debatte um die Leihmutterschaft – die Praxis, bei der eine Frau ein Kind für Wunscheltern austrägt – hat in den letzten Jahrzehnten dramatisch an Komplexität zugenommen. Aus medizinischer und rechtswissenschaftlicher Sicht wird heute grundlegend zwischen zwei Formen unterschieden: der traditionellen Leihmutterschaft und der gestationalen (genetischen) Leihmutterschaft. Während bei der traditionellen Form die Eizelle der Austragenden selbst verwendet wird, greift die gestationale Leihmutterschaft auf die In-vitro-Fertilisation (IVF) zurück. Hierbei stammt das genetische Material entweder von den Wunscheltern oder von anonymen Spendern, sodass die Leihmutter biologisch nicht mit dem Kind verwandt ist. Soziologische und psychologische Langzeitstudien untersuchten die mentalen Folgen. Bei der traditionellen Leihmutterschaft berichten Frauen im Nachhinein signifikant häufiger von emotionalen Zweifeln und Trennungsschmerzen, was Psychologen auf die ununterbrochene genetische und körperliche Bindung zurückführen. Bei der gestationalen Form hingegen erleichtert die fehlende genetische Verwandtschaft vielen Frauen die emotionale Distanzierung. Epidemiologische Untersuchungen belegen zudem, dass Schwangerschaften im Rahmen einer gestationalen Leihmutterschaft ein erhöhtes Risiko für Schwangerschaftsdiabetes, Präeklampsie und Frühgeburten bergen. Unabhängig von der Methode heben Frauenärzte jedoch hervor, dass jede Form der Leihmutterschaft für die Austragende das normale physische Grundrisiko einer jeden Austragung trägt. Entwicklungspsychologische Studien zeigen bezüglich des emotionalen Wohlbefindens und der kognitiven Fähigkeiten keine langfristigen Nachteile bei den Kindern.',
+    columns:['traditionelle Leihmutterschaft (TL)','gestationale Leihmutterschaft (GL)','beide','passt nicht'],
+    items:[
+      {text:'Eine genetische Verbindung zwischen der Leihmutter und dem Kind liegt vor.', correct:0},
+      {text:'Die Methode führt bei den aufwachsenden Kindern zu langfristigen kognitiven Beeinträchtigungen.', correct:3},
+      {text:'Das Risiko für medizinische Komplikationen wie Präeklampsie ist bei dieser Form nachweislich erhöht.', correct:1},
+      {text:'Die Betroffenen tragen das allgemeine körperliche Grundrisiko einer Schwangerschaft.', correct:2},
+      {text:'Die rechtliche Anerkennung der Elternschaft ist im Anschluss an die Geburt völlig unkompliziert.', correct:3},
+      {text:'Die emotionale Loslösung vom Neugeborenen fällt den Austragenden nach der Entbindung tendenziell schwerer.', correct:0},
+      {text:'Für das Verfahren wird eine Befruchtung außerhalb des Körpers (IVF) benötigt.', correct:1}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Neurowissenschaftliche Befunde, 2 Kognitive und gesellschaftliche Auswirkungen).',
+    title:'Sind Frauen wirklich besser im Multitasking?',
+    passage:'Der Mythos, dass Frauen von Natur aus eine ausgeprägtere Fähigkeit zum Multitasking besitzen als Männer, hält sich hartnäckig. Aus neurobiologischer Sicht ist das menschliche Gehirn grundsätzlich nicht darauf ausgelegt, zwei komplexe Aufgaben exakt zeitgleich auszuführen. Wenn Personen glauben, mehrere Tätigkeiten parallel zu erledigen, handelt es sich in Wahrheit um ein extrem schnelles Alternieren zwischen verschiedenen Aufgaben – ein Prozess, der als „Task Switching“ bezeichnet wird. Aktuelle MRT-Studien belegen, dass dabei im präfrontalen Kortex erhebliche Wechselkosten entstehen: Die kognitive Leistungsfähigkeit sinkt, die Fehlerrate steigt und die Reaktionszeit verlängert sich. Psychologen weisen darauf hin, dass die wahrgenommenen Leistungsunterschiede primär das Resultat soziokultureller Prägung und geschlechtsspezifischer Rollenerwartungen sind. Über Generationen hinweg wurden Frauen dazu angehalten, eine Vielzahl organisatorischer Pflichten parallel zu managen, was zu einer höheren Routine bei Mehrfachbelastungen führte. Labortests bestätigen, dass bei neuartigen Multitasking-Szenarien beide Geschlechter nahezu identische Leistungseinbußen zeigen. Die Aufrechterhaltung des Multitasking-Klischees dient oft als Rechtfertigung für die ungleiche Verteilung von unbezahlter Sorgearbeit („Mental Load“). Kognitionsforscher warnen zudem, dass der permanente Zwang zum Aufgabenwechsel zu chronischer mentaler Erschöpfung und Burnout führen und die Konzentrationsfähigkeit („Deep Work“) beeinträchtigen kann.',
+    aussagen:[
+      { key:'a', text:'[a] Das menschliche Gehirn simuliert paralleles Arbeiten durch extrem schnelles Hin- und Herschalten zwischen Aufgaben.' },
+      { key:'b', text:'[b] Neurowissenschaftliche MRT-Daten beweisen eine anatomische Überlegenheit von Frauen beim Aufgabenwechsel.' },
+      { key:'c', text:'[c] Die höhere Alltagsroutine von Frauen bei Mehrfachbelastungen ist auf historische Geschlechterrollen zurückzuführen.' },
+      { key:'d', text:'[d] Das Gehirn schrumpft im Bereich des präfrontalen Kortex dauerhaft, wenn man mehrere Dinge gleichzeitig erledigt.' },
+      { key:'e', text:'[e] Der Multitasking-Mythos dient häufig als Vorwand für eine ungleiche Aufteilung häuslicher Sorgearbeit.' },
+      { key:'f', text:'[f] Bei völlig neuartigen Multitasking-Tests im Labor erweisen sich Männer als deutlich fehleranfälliger als Frauen.' },
+      { key:'g', text:'[g] Ständiges Alternieren zwischen Aufgaben kann zu mentaler Erschöpfung führen und schwächt die Konzentrationsfähigkeit.' },
+      { key:'h', text:'[h] Die Evolution hat im Gehirn von Frauen ein spezielles Areal für die simultane Kinderbetreuung ausgebildet.' }
+    ],
+    correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'e' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten. Es gibt genau drei inhaltlich falsche Sätze.',
+    title:'KI sagt Resultate sozialwissenschaftlicher Experimente voraus',
+    passage:'In den vergangenen Jahrzehnten haben sozialwissenschaftliche Experimente wesentliche Erkenntnisse über menschliches Verhalten geliefert. Allerdings sind klassische Studien zeitaufwendig, teuer und leiden unter der Replikationskrise. Ein internationales Forschungsteam hat nun ein innovatives Verfahren entwickelt, bei dem Sprachmodelle (KI) darauf trainiert wurden, die Ergebnisse vorherzusagen. Anstatt Teilnehmer zu befragen, simulieren Forschende Interaktionen mithilfe autonomer KI-Agenten. In über 80 Prozent der Fälle stimmten die Prognosen der KI mit den tatsächlichen empirischen Resultaten überein. Wissenschaftler betonen jedoch ausdrücklich, dass die KI die traditionelle Forschung keineswegs vollständig ersetzen könne, sondern als analytisches Werkzeug zur Hypothesenfilterung dienen soll. Experten warnen zudem vor ethischen Risiken und systematischen Verzerrungen (Bias) in den Trainingsdaten.',
+    graphicData:[{year:'Klassische Expertenprognose',val:48},{year:'Erfahrenes Forschungsteam',val:62},{year:'KI-gestützte Simulation',val:83},{year:'Empirisches Replikationsexperiment',val:100}],
+    graphicCaption:'Vorhersagegenauigkeit von Forschungsmethoden bei sozialen Phänomenen (%) — KI-Simulation: ca. 500 € | Klassisches Feldexperiment: ca. 25.000 €',
+    sentences
+
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
@@ -1258,5 +1403,6 @@ const TESTS = [
   {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5},
   {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}, 
   {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7},
-  {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8}
+  {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8},
+  {id:9, title:'Modelltest 9 (Digitaler TestDaF)', teile: MT9}
 ];
