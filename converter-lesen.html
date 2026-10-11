@@ -10,23 +10,29 @@ h1{font-size:1.3rem;margin:.2em 0}h3{font-size:1rem;margin:14px 0 4px}
 .mut{color:var(--mut);font-size:.9rem}
 textarea{width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:13px;background:var(--bg);color:var(--fg);border:1px solid var(--bd);border-radius:6px;padding:8px}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
-button{padding:9px 14px;font-size:15px}
+button, input[type=file]{padding:8px;font-size:14px}
 .box{padding:9px 11px;border-radius:8px;margin:5px 0;font-size:.95rem;word-break:break-word}
 .error{background:var(--errbg);color:var(--err)}.warn{background:var(--wrnbg);color:var(--wrn)}.ok{background:var(--okbg);color:var(--ok)}
 details{margin:8px 0}pre{white-space:pre-wrap;font-size:.82rem;margin:6px 0}code{font-family:ui-monospace,monospace;font-size:.85rem}
 </style>
 </head><body>
 <h1>Convertisseur Lesen → lesen-data.js (Modèle Idéal)</h1>
-<p class="mut">Collez votre texte structuré ou vos données pour générer le code exact de votre <code>lesen-data.js</code> sans erreur.</p>
-<details><summary><b>Aide-mémoire du format</b></summary><pre id="help"></pre></details>
+<p class="mut">Sélectionnez vos fichiers ou collez votre texte structuré ci-dessous.</p>
+
+<div class="row">
+  <label for="fileInput"><b>Importer des fichiers :</b></label>
+  <input type="file" id="fileInput" multiple accept=".txt,.md">
+</div>
+
 <div class="row"><button id="conv">Convertir</button></div>
-<textarea id="in" rows="18" placeholder="#MT 8&#10;#TITEL Modelltest 8&#10;&#10;#TEIL 1&#10;#TITEL ...&#10;..."></textarea>
+<textarea id="in" rows="16" placeholder="#MT 8&#10;#TITEL Modelltest 8&#10;&#10;#TEIL 1&#10;#TITEL ..."></textarea>
 <div id="sum"></div>
-<div id="stats"></div>
 <div id="issues"></div>
-<h3>1. Bloc à coller dans lesen-data.js (ex: const MT8 = [...])</h3>
+
+<h3>1. Bloc à coller dans lesen-data.js</h3>
 <textarea id="out1" rows="10" readonly></textarea>
 <div class="row"><button id="c1">Copier le bloc</button></div>
+
 <h3>2. Ligne à ajouter dans <code>TESTS</code></h3>
 <textarea id="out2" rows="2" readonly></textarea>
 <div class="row"><button id="c2">Copier la ligne</button></div>
@@ -66,16 +72,14 @@ function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(M
 
 function parse(src){
   var E=[],mt={id:null,title:'',teile:[]},cur=null,blk=null;
-  function err(c,m){E.push({sev:'error',ctx:c,msg:m});}
   src.split(/\r?\n/).forEach(function(raw,ln){
     var m=raw.match(/^\s*#([A-Za-zÄÖÜäöüß]+)\s*(.*)$/);
     if(m){
       var d=m[1].toUpperCase(),v=m[2].trim();
-      if(DIR.indexOf(d)<0){err('Ligne '+(ln+1),'directive inconnue #'+m[1]);return;}
       if(d==='MT'){mt.id=parseInt(v,10);blk=null;return;}
       if(d==='TEIL'){cur={n:parseInt(v,10),titel:'',anw:'',blocks:{},spalten:'',grafik:''};mt.teile.push(cur);blk=null;return;}
       if(d==='TITEL'){if(cur)cur.titel=v;else mt.title=v;blk=null;return;}
-      if(!cur){err('Ligne '+(ln+1),'#'+d+' avant le premier #TEIL');return;}
+      if(!cur)return;
       if(d==='ANWEISUNG'){cur.anw=v;blk=null;return;}
       if(d==='SPALTEN'){cur.spalten=v;blk=null;return;}
       if(d==='GRAFIK')cur.grafik=v;
@@ -89,26 +93,17 @@ function parse(src){
 function bGap(t){
   var txt=para(t.blocks.TEXT||[]).join(' ');
   var segs=txt.split(/\{(\d+)\}/);
-  var gaps=[];
-  var gl={};
+  var gaps=[];var gl={};
   (t.blocks.LUECKEN||[]).forEach(function(l){
     var m=l.match(/^\s*(\d+)\)\s*(.*)$/);
     if(m) gl[+m[1]]=m[2];
   });
-  // Reconstitution propre des segments et gaps selon la structure exacte
   var cleanSegs=[segs[0]];
-  for(var i=1; i<segs.length; i+=2){
-    cleanSegs.push(segs[i+1]||'');
-  }
-  // Extraction des options pour chaque lacune
-  var keys=Object.keys(gl).sort(function(a,b){return a-b;});
-  keys.forEach(function(k){
+  for(var i=1; i<segs.length; i+=2) cleanSegs.push(segs[i+1]||'');
+  Object.keys(gl).sort(function(a,b){return a-b;}).forEach(function(k){
     var parts=gl[k].split('|').map(function(p){return p.trim();});
     var correct=0;
-    var opts=parts.map(function(p,idx){
-      if(p.charAt(0)==='*'){correct=idx;return p.slice(1).trim();}
-      return p;
-    });
+    var opts=parts.map(function(p,idx){if(p.charAt(0)==='*'){correct=idx;return p.slice(1).trim();}return p;});
     gaps.push({options:opts, correct:correct});
   });
   return {segments:cleanSegs, gaps:gaps};
@@ -117,8 +112,7 @@ function bGap(t){
 function bOrder(t){
   var items=(t.blocks.ABSCHNITTE||[]).filter(function(l){return l.trim();}).map(function(l){return l.trim().replace(/^\d+[\).]\s*/,'');});
   var idx=items.map(function(_,i){return i;});
-  var sh=shuffle(idx);
-  return {correctOrder:idx, items:items, shuffledStart:sh};
+  return {correctOrder:idx, items:items, shuffledStart:shuffle(idx)};
 }
 
 function bMc(t){
@@ -128,10 +122,7 @@ function bMc(t){
     var m=l.match(/^F:\s*(.*)$/);
     if(m){cur={q:m[1],options:[],correct:0};qs.push(cur);return;}
     var o=l.match(/^(\*?)\s*([a-dA-D])\)\s*(.*)$/);
-    if(o&&cur){
-      if(o[1]) cur.correct=cur.options.length;
-      cur.options.push(o[3]);
-    }
+    if(o&&cur){if(o[1]) cur.correct=cur.options.length; cur.options.push(o[3]);}
   });
   return {passage:para(t.blocks.TEXT||[]), questions:qs};
 }
@@ -166,8 +157,7 @@ function bTwo(t){
     var l=raw.trim();if(!l)return;
     var m=l.match(/^([a-z])\)\s*(.*?)(?:\s*=>\s*([A-Za-z][0-9]))?\s*$/);
     if(m){
-      as.push({key:m[1], text:'['+m[1+']']+' '+m[2]}); // Garde la syntaxe exacte
-      as[as.length-1].text='['+m[1]+'] '+m[2];
+      as.push({key:m[1], text:'['+m[1]+'] '+m[2]});
       if(m[3]){var k=TG[m[3].toUpperCase()];if(k)cm[k]=m[1];}
     }
   });
@@ -196,8 +186,9 @@ function bSum(t){
 var BUILD=[bGap,bOrder,bMc,bMatch,bTable,bTwo,bSum];
 
 function ser(p,n){
-  var F=['    instructions:'+q(p.instructions),'    title:'+q(p.title)],ty=p.type;
+  var F=['    instructions:'+q(p.instructions),'    title:'+q(p.title)];
   function lst(a,f,ind){return '[\n'+a.map(function(x){return ind+f(x);}).join(',\n')+'\n    ]';}
+  var ty=p.type;
   if(ty==='gap'){
     F.push('    segments:'+lst(p.segments,q,'      '));
     F.push('    gaps:'+lst(p.gaps,function(g){return '{options:['+g.options.map(q).join(',')+'], correct:'+g.correct+'}';},'      '));
@@ -234,34 +225,50 @@ function ser(p,n){
 }
 
 function build(src){
-  var P=parse(src),I=P.E,mt=P.mt,model=[];
+  var P=parse(src),mt=P.mt,model=[];
   var id=mt.id;
   for(var n=1;n<=7;n++){
     var t=null;mt.teile.forEach(function(x){if(x.n===n)t=x;});
     if(!t)continue;
-    var built=BUILD[n-1](t);
-    var fields=Object.assign({instructions:t.anw||DEF[n-1],title:t.titel},built);
-    model.push(Object.assign({},TEMPLATE[n-1],fields));
+    model.push(Object.assign({},TEMPLATE[n-1],{instructions:t.anw||DEF[n-1],title:t.titel},BUILD[n-1](t)));
   }
   var code='',tline='';
   if(model.length===7&&id){
     code='const MT'+id+' = [\n'+model.map(function(p,i){return ser(p,i+1);}).join(',\n')+'\n];';
     tline='{id:'+id+', title:'+q(mt.title)+', teile: MT'+id+'}';
   }
-  return {code:code, tline:tline, issues:I};
+  return {code:code, tline:tline};
 }
 
-var $=function(i){return document.getElementById(i);};
-function copy(id){var t=$(id);t.select();try{document.execCommand('copy');}catch(e){}}
-$('c1').onclick=function(){copy('out1');};$('c2').onclick=function(){copy('out2');};
+var $=function(i){return document.getElementById(i);};$('fileInput').onchange=function(e){
+  var files=e.target.files;
+  if(!files.length)return;
+  var content="";
+  var loaded=0;
+  for(var i=0; i<files.length; i++){
+    var reader=new FileReader();
+    reader.onload=(function(fIndex){
+      return function(evt){
+        content+=evt.target.result+"\n\n";
+        loaded++;
+        if(loaded===files.length){
+          $('in').value=content;
+        }
+      };
+    })(i);
+    reader.readAsText(files[i]);
+  }
+};
 
 $('conv').onclick=function(){
   var r=build($('in').value);$('out1').value=r.code;
   $('out2').value=r.tline;
   if(r.code){
-    $('sum').innerHTML='<div class="box ok">✓ Conversion réussie et code généré avec succès !</div>';
+    $('sum').innerHTML='<div class="box ok">✓ Conversion réussie !</div>';
   } else {
-    $('sum').innerHTML='<div class="box error">✖ Erreur de conversion, vérifiez les balises #MT, #TITEL et les 7 #TEIL.</div>';
+    $('sum').innerHTML='<div class="box error">✖ Erreur de conversion, vérifiez le contenu.</div>';
   }
 };
+$('c1').onclick=function(){$('out1').select();try{document.execCommand('copy');}catch(e){}};
+$('c2').onclick=function(){$('out2').select();try{document.execCommand('copy');}catch(e){}};
 </script></body></html>
