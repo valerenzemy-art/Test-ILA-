@@ -1393,7 +1393,18 @@ const MT9 = [
     passage:'In den vergangenen Jahrzehnten haben sozialwissenschaftliche Experimente wesentliche Erkenntnisse über menschliches Verhalten geliefert. Allerdings sind klassische Studien zeitaufwendig, teuer und leiden unter der Replikationskrise. Ein internationales Forschungsteam hat nun ein innovatives Verfahren entwickelt, bei dem Sprachmodelle (KI) darauf trainiert wurden, die Ergebnisse vorherzusagen. Anstatt Teilnehmer zu befragen, simulieren Forschende Interaktionen mithilfe autonomer KI-Agenten. In über 80 Prozent der Fälle stimmten die Prognosen der KI mit den tatsächlichen empirischen Resultaten überein. Wissenschaftler betonen jedoch ausdrücklich, dass die KI die traditionelle Forschung keineswegs vollständig ersetzen könne, sondern als analytisches Werkzeug zur Hypothesenfilterung dienen soll. Experten warnen zudem vor ethischen Risiken und systematischen Verzerrungen (Bias) in den Trainingsdaten.',
     graphicData:[{year:'Klassische Expertenprognose',val:48},{year:'Erfahrenes Forschungsteam',val:62},{year:'KI-gestützte Simulation',val:83},{year:'Empirisches Replikationsexperiment',val:100}],
     graphicCaption:'Vorhersagegenauigkeit von Forschungsmethoden bei sozialen Phänomenen (%) — KI-Simulation: ca. 500 € | Klassisches Feldexperiment: ca. 25.000 €',
-    sentences
+    sentences:[
+      {text:'Traditionelle sozialwissenschaftliche Experimente gelten als aufwendig und kostspielig, weshalb das Fachgebiet häufig unter Replikationsproblemen leidet.', wrong:false},
+      {text:'Um diese methodischen Hürden zu überwinden, setzen Forschende nun Künstliche Intelligenz ein, um menschliches Verhalten in Experimenten zu simulieren.', wrong:false},
+      {text:'Die Trefferquote der KI-gestützten Simulationen liegt laut Untersuchungen bei über 80 Prozent und übertrifft damit die Genauigkeit von Fachwissenschaftlern deutlich.', wrong:false},
+      {text:'Aufgrund dieser hohen Präzision planen die Wissenschaftler, empirische Experimente mit Menschen in Zukunft komplett durch KI-Systeme zu ersetzen.', wrong:true},
+      {text:'Ein großer finanzieller Vorteil der KI-Methode besteht darin, dass eine Simulationsreihe mit rund 500 Euro erheblich günstiger ist als ein klassisches Feldexperiment.', wrong:false},
+      {text:'Fachleute weisen darauf hin, dass die Datenbasis der KI-Modelle frei von systematischen Verzerrungen ist, was die wissenschaftliche Objektivität garantiert.', wrong:true},
+      {text:'Trotz des Fortschritts wird betont, dass KI-Modelle primär dazu genutzt werden sollten, Hypothesen im Vorfeld zu überprüfen und Studien gezielter zu planen.', wrong:false},
+      {text:'Die klassische Expertenprognose erzielt bei der Vorhersage sozialer Phänomene eine Genauigkeit von mehr als 60 Prozent.', wrong:true}
+    ]
+  }
+];
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
