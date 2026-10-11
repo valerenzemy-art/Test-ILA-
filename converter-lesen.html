@@ -242,7 +242,7 @@ function parse(src){
       if(d==='GRAFIK')cur.grafik=v;
       cur.blocks[d]=cur.blocks[d]||[];blk=cur.blocks[d];return;
     }
-    if(blk)blk.push(raw);else if(raw.trim())err('Ligne '+(ln+1),'texte hors section : « '+raw.trim().slice(0,40)+' »');
+    if(blk)blk.push(raw);
   });
   return {mt:mt,E:E};
 }
@@ -320,9 +320,7 @@ function bTwo(t,e){
     var l=raw.trim();if(!l)return;
     var m=l.match(/^([a-z])\)\s*(.*?)(?:\s*=>\s*([A-Za-z][0-9]))?\s*$/);
     if(!m){e('ligne non reconnue : « '+l.slice(0,40)+' »');return;}
-    as.push({key:m[1],text:'['+m[1+']']+' '+m[2]}); // Fixed key bracket index safely if needed, or keeping exact logic:
-    // Wait, let's keep original code: text:'['+m[1]+'] '+m[2]
-    as[as.length-1].text = '['+m[1]+'] '+m[2];
+    as.push({key:m[1],text:'['+m[1]+'] '+m[2]});
     if(m[3]){var k=TG[m[3].toUpperCase()];if(!k)e('étiquette « '+m[3]+' » invalide (V1, V2, N3, N4)');else{if(cm[k])e('étiquette '+m[3]+' utilisée deux fois');cm[k]=m[1];}}
   });
   var map={};['v1','v2','n3','n4'].forEach(function(k){if(k in cm)map[k]=cm[k];});
@@ -473,17 +471,27 @@ var MODELL=[
 var $=function(i){return document.getElementById(i);};$('help').textContent=HELP;
 $('mod').onclick=function(){$('in').value=MODELL;};
 
-/* Gestion de la sélection multiple de 7 PDF */
+/* Gestion intelligente et propre des 7 PDF : nettoyage automatique des parasites */
 $('pdfBtn').onclick=function(){ $('pdfFiles').click(); };$('pdfFiles').onchange=function(e){
   var files = Array.from(e.target.files);
   if(!files.length) return;
   
-  // Tri optionnel des fichiers par nom pour s'assurer de l'ordre (Teil 1 à 7)
   files.sort(function(a, b) {
     return a.name.localeCompare(b.name, undefined, {numeric: true, sensitivity: 'base'});
   });
 
-  var promises = files.map(function(file){
+  // Liste des mots-clés parasites typiques des PDF d'examen à éliminer automatiquement
+  var ignorePatterns = [
+    /TestDaF Digital/i,
+    /Vorbereitungsmaterial/i,
+    /Niveau C1/i,
+    /Lesen – Aufgabe/i,
+    /Didaktische Analyse/i,
+    /github\.io/i,
+    /^\d+$/ // Lignes ne contenant qu'un numéro de page
+  ];
+
+  var promises = files.map(function(file, index){
     return new Promise(function(resolve, reject){
       var reader = new FileReader();
       reader.onload = function(evt){
@@ -494,12 +502,25 @@ $('pdfBtn').onclick=function(){ $('pdfFiles').click(); };$('pdfFiles').onchange=
           for (var j = 1; j <= maxPages; j++) {
             pagePromises.push(pdf.getPage(j).then(function(page){
               return page.getTextContent().then(function(textContent){
-                return textContent.items.map(function(item){ return item.str; }).join(' ');
+                // Filtre ligne par ligne pour exclure les en-têtes/pieds de page parasites
+                var cleanItems = textContent.items.map(function(item){ return item.str.trim(); }).filter(function(str){
+                  if(!str) return false;
+                  for(var p=0; p<ignorePatterns.length; p++){
+                    if(ignorePatterns[p].test(str)) return false;
+                  }
+                  return true;
+                });
+                return cleanItems.join(' ');
               });
             }));
           }
           Promise.all(pagePromises).then(function(texts){
-            resolve(texts.join('\n\n'));
+            var text = texts.join('\n\n');
+            var teilNum = index + 1;
+            if (!text.includes('#TEIL')) {
+              text = '#TEIL ' + teilNum + '\n#TITEL Teil ' + teilNum + '\n#TEXT\n' + text;
+            }
+            resolve(text);
           });
         }).catch(reject);
       };
@@ -508,8 +529,7 @@ $('pdfBtn').onclick=function(){ $('pdfFiles').click(); };$('pdfFiles').onchange=
   });
 
   Promise.all(promises).then(function(results){
-    // Joint le contenu des 7 PDF extraits avec des sauts de ligne
-    $('in').value = results.join('\n\n\n');
+    $('in').value = '#MT 6\n#TITEL Modelltest 6 (Digitaler TestDaF)\n\n' + results.join('\n\n\n');
   }).catch(function(err){
     alert("Erreur lors de la lecture des PDF : " + err.message);
   });
