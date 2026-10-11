@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertisseur Lesen</title>
+<style>
+:root{--bg:#fff;--fg:#1c1c1c;--mut:#666;--bd:#d8d8d8;--err:#b42318;--errbg:#fdecea;--wrn:#9a5b00;--wrnbg:#fff4e0;--ok:#1e6b34;--okbg:#e6f4ea}
+@media(prefers-color-scheme:dark){:root{--bg:#161616;--fg:#eee;--mut:#999;--bd:#3a3a3a;--err:#ff8a80;--errbg:#3a1d1b;--wrn:#ffcc80;--wrnbg:#3a2c12;--ok:#81c995;--okbg:#17301f}}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--fg);max-width:900px;margin:0 auto;padding:12px;line-height:1.45}
+h1{font-size:1.3rem;margin:.2em 0}h3{font-size:1rem;margin:14px 0 4px}
+.mut{color:var(--mut);font-size:.9rem}
+textarea{width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:13px;background:var(--bg);color:var(--fg);border:1px solid var(--bd);border-radius:6px;padding:8px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+button{padding:9px 14px;font-size:15px}
+.box{padding:9px 11px;border-radius:8px;margin:5px 0;font-size:.95rem;word-break:break-word}
+.error{background:var(--errbg);color:var(--err)}.warn{background:var(--wrnbg);color:var(--wrn)}.ok{background:var(--okbg);color:var(--ok)}
+details{margin:8px 0}pre{white-space:pre-wrap;font-size:.82rem;margin:6px 0}code{font-family:ui-monospace,monospace;font-size:.85rem}
+</style></head><body>
+<h1>Convertisseur Lesen → lesen-data.js</h1>
+<p class="mut">Tu écris un Modelltest dans un format texte simple. L'outil génère le code exact pour <code>lesen-data.js</code>, le contrôle et relit son propre résultat.</p>
+<details><summary><b>Aide-mémoire du format</b></summary><pre id="help"></pre></details>
+<div class="row"><button id="mod">Insérer un exemple</button><button id="conv">Convertir</button></div>
+<textarea id="in" rows="18" placeholder="#MT 6&#10;#TITEL Modelltest 6 (Digitaler TestDaF)&#10;&#10;#TEIL 1&#10;..."></textarea>
+<div id="sum"></div>
+<div id="stats"></div>
+<div id="issues"></div>
+<h3>1. Bloc à coller dans lesen-data.js (avant <code>const TESTS</code>)</h3>
+<textarea id="out1" rows="10" readonly></textarea>
+<div class="row"><button id="c1">Copier le bloc</button></div>
+<h3>2. Ligne à ajouter dans <code>TESTS</code></h3>
+<textarea id="out2" rows="2" readonly></textarea>
+<div class="row"><button id="c2">Copier la ligne</button></div>
+
+<script>
+/* ===== Logique de contrôle (pure) ===== */
+var KNOWN=[
+ [/Gehim|Kleinhim/,'Gehirn / Kleinhirn (rn→m)'],[/\bKl-/,'KI (i→l)'],[/urspünglich/,'ursprünglich'],
+ [/stablien/,'stabilen'],[/egometris/,'egomanisch / egozentrisch ?'],[/Industrimengen/,'Industriemengen'],
+ [/zugebenermaßen/,'zugegebenermaßen'],[/physakalisch/,'physikalisch'],[/Mikroklimat\b/,'Mikroklimata'],
+ [/Paaroffene/,'« offene Fragen » ?'],[/\bzu warmen\b/,'zu warnen ?'],
+ [/[éèêàâçñô]/,'caractère non allemand (accent français)'],
+ [/Massnahmen|\bhiess|ausschliesslich|\bgrosse|Strasse|schliesslich/i,'ss au lieu de ß ?']
+];
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function isInt(n,min,max){return typeof n==='number'&&n%1===0&&n>=min&&n<=max;}
+function dupes(a){var s={},d=false;a.forEach(function(x){if(s[x])d=true;s[x]=1;});return d;}
+function snip(s,i,len){return '…'+s.slice(Math.max(0,i-18),i+len+18).replace(/\s+/g,' ')+'…';}
+function walk(o,path,cb){
+  if(typeof o==='string')return cb(o,path);
+  if(Array.isArray(o))o.forEach(function(v,i){walk(v,path+'['+i+']',cb);});
+  else if(o&&typeof o==='object')Object.keys(o).forEach(function(k){walk(o[k],path?path+'.'+k:k,cb);});
+}
+function validate(T,skip){
+  var I=[],ORDER=['gap','order','mc','match','table','twocat','summary'];
+  function add(sev,ctx,msg){I.push({sev:sev,ctx:ctx,msg:msg});}
+  if(!Array.isArray(T)){add('error','TESTS',"TESTS n'est pas un tableau");return I;}
+  var seen={};
+  T.forEach(function(t){
+    if(skip&&skip[t.id])return;
+    var tc='MT'+t.id;
+    if(seen[t.id])add('error',tc,'id en double');seen[t.id]=1;
+    if(!Array.isArray(t.teile)||t.teile.length!==7){add('error',tc,'doit contenir 7 Teile (trouvé '+(t.teile&&t.teile.length)+')');return;}
+    t.teile.forEach(function(p,i){
+      var c=tc+' › Teil '+(i+1), n;
+      if(p.teil!==i+1)add('error',c,'champ teil = '+p.teil+' (attendu '+(i+1)+')');
+      if(p.type!==ORDER[i])add('error',c,'type = « '+p.type+' » (attendu « '+ORDER[i]+' »)');
+      if(!p.instructions)add('error',c,'instructions manquantes');
+      if(!p.title)add('error',c,'title manquant');
+      if(typeof p.time!=='number'||p.time<=0)add('error',c,'time invalide');
+      if(p.type==='gap'){
+        var s=p.segments,g=p.gaps;
+        if(!Array.isArray(s)||!Array.isArray(g)){add('error',c,'segments ou gaps manquant');}
+        else{
+          if(s.length!==g.length+1)add('error',c,'segments ('+s.length+') doit valoir lacunes + 1 ('+(g.length+1)+')');
+          g.forEach(function(x,k){var m='lacune '+(k+1);
+            if(!Array.isArray(x.options)||x.options.length!==4)add('error',c,m+' : 4 options attendues');
+            else{
+              if(dupes(x.options))add('error',c,m+' : options en double');
+              x.options.forEach(function(o){if(/^[a-zäöü]\s[a-zäöü]{3,}/.test(o))add('warn',c,m+' : option suspecte « '+o+' »');});
+            }
+            if(!isInt(x.correct,0,(x.options||[]).length-1))add('error',c,m+' : correct invalide ('+x.correct+')');
+          });
+          var cs=g.map(function(x){return x.correct;});
+          if(cs.length>1&&cs.every(function(v){return v===cs[0];}))add('warn',c,'toutes les bonnes réponses = option '+(cs[0]+1)+" (vérifie que l'appli mélange les options)");
+        }
+      }
+      if(p.type==='order'){
+        n=(p.items||[]).length;
+        if(n!==5)add('warn',c,n+' items (5 attendus)');
+        var perm=function(a){return Array.isArray(a)&&a.length===n&&a.slice().sort(function(x,y){return x-y;}).every(function(v,k){return v===k;});};
+        if(!perm(p.correctOrder))add('error',c,"correctOrder n'est pas une permutation de 0.."+(n-1));
+        if(!perm(p.shuffledStart))add('error',c,"shuffledStart n'est pas une permutation de 0.."+(n-1));
+        else if(perm(p.correctOrder)&&p.correctOrder.every(function(v,k){return v===p.shuffledStart[k];}))add('error',c,'shuffledStart = correctOrder (déjà résolu au départ)');
+        if(perm(p.correctOrder)&&/^(Dieses?|Diese[rnm]?|Genau|Dennoch|Zudem|Außerdem|Deshalb|Daher)\b/.test(p.items[p.correctOrder[0]]))add('warn',c,'le 1er item de la solution commence par un connecteur / renvoi : « '+p.items[p.correctOrder[0]].slice(0,40)+'… »');
+        if(Array.isArray(p.items)&&dupes(p.items))add('error',c,'items en double');
+      }
+      if(p.type==='mc'){
+        var ps=p.passage,qs=p.questions;
+        if(!Array.isArray(ps)||!Array.isArray(qs)){add('error',c,'passage ou questions manquant');}
+        else{
+          ps.forEach(function(t,k){var m=t.match(/^\((\d+)\)/);if(!m||+m[1]!==k+1)add('warn',c,'paragraphe '+(k+1)+' : numérotation « ('+(k+1)+') » absente ou fausse');});
+          if(qs.length!==7)add('warn',c,qs.length+' questions (7 attendues)');
+          var cnt={};
+          qs.forEach(function(q,k){var m='question '+(k+1);
+            if(!q.q)add('error',c,m+' : énoncé manquant');
+            if(!Array.isArray(q.options)||q.options.length!==4)add('error',c,m+' : 4 options attendues');
+            else if(dupes(q.options))add('error',c,m+' : options en double');
+            if(!isInt(q.correct,0,3))add('error',c,m+' : correct invalide ('+q.correct+')');
+            cnt[q.correct]=(cnt[q.correct]||0)+1;
+            var a=(q.q||'').match(/Absatz (\d+)/);
+            if(a&&+a[1]>ps.length)add('error',c,m+' : renvoie à Absatz '+a[1]+' mais le texte a '+ps.length+' paragraphes');
+          });
+          var mx=Math.max.apply(null,Object.keys(cnt).map(function(k){return cnt[k];}));
+          if(mx>=4)add('warn',c,'biais de position : '+mx+'/'+qs.length+' bonnes réponses à la même position');
+        }
+      }
+      if(p.type==='match'){
+        var t2=p.passageText||'';
+        [1,2,3,4].forEach(function(k){var m=t2.split('['+k+']').length-1;if(m!==1)add('error',c,'marqueur ['+k+'] présent '+m+' fois (1 attendue)');});
+        var so=(t2.match(/<strong>/g)||[]).length,sc=(t2.match(/<\/strong>/g)||[]).length;
+        if(so!==sc)add('error',c,'<strong> non fermé ('+so+' ouvrants / '+sc+' fermants)');
+        if(JSON.stringify(p.textStellen)!=='[1,2,3,4]')add('warn',c,'textStellen devrait être [1,2,3,4]');
+        if(!Array.isArray(p.options)||p.options.length!==8)add('warn',c,'8 options attendues (trouvé '+(p.options&&p.options.length)+')');
+        if(!Array.isArray(p.correct)||p.correct.length!==4)add('error',c,'correct doit avoir 4 valeurs');
+        else{
+          p.correct.forEach(function(v,k){if(!isInt(v,0,(p.options||[]).length-1))add('error',c,'correct['+k+'] invalide ('+v+')');});
+          if(dupes(p.correct))add('error',c,'deux Textstellen ont la même solution');
+        }
+      }
+      if(p.type==='table'){
+        if(!p.passage)add('error',c,'passage manquant');
+        if(!Array.isArray(p.columns)||p.columns.length!==4)add('error',c,'4 colonnes attendues');
+        if(!Array.isArray(p.items)||p.items.length!==7)add('warn',c,'7 items attendus (trouvé '+(p.items&&p.items.length)+')');
+        (p.items||[]).forEach(function(x,k){
+          if(!x.text)add('error',c,'item '+(k+1)+' : text manquant');
+          if(!isInt(x.correct,0,(p.columns||[]).length-1))add('error',c,'item '+(k+1)+' : correct invalide ('+x.correct+')');
+        });
+      }
+      if(p.type==='twocat'){
+        var as=p.aussagen||[],keys=as.map(function(a){return a.key;});
+        if(as.length!==8)add('warn',c,as.length+' Aussagen (8 attendues)');
+        if(dupes(keys))add('error',c,'clés des Aussagen en double');
+        as.forEach(function(a){if(a.text.indexOf('['+a.key+']')!==0)add('error',c,'Aussage « '+a.key+' » : le texte ne commence pas par ['+a.key+']');});
+        var cm=p.correctMap||{},vals=[];
+        ['v1','v2','n3','n4'].forEach(function(k){
+          if(!(k in cm))add('error',c,'correctMap.'+k+' manquant');
+          else{vals.push(cm[k]);if(keys.indexOf(cm[k])<0)add('error',c,'correctMap.'+k+' = « '+cm[k]+' » n\'existe pas dans aussagen');}
+        });
+        if(dupes(vals))add('error',c,'correctMap : deux cases ont la même réponse');
+      }
+      if(p.type==='summary'){
+        var ss=p.sentences||[];
+        var w=ss.filter(function(x){return x.wrong===true;}).length;
+        ss.forEach(function(x,k){if(typeof x.wrong!=='boolean')add('error',c,'phrase '+(k+1)+' : wrong doit être true/false');if(!x.text)add('error',c,'phrase '+(k+1)+' : text manquant');});
+        if(/drei/i.test(p.instructions||'')&&w!==3)add('error',c,w+' phrases fausses (consigne : exactement 3)');
+        if(w===0)add('error',c,'aucune phrase fausse');
+        if(p.graphicSvg&&!/^<svg[\s\S]*<\/svg>$/.test(String(p.graphicSvg).trim()))add('error',c,'graphicSvg doit commencer par <svg et finir par </svg>');
+        if(p.graphicData){
+          var gv=p.graphicData.map(function(d){return d.val;});
+          if(gv.length>1&&gv.every(function(v){return v===gv[0];}))add('warn',c,'graphique factice : toutes les valeurs sont identiques ('+gv[0]+')');
+          if(!p.graphicCaption)add('warn',c,'graphicCaption manquant');
+        }
+      }
+      /* scan texte */
+      var seenMsg={};
+      walk(p,'',function(str,path){
+        var key=path.split(/[.\[]/)[0],html=(key==='passageText');if(key==='graphicSvg')return;
+        function A(sev,msg,idx,len){var m=path+' : '+msg+(idx>=0?'  '+snip(str,idx,len):'');if(!seenMsg[m]){seenMsg[m]=1;add(sev,c,m);}}
+        KNOWN.forEach(function(k){var m=str.match(k[0]);if(m)A('warn','faute probable « '+m[0]+' » → '+k[1],m.index,m[0].length);});
+        var r=str.match(/\b([A-Za-zÄÖÜäöüß]{4,})\s+\1\b/i);if(r)A('warn','mot répété « '+r[0]+' »',r.index,r[0].length);
+        var d=str.match(/\S {2,}\S/);if(d)A('warn','double espace',d.index,d[0].length);
+        var sp=str.match(/\S\s[,;]/);if(sp)A('warn','espace avant ponctuation',sp.index,sp[0].length);
+        var tg=/<\/?([A-Za-z0-9]+)/g,m2;
+        while((m2=tg.exec(str))){
+          var name=m2[1].toLowerCase();
+          if(html){if(name!=='br'&&name!=='strong')A('error','balise inattendue <'+name+'>',m2.index,m2[0].length);}
+          else if(key==='passage')A('error','balise <'+name+'> dans un passage : elle s\'affiche en clair dans l\'appli (<br> visible au Teil 6). Supprime-la ou remplace par un espace',m2.index,m2[0].length);
+          else A('warn','balise HTML dans un champ texte : <'+name+'>',m2.index,m2[0].length);
+        }
+      });
+    });
+  });
+  return I;
+}
+</script>
+<script>
+/* ===== Conversion (pure) ===== */
+var TEMPLATE=[
+ {teil:1,type:'gap',time:240,label:'Lückentext ergänzen'},
+ {teil:2,type:'order',time:300,label:'Textabschnitte ordnen'},
+ {teil:3,type:'mc',time:900,label:'Multiple Choice (C1 Level)'},
+ {teil:4,type:'match',time:360,label:'Textstellen zuordnen (C1 Level)'},
+ {teil:5,type:'table',time:540,label:'Aussagen Kategorien zuordnen'},
+ {teil:6,type:'twocat',time:420,label:'Vorteile / Nachteile Zuordnung (C1 Level)'},
+ {teil:7,type:'summary',time:420,label:'Fehler in Zusammenfassung erkennen'}];
+var DEF=[
+ 'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
+ 'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+ 'Lesen Sie den wissenschaftlichen Text. Beantworten Sie die Fragen mit den Optionen a, b, c oder d.',
+ 'Lesen Sie den Expertenkommentar. Ordnen Sie die Textstellen 1 – 4 den Aussagen unten zu. Für jede Textstelle gibt es genau eine richtige Lösung.',
+ 'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
+ 'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
+ 'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.'];
+var DIR=['MT','TITEL','TEIL','ANWEISUNG','TEXT','LUECKEN','ABSCHNITTE','FRAGEN','AUSSAGEN','SPALTEN','GRAFIK','SAETZE','GRAFIKSVG'];
+
+function q(s){return "'"+String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'")+"'";}
+function tl(s){return '`'+String(s).replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$\{/g,'\\${')+'`';}
+function para(lines){
+  var out=[],buf=[];
+  lines.forEach(function(l){if(l.trim()===''){if(buf.length)out.push(buf.join(' ').replace(/\s+/g,' ').trim());buf=[];}else buf.push(l.trim());});
+  if(buf.length)out.push(buf.join(' ').replace(/\s+/g,' ').trim());
+  return out;
+}
+function plain(lines){return para(lines).join(' ').replace(/\*\*(.+?)\*\*/g,'$1');}
+function html(lines){return para(lines).join('<br><br>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+
+function parse(src){
+  var E=[],mt={id:null,title:'',teile:[]},cur=null,blk=null;
+  function err(c,m){E.push({sev:'error',ctx:c,msg:m});}
+  src.split(/\r?\n/).forEach(function(raw,ln){
+    var m=raw.match(/^\s*#([A-Za-zÄÖÜ]+)\s*(.*)$/);
+    if(m){
+      var d=m[1].toUpperCase(),v=m[2].trim();
+      if(DIR.indexOf(d)<0){err('Ligne '+(ln+1),'directive inconnue #'+m[1]);return;}
+      if(d==='MT'){mt.id=parseInt(v,10);blk=null;return;}
+      if(d==='TEIL'){cur={n:parseInt(v,10),titel:'',anw:'',blocks:{},spalten:'',grafik:''};mt.teile.push(cur);blk=null;return;}
+      if(d==='TITEL'){if(cur)cur.titel=v;else mt.title=v;blk=null;return;}
+      if(!cur){err('Ligne '+(ln+1),'#'+d+' avant le premier #TEIL');return;}
+      if(d==='ANWEISUNG'){cur.anw=v;blk=null;return;}
+      if(d==='SPALTEN'){cur.spalten=v;blk=null;return;}
+      if(d==='GRAFIK')cur.grafik=v;
+      cur.blocks[d]=cur.blocks[d]||[];blk=cur.blocks[d];return;
+    }
+    if(blk)blk.push(raw);else if(raw.trim())err('Ligne '+(ln+1),'texte hors section : « '+raw.trim().slice(0,40)+' »');
+  });
+  return {mt:mt,E:E};
+}
+
+function bGap(t,e){
+  var txt=para(t.blocks.TEXT||[]).join(' '),ids=[],re=/\{(\d+)\}/g,m;
+  while((m=re.exec(txt)))ids.push(+m[1]);
+  ids.forEach(function(v,i){if(v!==i+1)e('marqueurs : attendu {'+(i+1)+'}, trouvé {'+v+'}');});
+  var segs=txt.split(/\{\d+\}/);
+  segs[0]=segs[0].replace(/^\s+/,'');segs[segs.length-1]=segs[segs.length-1].replace(/\s+$/,'');
+  var gl={},gaps=[];
+  (t.blocks.LUECKEN||[]).forEach(function(l){
+    if(!l.trim())return;
+    var m=l.match(/^\s*(\d+)\)\s*(.*)$/);
+    if(!m){e('ligne de lacune non reconnue : « '+l.trim().slice(0,40)+' »');return;}
+    gl[+m[1]]=m[2];
+  });
+  Object.keys(gl).forEach(function(k){if(+k>ids.length)e('options données pour la lacune '+k+' mais le texte n\'a que '+ids.length+' marqueur(s)');});
+  for(var i=1;i<=ids.length;i++){
+    if(!(i in gl)){e('lacune '+i+' : options manquantes');gaps.push({options:[],correct:-1});continue;}
+    var c=-1,st=0,opts=gl[i].split('|').map(function(p,k){p=p.trim();if(p.charAt(0)==='*'){c=k;st++;p=p.slice(1).trim();}return p;});
+    if(st!==1)e('lacune '+i+' : une seule option doit être marquée * (trouvé '+st+')');
+    gaps.push({options:opts,correct:c});
+  }
+  return {segments:segs,gaps:gaps};
+}
+function bOrder(t,e){
+  var items=(t.blocks.ABSCHNITTE||[]).filter(function(l){return l.trim();}).map(function(l){return l.trim().replace(/^\d+[\).]\s*/,'');});
+  var idx=items.map(function(_,i){return i;}),sh=idx,k=0;
+  do{sh=shuffle(idx);k++;}while(idx.length>1&&sh.every(function(v,i){return v===i;})&&k<50);
+  return {correctOrder:idx,items:items,shuffledStart:sh};
+}
+function bMc(t,e){
+  var qs=[],cur=null,last=null;
+  (t.blocks.FRAGEN||[]).forEach(function(raw){
+    var l=raw.trim();if(!l)return;
+    var m=l.match(/^F:\s*(.*)$/);
+    if(m){cur={q:m[1],options:[],correct:-1,stars:0,letters:[]};qs.push(cur);last='q';return;}
+    var o=l.match(/^(\*?)\s*([a-dA-D])\)\s*(.*)$/);
+    if(o&&cur){if(o[1]){cur.correct=cur.options.length;cur.stars++;}cur.options.push(o[3]);cur.letters.push(o[2].toLowerCase());last='o';return;}
+    if(cur){if(last==='q')cur.q+=' '+l;else cur.options[cur.options.length-1]+=' '+l;}else e('ligne hors question : « '+l.slice(0,40)+' »');
+  });
+  qs.forEach(function(x,i){
+    if(x.stars!==1)e('question '+(i+1)+' : une seule option doit être marquée * (trouvé '+x.stars+')');
+    if(x.letters.join('')!=='abcd'.slice(0,x.letters.length))e('question '+(i+1)+' : lettres a) b) c) d) hors ordre');
+  });
+  return {passage:para(t.blocks.TEXT||[]),questions:qs.map(function(x){return {q:x.q,options:x.options,correct:x.correct};})};
+}
+function bMatch(t,e){
+  var opts=[],map={};
+  (t.blocks.AUSSAGEN||[]).forEach(function(raw){
+    var l=raw.trim();if(!l)return;
+    var m=l.match(/^(.*?)\s*=>\s*([1-4])\s*$/);
+    if(m){if(m[2] in map)e('« => '+m[2]+' » utilisé deux fois');map[m[2]]=opts.length;}
+    opts.push(m?m[1]:l);
+  });
+  var corr=[1,2,3,4].map(function(k){if(!(k in map)){e('aucune option marquée « => '+k+' »');return -1;}return map[k];});
+  return {passageText:html(t.blocks.TEXT||[]),textStellen:[1,2,3,4],options:opts,correct:corr};
+}
+function bTable(t,e){
+  var cols=t.spalten.split('|').map(function(s){return s.trim();}).filter(Boolean),items=[];
+  if(!cols.length)e('#SPALTEN manquant');
+  (t.blocks.AUSSAGEN||[]).forEach(function(raw){
+    var l=raw.trim();if(!l)return;
+    var m=l.match(/^(.*?)\s*=>\s*(\d+)\s*$/);
+    if(!m){e('aussage sans « => n » : « '+l.slice(0,40)+' »');return;}
+    var n=+m[2];if(n<1||n>cols.length)e('« => '+n+' » hors colonnes (1..'+cols.length+')');
+    items.push({text:m[1],correct:n-1});
+  });
+  return {passage:plain(t.blocks.TEXT||[]),columns:cols,items:items};
+}
+function bTwo(t,e){
+  var as=[],cm={},TG={V1:'v1',V2:'v2',N3:'n3',N4:'n4'};
+  (t.blocks.AUSSAGEN||[]).forEach(function(raw){
+    var l=raw.trim();if(!l)return;
+    var m=l.match(/^([a-z])\)\s*(.*?)(?:\s*=>\s*([A-Za-z][0-9]))?\s*$/);
+    if(!m){e('ligne non reconnue : « '+l.slice(0,40)+' »');return;}
+    as.push({key:m[1],text:'['+m[1]+'] '+m[2]});
+    if(m[3]){var k=TG[m[3].toUpperCase()];if(!k)e('étiquette « '+m[3]+' » invalide (V1, V2, N3, N4)');else{if(cm[k])e('étiquette '+m[3]+' utilisée deux fois');cm[k]=m[1];}}
+  });
+  var map={};['v1','v2','n3','n4'].forEach(function(k){if(k in cm)map[k]=cm[k];});
+  return {passage:plain(t.blocks.TEXT||[]),aussagen:as,correctMap:map};
+}
+function bSum(t,e,warn){
+  var gd=[],ss=[];
+  (t.blocks.GRAFIK||[]).forEach(function(raw){
+    var l=raw.trim();if(!l)return;
+    var m=l.match(/^(.*?)\s*=\s*(-?\d+(?:[.,]\d+)?)$/);
+    if(!m){e('ligne #GRAFIK non reconnue : « '+l.slice(0,40)+' »');return;}
+    gd.push({year:m[1],val:parseFloat(m[2].replace(',','.'))});
+  });
+  (t.blocks.SAETZE||[]).forEach(function(raw){
+    var l=raw.trim();if(!l)return;
+    var w=l.charAt(0)==='!';ss.push({text:(w?l.slice(1):l).trim(),wrong:w});
+  });
+  var o={passage:plain(t.blocks.TEXT||[])};
+  if(gd.length){o.graphicData=gd;o.graphicCaption=t.grafik;}else warn('pas de #GRAFIK : tous tes modèles actuels ont un graphicData, vérifie que l\'appli accepte son absence');
+  var sv=(t.blocks.GRAFIKSVG||[]).join('').trim();if(sv)o.graphicSvg=sv;
+  o.sentences=ss;return o;
+}
+var BUILD=[bGap,bOrder,bMc,bMatch,bTable,bTwo,bSum];
+
+function ser(p,n){
+  var F=['    instructions:'+q(p.instructions),'    title:'+q(p.title)],ty=p.type;
+  function lst(a,f,ind){return '[\n'+a.map(function(x){return ind+f(x);}).join(',\n')+'\n    ]';}
+  if(ty==='gap'){
+    F.push('    segments:'+lst(p.segments,q,'      '));
+    F.push('    gaps:'+lst(p.gaps,function(g){return '{options:['+g.options.map(q).join(',')+'], correct:'+g.correct+'}';},'      '));
+  }else if(ty==='order'){
+    F.push('    correctOrder:['+p.correctOrder.join(',')+']');
+    F.push('    items:'+lst(p.items,q,'      '));
+    F.push('    shuffledStart:['+p.shuffledStart.join(',')+']');
+  }else if(ty==='mc'){
+    F.push('    passage:'+lst(p.passage,q,'      '));
+    F.push('    questions:'+lst(p.questions,function(x){return '{ q:'+q(x.q)+', options:[\n'+x.options.map(function(o){return '        '+q(o);}).join(',\n')+'\n      ], correct:'+x.correct+' }';},'      '));
+  }else if(ty==='match'){
+    F.push('    passageText:'+tl(p.passageText));
+    F.push('    textStellen:[1, 2, 3, 4]');
+    F.push('    options:'+lst(p.options,q,'      '));
+    F.push('    correct:['+p.correct.join(', ')+']');
+  }else if(ty==='table'){
+    F.push('    passage:'+q(p.passage));
+    F.push('    columns:['+p.columns.map(q).join(',')+']');
+    F.push('    items:'+lst(p.items,function(x){return '{text:'+q(x.text)+', correct:'+x.correct+'}';},'      '));
+  }else if(ty==='twocat'){
+    F.push('    passage:'+q(p.passage));
+    F.push('    aussagen:'+lst(p.aussagen,function(a){return '{ key:'+q(a.key)+', text:'+q(a.text)+' }';},'      '));
+    F.push('    correctMap: { '+Object.keys(p.correctMap).map(function(k){return k+': '+q(p.correctMap[k]);}).join(', ')+' }');
+  }else{
+    F.push('    passage:'+q(p.passage));
+    if(p.graphicData){
+      F.push('    graphicData:['+p.graphicData.map(function(d){return '{year:'+q(d.year)+',val:'+d.val+'}';}).join(',')+']');
+      F.push('    graphicCaption:'+q(p.graphicCaption));
+    }
+    if(p.graphicSvg)F.push('    graphicSvg:'+tl(p.graphicSvg));
+    F.push('    sentences:'+lst(p.sentences,function(s){return '{text:'+q(s.text)+', wrong:'+s.wrong+'}';},'      '));
+  }
+  return '  { ...TEMPLATE['+(n-1)+'],\n'+F.join(',\n')+'\n  }';
+}
+function words(s){return (String(s).replace(/<[^>]+>/g,' ').match(/\S+/g)||[]).length;}
+function stat(p){
+  var w=0;
+  if(p.segments)w=words(p.segments.join(' '));else if(p.items&&p.type==='order')w=words(p.items.join(' '));
+  else if(p.passage)w=words(Array.isArray(p.passage)?p.passage.join(' '):p.passage);else if(p.passageText)w=words(p.passageText);
+  var d={gap:(p.gaps||[]).length+' lacunes',order:(p.items||[]).length+' abschnitte',mc:(p.passage||[]).length+' paragraphes, '+(p.questions||[]).length+' questions',
+    match:(p.options||[]).length+' options',table:(p.items||[]).length+' aussagen',twocat:(p.aussagen||[]).length+' aussagen',
+    summary:(p.sentences||[]).length+' phrases ('+(p.sentences||[]).filter(function(s){return s.wrong;}).length+' fausses)'}[p.type];
+  return 'Teil '+p.teil+' : '+d+', '+w+' mots';
+}
+
+function build(src){
+  var P=parse(src),I=P.E.slice(),mt=P.mt,model=[],stats=[];
+  var id=mt.id;
+  if(!id||id<1)I.push({sev:'error',ctx:'En-tête',msg:'#MT manquant ou invalide (ex : #MT 6)'});
+  if(!mt.title)I.push({sev:'error',ctx:'En-tête',msg:'#TITEL du Modelltest manquant (avant le premier #TEIL)'});
+  var ctxM='MT'+(id||'?');
+  var seen={};
+  mt.teile.forEach(function(t){if(!(t.n>=1&&t.n<=7))I.push({sev:'error',ctx:ctxM,msg:'#TEIL '+t.n+' invalide (1 à 7)'});else if(seen[t.n])I.push({sev:'error',ctx:ctxM,msg:'#TEIL '+t.n+' en double'});seen[t.n]=1;});
+  for(var n=1;n<=7;n++){
+    var t=null;mt.teile.forEach(function(x){if(x.n===n)t=x;});
+    if(!t){I.push({sev:'error',ctx:ctxM,msg:'Teil '+n+' manquant'});continue;}
+    var c=ctxM+' › Teil '+n;
+    var e=function(m){I.push({sev:'error',ctx:c,msg:m});},w=function(m){I.push({sev:'warn',ctx:c,msg:m});};
+    var built=BUILD[n-1](t,e,w);
+    var fields=Object.assign({instructions:t.anw||DEF[n-1],title:t.titel},built);
+    model.push(Object.assign({},TEMPLATE[n-1],fields));
+  }
+  var code='',tline='',roundtrip=null;
+  if(model.length===7&&id){
+    code='const MT'+id+' = [\n'+model.map(function(p,i){return ser(p,i+1);}).join(',\n')+'\n];';
+    tline='{id:'+id+', title:'+q(mt.title)+', teile: MT'+id+'}';
+    try{
+      var back=new Function('TEMPLATE',code+';return MT'+id+';')(TEMPLATE);
+      roundtrip=JSON.stringify(back)===JSON.stringify(model);
+    }catch(x){roundtrip=false;I.push({sev:'error',ctx:'Code généré',msg:'le code généré ne s\'exécute pas : '+x.message});}
+    if(roundtrip===false)I.push({sev:'error',ctx:'Code généré',msg:'la relecture du code ne correspond pas aux données (ne pas utiliser)'});
+    validate([{id:id,title:mt.title,teile:model}],{}).forEach(function(x){I.push(x);});
+    model.forEach(function(p){stats.push(stat(p));});
+  }
+  return {code:code,tline:tline,issues:I,stats:stats,roundtrip:roundtrip};
+}
+</script>
+
+<script>
+/* ===== Interface ===== */
+var HELP=[
+'#MT 6',
+'#TITEL Modelltest 6 (Digitaler TestDaF)',
+'',
+'— Chaque Teil commence par #TEIL n, #TITEL ..., (option : #ANWEISUNG ...).',
+'— Si #ANWEISUNG est absent, la consigne standard est utilisée.',
+'— Ligne vide = nouveau paragraphe. Les retours à la ligne simples sont ignorés.',
+'',
+'TEIL 1 : #TEXT avec {1} {2} … pour les lacunes, puis #LUECKEN',
+'  1) *bonne | autre | autre | autre     (la bonne réponse est marquée *, à n\'importe quelle place)',
+'TEIL 2 : #ABSCHNITTE, 5 lignes DANS LE BON ORDRE (l\'outil mélange le départ)',
+'TEIL 3 : #TEXT (paragraphes numérotés (1) (2)…), puis #FRAGEN',
+'  F: énoncé       puis   a) …  *b) …  c) …  d) …',
+'TEIL 4 : #TEXT avec **[1] phrase.** (gras = Textstelle), puis #AUSSAGEN',
+'  Der Experte erklärt etwas. => 3     (=> n : cette option est la solution de la Textstelle n)',
+'TEIL 5 : #SPALTEN a | b | c | d ; #TEXT ; #AUSSAGEN  « texte => n » (n = numéro de colonne 1–4)',
+'  (Teil 5, 6, 7 : les paragraphes sont fusionnés en un bloc, car l\'appli affiche <br> en clair ; seul le Teil 4 garde le gras et les sauts)',
+'TEIL 6 : #TEXT ; #AUSSAGEN  a) texte => V1   (V1, V2 = Vorteile ; N3, N4 = Nachteile ; rien = faux)',
+'TEIL 7 : #TEXT ; #GRAFIK légende puis lignes « 2015 = 9 » ; #SAETZE (une phrase par ligne, « ! » devant = fausse)'
+].join('\n');
+var MODELL=[
+'#MT 6','#TITEL Modelltest 6 (Digitaler TestDaF)','',
+'#TEIL 1','#TITEL Schlaf und Gedächtnis','#TEXT',
+'Chronischer Schlafmangel kann die Leistung {1} und das Gedächtnis {2}.','#LUECKEN',
+'1) *beeinträchtigen | fördern | stabilisieren | ignorieren','2) schwächen | *belasten | heben | pflegen','',
+'#TEIL 2','#TITEL Die Entdeckung des Penicillins','#ABSCHNITTE',
+'1) Fleming bemerkte 1928 einen Schimmelpilz auf einer Bakterienkultur.','2) Rund um den Pilz wuchsen keine Bakterien mehr.','3) Die Entdeckung fand zunächst wenig Beachtung.','4) Später gelang die Herstellung des Wirkstoffs.','5) Im Zweiten Weltkrieg wurde Penicillin massenhaft produziert.','',
+'#TEIL 3','#TITEL Aufgabe 3: Beispieltext','#TEXT',
+'(1) Erster Absatz des Textes.','','(2) Zweiter Absatz des Textes.','#FRAGEN',
+'F: In Absatz 1 wird gesagt, dass ...','a) Option A','*b) Option B','c) Option C','d) Option D','',
+'#TEIL 4','#TITEL Aufgabe 4: Kommentar eines Experten','#TEXT',
+'Einleitung. **[1] Ob das stimmt, ist fraglich.** Mitte. **[2] Das ist derzeit noch teuer.**','','Zweiter Absatz. **[3] Das liegt an alten Denkmustern.** **[4] Künftig wird es gelingen.**','#AUSSAGEN',
+'Der Experte erklärt etwas.','Der Experte hofft auf etwas.','Der Experte prognostiziert etwas. => 4','Der Experte räumt etwas ein. => 2','Der Experte stellt etwas in Frage. => 1','Der Experte vermutet etwas. => 3','Der Experte verteidigt etwas.','Der Experte widerspricht etwas.','',
+'#TEIL 5','#TITEL Aufgabe 5: Hunde- und Katzenhalter','#SPALTEN Hundemenschen | Katzenmenschen | beide | passt nicht','#TEXT',
+'Beispieltext zur Studie.','#AUSSAGEN','Diese Personen sind sehr gesellig. => 1','Diese Gruppe hinterfragt Normen. => 2','',
+'#TEIL 6','#TITEL Aufgabe 6: Vor- und Nachteile','#TEXT','Beispieltext.','#AUSSAGEN',
+'a) Einfache Zubereitung => V1','b) Völlig ungiftig','c) Für Notfälle geeignet','d) Nicht nachweisbar','e) Lange Wirkdauer => N3','f) Mögliche Allergien => N4','g) Ersetzt alle Medikamente','h) Viele Einsatzformen => V2','',
+'#TEIL 7','#TITEL Wachstum des E-Commerce','#TEXT','Beispieltext.','#GRAFIK Grafik: Anteil des Online-Handels (in Prozent)','2015 = 9','2023 = 19','#SAETZE',
+'Der Anteil ist gestiegen.','!Lebensmittel machen den größten Anteil aus.','Mode wächst stark.','!Plattformen haben Marktanteile verloren.','!Der Anteil ist unverändert geblieben.'
+].join('\n');
+var $=function(i){return document.getElementById(i);};
+$('help').textContent=HELP;
+$('mod').onclick=function(){$('in').value=MODELL;};
+function copy(id){var t=$(id);t.select();try{document.execCommand('copy');}catch(e){}}
+$('c1').onclick=function(){copy('out1');};$('c2').onclick=function(){copy('out2');};
+$('conv').onclick=function(){
+  var r=build($('in').value),e=r.issues.filter(function(x){return x.sev==='error';}).length,w=r.issues.length-e;
+  $('out1').value=e===0?r.code:'';$('out2').value=e===0?r.tline:'';
+  var s;
+  if(e===0)s='<div class="box ok">✓ Conversion réussie'+(r.roundtrip?' — code relu : identique aux données':'')+(w?' · '+w+' avertissement(s)':'')+'</div>';
+  else s='<div class="box error"><b>'+e+' erreur(s)</b>'+(w?' · '+w+' avertissement(s)':'')+' — corrige avant de copier (aucun code n\'est produit tant qu\'il reste une erreur).</div>';
+  $('sum').innerHTML=s;
+  $('stats').innerHTML=r.stats.length?'<h3>Contrôle avec ton PDF</h3><div class="mut">'+r.stats.map(esc).join('<br>')+'</div>':'';
+  var g={},o=[];r.issues.forEach(function(x){if(!g[x.ctx]){g[x.ctx]=[];o.push(x.ctx);}g[x.ctx].push(x);});
+  var h='';o.forEach(function(c){h+='<h3>'+esc(c)+'</h3>';g[c].sort(function(a,b){return a.sev===b.sev?0:a.sev==='error'?-1:1;}).forEach(function(x){h+='<div class="box '+x.sev+'">'+(x.sev==='error'?'✖ ':'⚠ ')+esc(x.msg)+'</div>';});});
+  $('issues').innerHTML=h;
+};
+</script></body></html>
