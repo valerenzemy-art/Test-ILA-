@@ -159,13 +159,13 @@ function renderTask(){
       playlist = [
         { type: 'audio', src: 'media/consigne_t1.mp3', label: '🎧 Anweisung wird abgespielt...' },
         { type: 'pause', duration: 15000, label: '⏱️ Pause (15s)...' },
-        { type: 'audio', src: 'media/exercice_t1.mp3', label: '🎧 Haupttext läuft...' },
+        { type: 'audio', src: task.mediaUrl, label: '🎧 Haupttext läuft...' },
         { type: 'pause_end', duration: 20000, label: '⏱️ Nachbereitung...' }
       ];
     } else if(task.teil === 2) {
       playlist = [
         { type: 'audio', src: 'media/consigne_t2.mp3', label: '🎧 Anweisung wird abgespielt...' },
-        { type: 'audio', src: 'media/exercice_t2.mp3', label: '🎧 Podiumsdiskussion läuft...' },
+        { type: 'audio', src: task.mediaUrl, label: '🎧 Podiumsdiskussion läuft...' },
         { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit...' }
       ];
     } else if(task.teil === 3) {
@@ -178,7 +178,7 @@ function renderTask(){
       playlist = [
         { type: 'audio', src: 'media/consigne_t6.mp3', label: '🎧 Anweisung wird abgespielt...' },
         { type: 'pause', duration: 90000, label: '⏱️ Lesezeit: Sie haben 1 Minute und 30 Sekunden Zeit, um die Fragen zu lesen...' },
-        { type: 'audio', src: 'media/exercice_t6.mp3', label: '🎧 Vortrag läuft...' },
+        { type: 'audio', src: task.mediaUrl, label: '🎧 Vortrag läuft...' },
         { type: 'pause_end', duration: 90000, label: '⏱️ Nachbereitung: Sie haben 1 Minute und 30 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
       ];
     } else if(task.teil === 7) {
@@ -210,7 +210,11 @@ function renderTask(){
       if (currentItem.type === 'audio') {
         player.src = currentItem.src;
         player.load();
-        player.play().catch(e => console.log("Autoplay bloqué ou erreur de lecture :", e));
+        
+        player.play().catch(e => {
+          console.log("Autoplay bloqué ou erreur de lecture :", e);
+          if(statusText) statusText.innerText = "▶️ Klicken Sie auf Play, um zu starten";
+        });
         
         player.onended = function() {
           currentIndex++;
@@ -253,7 +257,8 @@ function renderTask(){
       }
     }
 
-    player.addEventListener('play', function() {
+    // Utilisation d'un écouteur robuste pour déclencher la séquence au premier clic sur Play
+    player.addEventListener('play', function handler(e) {
       if (!isPlayingSequence) {
         isPlayingSequence = true;
         currentIndex = 0;
