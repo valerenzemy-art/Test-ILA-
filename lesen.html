@@ -584,8 +584,16 @@ function showResults(){
   });
 
   const pct = sumTotal ? Math.round((sumCorrect/sumTotal)*100) : 0;
+  
+  // Seuils TDN basés strictement sur le nombre total de points corrects (35 items)
   let tdn = 'unterhalb TDN 3';
-  if(pct >= 88) tdn = 'TDN 5 (Sehr gut / C1.2)'; else if(pct >= 67) tdn = 'TDN 4 (Gut / C1.1)';
+  if (sumCorrect >= 27) {
+      tdn = 'TDN 5 (Sehr gut / C1.2)';
+  } else if (sumCorrect >= 17) {
+      tdn = 'TDN 4 (Gut / C1.1)';
+  } else if (sumCorrect >= 9) {
+      tdn = 'TDN 3 (Erfolgreich / B2/C1)';
+  }
 
   document.getElementById('main').innerHTML = `
   <div class="results">
