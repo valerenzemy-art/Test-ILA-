@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -38,6 +37,25 @@ let currentTestIdx = 0;
 let current = 0;
 const hoerenAnswers = {};
 
+/* ===== Gestion centralisée des séquences média (audio/vidéo) =====
+   - seqId : identifiant de la séquence active. Tout callback d'une ancienne
+     séquence (timer, onended) est ignoré s'il ne correspond plus.
+   - stopSequences() : coupe timers + médias quand on change d'Aufgabe / quitte. */
+let seqId = 0;
+let pauseIntervalG = null;
+let pauseTimeoutG = null;
+let activeMedia = [];
+
+function stopSequences(){
+  seqId++;
+  if(pauseIntervalG){ clearInterval(pauseIntervalG); pauseIntervalG = null; }
+  if(pauseTimeoutG){ clearTimeout(pauseTimeoutG); pauseTimeoutG = null; }
+  activeMedia.forEach(m => {
+    try { m.onended = null; m.onerror = null; m.pause(); } catch(e){}
+  });
+  activeMedia = [];
+}
+
 function escapeHtml(str){
   if(!str) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -50,6 +68,7 @@ function getBucket(test, task){
 }
 
 function showTestSelect(){
+  stopSequences();
   document.getElementById('taskbar').innerHTML = '';
   document.getElementById('navbar').innerHTML = '';
   let cards = '';
@@ -103,6 +122,9 @@ function renderNavbar(isLast, test){
 }
 
 function renderTask(){
+  stopSequences();               // coupe toute séquence de l'Aufgabe précédente
+  const myId = seqId;            // identifiant de la séquence de CETTE Aufgabe
+
   const test = HOREN_TESTS[currentTestIdx];
   const task = test.teile[current];
   renderTaskbar(task, test);
@@ -113,7 +135,8 @@ function renderTask(){
   if(task.mediaType === 'audio' && task.mediaUrl){
     mediaHtml = `<div class="media-box" style="background:#f4f6f8; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center;">
       <p id="mediaStatus" style="font-weight:bold; margin-bottom:8px; color:var(--teal-dark);">🎧 Audiospur abspielen:</p>
-      <audio id="sequentialAudio" controls controlsList="nodownload" style="width:100%; max-width:500px;">
+      <button class="btn next" id="btnStartAudio" style="margin-bottom:10px;">▶ Start</button><br>
+      <audio id="sequentialAudio" controls preload="auto" style="width:100%; max-width:500px;">
         Ihr Browser unterstützt das Audio-Element nicht.
       </audio>
     </div>`;
@@ -154,51 +177,65 @@ function renderTask(){
   if(task.mediaType === 'audio' && task.mediaUrl) {
     const player = document.getElementById('sequentialAudio');
     const statusText = document.getElementById('mediaStatus');
-    
+    const startBtn = document.getElementById('btnStartAudio');
+    activeMedia.push(player);
+
+    // Consigne : task.consigneUrl si défini dans hoeren-data.js, sinon fichier par défaut media/consigne_tN.mp3
+    const consigne = task.consigneUrl || ('media/consigne_t' + task.teil + '.mp3');
+    // Audio principal : toujours l'URL de la tâche (fonctionne pour tous les Modelltests)
+    const mainAudio = task.mediaUrl;
+
     let playlist = [];
     if(task.teil === 1) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t1.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: consigne, label: '🎧 Anweisung wird abgespielt...' },
         { type: 'pause', duration: 15000, label: '⏱️ Pause (15s)...' },
-        { type: 'audio', src: 'media/exercice_t1.mp3', label: '🎧 Haupttext läuft...' },
+        { type: 'audio', src: mainAudio, label: '🎧 Haupttext läuft...' },
         { type: 'pause_end', duration: 20000, label: '⏱️ Nachbereitung...' }
       ];
     } else if(task.teil === 2) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t2.mp3', label: '🎧 Anweisung wird abgespielt...' },
-        { type: 'audio', src: 'media/exercice_t2.mp3', label: '🎧 Podiumsdiskussion läuft...' },
+        { type: 'audio', src: consigne, label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: mainAudio, label: '🎧 Podiumsdiskussion läuft...' },
         { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit...' }
       ];
     } else if(task.teil === 3) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t3.mp3', label: '🎧 Anweisung wird abgespielt...' },
-        { type: 'audio', src: task.mediaUrl, label: '🎧 Vorlesung läuft...' },
+        { type: 'audio', src: consigne, label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: mainAudio, label: '🎧 Vorlesung läuft...' },
         { type: 'pause_end', duration: 150000, label: '⏱️ Bearbeitungszeit: Sie haben 2 Minuten und 30 Sekunden Zeit...' }
       ];
     } else if(task.teil === 6) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t6.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: consigne, label: '🎧 Anweisung wird abgespielt...' },
         { type: 'pause', duration: 90000, label: '⏱️ Lesezeit: Sie haben 1 Minute und 30 Sekunden Zeit, um die Fragen zu lesen...' },
-        { type: 'audio', src: 'media/exercice_t6.mp3', label: '🎧 Vortrag läuft...' },
+        { type: 'audio', src: mainAudio, label: '🎧 Vortrag läuft...' },
         { type: 'pause_end', duration: 90000, label: '⏱️ Nachbereitung: Sie haben 1 Minute und 30 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
       ];
     } else if(task.teil === 7) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t7.mp3', label: '🎧 Anweisung wird abgespielt...' },
-        { type: 'audio', src: task.mediaUrl, label: '🎧 Text läuft...' },
+        { type: 'audio', src: consigne, label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: mainAudio, label: '🎧 Text läuft...' },
         { type: 'pause_end', duration: 20000, label: '⏱️ Nachbereitung: Sie haben 20 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
       ];
     } else {
       playlist = [
-        { type: 'audio', src: task.mediaUrl, label: '🎧 Audiospur abspielen:' }
+        { type: 'audio', src: mainAudio, label: '🎧 Audiospur abspielen:' }
       ];
+    }
+
+    // CORRECTIF PRINCIPAL : un <audio> sans src est désactivé par le navigateur
+    // (bouton lecture grisé, événement "play" jamais déclenché). On lui donne donc
+    // une source dès le départ pour que le bouton soit actif.
+    if(playlist[0] && playlist[0].type === 'audio') {
+      player.src = playlist[0].src;
     }
 
     let currentIndex = 0;
     let isPlayingSequence = false;
-    let pauseInterval = null;
 
     function playSequence(index) {
+      if (myId !== seqId) return;   // séquence obsolète
       if (index >= playlist.length) {
         const testObj = HOREN_TESTS[currentTestIdx];
         if (current < testObj.teile.length - 1) { current++; renderTask(); } else { showResults(); }
@@ -209,22 +246,34 @@ function renderTask(){
       if(statusText) statusText.innerText = currentItem.label;
 
       if (currentItem.type === 'audio') {
-        player.src = currentItem.src;
-        player.load();
-        player.play().catch(e => console.log("Autoplay bloqué ou erreur de lecture :", e));
-        
+        player.onerror = function() {
+          if (myId !== seqId) return;
+          if(!player.getAttribute('src')) return;
+          if(statusText) statusText.innerText = '⚠️ Audiodatei nicht gefunden / nicht abspielbar: ' + currentItem.src;
+          console.error('Audio introuvable ou illisible :', currentItem.src);
+        };
         player.onended = function() {
+          if (myId !== seqId) return;
           currentIndex++;
           playSequence(currentIndex);
         };
+        player.src = currentItem.src;
+        player.load();
+        player.play().catch(e => {
+          console.log("Lecture audio bloquée ou erreur :", e);
+        });
       } else {
+        player.onended = null;
+        player.onerror = null;
         player.pause();
         player.removeAttribute('src');
         
         let remaining = currentItem.duration / 1000;
-        if(pauseInterval) clearInterval(pauseInterval);
+        if(pauseIntervalG) clearInterval(pauseIntervalG);
+        if(pauseTimeoutG) clearTimeout(pauseTimeoutG);
 
-        pauseInterval = setInterval(() => {
+        pauseIntervalG = setInterval(() => {
+          if (myId !== seqId) { clearInterval(pauseIntervalG); return; }
           remaining--;
           let mins = Math.floor(remaining / 60);
           let secs = remaining % 60;
@@ -242,24 +291,33 @@ function renderTask(){
             }
           }
           if (remaining <= 0) {
-            clearInterval(pauseInterval);
+            clearInterval(pauseIntervalG);
           }
         }, 1000);
 
-        setTimeout(function() {
-          clearInterval(pauseInterval);
+        pauseTimeoutG = setTimeout(function() {
+          if (myId !== seqId) return;
+          clearInterval(pauseIntervalG);
           currentIndex++;
           playSequence(currentIndex);
         }, currentItem.duration);
       }
     }
 
+    function startSequence() {
+      if (isPlayingSequence) return;
+      isPlayingSequence = true;
+      if(startBtn) startBtn.style.display = 'none';
+      currentIndex = 0;
+      playSequence(0);
+    }
+
+    if(startBtn) startBtn.addEventListener('click', startSequence);
+
     player.addEventListener('play', function() {
       if (!isPlayingSequence) {
-        isPlayingSequence = true;
-        currentIndex = 0;
         player.pause();
-        playSequence(0);
+        startSequence();
       }
     });
 
@@ -267,18 +325,21 @@ function renderTask(){
   } else if(task.mediaType === 'video' && task.mediaUrl) {
     const player = document.getElementById('sequentialVideo');
     const statusText = document.getElementById('mediaStatus');
+    if(player) activeMedia.push(player);
+
+    const consigneV = task.consigneUrl || ('media/consigne_t' + task.teil + '.mp3');
 
     let playlist = [];
     if(task.teil === 4) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t4.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: consigneV, label: '🎧 Anweisung wird abgespielt...' },
         { type: 'pause', duration: 45000, label: '⏱️ Lesezeit: Sie haben 45 Sekunden Zeit, um die Aussagen zu lesen...' },
         { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz läuft (Sie sehen das Video einmal)...' },
         { type: 'pause_end', duration: 45000, label: '⏱️ Nachbereitung: Sie haben 45 Sekunden Zeit, um Ihre Antworten zu kontrollieren...' }
       ];
     } else if(task.teil === 5) {
       playlist = [
-        { type: 'audio', src: 'media/consigne_t5.mp3', label: '🎧 Anweisung wird abgespielt...' },
+        { type: 'audio', src: consigneV, label: '🎧 Anweisung wird abgespielt...' },
         { type: 'pause', duration: 10000, label: '⏱️ Lesezeit: Sie haben 10 Sekunden Zeit, sich die Gliederungspunkte anzuschauen...' },
         { type: 'video', src: task.mediaUrl, label: '🎥 Videosequenz läuft (Sie sehen das Video einmal)...' },
         { type: 'pause_end', duration: 180000, label: '⏱️ Nachbereitung: Sie haben 3 Minuten Zeit, um Ihre Antworten zu kontrollieren...' }
@@ -291,9 +352,9 @@ function renderTask(){
 
     let currentIndex = 0;
     let isPlayingSequence = false;
-    let pauseInterval = null;
 
     function playVideoSequence(index) {
+      if (myId !== seqId) return;   // séquence obsolète
       if (index >= playlist.length) {
         const testObj = HOREN_TESTS[currentTestIdx];
         if (current < testObj.teile.length - 1) { current++; renderTask(); } else { showResults(); }
@@ -307,9 +368,14 @@ function renderTask(){
         if(player) player.style.display = 'none';
         
         let audioTemp = new Audio(currentItem.src);
-        audioTemp.play().catch(e => console.log("Autoplay bloqué ou erreur audio :", e));
-        
+        activeMedia.push(audioTemp);
+        audioTemp.play().catch(e => console.log("Lecture audio bloquée ou erreur :", e));
+        audioTemp.onerror = function() {
+          if (myId !== seqId) return;
+          if(statusText) statusText.innerText = '⚠️ Audiodatei nicht gefunden: ' + currentItem.src;
+        };
         audioTemp.onended = function() {
+          if (myId !== seqId) return;
           currentIndex++;
           playVideoSequence(currentIndex);
         };
@@ -318,9 +384,10 @@ function renderTask(){
           player.style.display = 'block';
           player.src = currentItem.src;
           player.load();
-          player.play().catch(e => console.log("Autoplay bloqué ou erreur vidéo :", e));
+          player.play().catch(e => console.log("Lecture vidéo bloquée ou erreur :", e));
           
           player.onended = function() {
+            if (myId !== seqId) return;
             currentIndex++;
             playVideoSequence(currentIndex);
           };
@@ -336,9 +403,11 @@ function renderTask(){
         }
         
         let remaining = currentItem.duration / 1000;
-        if(pauseInterval) clearInterval(pauseInterval);
+        if(pauseIntervalG) clearInterval(pauseIntervalG);
+        if(pauseTimeoutG) clearTimeout(pauseTimeoutG);
 
-        pauseInterval = setInterval(() => {
+        pauseIntervalG = setInterval(() => {
+          if (myId !== seqId) { clearInterval(pauseIntervalG); return; }
           remaining--;
           let mins = Math.floor(remaining / 60);
           let secs = remaining % 60;
@@ -352,12 +421,13 @@ function renderTask(){
             }
           }
           if (remaining <= 0) {
-            clearInterval(pauseInterval);
+            clearInterval(pauseIntervalG);
           }
         }, 1000);
 
-        setTimeout(function() {
-          clearInterval(pauseInterval);
+        pauseTimeoutG = setTimeout(function() {
+          if (myId !== seqId) return;
+          clearInterval(pauseIntervalG);
           currentIndex++;
           playVideoSequence(currentIndex);
         }, currentItem.duration);
@@ -716,6 +786,7 @@ function detailMarked(task, a){
 }
 
 function showResults(){
+  stopSequences();
   document.getElementById('taskbar').innerHTML = '';
   const test = HOREN_TESTS[currentTestIdx];
   const nb = document.getElementById('navbar');
@@ -780,3 +851,4 @@ showTestSelect();
 </script>
 </body>
 </html>
+
