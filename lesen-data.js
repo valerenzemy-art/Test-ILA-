@@ -1405,7 +1405,310 @@ const MT9 = [
     ]
   }
 ];
+const MT10 = [
 
+  { ...TEMPLATE[0],
+
+    instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
+
+    title:'Die Mathematik und der Zufall: Warum das menschliche Hirn echte Zufälligkeit schwer greifen kann',
+
+    segments:[
+
+      'Ob beim Werfen einer Münze, im Casino oder bei der Einschätzung von Lebensrisiken: Der menschliche Verstand tut sich erstaunlich schwer damit, stochastische Prozesse korrekt einzuschätzen. Psychologische Studien haben wiederholt ',
+
+      ', dass das Gehirn darauf konditioniert ist, in allen Umweltreizen stetig nach Kausalitäten und Mustern zu suchen. Diese evolutionär entstandene Eigenschaft war für das Überleben unserer Vorfahren zwar von unschätzbarem Vorteil, führt aber in der modernen Welt regelmäßig zu systematischen Denkfehlern. Wenn eine Münze beispielsweise zehnmal hintereinander auf „Kopf“ landet, neigen viele Beobachter zu der Annahme, dass beim nächsten Versuch „Zahl“ deutlich ',
+
+      ' sei. Aus mathematischer Sicht ist diese Erwartung jedoch völlig verfehlt, da das Ergebnis jedes einzelnen Wurfes vollkommen stochastisch ',
+
+      ' von den vorherigen Durchgängen bleibt. In der Kognitionsforschung bezeichnet man diese fehlerhafte Wahrnehmung als die sogenannte „Spielerfehlschluss-Neigung“. Zudem neigen Menschen dazu, rein zufällige Häufungen von Ereignissen fälschlicherweise als gezielte Absicht oder Gesetzmäßigkeit ',
+
+      '. Um den Begriff der echten Zufälligkeit mathematisch präzise zu fassen, ',
+
+      ' Wissenschaftler komplexe Algorithmen und Wahrscheinlichkeitsmodelle an. Dennoch bleibt die intuitionswidrige Natur der Stochastik eine der größten Herausforderungen für das menschliche Abstraktionsvermögen.'
+
+    ],
+
+    gaps:[
+
+      {options:['analysiert','nachgewiesen','angeordnet','vorgeschrieben'], correct:1},
+
+      {options:['wahrscheinlicher','beachtlicher','fragwürdiger','erheblicher'], correct:0},
+
+      {options:['angewiesen','gebunden','unabhängig','unterworfen'], correct:2},
+
+      {options:['feilzubieten','zu überwinden','zu umgehen','fehlzuinterpretieren'], correct:3},
+
+      {options:['wenden','fügen','richten','legen'], correct:0}
+
+    ]
+
+  },
+
+  { ...TEMPLATE[1],
+
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
+
+    title:'Wann gab es die meisten Sprachen auf der Erde?',
+
+    correctOrder:[0,1,2,3,4],
+
+    items:[
+
+      'Weltweit zählen Sprachwissenschaftler heute noch rund 7.000 gesprochene Sprachen, doch diese Zahl nimmt im Zuge der Globalisierung unaufhaltsam ab. Diese dramatische Entwicklung wirft unter Historikern und Linguisten die Frage auf, in welcher historischen Epoche die sprachliche Mannigfaltigkeit unseres Planeten eigentlich ihren Höhepunkt erreichte.',
+
+      'Welches Zeitalter markierte nun also den absoluten Höhepunkt der globalen Sprachvielfalt? Linguistische Rekonstruktionen deuten darauf hin, dass die sprachliche Diversität kurz vor der neolithischen Revolution ihren historischen Höchststand erreichte – eine Epoche, in der schätzungsweise Zehntausende eigenständige Sprachen nebeneinander existierten.',
+
+      'In jener Phase der Menschheitsgeschichte lebten die Menschen in kleinen, weitgehend isolierten Gruppen von Jägern und Sammlern. Da der Austausch zwischen diesen mobilen Gemeinschaften minimal war, entwickelten sich über Generationen hinweg unzählige hochgradig ausdifferenzierte Sprachen und Dialekte.',
+
+      'Erst mit dem Aufkommen von Ackerbau und Viehzucht vor etwa 10.000 Jahren veränderten sich diese dynamischen Strukturen grundlegend. Sesshaftigkeit und Bevölkerungswachstum führten zur Bildung größerer Gemeinschaften, was wiederum die Standardisierung von Dialekten begünstigte.',
+
+      'Dieser schleichende Konsolidierungsprozess setzte sich über Jahrtausende fort und beschleunigte sich durch die spätere Entstehung von Großreichen, Kolonisierung und modernen Nationalstaaten massiv. Dadurch wurden unzählige Minderheitensprachen verdrängt oder starben ganz aus, wodurch sich der Trend zur sprachlichen Vereinheitlichung bis heute fortsetzt.'
+
+    ],
+
+    shuffledStart:[0,4,1,3,2]
+
+  },
+
+  { ...TEMPLATE[2],
+
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
+
+    title:'Händigkeit: Übung macht eine Hand dominant',
+
+    passage:[
+
+      '(1) Ob jemand mit der rechten oder der linken Hand schreibt, zeichnet oder Suppe isst, schien in der Neurowissenschaft lange Zeit eine unumstößliche genetische Disposition zu sein. Traditionell ging die Forschung davon aus, dass die Asymmetrie des menschlichen Gehirns bereits vor der Geburt unveränderlich verankert ist und die spätere Händigkeit determiniert. Jüngste Befunde der vergleichenden Hirnforschung zeichnen jedoch ein weitaus dynamischeres Bild: Zwar existiert eine biologische Veranlagung, doch erst die fortwährende motorische Praxis und die damit verbundene neuronale Verstärkung führen dazu, dass sich eine Hand als eindeutig dominant herauskristallisiert.',
+
+      '(2) Verantwortlich für diese motorische Spezialisierung ist das Phänomen der Neuroplastizität – die Fähigkeit des Zentralnervensystems, sich durch Nutzung strukturell umzubauen. Wenn Säuglinge beginnen, nach Gegenständen zu greifen, nutzen sie zunächst beide Hände nahezu gleichwertig. Erst durch das wiederholte Ausführen komplexer Feinmotorik, etwa beim Halten von Stiften oder Werkzeugen, werden im motorischen Kortex der jeweils gegenüberliegenden Gehirnhälfte neue synaptische Verbindungen geknüpft und bestehende Nervenbahnen verstärkt. Die oft beobachtete Rechtshändigkeit in der Bevölkerung ist somit nicht bloß ein starres Erbgut, sondern das Resultat verfestigter Übungsschleifen.',
+
+      '(3) Interessante Einblicke bieten Studien an Personen, die durch Unfälle oder medizinische Interventionen gezwungen waren, auf ihre nicht-dominante Hand auszuweichen. Bildgebende Verfahren zeigen, dass bereits nach wenigen Wochen intensiven Trainings erhebliche strukturelle Veränderungen im Gehirn messbar sind. Die motorischen Areale, die für die Steuerung der bisher vernachlässigten Hand zuständig sind, vergrößern sich messbar. Diese Anpassungsfähigkeit belegt eindrucksvoll, dass die funktionale Dominanz einer Hand keineswegs lebenslang fixiert ist, sondern durch gezielte Aktivität bis ins hohe Erwachsenenalter verschoben werden kann.',
+
+      '(4) Welche Hand bevorzugt wird, hängt allerdings nicht ausschließlich von individuellem Training ab, sondern unterliegt auch gesellschaftlichen Prägungen. In vielen Kulturen wurden Linkshändige über Jahrhunderte hinweg systematisch umgeschult – oft mit gravierenden neurobiologischen Nebenwirkungen wie Lese-Rechtschreib-Schwächen oder Konzentrationsstörungen. Obwohl solche Umschulungsmaßnahmen heute weitgehend als pädagogisch überholt gelten, zeigt sich darin die enorme Formbarkeit des Gehirns: Selbst gegen die ursprüngliche biologische Tendenz kann eine künstliche Dominanz der anderen Hand erzwungen werden.',
+
+      '(5) Kognitionspsychologen betonen zudem, dass eine ausgeprägte Händigkeit wesentliche Effizienzvorteile bei der Informationsverarbeitung bietet. Indem komplexe feinmotorische Aufgaben primär an eine spezialisierte Hand und die entsprechende Hirnhälfte delegiert werden, werden kognitive Ressourcen geschont. Das Gehirn vermeidet dadurch parallele Doppelstrukturen und erhöht die Ausführungsgeschwindigkeit. Ambidextrie – also die seltene Fähigkeit, beide Hände völlig gleichwertig zu nutzen – mag faszinieren, bringt jedoch aus neurophysiologischer Sicht häufig Verzögerungen bei der Handlungsplanung mit sich.',
+
+      '(6) Die moderne Händigkeitsforschung plädiert daher für ein differenziertes Modell. Händigkeit ist kein binäres System mit zwei starr getrennten Kategorien, sondern ein kontinuierliches Spektrum. Übung und alltäglicher Gebrauch festigen zwar die Präferenz einer Hand, doch die anatomische Grundlage bleibt stets flexibel genug, um auf neue Anforderungen zu reagieren. Die Erkenntnis, dass Übung eine Hand dominant macht, eröffnet nicht zuletzt neue therapeutische Ansätze in der Neurorehabilitation nach Schlaganfällen.'
+
+    ],
+
+    questions:[
+
+      { q:'Welche der folgenden Aussagen fasst den Inhalt von Absatz 1 am besten zusammen?', options:[
+
+        'Die genetische Ausstattung bestimmt allein, welche Hand der Mensch im Alltag bevorzugt.',
+
+        'Neuere Studien belegen, dass die Ausprägung der Händigkeit maßgeblich durch Praxis geformt wird.',
+
+        'Die Asymmetrie des menschlichen Gehirns bildet sich erst Jahre nach der Geburt heraus.',
+
+        'Vergleichende Hirnforschungen widerlegen das Existieren biologischer Veranlagungen zur Händigkeit.'
+
+      ], correct:1 },
+
+      { q:'Laut Absatz 2 entsteht die Spezialisierung einer Hand vor allem dadurch, dass ...', options:[
+
+        'Säuglinge bereits im ersten Lebensmonat gezielt mit der rechten Hand nach Gegenständen greifen.',
+
+        'das Vererben motorischer Muster die Gehirnhälften vorab fest verschaltet.',
+
+        'wiederholte feinmotorische Aktivitäten entsprechende synaptische Strukturen im Gehirn verstärken.',
+
+        'das Zentralnervensystem den Umbau von Muskelsträngen in den Händen beschleunigt.'
+
+      ], correct:2 },
+
+      { q:'In Absatz 3 wird anhand von Studien an Unfallgeschädigten gezeigt, dass ...', options:[
+
+        'die Dominanz einer Hand durch intensives Training der anderen Hand veränderbar bleibt.',
+
+        'medizinische Eingriffe die Hirnstruktur dauerhaft schädigen können.',
+
+        'das Gehirn von Erwachsenen keine neuen motorischen Areale mehr bilden kann.',
+
+        'die Vernachlässigung einer Hand zu einer irreversiblen Verkleinerung des Kortex führt.'
+
+      ], correct:0 },
+
+      { q:'Was zeigt das in Absatz 4 erwähnte Beispiel der Umschulung von Linkshändigen?', options:[
+
+        'Gesellschaftliche Faktoren haben keinen Einfluss auf die Entwicklung der Händigkeit.',
+
+        'Umschulungen führen stets zu einer schmerzfreien Korrektur fehlerhafter Veranlagungen.',
+
+        'Das Gehirn lässt sich selbst entgegen ursprünglichen biologischen Neigungen umtrainieren.',
+
+        'Lese-Rechtschreib-Schwächen sind die Hauptursache für die Umschulung auf die rechte Hand.'
+
+      ], correct:2 },
+
+      { q:'Warum ist die Spezialisierung auf eine dominante Hand laut Absatz 5 vorteilhaft?', options:[
+
+        'Sie verhindert das Auftreten von Beidhändigkeit in allen Entwicklungsphasen.',
+
+        'Sie ermöglicht es dem Gehirn, doppelte Kontrollstrukturen für beide Hände aufzubauen.',
+
+        'Sie eliminiert Verzögerungen bei der Ausführung grobmotorischer Ganzkörperbewegungen.',
+
+        'Sie spart denkökonomische Ressourcen und steigert die Geschwindigkeit von Handlungsabläufen.'
+
+      ], correct:3 },
+
+      { q:'In Absatz 6 wird Händigkeit beschrieben als ...', options:[
+
+        'ein fließender Übergang, bei dem das Gehirn trotz Übung elastisch bleibt.',
+
+        'ein starres System mit zwei scharf voneinander abgegrenzten Ausprägungen.',
+
+        'ein rein theoretisches Konstrukt ohne praktischen Nutzen für die Neurorehabilitation.',
+
+        'eine biologische Eigenschaft, die nach erfolgreicher Therapie unveränderlich feststeht.'
+
+      ], correct:0 },
+
+      { q:'Das Hauptanliegen des Gesamttextes ist es, ...', options:[
+
+        'nachzuweisen, dass Linkshändigkeit eine behandlungsbedürftige Störung darstellt.',
+
+        'über das Zusammenspiel von biologischer Veranlagung und trainierbarer Neuroplastizität aufzuklären.',
+
+        'historische Pädagogikkonzepte zur Umschulung von Kindern scharf zu kritisieren.',
+
+        'die Überlegenheit der Ambidextrie gegenüber der Einseitigkeit wissenschaftlich zu belegen.'
+
+      ], correct:1 }
+
+    ]
+
+  },
+
+  { ...TEMPLATE[3],
+
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1–6 den Aussagen unten zu. Die Zahlen beziehen sich jeweils auf den nachfolgenden Satz. Für jede Textstelle gibt es genau eine richtige Lösung. Es gibt zwei Aussagen mehr als Textstellen.',
+
+    title:'Wo Lachen im Gehirn entsteht – Die Neurowissenschaft der Humorverarbeitung',
+
+    passageText:`Obwohl das Lachen als eine der universellsten menschlichen Verhaltensweisen gilt, verblieb seine exakte neurobiologische Verankerung lange Zeit im Dunkeln der Hirnforschung. Erst moderne bildgebende Verfahren wie die funktionelle Magnetresonanztomografie (fMRT) ermöglichten tiefe Einblicke in die komplexen neuronalen Netzwerke, die beim Erfassen von Humor aktiviert werden.<br><br><strong>[1] Entgegen der landläufigen Annahme, Lachen sei lediglich ein emotionaler Reflex des limbischen Systems, handelt es sich um einen hochgradig differenzierten, zweiphasigen kognitiven Prozess.</strong> Zunächst identifiziert der präfrontale Kortex eine gedankliche Inkongruenz – eine plötzliche Abweichung von der erwarteten Logik einer Situation. Erst wenn diese Unstimmigkeit im Hirnstamm kognitiv aufgelöst werden kann, entlädt sich die Spannung in der motorischen Steuerung des Lächelns oder Lachens.<br><br><strong>[2] Neurowissenschaftler warnen jedoch vor der voreiligen Schlussfolgerung, man könne Lachen auf eine reine Kombination von Logikanalyse und Mimik reduzieren.</strong> Vielmehr greifen affektive Netzwerke wie der Nucleus accumbens ein und schütten den Botenstoff Dopamin aus, was das wohlige Gefühl der Erheiterung erzeugt.<br><br><strong>[3] Dass Lachen eine essenzielle Schutzfunktion für das kardiovaskuläre System ausübt, indem es Gefäßweiten reguliert und Entzündungsmarker senkt, gilt heute in der klinischen Gelotologie als unumstößliche Tatsache.</strong><br><br><strong>[4] Bedenklich stimmte die Fachwelt jedoch eine neuere Studie der Universität Zürich, deren methodischer Aufbau gravierende Lücken bei der Auswertung von Kontrollgruppen aufwies und deren Befunde somit mit größter Vorsicht zu genießen sind.</strong><br><br><strong>[5] In den kommenden Jahrzehnten dürfte die zielgerichtete Stimulation humorverarbeitender Hirnareale mittels transkranieller Magnetstimulation eine tragende Rolle bei der klinischen Behandlung schwerer Depressionen einnehmen.</strong><br><br><strong>[6] Um diesen positiven Effekt im Alltag bestmöglich auszuschöpfen, sollten Therapeuten und Ärzte gezielte Humoreinheiten fest in den Behandlungsplan von chronisch kranken Patienten integrieren.</strong><br><br>Zusammenfassend zeigt sich, dass Lachen weit mehr als ein oberflächlicher Ausdruck von Freude ist: Es ist ein fein abgestimmtes Zusammenspiel kognitiver, emotionaler und motorischer Hirnstrukturen, dessen therapeutisches Potenzial die Neurowissenschaft gerade erst zu entschlüsseln beginnt.`,
+
+    textStellen:[1, 2, 3, 4, 5, 6],
+
+    options:[
+
+      'Der Autor erläutert einen komplexen biologischen Mechanismus.',
+
+      'Der Autor warnt vor einer vereinfachten Sichtweise.',
+
+      'Der Autor hebt eine wissenschaftlich gesicherte Erkenntnis hervor.',
+
+      'Der Autor zweifelt an der Wirksamkeit einer Therapie.',
+
+      'Der Autor prognostiziert künftige medizinische Anwendungen.',
+
+      'Der Autor kritisiert Mängel in der methodischen Forschung.',
+
+      'Der Autor empfiehlt konkrete Maßnahmen für die Behandlung chronisch kranker Patienten.',
+
+      'Der Autor relativiert den therapeutischen Nutzen eines Phänomens.'
+
+    ],
+
+    correct:[0, 1, 2, 5, 4, 6]
+
+  },
+
+  { ...TEMPLATE[4],
+
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu positiven Wörtern, zu negativen Wörtern, zu beiden oder gar nicht passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen. Für jede Aussage gibt es genau eine richtige Lösung. Die Aussagen folgen nicht dem Textverlauf.',
+
+    title:'Unbewusste Schutzfilter: Wie das menschliche Gehirn Sprache verarbeitet',
+
+    passage:'Täglich strömen unzählige sprachliche Reize auf das menschliche Gehirn ein. Um diese Informationsflut zu bewältigen, nutzt unser Denkorgan hocheffiziente Selektionsmechanismen. Eine neurobiologische Studie der Universität Jena hat untersucht, wie emotional geladene Wörter im Vergleich zu neutralen Begriffen verarbeitet werden. Dabei stießen die Forscher auf überraschende Asymmetrien zwischen der Wahrnehmung von Sprachreizen mit positiver und negativer Valenz. Entgegen der weitverbreiteten Annahme, dass bedrohliche Informationen aufgrund evolutionsbedingter Überlebensvorteile stets vorrangig analysiert werden, zeigte sich bei der sprachlichen Reizverarbeitung ein unerwarteter Schutzfilter: Das Gehirn neigt bei subliminaler – also extrem kurzer, unbewusster – Darbietung dazu, Reize mit negativer Bedeutung wie „Schmerz“, „Krankheit“ oder „Verlust“ aktiv zu hemmen. Magnetoenzephalografische Messungen (MEG) belegen, dass die neuronale Weiterleitung negativer Begriffe im visuellen Kortex messbar verzögert wird. Diese kognitive Dämpfung verhindert eine vorzeitige Überflutung des limbischen Systems mit Stresshormonen. Völlig anders verhält es sich bei Begriffen mit positiver Konnotation wie „Freude“, „Erfolg“ oder „Liebe“. Diese Signale passieren die thalamischen Filterstrukturen nahezu ungehindert und lösen bereits nach etwa 100 Millisekunden eine verstärkte Aktivierung im Belohnungszentrum aus. Sie werden nicht nur schneller verarbeitet, sondern verbleiben auch länger im Arbeitsgedächtnis, was die emotionale Resilienz des Individuums stärkt. Erst wenn Sprachreize über einen längeren Zeitraum bewusst wahrgenommen werden, hebt das Gehirn die Unterdrückung negativer Wörter auf. In Entscheidungssituationen führt dies dazu, dass negative Begriffe schlussendlich eine gründlichere analytische Bewertung erfahren als positive, um potenzielle Gefahren abzuwenden. Zudem belegen jüngste Untersuchungen zur kognitiven Alterungsforschung, dass beide Wortarten im hohen Alter gleichermaßen von einem allgemeinen Rückgang der Verarbeitungsgeschwindigkeit betroffen sind.',
+
+    columns:['Positive Wörter','Negative Wörter','beide','passt nicht'],
+
+    items:[
+
+      {text:'Sie lösen bereits bei unbewusster Wahrnehmung eine sofortige Aktivierung im Belohnungssystem aus.', correct:0},
+
+      {text:'Ihre neuronale Weiterleitung im Gehirn wird bei schneller Präsentation zunächst gebremst.', correct:1},
+
+      {text:'Bei bewusster Analyse führen sie zu einer tieferen und detaillierteren gedanklichen Bewertung.', correct:1},
+
+      {text:'Im Alter nimmt die Geschwindigkeit ihrer kognitiven Verarbeitung ab.', correct:2},
+
+      {text:'Sie werden im menschlichen Gehirn in einem völlig separaten Areal außerhalb der Großhirnrinde gespeichert.', correct:3},
+
+      {text:'Sie führen bei jedem Menschen unabhängig von der Persönlichkeit zu einer Steigerung des Blutdrucks.', correct:3},
+
+      {text:'Sie verbleiben für eine längere Zeitspanne im Arbeitsgedächtnis des Lesers.', correct:0}
+
+    ]
+
+  },
+
+  { ...TEMPLATE[5],
+
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Ursachen und Merkmale des Phänomens, 2 Untersuchungsmethoden und Beobachtungen).',
+
+    title:'Wir Menschen haben einen rätselhaften Linksdrall',
+
+    passage:'Ob in vollen Einkaufsstraßen, auf belebten Bahnhofsvorplätzen oder in kontrollierten Experimenten: Wenn Menschenmengen sich ohne äußere Vorgaben fortbewegen, zeigt sich ein überraschend einheitliches Verhaltensmuster. Forschungsteams aus der Bewegungswissenschaft und Kognitionspsychologie beobachteten in zahlreichen Versuchsreihen, dass Fußgänger in unstrukturierten Gruppen eine systematische Neigung zeigen, sich bevorzugt gegen den Uhrzeigersinn zu drehen. Dieses Phänomen tritt nicht nur bei alltäglichen Gehsituationen auf, sondern lässt sich auch unter streng isolierten Laborbedingungen getreu nachweisen. Um die Ursachen dieses rätselhaften Linksdralls zu ergründen, führten Wissenschaftler aufwendige Versuche mit Probandengruppen unterschiedlicher Größe und Herkunft durch. Dabei untersuchten sie unter anderem, ob kulturelle Prägungen oder verkehrserzieherische Gewohnheiten eine Rolle spielen. Interessanterweise zeigte sich die Bevorzugung der Bewegung gegen den Uhrzeigersinn sowohl in europäischen Ländern, in denen Rechtsverkehr herrscht, als auch in Ländern wie Japan mit Linksverkehr. Auch soziales Ausweichverhalten oder die Tendenz der Rechtshändigkeit lieferten keine hinreichende Erklärung, da der Effekt selbst bei einzelnen Testpersonen auftrat, die ohne Sichtkontakt zu anderen Personen in einer kreisförmigen Arena navigierten. Weitere neurologische und biomechanische Analysen brachten erstaunliche Details ans Licht. Weder die Dominanz eines bestimmten Auges noch die gezielte Abdeckung der Sehkraft beeinflussten die Drehrichtung maßgeblich. Selbst wenn Probanden mit verbundenen Augen liefen, neigten sie nach kurzer Zeit zu einer leichten Rotation nach links. Ergänzende Erhebungen bei Kindern offenbarten zudem, dass die Neigung zum Linksdrall in jungen Jahren noch deutlicher ausgeprägt ist als bei Erwachsenen. Dies deutet darauf hin, dass dem Phänomen eine fundamentale biologische Asymmetrie zugrunde liegt, die im Laufe der Reifung und durch gelernte Bewegungsmuster teilweise überlagert wird. Obwohl die exakten physiologischen Auslöser bislang nicht vollständig entschlüsselt sind, erweisen sich die Erkenntnisse für die Praxis als äußerst bedeutsam. In der Architektur, der Stadtplanung sowie bei der Organisation von Großveranstaltungen wird das Phänomen zunehmend berücksichtigt, um Besucherströme effizienter zu lenken, Engpässe zu vermeiden und die Sicherheit in Evakuierungssituationen nachhaltig zu erhöhen.',
+
+    aussagen:[
+
+      { key:'a', text:'[a] Die Bevorzugung der Linksdrehung lässt sich unabhängig von verkehrskulturellen Mustern nachweisen.' },
+
+      { key:'b', text:'[b] Die Ausprägung der Rotationsneigung nimmt mit zunehmendem Alter der Personen ab.' },
+
+      { key:'c', text:'[c] Sichtseinschränkungen führen dazu, dass Probanden die Orientierung vollständig verlieren.' },
+
+      { key:'d', text:'[d] Das Phänomen tritt ausschließlich auf, wenn Menschen in dicht gedrängten Gruppen agieren.' },
+
+      { key:'e', text:'[e] Forschende isolierten einzelne Probanden in einer kreisförmigen Testumgebung.' },
+
+      { key:'f', text:'[f] Die Neigung zur Linksdrehung wird primär durch die Dominanz der rechten Hand verursacht.' },
+
+      { key:'g', text:'[g] Das Phänomen blieb auch bei Experimenten mit verbundenen Augen bestehen.' },
+
+      { key:'h', text:'[h] Erkenntnisse über den Linksdrall werden bislang nicht für das Management von Menschenmengen genutzt.' }
+
+    ],
+
+    correctMap: { v1: 'a', v2: 'b', n3: 'e', n4: 'g' }
+
+  },
+
+  { ...TEMPLATE[6],
+
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Kreuzen Sie in der Zusammenfassung die drei Sätze an, die inhaltlich falsch sind. Es gibt genau drei inhaltlich falsche Sätze.',
+
+    title:'Jugendschutz im digitalen Raum: Der Ethikrat zur Regulierung sozialer Medien',
+
+    passage:'Die Debatte über die Auswirkungen sozialer Medien auf die psychische Gesundheit von Kindern und Jugendlichen hat in den vergangenen Jahren eine erhebliche Dynamik gewonnen. Angesichts steigender Zahlen von Angststörungen, Schlafproblemen und depressiven Symptomen unter Minderjährigen wird verstärkt über gesetzliche Beschränkungen debattiert. In einer umfassenden Stellungnahme hat sich nun der Deutsche Ethikrat zu Wort gemeldet und differenzierte Empfehlungen vorgelegt, die sich gegen ein pauschales Verbot sozialer Netzwerke aussprechen, jedoch eine strengere Regulierung der Betreiberplattformen fordern. Nach Ansicht des Ethikrats greift die Forderung nach einem strikten Konsumverbot für Jugendliche unter 16 Jahren zu kurz. Digitale Medien seien längst zu zentralen Orten der Sozialisation, der Informationsbeschaffung und der gesellschaftlichen Teilhabe geworden. Ein vollständiger Ausschluss würde jungen Menschen wichtige Lernräume für den Erwerb digitaler Medienkompetenz entziehen. Stattdessen betont das Gremium die Verpflichtung der Plattformanbieter, ihre Dienste nach dem Prinzip des „Safety by Design“ zu gestalten. Dies bedeutet, dass gesundheitsgefährdende Mechanismen – wie etwa endlos scrollbare Feeds, automatische Videoabspielungen oder auf Suchterzeugung ausgerichtete Belohnungsalgorithmen – standardmäßig deaktiviert sein müssen. Ein zentraler Kritikpunkt des Ethikrats richtet sich gegen die Praxis der Werbefinanzierung und datenintensiven Profilerstellung bei Minderjährigen. Es sei ethisch unvertretbar, dass kommerzielle Akteure die psychische Vulnerabilität junger Nutzer ausnutzen, um Verweilzeiten zu maximieren. Daher fordert das Gremium ein vollständiges Verbot von personalisierter Werbung und datenbasierter Nudging-Architekturen für Nutzer unter 18 Jahren. Ergänzend empfiehlt der Rat verpflichtende, wirksame Altersverifikationssysteme, die den Zugang zu potenziell schädlichen Inhalten wirksam beschränken, ohne dabei die Anonymität von Erwachsenen im Netz unnötig zu gefährden. Neben der Plattformregulierung hebt der Ethikrat die Bedeutung der pädagogischen Begleitung hervor. Schulen und Erziehungsberechtigte dürften mit den Herausforderungen des digitalen Wandels nicht allein gelassen werden. Eine nachhaltige Medienkompetenzförderung müsse fest in den Lehrplänen verankert werden, um Jugendliche zur reflexiven Nutzung zu befähigen. Ziel müsse eine digitale Umgebung sein, die Risiken minimiert, ohne die Entwicklungschancen der Heranwachsenden zu beschneiden.',
+
+    graphicData:[{year:'12–14 Jahre: Nutzung > 3 Std./Tag',val:72},{year:'12–14 Jahre: Befürwortung gesetzl. Nutzungsverbot',val:74},{year:'12–14 Jahre: Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber',val:82},{year:'15–17 Jahre: Nutzung > 3 Std./Tag',val:65},{year:'15–17 Jahre: Befürwortung gesetzl. Nutzungsverbot',val:42},{year:'15–17 Jahre: Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber',val:88},{year:'Eltern / Erziehende: Befürwortung gesetzl. Nutzungsverbot',val:68},{year:'Eltern / Erziehende: Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber',val:91}],
+
+    graphicCaption:'Einstellungen zur Plattformregulierung und Mediennutzung nach Altersgruppen (in %)',
+
+    graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 350" width="100%" role="img" aria-label="Säulendiagramm: Einstellungen zur Plattformregulierung und Mediennutzung nach Altersgruppen" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="348" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="24" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Einstellungen zur Plattformregulierung und</text><text x="260" y="42" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Mediennutzung nach Altersgruppen (in %)</text><line x1="52.0" y1="250.0" x2="492.0" y2="250.0" stroke="#64748b" stroke-width="1"/><text x="44" y="254" font-size="11" text-anchor="end" fill="currentColor">0%</text><line x1="52.0" y1="206.5" x2="492.0" y2="206.5" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="210" font-size="11" text-anchor="end" fill="currentColor">25%</text><line x1="52.0" y1="163.0" x2="492.0" y2="163.0" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="167" font-size="11" text-anchor="end" fill="currentColor">50%</text><line x1="52.0" y1="119.5" x2="492.0" y2="119.5" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="124" font-size="11" text-anchor="end" fill="currentColor">75%</text><line x1="52.0" y1="76.0" x2="492.0" y2="76.0" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="80" font-size="11" text-anchor="end" fill="currentColor">100%</text><rect x="62.0" y="124.7" width="30.0" height="125.3" rx="1" fill="#0284c7"/><text x="77" y="120" font-size="11" text-anchor="middle" font-weight="700" fill="#0284c7">72%</text><rect x="100.0" y="121.2" width="30.0" height="128.8" rx="1" fill="#1e3a8a"/><text x="115" y="116" font-size="11" text-anchor="middle" font-weight="700" fill="#1e3a8a">74%</text><rect x="138.0" y="107.3" width="30.0" height="142.7" rx="1" fill="#0f9488"/><text x="153" y="102" font-size="11" text-anchor="middle" font-weight="700" fill="#0f9488">82%</text><text x="119" y="268" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">12 – 14 Jahre</text><rect x="208.0" y="136.9" width="30.0" height="113.1" rx="1" fill="#0284c7"/><text x="223" y="132" font-size="11" text-anchor="middle" font-weight="700" fill="#0284c7">65%</text><rect x="246.0" y="176.9" width="30.0" height="73.1" rx="1" fill="#1e3a8a"/><text x="261" y="172" font-size="11" text-anchor="middle" font-weight="700" fill="#1e3a8a">42%</text><rect x="284.0" y="96.9" width="30.0" height="153.1" rx="1" fill="#0f9488"/><text x="299" y="92" font-size="11" text-anchor="middle" font-weight="700" fill="#0f9488">88%</text><text x="265" y="268" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">15 – 17 Jahre</text><text x="369" y="244" font-size="12" text-anchor="middle" fill="#64748b">–</text><rect x="392.0" y="131.7" width="30.0" height="118.3" rx="1" fill="#1e3a8a"/><text x="407" y="127" font-size="11" text-anchor="middle" font-weight="700" fill="#1e3a8a">68%</text><rect x="430.0" y="91.7" width="30.0" height="158.3" rx="1" fill="#0f9488"/><text x="445" y="87" font-size="11" text-anchor="middle" font-weight="700" fill="#0f9488">91%</text><text x="411" y="268" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">Eltern / Erziehende</text><rect x="60.0" y="273.0" width="10.0" height="10.0" rx="1" fill="#0284c7"/><text x="76" y="282" font-size="11" text-anchor="start" fill="currentColor">Nutzung &gt; 3 Std./Tag</text><rect x="60.0" y="293.0" width="10.0" height="10.0" rx="1" fill="#1e3a8a"/><text x="76" y="302" font-size="11" text-anchor="start" fill="currentColor">Befürwortung gesetzl. Nutzungsverbot</text><rect x="60.0" y="313.0" width="10.0" height="10.0" rx="1" fill="#0f9488"/><text x="76" y="322" font-size="11" text-anchor="start" fill="currentColor">Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber</text></svg>`,
+
+    sentences:[
+
+      {text:'Die zunehmende Nutzung digitaler Medien durch Jugendliche führt zu intensiven Diskussionen über staatliche Schutzmaßnahmen.', wrong:false},
+
+      {text:'Der Deutsche Ethikrat spricht sich in seiner Empfehlung nachdrücklich für ein allgemeines Nutzungsverbot von sozialen Netzwerken für Jugendliche unter 16 Jahren aus.', wrong:true},
+
+      {text:'Ein Ausbau von Sicherheitseinstellungen wird als unzureichend erachtet, weshalb Plattformen primär per Gesetz geschlossen werden sollten.', wrong:true},
+
+      {text:'Zum Schutz der Heranwachsenden fordert das Gremium ein Verbot personalisierter Werbung und datenbasierter Mechanismen für Minderjährige.', wrong:false},
+
+      {text:'Die Mehrheit aller befragten Gruppen befürwortet zwar ein gesetzliches Nutzungsverbot, stützt jedoch mehrheitlich vor allem Forderungen nach einer stärkeren gesetzlichen Pflicht der Plattformbetreiber.', wrong:true},
+
+      {text:'Zudem betont der Ethikrat, dass auch Schulen und Eltern die Medienkompetenz der Jugendlichen aktiv fördern müssen.', wrong:false}
+    ]
+  }
+];
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
@@ -1415,5 +1718,6 @@ const TESTS = [
   {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}, 
   {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7},
   {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8},
-  {id:9, title:'Modelltest 9 (Digitaler TestDaF)', teile: MT9}
+  {id:9, title:'Modelltest 9 (Digitaler TestDaF)', teile: MT9},
+  {id:10, title:'Modelltest 10 (Digitaler TestDaF)', teile: MT10}
 ];
