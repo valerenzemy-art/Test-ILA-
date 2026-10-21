@@ -94,7 +94,7 @@ const MT1 = [
         'Anleitungen zur Selbstinduktion von Klarträumen bereitzustellen.',
         'über den Forschungsstand und die Komplexität des Klarträumens zu informieren.',
         'die Überlegenheit alternativer Heilmethoden wissenschaftlich zu belegen.',
-        'vor den Gefahren des normalen REM-Schlafs zu warmen.'
+        'vor den Gefahren des normalen REM-Schlafs zu warnen.'
       ], correct:1 }
     ]
   },
@@ -118,10 +118,10 @@ const MT1 = [
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Hundemenschen, zu Katzenmenschen oder zu beiden passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen.',
     title:'Aufgabe 5: Das Persönlichkeitsprofil von Hunde- und Katzenhaltern',
-    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egomanischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
+    passage:'Die Fragestellung, inwiefern sich Halter von Hunden und Katzen in ihren grundlegenden Charakterzügen voneinander unterscheiden, ist Gegenstand verhaltenspsychologischer Untersuchungen. Eine empirische Studie analysierte die Probanden anhand des Fünf-Faktoren-Modells der Persönlichkeit. Dabei zeigte sich, dass Individuen, die sich selbst der Gruppe der Hundehalter zuordnen, ein höheres Maß an Extraversion, Verträglichkeit und Gewissenhaftigkeit aufweisen. Diese Personen zeichnen sich durch ausgeprägte soziale Interaktionsbereitschaft sowie eine strukturierte Lebensführung aus. Demgegenüber erzielten Katzenfreunde höhere Messwerte in den Dimensionen Offenheit für neue Erfahrungen und Neurotismus, was sich in einer Neigung zu emotionaler Labilität sowie einer erhöhten Bereitschaft zur kritischen Hinterfragung von Konventionen ausdrückt. Eine weitere Untersuchung widmete sich dem Einfluss von Dominanzstreben auf die Präferenz für bestimmte Ausprägungen von Heimtieren. Es zeigte sich, dass Personen mit stark ausgeprägter sozialer Dominanzorientierung signifikant häufiger ein Haustier bevorzugen, das sich klar unterordnet. Hinsichtlich ausgeprägter egozentrischer Charaktermerkmale wie Narzissmus ließen sich hingegen keine statistisch signifikanten Unterschiede zwischen beiden Probandengruppen feststellen.',
     columns:['Hundemenschen','Katzenmenschen','beide','passt nicht'],
     items:[
-      {text:'Diese Personen weisen ein stark ausgeprägtes egometrisches bzw. narzisstisches Verhalten auf.', correct:3},
+      {text:'Diese Personen weisen ein stark ausgeprägtes egozentrisches bzw. narzisstisches Verhalten auf.', correct:3},
       {text:'Diese Gruppe hinterfragt bestehende Normen und Werte eher kritisch.', correct:1},
       {text:'Diese Gruppe zeigt eine positive Einstellung gegenüber hierarchischen Rangordnungen.', correct:0},
       {text:'Diese Menschen zeigen sich im sozialen Umgang zugänglicher und verträglicher.', correct:0},
@@ -153,7 +153,7 @@ const MT1 = [
     graphicData:[{year:'2015',val:9},{year:'2018',val:12},{year:'2020',val:14},{year:'2021',val:17},{year:'2023',val:19}],
     graphicCaption:'Grafik: Anteil des Online-Handels am Einzelhandelsumsatz in Deutschland (in Prozent)',
     sentences:[
-      {text:'Der Online-Handel-Anteil ist von rund 9 Prozent 2015 auf über 19 Prozent 2023 gestiegen.', wrong:false},
+      {text:'Der Anteil des Online-Handels ist von rund 9 Prozent im Jahr 2015 auf über 19 Prozent im Jahr 2023 gestiegen.', wrong:false},
       {text:'Der stärkste Zuwachs war zwischen 2020 und 2021 zu beobachten.', wrong:false},
       {text:'Lebensmittel machen bislang den größten Anteil am Online-Handel aus.', wrong:true},
       {text:'Kleinere, inhabergeführte Geschäfte berichten überproportional häufig von Umsatzeinbußen.', wrong:false},
@@ -170,7 +170,7 @@ const MT2 = [
     instructions:'Lesen Sie den Text. Wählen Sie für jede Lücke das passende Wort.',
     title:'Aufgabe 1: Wie überlebt die Feueramöbe Extreme?',
     segments:[
-      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzieller Schlüsselpunkt ist: Demnach ',
+      'Obwohl die physiologischen Mechanismen, die der extremen Hitzetoleranz von einzelligen Organismen zugrunde liegen, längst nicht in allen Einzelheiten entschlüsselt sind, gilt in der Mikrobiologie als unbestritten, dass eine strukturelle Anpassung der Zellmembranen der essenzielle Schlüsselpunkt ist: Demnach ',
       ' diese Organismen in thermisch belasteten Gewässern dank spezialisierter Lipidzusammensetzungen, die ein Aufschmelzen der zellulären Barrieren verhindern. Doch die molekularen Feinheiten dieses Schutzmechanismus blieben lange Zeit im Verborgenen. Zudem schien die ',
       ' von Wissenschaftlern, es handele sich hierbei um eine rein passive Schutzreaktion, zunehmend fragwürdig. In einer neuen molekularbiologischen Untersuchung konnten Forscher nun eindeutig ',
       ', dass sich die fluiden Eigenschaften der Membranen aktiv und dynamisch an die Umgebungstemperatur anpassen. Mit einer Dicke, die dem Bruchteil einer Mikrometerschicht entspricht, reagiert die Zelle wesentlich schneller auf thermischen Stress als bisher angenommen. Der interessanteste Aspekt allerdings: Es handelt sich keineswegs um einen starren Panzer. Wie aus den proteomischen Analysen hervorgeht, verhält sich die Zytoplasmastruktur stattdessen hochelastisch und besitzt komplexe Regulationsmechanismen. Dieses ',
@@ -178,11 +178,11 @@ const MT2 = [
       ' sich rasch schützende Hitzeschockproteine, die den intrazellulären Zusammenbruch verhindern. Das Geheimnis der enormen Überlebensfähigkeit liegt demnach in den raffinierten biochemischen Schutzreaktionen dieser Spezies.'
     ],
     gaps:[
-      {options:['geht','überlebt','gleitet','agiert'], correct:1},
+      {options:['gehen','überleben','gleiten','agieren'], correct:1},
       {options:['Annahme','Erklärung','Mitteilung','Meldung'], correct:0},
       {options:['erweisen','nachweisen','verweisen','zurückweisen'], correct:1},
-      {options:['unangekündigte','unerwartete','unvergleichbare','unvorhergesehene'], correct:1},
-      {options:['bildet','entlädt','formt','trennt'], correct:0}
+      {options:['unangekündigte','unerwartete','unvergleichbare','unveränderliche'], correct:1},
+      {options:['bilden','entladen','lösen','trennen'], correct:0}
     ]
   },
   { ...TEMPLATE[1],
@@ -191,8 +191,8 @@ const MT2 = [
     correctOrder:[2,1,0,4,3],
     items:[
       'Dass dieses Gedankenexperiment im makroskopischen Alltag jedoch völlig absurd erscheint, liegt an einem physikalischen Phänomen namens Dekohärenz: Sobald ein Quantensystem mit seiner Umwelt – sei es auch nur mit einem einzigen Luftmolekül – in Wechselwirkung tritt, kollabiert der Überlagerungszustand augenblicklich in eine klassische Realität.',
-      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, der theoretisch so lange gleichzeitig lebend und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
-      'In der mikroskopischen Welt der Quantenmechanik gilt ein physikalisches System, solange es nicht gemessen oder beobachtet wird, in einer sogenannten Superposition – es befindet sich also gleichzeitig in mehreren unterschiedlichen Zuständen.',
+      'Um dieses paradoxe Verhalten zu veranschaulichen, erdachte der Physiker Erwin Schrödinger 1935 das berühmte Gedankenexperiment mit einer Katze in einem geschlossenen Kasten, in dem sie theoretisch so lange gleichzeitig lebendig und tot ist, bis ein Beobachter den Kasten öffnet und nachschaut.',
+      'In der mikroskopischen Welt der Quantenmechanik befindet sich ein physikalisches System, solange es nicht gemessen oder beobachtet wird, in einer sogenannten Superposition – es nimmt also gleichzeitig mehrere unterschiedliche Zustände ein.',
       'Dennoch versuchen moderne Quantenphysiker weltweit immer wieder, diese unsichtbare Grenze zwischen Quanten- und Makrowelt zu verschieben, um extrem empfindliche Quantencomputer zu konstruieren, die weit über die Leistung klassischer Rechenmaschinen hinausgehen.',
       'Genau aus diesem Grund gelingt es Wissenschaftlern bis heute nicht, makroskopische Objekte wie Katzen oder alltägliche Gegenstände in einen dauerhaften Quantenzustand zu versetzen, da die unkontrollierbare thermische Umgebung jede quantenmechanische Kohärenz innerhalb von Bruchteilen einer Mikrosekunde zerstört.'
     ],
@@ -202,8 +202,8 @@ const MT2 = [
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7.',
     title:'Aufgabe 3: Neue Unterart von Eiszeit-Leoparden in Thüringen entdeckt',
     passage:[
-      '(1) Lange Zeit galt die europäische Quartärfauna als gut erforscht, insbesondere was die großen Beutegreifer des Pleistozäns betrifft. Doch eine unscheinbare fossile Unterkieferfragment-Entdeckung in Thüringen hat das herkömmliche Bild der eiszeitlichen Raubkatzenpopulationen ins Wanken gebracht. Paläontologen konnten nachweisen, dass es sich bei den Überresten nicht etwa um eine bereits bekannte Population von Höhlenlöwen oder eurasischen Leoparden handelt, sondern um eine bislang unbeschriebene, eigenständige Unterart des Eiszeit-Leoparden. Dieser Fund wirft ein neues Licht auf die Anpassungsfähigkeit großräumiger Raubtiere an die extremen Klimaschwankungen des eiszeitlichen Europas.',
-      '(2) Die morphologische Analyse der Zähne und des Knochenmaterials offenbarte anatomische Besonderheiten, die eine präzise evolutionäre Einordnung erlaubten. Während moderne Leoparden vor allem in tropischen und subtropischen Wald- oder Savannengebieten heimisch sind, zeigte diese thüringische Form robuste Kiefernstrukturen und markante Zahnabnutzungen, die auf eine spezialisierte Beutejagd in kaltzeitlichen Offenlandschaften hindeuteten. Das Tier war anatomisch exakt auf das Erlegen von mittelgroßen Huftieren wie Renten oder Wildpferden ausgerichtet. Die Forscher sprechen von einer evolutionären Nischenbesetzung, die es der Raubkatze ermöglichte, in direkter Konkurrenz zu etablierten Großräubern wie dem Höhlenbären oder dem Wolf zu überleben.',
+      '(1) Lange Zeit galt die europäische Quartärfauna als gut erforscht, insbesondere was die großen Beutegreifer des Pleistozäns betrifft. Doch die Entdeckung eines unscheinbaren fossilen Unterkieferfragments in Thüringen hat das herkömmliche Bild der eiszeitlichen Raubkatzenpopulationen ins Wanken gebracht. Paläontologen konnten nachweisen, dass es sich bei den Überresten nicht etwa um eine bereits bekannte Population von Höhlenlöwen oder eurasischen Leoparden handelt, sondern um eine bislang unbeschriebene, eigenständige Unterart des Eiszeit-Leoparden. Dieser Fund wirft ein neues Licht auf die Anpassungsfähigkeit großräumiger Raubtiere an die extremen Klimaschwankungen des eiszeitlichen Europas.',
+      '(2) Die morphologische Analyse der Zähne und des Knochenmaterials offenbarte anatomische Besonderheiten, die eine präzise evolutionäre Einordnung erlaubten. Während moderne Leoparden vor allem in tropischen und subtropischen Wald- oder Savannengebieten heimisch sind, zeigte diese thüringische Form robuste Kiefernstrukturen und markante Zahnabnutzungen, die auf eine spezialisierte Beutejagd in kaltzeitlichen Offenlandschaften hindeuteten. Das Tier war anatomisch exakt auf das Erlegen von mittelgroßen Huftieren wie Rentieren oder Wildpferden ausgerichtet. Die Forscher sprechen von einer evolutionären Nischenbesetzung, die es der Raubkatze ermöglichte, in direkter Konkurrenz zu etablierten Großräubern wie dem Höhlenbären oder dem Wolf zu überleben.',
       '(3) Historisch betrachtet stieß die Suche nach eiszeitlichen Raubkatzenresten in Mitteleuropa im 19. Jahrhundert oft auf Skepsis und wissenschaftlichen Streit. Damals neigten Naturforscher dazu, fossile Knochenfragmente vorschnell bestehenden Arten zuzuordnen, um das klassische, hierarchische System der Tierwelt nicht zu gefährden. Kleinere Abweichungen wurden meist als individuelle Anomalien oder geografische Varianten abgetan. Erst mit der Etablierung moderner biometrischer Untersuchungsmethoden und der Paläogenetik im späten 20. Jahrhundert änderte sich dieses Dogma fundamental. Dennoch blieben Funde von echten Leoparden in Mitteleuropa extrem rar, was Skeptiker lange Zeit zu der Annahme verleitete, es habe sich lediglich um saisonale Wanderungsbewegungen einzelner Individuen statt um eine dauerhafte Population gehandelt.',
       '(4) Heutzutage rücken derartige paläontologische Entdeckungen vor allem deshalb in den Fokus der Biodiversitätsforschung, weil sie präzise Rückschlüsse auf die Robustheit von Ökosystemen bei rasantem Klimawandel zulassen. Für Wissenschaftler ist besonders faszinierend, dass genetische Spuren aus Knochenkollagen belegen, wie stark sich die Populationen während der Kältehöhepunkte isolierten. Dies führte zu genetischen Engpässen, aber auch zu evolutionären Innovationsschüben. Aus naturschutzfachlicher Sicht liefert die Erforschung solcher pleistozäner Relikte wertvolle Analogien dazu, wie moderne Wildtiere auf Habitatfragmentierung und globale Erwärmung reagieren könnten.',
       '(5) Abseits der rein theoretischen Evolutionsbiologie nutzen Paläontologen hochentwickelte bildgebende Verfahren, um innere Knochenstrukturen zu analysieren, ohne das wertvolle Originalmaterial zu zerstören. Ein kürzlich angewandtes mikro-CT-Verfahren machte es möglich, die Mikrostruktur des Dentins dreidimensional abzubilden, wodurch das Alter und der Ernährungszustand des Tieres exakt rekonstruiert werden konnten. Kritische Stimmen aus dem Fachbereich warnen davor, aus einzelnen Fossilien zu weit reichende Schlüsse über das gesamte regionale Ökosystem zu ziehen, da lokale Mikroklimata die Überlieferung verzerren können.',
@@ -218,7 +218,7 @@ const MT2 = [
       ], correct:1 },
       { q:'Wodurch zeichnet sich laut Absatz 2 die thüringische Form des Eiszeit-Leoparden aus? Durch ...', options:[
         'Anpassung an tropische Waldgebiete.',
-        'spezialisierte Jagd auf große Beutetiere in Offenlandschaften.',
+        'spezialisierte Jagd auf mittelgroße Huftiere in Offenlandschaften.',
         'eine Koexistenz mit modernen Leoparden.',
         'physische Merkmale, die denen von Höhlenbären ähneln.'
       ], correct:1 },
@@ -238,7 +238,7 @@ const MT2 = [
         'Mikro-CT-Verfahren zerstören stets das empfindliche Knochenmaterial.',
         'Kritiker lehnen den Einsatz moderner Technologie in der Paläontologie ab.',
         'Moderne Bildgebung ermöglicht präzise Analysen, doch Vorsicht bei Generalisierungen ist geboten.',
-        'Lokale Mikroklimat machen die Untersuchung von Fossilien unmöglich.'
+        'Lokale Mikroklimata machen die Untersuchung von Fossilien unmöglich.'
       ], correct:2 },
       { q:'Welche Meinung vertritt der Autor in Absatz 6?', options:[
         'Er fordert einen verstärkten behördlichen Schutz gegen illegale Grabungen.',
@@ -257,7 +257,7 @@ const MT2 = [
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Aufgabe 4: Kommentar eines Experten zu Rohstoffen',
-    passageText:`Die Vorstellung, dass wir bei der Energiewende vollständig von globalen Lieferketten abhängig bleiben und kritische Rohstoffe nur unter ökologisch fragwürdigen Bedingungen aus Übersee importieren können, ist eine These, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch innovative geothermische Verfahren Lithium direkt aus hiesigem Thermalwasser zu gewinnen. Dabei wird das Leichtmetall in einem komplexen technischen Kreislauf herausgefiltert, während das abgekühlte Wasser CO2-neutral in die Tiefe zurückgeleitet wird. <strong>[2] Diese Verfahren sind zugebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt extrem schnell voran. Vielleicht werden wir in Zukunft in der Lage sein, den gesamten hiesigen Bedarf an Batteriematerialien lokal und umweltschonend zu decken. Oder wir werden in den Genuss kommen, dass modernste Bergbautechnologien die Umweltauswirkungen auf ein absolutes Minimum reduzieren. Wenn Sie vor 100 Jahren einem Gelehrten gesagt hatten, dass wir schon bald durch automatisierte Fördertechniken und chemische Direktextraktion gigantische Industrimengen an Rohstoffen gewinnen können, hätte er Sie nur mitleidig angesehen. Und wenn Sie ihm gesagt hatten, dass diese Verfahren mit einem Bruchteil der ökologischen Belastung herkömmlicher Minen arbeiten wurden, hätte er Sie für komplett verrückt erklärt. Doch durch wissenschaftliche und ingenieurtechnische Meisterleistungen ist uns genau das gelungen.<br><br>Die Idee, dass heimische Rohstoffprojekte grundsätzlich zum Scheitern verurteilt sind, könnte auch ein Irrglaube sein. <strong>[3] Dass sie dennoch so unpopulär sind, hängt damit zusammen, dass unsere Vorstellung von der heimischen Natur immer noch von einer unberührten Idylle geprägt ist.</strong> Damals hiess es: Jede technische Eingriff in den Untergrund zerstört unweigerlich die Landschaft. Wenn alle Vorkommen erschlossen sind, wird die Region dauerhaft geschädigt. In Wahrheit sind unsere geologischen Potenziale jedoch enorm und die modernen Sicherheitsstandards extrem hoch. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Ingenieurskunst werden wir immer besser in der Lage sein, die Rohstoffe im Einklang mit der Umwelt zu fördern.</strong>`,
+    passageText:`Die Vorstellung, dass wir bei der Energiewende vollständig von globalen Lieferketten abhängig bleiben und kritische Rohstoffe nur unter ökologisch fragwürdigen Bedingungen aus Übersee importieren können, ist eine These, deren Wahrheitsgehalt praktisch keiner in Frage stellt. <strong>[1] Ob sie tatsächlich zutrifft, ist jedoch unklar.</strong> Bereits heute ist es möglich, durch innovative geothermische Verfahren Lithium direkt aus hiesigem Thermalwasser zu gewinnen. Dabei wird das Leichtmetall in einem komplexen technischen Kreislauf herausgefiltert, während das abgekühlte Wasser CO2-neutral in die Tiefe zurückgeleitet wird. <strong>[2] Diese Verfahren sind zugegebenermaßen noch sehr komplex und energieaufwändig.</strong> Doch wie wir wissen, schreitet der technologische Fortschritt extrem schnell voran. Vielleicht werden wir in Zukunft in der Lage sein, den gesamten hiesigen Bedarf an Batteriematerialien lokal und umweltschonend zu decken. Oder wir werden in den Genuss kommen, dass modernste Bergbautechnologien die Umweltauswirkungen auf ein absolutes Minimum reduzieren. Wenn Sie vor 100 Jahren einem Gelehrten gesagt hätten, dass wir schon bald durch automatisierte Fördertechniken und chemische Direktextraktion gigantische Industriemengen an Rohstoffen gewinnen können, hätte er Sie nur mitleidig angesehen. Und wenn Sie ihm gesagt hätten, dass diese Verfahren mit einem Bruchteil der ökologischen Belastung herkömmlicher Minen arbeiten würden, hätte er Sie für komplett verrückt erklärt. Doch durch wissenschaftliche und ingenieurtechnische Meisterleistungen ist uns genau das gelungen.<br><br>Die Idee, dass heimische Rohstoffprojekte grundsätzlich zum Scheitern verurteilt sind, könnte auch ein Irrglaube sein. <strong>[3] Dass sie dennoch so unpopulär sind, hängt damit zusammen, dass unsere Vorstellung von der heimischen Natur immer noch von einer unberührten Idylle geprägt ist.</strong> Damals hieß es: Jeder technische Eingriff in den Untergrund zerstört unweigerlich die Landschaft. Wenn alle Vorkommen erschlossen sind, wird die Region dauerhaft geschädigt. In Wahrheit sind unsere geologischen Potenziale jedoch enorm und die modernen Sicherheitsstandards extrem hoch. <strong>[4] Und mit unserem Erfindungsreichtum und unserer Ingenieurskunst werden wir immer besser in der Lage sein, die Rohstoffe im Einklang mit der Umwelt zu fördern.</strong>`,
     textStellen:[1, 2, 3, 4],
     options:[
       'Der Experte erklärt etwas.',
@@ -274,14 +274,14 @@ const MT2 = [
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu den Kategorien zu.',
     title:'Aufgabe 5: Wie finanzielle Zusatzleistungen die Kindergesundheit beeinflussen',
-    passage:'Ob sich die gesundheitliche Entwicklung von Kindern durch direkte finanzielle Hilfen für Mütter signifikant verbessern lässt – und wie die Effekte im Vergleich zu klassischen Sachleistungen ausgeprägt sind –, untersuchen Gesundheitsökonomen und Soziologen bereits seit Jahren. Eine aktuelle europaweite Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden zwei Gruppen von Müttern im Hinblick auf fünf gesundheits- und entwicklungsspezifische Indikatoren untersucht: Mütter, die einen monatlichen, bedingungslosen Finanzbonus (Zusatzgeld) erhalten, und Mütter, die im traditionellen, an strenge Auflagen geknüpften Regelsystem der staatlichen Sozialhilfe verblieben sind. Personen der ersten Gruppe, die sich selbst als Empfängerinnen des Zusatzgeldes bezeichneten, erwiesen sich in den Kennzahlen zu Ernährungssicherheit, Vorsorgeuntersuchungen und psychischem Wohlbefinden ihrer Kinder als deutlich proaktiver - sie gaben beispielsweise an, flexibler auf kindliche Bedürfnisse reagieren zu können, ausgewogenere Nahrungsmittel zu kaufen und präventive Arztbesuche termingerecht wahrzunehmen. Mütter im herkömmlichen Regelsystem erzielten dagegen niedrigere Werte in puncto Ernährungsqualität und wiesen häufiger stressbedingte Erschöpfungssymptome auf. Sie sind damit im Mittel stärker von akuten finanziellen Sorgen geplagt, wodurch auch die mentale Gesundheit der Kinder indirekt beeinträchtigt wird.',
+    passage:'Ob sich die gesundheitliche Entwicklung von Kindern durch direkte finanzielle Hilfen für Mütter signifikant verbessern lässt – und wie die Effekte im Vergleich zu klassischen Sachleistungen ausgeprägt sind –, untersuchen Gesundheitsökonomen und Soziologen bereits seit Jahren. Eine aktuelle europaweite Studie liefert nun neue Erkenntnisse zu dieser Frage. Dabei wurden zwei Gruppen von Müttern im Hinblick auf fünf gesundheits- und entwicklungsspezifische Indikatoren untersucht: Mütter, die einen monatlichen, bedingungslosen Finanzbonus (Zusatzgeld) erhalten, und Mütter, die im traditionellen, an strenge Auflagen geknüpften Regelsystem der staatlichen Sozialhilfe verblieben sind. Personen der ersten Gruppe, die sich selbst als Empfängerinnen des Zusatzgeldes bezeichneten, erwiesen sich in den Kennzahlen zu Ernährungssicherheit, Vorsorgeuntersuchungen und psychischem Wohlbefinden ihrer Kinder als deutlich proaktiver – sie gaben beispielsweise an, flexibler auf kindliche Bedürfnisse reagieren zu können, ausgewogenere Nahrungsmittel zu kaufen und präventive Arztbesuche termingerecht wahrzunehmen. Mütter im herkömmlichen Regelsystem erzielten dagegen niedrigere Werte in puncto Ernährungsqualität und wiesen häufiger stressbedingte Erschöpfungssymptome auf. Sie sind damit im Mittel stärker von akuten finanziellen Sorgen geplagt, wodurch auch die mentale Gesundheit der Kinder indirekt beeinträchtigt wird.',
     columns:['Mutter mit Zusatzgeld','Mutter im Regelsystem','beide','passt nicht'],
     items:[
       {text:'Diese Personen stehen unter starkem Dauerstress.', correct:3},
-      {text:'Diese Gruppe investiert gezielt in präventive Massnahmen.', correct:0},
+      {text:'Diese Gruppe investiert gezielt in präventive Maßnahmen.', correct:0},
       {text:'Diese Mütter weisen eine hohe Ernährungsqualität auf.', correct:0},
       {text:'Diese Gruppe erhält traditionelle staatliche Sachleistungen.', correct:1},
-      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:0},
+      {text:'Diese Mütter wählen ihre Ausgaben nach ökologischen Kriterien aus.', correct:3},
       {text:'Diese Personen sind psychisch völlig unauffällig.', correct:3},
       {text:'Diese Mütter leiden spürbar unter akuten finanziellen Sorgen.' , correct:1}
     ]
@@ -289,15 +289,15 @@ const MT2 = [
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Wie künstliche Intelligenz unsere Sprache verarmt',
-    passage:'Der Einfluss künstlicher Intelligenz auf unsere alltägliche Kommunikation und Sprachkultur ist in den letzten Jahren rasant gewachsen. Einerseits bieten generative KI-Systeme enorme Potenziale: Sie können Texte in Sekundenschnelle zusammenfassen, fehlerfrei übersetzen und stilistisch anpassen. Die Effizienzsteigerung im akademischen und beruflichen Bereich ist unbestritten, da wiederkehrende Schreibarbeiten automatisiert erledigt werden. Doch diese Bequemlichkeit hat ihren Preis. Linguisten warnen vor einer schleichenden Verarmung unseres Wortschatzes und dem Verlust individueller Ausdrucksformen. Wenn wir uns zunehmend auf standardisierte Textvorschläge verlassen, schrumpft die sprachliche Vielfalt, und komplexe Nuancen gehen verloren.<br><br>Besonders kritisch sehen Sprachforscher die Tatsache, dass generative Modelle oft zu sprachlichen Klischees und vorhersehbaren Formulierungen neigen. Dies führt zu einer Homogenisierung des schriftlichen Ausdrucks, bei der persönliche Stimmen und kreative Stilmittel zugunsten einer glatten, aber sterilen Durchschnittssprache verblassen. Zwar lässt sich durch den gezielten Einsatz von KI die Produktivität massiv steigern, doch wer verlernt, komplexe Gedanken selbst in Worte zu fassen, gefährdet langfristig seine kognitive und rhetorische Flexibilität. Dennoch wäre es verfehlt, KI-Technologien pauschal zu verteufeln. Sie können wertvolle Werkzeuge sein, sofern sie kritisch und ergänzend genutzt werden, anstatt das eigene Nachdenken und Formulieren komplett zu ersetzen. Der bewusste Umgang mit diesen neuen Werkzeugen ist daher entscheidend, um die sprachliche Kreativität und den Facettenreichtum unseres Wortschatzes zu bewahren.',
+    passage:'Der Einfluss künstlicher Intelligenz auf unsere alltägliche Kommunikation und Sprachkultur ist in den letzten Jahren rasant gewachsen. Einerseits bieten generative KI-Systeme enorme Potenziale: Sie können Texte in Sekundenschnelle zusammenfassen, fehlerfrei übersetzen und stilistisch anpassen. Die Effizienzsteigerung im akademischen und beruflichen Bereich ist unbestritten, da wiederkehrende Schreibarbeiten automatisiert erledigt werden. Doch diese Bequemlichkeit hat ihren Preis. Linguisten warnen vor einer schleichenden Verarmung unseres Wortschatzes und dem Verlust individueller Ausdrucksformen. Wenn wir uns zunehmend auf standardisierte Textvorschläge verlassen, schrumpft die sprachliche Vielfalt, und komplexe Nuancen gehen verloren. Besonders kritisch sehen Sprachforscher die Tatsache, dass generative Modelle oft zu sprachlichen Klischees und vorhersehbaren Formulierungen neigen. Dies führt zu einer Homogenisierung des schriftlichen Ausdrucks, bei der persönliche Stimmen und kreative Stilmittel zugunsten einer glatten, aber sterilen Durchschnittssprache verblassen. Zwar lässt sich durch den gezielten Einsatz von KI die Produktivität massiv steigern, doch wer verlernt, komplexe Gedanken selbst in Worte zu fassen, gefährdet langfristig seine kognitive und rhetorische Flexibilität. Dennoch wäre es verfehlt, KI-Technologien pauschal zu verteufeln. Sie können wertvolle Werkzeuge sein, sofern sie kritisch und ergänzend genutzt werden, anstatt das eigene Nachdenken und Formulieren komplett zu ersetzen. Der bewusste Umgang mit diesen neuen Werkzeugen ist daher entscheidend, um die sprachliche Kreativität und den Facettenreichtum unseres Wortschatzes zu bewahren.',
     aussagen:[
       { key:'a', text:'[a] Deutliche Effizienzsteigerung bei standardisierten Schreibarbeiten' },
       { key:'b', text:'[b] Vollständiger Ersatz des eigenen kreativen Denkens' },
       { key:'c', text:'[c] Schleichende Verarmung des individuellen Wortschatzes' },
       { key:'d', text:'[d] Erhaltung sämtlicher rhetorischer Nuancen' },
-      { key:'e', text:'[e] Homogenisierung und Sterilität des schriftlichen Ausdrucks' },
+      { key:'e', text:'[e] Zunahme individueller Ausdrucksformen im schriftlichen Bereich' },
       { key:'f', text:'[f] Unproblematische uneingeschränkte Nutzung ohne jegliche Kritik' },
-      { key:'g', text:'[g] Förderung einer enormen sprachlichen Vielfalt' },
+      { key:'g', text:'[g] Schnelles Zusammenfassen und fehlerfreies Übersetzen von Texten' },
       { key:'h', text:'[h] Verlust der kognitiven Flexibilität bei vollständiger Abhängigkeit' }
     ],
     correctMap: { v1: 'a', v2: 'g', n3: 'c', n4: 'h' }
@@ -305,7 +305,7 @@ const MT2 = [
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Aufgabe 7: Der Rhythmus des Lernens: Wie Musik das Gehirn beeinflusst',
-    passage:'Ein regelmäßiger Musikkonsum beim Lernen kostet zwar Zeit und Aufmerksamkeit, doch er entlastet nachweislich das Gehirn, senkt den Cortisolspiegel und fördert die Konzentrationsfähigkeit im Vergleich zum Arbeiten in völliger Stille. Sogar die Schüler, die beim Lernen intensiv über laute Kopfhörer beschallt werden, leiden häufiger unter akustischer Reizüberflutung und Konzentrationsproblemen. Doch nicht nur die Oberstufenschüler, sondern auch die Jüngsten zeigen oft ein verändertes Hör- und Lernverhalten. Wie in einer aktuellen Studie in Deutschland festgestellt wurde, benötigen Schüler im Schnitt 32 Minuten, um sich morgens durch gezieltes Musikhören in eine optimale Lernstimmung zu versetzen. Während bei immerhin 22 Prozent der Schüler der Weg zur Schule kürzer als zehn Minuten ist, brauchen 12 Prozent dafür 45 Minuten und länger. Wären sie musikalisch aktiv, würde man sie als klassische Melomanen bezeichnen.<br><br>Wie die Forscher herausfanden, geht das ständige Musikhören im Alltag an den Jugendlichen nicht spurlos vorüber. Ähnlich wie Erwachsene leiden besonders Jugendliche mit langen Lernphasen unter mentaler Erschöpfung. Sie sind zudem unkonzentriert und fühlen sich weniger leistungsfähig. Doch auch Schüler, die gar keine Musik hören, leiden unter derartigen Folgen. Auf Reaktionen aus der Politik wartet man bislang vergeblich und eine Abhilfe scheint nicht in Sicht. In den letzten zehn Jahren mussten immer mehr Musikschulen schließen, weil beispielsweise qualifizierte Musiklehrer fehlten. Für die Schüler ist dies fatal: Sie müssen immer monotonere Lehrmethoden in Kauf nehmen – und damit auch die mangelnde Kreativität, die damit verbunden ist. Zum Bildungserfolg der Jugendlichen trägt das sicherlich nicht bei.',
+    passage:'Ein regelmäßiger Musikkonsum beim Lernen kostet zwar Zeit und Aufmerksamkeit, doch er entlastet nachweislich das Gehirn, senkt den Cortisolspiegel und fördert die Konzentrationsfähigkeit im Vergleich zum Arbeiten in völliger Stille. Sogar die Schüler, die beim Lernen intensiv über laute Kopfhörer beschallt werden, leiden häufiger unter akustischer Reizüberflutung und Konzentrationsproblemen. Doch nicht nur die Oberstufenschüler, sondern auch die Jüngsten zeigen oft ein verändertes Hör- und Lernverhalten. Wie in einer aktuellen Studie in Deutschland festgestellt wurde, benötigen Schüler im Schnitt 32 Minuten, um sich morgens durch gezieltes Musikhören in eine optimale Lernstimmung zu versetzen. Während bei immerhin 22 Prozent der Schüler der Weg zur Schule kürzer als zehn Minuten ist, brauchen 12 Prozent dafür 45 Minuten und länger. Wären sie musikalisch aktiv, würde man sie als klassische Melomanen bezeichnen. Wie die Forscher herausfanden, geht das ständige Musikhören im Alltag an den Jugendlichen nicht spurlos vorüber. Ähnlich wie Erwachsene leiden besonders Jugendliche mit langen Lernphasen unter mentaler Erschöpfung. Sie sind zudem unkonzentriert und fühlen sich weniger leistungsfähig. Doch auch Schüler, die gar keine Musik hören, leiden unter derartigen Folgen. Auf Reaktionen aus der Politik wartet man bislang vergeblich und eine Abhilfe scheint nicht in Sicht. In den letzten zehn Jahren mussten immer mehr Musikschulen schließen, weil beispielsweise qualifizierte Musiklehrer fehlten. Für die Schüler ist dies fatal: Sie müssen immer monotonere Lehrmethoden in Kauf nehmen – und damit auch die mangelnde Kreativität, die damit verbunden ist. Zum Bildungserfolg der Jugendlichen trägt das sicherlich nicht bei.',
     graphicData:[{year:'1. Satz',val:1},{year:'2. Satz',val:1},{year:'3. Satz',val:1},{year:'4. Satz',val:1},{year:'5. Satz',val:1},{year:'6. Satz',val:1}],
     graphicCaption:'Grafik zur Zusammenfassung der Sätze (Modelltest 2)',
     sentences:[
@@ -334,11 +334,11 @@ const MT3 = [
       ' stark ansammelt.'
     ],
     gaps:[
-      {options:['bezeichnet','bezeichnet sich','benennt','n nennt sich'], correct:0},
-      {options:['beiträgt','führt','verursacht','bewirkt'], correct:0},
-      {options:['abgegeben','ausgestoßen','entlassen','ausgesetzt'], correct:0},
-      {options:['spenden','gewähren','leisten','bieten'], correct:0},
-      {options:['nicht','weniger','kaum','selten'], correct:0}
+      {options:['bezeichnet','genannt','ernannt','verkannt'], correct:0},
+      {options:['beiträgt','verhilft','gelangt','antreibt'], correct:0},
+      {options:['abgegeben','eingeholt','entlassen','ausgesetzt'], correct:0},
+      {options:['spenden','gewähren','leisten','erteilen'], correct:0},
+      {options:['nicht','besonders','sehr','äußerst'], correct:0}
     ]
   },
   { ...TEMPLATE[1],
@@ -358,8 +358,8 @@ const MT3 = [
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1-7. Entscheiden Sie, welche Lösung passt.',
     title:'Adaptive KI-Robotik und menschliche Motorik',
     passage:[
-      '(1) Die Schnittstelle zwischen künstlicher Intelligenz und hochkomplexer Robotik hat in den letzten Jahren jene technologischen Grenzen verschoben, die lange Zeit als unüberwindbar galten. Während traditionelle Industrieroboter vor allem starr programmierte, repetitive Aufgaben in isolierten Fabrikzellen ausführen, verlangen moderne physische Assistenzsysteme nach einer gänzlich neuen Dimension der sensorischen Adaption. Ein herausragendes Beispiel hierfür sind Kl-gesteuerte humanoide Robotersysteme, die in Echtzeit physikalische Parameter wie Flugbahnen, Reibung und kinetische Energie berechnen können, um beispielsweise hochentwickelte sportliche Interaktionen wie das Fangen und Schlagen von Baseball-Bällen zu meistern eine Aufgabe, die selbst für geschulte menschliche Athleten ein Höchstmaß an visuell-motorischer Koordination erfordert.',
-      '(2) Warum diese Integration von maschinellem Lernen und mechanischer Ausführung so komplex ist, liegt vor allem an der unvorhersehbaren Dynamik realer Umgebungen. Nachgewiesen ist, dass Algorithmen zwar immense Datenmengen in Millisekunden verarbeiten können, die physikalische Umsetzung durch Aktoren jedoch oft träge reagiert. Bei menschlichen Bewegungen steuert das Kleinhirn unbewusst die Feinabstimmung, während Kortex-Areale strategische Entscheidungen treffen. Moderne Roboterarchitekturen versuchen diesen biologischen Dualismus durch neuronale Netze nachzuahmen. Dennoch unterscheiden sich autonome Systeme von biologischen Organismen grundlegend dadurch, dass ihnen das intuitive, erfahrungsbasierte "Gefühl" für physakalisches Material fehlt, weshalb jede Abweichung von der Norm zu Fehlkalkulationen führt.',
+      '(1) Die Schnittstelle zwischen künstlicher Intelligenz und hochkomplexer Robotik hat in den letzten Jahren jene technologischen Grenzen verschoben, die lange Zeit als unüberwindbar galten. Während traditionelle Industrieroboter vor allem starr programmierte, repetitive Aufgaben in isolierten Fabrikzellen ausführen, verlangen moderne physische Assistenzsysteme nach einer gänzlich neuen Dimension der sensorischen Adaption. Ein herausragendes Beispiel hierfür sind KI-gesteuerte humanoide Robotersysteme, die in Echtzeit physikalische Parameter wie Flugbahnen, Reibung und kinetische Energie berechnen können, um beispielsweise hochentwickelte sportliche Interaktionen wie das Fangen und Schlagen von Baseball-Bällen zu meistern – eine Aufgabe, die selbst für geschulte menschliche Athleten ein Höchstmaß an visuell-motorischer Koordination erfordert.',
+      '(2) Warum diese Integration von maschinellem Lernen und mechanischer Ausführung so komplex ist, liegt vor allem an der unvorhersehbaren Dynamik realer Umgebungen. Nachgewiesen ist, dass Algorithmen zwar immense Datenmengen in Millisekunden verarbeiten können, die physikalische Umsetzung durch Aktoren jedoch oft träge reagiert. Bei menschlichen Bewegungen steuert das Kleinhirn unbewusst die Feinabstimmung, während Kortex-Areale strategische Entscheidungen treffen. Moderne Roboterarchitekturen versuchen diesen biologischen Dualismus durch neuronale Netze nachzuahmen. Dennoch unterscheiden sich autonome Systeme von biologischen Organismen grundlegend dadurch, dass ihnen das intuitive, erfahrungsbasierte "Gefühl" für physikalisches Material fehlt, weshalb jede Abweichung von der Norm zu Fehlkalkulationen führt.',
       '(3) Während in Europa die Entwicklung solcher dynamischen Roboterarme stark sicherheitsgetrieben und regulativ gebremst wird, setzt man in anderen Innovationszentren auf kompromisslose Praxistests unter Extrembedingungen. Ingenieure nutzen dort fortschrittliche Simulationen, um Tausende von Wurfszenarien zu generieren, bevor die Hardware überhaupt physisch beansprucht wird. In der westlichen Welt galt lange Zeit eine skeptische Haltung gegenüber autonomen Maschinen, die in direkter physischer Nähe zum Menschen agieren. Erst nachdem internationale Forschungsteams in kontrollierten Testlaboren nachweisen konnten, dass moderne Kollisionserkennungssysteme absolut verlässlich arbeiten, erhielten solche Roboter eine breitere gesellschaftliche und industrielle Akzeptanz.',
       '(4) Heutzutage stehen autonome KI-Systeme vor allem im Fokus der Materialwissenschaft und der Logistikoptimierung. Denn über physikalische Interaktionskräfte wissen wir oft weniger, als intuitiv angenommen wird, da sich mechanische Belastungen in dreidimensionalen Räumen unvorhersehbar überlagern. Roboter sind für Forscher besonders wertvoll, da sie als messbare Versuchsträger dienen: Das System registriert und quantifiziert jeden Millimeterbruchteil einer Bewegung. Dieser empirische Datensatz kann auch in der Rehabilitation genutzt werden: Ein gewisser Prozentsatz von Patienten leidet unter neurologisch bedingten Bewegungsstörungen nach Schlaganfällen. Es ist bereits wissenschaftlich belegt, dass präzise haptische Feedback-Roboter helfen können, neuronale Bahnen im Gehirn zu reaktivieren und motorische Fähigkeiten gezielt wiederherzustellen.',
       '(5) Anders als die Ingenieure beschäftigen sich Kognitionswissenschaftler mit der Frage, inwiefern die algorithmische Entscheidungsfindung Aufschluss über menschliche Denkprozesse geben kann. Einer der Forscher analysierte, ob neuronale KI-Modelle das menschliche Antizipationsvermögen bei High-Speed-Reaktionen simulieren können. Nach eigenen Angaben konnte er dadurch neue Muster im menschlichen Lernverhalten entschlüsseln. Mittlerweile ist auch anderweitig belegt, dass derartige Simulationen für das Verstehen einfacher Bewegungsabläufe hervorragend funktionieren. Bei hochkomplexen, intuitiven Handlungen geraten die Algorithmen jedoch an ihre Grenzen, da menschliche Kreativität und Spontaneität mathematisch kaum fassbar sind.',
@@ -375,8 +375,8 @@ const MT3 = [
       { q:'Wodurch zeichnen sich laut Absatz 2 autonome KI-Systeme aus? Durch ...', options:[
         'ein intuitives, erfahrungsbasiertes Materialgefühl.',
         'eine absolut fehlerfreie mechanische Umsetzung.',
-        'eine rein biologische Nachahmung des Kleinhims.',
-        'Schwierigkeiten bei normAbweichungen aufgrund fehlender Intuition.'
+        'eine rein biologische Nachahmung des Kleinhirns.',
+        'Schwierigkeiten bei Normabweichungen aufgrund fehlender Intuition.'
       ], correct:3 },
       { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 3?', options:[
         'Unterschiedliche globale Herangehensweisen und Akzeptanz',
@@ -388,7 +388,7 @@ const MT3 = [
         'neurologische Störungen endgültig heilen.',
         'mechanische Belastungen im Raum komplett eliminieren.',
         'neuronale Bahnen durch haptisches Feedback reaktivieren.',
-        'das menschliche Gehim vollständig digitalisieren.'
+        'das menschliche Gehirn vollständig digitalisieren.'
       ], correct:2 },
       { q:'Welche der folgenden Aussagen fasst den Inhalt aus Absatz 5 korrekt zusammen?', options:[
         'KI-Simulationen erfassen menschliche Spontaneität vollständig.',
@@ -402,10 +402,10 @@ const MT3 = [
         'Er lehnt den Einsatz von Reinforcement Learning ab.',
         'Er dämpft die Erwartungen wegen hoher Kosten und Rechenintensität.'
       ], correct:3 },
-      { q:'Hauptanliegen des Textes ist es,...', options:[
+      { q:'Hauptanliegen des Textes ist es, ...', options:[
         'die Fortschritte und Grenzen adaptiver KI-Robotik darzulegen.',
-        'ausschliesslich die sportlichen Anwendungen von Robotern zu vergleichen.',
-        'vor den Gefahren autonomer Maschinen im Alltag zu warmen.',
+        'ausschließlich die sportlichen Anwendungen von Robotern zu vergleichen.',
+        'vor den Gefahren autonomer Maschinen im Alltag zu warnen.',
         'die Überlegenheit von Robotern gegenüber Menschen zu beweisen.'
       ], correct:0 }
     ]
@@ -413,7 +413,7 @@ const MT3 = [
   { ...TEMPLATE[3],
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1-4 den Aussagen unten zu.',
     title:'Kommentar eines Experten zu Künstlicher Intelligenz und Arbeitsmarkt',
-    passageText:`Die Annahme, dass generative Künstliche Intelligenz in naher Zukunft weite Teile der intellektuellen Arbeitswelt revolutionieren und zu einer massiven Entwertung akademischer Berufe führen wird, wird in Fachkreisen kaum noch ernsthaft bestritten. <strong>[1] Ob diese technologische Disruption jedoch linear verläuft oder durch unvorhersehbare regulatorische und gesellschaftliche Hürden abgebremst wird, entzieht sich aktuell jeder verlässlichen Prognose.</strong> Bereits heute existieren Algorithmen, die komplexe juristische Schriftsätze verfassen und medizinische Diagnosen mit einer Präzision stellen können, die das menschliche Fehlerrisiko in bestimmten Teilbereichen signifikant unterscheidet. <strong>[2] Diese Applikationen basieren auf gigantischen Rechenkapazitäten und probabilistischen Modellen, deren interne Entscheidungsprozesse für den Anwender eine absolute Blackbox darstellen.</strong> Doch während Kritiker vor einem irreversiblen Vertrauensverlust in automatisierte Systeme warnen, schreitet die Implementierung in sicherheitskritischen Infrastrukturen rasant voran. Vielleicht erleben wir schon bald den Punkt, an dem autonome Agenten eigenständig ökonomische Strategien für globale Konzerne entwickeln. Wenn Sie vor zwanzig Jahren einem Pionier der Informatik gesagt hätten, dass Computer semantische Nuancen menschlicher Sprache fehlerfrei erfassen und imitieren können, hätte er Sie vermutlich ungläubig angeschaut. Und wenn Sie ihm gesagt hätten, dass diese Systeme kreative Prozesse wie das Komponieren von Symphonien in Sekundenschnelle und mit bruchteilhaften Energiekosten im Vergleich zu menschlichen Künstlern bewältigen, hätte er das für völlig absurd erklärt. Doch durch algorithmische Optimierung und massive Skalierung ist uns genau das gelungen.<br><br>Die Idee des unaufhaltsamen technologischen Fortschritts könnte also ein Trugschluss sein. <strong>[3] Dass sie dennoch so populär ist, hängt damit zusammen, dass unser kollektives Narrativ von Innovation immer noch tief im linearen Denken der industriellen Revolution verwurzelt ist.</strong> Damals hieß es: Wer effizienter maschinell produziert, gewinnt den Markt. Wenn heute alle alten Paradigmen obsolet werden, müssen wir unsere ökonomischen Grundregeln völlig neu definieren. In Wahrheit sind unsere Grenzen unserer technologischen Leistungsfähigkeit keineswegs erreicht. <strong>[4] Und mit unserem rasant wachsenden Verständnis neuronaler Netze und synthetischer Daten werden wir immer besser in der Lage sein, kognitive Engpässe zu überwinden.</strong>`,
+    passageText:`Die Annahme, dass generative Künstliche Intelligenz in naher Zukunft weite Teile der intellektuellen Arbeitswelt revolutionieren und zu einer massiven Entwertung akademischer Berufe führen wird, wird in Fachkreisen kaum noch ernsthaft bestritten. <strong>[1] Ob diese technologische Disruption jedoch linear verläuft oder durch unvorhersehbare regulatorische und gesellschaftliche Hürden abgebremst wird, entzieht sich aktuell jeder verlässlichen Prognose.</strong> Bereits heute existieren Algorithmen, die komplexe juristische Schriftsätze verfassen und medizinische Diagnosen mit einer Präzision stellen können, die das menschliche Fehlerrisiko in bestimmten Teilbereichen signifikant unterschreitet. <strong>[2] Diese Applikationen basieren auf gigantischen Rechenkapazitäten und probabilistischen Modellen, deren interne Entscheidungsprozesse für den Anwender eine absolute Blackbox darstellen.</strong> Doch während Kritiker vor einem irreversiblen Vertrauensverlust in automatisierte Systeme warnen, schreitet die Implementierung in sicherheitskritischen Infrastrukturen rasant voran. Vielleicht erleben wir schon bald den Punkt, an dem autonome Agenten eigenständig ökonomische Strategien für globale Konzerne entwickeln. Wenn Sie vor zwanzig Jahren einem Pionier der Informatik gesagt hätten, dass Computer semantische Nuancen menschlicher Sprache fehlerfrei erfassen und imitieren können, hätte er Sie vermutlich ungläubig angeschaut. Und wenn Sie ihm gesagt hätten, dass diese Systeme kreative Prozesse wie das Komponieren von Symphonien in Sekundenschnelle und mit einem Bruchteil der Energiekosten menschlicher Künstler bewältigen, hätte er das für völlig absurd erklärt. Doch durch algorithmische Optimierung und massive Skalierung ist uns genau das gelungen.<br><br>Die Idee des unaufhaltsamen technologischen Fortschritts könnte also ein Trugschluss sein. <strong>[3] Dass sie dennoch so populär ist, hängt damit zusammen, dass unser kollektives Narrativ von Innovation immer noch tief im linearen Denken der industriellen Revolution verwurzelt ist.</strong> Damals hieß es: Wer effizienter maschinell produziert, gewinnt den Markt. Wenn heute alle alten Paradigmen obsolet werden, müssen wir unsere ökonomischen Grundregeln völlig neu definieren. In Wahrheit sind die Grenzen unserer technologischen Leistungsfähigkeit keineswegs erreicht. <strong>[4] Und mit unserem rasant wachsenden Verständnis neuronaler Netze und synthetischer Daten werden wir immer besser in der Lage sein, kognitive Engpässe zu überwinden.</strong>`,
     textStellen:[1, 2, 3, 4],
     options:[
       'Der Experte erklärt etwas.',
@@ -425,16 +425,16 @@ const MT3 = [
       'Der Experte verteidigt etwas.',
       'Der Experte widerspricht etwas.'
     ],
-    correct:[5, 3, 7, 2]
+    correct:[4, 3, 5, 2]
   },
   { ...TEMPLATE[4],
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu Analytikern, zu Intuitionistikern oder zu beiden passt.',
     title:'Wie analytische und intuitive Köpfe ticken',
-    passage:'Ob sich menschliche Denkstrukturen in kognitive Extreme wie strikte Analytik und fluid-intuitive Verarbeitung aufteilen lassen – und wie stark diese Unterschiede im Einzelfall ausgeprägt sind –, diskutieren Neurowissenschaftler seit Jahrzehnten kontrovers. Eine aktuelle multidisziplinäre Studie liefert nun tiefere Einblicke in diese kognitive Dichotomie. Dabei wurden Probanden hinsichtlich fünf fundamentaler neurokognitiver Merkmale untersucht: algorithmische Stringenz, Offenheit für sensorische Ambiguität, Gewissenhaftigkeit, kognitive Flexibilität d.h. die Fähigkeit zur schnellen Reorientierung, sowie neuronale Erregbarkeit bzw. emotionale Stabilität unter Entscheidungsdruck. Personen, die sich selbst als primär analytisch veranlagt einstuften, erzielen im Schnitt höhere Werte in puncto systematischer Planung, formaler Logik und methodischer Vorhersehbarkeit – sie neigen also dazu, Probleme strikt strukturiert und Schritt für Schritt anzugehen. Intuitionistischer veranlagte Probanden verzeichnen dagegen höhere Werte bei holistischer Mustererkennung und divergentem Denken. Sie sind damit im Mittel etwas risikofreudiger und fehlerintoleranter gegenüber starren Hierarchien; gleichzeitig werden sie jedoch auch häufiger von unbewussten kognitiven Verzerrungen und spontanen Fehleinschätzungen geplagt. Ein relativ ähnliches Bild liefert auch eine andere Untersuchung: Insgesamt deuten die neueren Studien auf einen engen Zusammenhang zwischen unserer neuronalen Verschaltung und der Präferenz für einen ganz bestimmten Problemlösungsstil hin. Wie dieser Zusammenhang genau aussehen könnte, ist jedoch nicht abschließend geklärt. Australische Forscher vertreten die These, dass wir kognitive Strategien präferieren, die unsere angeborene mentale Architektur optimal ergänzen. Um ihre Vermutung zu überprüfen, untersuchten sie in zwei unterschiedlichen Studien mit jeweils rund 500 Teilnehmern, ob dominante Analytiker im Schnitt eine ausgeprägtere Dominanzorientierung besaßen als intuitive Köpfe – sie präferierten also eine feste gedankliche Hierarchie und glaubten, dass übergeordnete Systeme stets mit einem niedrigen Rang dominieren sollten. Paaroffene Fragen hinterlässt die Untersuchung allerdings: Die Wissenschaftler sehen das als Hinweis darauf, dass analytischere Personen Führungspositionen anstreben, die nicht primär auf emotionalem Konsens beruhen, sondern bereit sind, harte rationale Kriterien anzulegen – was auf mathematische Disziplinen eher zutrifft als auf rein künstlerisch-intuitive Domänen. So konnten die Wissenschaftler hinsichtlich Durchsetzungsvermögen und Narzissmus – zwei Eigenschaften, die ebenfalls mit kognitiver Dominanz zusammenhängen – keine signifikanten Unterschiede zwischen ihren Versuchspersonen finden: Analytiker waren weder durchsetzungsstärker noch selbstbezogener als Intuitionistiker. Wie das genau zu ihrer Hypothese passt, konnten die Wissenschaftler allerdings nicht abschließend erklären.',
+    passage:'Ob sich menschliche Denkstrukturen in kognitive Extreme wie strikte Analytik und fluid-intuitive Verarbeitung aufteilen lassen – und wie stark diese Unterschiede im Einzelfall ausgeprägt sind –, diskutieren Neurowissenschaftler seit Jahrzehnten kontrovers. Eine aktuelle multidisziplinäre Studie liefert nun tiefere Einblicke in diese kognitive Dichotomie. Dabei wurden Probanden hinsichtlich fünf fundamentaler neurokognitiver Merkmale untersucht: algorithmische Stringenz, Offenheit für sensorische Ambiguität, Gewissenhaftigkeit, kognitive Flexibilität, d. h. die Fähigkeit zur schnellen Reorientierung, sowie neuronale Erregbarkeit bzw. emotionale Stabilität unter Entscheidungsdruck. Personen, die sich selbst als primär analytisch veranlagt einstuften, erzielen im Schnitt höhere Werte in puncto systematischer Planung, formaler Logik und methodischer Vorhersehbarkeit – sie neigen also dazu, Probleme strikt strukturiert und Schritt für Schritt anzugehen. Intuitionistischer veranlagte Probanden verzeichnen dagegen höhere Werte bei holistischer Mustererkennung und divergentem Denken. Sie sind damit im Mittel etwas risikofreudiger und weniger tolerant gegenüber starren Hierarchien; gleichzeitig werden sie jedoch auch häufiger von unbewussten kognitiven Verzerrungen und spontanen Fehleinschätzungen geplagt. Ein relativ ähnliches Bild liefert auch eine andere Untersuchung: Insgesamt deuten die neueren Studien auf einen engen Zusammenhang zwischen unserer neuronalen Verschaltung und der Präferenz für einen ganz bestimmten Problemlösungsstil hin. Wie dieser Zusammenhang genau aussehen könnte, ist jedoch nicht abschließend geklärt. Australische Forscher vertreten die These, dass wir kognitive Strategien präferieren, die unsere angeborene mentale Architektur optimal ergänzen. Um ihre Vermutung zu überprüfen, untersuchten sie in zwei unterschiedlichen Studien mit jeweils rund 500 Teilnehmern, ob dominante Analytiker im Schnitt eine ausgeprägtere Dominanzorientierung besaßen als intuitive Köpfe – sie präferierten also eine feste gedankliche Hierarchie und glaubten, dass übergeordnete Instanzen stets über untergeordnete dominieren sollten. Offene Fragen hinterlässt die Untersuchung allerdings: Die Wissenschaftler sehen das als Hinweis darauf, dass analytischere Personen Führungspositionen anstreben, die nicht primär auf emotionalem Konsens beruhen, sondern bereit sind, harte rationale Kriterien anzulegen – was auf mathematische Disziplinen eher zutrifft als auf rein künstlerisch-intuitive Domänen. So konnten die Wissenschaftler hinsichtlich Durchsetzungsvermögen und Narzissmus – zwei Eigenschaften, die ebenfalls mit kognitiver Dominanz zusammenhängen – keine signifikanten Unterschiede zwischen ihren Versuchspersonen finden: Analytiker waren weder durchsetzungsstärker noch selbstbezogener als Intuitionistiker. Wie das genau zu ihrer Hypothese passt, konnten die Wissenschaftler allerdings nicht abschließend erklären.',
     columns:['Analytiker','Intuitionistiker','beide','passt nicht'],
     items:[
       {text:'Diese Personen neigen zu einem starken Narzissmus.', correct:3},
-      {text:'Diese Gruppe hinterfragt ständige gedankliche Hierarchien.', correct:1},
+      {text:'Diese Gruppe hinterfragt starre gedankliche Hierarchien.', correct:1},
       {text:'Diese Personen schätzen eine systematische und methodische Vorhersehbarkeit.', correct:0},
       {text:'Diese Gruppe profitiert von einer flexiblen holistischen Mustererkennung.', correct:1},
       {text:'Diese Personen lassen sich stark durch unbewusste kognitive Verzerrungen leiten.', correct:1},
@@ -452,16 +452,16 @@ const MT3 = [
       { key:'c', text:'[c] Beteiligung von mehr als nur zwei Organismenarten' },
       { key:'d', text:'[d] Problematische künstliche Kultivierung im Labor' },
       { key:'e', text:'[e] Schneller und unkontrollierter Wuchs in feuchten Regionen' },
-      { key:'f', text:'[f] Ausschließlich ausschließliche Abhängigkeit von Grünalgen' },
+      { key:'f', text:'[f] Ausschließliche Abhängigkeit von Grünalgen' },
       { key:'g', text:'[g] Hohe Widerstandsfähigkeit gegen langanhaltende Dürreperioden' },
-      { key:'h', text:'[h] Unmittelbare Gefahr für das Menschen beim Berühren der Thalli' }
+      { key:'h', text:'[h] Unmittelbare Gefahr für den Menschen beim Berühren der Thalli' }
     ],
     correctMap: { v1: 'c', v2: 'g', n3: 'a', n4: 'd' }
   },
   { ...TEMPLATE[6],
     instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten. Es gibt genau drei inhaltlich falsche Sätze.',
     title:'Das Erdsystem an den Belastungsgrenzen',
-    passage:'Das Konzept der planetaren Grenzen, das erstmals im Jahr 2009 von einem internationalen Forscherteam um Johan Rockström und Will Steffen vorgestellt wurde, definiert den sicheren Handlungsraum für die Menschheit. Jüngste wissenschaftliche Aktualisierungen zeichnen jedoch ein alarmierendes Bild: Mittlerweile sind sieben von neun definierten Grenzen überschritten worden. Zu den kritisch fortgeschrittenen Bereichen gehören neben dem Klimawandel vor allem die Intégrität der Biosphäre, der Verlust von Ökosystemfunktionen sowie massive Störungen der biogeochemischen Kreisläufe von Stickstoff und Phosphor. Besonders besorgniserregend ist die Tatsache, dass diese Subsysteme des Erdsystems nicht isoliert voneinander betrachtet werden dürfen. Sie stehen in einem hochkomplexen, nicht-linearen Wechselverhältnis. So schwächt die anhaltende Entwaldung tropischer Regenwälder nicht nur die globale Kohlenstoffsenke, sondern beschleunigt gleichzeitig das Artensterben dramatisch. Wissenschaftler betonen, dass das Überschreiten dieser Schwellenwerte das Risiko unumkehrbarer Kippelemente signifikant erhöht, was kaskadenartige Kollapse ganzer Naturräume zur Folge haben kann. Zwar existieren auf internationaler Ebene zahlreiche Abkommen wie das Pariser Klimaschutzabkommen, doch kritisieren Experten immer wieder die mangelnde politische Entschlossenheit bei der Umsetzung konsequenter Gegenmaßnahmen. Ohne eine grundlegende sozial-ökologische Transformation droht die Stabilität des gesamten Erdsystems irreversibel zu kippen, wodurch die Lebensgrundlagen künftiger Generationen akut gefährdet werden.',
+    passage:'Das Konzept der planetaren Grenzen, das erstmals im Jahr 2009 von einem internationalen Forscherteam um Johan Rockström und Will Steffen vorgestellt wurde, definiert den sicheren Handlungsraum für die Menschheit. Jüngste wissenschaftliche Aktualisierungen zeichnen jedoch ein alarmierendes Bild: Mittlerweile sind sieben von neun definierten Grenzen überschritten worden. Zu den kritisch fortgeschrittenen Bereichen gehören neben dem Klimawandel vor allem die Integrität der Biosphäre, der Verlust von Ökosystemfunktionen sowie massive Störungen der biogeochemischen Kreisläufe von Stickstoff und Phosphor. Besonders besorgniserregend ist die Tatsache, dass diese Subsysteme des Erdsystems nicht isoliert voneinander betrachtet werden dürfen. Sie stehen in einem hochkomplexen, nicht-linearen Wechselverhältnis. So schwächt die anhaltende Entwaldung tropischer Regenwälder nicht nur die globale Kohlenstoffsenke, sondern beschleunigt gleichzeitig das Artensterben dramatisch. Wissenschaftler betonen, dass das Überschreiten dieser Schwellenwerte das Risiko unumkehrbarer Kippelemente signifikant erhöht, was kaskadenartige Kollapse ganzer Naturräume zur Folge haben kann. Zwar existieren auf internationaler Ebene zahlreiche Abkommen wie das Pariser Klimaschutzabkommen, doch kritisieren Experten immer wieder die mangelnde politische Entschlossenheit bei der Umsetzung konsequenter Gegenmaßnahmen. Ohne eine grundlegende sozial-ökologische Transformation droht die Stabilität des gesamten Erdsystems irreversibel zu kippen, wodurch die Lebensgrundlagen künftiger Generationen akut gefährdet werden.',
     graphicData:[{year:'Klima',val:4},{year:'Biosphäre',val:5},{year:'Stickstoff',val:3},{year:'Landnutzung',val:4}],
     graphicCaption:'Grafik: Zustand der planetaren Grenzen im Erdsystem',
     sentences:[
@@ -485,7 +485,7 @@ const MT4 = [
     segments:[
       'Die Fähigkeit zahlreicher mariner Organismen, eigenes Licht zu erzeugen – die sogenannte Biolumineszenz –, stellt einen der faszinierendsten Anpassungsmechanismen an die extremen Bedingungen der Tiefsee dar. In absoluter Dunkelheit dient dieses biologische Leuchten vor allem der Kommunikation, der Abwehr von Fressfeinden oder dem Anlocken von Beute. Biochemisch basiert dieser Prozess auf einer enzymatisch katalysierten Oxidation, bei der das Substrat Luciferin durch das Enzym Luciferase umgewandelt wird. Forschern zufolge ',
       ' sich dieser komplexe Mechanismus im Laufe der Erdgeschichte unabhängig voneinander in Dutzenden verschiedenen Tierstämmen entwickelt. Lange Zeit gab es unter Meeresbiologen eine intensive ',
-      ' darüber, ob diese evolutionäre Vielfalt eher auf einen urspünglichen, gemeinsamen Vorfahren oder auf konvergente Evolution zurückzuführen ist. Neuere phylogenetische Analysen konnten jedoch überzeugend ',
+      ' darüber, ob diese evolutionäre Vielfalt eher auf einen ursprünglichen, gemeinsamen Vorfahren oder auf konvergente Evolution zurückzuführen ist. Neuere phylogenetische Analysen konnten jedoch überzeugend ',
       ', dass die konvergente Entstehung bei den meisten Taxa das wahrscheinlichere Szenario darstellt. Dies verdeutlicht, wie stark der Selektionsdruck in lichtlosen Meereszonen auf innovative Überlebensstrategien ',
       '. Zukünftige Expeditionen mit autonom gesteuerten Unterwasserfahrzeugen sollen nun weitere unbekannte Spezies dokumentieren und helfen, die ökologischen Dynamiken dieser sensiblen Ökosysteme besser zu ',
       '.'
@@ -495,13 +495,13 @@ const MT4 = [
       {options:['Diskussion','Meldung','Mitteilung','Rede'], correct:0},
       {options:['zeigen','verweisen','zurückweisen','hinweisen'], correct:0},
       {options:['einwirkt','auswirkt','nachwirkt','vorwirkt'], correct:0},
-      {options:['begreifen','erfassen','verstehen','erkennen'], correct:2}
+      {options:['verstellen','verlassen','verstehen','verwenden'], correct:2}
     ]
   },
   { ...TEMPLATE[1],
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
     title:'Die Entstehung von Mikroplastik in terrestrischen Böden',
-    correctOrder:[1,0,3,2,4],
+    correctOrder:[1,3,0,2,4],
     items:[
       'Durch mechanische Belastung, UV-Strahlung und mikrobiellen Abbau zerfallen diese Makroplastikreste im Laufe der Zeit in immer kleinere Fragmente, bis sie die definierte Mikroplastik-Grenze unterschreiten.',
       'Lange Zeit konzentrierte sich die ökologische Forschung im Zusammenhang mit Plastikmüll fast ausschließlich auf die Weltmeere, während terrestrische Böden als vergleichsweise unbedeutend galten.',
@@ -519,9 +519,9 @@ const MT4 = [
       '(2) Ein zentraler Mechanismus des Vergessens ist die institutionelle Verdrängung. Wenn schmerzhafte oder beschämende Kapitel der nationalen Geschichte im Widerspruch zum aktuellen Selbstbild einer Nation stehen, neigen kollektive Akteure dazu, diese Erzählungen schrittweise aus Lehrplänen, Denkmälern und Gedenkveranstaltungen zu entfernen. Dieser Prozess verläuft oft unbemerkt, führt jedoch langfristig zu einer tiefgreifenden Verzerrung des historischen Bewusstseins, was den kritischen Diskurs über historische Verantwortung erheblich erschwert.',
       '(3) Historisch gesehen war der Umgang mit kollektivem Gedächtnis stark durch staatliche Lenkung und nationale Meistererzählungen geprägt. Im 19. und frühen 20. Jahrhundert diente die Geschichtsschreibung vor allem der Nationsbildung und der Erzeugung eines homogenen Wir-Gefühls, weshalb abweichende oder widersprüchliche Stimmen systematisch marginalisiert wurden. Erst mit dem Aufkommen postmoderner geschichtswissenschaftlicher Ansätze und der Etablierung einer pluralistischen Erinnerungskultur im späten 20. Jahrhundert wurde dieses starre Dogma grundlegend aufgebrochen.',
       '(4) In der modernen Medienlandschaft vollzieht sich dieser Prozess unter völlig neuen Vorzeichen. Durch die Beschleunigung der Informationsströme und die digitale Flut an tagesaktuellen Nachrichten droht ein beschleunigtes Vergessen von Großereignissen, die noch vor wenigen Jahren als epochal galten. Soziologen sprechen in diesem Zusammenhang von einer Verkürzung der historischen Halbwertszeit: Ereignisse schrumpfen im digitalen Speicher zu ephemeren Datenpunkten, die kaum noch tiefere Spuren im kollektiven Bewusstsein hinterlassen.',
-      '(5) Dennoch gibt es gegenläufige Tendenzen, die durch digitale Graswurzelbewegungen und zivilgesellschaftliche Initiativen getragen werden. Mithilfe von Online-Archiven, Crowdsourcing-Projekten und virtuellen Gedenkorten versuchen Aktivisten, marginalisierte Geschichten und vergessene historische Opfer dem Vergessen zu entreißen. Diese dezentralen Initiativen demokratisieren den Zugang zur Vergangenheit, stehen jedoch gleichzeitig vor dem Problem der Verifizierung und der schieren Unüberschneidbarkeit der verfügbaren Datenmengen.',
+      '(5) Dennoch gibt es gegenläufige Tendenzen, die durch digitale Graswurzelbewegungen und zivilgesellschaftliche Initiativen getragen werden. Mithilfe von Online-Archiven, Crowdsourcing-Projekten und virtuellen Gedenkorten versuchen Aktivisten, marginalisierte Geschichten und vergessene historische Opfer dem Vergessen zu entreißen. Diese dezentralen Initiativen demokratisieren den Zugang zur Vergangenheit, stehen jedoch gleichzeitig vor dem Problem der Verifizierung und der schieren Unüberschaubarkeit der verfügbaren Datenmengen.',
       '(6) Kritische Stimmen aus den Kulturwissenschaften warnen vor einer Inflation des Gedenkens. Wenn nahezu jedes historische Detail mit Gedenktagen, digitalen Hashtags oder symbolischen Akten bedacht wird, droht eine Übersättigung, die das eigentliche Erinnern trivialisiert und in eine oberflächliche Eventkultur mündet. Echtes historisches Verstehen erfordert jedoch Kontinuität, kritische Analyse und die Bereitschaft, sich mit unbequemen Wahrheiten auseinanderzusetzen, statt sich in einer ritualisierten Erinnerungsrhetorik zu erschöpfen.',
-      '(7) Zusammenfassend lässt sich festhalten, dass das kollektive Gedächtnis ein dynamisches, umkämpftes Terrain darstellt. Die Untersuchung seiner Mechanismen liefert wichtige Einblicke in die seelische Verfassung moderner Gesellschaften und zeigt auf, wie fragile die Balance zwischen Erinnern und Vergessen in einer sich rasant verändernden Welt ist.'
+      '(7) Zusammenfassend lässt sich festhalten, dass das kollektive Gedächtnis ein dynamisches, umkämpftes Terrain darstellt. Die Untersuchung seiner Mechanismen liefert wichtige Einblicke in die seelische Verfassung moderner Gesellschaften und zeigt auf, wie fragil die Balance zwischen Erinnern und Vergessen in einer sich rasant verändernden Welt ist.'
     ],
     questions:[
       { q:'In Absatz 1 wird dargelegt, dass das kollektive Gedächtnis ...', options:[
@@ -603,7 +603,7 @@ const MT4 = [
   { ...TEMPLATE[5],
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Vorteile, 2 Nachteile).',
     title:'Aufgabe 6: Vertikaler Landbau (Vertical Farming)',
-    passage:'Der urbane oder vertikale Landbau gilt als zukunftsweisender Ansatz, um die Nahrungsmittelversorgung in stark verdichteten Ballungsräumen sicherzustellen. Durch den anbaumäßig gestapelten Anbau in geschlossenen Gebäuden unter kontrollierten Licht- und Klimabedingungen lassen sich Erträge pro Quadratmeter massiv steigern. Ein weiterer großer Vorzug ist der extrem sparsame Umgang mit Wasser, da moderne Hydrokultursysteme den Großteil der Flüssigkeit im geschlossenen Kreislauf recyceln, wodurch der Wasserverbrauch im Vergleich zur Freilandwirtschaft um bis zu 95 Prozent sinkt. Zudem entfallen lange Transportwege, da die Produktion direkt in den Konsumzentren stattfindet. Dennoch ist das Konzept mit gravierenden Nachteilen verbunden: Der energetische Aufwand für künstliche LED-Beleuchtung und hochkomplexe Klimatisierung ist enorm und treibt die Betriebskosten in die Höhe. Darüber hinaus ist das Spektrum der sinnvoll anbaubaren Kulturpflanzen derzeit noch stark auf schnell wachsende Blattgemüse- und Kräuterarten beschränkt, während der großflächige Anbau von Grundnahrungsmitteln wie Getreide oder Kartoffeln wirtschaftlich völlig unrentabel bleibt.',
+    passage:'Der urbane oder vertikale Landbau gilt als zukunftsweisender Ansatz, um die Nahrungsmittelversorgung in stark verdichteten Ballungsräumen sicherzustellen. Durch den vertikal gestapelten Anbau in geschlossenen Gebäuden unter kontrollierten Licht- und Klimabedingungen lassen sich Erträge pro Quadratmeter massiv steigern. Ein weiterer großer Vorzug ist der extrem sparsame Umgang mit Wasser, da moderne Hydrokultursysteme den Großteil der Flüssigkeit im geschlossenen Kreislauf recyceln, wodurch der Wasserverbrauch im Vergleich zur Freilandwirtschaft um bis zu 95 Prozent sinkt. Zudem entfallen lange Transportwege, da die Produktion direkt in den Konsumzentren stattfindet. Dennoch ist das Konzept mit gravierenden Nachteilen verbunden: Der energetische Aufwand für künstliche LED-Beleuchtung und hochkomplexe Klimatisierung ist enorm und treibt die Betriebskosten in die Höhe. Darüber hinaus ist das Spektrum der sinnvoll anbaubaren Kulturpflanzen derzeit noch stark auf schnell wachsende Blattgemüse- und Kräuterarten beschränkt, während der großflächige Anbau von Grundnahrungsmitteln wie Getreide oder Kartoffeln wirtschaftlich völlig unrentabel bleibt.',
     aussagen:[
       { key:'a', text:'[a] Drastische Einsparung von wertvollem Wasser' },
       { key:'b', text:'[b] Geringer Energiebedarf dank natürlicher Sonneneinstrahlung' },
@@ -619,7 +619,7 @@ const MT4 = [
   { ...TEMPLATE[6],
     instructions:'Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
     title:'Aufgabe 7: Die Renaissance der Kernfusion',
-    passage:'Die Kernfusion, bei der atomare Leichtkerne unter extremen Temperaturen verschmolzen werden, gilt seit Jahrzehnten als der heilige Gral der Energietechnik. Im Gegensatz zur Kernspaltung entsteht bei diesem Prozess kein langlebiger radioaktiver Abfall, und es besteht keine Gefahr einer unkontrollierten Kettenreaktion. Jüngste experimentelle Durchbrüche an internationalen Forschungseinrichtungen haben gezeigt, dass es erstmals gelungen ist, in einem kontrollierten Plasmareaktor kurzzeitig mehr Fusionsenergie freizusetzen, als für die Aufheizung des Plasmas aufgewendet werden musste – ein historischer Meilenstein auf dem Weg zur Netto-Energiegewinnung. Dennoch warnen Physiker vor übertriebenem Optimismus: Bis kommerzielle Fusionskraftwerke stablien Strom ins Netz einspeisen, werden voraussichtlich noch mehrere Jahrzehnte vergehen, da gigantische materialwissenschaftliche und thermische Herausforderungen ungelöst sind.',
+    passage:'Die Kernfusion, bei der atomare Leichtkerne unter extremen Temperaturen verschmolzen werden, gilt seit Jahrzehnten als der heilige Gral der Energietechnik. Im Gegensatz zur Kernspaltung entsteht bei diesem Prozess kein langlebiger radioaktiver Abfall, und es besteht keine Gefahr einer unkontrollierten Kettenreaktion. Jüngste experimentelle Durchbrüche an internationalen Forschungseinrichtungen haben gezeigt, dass es erstmals gelungen ist, in einem kontrollierten Plasmareaktor kurzzeitig mehr Fusionsenergie freizusetzen, als für die Aufheizung des Plasmas aufgewendet werden musste – ein historischer Meilenstein auf dem Weg zur Netto-Energiegewinnung. Dennoch warnen Physiker vor übertriebenem Optimismus: Bis kommerzielle Fusionskraftwerke stabilen Strom ins Netz einspeisen, werden voraussichtlich noch mehrere Jahrzehnte vergehen, da gigantische materialwissenschaftliche und thermische Herausforderungen ungelöst sind.',
     graphicData:[{year:'2010',val:10},{year:'2015',val:25},{year:'2020',val:50},{year:'2023',val:100}],
     graphicCaption:'Grafik: Entwicklung der Netto-Energiegewinnung bei Fusionsexperimenten (symbolisch)',
     sentences:[
@@ -634,6 +634,7 @@ const MT4 = [
     ]
   }
 ];
+
 const MT5 = [
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Text. Entscheiden Sie für die Lücken 1 – 5, welches Wort am besten passt. Für jede Lücke gibt es genau eine richtige Lösung.',
@@ -665,7 +666,7 @@ const MT5 = [
       'Die akribische Pionierarbeit von Physikern wie Francis Halzen, die diese Detektion letztlich ermöglichte, öffnet ein neues Fenster zur Erforschung kataklysmischer kosmischer Phänomene und revolutioniert unser Verständnis der Astrophysik.',
       'Dank dieser wegweisenden Entdeckungen und der präzisen Lokalisierung hochenergetischer Neutrinoquellen gilt die Auszeichnung mit dem Nobelpreis für Physik als folgerichtige Würdigung jahrzehntelanger wissenschaftlicher Exzellenz.'
     ],
-    shuffledStart:[2,4,3,0,1]
+    shuffledStart:[4,1,3,2,0]
   },
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–6. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
@@ -814,7 +815,7 @@ const MT6 = [
       'Treten Versprecher wie Buchstabendreher oder falsche Wörter häufig auf, sodass Gespräche zur Qual werden, dann liegt wahrscheinlich eine Sprach- oder Sprechstörung vor.',
       'Die möglichen Folgen: Angst vor Gesprächssituationen, berufliche Einschränkungen, Probleme beim Schreiben und Lesen, im schlimmsten Fall Vereinsamung. Zum Glück sind aber die meisten Sprach- und Sprechstörungen gut behandelbar.'
     ],
-    shuffledStart:[0,1,3,2,4]
+    shuffledStart:[1,2,0,4,3]
   },
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
@@ -926,6 +927,7 @@ const MT6 = [
     passage:'Herzschrittmacher, Organtransplantationen, künstliche Hüftgelenke, Dialyse, eine hochmoderne Onkologie, seit Kurzem auch Stammzelltherapie – all das können Tierärzte mittlerweile anbieten. Die letzte Grenze ist bislang die Organtransplantation, die in den USA bei Tieren allerdings durchaus schon üblich ist. Im Prinzip kann ein Tier in den reichen Industrienationen eine genauso gute medizinische Behandlung erhalten wie ein menschlicher Privatpatient – sofern der Besitzer sich die leisten kann. Es gibt Menschen, die wollen die 250 Euro für die Behandlung eines gebrochenen Beins nicht ausgeben. Dann gibt es diejenigen, die alles für ihr krankes Tier tun würden und mit Rechnungen um 20 000 Euro die Tierklinik verlassen. Die durchschnittliche Lebenserwartung von Hunden und Katzen hat sich in den vergangenen Jahrzehnten vervielfacht, unter anderem aufgrund der besseren medizinischen Versorgung. Das Ergebnis sind immer mehr alte tierische Patienten, die häufiger Wohlstandserkrankungen wie Diabetes, Krebs oder sogar Demenz entwickeln. Wegen der modernen Heilverfahren sind diese Erkrankungen auch therapierbar. Die lange Lebensdauer, verbunden mit Wohlstand und dem technologischen Fortschritt, hat zu einem neuen Niveau in der Tiermedizin geführt. Daneben steht der radikale Wandel in der Beziehung zwischen Mensch und Tier. In verschiedenen Befragungen von Haustierbesitzern, welche soziale Rolle ihr Tier für sie einnehme, antworten seit einigen Jahren über 90 Prozent der Teilnehmer, ihr Tier sei ein vollwertiges Familienmitglied. Und für die Gesundheit eines nahestehenden Wesens wollen die Leute sehr viel Geld auszugeben, auch wenn es ein Tier ist.',
     graphicData:[{year:'Hund: Hundesteuer pro Jahr',val:100},{year:'Katze: Katzenstreu pro Jahr',val:20},{year:'Hund: Transport',val:90},{year:'Katze: Transport',val:40},{year:'Hund: Min. jährliche Tierarztkosten',val:60},{year:'Katze: Min. jährliche Tierarztkosten',val:55},{year:'Hund: Erste Impfung',val:115},{year:'Katze: Erste Impfung',val:150},{year:'Hund: Anschaffung',val:120},{year:'Katze: Anschaffung',val:340},{year:'Hund: Jährliche Futterkosten',val:160},{year:'Katze: Jährliche Futterkosten',val:400}],
     graphicCaption:'Wie viel kosten Hund und Katze? Ausgaben in Euro €',
+    graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 430" width="100%" role="img" aria-label="Balkendiagramm: Wie viel kosten Hund und Katze?" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="428" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="24" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Wie viel kosten Hund und Katze?</text><rect x="330.0" y="34.0" width="11.0" height="11.0" rx="1" fill="#d1d5db"/><text x="346" y="44" font-size="12" text-anchor="start" fill="currentColor">Hunde</text><rect x="410.0" y="34.0" width="11.0" height="11.0" rx="1" fill="#6b7280"/><text x="426" y="44" font-size="12" text-anchor="start" fill="currentColor">Katzen</text><line x1="15.0" y1="56.0" x2="15.0" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="69.4" y1="56.0" x2="69.4" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="123.9" y1="56.0" x2="123.9" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="178.3" y1="56.0" x2="178.3" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="232.8" y1="56.0" x2="232.8" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="287.2" y1="56.0" x2="287.2" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="341.7" y1="56.0" x2="341.7" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="396.1" y1="56.0" x2="396.1" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="450.6" y1="56.0" x2="450.6" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><line x1="505.0" y1="56.0" x2="505.0" y2="374.0" stroke="#cbd5e1" stroke-width="0.8"/><text x="15" y="73" font-size="12" text-anchor="start" fill="currentColor">Hundesteuer pro Jahr</text><rect x="15.0" y="78.0" width="108.9" height="11.0" rx="1" fill="#d1d5db"/><text x="15" y="117" font-size="12" text-anchor="start" fill="currentColor">Katzenstreu pro Jahr</text><rect x="15.0" y="134.0" width="21.8" height="11.0" rx="1" fill="#6b7280"/><text x="15" y="161" font-size="12" text-anchor="start" fill="currentColor">Transport</text><rect x="15.0" y="166.0" width="98.0" height="11.0" rx="1" fill="#d1d5db"/><rect x="15.0" y="178.0" width="43.6" height="11.0" rx="1" fill="#6b7280"/><text x="15" y="205" font-size="12" text-anchor="start" fill="currentColor">Minimum an jährlichen Tierarztkosten</text><rect x="15.0" y="210.0" width="65.3" height="11.0" rx="1" fill="#d1d5db"/><rect x="15.0" y="222.0" width="59.9" height="11.0" rx="1" fill="#6b7280"/><text x="15" y="249" font-size="12" text-anchor="start" fill="currentColor">Erste Impfung</text><rect x="15.0" y="254.0" width="125.2" height="11.0" rx="1" fill="#d1d5db"/><rect x="15.0" y="266.0" width="163.3" height="11.0" rx="1" fill="#6b7280"/><text x="15" y="293" font-size="12" text-anchor="start" fill="currentColor">Anschaffung</text><rect x="15.0" y="298.0" width="130.7" height="11.0" rx="1" fill="#d1d5db"/><rect x="15.0" y="310.0" width="370.2" height="11.0" rx="1" fill="#6b7280"/><text x="15" y="337" font-size="12" text-anchor="start" fill="currentColor">Jährliche Futterkosten</text><rect x="15.0" y="342.0" width="174.2" height="11.0" rx="1" fill="#d1d5db"/><rect x="15.0" y="354.0" width="435.6" height="11.0" rx="1" fill="#6b7280"/><line x1="15.0" y1="374.0" x2="505.0" y2="374.0" stroke="#64748b" stroke-width="1"/><text x="15" y="390" font-size="11" text-anchor="middle" fill="currentColor">0</text><text x="69" y="390" font-size="11" text-anchor="middle" fill="currentColor">50</text><text x="124" y="390" font-size="11" text-anchor="middle" fill="currentColor">100</text><text x="178" y="390" font-size="11" text-anchor="middle" fill="currentColor">150</text><text x="233" y="390" font-size="11" text-anchor="middle" fill="currentColor">200</text><text x="287" y="390" font-size="11" text-anchor="middle" fill="currentColor">250</text><text x="342" y="390" font-size="11" text-anchor="middle" fill="currentColor">300</text><text x="396" y="390" font-size="11" text-anchor="middle" fill="currentColor">350</text><text x="451" y="390" font-size="11" text-anchor="middle" fill="currentColor">400</text><text x="505" y="390" font-size="11" text-anchor="middle" fill="currentColor">450</text><text x="260" y="412" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">Ausgaben in Euro €</text></svg>`,
     sentences:[
       {text:'Trotz des hohen Stellenwerts von Tieren ist ihre Versorgung abhängig von den finanziellen Möglichkeiten der Besitzer.', wrong:false},
       {text:'Durch die hoch entwickelten medizinischen Möglichkeiten können Haustiere heutzutage in vielen Ländern bessere Behandlungen erhalten als Menschen.', wrong:true},
@@ -939,6 +941,7 @@ const MT6 = [
     ]
   }
 ];
+
 const MT7 = [
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
@@ -970,7 +973,7 @@ const MT7 = [
       'Hinzu kam die organisatorische Zersplitterung der deutschen Wissenschaftslandschaft, die im extremen Gegensatz zum hochzentralisierten US-amerikanischen Manhattan-Projekt stand. Während in den USA unbegrenzte finanzielle Mittel gebündelt wurden, konkurrierten im Deutschen Reich verschiedene Forschungsgruppen vergeblich um die knappen Ressourcen.',
       'Neueste Isotopenanalysen an historischem Uranmaterial bestätigten schließlich, dass die Reaktorversuche in Haigerloch bis zum Schluss unterkritisch blieben. Hitlers Physiker standen somit meilenweit vor einem nuklearen Durchbruch und besaßen zu keinem Zeitpunkt eine einsatzbereite Waffe.'
     ],
-    shuffledStart:[3,0,2,1,4]
+    shuffledStart:[0,4,2,3,1]
   },
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
@@ -1081,8 +1084,8 @@ const MT7 = [
     title:'Erfreuliche Zahlen zum Semesterstart: Dynamik und Herausforderungen im Hochschulsektor',
     passage:'Erlangen/Nürnberg. Zum Auftakt des neuen Akademischen Jahres verzeichnen die bundesdeutschen Universitäten einen unerwartet kräftigen Zustrom an Ersteinschreibungen. Entgegen den demografisch bedingten Prognosen einer rückläufigen Studienneigung schlagen sich die jüngsten Reformen zur Modernisierung der Lehre und der Ausbau internationaler Studiengänge positiv in den Matrikelstatistiken nieder. Insbesondere an traditionellen Volluniversitäten wie der Friedrich-Alexander-Universität (FAU) zeigt sich, dass die Nachfrage nach akademischer Bildung im In- und Ausland ungebrochen hoch bleibt, wenngleich sich die Verteilung der Studierenden auf die einzelnen Fachbereiche signifikant verschoben hat. Ein detaillierter Blick auf die Immatrikulationszahlen verdeutlicht, dass der Zuwachs vor allem durch internationale Studienanfänger generiert wird. Während die Zahl der inländischen Erstsemester aufgrund geburtenarmer Jahrgänge stagniert oder in einzelnen Disziplinen leicht rückläufig ist, stieg der Anteil ausländischer Studierender im Vergleich zum Vorjahr um knapp zwölf Prozent. Experte führen diesen Trend auf das vergrößerte Angebot englischsprachiger Masterstudiengänge sowie auf gezielte Kooperationen mit partneruniversitäten im außereuropäischen Raum zurück. Besonders stark nachgefragt sind Studiengänge aus den MINT-Fächern (Mathematik, Informatik, Naturwissenschaften und Technik), wohingegen die Geisteswissenschaften mit einer weitgehenden Stagnation der Nachfrage konfrontiert sind. Parallel zu diesem quantitativen Wachstum steigen jedoch auch die finanziellen Aufwendungen für ein ordnungsgemäßes Studium drastisch an. Die durchschnittlichen Lebenshaltungskosten für Studierende haben sich in den vergangenen Jahren durch die allgemeine Inflation und drastisch gestiegene Mietpreise erheblich erhöht. Während der allgemeine Semesterbeitrag, der unter anderem das Semesterticket für den öffentlichen Nahverkehr beinhaltet, moderat angestiegen ist, schlagen die monatlichen Mietkosten für ein Zimmer im Wohnheim oder in einer Wohngemeinschaft am stärksten zu Buche. Die administrative Zusage eines Studienplatzes garantiert somit keineswegs mehr die finanzielle Machbarkeit des akademischen Bildungsweges. Um dieser finanziellen Belastung entgegenzuwirken, greift eine wachsende Zahl von Studierenden auf Erwerbstätigkeiten neben dem Studium zurück. Dies hat wiederum direkte Auswirkungen auf die durchschnittliche Studiendauer: Viele Immatrikulierte überschreiten die Regelstudienzeit um mehrere Semester, was die Kapazitäten der Hochschulen zusätzlich belastet. Um den wissenschaftlichen Nachwuchs nachhaltig zu sichern, fordern Hochschulverband und Studierendenvertretungen gleichermaßen eine grundlegende Reform der staatlichen Ausbildungsförderung (BAföG) sowie eine stärkere Bezuschussung des studentischen Wohnungsbaus.',
     graphicData:[{year:'Semesterbeitrag (€/Sem.)',val:140},{year:'Monatl. Miete WG/Heim (€)',val:380},{year:'Internat. Erstsemester (Anz., +12 %)',val:2200},{year:'Inländ. Erstsemester (Anz., stagnierend)',val:4100}],
-   graphicCaption:'Entwicklung der Semesterkosten und Studierendenstruktur (in € bzw. Personen)',
-       graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 292" width="100%" role="img" aria-label="Balkendiagramm: Entwicklung der Semesterkosten und Studierendenstruktur" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="290" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="24" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Entwicklung der Semesterkosten und Studierendenstruktur</text><text x="260" y="42" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">(in € bzw. Personen)</text><line x1="20.0" y1="54.0" x2="20.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="130.0" y1="54.0" x2="130.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="240.0" y1="54.0" x2="240.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="350.0" y1="54.0" x2="350.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="460.0" y1="54.0" x2="460.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><text x="20" y="74" font-size="12" text-anchor="start" fill="currentColor">Semesterbeitrag (€/Sem.)</text><rect x="20.0" y="80.0" width="154.0" height="20.0" rx="2" fill="#3b82f6"/><text x="180" y="94" font-size="12" text-anchor="start" fill="currentColor">140 €</text><text x="20" y="124" font-size="12" text-anchor="start" fill="currentColor">Monatl. Miete WG/Heim (€)</text><rect x="20.0" y="130.0" width="418.0" height="20.0" rx="2" fill="#1d4ed8"/><text x="444" y="144" font-size="12" text-anchor="start" fill="currentColor">380 €</text><text x="20" y="174" font-size="12" text-anchor="start" fill="currentColor">Internat. Erstsemester (Anz.)</text><rect x="20.0" y="180.0" width="242.0" height="20.0" rx="2" fill="#10b981"/><text x="268" y="194" font-size="12" text-anchor="start" fill="currentColor">2.200 (+12%)</text><text x="20" y="224" font-size="12" text-anchor="start" fill="currentColor">Inländ. Erstsemester (Anz.)</text><rect x="20.0" y="230.0" width="451.0" height="20.0" rx="2" fill="#047857"/><text x="465" y="244" font-size="12" text-anchor="end" font-weight="700" fill="#ffffff">4.100 (stagnierend)</text><line x1="20.0" y1="262.0" x2="460.0" y2="262.0" stroke="#64748b" stroke-width="1"/><text x="20" y="278" font-size="11" text-anchor="middle" fill="currentColor">0</text><text x="130" y="278" font-size="11" text-anchor="middle" fill="currentColor">100 / 1.000</text><text x="240" y="278" font-size="11" text-anchor="middle" fill="currentColor">200 / 2.000</text><text x="350" y="278" font-size="11" text-anchor="middle" fill="currentColor">300 / 3.000</text><text x="460" y="278" font-size="11" text-anchor="middle" fill="currentColor">400 / 4.000</text></svg>`,
+    graphicCaption:'Entwicklung der Semesterkosten und Studierendenstruktur (in € bzw. Personen)',
+    graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 292" width="100%" role="img" aria-label="Balkendiagramm: Entwicklung der Semesterkosten und Studierendenstruktur" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="290" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="24" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Entwicklung der Semesterkosten und Studierendenstruktur</text><text x="260" y="42" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">(in € bzw. Personen)</text><line x1="20.0" y1="54.0" x2="20.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="130.0" y1="54.0" x2="130.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="240.0" y1="54.0" x2="240.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="350.0" y1="54.0" x2="350.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><line x1="460.0" y1="54.0" x2="460.0" y2="262.0" stroke="#e5e7eb" stroke-width="1"/><text x="20" y="74" font-size="12" text-anchor="start" fill="currentColor">Semesterbeitrag (€/Sem.)</text><rect x="20.0" y="80.0" width="154.0" height="20.0" rx="2" fill="#3b82f6"/><text x="180" y="94" font-size="12" text-anchor="start" fill="currentColor">140 €</text><text x="20" y="124" font-size="12" text-anchor="start" fill="currentColor">Monatl. Miete WG/Heim (€)</text><rect x="20.0" y="130.0" width="418.0" height="20.0" rx="2" fill="#1d4ed8"/><text x="444" y="144" font-size="12" text-anchor="start" fill="currentColor">380 €</text><text x="20" y="174" font-size="12" text-anchor="start" fill="currentColor">Internat. Erstsemester (Anz.)</text><rect x="20.0" y="180.0" width="242.0" height="20.0" rx="2" fill="#10b981"/><text x="268" y="194" font-size="12" text-anchor="start" fill="currentColor">2.200 (+12%)</text><text x="20" y="224" font-size="12" text-anchor="start" fill="currentColor">Inländ. Erstsemester (Anz.)</text><rect x="20.0" y="230.0" width="451.0" height="20.0" rx="2" fill="#047857"/><text x="465" y="244" font-size="12" text-anchor="end" font-weight="700" fill="#ffffff">4.100 (stagnierend)</text><line x1="20.0" y1="262.0" x2="460.0" y2="262.0" stroke="#64748b" stroke-width="1"/><text x="20" y="278" font-size="11" text-anchor="middle" fill="currentColor">0</text><text x="130" y="278" font-size="11" text-anchor="middle" fill="currentColor">100 / 1.000</text><text x="240" y="278" font-size="11" text-anchor="middle" fill="currentColor">200 / 2.000</text><text x="350" y="278" font-size="11" text-anchor="middle" fill="currentColor">300 / 3.000</text><text x="460" y="278" font-size="11" text-anchor="middle" fill="currentColor">400 / 4.000</text></svg>`,
     sentences:[
       {text:'Trotz demografischer Hürden verzeichnen die deutschen Hochschulen zu Semesterbeginn einen deutlichen Anstieg der Gesamtzahl der Studienanfänger.', wrong:false},
       {text:'Dieser Zuwachs ist primär auf steigende Einschreibezahlen bei den inländischen Studierenden zurückzuführen, die sich vermehrt für geisteswissenschaftliche Fächer immatrikulieren.', wrong:true},
@@ -1094,6 +1097,7 @@ const MT7 = [
     ]
   }
 ];
+
 const MT8 = [
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
@@ -1125,7 +1129,7 @@ const MT8 = [
       'Auf diese Herausforderung reagiert die Europäische Union nun mit verschärften Richtlinien, die strenge Nachweispflichten für umweltbezogene Werbeaussagen vorschreiben und Irreführung konsequent sanktionieren sollen.',
       'Die Folgen dieser verschärften Regulierung sind bereits absehbar: Unternehmen müssen künftig wissenschaftliche Belege erbringen, bevor sie ihre Produkte mit grünen Siegeln werblich hervorheben dürfen.'
     ],
-    shuffledStart:[0,3,2,1,4]
+    shuffledStart:[4,2,1,0,3]
   },
   { ...TEMPLATE[2],
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
@@ -1237,6 +1241,7 @@ const MT8 = [
     passage:'Süßwasser gilt weltweit als eine der kostbarsten Ressourcen des 21. Jahrhunderts. Vor dem Hintergrund fortschreitender Klimaveränderungen, intensiverer Dürreperioden und des stetigen Wachstums der Weltbevölkerung gerät insbesondere der Industriesektor unter zunehmenden Druck, seinen Wasserverbrauch drastisch zu reduzieren. In modernsten Industrieanlagen kommen daher hochkomplexe Membranfiltrationssysteme zum Einsatz. Diese ermöglichen es, selbst stark kontaminiertes Prozesswasser so gründlich zu reinigen, dass es im geschlossenen Kreislauf direkt wiederverwendet werden kann. Traditionelle mechanisch-biologische Klärverfahren stießen bei der Entfernung von mikroskopischen Schadstoffen, chemischen Rückständen und gelösten Schwerölen oft an ihre Grenzen. Neuartige Verfahren der Nanofiltration und Umkehrosmose hingegen filtern selbst kleinste Moleküle zuverlässig heraus. Die wesentliche Hürde für eine flächendeckende Implementierung liegt jedoch in den immensen Anschaffungs- und Betriebskosten. Die Herstellung sowie die regelmäßige chemische Aufbereitung der hochfunktionalen Filterfilterstrukturen erfordern nicht nur beträchtliche finanzielle Mittel, sondern auch einen enormen Energieaufwand, was vor allem kleine und mittlere Unternehmen (KMU) vor Erstinvestitionen zurückschrecken lässt. Nichtsdestotrotz zeigt der Branchenvergleich erhebliche Unterschiede bezüglich des Einsatzes dieser Aufbereitungstechnologien. Während die chemische Industrie aufgrund strenger Umweltauflagen bereits hohe Wiederverwendungsraten aufweist, hinkt die Lebensmittelverarbeitung trotz ihres immensen Gesamtverbrauchsniveaus bei der Implementierung geschlossener Kreislaufsysteme hinterher. Umweltökonomen betonen, dass ohne gezielte staatliche Förderprogramme und strenge gesetzliche Regulierungen der globale Wasserverbrauch des Industriesektors nicht nachhaltig gesenkt werden kann.',
     graphicData:[{year:'Chemieindustrie: Frischwasser (Mio. m³)',val:320},{year:'Chemieindustrie: Recyclingquote (%)',val:68},{year:'Lebensmittelind.: Frischwasser (Mio. m³)',val:410},{year:'Lebensmittelind.: Recyclingquote (%)',val:25},{year:'Papierherstellung: Frischwasser (Mio. m³)',val:180},{year:'Papierherstellung: Recyclingquote (%)',val:52}],
     graphicCaption:'Wasserverbrauch und Recyclingquote nach Industriesektor (in Mio. m³ / %)',
+    graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 276" width="100%" role="img" aria-label="Balkendiagramm: Wasserverbrauch und Recyclingquote nach Industriesektor" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="274" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="24" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Wasserverbrauch und Recyclingquote nach Industriesektor</text><text x="260" y="42" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">(in Mio. m³ / %)</text><text x="10" y="90" font-size="12" text-anchor="start" font-weight="700" fill="currentColor">Chemieindustrie</text><rect x="140.0" y="70.0" width="256.0" height="16.0" rx="2" fill="#9ca3af"/><text x="402" y="82" font-size="11" text-anchor="start" fill="currentColor">320 Mio. m³</text><rect x="140.0" y="90.0" width="244.8" height="16.0" rx="2" fill="#2563eb"/><text x="391" y="102" font-size="11" text-anchor="start" fill="currentColor">68 %</text><text x="10" y="148" font-size="12" text-anchor="start" font-weight="700" fill="currentColor">Lebensmittelind.</text><rect x="140.0" y="128.0" width="328.0" height="16.0" rx="2" fill="#9ca3af"/><text x="462" y="140" font-size="11" text-anchor="end" font-weight="700" fill="#111827">410 Mio. m³</text><rect x="140.0" y="148.0" width="90.0" height="16.0" rx="2" fill="#2563eb"/><text x="236" y="160" font-size="11" text-anchor="start" fill="currentColor">25 %</text><text x="10" y="206" font-size="12" text-anchor="start" font-weight="700" fill="currentColor">Papierherstellung</text><rect x="140.0" y="186.0" width="144.0" height="16.0" rx="2" fill="#9ca3af"/><text x="290" y="198" font-size="11" text-anchor="start" fill="currentColor">180 Mio. m³</text><rect x="140.0" y="206.0" width="187.2" height="16.0" rx="2" fill="#2563eb"/><text x="333" y="218" font-size="11" text-anchor="start" fill="currentColor">52 %</text><line x1="140.0" y1="58.0" x2="140.0" y2="236.0" stroke="#64748b" stroke-width="1"/><rect x="60.0" y="254.0" width="10.0" height="10.0" rx="1" fill="#9ca3af"/><text x="76" y="263" font-size="11" text-anchor="start" fill="currentColor">Frischwasserverbrauch (Mio. m³)</text><rect x="300.0" y="254.0" width="10.0" height="10.0" rx="1" fill="#2563eb"/><text x="316" y="263" font-size="11" text-anchor="start" fill="currentColor">Recyclingquote (%)</text></svg>`,
     sentences:[
       {text:'Aufgrund globaler Umwelteinflüsse wird eine effizientere Wassernutzung in der Industrie immer dringlicher.', wrong:false},
       {text:'Moderne Membranfiltrationssysteme ermöglichen es heutzutage, selbst stark verunreinigtes Wasser vollständig aufzubereiten.', wrong:false},
@@ -1250,6 +1255,7 @@ const MT8 = [
     ]
   }
 ];
+
 const MT9 = [
   { ...TEMPLATE[0],
     instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
@@ -1405,319 +1411,227 @@ const MT9 = [
     ]
   }
 ];
+
 const MT10 = [
-
   { ...TEMPLATE[0],
-
     instructions:'Lesen Sie den Lückentext. Klicken Sie in die Lücken und entscheiden Sie, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
-
     title:'Die Mathematik und der Zufall: Warum das menschliche Hirn echte Zufälligkeit schwer greifen kann',
-
     segments:[
-
       'Ob beim Werfen einer Münze, im Casino oder bei der Einschätzung von Lebensrisiken: Der menschliche Verstand tut sich erstaunlich schwer damit, stochastische Prozesse korrekt einzuschätzen. Psychologische Studien haben wiederholt ',
-
       ', dass das Gehirn darauf konditioniert ist, in allen Umweltreizen stetig nach Kausalitäten und Mustern zu suchen. Diese evolutionär entstandene Eigenschaft war für das Überleben unserer Vorfahren zwar von unschätzbarem Vorteil, führt aber in der modernen Welt regelmäßig zu systematischen Denkfehlern. Wenn eine Münze beispielsweise zehnmal hintereinander auf „Kopf“ landet, neigen viele Beobachter zu der Annahme, dass beim nächsten Versuch „Zahl“ deutlich ',
-
       ' sei. Aus mathematischer Sicht ist diese Erwartung jedoch völlig verfehlt, da das Ergebnis jedes einzelnen Wurfes vollkommen stochastisch ',
-
       ' von den vorherigen Durchgängen bleibt. In der Kognitionsforschung bezeichnet man diese fehlerhafte Wahrnehmung als die sogenannte „Spielerfehlschluss-Neigung“. Zudem neigen Menschen dazu, rein zufällige Häufungen von Ereignissen fälschlicherweise als gezielte Absicht oder Gesetzmäßigkeit ',
-
       '. Um den Begriff der echten Zufälligkeit mathematisch präzise zu fassen, ',
-
       ' Wissenschaftler komplexe Algorithmen und Wahrscheinlichkeitsmodelle an. Dennoch bleibt die intuitionswidrige Natur der Stochastik eine der größten Herausforderungen für das menschliche Abstraktionsvermögen.'
-
     ],
-
     gaps:[
-
       {options:['analysiert','nachgewiesen','angeordnet','vorgeschrieben'], correct:1},
-
       {options:['wahrscheinlicher','beachtlicher','fragwürdiger','erheblicher'], correct:0},
-
       {options:['angewiesen','gebunden','unabhängig','unterworfen'], correct:2},
-
       {options:['feilzubieten','zu überwinden','zu umgehen','fehlzuinterpretieren'], correct:3},
-
       {options:['wenden','fügen','richten','legen'], correct:0}
-
     ]
-
   },
-
   { ...TEMPLATE[1],
-
     instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge.',
-
     title:'Wann gab es die meisten Sprachen auf der Erde?',
-
     correctOrder:[0,1,2,3,4],
-
     items:[
-
       'Weltweit zählen Sprachwissenschaftler heute noch rund 7.000 gesprochene Sprachen, doch diese Zahl nimmt im Zuge der Globalisierung unaufhaltsam ab. Diese dramatische Entwicklung wirft unter Historikern und Linguisten die Frage auf, in welcher historischen Epoche die sprachliche Mannigfaltigkeit unseres Planeten eigentlich ihren Höhepunkt erreichte.',
-
       'Welches Zeitalter markierte nun also den absoluten Höhepunkt der globalen Sprachvielfalt? Linguistische Rekonstruktionen deuten darauf hin, dass die sprachliche Diversität kurz vor der neolithischen Revolution ihren historischen Höchststand erreichte – eine Epoche, in der schätzungsweise Zehntausende eigenständige Sprachen nebeneinander existierten.',
-
       'In jener Phase der Menschheitsgeschichte lebten die Menschen in kleinen, weitgehend isolierten Gruppen von Jägern und Sammlern. Da der Austausch zwischen diesen mobilen Gemeinschaften minimal war, entwickelten sich über Generationen hinweg unzählige hochgradig ausdifferenzierte Sprachen und Dialekte.',
-
       'Erst mit dem Aufkommen von Ackerbau und Viehzucht vor etwa 10.000 Jahren veränderten sich diese dynamischen Strukturen grundlegend. Sesshaftigkeit und Bevölkerungswachstum führten zur Bildung größerer Gemeinschaften, was wiederum die Standardisierung von Dialekten begünstigte.',
-
       'Dieser schleichende Konsolidierungsprozess setzte sich über Jahrtausende fort und beschleunigte sich durch die spätere Entstehung von Großreichen, Kolonisierung und modernen Nationalstaaten massiv. Dadurch wurden unzählige Minderheitensprachen verdrängt oder starben ganz aus, wodurch sich der Trend zur sprachlichen Vereinheitlichung bis heute fortsetzt.'
-
     ],
-
     shuffledStart:[0,4,1,3,2]
-
   },
-
   { ...TEMPLATE[2],
-
     instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
-
     title:'Händigkeit: Übung macht eine Hand dominant',
-
     passage:[
-
       '(1) Ob jemand mit der rechten oder der linken Hand schreibt, zeichnet oder Suppe isst, schien in der Neurowissenschaft lange Zeit eine unumstößliche genetische Disposition zu sein. Traditionell ging die Forschung davon aus, dass die Asymmetrie des menschlichen Gehirns bereits vor der Geburt unveränderlich verankert ist und die spätere Händigkeit determiniert. Jüngste Befunde der vergleichenden Hirnforschung zeichnen jedoch ein weitaus dynamischeres Bild: Zwar existiert eine biologische Veranlagung, doch erst die fortwährende motorische Praxis und die damit verbundene neuronale Verstärkung führen dazu, dass sich eine Hand als eindeutig dominant herauskristallisiert.',
-
       '(2) Verantwortlich für diese motorische Spezialisierung ist das Phänomen der Neuroplastizität – die Fähigkeit des Zentralnervensystems, sich durch Nutzung strukturell umzubauen. Wenn Säuglinge beginnen, nach Gegenständen zu greifen, nutzen sie zunächst beide Hände nahezu gleichwertig. Erst durch das wiederholte Ausführen komplexer Feinmotorik, etwa beim Halten von Stiften oder Werkzeugen, werden im motorischen Kortex der jeweils gegenüberliegenden Gehirnhälfte neue synaptische Verbindungen geknüpft und bestehende Nervenbahnen verstärkt. Die oft beobachtete Rechtshändigkeit in der Bevölkerung ist somit nicht bloß ein starres Erbgut, sondern das Resultat verfestigter Übungsschleifen.',
-
       '(3) Interessante Einblicke bieten Studien an Personen, die durch Unfälle oder medizinische Interventionen gezwungen waren, auf ihre nicht-dominante Hand auszuweichen. Bildgebende Verfahren zeigen, dass bereits nach wenigen Wochen intensiven Trainings erhebliche strukturelle Veränderungen im Gehirn messbar sind. Die motorischen Areale, die für die Steuerung der bisher vernachlässigten Hand zuständig sind, vergrößern sich messbar. Diese Anpassungsfähigkeit belegt eindrucksvoll, dass die funktionale Dominanz einer Hand keineswegs lebenslang fixiert ist, sondern durch gezielte Aktivität bis ins hohe Erwachsenenalter verschoben werden kann.',
-
       '(4) Welche Hand bevorzugt wird, hängt allerdings nicht ausschließlich von individuellem Training ab, sondern unterliegt auch gesellschaftlichen Prägungen. In vielen Kulturen wurden Linkshändige über Jahrhunderte hinweg systematisch umgeschult – oft mit gravierenden neurobiologischen Nebenwirkungen wie Lese-Rechtschreib-Schwächen oder Konzentrationsstörungen. Obwohl solche Umschulungsmaßnahmen heute weitgehend als pädagogisch überholt gelten, zeigt sich darin die enorme Formbarkeit des Gehirns: Selbst gegen die ursprüngliche biologische Tendenz kann eine künstliche Dominanz der anderen Hand erzwungen werden.',
-
       '(5) Kognitionspsychologen betonen zudem, dass eine ausgeprägte Händigkeit wesentliche Effizienzvorteile bei der Informationsverarbeitung bietet. Indem komplexe feinmotorische Aufgaben primär an eine spezialisierte Hand und die entsprechende Hirnhälfte delegiert werden, werden kognitive Ressourcen geschont. Das Gehirn vermeidet dadurch parallele Doppelstrukturen und erhöht die Ausführungsgeschwindigkeit. Ambidextrie – also die seltene Fähigkeit, beide Hände völlig gleichwertig zu nutzen – mag faszinieren, bringt jedoch aus neurophysiologischer Sicht häufig Verzögerungen bei der Handlungsplanung mit sich.',
-
       '(6) Die moderne Händigkeitsforschung plädiert daher für ein differenziertes Modell. Händigkeit ist kein binäres System mit zwei starr getrennten Kategorien, sondern ein kontinuierliches Spektrum. Übung und alltäglicher Gebrauch festigen zwar die Präferenz einer Hand, doch die anatomische Grundlage bleibt stets flexibel genug, um auf neue Anforderungen zu reagieren. Die Erkenntnis, dass Übung eine Hand dominant macht, eröffnet nicht zuletzt neue therapeutische Ansätze in der Neurorehabilitation nach Schlaganfällen.'
-
     ],
-
     questions:[
-
       { q:'Welche der folgenden Aussagen fasst den Inhalt von Absatz 1 am besten zusammen?', options:[
-
         'Die genetische Ausstattung bestimmt allein, welche Hand der Mensch im Alltag bevorzugt.',
-
         'Neuere Studien belegen, dass die Ausprägung der Händigkeit maßgeblich durch Praxis geformt wird.',
-
         'Die Asymmetrie des menschlichen Gehirns bildet sich erst Jahre nach der Geburt heraus.',
-
         'Vergleichende Hirnforschungen widerlegen das Existieren biologischer Veranlagungen zur Händigkeit.'
-
       ], correct:1 },
-
       { q:'Laut Absatz 2 entsteht die Spezialisierung einer Hand vor allem dadurch, dass ...', options:[
-
         'Säuglinge bereits im ersten Lebensmonat gezielt mit der rechten Hand nach Gegenständen greifen.',
-
         'das Vererben motorischer Muster die Gehirnhälften vorab fest verschaltet.',
-
         'wiederholte feinmotorische Aktivitäten entsprechende synaptische Strukturen im Gehirn verstärken.',
-
         'das Zentralnervensystem den Umbau von Muskelsträngen in den Händen beschleunigt.'
-
       ], correct:2 },
-
       { q:'In Absatz 3 wird anhand von Studien an Unfallgeschädigten gezeigt, dass ...', options:[
-
         'die Dominanz einer Hand durch intensives Training der anderen Hand veränderbar bleibt.',
-
         'medizinische Eingriffe die Hirnstruktur dauerhaft schädigen können.',
-
         'das Gehirn von Erwachsenen keine neuen motorischen Areale mehr bilden kann.',
-
         'die Vernachlässigung einer Hand zu einer irreversiblen Verkleinerung des Kortex führt.'
-
       ], correct:0 },
-
       { q:'Was zeigt das in Absatz 4 erwähnte Beispiel der Umschulung von Linkshändigen?', options:[
-
         'Gesellschaftliche Faktoren haben keinen Einfluss auf die Entwicklung der Händigkeit.',
-
         'Umschulungen führen stets zu einer schmerzfreien Korrektur fehlerhafter Veranlagungen.',
-
         'Das Gehirn lässt sich selbst entgegen ursprünglichen biologischen Neigungen umtrainieren.',
-
         'Lese-Rechtschreib-Schwächen sind die Hauptursache für die Umschulung auf die rechte Hand.'
-
       ], correct:2 },
-
       { q:'Warum ist die Spezialisierung auf eine dominante Hand laut Absatz 5 vorteilhaft?', options:[
-
         'Sie verhindert das Auftreten von Beidhändigkeit in allen Entwicklungsphasen.',
-
         'Sie ermöglicht es dem Gehirn, doppelte Kontrollstrukturen für beide Hände aufzubauen.',
-
         'Sie eliminiert Verzögerungen bei der Ausführung grobmotorischer Ganzkörperbewegungen.',
-
         'Sie spart denkökonomische Ressourcen und steigert die Geschwindigkeit von Handlungsabläufen.'
-
       ], correct:3 },
-
       { q:'In Absatz 6 wird Händigkeit beschrieben als ...', options:[
-
         'ein fließender Übergang, bei dem das Gehirn trotz Übung elastisch bleibt.',
-
         'ein starres System mit zwei scharf voneinander abgegrenzten Ausprägungen.',
-
         'ein rein theoretisches Konstrukt ohne praktischen Nutzen für die Neurorehabilitation.',
-
         'eine biologische Eigenschaft, die nach erfolgreicher Therapie unveränderlich feststeht.'
-
       ], correct:0 },
-
       { q:'Das Hauptanliegen des Gesamttextes ist es, ...', options:[
-
         'nachzuweisen, dass Linkshändigkeit eine behandlungsbedürftige Störung darstellt.',
-
         'über das Zusammenspiel von biologischer Veranlagung und trainierbarer Neuroplastizität aufzuklären.',
-
         'historische Pädagogikkonzepte zur Umschulung von Kindern scharf zu kritisieren.',
-
         'die Überlegenheit der Ambidextrie gegenüber der Einseitigkeit wissenschaftlich zu belegen.'
-
       ], correct:1 }
-
     ]
-
   },
-
   { ...TEMPLATE[3],
-
     instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1–6 den Aussagen unten zu. Die Zahlen beziehen sich jeweils auf den nachfolgenden Satz. Für jede Textstelle gibt es genau eine richtige Lösung. Es gibt zwei Aussagen mehr als Textstellen.',
-
     title:'Wo Lachen im Gehirn entsteht – Die Neurowissenschaft der Humorverarbeitung',
-
     passageText:`Obwohl das Lachen als eine der universellsten menschlichen Verhaltensweisen gilt, verblieb seine exakte neurobiologische Verankerung lange Zeit im Dunkeln der Hirnforschung. Erst moderne bildgebende Verfahren wie die funktionelle Magnetresonanztomografie (fMRT) ermöglichten tiefe Einblicke in die komplexen neuronalen Netzwerke, die beim Erfassen von Humor aktiviert werden.<br><br><strong>[1] Entgegen der landläufigen Annahme, Lachen sei lediglich ein emotionaler Reflex des limbischen Systems, handelt es sich um einen hochgradig differenzierten, zweiphasigen kognitiven Prozess.</strong> Zunächst identifiziert der präfrontale Kortex eine gedankliche Inkongruenz – eine plötzliche Abweichung von der erwarteten Logik einer Situation. Erst wenn diese Unstimmigkeit im Hirnstamm kognitiv aufgelöst werden kann, entlädt sich die Spannung in der motorischen Steuerung des Lächelns oder Lachens.<br><br><strong>[2] Neurowissenschaftler warnen jedoch vor der voreiligen Schlussfolgerung, man könne Lachen auf eine reine Kombination von Logikanalyse und Mimik reduzieren.</strong> Vielmehr greifen affektive Netzwerke wie der Nucleus accumbens ein und schütten den Botenstoff Dopamin aus, was das wohlige Gefühl der Erheiterung erzeugt.<br><br><strong>[3] Dass Lachen eine essenzielle Schutzfunktion für das kardiovaskuläre System ausübt, indem es Gefäßweiten reguliert und Entzündungsmarker senkt, gilt heute in der klinischen Gelotologie als unumstößliche Tatsache.</strong><br><br><strong>[4] Bedenklich stimmte die Fachwelt jedoch eine neuere Studie der Universität Zürich, deren methodischer Aufbau gravierende Lücken bei der Auswertung von Kontrollgruppen aufwies und deren Befunde somit mit größter Vorsicht zu genießen sind.</strong><br><br><strong>[5] In den kommenden Jahrzehnten dürfte die zielgerichtete Stimulation humorverarbeitender Hirnareale mittels transkranieller Magnetstimulation eine tragende Rolle bei der klinischen Behandlung schwerer Depressionen einnehmen.</strong><br><br><strong>[6] Um diesen positiven Effekt im Alltag bestmöglich auszuschöpfen, sollten Therapeuten und Ärzte gezielte Humoreinheiten fest in den Behandlungsplan von chronisch kranken Patienten integrieren.</strong><br><br>Zusammenfassend zeigt sich, dass Lachen weit mehr als ein oberflächlicher Ausdruck von Freude ist: Es ist ein fein abgestimmtes Zusammenspiel kognitiver, emotionaler und motorischer Hirnstrukturen, dessen therapeutisches Potenzial die Neurowissenschaft gerade erst zu entschlüsseln beginnt.`,
-
     textStellen:[1, 2, 3, 4, 5, 6],
-
     options:[
-
       'Der Autor erläutert einen komplexen biologischen Mechanismus.',
-
       'Der Autor warnt vor einer vereinfachten Sichtweise.',
-
       'Der Autor hebt eine wissenschaftlich gesicherte Erkenntnis hervor.',
-
       'Der Autor zweifelt an der Wirksamkeit einer Therapie.',
-
       'Der Autor prognostiziert künftige medizinische Anwendungen.',
-
       'Der Autor kritisiert Mängel in der methodischen Forschung.',
-
       'Der Autor empfiehlt konkrete Maßnahmen für die Behandlung chronisch kranker Patienten.',
-
       'Der Autor relativiert den therapeutischen Nutzen eines Phänomens.'
-
     ],
-
     correct:[0, 1, 2, 5, 4, 6]
-
   },
-
   { ...TEMPLATE[4],
-
     instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zu positiven Wörtern, zu negativen Wörtern, zu beiden oder gar nicht passt. Es kann auch sein, dass einzelne Aussagen gar nicht passen. Für jede Aussage gibt es genau eine richtige Lösung. Die Aussagen folgen nicht dem Textverlauf.',
-
     title:'Unbewusste Schutzfilter: Wie das menschliche Gehirn Sprache verarbeitet',
-
     passage:'Täglich strömen unzählige sprachliche Reize auf das menschliche Gehirn ein. Um diese Informationsflut zu bewältigen, nutzt unser Denkorgan hocheffiziente Selektionsmechanismen. Eine neurobiologische Studie der Universität Jena hat untersucht, wie emotional geladene Wörter im Vergleich zu neutralen Begriffen verarbeitet werden. Dabei stießen die Forscher auf überraschende Asymmetrien zwischen der Wahrnehmung von Sprachreizen mit positiver und negativer Valenz. Entgegen der weitverbreiteten Annahme, dass bedrohliche Informationen aufgrund evolutionsbedingter Überlebensvorteile stets vorrangig analysiert werden, zeigte sich bei der sprachlichen Reizverarbeitung ein unerwarteter Schutzfilter: Das Gehirn neigt bei subliminaler – also extrem kurzer, unbewusster – Darbietung dazu, Reize mit negativer Bedeutung wie „Schmerz“, „Krankheit“ oder „Verlust“ aktiv zu hemmen. Magnetoenzephalografische Messungen (MEG) belegen, dass die neuronale Weiterleitung negativer Begriffe im visuellen Kortex messbar verzögert wird. Diese kognitive Dämpfung verhindert eine vorzeitige Überflutung des limbischen Systems mit Stresshormonen. Völlig anders verhält es sich bei Begriffen mit positiver Konnotation wie „Freude“, „Erfolg“ oder „Liebe“. Diese Signale passieren die thalamischen Filterstrukturen nahezu ungehindert und lösen bereits nach etwa 100 Millisekunden eine verstärkte Aktivierung im Belohnungszentrum aus. Sie werden nicht nur schneller verarbeitet, sondern verbleiben auch länger im Arbeitsgedächtnis, was die emotionale Resilienz des Individuums stärkt. Erst wenn Sprachreize über einen längeren Zeitraum bewusst wahrgenommen werden, hebt das Gehirn die Unterdrückung negativer Wörter auf. In Entscheidungssituationen führt dies dazu, dass negative Begriffe schlussendlich eine gründlichere analytische Bewertung erfahren als positive, um potenzielle Gefahren abzuwenden. Zudem belegen jüngste Untersuchungen zur kognitiven Alterungsforschung, dass beide Wortarten im hohen Alter gleichermaßen von einem allgemeinen Rückgang der Verarbeitungsgeschwindigkeit betroffen sind.',
-
     columns:['Positive Wörter','Negative Wörter','beide','passt nicht'],
-
     items:[
-
       {text:'Sie lösen bereits bei unbewusster Wahrnehmung eine sofortige Aktivierung im Belohnungssystem aus.', correct:0},
-
       {text:'Ihre neuronale Weiterleitung im Gehirn wird bei schneller Präsentation zunächst gebremst.', correct:1},
-
       {text:'Bei bewusster Analyse führen sie zu einer tieferen und detaillierteren gedanklichen Bewertung.', correct:1},
-
       {text:'Im Alter nimmt die Geschwindigkeit ihrer kognitiven Verarbeitung ab.', correct:2},
-
       {text:'Sie werden im menschlichen Gehirn in einem völlig separaten Areal außerhalb der Großhirnrinde gespeichert.', correct:3},
-
       {text:'Sie führen bei jedem Menschen unabhängig von der Persönlichkeit zu einer Steigerung des Blutdrucks.', correct:3},
-
       {text:'Sie verbleiben für eine längere Zeitspanne im Arbeitsgedächtnis des Lesers.', correct:0}
-
     ]
-
   },
-
   { ...TEMPLATE[5],
-
     instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Ursachen und Merkmale des Phänomens, 2 Untersuchungsmethoden und Beobachtungen).',
-
     title:'Wir Menschen haben einen rätselhaften Linksdrall',
-
     passage:'Ob in vollen Einkaufsstraßen, auf belebten Bahnhofsvorplätzen oder in kontrollierten Experimenten: Wenn Menschenmengen sich ohne äußere Vorgaben fortbewegen, zeigt sich ein überraschend einheitliches Verhaltensmuster. Forschungsteams aus der Bewegungswissenschaft und Kognitionspsychologie beobachteten in zahlreichen Versuchsreihen, dass Fußgänger in unstrukturierten Gruppen eine systematische Neigung zeigen, sich bevorzugt gegen den Uhrzeigersinn zu drehen. Dieses Phänomen tritt nicht nur bei alltäglichen Gehsituationen auf, sondern lässt sich auch unter streng isolierten Laborbedingungen getreu nachweisen. Um die Ursachen dieses rätselhaften Linksdralls zu ergründen, führten Wissenschaftler aufwendige Versuche mit Probandengruppen unterschiedlicher Größe und Herkunft durch. Dabei untersuchten sie unter anderem, ob kulturelle Prägungen oder verkehrserzieherische Gewohnheiten eine Rolle spielen. Interessanterweise zeigte sich die Bevorzugung der Bewegung gegen den Uhrzeigersinn sowohl in europäischen Ländern, in denen Rechtsverkehr herrscht, als auch in Ländern wie Japan mit Linksverkehr. Auch soziales Ausweichverhalten oder die Tendenz der Rechtshändigkeit lieferten keine hinreichende Erklärung, da der Effekt selbst bei einzelnen Testpersonen auftrat, die ohne Sichtkontakt zu anderen Personen in einer kreisförmigen Arena navigierten. Weitere neurologische und biomechanische Analysen brachten erstaunliche Details ans Licht. Weder die Dominanz eines bestimmten Auges noch die gezielte Abdeckung der Sehkraft beeinflussten die Drehrichtung maßgeblich. Selbst wenn Probanden mit verbundenen Augen liefen, neigten sie nach kurzer Zeit zu einer leichten Rotation nach links. Ergänzende Erhebungen bei Kindern offenbarten zudem, dass die Neigung zum Linksdrall in jungen Jahren noch deutlicher ausgeprägt ist als bei Erwachsenen. Dies deutet darauf hin, dass dem Phänomen eine fundamentale biologische Asymmetrie zugrunde liegt, die im Laufe der Reifung und durch gelernte Bewegungsmuster teilweise überlagert wird. Obwohl die exakten physiologischen Auslöser bislang nicht vollständig entschlüsselt sind, erweisen sich die Erkenntnisse für die Praxis als äußerst bedeutsam. In der Architektur, der Stadtplanung sowie bei der Organisation von Großveranstaltungen wird das Phänomen zunehmend berücksichtigt, um Besucherströme effizienter zu lenken, Engpässe zu vermeiden und die Sicherheit in Evakuierungssituationen nachhaltig zu erhöhen.',
-
     aussagen:[
-
       { key:'a', text:'[a] Die Bevorzugung der Linksdrehung lässt sich unabhängig von verkehrskulturellen Mustern nachweisen.' },
-
       { key:'b', text:'[b] Die Ausprägung der Rotationsneigung nimmt mit zunehmendem Alter der Personen ab.' },
-
       { key:'c', text:'[c] Sichtseinschränkungen führen dazu, dass Probanden die Orientierung vollständig verlieren.' },
-
       { key:'d', text:'[d] Das Phänomen tritt ausschließlich auf, wenn Menschen in dicht gedrängten Gruppen agieren.' },
-
       { key:'e', text:'[e] Forschende isolierten einzelne Probanden in einer kreisförmigen Testumgebung.' },
-
       { key:'f', text:'[f] Die Neigung zur Linksdrehung wird primär durch die Dominanz der rechten Hand verursacht.' },
-
       { key:'g', text:'[g] Das Phänomen blieb auch bei Experimenten mit verbundenen Augen bestehen.' },
-
       { key:'h', text:'[h] Erkenntnisse über den Linksdrall werden bislang nicht für das Management von Menschenmengen genutzt.' }
-
     ],
-
     correctMap: { v1: 'a', v2: 'b', n3: 'e', n4: 'g' }
-
   },
-
   { ...TEMPLATE[6],
-
     instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Kreuzen Sie in der Zusammenfassung die drei Sätze an, die inhaltlich falsch sind. Es gibt genau drei inhaltlich falsche Sätze.',
-
     title:'Jugendschutz im digitalen Raum: Der Ethikrat zur Regulierung sozialer Medien',
-
     passage:'Die Debatte über die Auswirkungen sozialer Medien auf die psychische Gesundheit von Kindern und Jugendlichen hat in den vergangenen Jahren eine erhebliche Dynamik gewonnen. Angesichts steigender Zahlen von Angststörungen, Schlafproblemen und depressiven Symptomen unter Minderjährigen wird verstärkt über gesetzliche Beschränkungen debattiert. In einer umfassenden Stellungnahme hat sich nun der Deutsche Ethikrat zu Wort gemeldet und differenzierte Empfehlungen vorgelegt, die sich gegen ein pauschales Verbot sozialer Netzwerke aussprechen, jedoch eine strengere Regulierung der Betreiberplattformen fordern. Nach Ansicht des Ethikrats greift die Forderung nach einem strikten Konsumverbot für Jugendliche unter 16 Jahren zu kurz. Digitale Medien seien längst zu zentralen Orten der Sozialisation, der Informationsbeschaffung und der gesellschaftlichen Teilhabe geworden. Ein vollständiger Ausschluss würde jungen Menschen wichtige Lernräume für den Erwerb digitaler Medienkompetenz entziehen. Stattdessen betont das Gremium die Verpflichtung der Plattformanbieter, ihre Dienste nach dem Prinzip des „Safety by Design“ zu gestalten. Dies bedeutet, dass gesundheitsgefährdende Mechanismen – wie etwa endlos scrollbare Feeds, automatische Videoabspielungen oder auf Suchterzeugung ausgerichtete Belohnungsalgorithmen – standardmäßig deaktiviert sein müssen. Ein zentraler Kritikpunkt des Ethikrats richtet sich gegen die Praxis der Werbefinanzierung und datenintensiven Profilerstellung bei Minderjährigen. Es sei ethisch unvertretbar, dass kommerzielle Akteure die psychische Vulnerabilität junger Nutzer ausnutzen, um Verweilzeiten zu maximieren. Daher fordert das Gremium ein vollständiges Verbot von personalisierter Werbung und datenbasierter Nudging-Architekturen für Nutzer unter 18 Jahren. Ergänzend empfiehlt der Rat verpflichtende, wirksame Altersverifikationssysteme, die den Zugang zu potenziell schädlichen Inhalten wirksam beschränken, ohne dabei die Anonymität von Erwachsenen im Netz unnötig zu gefährden. Neben der Plattformregulierung hebt der Ethikrat die Bedeutung der pädagogischen Begleitung hervor. Schulen und Erziehungsberechtigte dürften mit den Herausforderungen des digitalen Wandels nicht allein gelassen werden. Eine nachhaltige Medienkompetenzförderung müsse fest in den Lehrplänen verankert werden, um Jugendliche zur reflexiven Nutzung zu befähigen. Ziel müsse eine digitale Umgebung sein, die Risiken minimiert, ohne die Entwicklungschancen der Heranwachsenden zu beschneiden.',
-
     graphicData:[{year:'12–14 Jahre: Nutzung > 3 Std./Tag',val:72},{year:'12–14 Jahre: Befürwortung gesetzl. Nutzungsverbot',val:74},{year:'12–14 Jahre: Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber',val:82},{year:'15–17 Jahre: Nutzung > 3 Std./Tag',val:65},{year:'15–17 Jahre: Befürwortung gesetzl. Nutzungsverbot',val:42},{year:'15–17 Jahre: Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber',val:88},{year:'Eltern / Erziehende: Befürwortung gesetzl. Nutzungsverbot',val:68},{year:'Eltern / Erziehende: Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber',val:91}],
-
     graphicCaption:'Einstellungen zur Plattformregulierung und Mediennutzung nach Altersgruppen (in %)',
-
     graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 350" width="100%" role="img" aria-label="Säulendiagramm: Einstellungen zur Plattformregulierung und Mediennutzung nach Altersgruppen" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="348" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="24" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Einstellungen zur Plattformregulierung und</text><text x="260" y="42" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Mediennutzung nach Altersgruppen (in %)</text><line x1="52.0" y1="250.0" x2="492.0" y2="250.0" stroke="#64748b" stroke-width="1"/><text x="44" y="254" font-size="11" text-anchor="end" fill="currentColor">0%</text><line x1="52.0" y1="206.5" x2="492.0" y2="206.5" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="210" font-size="11" text-anchor="end" fill="currentColor">25%</text><line x1="52.0" y1="163.0" x2="492.0" y2="163.0" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="167" font-size="11" text-anchor="end" fill="currentColor">50%</text><line x1="52.0" y1="119.5" x2="492.0" y2="119.5" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="124" font-size="11" text-anchor="end" fill="currentColor">75%</text><line x1="52.0" y1="76.0" x2="492.0" y2="76.0" stroke="#e5e7eb" stroke-width="1"/><text x="44" y="80" font-size="11" text-anchor="end" fill="currentColor">100%</text><rect x="62.0" y="124.7" width="30.0" height="125.3" rx="1" fill="#0284c7"/><text x="77" y="120" font-size="11" text-anchor="middle" font-weight="700" fill="#0284c7">72%</text><rect x="100.0" y="121.2" width="30.0" height="128.8" rx="1" fill="#1e3a8a"/><text x="115" y="116" font-size="11" text-anchor="middle" font-weight="700" fill="#1e3a8a">74%</text><rect x="138.0" y="107.3" width="30.0" height="142.7" rx="1" fill="#0f9488"/><text x="153" y="102" font-size="11" text-anchor="middle" font-weight="700" fill="#0f9488">82%</text><text x="119" y="268" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">12 – 14 Jahre</text><rect x="208.0" y="136.9" width="30.0" height="113.1" rx="1" fill="#0284c7"/><text x="223" y="132" font-size="11" text-anchor="middle" font-weight="700" fill="#0284c7">65%</text><rect x="246.0" y="176.9" width="30.0" height="73.1" rx="1" fill="#1e3a8a"/><text x="261" y="172" font-size="11" text-anchor="middle" font-weight="700" fill="#1e3a8a">42%</text><rect x="284.0" y="96.9" width="30.0" height="153.1" rx="1" fill="#0f9488"/><text x="299" y="92" font-size="11" text-anchor="middle" font-weight="700" fill="#0f9488">88%</text><text x="265" y="268" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">15 – 17 Jahre</text><text x="369" y="244" font-size="12" text-anchor="middle" fill="#64748b">–</text><rect x="392.0" y="131.7" width="30.0" height="118.3" rx="1" fill="#1e3a8a"/><text x="407" y="127" font-size="11" text-anchor="middle" font-weight="700" fill="#1e3a8a">68%</text><rect x="430.0" y="91.7" width="30.0" height="158.3" rx="1" fill="#0f9488"/><text x="445" y="87" font-size="11" text-anchor="middle" font-weight="700" fill="#0f9488">91%</text><text x="411" y="268" font-size="12" text-anchor="middle" font-weight="700" fill="currentColor">Eltern / Erziehende</text><rect x="60.0" y="273.0" width="10.0" height="10.0" rx="1" fill="#0284c7"/><text x="76" y="282" font-size="11" text-anchor="start" fill="currentColor">Nutzung &gt; 3 Std./Tag</text><rect x="60.0" y="293.0" width="10.0" height="10.0" rx="1" fill="#1e3a8a"/><text x="76" y="302" font-size="11" text-anchor="start" fill="currentColor">Befürwortung gesetzl. Nutzungsverbot</text><rect x="60.0" y="313.0" width="10.0" height="10.0" rx="1" fill="#0f9488"/><text x="76" y="322" font-size="11" text-anchor="start" fill="currentColor">Befürwortung stärkerer gesetzl. Pflichten für Plattformbetreiber</text></svg>`,
-
     sentences:[
-
       {text:'Die zunehmende Nutzung digitaler Medien durch Jugendliche führt zu intensiven Diskussionen über staatliche Schutzmaßnahmen.', wrong:false},
-
       {text:'Der Deutsche Ethikrat spricht sich in seiner Empfehlung nachdrücklich für ein allgemeines Nutzungsverbot von sozialen Netzwerken für Jugendliche unter 16 Jahren aus.', wrong:true},
-
       {text:'Ein Ausbau von Sicherheitseinstellungen wird als unzureichend erachtet, weshalb Plattformen primär per Gesetz geschlossen werden sollten.', wrong:true},
-
       {text:'Zum Schutz der Heranwachsenden fordert das Gremium ein Verbot personalisierter Werbung und datenbasierter Mechanismen für Minderjährige.', wrong:false},
-
       {text:'Die Mehrheit aller befragten Gruppen befürwortet zwar ein gesetzliches Nutzungsverbot, stützt jedoch mehrheitlich vor allem Forderungen nach einer stärkeren gesetzlichen Pflicht der Plattformbetreiber.', wrong:true},
-
       {text:'Zudem betont der Ethikrat, dass auch Schulen und Eltern die Medienkompetenz der Jugendlichen aktiv fördern müssen.', wrong:false}
     ]
   }
 ];
+
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
   {id:2, title:'Modelltest 2 (Digitaler TestDaF)', teile: MT2},
   {id:3, title:'Modelltest 3 (Digitaler TestDaF)', teile: MT3},
   {id:4, title:'Modelltest 4 (Digitaler TestDaF)', teile: MT4},
   {id:5, title:'Modelltest 5 (Digitaler TestDaF)', teile: MT5},
-  {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6}, 
+  {id:6, title:'Modelltest 6 (Digitaler TestDaF)', teile: MT6},
   {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7},
   {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8},
   {id:9, title:'Modelltest 9 (Digitaler TestDaF)', teile: MT9},
   {id:10, title:'Modelltest 10 (Digitaler TestDaF)', teile: MT10}
 ];
+
+/* ============================================================
+   PATCH GRAPHIQUES — à coller TOUT EN BAS de lesen-data.js (après const TESTS)
+   1) Supprime les <br> visibles dans les Teile 5/6/7 (filet de sécurité).
+   2) Si ta page dessine encore des barres, le graphique SVG (champ graphicSvg)
+      les remplace : MT6, MT7, MT8 et MT10.
+   ============================================================ */
+(function(){
+  /* --- 1) plus de <br> visibles dans les textes (hors Teil 4) --- */
+  try{
+    TESTS.forEach(function(t){(t.teile||[]).forEach(function(p){
+      if(p&&(p.type==='table'||p.type==='twocat'||p.type==='summary')&&typeof p.passage==='string')
+        p.passage=p.passage.replace(/<br\s*\/?>(\s*<br\s*\/?>)*/gi,' ');
+    });});
+  }catch(e){}
+  /* --- 2) le graphique SVG remplace le graphique en barres --- */
+  if(typeof document==='undefined')return;
+  var MAP={};
+  function norm(s){return String(s||'').replace(/\s+/g,' ').trim();}
+  try{
+    TESTS.forEach(function(t){(t.teile||[]).forEach(function(p){
+      if(p&&p.graphicSvg&&p.graphicCaption)MAP[norm(p.graphicCaption)]=String(p.graphicSvg).replace('<svg ','<svg data-lesen="1" ');
+    });});
+  }catch(e){}
+  if(!Object.keys(MAP).length)return;
+  function findBox(el){
+    var n=el;
+    for(var i=0;i<4&&n&&n.parentElement;i++){
+      n=n.parentElement;
+      var cs=window.getComputedStyle(n),bg=cs.backgroundColor;
+      var hasBg=bg&&bg!=='transparent'&&!/rgba\(\s*0,\s*0,\s*0,\s*0\s*\)/.test(bg);
+      if(hasBg||parseFloat(cs.borderTopWidth)>0)return n;
+    }
+    return el.parentElement;
+  }
+  function patch(){
+    if(!document.body)return;
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false),node,hits=[];
+    while((node=w.nextNode())){var t=norm(node.nodeValue);if(t&&MAP[t])hits.push([node,t]);}
+    hits.forEach(function(h){
+      if(!h[0].parentElement)return;
+      var box=findBox(h[0].parentElement);
+      if(!box||box.querySelector('svg[data-lesen]'))return;
+      box.innerHTML='<div style="padding:6px;max-width:100%;overflow:hidden">'+MAP[h[1]]+'</div>';
+      box.style.overflow='hidden';box.style.maxWidth='100%';
+    });
+  }
+  var timer=null;
+  function later(){clearTimeout(timer);timer=setTimeout(patch,60);}
+  function start(){
+    patch();
+    if(window.MutationObserver)new MutationObserver(later).observe(document.body,{childList:true,subtree:true,characterData:true});
+    else setInterval(patch,500);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+})();
