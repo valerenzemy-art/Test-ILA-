@@ -317,21 +317,45 @@ table.a6-table select { width: 100%; padding: 8px; border-radius: 6px; border: 1
   justify-content: space-between;
   align-items: center;
   margin-bottom: 14px;
-  border-bottom: 2px solid var(--bg-page);
-  padding-bottom: 10px;
+  /* MODIFICATION : Remplissage avec le fond des cartes Modelltest */
+  background: var(--modeltest-bg);
+  border: 1px solid var(--modeltest-border);
+  border-radius: 8px;
+  padding: 12px 14px;
 }
 
 .exercise-title {
   font-weight: 700;
   font-size: 1rem;
-  color: var(--text);
+  /* MODIFICATION : Texte en blanc pour un contraste parfait */
+  color: var(--modeltest-text);
   margin: 0;
 }
 
 .exercise-points {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
-  color: var(--text-soft);
+  /* MODIFICATION : Texte secondaire très lisible */
+  color: var(--modeltest-text-soft);
+  text-align: right;
+  line-height: 1.2;
+}
+
+/* MODIFICATION : Gestion dynamique des points en Rouge ou Vert */
+.exercise-points.is-wrong,
+.exercise-points.score-below {
+  color: var(--wrong) !important;
+  background: rgba(185, 28, 28, 0.15);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.exercise-points.is-correct,
+.exercise-points.score-above {
+  color: var(--correct) !important;
+  background: rgba(4, 120, 87, 0.15);
+  padding: 4px 8px;
+  border-radius: 6px;
 }
 
 /* Item de question individuel */
