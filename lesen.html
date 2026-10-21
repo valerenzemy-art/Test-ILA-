@@ -399,6 +399,10 @@ function showResults(){
       sumCorrect += correct; 
       sumTotal += total;
 
+      // MODIFICATION ICI : Calcul de la moyenne et de la classe de couleur dynamique
+      const moyenneAufgabe = total / 2;
+      const scoreClass = correct < moyenneAufgabe ? 'is-wrong' : 'is-correct';
+
       let taskDetails = '';
 
       switch(task.type){
@@ -574,7 +578,7 @@ function showResults(){
           <div class="exercise-card">
               <div class="exercise-header">
                   <h3 class="exercise-title">Aufgabe ${task.teil} - ${task.label}</h3>
-                  <span class="exercise-points">${correct} / ${total} Punkte</span>
+                  <span class="exercise-points ${scoreClass}">${correct} / ${total} Punkte</span>
               </div>
               <div style="display: flex; flex-direction: column; gap: 8px;">
                   ${taskDetails}
