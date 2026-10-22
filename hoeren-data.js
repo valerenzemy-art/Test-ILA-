@@ -13,7 +13,6 @@ const TEMPLATE_HOEREN = [
 
 // Aufgabe 7 : mots séparés par des espaces. Un mot précédé de § = mot qui diffère du texte audio.
 // Corrigé officiel : Zeit/seit ; irrer/ihrer ; geführt/gefühlt ; weniger/wenige
-// A VERIFIER avec le PDF : les 4 mots affichés doivent être ceux du texte ECRIT.
 const WIKINGER_TEXT =
   "Um das Jahr 986 kamen die ersten Wikinger von Island zur Südspitze Grönlands. " +
   "In der folgenden §Zeit entstand dort eine blühende Kolonie aus kleinen Siedlungen. " +
@@ -145,7 +144,7 @@ const HOREN_MT1 = [
 ];
 
 const HOREN_MT2 = [
-    { ...TEMPLATE_HOEREN[0],
+  { ...TEMPLATE_HOEREN[0],
     instructions: 'Sie hören ein Gespräch zwischen den Studierenden Sandra und Julius, die sich zufällig vor der Tür zu Professor Dr. Kruses Büro treffen. Sie hören das Gespräch einmal. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.\n\nSie haben nach dem Hören noch 20 Sekunden Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 15 Sekunden Zeit, um sich die Tabelle anzuschauen.',
     title: 'Aufgabe 1: Gespräch vor Professor Dr. Kruses Büro',
     mediaType: 'audio',
@@ -157,8 +156,8 @@ const HOREN_MT2 = [
       { q: 'Donnerstag Nachmittag - Klausur in (4):', correct: 'Statistik' },
       { q: 'Freitag Vormittag - Kurs in (5):', correct: 'Statistik' }
     ]
-  },
-
+  }
+];
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
