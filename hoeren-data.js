@@ -145,20 +145,20 @@ const HOREN_MT1 = [
 ];
 
 const HOREN_MT2 = [
-  { ...TEMPLATE_HOEREN[0],
-    instructions:'Sie hören ein Gespräch zwischen einer Studienberaterin und einem Mitarbeiter des Studierendenmarketings zum Thema „Unser erster eigener Podcast: Erst Abi, dann Uni“. Sie hören den Text einmal. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.',
-    title:'Aufgabe 1: Unser erster eigener Podcast: Erst Abi, dann Uni',
+    { ...TEMPLATE_HOEREN[0],
+    instructions: 'Sie hören ein Gespräch zwischen den Studierenden Sandra und Julius, die sich zufällig vor der Tür zu Professor Dr. Kruses Büro treffen. Sie hören das Gespräch einmal. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.\n\nSie haben nach dem Hören noch 20 Sekunden Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 15 Sekunden Zeit, um sich die Tabelle anzuschauen.',
+    title: 'Aufgabe 1: Gespräch vor Professor Dr. Kruses Büro',
     mediaType: 'audio',
     mediaUrl: 'media/mt2_exercice_t1.mp3',
-    questions:[
-      { q: 'Medium zur Vermittlung der Studienorientierung:', correct: 'Podcast' },
-      { q: 'Verantwortungsbereich der Berater neben der Studienorientierung:', correct: 'Studierende unterstützen' },
-      { q: 'Grund für Annikas anfängliche Ablehnung des Lehramtsstudiums:', correct: 'Mutti Lehrerin' },
-      { q: 'Person, die Annika maßgeblich zum Lehramt geraten hat:', correct: 'viele Leute' },
-      { q: 'Annika heutige Haltung zu ihrem ehemaligen Studienfach:', correct: 'nicht bereuen' }
+    questions: [
+      { q: 'Sandra arbeitet bei Professor Dr. Kruse an (1):', correct: 'Doktorarbeit / Dissertation' },
+      { q: 'Dienstag Vormittag - Vorlesung in (2):', correct: 'Soziologie' },
+      { q: 'Dienstag Nachmittag - Problem (3):', correct: 'Drucker kaputt / Drucker defekt' },
+      { q: 'Donnerstag Nachmittag - Klausur in (4):', correct: 'Statistik' },
+      { q: 'Freitag Vormittag - Kurs in (5):', correct: 'Statistik' }
     ]
-  }
-];
+  },
+
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
