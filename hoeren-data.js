@@ -12,7 +12,6 @@ const TEMPLATE_HOEREN = [
 ];
 
 // Aufgabe 7 : mots séparés par des espaces. Un mot précédé de § = mot qui diffère du texte audio.
-// Corrigé officiel : Zeit/seit ; irrer/ihrer ; geführt/gefühlt ; weniger/wenige
 const WIKINGER_TEXT =
   "Um das Jahr 986 kamen die ersten Wikinger von Island zur Südspitze Grönlands. " +
   "In der folgenden §Zeit entstand dort eine blühende Kolonie aus kleinen Siedlungen. " +
