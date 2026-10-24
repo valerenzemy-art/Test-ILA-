@@ -144,10 +144,11 @@ const HOREN_MT1 = [
 
 const HOREN_MT2 = [
   { ...TEMPLATE_HOEREN[0],
-    instructions: 'Sie hören ein Gespräch zwischen den Studierenden Sandra und Julius, die sich zufällig vor der Tür zu Professor Dr. Kruses Büro treffen. Sie hören das Gespräch einmal. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.\n\nSie haben nach dem Hören noch 20 Sekunden Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 15 Sekunden Zeit, um sich die Tabelle anzuschauen.',
+    instructions: 'Sie hören ein Gespräch zwischen den Studierenden Sandra und Julius...',
     title: 'Aufgabe 1: Gespräch vor Professor Dr. Kruses Büro',
     mediaType: 'audio',
     mediaUrl: 'media/mt2_exercice_t1.mp3',
+    consigneUrl: 'media/mt2_consigne_t1.mp3', // <-- Ajoutez cette ligne pour pointer vers votre nouveau fichier
     questions: [
       { q: 'Sandra arbeitet bei Professor Dr. Kruse an (1):', correct: 'Doktorarbeit / Dissertation' },
       { q: 'Dienstag Vormittag - Vorlesung in (2):', correct: 'Soziologie' },
