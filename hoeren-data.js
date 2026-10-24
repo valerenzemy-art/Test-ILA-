@@ -148,7 +148,7 @@ const HOREN_MT2 = [
     title: 'Aufgabe 1: Gespräch vor Professor Dr. Kruses Büro',
     mediaType: 'audio',
     mediaUrl: 'media/mt2_exercice_t1.mp3',
-    consigneUrl: 'media/mt2_consigne_t1.mp3', // <-- Ajoutez cette ligne pour pointer vers votre nouveau fichier
+    consigneUrl: 'media/mt2_consigne_t1.mp3', // Pointe vers le fichier que vous venez d'uploader
     questions: [
       { q: 'Sandra arbeitet bei Professor Dr. Kruse an (1):', correct: 'Doktorarbeit / Dissertation' },
       { q: 'Dienstag Vormittag - Vorlesung in (2):', correct: 'Soziologie' },
