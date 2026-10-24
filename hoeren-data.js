@@ -144,11 +144,11 @@ const HOREN_MT1 = [
 
 const HOREN_MT2 = [
   { ...TEMPLATE_HOEREN[0],
-    instructions: 'Sie hören ein Gespräch zwischen den Studierenden Sandra und Julius...',
+    instructions: 'Sie hören ein Gespräch zwischen den Studierenden Sandra und Julius, die sich zufällig vor der Tür zu Professor Dr. Kruses Büro treffen. Sie hören das Gespräch einmal. Ergänzen Sie beim Hören die fünf leeren Felder in der Tabelle. Schreiben Sie pro Feld maximal 2 Wörter.',
     title: 'Aufgabe 1: Gespräch vor Professor Dr. Kruses Büro',
     mediaType: 'audio',
     mediaUrl: 'media/mt2_exercice_t1.mp3',
-    consigneUrl: 'media/mt2_consigne_t1.mp3', // Pointe vers le fichier que vous venez d'uploader
+    consigneUrl: 'media/mt2_consigne_t1.mp3',
     questions: [
       { q: 'Sandra arbeitet bei Professor Dr. Kruse an (1):', correct: 'Doktorarbeit / Dissertation' },
       { q: 'Dienstag Vormittag - Vorlesung in (2):', correct: 'Soziologie' },
@@ -158,6 +158,7 @@ const HOREN_MT2 = [
     ]
   }
 ];
+
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
