@@ -537,52 +537,63 @@ function renderKurzAntwort(task, test, body){
       `;
       body.innerHTML = html;
     } else {
-      let html = `
-        <div class="passage" style="max-width: 800px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-          <h3 style="margin-bottom: 20px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Nutzung der Universitätsbibliothek</h3>
-          <div style="border: 1px solid #b5b5b5; display: flex; flex-direction: column;">
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten:</div>
-              <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 8.00 bis 24.00 Uhr</div>
-              <div style="font-size: 0.95rem; color: #333;">Samstag und Sonntag 8.00 bis 23.00 Uhr</div>
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Nutzung der Schließfächer:</div>
-              <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">Montag bis Sonntag</div>
-              <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten Bibliothekscafé:</div>
-              <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 10.00 bis 18.00 Uhr</div>
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Erlaubte Getränke in der Bibliothek:</div>
-              <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Maximale Ausleihfrist für Bücher:</div>
-              <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Strafgebühr bei verspäteter Bücherrückgabe:</div>
-              <div style="font-size: 0.95rem; color: #333;">Fünf Euro pro Buch pro Tag</div>
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Nicht ausleihbare Bücher:</div>
-              <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-            </div>
-            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Fernleihe:</div>
-              <div style="font-size: 0.95rem; color: #333;">Bücher kommen innerhalb von zwei bis drei Tagen</div>
-            </div>
-            <div style="padding: 12px 15px;">
-              <div style="font-weight: bold; margin-bottom: 4px;">Lernräume für Lerngruppen:</div>
-              <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">2. Stock,</div>
-              <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-            </div>
+            let html = `
+        <div class="passage" style="max-width: 900px; margin: 0 auto; background: #fff; color: #000; padding: 15px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 15px; font-size: 1rem; border-bottom: 2px solid #333; padding-bottom: 8px;">
+            Sandra arbeitet bei Professor Dr. Kruse an (1):<br> 
+            <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Max. 2 Wörter..." style="width: 100%; max-width: 300px; padding: 6px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem; margin-top: 5px;">
+          </h3>
+          <div style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
+            <table style="width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+              <thead>
+                <tr style="background: #f4f6f8; border-bottom: 2px solid #b5b5b5;">
+                  <th style="border: 1px solid #b5b5b5; padding: 8px; width: 15%;"></th>
+                  <th style="border: 1px solid #b5b5b5; padding: 8px; width: 21%;">Dienstag</th>
+                  <th style="border: 1px solid #b5b5b5; padding: 8px; width: 21%;">Mittwoch</th>
+                  <th style="border: 1px solid #b5b5b5; padding: 8px; width: 21%;">Donnerstag</th>
+                  <th style="border: 1px solid #b5b5b5; padding: 8px; width: 22%;">Freitag</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; font-weight: bold; background: #f9f9f9;">Vormittag</td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top;">
+                    Vorlesung in:<br><br>
+                    <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="(2) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                  </td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; background: #fafafa;"></td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top; font-size: 0.8rem;">
+                    Treffen Arbeitsgruppe<br>(Präsentation besprechen)
+                  </td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top;">
+                    Kurs in:<br><br>
+                    <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="(5) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; font-weight: bold; background: #f9f9f9;">Nachmittag</td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top; font-size: 0.8rem;">
+                    Abgabe der Seminararbeit bei Prof. Kruse!<br><br>
+                    Problem:<br>
+                    <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="(3) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                  </td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top; font-size: 0.8rem;">
+                    Arbeit in der Buchhandlung
+                  </td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top;">
+                    Klausur in:<br><br>
+                    <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="(4) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                  </td>
+                  <td style="border: 1px solid #b5b5b5; padding: 8px; vertical-align: top; font-size: 0.8rem;">
+                    Geburtstagsfeier Vater
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       `;
+
       body.innerHTML = html;
     }
   } else if(task.teil === 5) {
