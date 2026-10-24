@@ -479,53 +479,112 @@ function renderTask(){
 function renderKurzAntwort(task, test, body){
   const a = getBucket(test, task);
   if(task.teil === 1) {
-    let html = `
-      <div class="passage" style="max-width: 800px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
-        <h3 style="margin-bottom: 20px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Nutzung der Universitätsbibliothek</h3>
-        <div style="border: 1px solid #b5b5b5; display: flex; flex-direction: column;">
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten:</div>
-            <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 8.00 bis 24.00 Uhr</div>
-            <div style="font-size: 0.95rem; color: #333;">Samstag und Sonntag 8.00 bis 23.00 Uhr</div>
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Nutzung der Schließfächer:</div>
-            <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">Montag bis Sonntag</div>
-            <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten Bibliothekscafé:</div>
-            <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 10.00 bis 18.00 Uhr</div>
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Erlaubte Getränke in der Bibliothek:</div>
-            <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Maximale Ausleihfrist für Bücher:</div>
-            <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Strafgebühr bei verspäteter Bücherrückgabe:</div>
-            <div style="font-size: 0.95rem; color: #333;">Fünf Euro pro Buch pro Tag</div>
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Nicht ausleihbare Bücher:</div>
-            <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
-          </div>
-          <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Fernleihe:</div>
-            <div style="font-size: 0.95rem; color: #333;">Bücher kommen innerhalb von zwei bis drei Tagen</div>
-          </div>
-          <div style="padding: 12px 15px;">
-            <div style="font-weight: bold; margin-bottom: 4px;">Lernräume für Lerngruppen:</div>
-            <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">2. Stock,</div>
-            <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+    if(test.id === 2) {
+      // Tableau spécifique pour Modelltest 2 (Sandra et Julius)
+      let html = `
+        <div class="passage" style="max-width: 900px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 20px; font-size: 1.1rem; border-bottom: 2px solid #333; padding-bottom: 8px;">
+            Sandra arbeitet bei Professor Dr. Kruse an (1): 
+            <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Max. 2 Wörter..." style="width: 250px; padding: 6px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem; margin-left: 10px;">
+          </h3>
+          <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.95rem;">
+            <thead>
+              <tr style="background: #f4f6f8; border-bottom: 2px solid #b5b5b5;">
+                <th style="border: 1px solid #b5b5b5; padding: 10px; width: 15%;"></th>
+                <th style="border: 1px solid #b5b5b5; padding: 10px; width: 21%;">Dienstag</th>
+                <th style="border: 1px solid #b5b5b5; padding: 10px; width: 21%;">Mittwoch</th>
+                <th style="border: 1px solid #b5b5b5; padding: 10px; width: 21%;">Donnerstag</th>
+                <th style="border: 1px solid #b5b5b5; padding: 10px; width: 22%;">Freitag</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; font-weight: bold; background: #f9f9f9;">Vormittag</td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top;">
+                  Vorlesung in:<br><br>
+                  <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="(2) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                </td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; background: #fafafa;"></td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top; font-size: 0.85rem;">
+                  Treffen Arbeitsgruppe<br>(Präsentation besprechen)
+                </td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top;">
+                  Kurs in:<br><br>
+                  <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="(5) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                </td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; font-weight: bold; background: #f9f9f9;">Nachmittag</td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top; font-size: 0.85rem;">
+                  Abgabe der Seminararbeit bei Prof. Kruse!<br><br>
+                  Problem:<br>
+                  <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="(3) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                </td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top; font-size: 0.85rem;">
+                  Arbeit in der Buchhandlung
+                </td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top;">
+                  Klausur in:<br><br>
+                  <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="(4) Eingeben..." style="width: 100%; padding: 6px; border: 1px solid #888; border-radius: 4px;">
+                </td>
+                <td style="border: 1px solid #b5b5b5; padding: 10px; vertical-align: top; font-size: 0.85rem;">
+                  Geburtstagsfeier Vater
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      `;
+      body.innerHTML = html;
+    } else {
+      let html = `
+        <div class="passage" style="max-width: 800px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+          <h3 style="margin-bottom: 20px; font-size: 1.2rem; border-bottom: 2px solid #333; padding-bottom: 8px;">Nutzung der Universitätsbibliothek</h3>
+          <div style="border: 1px solid #b5b5b5; display: flex; flex-direction: column;">
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten:</div>
+              <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 8.00 bis 24.00 Uhr</div>
+              <div style="font-size: 0.95rem; color: #333;">Samstag und Sonntag 8.00 bis 23.00 Uhr</div>
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Nutzung der Schließfächer:</div>
+              <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">Montag bis Sonntag</div>
+              <input type="text" class="kurz-input" data-qi="0" value="${escapeHtml(a[0]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Öffnungszeiten Bibliothekscafé:</div>
+              <div style="font-size: 0.95rem; color: #333;">Montag bis Freitag 10.00 bis 18.00 Uhr</div>
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Erlaubte Getränke in der Bibliothek:</div>
+              <input type="text" class="kurz-input" data-qi="1" value="${escapeHtml(a[1]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Maximale Ausleihfrist für Bücher:</div>
+              <input type="text" class="kurz-input" data-qi="2" value="${escapeHtml(a[2]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Strafgebühr bei verspäteter Bücherrückgabe:</div>
+              <div style="font-size: 0.95rem; color: #333;">Fünf Euro pro Buch pro Tag</div>
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Nicht ausleihbare Bücher:</div>
+              <input type="text" class="kurz-input" data-qi="3" value="${escapeHtml(a[3]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+            </div>
+            <div style="border-bottom: 1px solid #b5b5b5; padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Fernleihe:</div>
+              <div style="font-size: 0.95rem; color: #333;">Bücher kommen innerhalb von zwei bis drei Tagen</div>
+            </div>
+            <div style="padding: 12px 15px;">
+              <div style="font-weight: bold; margin-bottom: 4px;">Lernräume für Lerngruppen:</div>
+              <div style="font-size: 0.95rem; color: #333; margin-bottom: 8px;">2. Stock,</div>
+              <input type="text" class="kurz-input" data-qi="4" value="${escapeHtml(a[4]||'')}" placeholder="Antwort eingeben (max. 2 Wörter)..." style="width: 100%; padding: 8px; border: 1px solid #888; border-radius: 4px; font-size: 0.95rem;">
+            </div>
           </div>
         </div>
-      </div>
-    `;
-    body.innerHTML = html;
+      `;
+      body.innerHTML = html;
+    }
   } else if(task.teil === 5) {
     let html = `
       <div class="passage" style="max-width: 900px; margin: 0 auto; background: #fff; color: #000; padding: 25px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
@@ -685,15 +744,15 @@ function renderMCHoeren(task, test, body){
 
 // Aufgaben à réponse libre : mots-clés acceptés + solution officielle
 const FREI = {
-  1: { labels:['Nutzung der Schließfächer','Erlaubte Getränke in der Bibliothek','Maximale Ausleihfrist für Bücher','Nicht ausleihbare Bücher','Lernräume für Lerngruppen'],
-       keys:[["10 uhr","22 uhr","22.00","münze","über nacht"],["wasser"],["4 wochen","vier wochen","12 wochen","verlängerung"],["lexika","lexikon"],["bereich g"]],
-       sol:['bis 10 Uhr abends / bis 22 Uhr / mit 2-Euro-Münze / nicht über Nacht','Wasser (in Flaschen)','4 Wochen / 4 Wochen plus 2 x 4 Wochen / 4 Wochen plus Verlängerung / 12 Wochen','Lexika','Bereich G'] },
+  1: { labels:['Sandra arbeitet bei Professor Dr. Kruse an','Dienstag Vormittag - Vorlesung in','Dienstag Nachmittag - Problem','Donnerstag Nachmittag - Klausur in','Freitag Vormittag - Kurs in'],
+       keys:[["doktorarbeit","dissertation"],["soziologie"],["drucker kaputt","drucker defekt","drucker"],["statistik"],["statistik"]],
+       sol:['Doktorarbeit / Dissertation','Soziologie','Drucker kaputt / Drucker defekt','Statistik','Statistik'] },
   2: { labels:['Herr Schuster – Übergeordnetes Ziel','Herr Schuster – Konkretes Vorgehen','Frau Bach – Übergeordnetes Ziel','Frau Bach – Konkretes Vorgehen'],
        keys:[["minimal","konsumgesellschaft","glücklich"],["kleidung"],["müll"],["recycl","verpackung","wirklich brauchen","nur dann"]],
        sol:['minimalistisch leben / von der Konsumgesellschaft distanzieren / glücklich sein','(ein Jahr) keine neue Kleidung einkaufen','Müllproduktion reduzieren','Verpackungen verwenden, die man recyceln kann / nur dann etwas kaufen, wenn wir es wirklich brauchen'] },
   5: { labels:['Grund für Anosmie bei jungen Menschen','Riechzellen können sich nicht erneuern, wenn','Andere Form von Störung (Beispiel)','Früher Hinweis auf Parkinson'],
        keys:[["hindernis","blockier","duftstoffe gelangen","schnupfen","rauch"],["viren","stammzellen"],["überempfindlich","veränderte wahrnehmung","wahrnehmung von duft"],["reduziert","vermindert","schlechter"]],
-       sol:['Hindernisse in der Nase blockieren Duftstoffe / Duftstoffe gelangen nicht zu Riechzellen / Schnupfen / Rauchen','(Schnupfen)viren Stammzellen töten / Stammzellen tot sind','Überempfindlichkeit gegenüber Duftstoffen / veränderte Wahrnehmung von Duftreizen','reduziertes Riechvermögen'] }
+       sol:['Hindernisse in der Nase blockieren Duftstoffe / Duftstoffe gelangen nicht zu Riechzellen / Schnupfen / Rauchen','(Schnupfen)viren Stammzellen töten / Stammzellen tot sind','Überempfindlichkeit gegenüber Duftstoffen / veränderte Wahrnehmung von Geruchsreizen','reduziertes Riechvermögen'] }
 };
 
 // Aufgaben où l'on marque des phrases / mots
@@ -851,4 +910,3 @@ showTestSelect();
 </script>
 </body>
 </html>
-
