@@ -1566,6 +1566,162 @@ const MT10 = [
     ]
   }
 ];
+const MT11 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Lückentext. Wählen Sie für jede Lücke die einzige passende Option aus. Für jede Lücke gibt es genau eine richtige Lösung.',
+    title:'Wie gefährdet sind Europas Bestäuberinsekten?',
+    segments:[
+      'Bestäuberinsekten wie Wildbienen, Schmetterlinge und Schwebfliegen spielen eine unverzichtbare Rolle für das ökologische Gleichgewicht sowie für die menschliche Nahrungsmittelproduktion. Dennoch schlagen Umweltforscher und Biologen seit Jahren Alarm, da viele dieser Arten von einem dramatischen Rückgang betroffen sind. Eine umfassende europäische Studie hat nun ',
+      ', dass nahezu ein Drittel aller Wildbienenarten in ihrem Bestand bedroht oder zumindest stark gefährdet ist. Als Hauptursachen gelten der intensiver werdende Einsatz von Pestiziden, der Verlust natürlicher Lebensräume sowie die zunehmende Bebauung von Grünflächen. Um dem Artensterben entgegenzuwirken, fordern Wissenschaftler strengere Umweltauflagen und eine grundlegende Umgestaltung der Agrarwirtschaft. Es reicht jedoch nicht aus, lediglich Schutzgebiete auszuweisen; vielmehr müssen auch in von Menschen genutzten Landschaften wieder vernetzte Lebensräume geschaffen werden. Experten betonen, dass ohne ein rechtzeitiges Gegensteuern schwerwiegende ',
+      ' für die Ernteerträge und das gesamte Ökosystem drohen. Wissenschaftliche Teams ',
+      ' in einer lang angelegten Feldstudie verschiedene Maßnahmen zur Förderung der Biodiversität an, um herauszufinden, welche Strukturen den Insekten am effektivsten helfen. Dabei zeigte sich, dass schon kleine, ungestörte Blühstreifen am Rande landwirtschaftlicher Nutzflächen den Insektenbestand spürbar stabilisieren können. Die Ergebnisse zeigen eindeutig, dass gezieltes Handeln noch immer eine positive Wirkung ',
+      ' kann. Schließlich wird hervorgehoben, dass der Erhalt dieser Insekten eine Aufgabe ist, bei der sowohl die Politik als auch die breite Öffentlichkeit eng zusammenarbeiten müssen, da die ökologischen Folgen sonst irreparabel sein ',
+      '.'
+    ],
+    gaps:[
+      {options:['vermutet','festgestellt','veranlasst','angeordnet'], correct:1},
+      {options:['Ausfallzeiten','Begleiterscheinungen','Konsequenzen','Bedingungen'], correct:2},
+      {options:['wendeten','richteten','unterzogen','überwachten'], correct:0},
+      {options:['herstellen','entfalten','auslösen','hinterlassen'], correct:1},
+      {options:['durften','könnten','müssten','sollten'], correct:1}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge. Es gibt genau eine richtige Reihenfolge.',
+    title:'Klimaschutz: Ländervergleich zeigt Verlierer und Gewinner',
+    correctOrder:[2,3,0,1,4],
+    items:[
+      'Sollte dieser besorgniserregende Trend in den Emissionen nicht umgehend gestoppt werden, drohen den betroffenen Staaten enorme wirtschaftliche Ausfälle sowie empfindliche Sanktionen im Rahmen internationaler Abkommen. Ein rasches Umdenken der politischen Führung ist daher unumgänglich.',
+      'Ganz anders stellt sich die Situation in jenen Ländern dar, die resolut auf den Ausbau erneuerbarer Energien setzen. Durch die konsequente Förderung ökologischer Innovationen gelingt es ihnen, den CO₂-Ausstoß drastisch zu reduzieren und zeitgleich nachhaltige Arbeitsplätze der Zukunft zu schaffen.',
+      'Ein weltweiter Leistungsvergleich zum Klimaschutz offenbart gravierende Disparitäten bei den nationalen Dekarbonisierungsstrategien. Während einige Staaten durch ehrgeizige Gesetzgebungen Pionierarbeit leisten, verharren andere weiterhin in veralteten, fossilen Wirtschaftsstrukturen.',
+      'Ein Hauptgrund für das schlechte Abschneiden der Schlusslichter liegt im schleppenden Abschied von Kohle und Öl. Trotz internationaler Klimaverpflichtungen halten diese Regierungen aus Sorge vor kurzfristigen Wohlstandsverlusten an fossilen Subventionen fest.',
+      'Diese eklatante Kluft verdeutlicht, dass globale Klimaziele nur dann erreichbar sind, wenn ein verbindlicher Technologietransfer stattfindet und Nachzügler durch gezielte Anreize zum Umsteuern bewegt werden.'
+    ],
+    shuffledStart:[1,4,0,3,2]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Entscheiden Sie, welche Lösung passt. Für jede Frage gibt es genau eine richtige Lösung.',
+    title:'Unbekannte Virosphäre: Mehr als 40.000 neue RNA-Viren in unseren Städten',
+    passage:[
+      '(1) Obwohl Viren omnipräsente Bestandteile unseres Ökosystems darstellen, galt ein Großteil der zirkulierenden viralen Diversität bislang als unerforschte „dunkle Materie“. Traditionelle virologische Untersuchungen konzentrierten sich primär auf pathogenesebezogene Erreger in klinischen Kontexten. Erst neuere Methoden der Hochdurchsatz-Sequenzierung ermöglichen die systematische Erfassung Umwelt-assoziierter Genome. Ein internationales Konsortium unter Leitung von Forschenden der East China Normal University untersuchte nun in einer umfassenden metatranskriptomischen Analyse städtische Mikrobiome. In Umweltproben aus 102 Metropolen weltweit wiesen die Wissenschaftler über 54.000 RNA-Viren nach, von denen mehr als 40.000 – sprich rund 77 Prozent – der Fachwelt bis dahin völlig unbekannt waren. Dieser Befund belegt eindrücklich, dass insbesondere dicht besiedelte urbane Räume als artenreiche Reservoire neuartiger genetischer Virusstrukturen fungieren.',
+      '(2) Um die gewaltige Datenmenge genomischer Fragmente präzise zu strukturieren, griffen die Forschenden auf innovative bioinformatische Werkzeuge wie das Programm geNomad zurück. Die wesentliche Herausforderung bestand darin, aus unzähligen RNA-Sequenzen mikrobiellen Ursprungs jene zu isolieren, die zweifelsfrei viralen Genomen zuzuordnen sind. Das Augenmerk galt hierbei der Identifizierung der RNA-abhängigen RNA-Polymerase (RdRP). Dieses Enzym ist für die Replikation sämtlicher RNA-Viren essenziell und dient in der Taxonomie als universeller phylogenetischer Marker. Überraschenderweise offenbarten die Analysen zwei gänzlich neue Virenstämme: Das Taxon upv.p.001 ließ sich kontinentalübergreifend auf der Nordhalbkugel in zahlreichen Ballungsräumen nachweisen, wohingegen upv.p.002 geografisch strenger auf spezifische Regionen Nordamerikas und Europas beschränkt blieb.',
+      '(3) Die Verteilung der nachgewiesenen RNA-Viren variiert erheblich zwischen den unterschiedlichen städtischen Habitaten. Während auf stark frequentierten Oberflächen des öffentlichen Personennahverkehrs wie Entwertungsautomaten, Haltestellen oder Türklinken vorrangig stabile, an Umweltbedingungen angepasste Partikel identifiziert wurden, erwies sich das kommunale Abwasser als das unangefochtene Zentrum der Virenvielfalt. Diese enorme Konzentration erklärt sich durch den kontinuierlichen Eintrag menschlicher und tierischer Fäkalien. Ähnlich wie bereits während der COVID-19-Pandemie demonstrieren diese Befunde, dass die Abwasseranalyse ein hocheffektives Instrument des epidemiologischen Monitorings darstellt, da sie das mikrobiologische Geschehen einer gesamten urbanen Population zeitnah und repräsentativ abbildet.',
+      '(4) Trotz der beeindruckenden Zahlen betonen die beteiligten Wissenschaftler, dass die Entdeckung zehntausender neuer Viren keineswegs mit einer unmittelbaren epidemiologischen Bedrohung gleichzusetzen ist. Eine bioinformatische Wirtsbestimmung ergab, dass lediglich ein Bruchteil der identifizierten Sequenzen überhaupt in der Lage ist, Wirbeltiere oder Menschen zu infizieren. Mehr als die Hälfte der zugeordneten Genome entfällt vielmehr auf sogenannte Bakteriophagen – Viren, die ausschließlich Bakterien befallen und somit eine Schlüsselrolle bei der Regulierung bakterieller Populationen im städtischen Mikrobiom spielen. Die Gegenwart dieser Erreger ist somit primär ein Indikator für ökologische Gleichgewichtsprozesse und keineswegs ein Beleg für drohende Infektionswellen.',
+      '(5) Dennoch eröffnet die systematische Kartierung der städtischen Virosphäre bahnbrechende Perspektiven für die präventive Infektionsmedizin. Durch die Erstellung umfassender genomischer Referenzdatenbanken können künftige Zoonosen – also das Überspringen von Krankheitserregern vom Tier auf den Menschen – in einem extrem frühen Stadium erkannt werden. Anstatt erst bei Ausbruch klinischer Symptome zu reagieren, erlaubt das kontinuierliche Umwelt-Monitoring ein frühzeitiges Erfassen von Mutationsmustern und Selektionsdruck. Allerdings warnen Experten vor voreiligen Schlüssen: Da die derzeitigen Ergebnisse nahezu ausschließlich auf bioinformatischen Berechnungen basieren, bedarf es noch aufwendiger zellbiologischer und experimenteller Validierungen im Labor, um das tatsächliche biologische Verhalten dieser Viren verlässlich zu bewerten.',
+      '(6) Zusammenfassend verdeutlicht die Studie, dass Städte keineswegs sterile Betonwüsten sind, sondern dynamische, biologisch hochkomplexe Ökosysteme. Die Identifizierung von über 40.000 neuen RNA-Viren markiert erst den Anfang der Entschlüsselung der urbanen Mikrofauna. Ein tieferes Verständnis dieser mikrobiellen Netzwerke schützt nicht nur vor zukünftigen Pandemien, sondern korrigiert auch das überholte Paradigma, dass urbane Hygiene das vollständige Erradizieren sämtlicher Mikroorganismen zum Ziel haben müsse.'
+    ],
+    questions:[
+      { q:'Welche Aussage fasst den Inhalt von Absatz 1 am besten zusammen?', options:[
+        'Moderne Sequenzierungsverfahren offenbaren eine unerwartet hohe Vielfalt bislang unbekannter RNA-Viren in Städten.',
+        'Medizinische Studien konzentrierten sich in der Vergangenheit fälschlicherweise nur auf städtische Umweltproben.',
+        'Die Mehrheit aller existierenden Virenarten konnte durch die Untersuchung in 102 Metropolen vollständig entschlüsselt werden.',
+        'In städtischen Ökosystemen kommen deutlich weniger Krankheitserreger vor als in ländlichen Regionen.'
+      ], correct:0 },
+      { q:'Laut Absatz 2 nutzten die Forschenden das Bioinformatik-Tool geNomad, um ...', options:[
+        'die genaue geografische Herkunft der Proben automatisiert zu kartieren.',
+        'das Enzym RdRP künstlich herzustellen und dessen Vermehrung zu beschleunigen.',
+        'virale Erbinformationen gezielt aus der Gesamtheit des genetischen Materials herauszufiltern.',
+        'nachzuweisen, dass das Taxon upv.p.002 auf der Südhalbkugel dominiert.'
+      ], correct:2 },
+      { q:'In Absatz 3 wird erklärt, dass das kommunale Abwasser deshalb besonders virenreich ist, weil ...', options:[
+        'auf Oberflächen von Fahrkartenautomaten Viren schneller absterben als in Flüssigkeiten.',
+        'Ausscheidungen von Mensch und Tier kontinuierlich in die Kanalisation gelangen.',
+        'dort chemische Desinfektionsmittel die genetische Struktur der Viren verändern.',
+        'die Probenentnahme im Abwasser technisch einfacher durchzuführen war als an Haltestellen.'
+      ], correct:1 },
+      { q:'Was sagt Absatz 4 über das Gefahrenpotenzial der neu entdeckten Viren aus?', options:[
+        'Die hohe Anzahl an Bakteriophagen stellt eine unmittelbare Bedrohung für das menschliche Immunsystem dar.',
+        'Der Großteil der Viren befällt Bakterien und ist für Menschen gesundheitlich unbedenklich.',
+        'Fast alle identifizierten RNA-Viren können leicht auf Säugetiere übertragen werden.',
+        'Urbane Bakterienpopulationen werden durch die Entdeckung neuer Viren komplett zerstört.'
+      ], correct:1 },
+      { q:'Welche Bedeutung wird der Kartierung der Virosphäre in Absatz 5 zugeschrieben?', options:[
+        'Sie ersetzt in Zukunft zeitintensive Laboruntersuchungen und klinische Studien vollständig.',
+        'Sie erlaubt das frühzeitige Erkennen potenzieller Zoonosen noch vor dem Auftreten von Symptomen.',
+        'Sie beweist, dass Mutationen von Viren durch städtische Einflüsse verhindert werden können.',
+        'Sie dient primär der Erforschung historischer Infektionskrankheiten bei Wildtieren.'
+      ], correct:1 },
+      { q:'Welche Kernbotschaft vermittelt Absatz 6 bezüglich städtischer Hygiene?', options:[
+        'Städtische Räume müssen durch verstärkten Chemikalieneinsatz keimfrei gehalten werden.',
+        'Die vollständige Vernichtung aller Mikroorganismen ist weder realistisch noch wissenschaftlich sinnvoll.',
+        'Urbane Ökosysteme sind aufgrund der hohen Virenlast für den Menschen dauerhaft unbewohnbar.',
+        'Hygienevorschriften in öffentlichen Verkehrsmitteln müssen dringend verschärft werden.'
+      ], correct:1 },
+      { q:'Das Hauptanliegen des gesamten Textes ist es, ...', options:[
+        'vor der unmittelbaren Gefahr einer weltweiten Pandemie durch städtisches Abwasser zu warnen.',
+        'die Funktionsweise des bioinformatischen Programms geNomad detailliert zu erklären.',
+        'über die wissenschaftliche Relevanz und die Erkenntnisse der urbanen Virenforschung zu informieren.',
+        'den Einsatz von Desinfektionsmitteln im öffentlichen Personennahverkehr kritisch zu hinterfragen.'
+      ], correct:2 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1–4 den Aussagen unten zu. Die Zahlen beziehen sich immer auf den nachfolgenden Satz. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Kommentar eines Experten: Dermatologische Geschlechterforschung',
+    passageText:`Lange Zeit ging die medizinische Praxis davon aus, dass die menschliche Haut unabhängig vom Geschlecht identisch strukturiert sei und auf Pflegeprodukte wie auch dermatologische Therapien analog reagiere. <strong>[1] Dass sich die Haut von Männern und Frauen jedoch in Dicke, Talgproduktion und Alterungsprozess grundlegend unterscheidet, ist in der Dermatologie mittlerweile unumstößlich bewiesen.</strong> Die männliche Epidermis ist aufgrund des höheren Testosteronspiegels im Schnitt um rund 20 Prozent dicker und kollagendichter als die weibliche, was ihr eine höhere Widerstandskraft verleiht. <strong>[2] Dennoch verzichten erschreckend viele Männer nach wie vor auf eine adäquate UV-Protektion sowie auf eine systematische Hautpflege, da sie diese Maßnahmen fälschlicherweise als reine Kosmetik abtun.</strong> Dies führt dazu, dass bösartige Hautveränderungen bei Männern oft erst in deutlich fortgeschritteneren Stadien diagnostiziert werden.<br><br>Frauen hingegen neigen ab den Wechseljahren durch den signifikanten Östrogenabfall zu einem rascheren Kollagenabbau und starker Trockenheit. <strong>[3] Ein künftiges Szenario ist, dass personalisierte Hautpflegemittel, die exakt auf das hormonelle Profil des Individuums abgestimmt sind, die herkömmliche Einheitskosmetik vollständig vom Markt verdrängen werden.</strong> <strong>[4] Angesichts dieser wissenschaftlichen Erkenntnisse ist es besonders wichtig, jeden Anwendungsbereich in der Pharmazie gezielt nach Geschlechtern zu untersuchen und klinische Studien anzupassen, um die spezifischen Heilungschancen wirklich zu maximieren.</strong> Der Einsatz rein geschlechtsspezifischer Wirkstoffkomplexe in der breiten Medizin bleibt vorläufig ein Zukunftsmodell.`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte bedauert etwas.',
+      'Der Experte begrüßt etwas.',
+      'Der Experte empfiehlt etwas.',
+      'Der Experte kritisiert etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte vermutet etwas.',
+      'Der Experte warnt vor etwas.',
+      'Der Experte zweifelt an etwas.'
+    ],
+    correct:[1, 0, 4, 2]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zur Klassischen Optik, zur Quantenoptik, zu beiden oder gar nicht passt. Für jede Aussage gibt es genau eine richtige Lösung. Die Aussagen folgen nicht dem Textverlauf.',
+    title:'Quantenlicht für den Alltag: Eine Revolution in der Halbleitertechnologie',
+    passage:'Licht begleitet die Menschheit seit jeher, doch das physikalische Verständnis der optischen Phänomene hat sich im Laufe der Jahrhunderte grundlegend gewandelt. Während die traditionelle Optik Licht als eine kontinuierliche elektromagnetische Welle beschreibt, betrachtet die moderne Quantenoptik Licht als ein Ensemble diskreter Energiepakete, den sogenannten Photonen. Diese dualistische Natur des Lichtes stellt nicht nur ein theoretisches Fundament dar, sondern eröffnet neuartige technologische Anwendungshorizonte, insbesondere bei der Miniaturisierung von Halbleiterbauelementen für alltägliche Endgeräte wie Smartphones. In konventionellen optischen Systemen stoßen Ingenieure zunehmend an physikalische Leistungsgrenzen. Herkömmliche Lichtquellen erzeugen thermisches oder kohärentes Wellenlicht, das aufgrund verfahrensbedingter Beugungseffekte in seiner Bündelung limitiert ist. Die Quantenoptik hingegen macht sich Eigenschaften wie die Quantenverschränkung und die gezielte Emission einzelner Photonen zunutze. Forscherteams ist es kürzlich gelungen, winzige Quantenpunkt-Lichtquellen direkt auf Siliziumchips zu integrieren. Diese winzigen Strukturen ermöglichen eine nahezu verlustfreie Informationsübertragung auf kleinstem Raum und versprechen eine Energieeinsparung bei Mikroprozessoren von bis zu sechzig Prozent. Trotz dieser eklatanten Performanzvorteile steht die kommerzielle Marktreife von quantenoptischen Alltagsprodukten vor beträchtlichen Hürden. Während die klassische Optik seit Jahrzehnten auf eingespielte, kostengünstige Massenfertigungsverfahren zurückgreifen kann, erfordert die Stabilisierung von Quantenzuständen meist extrem tiefe Temperaturen nahe dem absoluten Nullpunkt. Aktuelle Forschungsarbeiten konzentrieren sich daher darauf, die Quantenemitter so zu modifizieren, dass sie auch bei Raumtemperatur verlässlich funktionieren. Erst wenn dieses fertigungstechnische Hindernis überwunden ist, wird Quantenlicht den Massenmarkt erobern. Dennoch existieren bereits Hybridsysteme, in denen klassische Linsensysteme mit neuartigen Quantensensoren kombiniert werden. Diese Symbiose erlaubt hochpräzise optische Messungen, etwa bei der biomedizinischen Bildgebung oder der Abstands- und Umgebungserkennung für autonome Fahrzeuge. Experten sind sich einig, dass nicht das Ersetzen, sondern das Zusammenspiel beider Disziplinen den technologischen Fortschritt der kommenden Dekade maßgeblich prägen wird.',
+    columns:['Klassische Optik','Quantenoptik','beide','passt nicht'],
+    items:[
+      {text:'Licht wird hierbei als eine kontinuierliche Wellenbewegung interpretiert.', correct:0},
+      {text:'Diese Technologie hat bereits ohne Einschränkungen den weltweiten Konsumgütermarkt durchdrungen.', correct:3},
+      {text:'Ihre Verfahren profitieren von bewährten und preiswerten industriellen Herstellungsverfahren.', correct:0},
+      {text:'Sie kommt in kombinierten Systemen zur hochpräzisen Erfassung von Umgebungsdaten zum Einsatz.', correct:2},
+      {text:'Sie ermöglicht eine drastische Reduktion des Energieverbrauchs in modernen integrierten Schaltkreisen.', correct:1},
+      {text:'Der Einsatz erfordert in der Praxis zwingend den ständigen Verzicht auf halbleitende Trägermaterialien.', correct:3},
+      {text:'Das grundlegende theoretische Lichtverständnis basiert auf physikalischen Gesetzmäßigkeiten.', correct:2}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen stimmen, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Ursachen des Konsumtrends, 2 Ökologische & gesellschaftliche Folgen). Vier Aussagen sind falsch oder passen nicht.',
+    title:'Elektroschrott: Warum „Fast Tech“ zum Problem wird',
+    passage:'In Analogie zur Modebranche, in der die sogenannte „Fast Fashion“ für eine beispiellose Wegwerfkultur sorgt, verzeichnet der globale Konsumgütermarkt ein drastisches Anwachsen des sogenannten „Fast Tech“-Phänomens. Darunter versteht die Wissenschaft den exzessiven Erwerb und die schnelle Entsorgung von kostengünstigen, oft impulsiv gekauften Elektronikartikeln wie Mini-LED-Lichterketten, elektronischen Einweg-Zigaretten, Billig-Kopfhörern oder kabellosem Spielzeug. Getrieben von aggressiven Vermarktungsstrategien auf sozialen Medien und extrem niedrigen Herstellungskosten sinkt die Hemmschwelle der Verbraucher radikal, technische Geräte als kurzlebige Verbrauchsgüter statt als langlebige Investitionsgüter zu betrachten. Die ökonomische Logik hinter diesem Trend basiert auf einer gezielten Verringerung der Produktlebensdauer. Viele Hersteller verzichten bewusst auf Reparaturfähigkeiten, verkleben Gehäuse oder verwenden minderwertige Materialien, sodass eine Neuanschaffung finanziell deutlich attraktiver erscheint als eine Instandsetzung. Hinzu kommt eine psychologische Obsoleszenz: Durch rasche Generationswechsel bei Design und Funktionalität wird dem Konsumenten suggeriert, sein funktionsfähiges Gerät sei veraltet. Der ständige Wunsch nach dem neuesten Gadget führt dazu, dass Millionen voll funktionsfähiger Kleingeräte nach kürzester Nutzung im Hausmüll oder in Schubladen landen. Die ökologischen und gesellschaftlichen Konsequenzen dieser Entgrenzung des Technikkonsums sind gravierend. Elektroschrott stellt bereits den am schnellsten wachsenden Abfallstrom weltweit dar. Bei der verfrühten Entsorgung gehen wertvolle Sekundärrohstoffe wie Kupfer, Gold und seltene Erden unwiederbringlich verloren, deren Abbau in den Herkunftsländern oft unter menschenunwürdigen Bedingungen und mit massiven Umweltzerstörungen einhergeht. Werden die Altgeräte zudem unsachgemäß über den Hausmüll entsorgt, gelangen Schwermetalle und giftige chemische Verbindungen in den Wirtschaftskreislauf, was erhebliche Gesundheitsrisiken für die Bevölkerung birgt und die Brandgefahr in Entsorgungsanlagen drastisch erhöht. Um dieser Entwicklung entgegenzuwirken, fordern Umweltverbände und politische Akteure strengere Regularien. Ein zentraler Ansatzpunkt liegt in der Ausweitung der Herstellerverantwortung sowie der gesetzlichen Verankerung eines „Rechts auf Reparatur“. Zudem müssten Pfandsysteme für Kleinelektronik etabliert werden, um die Sammelquoten zu steigern. Ohne ein grundlegendes Umdenken auf Konsumentenseite und verbindliche ökologische Designstandards droht die verdeckte Müllkrise der Elektronikbranche die globalen Nachhaltigkeitsziele vollkommen zu untergraben.',
+    aussagen:[
+      { key:'a', text:'[a] Aggressive Social-Media-Werbung und niedrige Preise senken die Kaufhemmung bei Kleingeräten.' },
+      { key:'b', text:'[b] Einweg-Zigaretten werden von Konsumenten primär wegen ihrer hohen Reparaturfreundlichkeit erworben.' },
+      { key:'c', text:'[c] Verklebte Gehäuse und billige Materialien machen Neuanschaffungen lohnender als Reparaturen.' },
+      { key:'d', text:'[d] Durch den Konsumtrend nimmt die weltweite Brandgefahr in Recycling- und Müllanlagen ab.' },
+      { key:'e', text:'[e] Unsachgemäße Entsorgung im Hausmüll führt zum Verlust wertvoller Rohstoffe wie Gold und Kupfer.' },
+      { key:'f', text:'[f] Der Gesetzgeber hat bereits ein flächendeckendes Pfandsystem für Kleingeräte erfolgreich etabliert.' },
+      { key:'g', text:'[g] Ausgetretene Giftstoffe und Schwermetalle gefährden die Gesundheit der Bevölkerung.' },
+      { key:'h', text:'[h] Hersteller verzichten künftig komplett auf den Einsatz digitaler Marketingstrategien.' }
+    ],
+    correctMap: { v1: 'a', v2: 'c', n3: 'e', n4: 'g' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Die Zusammenfassung folgt nicht zwangsläufig dem Textverlauf. Kreuzen Sie genau drei Sätze an, die inhaltlich falsche Informationen enthalten.',
+    title:'Eine Waffe gegen den Peitschenwurm',
+    passage:'Der Peitschenwurm (Trichuris trichiura) gehört zu den am weitesten verbreiteten Parasiten weltweit und infiziert schätzungsweise knapp eine halbe Milliarde Menschen, vorwiegend in tropischen und subtropischen Regionen mit unzureichenden hygienischen Standards. Während eine leichte Infektion oft symptomlos verläuft, führt ein chronischer Befall bei Kindern häufig zu gravierenden Entwicklungsstörungen, chronischer Anämie sowie Verhaltens- und Lernschwierigkeiten. Trotz der enormen globalen Krankheitslast galt die Peitschenwurminfektion in der pharmazeutischen Forschung lange Zeit als vernachlässigte Tropenkrankheit, da der finanzielle Anreiz für die Entwicklung neuer Wirkstoffe in einkommensschwachen Regionen weitgehend fehlt. Bislang stützte sich die medizinische Behandlung primär auf Breitband-Anthelminthika wie Mebendazol oder Albendazol. Diese Standardmedikamente weisen jedoch bei der Bekämpfung des Peitschenwurms eine alarmierend geringe Heilungsrate von oft unter 30 Prozent auf. Ein internationales Forschungskonsortium hat nun einen neuartigen Wirkstoffkomplex identifiziert, der gezielt ein spezifisches Enzym im Energiestoffwechsel der Parasiteneier blockiert. In klinischen Studien der Phase II konnte durch die Kombinationstherapie dieses neuen Präparats mit Oxantel eine Entwurmungsquote von über 85 Prozent erreicht werden, ohne dass schwerwiegende Nebenwirkungen auftraten. Neben dem rein pharmakologischen Durchbruch betonen Epidemiologen jedoch, dass Medikamente allein das Problem nicht nachhaltig lösen können. Die Infektion erfolgt oral über Nahrung oder Trinkwasser, das mit mikroskopisch kleinen Wurmeiern aus Fäkalien kontaminiert ist. Ohne flächendeckende Investitionen in die sanitäre Infrastruktur und sauberes Trinkwasser bleibt das Risiko einer Reinfektion unmittelbar nach der medikamentösen Entwurmung extrem hoch. Der Schlüssel zur endgültigen Ausrottung der Erkrankung liegt daher in einer synergetischen Kombination aus gezielter Massenmedikation an Schulen und strukturellen Hygienemaßnahmen vor Ort.',
+    graphicData:[{year:'Kleinkinder (0–5 J.): niedriger Sanitätsstandard',val:38},{year:'Kleinkinder (0–5 J.): verbesserter Sanitätsstandard',val:8},{year:'Schulkinder (6–15 J.): niedriger Sanitätsstandard',val:72},{year:'Schulkinder (6–15 J.): verbesserter Sanitätsstandard',val:14},{year:'Erwachsene (>15 J.): niedriger Sanitätsstandard',val:24},{year:'Erwachsene (>15 J.): verbesserter Sanitätsstandard',val:5}],
+    graphicCaption:'Infektionsrate mit Trichuris trichiura nach Altersgruppen und Sanitätsstandard (in % der Bevölkerung)',
+    graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 290" width="100%" role="img" aria-label="Balkendiagramm: Infektionsrate mit Trichuris trichiura nach Altersgruppen und Sanitätsstandard" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="288" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="22" font-size="13" text-anchor="middle" font-weight="700" fill="currentColor">Infektionsrate mit Trichuris trichiura nach Altersgruppen</text><text x="260" y="39" font-size="13" text-anchor="middle" font-weight="700" fill="currentColor">und Sanitätsstandard (in % der Bevölkerung)</text><line x1="130" y1="56" x2="130" y2="236" stroke="#64748b" stroke-width="1"/><line x1="202" y1="56" x2="202" y2="236" stroke="#e5e7eb" stroke-width="1"/><line x1="274" y1="56" x2="274" y2="236" stroke="#e5e7eb" stroke-width="1"/><line x1="346" y1="56" x2="346" y2="236" stroke="#e5e7eb" stroke-width="1"/><line x1="418" y1="56" x2="418" y2="236" stroke="#e5e7eb" stroke-width="1"/><line x1="490" y1="56" x2="490" y2="236" stroke="#e5e7eb" stroke-width="1"/><text x="10" y="86" font-size="12" font-weight="700" fill="currentColor">Kleinkinder</text><text x="10" y="100" font-size="11" fill="currentColor">(0–5 J.)</text><rect x="130" y="70" width="136.8" height="16" rx="2" fill="#b91c1c"/><text x="272" y="82" font-size="11" fill="currentColor">38 %</text><rect x="130" y="90" width="28.8" height="16" rx="2" fill="#0f766e"/><text x="164" y="102" font-size="11" fill="currentColor">8 %</text><text x="10" y="146" font-size="12" font-weight="700" fill="currentColor">Schulkinder</text><text x="10" y="160" font-size="11" fill="currentColor">(6–15 J.)</text><rect x="130" y="130" width="259.2" height="16" rx="2" fill="#b91c1c"/><text x="395" y="142" font-size="11" fill="currentColor">72 %</text><rect x="130" y="150" width="50.4" height="16" rx="2" fill="#0f766e"/><text x="186" y="162" font-size="11" fill="currentColor">14 %</text><text x="10" y="206" font-size="12" font-weight="700" fill="currentColor">Erwachsene</text><text x="10" y="220" font-size="11" fill="currentColor">(&gt;15 J.)</text><rect x="130" y="190" width="86.4" height="16" rx="2" fill="#b91c1c"/><text x="222" y="202" font-size="11" fill="currentColor">24 %</text><rect x="130" y="210" width="18" height="16" rx="2" fill="#0f766e"/><text x="154" y="222" font-size="11" fill="currentColor">5 %</text><text x="130" y="252" font-size="11" text-anchor="middle" fill="currentColor">0 %</text><text x="202" y="252" font-size="11" text-anchor="middle" fill="currentColor">20 %</text><text x="274" y="252" font-size="11" text-anchor="middle" fill="currentColor">40 %</text><text x="346" y="252" font-size="11" text-anchor="middle" fill="currentColor">60 %</text><text x="418" y="252" font-size="11" text-anchor="middle" fill="currentColor">80 %</text><text x="490" y="252" font-size="11" text-anchor="middle" fill="currentColor">100 %</text><rect x="60" y="266" width="10" height="10" rx="1" fill="#b91c1c"/><text x="76" y="275" font-size="11" fill="currentColor">Niedriger Sanitätsstandard</text><rect x="270" y="266" width="10" height="10" rx="1" fill="#0f766e"/><text x="286" y="275" font-size="11" fill="currentColor">Verbesserter Sanitätsstandard</text></svg>`,
+    sentences:[
+      {text:'Der Peitschenwurm stellt insbesondere in tropischen Regionen eine erhebliche gesundheitliche Belastung dar und betrifft weltweit fast eine halbe Milliarde Menschen.', wrong:false},
+      {text:'Bei jüngeren Patienten löst ein dauerhafter Befall oft schwerwiegende körperliche und kognitive Folgeschäden aus.', wrong:false},
+      {text:'Obwohl die Krankheit weit verbreitet ist, galt sie in der Pharmaindustrie lange Zeit als hochprioritäres Forschungsfeld mit starker finanzieller Förderung.', wrong:true},
+      {text:'Etablierte Standardpräparate wie Mebendazol erreichen bei der Behandlung nur eine unzureichende Heilungsquote von unter einem Drittel der Fälle.', wrong:false},
+      {text:'Ein neu entwickelter Wirkstoff, der zusammen mit Oxantel eingesetzt wird, zeigt jedoch hervorragende Erfolgsquoten von über 85 Prozent.', wrong:false},
+      {text:'Laut der statistischen Erhebung weisen Erwachsene in Regionen mit mangelhafter Hygiene die höchste Infektionsrate aller Altersgruppen auf.', wrong:true},
+      {text:'Ergänzend zur medikamentösen Therapie betonen Fachleute, dass der Ausbau der sanitären Infrastruktur unverzichtbar ist, um dauerhafte Reinfektionen zu verhindern.', wrong:false},
+      {text:'Eine alleinige Verabreichung von Entwurmungsmitteln ohne hygienische Begleitmaßnahmen garantiert bereits den vollständigen Schutz vor einer erneuten Erkrankung.', wrong:true}
+    ]
+  }
+];
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
@@ -1577,8 +1733,10 @@ const TESTS = [
   {id:7, title:'Modelltest 7 (Digitaler TestDaF)', teile: MT7},
   {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8},
   {id:9, title:'Modelltest 9 (Digitaler TestDaF)', teile: MT9},
-  {id:10, title:'Modelltest 10 (Digitaler TestDaF)', teile: MT10}
+  {id:10, title:'Modelltest 10 (Digitaler TestDaF)', teile: MT10},  
+  {id:11, title:'Modelltest 11 (Digitaler TestDaF)', teile: MT11}
 ];
+
 
 /* ============================================================
    PATCH GRAPHIQUES — à coller TOUT EN BAS de lesen-data.js (après const TESTS)
