@@ -158,7 +158,29 @@ const HOREN_MT2 = [
     ]
   }
 ];
-
+  { ...TEMPLATE_HOEREN[1],
+    instructions: 'Das Gespräch hören Sie einmal.\nNotieren Sie auf der linken Seite für jede Person, welche Maßnahme diese Person vorschlägt, und auf der rechten Seite die dazugehörige Folge in Stichpunkten.\n\nDanach haben Sie 3 Minuten Zeit, um Ihre Antworten zu überprüfen.',
+    title: 'Aufgabe: Herr Klöbner und Frau Wagner',
+    mediaType: 'audio',
+    mediaUrl: 'media/mt2_exercice_t2.mp3', // Ajustez le nom du fichier audio si besoin
+    consigneUrl: 'media/mt2_consigne_t2.mp3',
+    personsData: [
+      {
+        name: 'Herr Klöbner',
+        fields: [
+          { label: 'Maßnahme', placeholder: 'Maßnahme eingeben...' },
+          { label: 'Folge', placeholder: 'Folge eingeben...' }
+        ]
+      },
+      {
+        name: 'Frau Wagner',
+        fields: [
+          { label: 'Maßnahme', placeholder: 'Maßnahme eingeben...' },
+          { label: 'Folge', placeholder: 'Folge eingeben...' }
+        ]
+      }
+    ]
+  }
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
