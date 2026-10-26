@@ -197,6 +197,27 @@ const HOREN_MT2 = [
       { text: 'Diese Dämme halten zwar das Wasser zurück, aber nicht die für viele Lebewesen notwendigen fruchtbaren Sedimente, die dann weggeschwemmt werden.', wrong: false },
       { text: 'Zudem hindern sie Fische an der Fortpflanzung.', wrong: false }
     ]
+  },
+  { ...TEMPLATE_HOEREN[3],
+    instructions: 'Sie sehen eine Podiumsdiskussion zum Thema „Resistenz gegen Antibiotika“.\nSie sehen das Video einmal.\nKlicken Sie an, zu wem die Aussagen 1-6 passen.\nFür jede Aussage gibt es nur eine richtige Lösung.\n\nNach dem Video haben Sie 45 Sekunden Zeit, um Ihre Antworten zu überprüfen.\nSie haben jetzt 45 Sekunden Zeit, um die Aussagen zu lesen.',
+    title: 'Aufgabe 4: Resistenz gegen Antibiotika',
+    mediaType: 'video',
+    mediaUrl: 'media/mt2_exercice_t4.mov',
+    consigneUrl: 'media/mt2_consigne_t4.mp3',
+    pairs:[
+      { term: '1. Schon der Erfinder des Penicillins hat befürchtet, dass Bakterien resistent werden könnten.',
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 0 },
+      { term: '2. Die Landwirtschaft ist ein Faktor, der zur Resistenzbildung beiträgt.',
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 2 },
+      { term: '3. Wenn der Mensch Fleisch isst, nimmt er damit möglicherweise auch Antibiotika auf.',
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 2 },
+      { term: '4. Vor den Bakterien gab es keine anderen Lebewesen auf der Erde.',
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 3 },
+      { term: '5. Die entwickelten Länder sind durch die Antibiotikaresistenz weniger gefährdet.',
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 3 },
+      { term: '6. Ein Antibiotikum zu entwickeln, das gegen alle Bakterien wirkt, lohnt sich finanziell nicht.',
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 0 }
+    ]
   }
 ];
 
