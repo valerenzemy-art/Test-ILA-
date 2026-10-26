@@ -1,169 +1,250 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schreiben - Aufgabentyp 1</title>
-    <style>
-        :root {
-            --primary-blue: #1b4b82;
-            --bg-gray: #e9ecef;
-            --text-dark: #212529;
-            --border-gray: #ced4da;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: var(--bg-gray);
-            margin: 0;
-            padding: 20px;
-            color: var(--text-dark);
-        }
-
-        .exam-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            overflow: hidden;
-        }
-
-        /* En-tête bleu bleu officiel */
-        .exam-header {
-            background-color: var(--primary-blue);
-            color: #ffffff;
-            padding: 15px 25px;
-        }
-
-        .exam-header h1 {
-            font-size: 1.4rem;
-            margin: 0;
-            font-weight: bold;
-        }
-
-        .exam-content {
-            padding: 25px;
-        }
-
-        /* Encadré des consignes sur fond gris léger */
-        .instruction-box {
-            background-color: #dbe4ee;
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .instruction-box p {
-            margin-top: 0;
-            margin-bottom: 12px;
-        }
-
-        .instruction-box strong {
-            color: #000;
-        }
-
-        .task-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        /* Zone d'écriture avec lignes pointillés */
-        .editor-container {
-            position: relative;
-        }
-
-        textarea {
-            width: 100%;
-            height: 350px;
-            padding: 10px 15px;
-            font-size: 1rem;
-            line-height: 32px; /* Espacement aligné avec les lignes */
-            border: 1px solid var(--border-gray);
-            border-radius: 4px;
-            resize: vertical;
-            outline: none;
-            box-sizing: border-box;
-            background: repeating-linear-gradient(
-                transparent,
-                transparent 31px,
-                #a0a0a0 31px,
-                #a0a0a0 32px
-            );
-            font-family: inherit;
-        }
-
-        textarea:focus {
-            border-color: var(--primary-blue);
-        }
-
-        /* Barre d'information sous la zone de texte */
-        .editor-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-
-        .word-count {
-            font-weight: bold;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelltest 6 – Aufgabe 1 – TestDaF Schreiben</title>
+<style>
+:root{--bg:#eef1f4;--card:#fff;--ink:#1b2430;--sub:#5b6675;--line:#e3e7eb;--navy:#2f3d52;--navy-d:#232e3f;--red:#e2574c;--yellow:#ffd54f;--yellow-d:#f3c02f;--green:#4fa07a;--green-d:#3d8a67;--shadow:0 2px 10px rgba(20,30,45,.07)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:5;background:#fff;box-shadow:var(--shadow);padding:10px 18px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:1.02rem;color:var(--navy);white-space:nowrap}
+.brand span{color:var(--red)}
+.ctl{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+.ctl button{border:0;padding:8px 15px;border-radius:999px;cursor:pointer;font:inherit;font-weight:700;font-size:.85rem;background:var(--bg);color:var(--navy)}
+.ctl button.primary{background:var(--navy);color:#fff}
+.timer{font-variant-numeric:tabular-nums;font-weight:800;font-size:1.3rem;color:var(--navy);background:var(--bg);border-radius:10px;padding:4px 12px}
+.timer.warn{color:#a86a00;background:#fff2cf}.timer.over{color:#fff;background:var(--red)}
+.banner{background:var(--red);color:#fff;padding:9px 18px;text-align:center;font-weight:700;font-size:.92rem}
+.hidden{display:none}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;padding:20px 22px 60px;max-width:1180px;margin:0 auto}
+.panel.left{position:sticky;top:66px;max-height:calc(100vh - 90px);overflow-y:auto;padding-right:4px}
+@media(max-width:900px){.split{grid-template-columns:1fr;padding:16px 14px 50px}.panel.left{position:static;max-height:none}}
+.meta{background:linear-gradient(180deg,var(--yellow),var(--yellow-d));border-left:6px solid var(--red);border-radius:14px;padding:14px 18px;font-weight:800;font-size:1.02rem;color:#3a2e05;text-align:center;box-shadow:var(--shadow);margin-bottom:16px}
+.card{background:var(--card);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.task h2{display:inline-block;background:var(--red);color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:6px 15px;border-radius:999px;margin:0 0 14px}
+.task p{margin:8px 0;font-size:.98rem}
+.task p strong{color:var(--navy-d)}
+.status-card{background:var(--card);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.stat{background:var(--bg);border-radius:10px;padding:8px 14px;font-weight:700;font-size:.9rem;color:var(--navy-d);font-variant-numeric:tabular-nums}
+.stat.bad b{color:var(--red)}
+.stat b{color:var(--green-d)}
+.tools{margin-left:auto;display:flex;gap:8px}
+.tools button{border:0;padding:9px 16px;border-radius:12px;cursor:pointer;font:inherit;font-weight:700;font-size:.85rem}
+#copy{background:linear-gradient(160deg,#6cc79c,var(--green-d));color:#fff;box-shadow:0 3px 10px rgba(61,138,103,.35)}
+#clear{background:var(--bg);color:var(--navy-d)}
+.writecard{background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:6px}
+textarea{display:block;width:100%;border:0;outline:0;resize:vertical;min-height:480px;padding:16px;border-radius:14px;font:1.02rem/1.7 "Segoe UI",Helvetica,Arial,sans-serif;color:#111;background:#fff}
+textarea::placeholder{color:#9aa5b1}
+textarea.locked{background-color:#f4f6f7;color:#444;cursor:not-allowed}
+.goalrow{margin-top:8px;font-size:.85rem;color:var(--sub);text-align:right}
+.ok{color:var(--green-d);font-weight:700}.no{color:var(--red);font-weight:700}
+.tips{font-size:.85rem;color:var(--sub);margin-top:14px;background:var(--bg);border-radius:10px;padding:10px 14px}
+.eval{margin-top:20px;background:var(--card);border-radius:18px;box-shadow:var(--shadow);padding:20px 22px}
+.eval h2{margin:0 0 6px;font-size:1.08rem;color:var(--navy-d)}
+.eval h3{font-size:.98rem;margin:16px 0 8px}
+.hint{font-size:.83rem;color:var(--sub);margin:4px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{font-size:.82rem;padding:4px 11px;border-radius:999px;font-weight:600}
+.chip.ok{color:var(--green-d);background:#e6f5ee}
+.chip.no{color:var(--red);background:#fdeceb}
+.matchcard{background:#fff8e1;border-left:4px solid var(--yellow-d);border-radius:10px;padding:10px 14px;margin:10px 0}
+.matchcard .mtitle{font-size:.75rem;font-weight:800;color:#a86a00;text-transform:uppercase;letter-spacing:.03em;margin-bottom:4px}
+.matchcard .mctx{font-family:ui-monospace,monospace;font-size:.86rem;background:#fff;border-radius:8px;padding:8px 10px;line-height:1.6}
+.matchcard .mctx mark{background:var(--red);color:#fff;border-radius:4px;padding:0 3px}
+.matchcard .msug{margin-top:6px;font-size:.85rem}
+.matchcard .msug span{display:inline-block;background:#e6f5ee;color:var(--green-d);border-radius:8px;padding:2px 8px;margin-right:4px;font-weight:600}
+.nomatches{color:var(--green-d);font-weight:700;padding:10px 0}
+.checknote{font-size:.8rem;color:var(--sub);margin:8px 0}
+.checkbtn{background:linear-gradient(160deg,#6cc79c,var(--green-d));color:#fff;border:0;padding:9px 18px;border-radius:12px;cursor:pointer;font:inherit;font-weight:700;font-size:.9rem;box-shadow:0 3px 10px rgba(61,138,103,.35);display:inline-flex;align-items:center;gap:6px}
+.checkbtn:disabled{opacity:.6;cursor:not-allowed}
+.scorecard{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:18px 20px;margin-top:16px}
+.tdnline{margin-top:10px;font-size:.85rem;color:var(--sub)}
+.tdnline b{color:var(--navy-d)}
+</style>
 </head>
 <body>
-
-<div class="exam-container">
-    <!-- En-tête -->
-    <div class="exam-header">
-        <h1>Schreiben – Aufgabentyp 1<br>(Argumentativen Text schreiben)</h1>
-    </div>
-
-    <!-- Contenu -->
-    <div class="exam-content">
-        <!-- Consignes -->
-        <div class="instruction-box">
-            <p>Auf einer Lernplattform diskutieren Sie mit Ihrem Dozenten und anderen Seminarteilnehmenden über das Thema „Berufliche Mobilität“.</p>
-            <p>Schreiben Sie einen kurzen Beitrag.</p>
-            <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für Arbeitskräfte und Unternehmen haben kann, wenn Menschen oft ihre Arbeitsstelle wechseln.</strong></p>
-            <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>
-            Sie haben <strong>30 Minuten</strong> Zeit.</p>
-        </div>
-
-        <!-- Titre du sujet -->
-        <div class="task-title">Berufliche Mobilität</div>
-
-        <!-- Zone de texte -->
-        <div class="editor-container">
-            <textarea id="essayInput" placeholder="Schreiben Sie Ihren Text hier..."></textarea>
-            <div class="editor-footer">
-                <span class="word-count">Wörter: <span id="wordCount">0</span> / min. 200</span>
-            </div>
-        </div>
-    </div>
+<div class="topbar">
+  <span class="brand">TestDaF <span>Schreiben</span> · Modelltest 6 – Aufgabe 1</span>
+  <div class="ctl">
+    <button class="primary" id="start">Start</button>
+    <button id="submit">Abgeben</button>
+    <button id="reset">Reset</button>
+  </div>
+  <div class="timer" id="timer">30:00</div>
 </div>
+<div class="banner hidden" id="banner"></div>
 
-<!-- Script JS pour compter les mots automatiquement -->
+<main class="split">
+  <section class="panel left">
+    <div class="meta" id="meta"></div>
+    <section class="task-block" data-kind="argument" data-min="200" data-time="30" data-aspects='{"positive Aspekte":"vorteil|positiv","negative Aspekte":"nachteil|negativ","Umwelt":"umwelt|natur|ökologie","Gesellschaft":"gesellschaft|mensch"}'>
+      <div class="task">
+        <h2>Aufgabe 1</h2>
+        <p>Auf einer Lernplattform diskutieren Sie mit Ihrem Dozenten und anderen Seminarteilnehmenden über das Thema „Schutz der Bienen und der Biodiversität“.<br>Schreiben Sie einen kurzen Beitrag.</p>
+        <p><strong>Erläutern und begründen Sie, welche Maßnahmen sinnvoll sind, um das Bienensterben zu stoppen, und welche Vor- und Nachteile diese für die Landwirtschaft und die Verbraucher haben können.</strong></p>
+        <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>Sie haben <strong>30 Minuten</strong> Zeit.</p>
+      </div>
+    </section>
+  </section>
+  
+  <section class="panel right">
+    <div class="status-card">
+      <div class="stat">Wörter: <b id="wc">0</b>/<span id="wgoal">–</span></div>
+      <div class="stat">Zeichen: <b id="ch">0</b></div>
+      <div class="tools"><button class="checkbtn" id="check">🔍 Text überprüfen</button><button id="copy">Text kopieren</button><button id="clear">Leeren</button></div>
+    </div>
+    <div class="writecard">
+      <textarea id="ta" spellcheck="false" placeholder="Fangen Sie hier an zu schreiben …" aria-label="Schreibfeld"></textarea>
+    </div>
+    <p class="goalrow" id="goal"></p>
+    <p class="tips" id="tips"></p>
+    <section id="eval" class="eval hidden"></section>
+  </section>
+</main>
 <script>
-    const textarea = document.getElementById('essayInput');
-    const wordCountDisplay = document.getElementById('wordCount');
-
-    textarea.addEventListener('input', () => {
-        const text = textarea.value.trim();
-        const words = text ? text.split(/\s+/).length : 0;
-        wordCountDisplay.textContent = words;
-        
-        if (words >= 200) {
-            wordCountDisplay.style.color = 'green';
-        } else {
-            wordCountDisplay.style.color = '#555';
-        }
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var CRIT={
+    argument:["Sprachliche Mittel: Verfügen Sie über ausreichend Grammatik, Wortschatz und Redemittel, um sich angemessen und präzise auszudrücken?",
+      "Bleibt der Text trotz sprachlicher Fehler gut verständlich?",
+      "Aufgabenstellung: Wurden alle Aspekte behandelt, begründet?",
+      "Ist der Text nachvollziehbar und strukturiert?"]
+  };
+  var TIPS={
+    argument:"Struktur: Einleitung (Thema, Ihre Position) – Maßnahmen und Vorteile – Nachteile / Herausforderungen – Fazit. Verwenden Sie Konnektoren und begründen Sie jede Aussage."
+  };
+  var CONN=["einerseits","andererseits","jedoch","dennoch","deshalb","daher","außerdem","zudem","darüber hinaus","folglich","dagegen","hingegen","zwar","obwohl","allerdings","zunächst","abschließend","zusammenfassend","insgesamt","beispielsweise","weil","während","dadurch","somit"];
+  var STORE="tdf_mt6_a1_v1";
+  var k=(function(){var b=document.querySelector(".task-block");
+    return{el:b,kind:b.dataset.kind||"argument",min:+b.dataset.min||0,max:b.dataset.max?+b.dataset.max:null,time:(+b.dataset.time||30)*60,
+      keys:b.dataset.keys?JSON.parse(b.dataset.keys):null,aspects:b.dataset.aspects?JSON.parse(b.dataset.aspects):null};
+  })();
+  var run=null,end=0,left=k.time,text="",done=false,ev=[-1,-1,-1,-1],corr="";
+  var ta=$("ta"),tm=$("timer");
+  try{
+    var s=JSON.parse(localStorage.getItem(STORE)||"null");
+    if(s){text=s.text||"";left=(s.left!=null?s.left:k.time);done=!!s.done;ev=s.ev||ev;corr=s.corr||""}
+  }catch(e){}
+  function save(){try{localStorage.setItem(STORE,JSON.stringify({text:text,left:left,done:done,ev:ev,corr:corr}))}catch(e){}}
+  function fmt(t){var m=Math.floor(Math.abs(t)/60),s=Math.abs(t)%60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+  function words(t){var m=t.trim().match(/\S+/g);return m?m.length:0}
+  function locked(){return done||left<=0}
+  function startLabel(){return left<k.time&&left>0?"Weiter":"Start"}
+  function goal(){return "Ziel: mindestens "+k.min+" Wörter"}
+  function chk(ok,t){return'<span class="chip '+(ok?"ok":"no")+'">'+(ok?"✓ ":"✗ ")+t+"</span>"}
+  function LT_check(text){
+    return fetch("https://api.languagetool.org/v2/check",{
+      method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},
+      body:"text="+encodeURIComponent(text)+"&language=de-DE"
+    }).then(function(r){if(!r.ok)throw new Error("LT HTTP "+r.status);return r.json()}).then(function(j){return j.matches||[]});
+  }
+  function escH(t){return (t||"").replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+  function renderMatches(matches,text){
+    if(!matches.length)return '<p class="nomatches">✓ Keine Rechtschreib- oder Grammatikfehler gefunden (automatische Prüfung).</p>';
+    var h="";
+    matches.slice(0,20).forEach(function(m){
+      var ctx=m.context.text,off=m.context.offset,len=m.context.length;
+      var before=escH(ctx.slice(0,off)),bad=escH(ctx.slice(off,off+len)),after=escH(ctx.slice(off+len));
+      var sug=(m.replacements||[]).slice(0,3).map(function(r){return escH(r.value)});
+      h+='<div class="matchcard"><div class="mtitle">'+escH(m.rule&&m.rule.category&&m.rule.category.name||"Hinweis")+'</div>';
+      h+='<div class="mctx">…'+before+'<mark>'+bad+'</mark>'+after+'…</div>';
+      if(sug.length)h+='<div class="msug">Vorschlag: '+sug.map(function(s){return'<span>'+s+'</span>'}).join("")+'</div>';
+      h+='</div>';
     });
+    if(matches.length>20)h+='<p class="checknote">+ '+(matches.length-20)+' weitere Hinweise (nicht alle angezeigt).</p>';
+    return h;
+  }
+  function localScore(matches){
+    var t=ta.value,l=t.toLowerCase(),n=words(t);
+    var wScore=Math.min(6,Math.round(6*Math.min(n/k.min,1)));
+    var foundA=0,totalA=0,key;
+    if(k.aspects){totalA=Object.keys(k.aspects).length;for(key in k.aspects)if(new RegExp(k.aspects[key]).test(l))foundA++;}
+    var aspScore=totalA?Math.round(6*foundA/totalA):6;
+    var inhalt=Math.min(12,wScore+aspScore);
+    var per100=n>0?(matches.length/n*100):0;
+    var gram=Math.max(0,Math.min(12,12-Math.round(per100*1.3)));
+    var conn=CONN.filter(function(x){return l.indexOf(x)>-1}).length;
+    var paras=t.split(/\n\s*\n/).filter(function(p){return p.trim()}).length;
+    var koh=Math.min(12,Math.round(conn*1.4)+Math.round(Math.min(4,paras*1.3)));
+    var format=n>=k.min?7:4;
+    if(paras>=2)format=Math.min(9,format+2);
+    var total=inhalt+gram+koh+format;
+    var tdn=total>=36?"TDN 5":total>=26?"TDN 4":total>=16?"TDN 3":"unter TDN 3";
+    return {total:total,tdn:tdn};
+  }
+  function runCheck(){
+    var btn=$("check");btn.disabled=true;btn.textContent="🔍 Wird geprüft …";
+    LT_check(ta.value).then(function(matches){
+      renderResult(matches,null);
+    }).catch(function(e){
+      renderResult([],"Rechtschreib-/Grammatikprüfung aktuell nicht erreichbar.");
+    }).then(function(){btn.disabled=false;btn.textContent="🔍 Text überprüfen"});
+  }
+  function renderResult(matches,note){
+    var sc=localScore(matches);
+    var h='<div class="scorecard"><div class="tdnline" style="margin-top:0">Geschätztes Niveau: <b>'+sc.tdn+'</b></div>';
+    h+='<p class="checknote">Automatische Schätzung auf Basis von Wortzahl, Stichwörtern, Konnektoren und Fehlerdichte.</p></div>';
+    if(note)h+='<p class="checknote">'+note+'</p>';
+    h+='<h3 style="margin-top:16px">Rechtschreibung &amp; Grammatik</h3>'+renderMatches(matches,ta.value);
+    $("eval").innerHTML=h;
+    $("eval").classList.remove("hidden");
+  }
+  function applyLock(){
+    var l=locked();
+    ta.readOnly=l;ta.classList.toggle("locked",l);
+    $("clear").disabled=l;$("start").disabled=l||!!run;$("submit").disabled=l;
+    $("banner").classList.toggle("hidden",!l);
+    $("banner").textContent=left<=0?"Die Zeit ist um. Das Schreibfeld ist gesperrt.":"Abgegeben. Das Schreibfeld ist gesperrt.";
+  }
+  function paintTimer(){
+    tm.textContent=fmt(left);
+    tm.className="timer"+(left<=0?" over":left<=300?" warn":"");
+    applyLock();
+  }
+  function paintCount(){
+    var n=words(ta.value),ok=n>=k.min;
+    $("wc").textContent=n;$("wgoal").textContent=k.min;
+    $("wc").parentNode.classList.toggle("bad",!ok);
+    $("ch").textContent=ta.value.length;
+    $("goal").innerHTML='<span class="'+(ok?"ok":"no")+'">'+goal()+"</span>";
+  }
+  function paintBanner(){
+    $("meta").textContent="Zeit: 30 Minuten | mindestens "+k.min+" Wörter";
+  }
+  function stop(){if(run){clearInterval(run);run=null}$("start").textContent=startLabel()}
+  function tick(){
+    left=Math.max(0,Math.round((end-Date.now())/1000));
+    if(left<=0){text=ta.value;stop()}
+    paintTimer();save();
+  }
+  $("start").onclick=function(){
+    if(locked()||run)return;
+    end=Date.now()+left*1000;run=setInterval(tick,250);$("start").textContent="Läuft …";paintTimer();ta.focus();
+  };
+  $("submit").onclick=function(){
+    if(locked()||!confirm("Jetzt abgeben? Danach kannst du nicht mehr schreiben."))return;
+    text=ta.value;stop();done=true;paintTimer();save();
+  };
+  $("reset").onclick=function(){
+    if(!confirm("Zeit zurücksetzen, Schreibfeld entsperren und Bewertung löschen?"))return;
+    stop();left=k.time;done=false;ev=[-1,-1,-1,-1];corr="";paintTimer();paintCount();save();$("start").textContent="Start";
+  };
+  ta.addEventListener("input",function(){if(locked())return;text=ta.value;paintCount();save()});
+  $("copy").onclick=function(){
+    navigator.clipboard.writeText(ta.value).then(function(){
+      var b=$("copy");b.textContent="Kopiert!";setTimeout(function(){b.textContent="Text kopiert"},2000);
+    });
+  };
+  $("clear").onclick=function(){if(confirm("Text löschen?")){ta.value="";text="";paintCount();save()}};
+  $("check").onclick=runCheck;
+  window.addEventListener("beforeunload",save);
+  ta.value=text;
+  $("tips").textContent=TIPS[k.kind];
+  $("start").textContent=startLabel();
+  paintTimer();paintCount();paintBanner();
+})();
 </script>
-
 </body>
 </html>
