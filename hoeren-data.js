@@ -233,6 +233,56 @@ const HOREN_MT2 = [
     ]
   }
 ];
+  { ...TEMPLATE_HOEREN[5],
+    instructions: 'Sie hören einen Ausschnitt aus einem Vortrag zum Thema „Prozessautomatisierung“.\nSie hören den Text einmal.\nBeantworten Sie die Fragen 1-5. Klicken Sie die Fragen an und entscheiden Sie, welche Lösung passt.\nFür jede Frage gibt es genau eine richtige Lösung.\n\nNach dem Hören haben Sie 1 Minute und 30 Sekunden Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 1 Minute und 30 Sekunden Zeit, um die Fragen zu lesen.',
+    title: 'Aufgabe 6: Prozessautomatisierung',
+    mediaType: 'audio',
+    mediaUrl: 'media/mt2_exercice_t6.mp3', // Pensez à adapter le nom du fichier audio sur GitHub
+    consigneUrl: 'media/mt2_consigne_t6.mp3', // Pensez à adapter le nom de l'audio de consigne si besoin
+    questions:[
+      { q: 'Frage 1: Die Automatisierung von Arbeitsprozessen',
+        options: [
+          'gibt es schon seit der Industrialisierung.',
+          'konzentrierte sich bis jetzt auf bestimmte Bereiche.',
+          'wird heutzutage kritischer gesehen als früher.',
+          'wird in der modernen Welt begrüßt.'
+        ],
+        correct: 1 },
+      { q: 'Frage 2: Software-Roboter',
+        options: [
+          'können Forschungsdaten analysieren.',
+          'machen Fabrikarbeiter überflüssig.',
+          'simulieren menschliche Handlungen.',
+          'unterstützen die industrielle Produktion.'
+        ],
+        correct: 2 },
+      { q: 'Frage 3: Die von dem Sprecher genannten Vorteile',
+        options: [
+          'betreffen nur wenige Wirtschaftszweige.',
+          'gelten vor allem für die Unternehmen.',
+          'kommen besonders den Mitarbeitenden zugute.',
+          'sind bis jetzt noch nicht bewiesen.'
+        ],
+        correct: 1 },
+      { q: 'Frage 4: Wie äußert sich der Sprecher über die zukünftige menschliche Arbeit?',
+        options: [
+          'Er empfiehlt, dass die Unternehmen die Arbeitszeiten reduzieren.',
+          'Er kritisiert, dass Menschen nicht mehr arbeiten möchten.',
+          'Er vermutet, dass qualifizierte Tätigkeiten bald automatisiert werden.',
+          'Er warnt, dass das Leben ohne Arbeit seinen Sinn verliert.'
+        ],
+        correct: 2 },
+      { q: 'Frage 5: Das Hauptziel des Vortrags besteht darin,',
+        options: [
+          'auf die Gefahren der Automatisierung hinzuweisen.',
+          'die Geschichte der Automatisierung darzulegen.',
+          'die großen Vorteile von Automatisierung zu erklären.',
+          'einen guten Umgang mit Automatisierung aufzuzeigen.'
+        ],
+        correct: 2 }
+    ]
+  }
+];
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
