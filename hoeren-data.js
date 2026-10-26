@@ -179,14 +179,13 @@ const HOREN_MT2 = [
         ]
       }
     ]
-  }
-];
+  },
   { ...TEMPLATE_HOEREN[2],
     instructions: 'Sie hören einen Ausschnitt aus einer Vorlesung im Fach Ingenieurwissenschaften zum Thema „Regenerative Energien“. Sie hören den Text einmal. Machen Sie sich beim Hören Notizen. Nach dem Hörtext sehen Sie eine schriftliche Zusammenfassung. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten.',
     title: 'Aufgabe 3: Regenerative Energien',
     mediaType: 'audio',
-    mediaUrl: 'media/mt2_exercice_t3.mp3', // Pensez à uploader le fichier audio sur GitHub
-    consigneUrl: 'media/mt2_consigne_t3.mp3', // Pensez à uploader le fichier de consigne
+    mediaUrl: 'media/mt2_exercice_t3.mp3',
+    consigneUrl: 'media/mt2_consigne_t3.mp3',
     segments:[
       { text: 'Viele Menschen sind mittlerweile zu der Auffassung gelangt, dass regenerative Energien doch nicht so umweltfreundlich sind, wie man anfänglich angenommen hat.', wrong: false },
       { text: 'Die Solarenergie verursacht Umweltprobleme, denn bei ihrer Produktion finden große Mengen Blei und Cadmium Verwendung.', wrong: false },
@@ -199,7 +198,7 @@ const HOREN_MT2 = [
       { text: 'Zudem hindern sie Fische an der Fortpflanzung.', wrong: false }
     ]
   }
-
+];
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
