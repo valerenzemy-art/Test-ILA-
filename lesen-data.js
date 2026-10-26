@@ -1722,6 +1722,163 @@ const MT11 = [
     ]
   }
 ];
+const MT12 = [
+  { ...TEMPLATE[0],
+    instructions:'Lesen Sie den Lückentext. Entscheiden Sie für jede Lücke, welches Wort passt. Für jede Lücke gibt es genau eine richtige Lösung.',
+    title:'Vegetarische Krokodile',
+    segments:[
+      'Heute existieren weltweit nur noch 23 unterschiedliche Arten von Krokodilen. Sie alle fressen fast ausschließlich Fleisch und Fisch. Doch das war nicht immer so, wie eine Studie zeigt. Im langen Lauf ihrer evolutionären ',
+      ' brachten die krokodilartigen Tiere mindestens dreimal Pflanzen fressende Gattungen hervor. Wissenschaftler analysierten 146 fossile Zähne von 16 unterschiedlichen ',
+      ', die vor 250 Millionen Jahren bis vor 66 Millionen Jahren existiert haben. Aus Form und Aufbau konnten die Wissenschaftler schließen, welche Nahrung bevorzugt aufgenommen wurde: Einfache, spitze Zähne deuten demnach auf Fleischkonsum hin, breite Formen sprechen dagegen für Pflanzenkost. Allesfresser, die Omnivoren, besaßen Zähne, die ein Mittelding zwischen den beiden anderen Varianten bildeten. Unter den ',
+      ' Arten stießen die Paläontologen auf acht Pflanzenfresser, eine omnivore Spezies und nur sieben Fleischfresser. Die „Vegetarier“ verteilten sich über mehrere Kontinente und lebten zu unterschiedlichen Zeiten der Erdgeschichte. Die ersten Pflanzen fressenden Krokodilarten entstanden im frühen Jura, einem Erdzeitalter vor etwa 200 Millionen Jahren, und sie hielten sich bis zum Ende der Kreidezeit, als durch den Einschlag eines Asteroiden nicht nur die Dinosaurier, sondern auch viele andere Arten ',
+      ' wurden. Warum sich danach aus den vorhandenen überlebenden Krokodilen keine neuen vegetarischen Spezies herausbildeten, ist ',
+      '.'
+    ],
+    gaps:[
+      {options:['Auswahl','Entstehung','Entwicklung','Verbreitung'], correct:2},
+      {options:['Formen','Sorten','Spezies','Tieren'], correct:2},
+      {options:['ausgeforschten','entdeckten','gefundenen','untersuchten'], correct:3},
+      {options:['abgeschafft','ausgerottet','beendet','niedergemacht'], correct:1},
+      {options:['unbegreiflich','unbekannt','unerklärlich','unverständlich'], correct:1}
+    ]
+  },
+  { ...TEMPLATE[1],
+    instructions:'Bringen Sie die fünf Textabschnitte mit den Pfeiltasten in die richtige Reihenfolge. Es gibt genau eine richtige Reihenfolge.',
+    title:'Lesen, Schreiben und Demenz',
+    correctOrder:[3,4,2,1,0],
+    items:[
+      'Das gilt sogar für solche Menschen, die nur wenige Jahre zur Schule gegangen sind und relativ wenig Hirntraining betreiben.',
+      'Die Forscher schließen daraus, dass Lesen und Schreiben das Gehirn nicht nur trainiert, sondern es auch bis zu einem gewissen Grad vor dem Abbau der Nervenzellen schützt oder diesen zumindest hinauszögert.',
+      'Knapp ein Viertel der Studienteilnehmer waren Analphabeten, der Rest konnte lesen und schreiben. Während der zweijährigen Studienphase entwickelten die Analphabeten doppelt so häufig eine Demenz wie ihre alphabetisierten Altersgenossen.',
+      'Wer nie richtig das Lesen und Schreiben beherrscht hat, erkrankt im Alter deutlich häufiger an einer Demenz als Menschen, die regelmäßig Bücher konsumieren oder Briefe verfassen.',
+      'Zu diesem Ergebnis gelangten Wissenschaftler nach einer zweijährigen Studie. Dazu hatten sie rund 1000 ältere Menschen aus ländlichen Regionen untersucht, die maximal vier Jahre zur Schule gegangen waren.'
+    ],
+    shuffledStart:[0,1,2,3,4]
+  },
+  { ...TEMPLATE[2],
+    instructions:'Lesen Sie den Text. Beantworten Sie die Fragen 1–7. Für jede Frage gibt es genau eine richtige Lösung.',
+    title:'Neue Arbeitsformen in der modernen Arbeitswelt',
+    passage:[
+      '(1) Wie wirkt sich unterschiedliches Personalmanagement in Unternehmen auf die Leistung der Angestellten aus? Mit dieser Frage beschäftigt sich Prof. Michael Beckmann von der wirtschaftswissenschaftlichen Fakultät der Universität Basel seit mehreren Jahren. Dabei untersucht er den Effekt von Maßnahmen, die Mitarbeitenden mehr Autonomie im Hinblick auf die Arbeitszeit geben. Dahinter steht die These, dass dies ein starkes Motivationsinstrument sein kann. Beispiele für derartige Arbeitszeitmodelle sind die sogenannte Vertrauensarbeitszeit – auch selbstbestimmte Arbeitszeit genannt – und das Home Office, bei denen die Angestellten weitestgehend selber bestimmen, wann und wo sie ihre Aufgaben erledigen. Im Vordergrund steht dabei immer die Erledigung vereinbarter Aufgaben, nicht die zeitliche Präsenz. Auf die Dokumentation der Arbeitszeiten wird ganz oder teilweise verzichtet.',
+      '(2) Die Arbeit im Home Office ist allerdings ein umstrittenes Instrument. Viele Arbeitgeber befürchten, dass der eingeräumte Freiraum missbraucht werden könnte. „Der klassische Ökonom denkt bei der Förderung von Motivation eher an Anreize wie Leistungsprämien oder Überwachung“, sagt Beckmann. Dieser Idee liegt ein Menschenbild zugrunde, das unter dem Begriff Homo oeconomicus bekannt ist und davon ausgeht, dass Menschen nur nach wirtschaftlichen Kriterien denken und handeln und immer ihren Nutzen maximieren möchten. Damit in Zusammenhang steht eine ziemlich pessimistische Haltung, was Arbeitsbereitschaft betrifft. „Den Homo oeconomicus muss man von außen dazu bringen, dass er das tut, was er soll – das heißt, er muss extrinsisch motiviert werden.“',
+      '(3) Geht man von solchem Verhalten aus, muss man tatsächlich befürchten, dass Arbeitnehmende nur dann Leistung bringen, wenn sie unter Aufsicht stehen. Für Beckmann greift dieses Menschenbild allerdings zu kurz. „Es gibt durchaus Menschen, die sich mit ihrem Job identifizieren, Freude an ihrer Tätigkeit haben oder von Natur aus pflichtbewusst sind – sie verfügen über eine intrinsische Motivation.“ Um die bestehende Eigenmotivation dieser Mitarbeitenden zu fördern, so Beckmann, müssen Firmen andere Methoden finden. Großes Potenzial sieht er dabei in der Mitarbeiterautonomie.',
+      '(4) Dieses Jahr veröffentlichten Beckmann und Co-Autoren eine große Studie zur Vertrauensarbeitszeit. Die Ergebnisse zeigten, dass Beschäftigte, die weitgehende Kontrolle über ihre Arbeitsstunden haben, nicht weniger, sondern sogar mehr Arbeitseinsatz liefern. Nach Abzug aller anderen Faktoren arbeiten Angestellte bei Vertrauensarbeitszeit pro Woche durchschnittlich 80 Minuten länger als Angestellte mit festen Arbeitszeiten. „Die Studie widerlegt deutlich die Befürchtungen, dass eine fehlende Arbeitszeitkontrolle zu Faulheit führt“, so Beckmann. Im Gegenteil: Selbstbestimmung scheint für viele Arbeitnehmende ein starkes intrinsisches Motivationsinstrument zu sein. „Das soll nicht bedeuten, dass es nicht auch Angestellte gibt, die ihre Arbeitszeitsouveränität missbrauchen – die empirischen Daten zeigen allerdings, dass dies eine große Anzahl nicht tut“, erläutert er.',
+      '(5) Schwierig wird es, wenn Unternehmen versuchen, den entstandenen Kontrollverlust durch Kontrollinstrumente zu kompensieren. Als Beispiel nennt Beckmann überambitionierte Zielvereinbarungen: Wird den Mitarbeitern einerseits gesagt, dass sie zwar arbeiten können, wann und wo sie wollen, dass sie aber bestimmte Ziele erfüllen müssen, kann das kontraproduktiv wirken. Häufig seien diese Ziele nämlich so hoch gesteckt, dass sie nicht realistisch zu erreichen sind, oder sie würden immer wieder nach oben angepasst: „Das hat mit Autonomie dann nichts mehr zu tun, und der positive Effekt kann dadurch verloren gehen.“ Sollten Firmen Instrumente für mehr Mitarbeiterautonomie nutzen, ist es entscheidend, dass sie es ernst meinen mit dem Vertrauen. Selbstbestimmte Arbeitszeiten und Home Office funktionieren nur dann, wenn gegenseitiges Vertrauen herrscht. Fühlen sich die Mitarbeitenden überwacht, zerstört das ihre ursprüngliche Eigenmotivation.',
+      '(6) Trotz aller Bedenken: Arbeiten in den eigenen vier Wänden liegt im Trend. Auch in der Schweiz steigt die Anzahl jener, die zumindest teilweise auf das Büro verzichten. Möglich macht dies nicht zuletzt die moderne Kommunikationstechnik. So kann man leichter von anderen Orten aus arbeiten, und viele Menschen schätzen Selbstbestimmung und Flexibilität bei der Zeiteinteilung – gerade im Hinblick auf die Vereinbarkeit von Beruf und Familie. „Das Aufkommen von flexiblen Arbeitszeitmodellen hängt auch damit zusammen, dass sich die Tätigkeiten geändert haben. Im Schnitt werden die Arbeitsaufgaben immer anspruchsvoller“, sagt Beckmann. Wachsender Wettbewerb und technologischer Wandel stellen hohe Anforderungen an die Flexibilität sowohl von Unternehmen als auch von Arbeitnehmenden. Die neuen Arbeitsmodelle werden sich also weiter verbreiten.'
+    ],
+    questions:[
+      { q:'Welches ist laut Absatz 1 das Hauptmerkmal der neuen Arbeitszeitmodelle?', options:[
+        'Die Zeit kann frei eingeteilt werden.',
+        'Die zu erledigenden Aufgaben werden selbst gewählt.',
+        'Es findet Teilzeitarbeit statt.',
+        'Telearbeit ist vorherrschend.'
+      ], correct:0 },
+      { q:'Welche Aussage ist in Absatz 2 impliziert?', options:[
+        'Angestellte sollten durch bessere Löhne motiviert werden.',
+        'Das Menschenbild beeinflusst die Motivationsstrategien.',
+        'Der Homo oeconomicus ist als Mitarbeiter wenig leistungsorientiert.',
+        'Der Homo oeconomicus ist wichtig für den Erfolg eines Unternehmens.'
+      ], correct:1 },
+      { q:'In Absatz 3 empfiehlt der Forscher, ...', options:[
+        'den Angestellten mehr Freiheit zu geben.',
+        'die Angestellten besser zu kontrollieren.',
+        'die Identifikation der Mitarbeiter mit der Firma zu stärken.',
+        'pflichtbewusste Mitarbeiter einzustellen.'
+      ], correct:0 },
+      { q:'In Absatz 4 wird gesagt, dass ...', options:[
+        'ein negativer Effekt durch Arbeitszeitsouveränität auszuschließen ist.',
+        'eine Studie die Skepsis gegenüber Arbeitszeitautonomie bestätigt.',
+        'selbstbestimmte Arbeitszeit die Leistung nicht beeinflusst.',
+        'selbstverantwortlich gestaltete Arbeitszeit beflügelnd wirken kann.'
+      ], correct:3 },
+      { q:'Welche der folgenden Überschriften passt inhaltlich zu Absatz 5?', options:[
+        'Arbeitsziele flexibel anpassen',
+        'Gefahr von neuem Leistungsdruck',
+        'Klare Vorgaben für Heimarbeiter',
+        'Zuhause die Produktivität steigern'
+      ], correct:1 },
+      { q:'Laut Absatz 6 nimmt das Arbeiten von Zuhause zu, weil ...', options:[
+        'ein Bürojob heute schwieriger zu finden ist.',
+        'es mehr Konkurrenz auf dem Arbeitsmarkt gibt.',
+        'viele Angestellte mehr Freiheit möchten.',
+        'viele Menschen kein Büro mehr haben.'
+      ], correct:2 },
+      { q:'Das Hauptanliegen des Textes ist es, ...', options:[
+        'Empfehlungen für ein besseres Betriebsklima zu geben.',
+        'Maßnahmen für Mitarbeiterzufriedenheit vorzustellen.',
+        'Vorschläge zur Mitarbeiterführung zu machen.',
+        'über neue Arbeitsformen aufzuklären.'
+      ], correct:3 }
+    ]
+  },
+  { ...TEMPLATE[3],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Textstellen 1–4 den Aussagen rechts zu. Die Zahlen beziehen sich immer auf den nachfolgenden Satz. Für jede Textstelle gibt es genau eine richtige Lösung.',
+    title:'Kommentar eines Experten zu Umweltsorgen',
+    passageText:`<strong>[1] Jeden Tag sagen uns irgendwelche angeblichen Experten, wovor wir jetzt wieder ganz dringend Angst haben sollen.</strong> Drei Grundregeln helfen, Panikpropaganda von echten Gefahren zu unterscheiden. Zuallererst sollten wir fragen: Ist das, wovor wir uns fürchten, überhaupt real? Das klingt banaler als es ist. Als Kinder haben wir uns in der Dunkelheit vor Monstern gefürchtet, heute erzählt man uns, dass dunkle Mächte aus Flugzeugen giftige Chemikalien über den Himmel sprühen. <strong>[2] Beide Geschichten entsprechen nicht der Realität.</strong> Daher lautet Grundregel eins: Wenn sich das Objekt unserer Angst gar nicht belegen lässt, ist jede Angst bloß Zeitverschwendung.<br><br>Doch meistens fürchten wir uns vor Sachen, die es wirklich gibt: Etwa vor Handystrahlen oder vor mikrowellengewärmter Nahrung. Mikrowellen sind real – aber wir kennen keinen Mechanismus, durch den sie unser Essen in etwas Ungesundes verwandeln können. Das bringt uns zu Grundregel zwei: Wenn man keine Verbindung zu schädlichen Auswirkungen nachweisen kann, sollten wir uns nicht fürchten. Außerdem muss man immer die Dosis beachten. Jeder Bioapfel enthält Pestizide, die er von Natur aus selbst produziert. <strong>[3] Auch fern von der Zivilisation nimmt man mit jedem Atemzug schädliche Substanzen auf, weil sie in der Luft vorkommen, seit es die Atmosphäre gibt.</strong> Grundregel Nummer drei lautet daher: Wir sollten uns nicht vor etwas fürchten, wenn es harmloser ist als andere Dinge, die wir bedenkenlos akzeptieren. Wer aus Angst vor Dieselabgasen das Fenster nicht öffnet und dann auf den Balkon rauchen geht, handelt irrational.<br><br><strong>[4] Es wird immer schwierig sein, die Grenze zwischen gerade noch harmlosen und gerade schon gefährlichen Dingen zu ziehen.</strong> Doch wenn wir es nicht schaffen, die Gefahren in die richtige Reihenfolge zu bringen, droht uns ein Scheitern bei der Lösung der eigentlichen Probleme.`,
+    textStellen:[1, 2, 3, 4],
+    options:[
+      'Der Experte bedauert etwas.',
+      'Der Experte empfiehlt etwas.',
+      'Der Experte erklärt etwas.',
+      'Der Experte kritisiert etwas.',
+      'Der Experte prognostiziert etwas.',
+      'Der Experte vermutet etwas.',
+      'Der Experte warnt vor etwas.',
+      'Der Experte widerspricht etwas.'
+    ],
+    correct:[3, 7, 2, 4]
+  },
+  { ...TEMPLATE[4],
+    instructions:'Lesen Sie den Text. Ordnen Sie die Aussagen 1–7 zu: Entscheiden Sie für jede Aussage, ob sie zum Antrieb durch Diesel, durch Erdgas, zu beiden oder gar nicht passt. Für jede Aussage gibt es nur eine richtige Lösung. Die Aussagen folgen nicht dem Textverlauf.',
+    title:'Diesel oder Erdgas?',
+    passage:'Als Nikolaus August Otto 1876 in seiner Gasmotorenfabrik im Kölner Stadtteil Deutz den nach ihm benannten Ottomotor erfand, lief dieser mit Gas. Allerdings hatte Ottos damaliger Motor eine außerhalb des Motors liegende Zündquelle, nämlich eine Gasflamme. Das Problem dabei war, dass das Gas damals stationär war, das heißt, dass ein Auto kein Automobil war, weil es nicht mobil, sondern an die Gasquelle gebunden war. Erst die 1884 erfundene elektrische Zündung ermöglichte schließlich die Verwendung flüssiger Kraftstoffe, z. B. Diesel. Die Zahl der Fahrzeuge mit Verbrennungsmotor hat seit dieser Zeit stark zugenommen, sodass wir heute nicht nur Probleme mit Staus haben, sondern auch vor gravierenden Umweltproblemen stehen. Deshalb ist die Diskussion um Feinstaubemission, CO₂-Minderung und Dieselfahrverbote sehr aktuell. Nicht zuletzt aus diesem Grund wurden an der Fachhochschule Dortmund Möglichkeiten untersucht, Dieselmotoren auf das schadstoffärmere Erdgas umzustellen. Das Umstellen funktioniert bei Dieselmotoren besser als bei Benzinmotoren, denn der Wirkungsgrad des Erdgases ist in einem Dieselmotor sehr viel effizienter. Aber Dieselmotoren sind für gasförmige Kraftstoffe wie Erdgas nicht geeignet, weil heutige Dieselsysteme hydraulisch, also mit Druck arbeiten. Deshalb funktionieren sie nur bei flüssigen Kraftstoffen. Zudem kann das Gas nicht in den Motor eingespritzt werden wie beim Diesel, sondern es muss bei einem Druck von 200 bar eingeblasen werden. Dafür haben die Dortmunder Ingenieure bereits eine Lösung gefunden. Zudem müssen aber im Tank des Wagens 200 Bar aufrechterhalten werden, weil der Dieselmotor einen konstanten Druck braucht. Auch dieses Problem wurde gelöst. Die Vorteile der Entwicklung dieses Erdgasmotors liegen auf der Hand: Die Effizienz eines Dieselmotors wird jetzt erreicht und der Motor stößt weder Ruß noch andere Partikel aus, die die Umwelt belasten. Diese Technik, die zurzeit vor allem für Nutzfahrzeuge geeignet ist, also zum Beispiel für Lastkraftwagen oder Busse, ist sicherer, denn bei einem Unfall entweicht das Gas und entzündet sich nicht wie Benzin. Als z. B. in den Niederlanden ein Busdepot brannte, blieb von den Dieselbussen nur noch Asche übrig. Die Busse, die mit Erdgas betrieben waren, überstanden das Feuer unbeschadet, denn das Gas wurde durch ein Ventil abgelassen, als es im Bus zu heiß wurde.',
+    columns:['Diesel','Erdgas','beide','passt nicht'],
+    items:[
+      {text:'Dieses System funktioniert mit Druck.', correct:0},
+      {text:'Bei einem Unfall herrscht erhöhte Brandgefahr.', correct:0},
+      {text:'Der Motor muss extern gezündet werden.', correct:3},
+      {text:'Diese Technik ist z. B. für LKW geeignet.', correct:1},
+      {text:'Spezielle Technik beim Befüllen des Tanks', correct:1},
+      {text:'Im Tank ist ein bestimmter Druck nötig.', correct:2},
+      {text:'Die Antriebsart ist schadstofffrei.', correct:1}
+    ]
+  },
+  { ...TEMPLATE[5],
+    instructions:'Lesen Sie den Text. Entscheiden Sie, welche Aussagen richtig sind, und ordnen Sie genau vier Aussagen der Tabelle zu (2 Gründe, 2 Folgen).',
+    title:'Stadtentwicklung',
+    passage:'Der Prozess der Urbanisierung setzte mit dem Beginn der Industrialisierung im 19. Jahrhundert in Großbritannien ein, wo es die Menschen vermehrt vom Land in die Städte zog. Im heutigen 21. Jahrhundert leben bereits mehr als 50 Prozent der Weltbevölkerung in städtischen Siedlungsgebieten, in Deutschland sind es bereits 75 Prozent. Die Vereinten Nationen sagen voraus, dass bis zum Jahr 2050 bis zu 70 Prozent der Menschen weltweit in einer Stadt leben werden. Diese Menschen erwarten nicht zu Unrecht in den Städten bessere Karrierechancen und eine gute Ausbildung sowie eine bessere medizinische Versorgung und eine größere Mobilität. Das Leben in kleineren Städten und auf dem Land ist für sie dagegen weniger ansprechend. Doch wo viele Menschen leben, kommt es auch zu Problemen: Die Luft in den Städten ist meistens alles andere als rein, wofür schon die Nutzung fossiler Energien für die Heizungen der Wohnungen und Häuser und auch die Emissionen, die durch den Transport von Waren und Personen entstehen, sorgen. Zudem ist das Prinzip von Angebot und Nachfrage dafür verantwortlich, dass das Angebot auf dem Arbeitsmarkt größer ist und es somit meistens viele Bewerber für einen Job gibt. Das gilt auch auf dem Wohnungsmarkt: In den großen Städten steigen die Preise für Immobilien und damit auch die Mieten, sodass es vor allem für größere Familien ein Problem ist, bezahlbaren Wohnraum zu finden. Vor allem stehen die Städte auch vor logistischen Problemen, denn die vielen Stadtbewohner müssen mit Nahrungsmitteln, Wasser und Strom versorgt werden. Auch der Abtransport von Müll bzw. die Entsorgung von Abwasser muss sichergestellt werden. Das stellt vor allem die wirtschaftlich weniger entwickelten Länder vor große Probleme: Oft fehlen besonders in den ärmeren Stadtvierteln Kanalisation, Wasserleitungen und entsprechende Unterkünfte. Die Folge ist, dass die Bewohner hier unter sehr schlechten Bedingungen leben müssen.',
+    aussagen:[
+      { key:'a', text:'[a] Beschaffung von Nahrungsmitteln problemlos' },
+      { key:'b', text:'[b] Zunahme der Luftverschmutzung' },
+      { key:'c', text:'[c] Erhöhung des Lebensstandards' },
+      { key:'d', text:'[d] Die Nachfrage auf dem Wohnungsmarkt steigt.' },
+      { key:'e', text:'[e] Konkurrenz um Arbeitsplätze' },
+      { key:'f', text:'[f] Die Menschen finden leichter eine Arbeitsstelle.' },
+      { key:'g', text:'[g] Geringe Attraktivität von Kleinstädten' },
+      { key:'h', text:'[h] Die Mietpreise sinken.' }
+    ],
+    correctMap: { v1: 'f', v2: 'g', n3: 'b', n4: 'e' }
+  },
+  { ...TEMPLATE[6],
+    instructions:'Lesen Sie den Text. Beachten Sie auch die Informationen aus der Grafik. Die Zusammenfassung folgt nicht dem Textverlauf. Kreuzen Sie genau drei Sätze an, die inhaltlich falsch sind.',
+    title:'Mülldeponien sind Rohstofflager',
+    passage:'In den sechziger und siebziger Jahren des vergangenen Jahrhunderts gab es noch kein Bewusstsein dafür, dass unsere Ressourcen irgendwann knapp werden könnten: Abfälle, welcher Art auch immer, wurden auf Mülldeponien innerhalb oder außerhalb der Städte entsorgt. Das führte dazu, dass dort heute wertvolle Metalle, aber auch Papier, Bauschutt und anderes lagern, Dinge, die man nutzen könnte: „Urban Mining“ ist das Stichwort. Anders als der Name vermuten lässt, bezieht sich Urban Mining nicht allein auf die Nutzung innerstädtischer Lager, sondern befasst sich vielmehr mit dem gesamten Bestand an langlebigen Gütern wie Elektrogeräte und Autos, aber auch Bauschutt. Wenn man diese Güter wiederverwertet, leistet das einen wichtigen Beitrag zur Schonung natürlicher Quellen. Man spricht dann von „Kreislaufwirtschaft“: Das bedeutet, dass am Ende der Nutzungsphase von Gütern die darin gebundenen Materialien, z. B. Metalle, über Recyclingprozesse zurückgewonnen oder zur Energieherstellung verwertet werden. In Hinblick auf einen zunehmenden internationalen Wettbewerb um die knappen Ressourcen der Erde kann die Nutzung von diesen wiedergewonnenen Rohstoffen, auch Sekundärrohstoffe genannt, dazu beitragen, die Lebensgrundlagen bestehender und zukünftiger Generationen zu sichern. Urban Mining trägt damit auch zum Umweltschutz bei, denn die Gewinnung sogenannter Primärrohstoffe, also neuer Rohstoffe, ist oft mit empfindlichen Eingriffen in die Ökosysteme der Länder verbunden, in denen diese Stoffe gewonnen werden. Und nicht selten kommt es dabei zur Freisetzung umweltgefährdender Substanzen. Aber nicht nur das: Deren Förderung konkurriert oftmals mit der lokalen Bevölkerung um die Nutzung knapper natürlicher Vorkommen wie Wasser und Flächen. Urban Mining kann deshalb auch helfen, die Konflikte bei dieser Nutzung zu entschärfen.',
+    graphicData:[{year:'Bulgarien',val:68.3},{year:'Schweden',val:52.5},{year:'Irland',val:42.7},{year:'Österreich',val:39.1},{year:'Niederlande',val:38.1},{year:'Deutschland',val:36.0},{year:'UK',val:29.6},{year:'Frankreich',val:26.3},{year:'Italien',val:26.3},{year:'Spanien',val:26.1}],
+    graphicCaption:'Elektrogeräte zu Rohstoffen: Recyclingquote von Elektroschrott in ausgewählten EU-Staaten, 2014 (in %)',
+    graphicSvg:`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 330" width="100%" role="img" aria-label="Balkendiagramm: Recyclingquote von Elektroschrott in ausgewählten EU-Staaten 2014" style="max-width:640px;height:auto;display:block;margin:0 auto;font-family:system-ui,sans-serif"><rect x="1" y="1" width="518" height="328" rx="8" fill="none" stroke="#cbd5e1"/><text x="260" y="22" font-size="14" text-anchor="middle" font-weight="700" fill="currentColor">Elektrogeräte zu Rohstoffen</text><text x="260" y="40" font-size="11" text-anchor="middle" fill="currentColor">Recyclingquote von Elektroschrott in ausgewählten EU-Staaten, 2014 (in %)</text><line x1="110" y1="50" x2="110" y2="296" stroke="#64748b" stroke-width="1"/><text x="104" y="72" font-size="12" text-anchor="end" fill="currentColor">Bulgarien</text><rect x="110" y="60" width="351.3" height="16" rx="2" fill="#4b5563"/><text x="467" y="72" font-size="11" fill="currentColor">68,3</text><text x="104" y="96" font-size="12" text-anchor="end" fill="currentColor">Schweden</text><rect x="110" y="84" width="270" height="16" rx="2" fill="#4b5563"/><text x="386" y="96" font-size="11" fill="currentColor">52,5</text><text x="104" y="120" font-size="12" text-anchor="end" fill="currentColor">Irland</text><rect x="110" y="108" width="219.6" height="16" rx="2" fill="#4b5563"/><text x="335" y="120" font-size="11" fill="currentColor">42,7</text><text x="104" y="144" font-size="12" text-anchor="end" fill="currentColor">Österreich</text><rect x="110" y="132" width="201.1" height="16" rx="2" fill="#4b5563"/><text x="317" y="144" font-size="11" fill="currentColor">39,1</text><text x="104" y="168" font-size="12" text-anchor="end" fill="currentColor">Niederlande</text><rect x="110" y="156" width="195.9" height="16" rx="2" fill="#4b5563"/><text x="312" y="168" font-size="11" fill="currentColor">38,1</text><text x="104" y="192" font-size="12" text-anchor="end" fill="currentColor">Deutschland</text><rect x="110" y="180" width="185.1" height="16" rx="2" fill="#4b5563"/><text x="301" y="192" font-size="11" fill="currentColor">36,0</text><text x="104" y="216" font-size="12" text-anchor="end" fill="currentColor">UK</text><rect x="110" y="204" width="152.2" height="16" rx="2" fill="#4b5563"/><text x="268" y="216" font-size="11" fill="currentColor">29,6</text><text x="104" y="240" font-size="12" text-anchor="end" fill="currentColor">Frankreich</text><rect x="110" y="228" width="135.3" height="16" rx="2" fill="#4b5563"/><text x="251" y="240" font-size="11" fill="currentColor">26,3</text><text x="104" y="264" font-size="12" text-anchor="end" fill="currentColor">Italien</text><rect x="110" y="252" width="135.3" height="16" rx="2" fill="#4b5563"/><text x="251" y="264" font-size="11" fill="currentColor">26,3</text><text x="104" y="288" font-size="12" text-anchor="end" fill="currentColor">Spanien</text><rect x="110" y="276" width="134.2" height="16" rx="2" fill="#4b5563"/><text x="250" y="288" font-size="11" fill="currentColor">26,1</text><text x="260" y="316" font-size="10" text-anchor="middle" fill="currentColor">Quelle: Eurostat / Statista (Italien und Spanien: Daten von 2013)</text></svg>`,
+    sentences:[
+      {text:'Auf den Mülldeponien befinden sich viele Rohstoffe, die noch gut zu nutzen wären.', wrong:false},
+      {text:'Denn früher haben die Menschen einfach alles weggeworfen.', wrong:false},
+      {text:'Heute betreibt man „Urban Mining“.', wrong:false},
+      {text:'Das bedeutet, dass auf den Müllhalden in den Städten diese wertvollen Stoffe wiedergewonnen werden.', wrong:true},
+      {text:'Das ist umweltfreundlich, weil damit natürliche Vorkommen geschont werden.', wrong:false},
+      {text:'Eine andere Möglichkeit zur Schonung dieser Quellen ist das direkte Recycling.', wrong:false},
+      {text:'Beispielsweise werden in der EU Elektrogeräte von den Händlern zurückgenommen und direkt dem Recycling zugeführt.', wrong:false},
+      {text:'Auf diese Weise wurde in Deutschland in einem Jahr mehr als die Hälfte der ausgedienten Geräte recycelt.', wrong:true},
+      {text:'Spitzenreiter in diesem Zusammenhang ist allerdings die schwedische Recyclingquote.', wrong:true}
+    ]
+  }
+];
 
 const TESTS = [
   {id:1, title:'Modelltest C1 (Akademisch)', teile: MT1},
@@ -1734,7 +1891,8 @@ const TESTS = [
   {id:8, title:'Modelltest 8 (Digitaler TestDaF)', teile: MT8},
   {id:9, title:'Modelltest 9 (Digitaler TestDaF)', teile: MT9},
   {id:10, title:'Modelltest 10 (Digitaler TestDaF)', teile: MT10},  
-  {id:11, title:'Modelltest 11 (Digitaler TestDaF)', teile: MT11}
+  {id:11, title:'Modelltest 11 (Digitaler TestDaF)', teile: MT11},
+  {id:12, title:'Modelltest 12 (Digitaler TestDaF)', teile: MT12}
 ];
 
 
