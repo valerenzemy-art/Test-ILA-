@@ -181,6 +181,25 @@ const HOREN_MT2 = [
     ]
   }
 ];
+  { ...TEMPLATE_HOEREN[2],
+    instructions: 'Sie hören einen Ausschnitt aus einer Vorlesung im Fach Ingenieurwissenschaften zum Thema „Regenerative Energien“. Sie hören den Text einmal. Machen Sie sich beim Hören Notizen. Nach dem Hörtext sehen Sie eine schriftliche Zusammenfassung. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten.',
+    title: 'Aufgabe 3: Regenerative Energien',
+    mediaType: 'audio',
+    mediaUrl: 'media/mt2_exercice_t3.mp3', // Pensez à uploader le fichier audio sur GitHub
+    consigneUrl: 'media/mt2_consigne_t3.mp3', // Pensez à uploader le fichier de consigne
+    segments:[
+      { text: 'Viele Menschen sind mittlerweile zu der Auffassung gelangt, dass regenerative Energien doch nicht so umweltfreundlich sind, wie man anfänglich angenommen hat.', wrong: false },
+      { text: 'Die Solarenergie verursacht Umweltprobleme, denn bei ihrer Produktion finden große Mengen Blei und Cadmium Verwendung.', wrong: false },
+      { text: 'Das ist aber noch nicht alles, denn im Falle einer Beschädigung eines Moduls kann durch diese Stoffe das Grundwasser kontaminiert werden.', wrong: false },
+      { text: 'Windräder zerstören das Landschaftsbild und sind, so haben Ornithologen festgestellt, vor allem für Vögel gefährlich: Die Zahl der pro Jahr durch Windräder getöteten Vögel ist enorm hoch.', wrong: false },
+      { text: 'Beide Systeme sind abhängig vom Standort und lohnen sich deshalb nicht überall.', wrong: false },
+      { text: 'Auch das Problem der Speicherung ist aus ingenieurwissenschaftlicher Sicht noch nicht befriedigend gelöst.', wrong: false },
+      { text: 'Das Problem bei der Wasserkraft ist, dass dafür Staudämme notwendig sind.', wrong: false },
+      { text: 'Diese Dämme halten zwar das Wasser zurück, aber nicht die für viele Lebewesen notwendigen fruchtbaren Sedimente, die dann weggeschwemmt werden.', wrong: false },
+      { text: 'Zudem hindern sie Fische an der Fortpflanzung.', wrong: false }
+    ]
+  }
+
 
 const HOREN_TESTS = [
   {id:1, title:'Modelltest 1 (Hörverstehen)', teile: HOREN_MT1},
