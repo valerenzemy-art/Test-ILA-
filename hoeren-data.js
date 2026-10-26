@@ -11,7 +11,7 @@ const TEMPLATE_HOEREN = [
   {teil:7, type:'laut_schrift',    time:20,  label:'Laut- und Schriftbild abgleichen'}
 ];
 
-// Aufgabe 7 - Modelltest 1
+// Aufgabe 7 - Modelltest 1 (Correction texte Wikinger)
 const WIKINGER_TEXT =
   "Um das Jahr 986 kamen die ersten Wikinger von Island zur Südspitze Grönlands. " +
   "In der folgenden §Zeit entstand dort eine blühende Kolonie aus kleinen Siedlungen. " +
@@ -22,14 +22,14 @@ const WIKINGER_TEXT =
   "Eine neue Studie verweist nun auf einen weiteren Aspekt: Die Jagd auf Walrosse war eine wichtige Lebensgrundlage. " +
   "Davon gab es jedoch im Laufe der Jahrhunderte immer §weniger, sodass die Siedlungen nicht mehr wirtschaftlich waren.";
 
-// Aufgabe 7 - Modelltest 2
+// Aufgabe 7 - Modelltest 2 (Correction texte Sprachen basée sur votre image officielle)
 const SPRACHEN_TEXT =
   "Wie sind die menschlichen Sprachen entstanden und was prägte ihre charakteristischen Unterschiede? " +
-  "Bisher hat sich die Forschung bei dieser Frage vor allem auf die Untersuchung §kultureller Aspekte konzentriert. " +
+  "Bisher hat sich die Forschung bei dieser Frage §vor allem auf die Untersuchung kultureller Aspekte konzentriert. " +
   "Es scheint allerdings auch denkbar, dass feine Unterschiede in der Anatomie der Sprachorgane eine §Rolle gespielt haben. " +
-  "Es ist allgemein bekannt, dass anatomische Besonderheiten §beeinflussen können, wie sich Menschen beim Sprechen anhören. " +
+  "Es ist allgemein bekannt, dass anatomische Besonderheiten beeinflussen können, wie sich §Menschen beim Sprechen anhören. " +
   "Schon kleine Abweichungen in der Form unseres Stimmapparates können sich auf die Art und Weise auswirken, wie wir sprechen, " +
-  "und das kann sich über Generationen hinweg auf die Unterschiede zwischen Dialekten und Sprachen §auswirken.";
+  "und das kann sich §zwischen Generationen hinweg auf die Unterschiede zwischen Dialekten und Sprachen auswirken.";
 
 const HOREN_MT1 = [
   { ...TEMPLATE_HOEREN[0],
@@ -46,7 +46,7 @@ const HOREN_MT1 = [
     ]
   },
   { ...TEMPLATE_HOEREN[1],
-    instructions:'Sie hören eine Podiumsdiskussion zum Thema „Minimalismus“. Sie hören den Text einmal. Notieren Sie für jede Person auf der linken Seite, welches Ziel die Person nennt, und auf der rechten Seite das dazugehörige Vorgehen in Stichpunkten. Nach dem Hören haben Sie 3 Minuten Zeit, um Ihre Antworten zu kontrollieren.',
+    instructions:'Sie hören eine Podiumsdiskussion zum Thema „Minimalismus“. Sie hören den Text einmal. Notieren Sie für jede Person auf der linken Seite, welches Ziel the Person nennt, und auf der rechten Seite das dazugehörige Vorgehen in Stichpunkten. Nach dem Hören haben Sie 3 Minuten Zeit, um Ihre Antworten zu kontrollieren.',
     title:'Aufgabe 2: Podiumsdiskussion zum Thema „Minimalismus“',
     mediaType: 'audio',
     mediaUrl: 'media/exercice_t2.mp3',
@@ -92,7 +92,7 @@ const HOREN_MT1 = [
     pairs:[
       { term: '1. Deutsche Forscher waren wohl nicht nur unschuldige Opfer von Scheinverlagen.',
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], correct: 0 },
-      { term: '2. Das Veröffentlichen in angeblichen Fachzeihnstschriften verschafft den Autoren einen persönlichen Vorteil.',
+      { term: '2. Das Veröffentlichen in angeblichen Fachzeitschriften verschafft den Autoren einen persönlichen Vorteil.',
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], correct: 2 },
       { term: '3. Durch Publikationen seriöser Forscher in Scheinverlagen profitieren Betrüger.',
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], correct: 2 },
@@ -159,11 +159,11 @@ const HOREN_MT2 = [
     mediaUrl: 'media/mt2_exercice_t1.mp3',
     consigneUrl: 'media/mt2_consigne_t1.mp3',
     questions: [
-      { q: 'Sandra arbeitet bei Professor Dr. Kruse an (1):', correct: 'Doktorarbeit / Dissertation' },
-      { q: 'Dienstag Vormittag - Vorlesung in (2):', correct: 'Soziologie' },
-      { q: 'Dienstag Nachmittag - Problem (3):', correct: 'Drucker kaputt / Drucker defekt' },
-      { q: 'Donnerstag Nachmittag - Klausur in (4):', correct: 'Statistik' },
-      { q: 'Freitag Vormittag - Kurs in (5):', correct: 'Statistik' }
+      { q: 'Sandra arbeitet bei Professor Dr. Kruse an (1):', correct: 'Promotions / Dissertation / Doktorarbeit' },
+      { q: 'Dienstag Vormittag - Vorlesung in (2):', correct: 'praktischer Philosophie' },
+      { q: 'Dienstag Nachmittag - Problem (3):', correct: 'Computer abgestürzt / Daten weg / alles weg / Computer kaputt' },
+      { q: 'Donnerstag Nachmittag - Klausur in (4):', correct: 'alter Geschichte' },
+      { q: 'Freitag Vormittag - Kurs in (5):', correct: 'kreativem Schreiben' }
     ]
   },
   { ...TEMPLATE_HOEREN[1],
@@ -176,30 +176,30 @@ const HOREN_MT2 = [
       {
         name: 'Herr Klöbner',
         fields: [
-          { label: 'Maßnahme', placeholder: 'Maßnahme eingeben...' },
-          { label: 'Folge', placeholder: 'Folge eingeben...' }
+          { label: 'Maßnahme', placeholder: 'Maßnahme eingeben...', correct: 'Citymaut einführen' },
+          { label: 'Folge', placeholder: 'Folge eingeben...', correct: 'weniger Verkehr / weniger Staus' }
         ]
       },
       {
         name: 'Frau Wagner',
         fields: [
-          { label: 'Maßnahme', placeholder: 'Maßnahme eingeben...' },
-          { label: 'Folge', placeholder: 'Folge eingeben...' }
+          { label: 'Maßnahme', placeholder: 'Maßnahme eingeben...', correct: 'öffentliche Verkehrsmittel billiger / kostenfrei anbieten' },
+          { label: 'Folge', placeholder: 'Folge eingeben...', correct: 'Leute steigen auf öffentliche Verkehrsmittel um' }
         ]
       }
     ]
   },
   { ...TEMPLATE_HOEREN[2],
-    instructions: 'Sie hören einen Ausschnitt aus einer Vorlesung im Fach Ingenieurwissenschaften zum Thema „Regenerative Energien“. Sie hören den Text einmal. Machen Sie sich beim Hören Notizen. Nach dem Hörtext sehen Sie eine schriftliche Zusammenfassung. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten.',
+    instructions: 'Sie hören einen Ausschnitt aus einer Vorlesung im Fach Ingenieurwissenschaften zum Thema „Regenerative Energien“. Sie hören den Text einmal. Machen Sie sich beim Hören Notizen. Nach dem Hörtext sehen Sie eine schriftliche Zusammenfassung. Finden Sie die Sätze in der Zusammenfassung, die falsche Informationen enthalten[span_0](start_span)[span_0](end_span).',
     title: 'Aufgabe 3: Regenerative Energien',
     mediaType: 'audio',
     mediaUrl: 'media/mt2_exercice_t3.mp3',
     consigneUrl: 'media/mt2_consigne_t3.mp3',
     segments:[
       { text: 'Viele Menschen sind mittlerweile zu der Auffassung gelangt, dass regenerative Energien doch nicht so umweltfreundlich sind, wie man anfänglich angenommen hat.', wrong: false },
-      { text: 'Die Solarenergie verursacht Umweltprobleme, denn bei ihrer Produktion finden große Mengen Blei und Cadmium Verwendung.', wrong: false },
-      { text: 'Das ist aber noch nicht alles, denn im Falle einer Beschädigung eines Moduls kann durch diese Stoffe das Grundwasser kontaminiert werden.', wrong: false },
-      { text: 'Windräder zerstören das Landschaftsbild und sind, so haben Ornithologen festgestellt, vor allem für Vögel gefährlich: Die Zahl der pro Jahr durch Windräder getöteten Vögel ist enorm hoch.', wrong: false },
+      { text: 'Die Solarenergie verursacht Umweltprobleme, denn bei ihrer Produktion finden große Mengen Blei und Cadmium Verwendung.', wrong: true },
+      { text: 'Das ist aber noch nicht alles, denn im Falle einer Beschädigung eines Moduls kann durch diese Stoffe das Grundwasser kontaminiert werden.', wrong: true },
+      { text: 'Windräder zerstören das Landschaftsbild und sind, so haben Ornithologen festgestellt, vor allem für Vögel gefährlich: Die Zahl der pro Jahr durch Windräder getöteten Vögel ist enorm hoch.', wrong: true },
       { text: 'Beide Systeme sind abhängig vom Standort und lohnen sich deshalb nicht überall.', wrong: false },
       { text: 'Auch das Problem der Speicherung ist aus ingenieurwissenschaftlicher Sicht noch nicht befriedigend gelöst.', wrong: false },
       { text: 'Das Problem bei der Wasserkraft ist, dass dafür Staudämme notwendig sind.', wrong: false },
@@ -217,15 +217,15 @@ const HOREN_MT2 = [
       { term: '1. Schon der Erfinder des Penicillins hat befürchtet, dass Bakterien resistent werden könnten.',
         options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 0 },
       { term: '2. Die Landwirtschaft ist ein Faktor, der zur Resistenzbildung beiträgt.',
-        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 2 },
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 1 },
       { term: '3. Wenn der Mensch Fleisch isst, nimmt er damit möglicherweise auch Antibiotika auf.',
         options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 2 },
       { term: '4. Vor den Bakterien gab es keine anderen Lebewesen auf der Erde.',
-        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 3 },
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 0 },
       { term: '5. Die entwickelten Länder sind durch die Antibiotikaresistenz weniger gefährdet.',
         options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 3 },
       { term: '6. Ein Antibiotikum zu entwickeln, das gegen alle Bakterien wirkt, lohnt sich finanziell nicht.',
-        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 0 }
+        options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 2 }
     ]
   },
   { ...TEMPLATE_HOEREN[4],
@@ -235,10 +235,10 @@ const HOREN_MT2 = [
     mediaUrl: 'media/mt2_exercice_t5.mp4',
     consigneUrl: 'media/mt2_consigne_t5.mp3',
     questions:[
-      { q: 'Definition von Massensterben: (nennen Sie einen Aspekt)', correct: 'Extrem schneller Verlust von Arten / in geologisch kurzer Zeit / rasantes Aussterben' },
-      { q: 'Argument gegen Ausrufung des Anthropozäns:', correct: 'Mensch hat Erde schon früher verändert / Beginn nicht genau definierbar' },
-      { q: 'Seit 1800 paralleler Anstieg von:', correct: 'Bevölkerungszahl und Artenverlust / Bevölkerung und Aussterberate' },
-      { q: 'Vom fünften Massensterben profitierten:', correct: 'Säugetiere / Säuger' }
+      { q: 'Definition von Massensterben: (nennen Sie einen Aspekt)', correct: 'Viele Arten sterben schnell aus / in geologisch kurzer Zeit / Zeitspanne ist zu kurz' },
+      { q: 'Argument gegen Ausrufung des Anthropozäns:', correct: 'Mensch hat Erde schon früher verändert' },
+      { q: 'Seit 1800 paralleler Anstieg von:', correct: 'Bevölkerungszahl und Artenverlust' },
+      { q: 'Vom fünften Massensterben profitierten:', correct: 'Säugetiere / Säugtiere' }
     ]
   },
   { ...TEMPLATE_HOEREN[5],
@@ -255,7 +255,7 @@ const HOREN_MT2 = [
           'wird heutzutage kritischer gesehen als früher.',
           'wird in der modernen Welt begrüßt.'
         ],
-        correct: 1 },
+        correct: 1 }, // Correct : 1b
       { q: 'Frage 2: Software-Roboter',
         options: [
           'können Forschungsdaten analysieren.',
@@ -263,7 +263,7 @@ const HOREN_MT2 = [
           'simulieren menschliche Handlungen.',
           'unterstützen die industrielle Produktion.'
         ],
-        correct: 2 },
+        correct: 2 }, // Correct : 2c
       { q: 'Frage 3: Die von dem Sprecher genannten Vorteile',
         options: [
           'betreffen nur wenige Wirtschaftszweige.',
@@ -271,7 +271,7 @@ const HOREN_MT2 = [
           'kommen besonders den Mitarbeitenden zugute.',
           'sind bis jetzt noch nicht bewiesen.'
         ],
-        correct: 1 },
+        correct: 1 }, // Correct : 3b
       { q: 'Frage 4: Wie äußert sich der Sprecher über die zukünftige menschliche Arbeit?',
         options: [
           'Er empfiehlt, dass die Unternehmen die Arbeitszeiten reduzieren.',
@@ -279,7 +279,7 @@ const HOREN_MT2 = [
           'Er vermutet, dass qualifizierte Tätigkeiten bald automatisiert werden.',
           'Er warnt, dass das Leben ohne Arbeit seinen Sinn verliert.'
         ],
-        correct: 2 },
+        correct: 0 }, // Correct : 4a
       { q: 'Frage 5: Das Hauptziel des Vortrags besteht darin,',
         options: [
           'auf die Gefahren der Automatisierung hinzuweisen.',
@@ -287,7 +287,7 @@ const HOREN_MT2 = [
           'die großen Vorteile von Automatisierung zu erklären.',
           'einen guten Umgang mit Automatisierung aufzuzeigen.'
         ],
-        correct: 2 }
+        correct: 3 }  // Correct : 5d
     ]
   },
   { ...TEMPLATE_HOEREN[6],
