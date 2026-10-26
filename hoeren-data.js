@@ -202,7 +202,7 @@ const HOREN_MT2 = [
     instructions: 'Sie sehen eine Podiumsdiskussion zum Thema „Resistenz gegen Antibiotika“.\nSie sehen das Video einmal.\nKlicken Sie an, zu wem die Aussagen 1-6 passen.\nFür jede Aussage gibt es nur eine richtige Lösung.\n\nNach dem Video haben Sie 45 Sekunden Zeit, um Ihre Antworten zu überprüfen.\nSie haben jetzt 45 Sekunden Zeit, um die Aussagen zu lesen.',
     title: 'Aufgabe 4: Resistenz gegen Antibiotika',
     mediaType: 'video',
-    mediaUrl: 'media/mt2_exercice_t4.mov',
+    mediaUrl: 'media/mt2_exercice_t4.mp4',
     consigneUrl: 'media/mt2_consigne_t4.mp3',
     pairs:[
       { term: '1. Schon der Erfinder des Penicillins hat befürchtet, dass Bakterien resistent werden könnten.',
