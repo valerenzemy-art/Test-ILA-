@@ -11,7 +11,7 @@ const TEMPLATE_HOEREN = [
   {teil:7, type:'laut_schrift',    time:20,  label:'Laut- und Schriftbild abgleichen'}
 ];
 
-// Aufgabe 7 : mots séparés par des espaces. Un mot précédé de § = mot qui diffère du texte audio.
+// Aufgabe 7 - Modelltest 1
 const WIKINGER_TEXT =
   "Um das Jahr 986 kamen die ersten Wikinger von Island zur Südspitze Grönlands. " +
   "In der folgenden §Zeit entstand dort eine blühende Kolonie aus kleinen Siedlungen. " +
@@ -21,6 +21,15 @@ const WIKINGER_TEXT =
   "Man geht bisher davon aus, dass vor allem eine Verschlechterung des Klimas in der Region zum Untergang §geführt hat. " +
   "Eine neue Studie verweist nun auf einen weiteren Aspekt: Die Jagd auf Walrosse war eine wichtige Lebensgrundlage. " +
   "Davon gab es jedoch im Laufe der Jahrhunderte immer §weniger, sodass die Siedlungen nicht mehr wirtschaftlich waren.";
+
+// Aufgabe 7 - Modelltest 2
+const SPRACHEN_TEXT =
+  "Wie sind die menschlichen Sprachen entstanden und was prägte ihre charakteristischen Unterschiede? " +
+  "Bisher hat sich die Forschung bei dieser Frage vor allem auf die Untersuchung §kultureller Aspekte konzentriert. " +
+  "Es scheint allerdings auch denkbar, dass feine Unterschiede in der Anatomie der Sprachorgane eine §Rolle gespielt haben. " +
+  "Es ist allgemein bekannt, dass anatomische Besonderheiten §beeinflussen können, wie sich Menschen beim Sprechen anhören. " +
+  "Schon kleine Abweichungen in der Form unseres Stimmapparates können sich auf die Art und Weise auswirken, wie wir sprechen, " +
+  "und das kann sich über Generationen hinweg auf die Unterschiede zwischen Dialekten und Sprachen §auswirken.";
 
 const HOREN_MT1 = [
   { ...TEMPLATE_HOEREN[0],
@@ -83,7 +92,7 @@ const HOREN_MT1 = [
     pairs:[
       { term: '1. Deutsche Forscher waren wohl nicht nur unschuldige Opfer von Scheinverlagen.',
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], correct: 0 },
-      { term: '2. Das Veröffentlichen in angeblichen Fachzeitschriften verschafft den Autoren einen persönlichen Vorteil.',
+      { term: '2. Das Veröffentlichen in angeblichen Fachzeihnstschriften verschafft den Autoren einen persönlichen Vorteil.',
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], correct: 2 },
       { term: '3. Durch Publikationen seriöser Forscher in Scheinverlagen profitieren Betrüger.',
         options: ['nur Herr Krick [A]', 'nur Frau Dressel [B]', 'beide [C]', 'keiner [D]'], correct: 2 },
@@ -280,6 +289,16 @@ const HOREN_MT2 = [
         ],
         correct: 2 }
     ]
+  },
+  { ...TEMPLATE_HOEREN[6],
+    instructions: 'Sie hören einen Text zum Thema „Die Entwicklung der Sprachen“, den Sie gleichzeitig mitlesen müssen. Hörtext und schriftlicher Text sind nicht identisch. Vier Wörter sind unterschiedlich.\nSie hören den Text einmal.\nFinden Sie beim Hören die vier Wörter, die nicht dem Hörtext entsprechen.\n\nNach dem Hören haben Sie 20 Sekunden Zeit, um Ihre Antworten zu kontrollieren.',
+    title: 'Aufgabe 7: Die Entwicklung der Sprachen',
+    mediaType: 'audio',
+    mediaUrl: 'media/mt2_exercice_t7.mp3',
+    consigneUrl: 'media/mt2_consigne_t7.mp3',
+    words: SPRACHEN_TEXT.split(' ').map(t =>
+      t.charAt(0) === '§' ? { text: t.slice(1), isWrong: true } : { text: t, isWrong: false }
+    )
   }
 ];
 
