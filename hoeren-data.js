@@ -218,6 +218,19 @@ const HOREN_MT2 = [
       { term: '6. Ein Antibiotikum zu entwickeln, das gegen alle Bakterien wirkt, lohnt sich finanziell nicht.',
         options: ['Herr Dr. Matthäus', 'Frau Zeitler', 'beide', 'keiner'], correct: 0 }
     ]
+  },
+  { ...TEMPLATE_HOEREN[4],
+    instructions: 'Sie sehen einen Ausschnitt aus einer Vorlesung im Fach Biologie zum Thema „Artensterben“.\nSie sehen das Video einmal.\nErgänzen Sie beim Hören die Gliederungspunkte in den Textfeldern in Stichpunkten.\n\nNach dem Video haben Sie 3 Minuten Zeit, um Ihre Antworten zu kontrollieren.\nSie haben jetzt 10 Sekunden Zeit, sich die Gliederungspunkte anzuschauen.',
+    title: 'Aufgabe 5: Artensterben',
+    mediaType: 'video',
+    mediaUrl: 'media/mt2_exercice_t5.mp4',
+    consigneUrl: 'media/mt2_consigne_t5.mp3',
+    questions:[
+      { q: 'Definition von Massensterben: (nennen Sie einen Aspekt)', correct: 'Extrem schneller Verlust von Arten / in geologisch kurzer Zeit / rasantes Aussterben' },
+      { q: 'Argument gegen Ausrufung des Anthropozäns:', correct: 'Mensch hat Erde schon früher verändert / Beginn nicht genau definierbar' },
+      { q: 'Seit 1800 paralleler Anstieg von:', correct: 'Bevölkerungszahl und Artenverlust / Bevölkerung und Aussterberate' },
+      { q: 'Vom fünften Massensterben profitierten:', correct: 'Säugetiere / Säuger' }
+    ]
   }
 ];
 
