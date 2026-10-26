@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schreiben - Aufgabentyp 1</title>
+    <style>
+        :root {
+            --primary-blue: #1b4b82;
+            --bg-gray: #e9ecef;
+            --text-dark: #212529;
+            --border-gray: #ced4da;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--bg-gray);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-dark);
+        }
+
+        .exam-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        /* En-tête bleu bleu officiel */
+        .exam-header {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 15px 25px;
+        }
+
+        .exam-header h1 {
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .exam-content {
+            padding: 25px;
+        }
+
+        /* Encadré des consignes sur fond gris léger */
+        .instruction-box {
+            background-color: #dbe4ee;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .instruction-box p {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+
+        .instruction-box strong {
+            color: #000;
+        }
+
+        .task-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Zone d'écriture avec lignes pointillés */
+        .editor-container {
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            height: 350px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            line-height: 32px; /* Espacement aligné avec les lignes */
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            resize: vertical;
+            outline: none;
+            box-sizing: border-box;
+            background: repeating-linear-gradient(
+                transparent,
+                transparent 31px,
+                #a0a0a0 31px,
+                #a0a0a0 32px
+            );
+            font-family: inherit;
+        }
+
+        textarea:focus {
+            border-color: var(--primary-blue);
+        }
+
+        /* Barre d'information sous la zone de texte */
+        .editor-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .word-count {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="exam-container">
+    <!-- En-tête -->
+    <div class="exam-header">
+        <h1>Schreiben – Aufgabentyp 1<br>(Argumentativen Text schreiben)</h1>
+    </div>
+
+    <!-- Contenu -->
+    <div class="exam-content">
+        <!-- Consignes -->
+        <div class="instruction-box">
+            <p>Auf einer Lernplattform diskutieren Sie mit Ihrem Dozenten und anderen Seminarteilnehmenden über das Thema „Berufliche Mobilität“.</p>
+            <p>Schreiben Sie einen kurzen Beitrag.</p>
+            <p><strong>Erläutern und begründen Sie, welche positiven und negativen Aspekte es für Arbeitskräfte und Unternehmen haben kann, wenn Menschen oft ihre Arbeitsstelle wechseln.</strong></p>
+            <p>Schreiben Sie mindestens <strong>200 Wörter</strong>.<br>
+            Sie haben <strong>30 Minuten</strong> Zeit.</p>
+        </div>
+
+        <!-- Titre du sujet -->
+        <div class="task-title">Berufliche Mobilität</div>
+
+        <!-- Zone de texte -->
+        <div class="editor-container">
+            <textarea id="essayInput" placeholder="Schreiben Sie Ihren Text hier..."></textarea>
+            <div class="editor-footer">
+                <span class="word-count">Wörter: <span id="wordCount">0</span> / min. 200</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script JS pour compter les mots automatiquement -->
+<script>
+    const textarea = document.getElementById('essayInput');
+    const wordCountDisplay = document.getElementById('wordCount');
+
+    textarea.addEventListener('input', () => {
+        const text = textarea.value.trim();
+        const words = text ? text.split(/\s+/).length : 0;
+        wordCountDisplay.textContent = words;
+        
+        if (words >= 200) {
+            wordCountDisplay.style.color = 'green';
+        } else {
+            wordCountDisplay.style.color = '#555';
+        }
+    });
+</script>
+
+</body>
+</html>
